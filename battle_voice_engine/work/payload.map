@@ -1,0 +1,198 @@
+
+Discarded input sections
+
+ .text          0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+ .data          0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+ .bss           0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+ .text          0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .data          0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss           0x00000000        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_probe
+                0x00000000       0x24 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_after_original
+                0x00000000       0xa0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+LOAD D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x0202ea78                        PushCommand_impl = 0x202ea78
+                0x0202ece4                        SND_StartTimer = 0x202ece4
+                0x0202ec74                        SND_StopTimer = 0x202ec74
+                0x0202f1dc                        SND_FlushCommand = 0x202f1dc
+                0x02031bc4                        FS_InitFile = 0x2031bc4
+                0x02031940                        FS_OpenFileDirect = 0x2031940
+                0x020316f0                        FS_ReadFile = 0x20316f0
+                0x02031684                        FS_SeekFile = 0x2031684
+                0x0203182c                        FS_CloseFile = 0x203182c
+                0x0202d090                        DC_FlushRange = 0x202d090
+                0x0202cdec                        OS_ReceiveMessage = 0x202cdec
+                0x0202c788                        OS_CreateThread = 0x202c788
+                0x0202c574                        OS_WakeupThread = 0x202c574
+                0x0202c540                        OS_WakeupThreadDirect = 0x202c540
+                0x0200f11c                        Game_SetMasterVolumeFx = 0x200f11c
+                0x0200f25c                        Game_UpdateBgmState = 0x200f25c
+                0x0200f238                        Game_SelectBgmState = 0x200f238
+                0x02001040                        . = 0x2001040
+                0x02001040                        __payload_start = .
+
+.text           0x02001040      0xc0c
+ *(.text.hook)
+ .text.hook     0x02001040       0x70 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+                0x02001040                bgm_hook
+                0x02001060                seq_stop_hook
+                0x02001074                seq_stop_original
+                0x02001088                seq_volume_hook
+                0x0200109c                seq_volume_original
+ *(.text*)
+ .text.clear_channel_page
+                0x020010b0       0x38 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_stop_audio
+                0x020010e8       0xcc D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_stop
+                0x020011b4       0x1c D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.fill_page
+                0x020011d0      0x298 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_close_files
+                0x02001468       0x30 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_alarm_callback
+                0x02001498      0x114 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_thread_main
+                0x020015ac      0x254 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_init.part.0
+                0x02001800       0xa4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .text.stream_stop_from_game
+                0x020018a4        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x020018a4                stream_stop_from_game
+ .text.stream_set_volume_from_game
+                0x020018a8       0x50 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x020018a8                stream_set_volume_from_game
+ .text.voice_glyph_probe
+                0x020018f8      0x284 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x020018f8                voice_glyph_probe
+ *(.rodata*)
+ .rodata.kazuma_name.0
+                0x02001b7c        0x7 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .rodata.adpcm_index_table
+                0x02001b83        0x8 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ *fill*         0x02001b8b        0x1 
+ .rodata.adpcm_step_table
+                0x02001b8c       0xb2 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ *fill*         0x02001c3e        0x2 
+ .rodata.STREAM_ENTRIES
+                0x02001c40        0xc D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+
+.glue_7         0x02001c4c        0x0
+ .glue_7        0x02001c4c        0x0 linker stubs
+
+.glue_7t        0x02001c4c        0x0
+ .glue_7t       0x02001c4c        0x0 linker stubs
+
+.vfp11_veneer   0x02001c4c        0x0
+ .vfp11_veneer  0x02001c4c        0x0 linker stubs
+
+.v4_bx          0x02001c4c        0x0
+ .v4_bx         0x02001c4c        0x0 linker stubs
+
+.iplt           0x02001c4c        0x0
+ .iplt          0x02001c4c        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+
+.rel.dyn        0x02001c4c        0x0
+ .rel.iplt      0x02001c4c        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+
+.data
+ *(.data*)
+
+.igot.plt       0x02001c4c        0x0
+ .igot.plt      0x02001c4c        0x0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+                0x02001c60                        . = ALIGN (0x20)
+                0x02001c60                        __payload_file_end = .
+
+.bss            0x02001c60     0x1260
+                0x02001c60                        __bss_start = .
+ *(.bss*)
+ .bss.voice_last_quote_hash
+                0x02001c60        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c60                voice_last_quote_hash
+ .bss.voice_was_battle
+                0x02001c64        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.voice_seen
+                0x02001c68        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c68                voice_seen
+ .bss.voice_ignored_speaker_frames
+                0x02001c6c        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c6c                voice_ignored_speaker_frames
+ .bss.voice_ignored_map_frames
+                0x02001c70        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c70                voice_ignored_map_frames
+ .bss.voice_battle_count
+                0x02001c74        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c74                voice_battle_count
+ .bss.voice_last_pointer
+                0x02001c78        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c78                voice_last_pointer
+ .bss.voice_match_count
+                0x02001c7c        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c7c                voice_match_count
+ .bss.voice_glyph_calls
+                0x02001c80        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c80                voice_glyph_calls
+ .bss.stream_underruns
+                0x02001c84        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                0x02001c84                stream_underruns
+ .bss.silence_page_mask
+                0x02001c88        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.refill_busy
+                0x02001c8c        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.next_refill_page
+                0x02001c90        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.active_channel_mask
+                0x02001c94        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.stream_file_open
+                0x02001c98        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.playing   0x02001c9c        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.initialized
+                0x02001ca0        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.stream_block
+                0x02001ca4        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.requested_stream
+                0x02001ca8        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.current_stream
+                0x02001cac        0x4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.adpcm_block
+                0x02001cb0       0xc4 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.stream_file
+                0x02001d74       0x4c D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.message_slots
+                0x02001dc0        0x8 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.message_queue
+                0x02001dc8       0x20 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.stream_thread_stack
+                0x02001de8      0x400 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ .bss.stream_thread_object
+                0x020021e8       0xc0 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ *fill*         0x020022a8       0x18 
+ .bss.audio_buffer
+                0x020022c0      0xc00 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+ *(COMMON)
+                0x02002ec0                        __bss_end = .
+                0x02002ec0                        __payload_end = .
+                0x00000001                        ASSERT ((__payload_end <= 0x2003000), ARM9 code cave overflow)
+OUTPUT(D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\payload.elf elf32-littlearm)
+LOAD linker stubs
+
+.ARM.attributes
+                0x00000000       0x27
+ .ARM.attributes
+                0x00000000       0x1b D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\hook.o
+ .ARM.attributes
+                0x0000001b       0x2b D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+
+.comment        0x00000000       0x39
+ .comment       0x00000000       0x39 D:\패치유틸.xdeltaUI\work_srw_w_voice\battle_voice_engine\work\stream_patch.o
+                                 0x3a (size before relaxing)

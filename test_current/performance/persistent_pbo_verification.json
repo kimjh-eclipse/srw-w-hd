@@ -1,0 +1,160 @@
+{
+  "renderer": "AMD Radeon(TM) Graphics",
+  "version": 330,
+  "arb_buffer_storage": true,
+  "actual_cases": [
+    {
+      "scene": "formation/favorite_base.state",
+      "screen": 0,
+      "returned": [
+        "formation/favorite_base.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 3
+    },
+    {
+      "scene": "formation/favorite_base.state",
+      "screen": 1,
+      "returned": [
+        "formation/favorite_base.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 11
+    },
+    {
+      "scene": "formation/formation.state",
+      "screen": 0,
+      "returned": [
+        "formation/favorite_base.state",
+        1
+      ],
+      "pixel_exact": true,
+      "operations": 41
+    },
+    {
+      "scene": "formation/formation.state",
+      "screen": 1,
+      "returned": [
+        "formation/formation.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 5
+    },
+    {
+      "scene": "font/cutin_dialogue.state",
+      "screen": 0,
+      "returned": [
+        "formation/formation.state",
+        1
+      ],
+      "pixel_exact": true,
+      "operations": 24
+    },
+    {
+      "scene": "font/cutin_dialogue.state",
+      "screen": 1,
+      "returned": [
+        "font/cutin_dialogue.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 5
+    },
+    {
+      "scene": "scenario/final.state",
+      "screen": 0,
+      "returned": [
+        "font/cutin_dialogue.state",
+        1
+      ],
+      "pixel_exact": true,
+      "operations": 4
+    },
+    {
+      "scene": "scenario/final.state",
+      "screen": 1,
+      "returned": [
+        "scenario/final.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 12
+    },
+    {
+      "scene": "map_icons/all_enemies_visible.state",
+      "screen": 0,
+      "returned": [
+        "scenario/final.state",
+        1
+      ],
+      "pixel_exact": true,
+      "operations": 12
+    },
+    {
+      "scene": "map_icons/all_enemies_visible.state",
+      "screen": 1,
+      "returned": [
+        "map_icons/all_enemies_visible.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 215
+    },
+    {
+      "scene": "localized_screens/chapter.state",
+      "screen": 0,
+      "returned": [
+        "map_icons/all_enemies_visible.state",
+        1
+      ],
+      "pixel_exact": true,
+      "operations": 2
+    },
+    {
+      "scene": "localized_screens/chapter.state",
+      "screen": 1,
+      "returned": [
+        "localized_screens/chapter.state",
+        0
+      ],
+      "pixel_exact": true,
+      "operations": 1
+    },
+    {
+      "drain": true,
+      "returned": [
+        "localized_screens/chapter.state",
+        1
+      ],
+      "pixel_exact": true
+    }
+  ],
+  "resolution_and_paused_reset_exact": true,
+  "960": {
+    "standard_pbo": {
+      "mean_ms": 2.2991,
+      "p95_ms": 3.6714
+    },
+    "persistent_coherent": {
+      "mean_ms": 1.4794,
+      "p95_ms": 2.2598
+    }
+  },
+  "1440": {
+    "standard_pbo": {
+      "mean_ms": 4.2745,
+      "p95_ms": 5.1128
+    },
+    "persistent_coherent": {
+      "mean_ms": 2.7124,
+      "p95_ms": 3.7375
+    }
+  },
+  "persistent_internal_mean_ms": {
+    "wait_ms": 0.7406,
+    "copy_ms": 1.5412
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "original_error": "SystemError: <built-in function get> returned a result with an exception set",
+  "checks": {
+    "native_stale_events_survived": 20,
+    "virtual_attach_input_capture_detach_cycles": 3,
+    "controller_fast_forward_save_load_pause_resume": true,
+    "system_error_releases_pad_and_rumble": true,
+    "tk_poll_and_keyboard_continue": true
+  }
+}

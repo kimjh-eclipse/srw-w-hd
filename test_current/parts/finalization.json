@@ -1,0 +1,47 @@
+[
+  {
+    "script": "install_full_attack_parts.py",
+    "exit_code": 0,
+    "seconds": 67.82
+  },
+  {
+    "script": "install_shared_attack_parts.py",
+    "exit_code": 0,
+    "seconds": 27.53
+  },
+  {
+    "script": "audit_generated_bindings.py",
+    "exit_code": 0,
+    "seconds": 58.91
+  },
+  {
+    "script": "verify_all_unit_coverage.py",
+    "exit_code": 0,
+    "seconds": 6.37
+  },
+  {
+    "script": "build_tile_library.py",
+    "exit_code": 0,
+    "seconds": 33.91
+  },
+  {
+    "script": "verify_compound_parts.py",
+    "exit_code": 0,
+    "seconds": 9.87
+  },
+  {
+    "script": "verify_dynamic_parts.py",
+    "exit_code": 0,
+    "seconds": 25.79
+  },
+  {
+    "script": "verify_async_parts.py",
+    "exit_code": 0,
+    "seconds": 35.74
+  },
+  {
+    "script": "verify_frame_compositor.py",
+    "exit_code": 1,
+    "seconds": 22.91
+  }
+]

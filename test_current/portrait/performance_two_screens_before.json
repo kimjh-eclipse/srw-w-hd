@@ -1,0 +1,40 @@
+{
+  "renderers": 2,
+  "registered_each": 548,
+  "constructor_ms": [
+    754.7821000043768,
+    745.8440999907907
+  ],
+  "memory_before": null,
+  "memory_after_init": null,
+  "memory_after_warm": null,
+  "memory_after_40_faces": null,
+  "cold_pair": {
+    "mean_ms": 26.027,
+    "p95_ms": 29.203,
+    "max_ms": 30.875
+  },
+  "cold_file_reads": 144,
+  "warm_pair": {
+    "mean_ms": 0.993,
+    "p95_ms": 1.501,
+    "max_ms": 1.679
+  },
+  "warm_file_reads": 0,
+  "miss_pair": {
+    "mean_ms": 0.685,
+    "p95_ms": 0.901,
+    "max_ms": 1.042
+  },
+  "miss_file_reads": 0,
+  "hd_cache_sizes": [
+    32,
+    32
+  ],
+  "reference_cache_sizes": [
+    40,
+    40
+  ],
+  "note": "Cold means empty application asset cache; Windows filesystem cache is not forcibly cleared.",
+  "memory_note": "The initial snapshot had an invalid memory-query handle; use the post-change report for measured memory."
+}

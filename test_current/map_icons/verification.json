@@ -1,0 +1,117 @@
+{
+  "actual_scenes": [
+    {
+      "scene": "map_fresh",
+      "matches": [],
+      "seconds": 0.007349799998337403
+    },
+    {
+      "scene": "menu_step_0",
+      "matches": [],
+      "seconds": 0.005682500006514601
+    },
+    {
+      "scene": "menu_step_1",
+      "matches": [],
+      "seconds": 0.006094299998949282
+    },
+    {
+      "scene": "menu_step_2",
+      "matches": [
+        {
+          "x": 32,
+          "y": 88,
+          "entry": 6140,
+          "resource": 4253,
+          "palette": 3938,
+          "flip": 0
+        }
+      ],
+      "seconds": 0.012181400001281872
+    },
+    {
+      "scene": "menu_step_3",
+      "matches": [
+        {
+          "x": 32,
+          "y": 88,
+          "entry": 6140,
+          "resource": 4253,
+          "palette": 3938,
+          "flip": 0
+        }
+      ],
+      "seconds": 0.010292899998603389
+    },
+    {
+      "scene": "menu_step_4",
+      "matches": [
+        {
+          "x": 32,
+          "y": 88,
+          "entry": 6140,
+          "resource": 4253,
+          "palette": 3938,
+          "flip": 0
+        }
+      ],
+      "seconds": 0.0034707000013440847
+    },
+    {
+      "scene": "menu_step_5",
+      "matches": [
+        {
+          "x": 32,
+          "y": 88,
+          "entry": 6140,
+          "resource": 4253,
+          "palette": 3938,
+          "flip": 0
+        }
+      ],
+      "seconds": 0.01061640000261832
+    },
+    {
+      "scene": "grid",
+      "matches": [],
+      "seconds": 0.0060837000055471435
+    },
+    {
+      "scene": "live_500",
+      "matches": [
+        {
+          "x": 96,
+          "y": 0,
+          "entry": 126,
+          "resource": 3950,
+          "palette": 3939,
+          "flip": 1
+        },
+        {
+          "x": 96,
+          "y": 144,
+          "entry": 6140,
+          "resource": 4253,
+          "palette": 3938,
+          "flip": 0
+        }
+      ]
+    }
+  ],
+  "synthetic_cases": 6720,
+  "synthetic_failures": [],
+  "equivalent_mirrored_variants": 380,
+  "false_positive_random_frame": false,
+  "prepared_errors": {},
+  "generated_nonempty_icons": 336,
+  "initialization_seconds": 7.157955199989374,
+  "initialization_allocated_bytes": 11325203,
+  "initialization_peak_bytes": 11641032,
+  "warm_composition_mean_ms": 2.717633332455686,
+  "warm_composition_p95_ms": 3.351454995572567,
+  "initialization_seconds_unprofiled": 0.4932762999960687,
+  "six_icons_warm_mean_ms": 11.802803333557677,
+  "six_icons_warm_p95_ms": 15.770220004196739,
+  "six_icons_with_background_warm_mean_ms": 1.7546499996872928,
+  "six_icons_with_background_warm_p95_ms": 2.5197050003043837
+}

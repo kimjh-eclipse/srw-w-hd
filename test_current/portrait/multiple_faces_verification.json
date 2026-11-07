@@ -1,0 +1,39 @@
+{
+  "catalog_pair_cases": 548,
+  "faces_checked": 1096,
+  "top_only_change": true,
+  "top_remove_return": true,
+  "overlap_positions_tested": [
+    0,
+    8,
+    24
+  ],
+  "user_source_ids": {
+    "bless": 1018,
+    "quatre": 60,
+    "duo": 56
+  },
+  "catalog_seconds": 21.11,
+  "two_screens_faces": 4,
+  "cold_frame_ms": 1.722,
+  "cold_main_image_opens": 0,
+  "warm_four_faces": {
+    "mean_ms": 1.318,
+    "p95_ms": 1.41,
+    "max_ms": 1.628
+  },
+  "warm_image_opens": 0,
+  "memory_before_two": {
+    "working_mib": 91.352,
+    "private_mib": 563.266
+  },
+  "memory_after_two": {
+    "working_mib": 103.941,
+    "private_mib": 574.047
+  },
+  "cache_sizes": [
+    14,
+    14
+  ],
+  "note": "Catalog cases reconstruct native frames from original assets; user live-scene replay is a separate check."
+}

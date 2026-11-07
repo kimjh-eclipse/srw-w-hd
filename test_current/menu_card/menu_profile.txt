@@ -1,0 +1,57 @@
+         39322 function calls in 1.073 seconds
+
+   Ordered by: cumulative time
+   List reduced from 86 to 16 due to restriction <16>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    1.073    1.073 <string>:1(<listcomp>)
+       40    0.034    0.001    1.072    0.027 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:50(render_top)
+       40    0.027    0.001    0.729    0.018 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:36(compose)
+      600    0.009    0.000    0.635    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1840(paste)
+      600    0.613    0.001    0.613    0.001 {method 'paste' of 'ImagingCore' objects}
+       40    0.001    0.000    0.149    0.004 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:2329(resize)
+       40    0.146    0.004    0.146    0.004 {method 'resize' of 'ImagingCore' objects}
+       40    0.017    0.000    0.109    0.003 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:196(compose)
+       40    0.000    0.000    0.101    0.003 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1356(copy)
+       40    0.099    0.002    0.099    0.002 {method 'copy' of 'ImagingCore' objects}
+       40    0.001    0.000    0.048    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:22(grid)
+       40    0.032    0.001    0.038    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_parts.py:231(compose)
+       40    0.020    0.001    0.021    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:95(recognize)
+       40    0.001    0.000    0.014    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1369(crop)
+       40    0.001    0.000    0.011    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1395(_crop)
+       40    0.001    0.000    0.010    0.000 {built-in method builtins.sum}
+
+
+bgparts 0
+Microphone successfully inited.
+DeSmuME 0.9.12 git#0 x64-JIT SSE2
+SoftRasterizer: Running directly on the emulation thread. (Multithreading disabled.)
+
+ROM game code: AS6J
+ROM crc: 2D5AC67C
+ROM serial: NTR-AS6J-JPN
+ROM chipID: 00003FC2
+ROM internal name: SRW-W      
+ROM developer: Unknown
+
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot 2: None
+Savestate info:
+	DeSmuME version: 0.9.12 svn 0
+	Save created: 2026-NOV-07 Sat 19:02:36
+JIT: max block size 12 instruction(s)

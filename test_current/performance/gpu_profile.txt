@@ -1,0 +1,68 @@
+         169894 function calls in 0.896 seconds
+
+   Ordered by: cumulative time
+   List reduced from 211 to 28 due to restriction <28>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002    0.896    0.896 <string>:1(<listcomp>)
+       30    0.007    0.000    0.521    0.017 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:75(render_top)
+      300    0.004    0.000    0.376    0.001 {built-in method numpy.asarray}
+       30    0.014    0.000    0.372    0.012 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:140(__array__)
+       30    0.011    0.000    0.359    0.012 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:49(render)
+       30    0.001    0.000    0.249    0.008 D:\패치유틸.xdeltaUI\work_srw_w_voice\tools\gpu_py\moderngl\__init__.py:362(read)
+       30    0.247    0.008    0.247    0.008 {method 'read_into' of 'mgl.Framebuffer' objects}
+       30    0.001    0.000    0.194    0.006 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:167(compose)
+       30    0.002    0.000    0.188    0.006 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:121(plan)
+       60    0.004    0.000    0.139    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:112(phase)
+     1650    0.139    0.000    0.139    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+       60    0.000    0.000    0.122    0.002 {method 'max' of 'numpy.ndarray' objects}
+       60    0.000    0.000    0.122    0.002 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\_methods.py:39(_amax)
+       30    0.055    0.002    0.117    0.004 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:78(overview_plan)
+       30    0.076    0.003    0.108    0.004 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_parts.py:231(compose)
+       90    0.061    0.001    0.061    0.001 {method 'copy' of 'numpy.ndarray' objects}
+       30    0.022    0.001    0.047    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_backgrounds.py:86(compose)
+       60    0.026    0.000    0.028    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:95(recognize)
+       30    0.009    0.000    0.028    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:184(clean_native)
+    29070    0.024    0.000    0.024    0.000 {method 'tobytes' of 'numpy.ndarray' objects}
+       30    0.007    0.000    0.023    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:196(compose)
+       30    0.001    0.000    0.020    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_scenario_backgrounds.py:87(compose)
+       30    0.013    0.000    0.017    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_scenario_backgrounds.py:16(rgb555)
+      720    0.004    0.000    0.016    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:37(texture)
+      240    0.014    0.000    0.014    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+     3420    0.006    0.000    0.013    0.000 C:\Program Files\Python311\Lib\collections\__init__.py:608(most_common)
+     2910    0.002    0.000    0.013    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\tools\gpu_py\moderngl\__init__.py:414(__setitem__)
+     6870    0.006    0.000    0.011    0.000 C:\Program Files\Python311\Lib\collections\__init__.py:658(update)
+
+
+Microphone successfully inited.
+DeSmuME 0.9.12 git#0 x64-JIT SSE2
+SoftRasterizer: Running directly on the emulation thread. (Multithreading disabled.)
+
+ROM game code: AS6J
+ROM crc: 2D5AC67C
+ROM serial: NTR-AS6J-JPN
+ROM chipID: 00003FC2
+ROM internal name: SRW-W      
+ROM developer: Unknown
+
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot 2: None
+Savestate info:
+	DeSmuME version: 0.9.12 svn 0
+	Save created: 2026-NOV-07 Sat 20:34:25
+JIT: max block size 12 instruction(s)

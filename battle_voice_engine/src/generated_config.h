@@ -1,0 +1,7 @@
+#ifndef GENERATED_CONFIG_H
+#define GENERATED_CONFIG_H
+#define STREAM_ENTRY_COUNT 1u
+static const StreamEntry STREAM_ENTRIES[STREAM_ENTRY_COUNT] = {
+    {0u, 0x04000068u, 0x000000B6u},
+};
+#endif

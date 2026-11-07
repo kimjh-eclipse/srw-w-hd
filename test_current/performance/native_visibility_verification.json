@@ -1,0 +1,46 @@
+{
+  "random_exact_masks": 2000,
+  "mask_mean_ms": {
+    "numpy": 0.05378,
+    "native": 0.01958
+  },
+  "mask_speedup": 2.75,
+  "actual": [
+    {
+      "scene": "ability",
+      "actual_full_screen_priority_masks": 1584,
+      "full_compose_ms": {
+        "numpy": 3.532,
+        "native": 2.719
+      },
+      "full_compose_pixel_exact": true
+    },
+    {
+      "scene": "cutin",
+      "actual_full_screen_priority_masks": 1584,
+      "full_compose_ms": {
+        "numpy": 5.42,
+        "native": 3.235
+      },
+      "full_compose_pixel_exact": true
+    },
+    {
+      "scene": "battle",
+      "actual_full_screen_priority_masks": 1584,
+      "full_compose_ms": {
+        "numpy": 7.452,
+        "native": 5.129
+      },
+      "full_compose_pixel_exact": true
+    },
+    {
+      "scene": "battle_13620_live_24frames",
+      "full_compose_ms": {
+        "numpy": 6.885,
+        "native": 3.76
+      },
+      "full_compose_pixel_exact": true,
+      "csv": "test_current\\performance\\native_visibility_game_frames.csv"
+    }
+  ]
+}

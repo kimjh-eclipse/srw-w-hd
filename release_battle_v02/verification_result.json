@@ -1,0 +1,54 @@
+{
+  "version": "battle-v02",
+  "rom_sha256": "77ab10ce3906cb08e0f4855d5f597b2817bfcfb5611dc671a6f1512a20d0091c",
+  "combat": {
+    "voice_seen": 0,
+    "voice_match_count": 3,
+    "voice_glyph_calls": 2662,
+    "voice_last_pointer": 35615544,
+    "voice_battle_count": 1,
+    "voice_ignored_map_frames": 560,
+    "voice_ignored_speaker_frames": 970,
+    "voice_last_quote_hash": 0,
+    "stream_underruns": 0,
+    "stream_block": 120,
+    "playing": 0
+  },
+  "scenario_negative_control": {
+    "voice_seen": 0,
+    "voice_match_count": 0,
+    "voice_glyph_calls": 3283,
+    "voice_last_pointer": 0,
+    "voice_battle_count": 0,
+    "voice_ignored_map_frames": 3283,
+    "voice_ignored_speaker_frames": 0,
+    "voice_last_quote_hash": 0,
+    "stream_underruns": 0,
+    "stream_block": 0,
+    "playing": 0
+  },
+  "cold_start": {
+    "voice_seen": 0,
+    "voice_match_count": 0,
+    "voice_glyph_calls": 660,
+    "voice_last_pointer": 0,
+    "voice_battle_count": 1,
+    "voice_ignored_map_frames": 618,
+    "voice_ignored_speaker_frames": 0,
+    "voice_last_quote_hash": 0,
+    "stream_underruns": 0,
+    "stream_block": 0,
+    "playing": 0
+  },
+  "trigger": {
+    "count": 2,
+    "frame": 65257,
+    "seconds_from_run_start": 9.310317737576074,
+    "caption_hex": "81759092919790ca919681408cb98bf188eb814900f58c6d814900fa814981760063007600760000000000000000000000000000000000000000000000000000000000000000000038731f02000400010d000001010000001001000000220000"
+  },
+  "audio_reference_correlation": 0.42020582799660344,
+  "verified_scene": "Kazuma opening response, attack shout and defence response within the Valhawk combat animation",
+  "method": "DeSmuME libretro; actual battle resumed from baseline, interpreter mode; cold startup separately checked",
+  "hardware_verified": false,
+  "all_battle_quotes_voiced": false
+}

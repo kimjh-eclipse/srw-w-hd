@@ -1,0 +1,52 @@
+{
+  "version": "battle-v02",
+  "rom_sha256": "3c746d240d2d2386449dba9f4d3794f56d399530321bdca427835fdc27e495b0",
+  "combat": {
+    "voice_seen": 0,
+    "voice_match_count": 1,
+    "voice_glyph_calls": 2664,
+    "voice_last_pointer": 35615544,
+    "voice_battle_count": 1,
+    "voice_ignored_map_frames": 562,
+    "voice_ignored_speaker_frames": 96,
+    "voice_ignored_quote_frames": 111,
+    "stream_underruns": 0,
+    "stream_block": 184,
+    "playing": 0
+  },
+  "scenario_negative_control": {
+    "voice_seen": 0,
+    "voice_match_count": 0,
+    "voice_glyph_calls": 3283,
+    "voice_last_pointer": 0,
+    "voice_battle_count": 0,
+    "voice_ignored_map_frames": 3283,
+    "voice_ignored_speaker_frames": 0,
+    "voice_ignored_quote_frames": 0,
+    "stream_underruns": 0,
+    "stream_block": 0,
+    "playing": 0
+  },
+  "cold_start": {
+    "voice_seen": 0,
+    "voice_match_count": 0,
+    "voice_glyph_calls": 660,
+    "voice_last_pointer": 0,
+    "voice_battle_count": 1,
+    "voice_ignored_map_frames": 618,
+    "voice_ignored_speaker_frames": 0,
+    "voice_ignored_quote_frames": 0,
+    "stream_underruns": 0,
+    "stream_block": 0,
+    "playing": 0
+  },
+  "trigger": {
+    "frame": 65256,
+    "seconds_from_run_start": 9.293602624941288
+  },
+  "audio_reference_correlation": 0.41700020220620376,
+  "verified_scene": "Valhawk beam-shot attack, Kazuma quote beginning 움직이지 말라고",
+  "method": "DeSmuME libretro; actual battle resumed from baseline, interpreter mode; cold startup separately checked",
+  "hardware_verified": false,
+  "all_battle_quotes_voiced": false
+}

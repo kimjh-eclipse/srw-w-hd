@@ -1,0 +1,14 @@
+START verify_native_texture_cache.py
+{'script': 'verify_native_texture_cache.py', 'exit_code': 0, 'seconds': 16.86}
+START profile_native_runtime.py
+{'script': 'profile_native_runtime.py', 'exit_code': 0, 'seconds': 15.17}
+START verify_frame_compositor.py
+{'script': 'verify_frame_compositor.py', 'exit_code': 1, 'seconds': 22.11}
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\finalize_runtime_checks.py", line 15, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\finalize_runtime_checks.py", line 12, in main
+    if code:raise RuntimeError(name+' failed')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: verify_frame_compositor.py failed

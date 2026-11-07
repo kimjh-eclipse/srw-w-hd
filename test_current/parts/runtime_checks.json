@@ -1,0 +1,17 @@
+[
+  {
+    "script": "verify_native_texture_cache.py",
+    "exit_code": 0,
+    "seconds": 16.86
+  },
+  {
+    "script": "profile_native_runtime.py",
+    "exit_code": 0,
+    "seconds": 15.17
+  },
+  {
+    "script": "verify_frame_compositor.py",
+    "exit_code": 1,
+    "seconds": 22.11
+  }
+]

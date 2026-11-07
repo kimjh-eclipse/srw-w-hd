@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\tkinter\__init__.py", line 861, in callit
+    func(*args)
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 591, in poll
+    if self.dirty:self.draw()
+                  ^^^^^^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 314, in draw
+    self.gpu.draw(self.latest,self.rects)
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_display.py", line 54, in draw
+    if self.textures[number] is None or self.sources[number].size!=image.size:
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'size'

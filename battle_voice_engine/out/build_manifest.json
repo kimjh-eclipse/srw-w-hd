@@ -1,0 +1,49 @@
+{
+  "source": {
+    "path": "D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\baseline\\SRWW_Korean_1.0.8.nds",
+    "size": 67108864,
+    "sha256": "0a5a22bd6bb25ebe640767e6b422b91358636e9ae1300e61d7e8ac3c5d8cd478",
+    "crc32": "2D5AC67C"
+  },
+  "target": {
+    "path": "D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\battle_voice_engine\\out\\SRWW_K_Kazuma_BattleVoice_v02.nds",
+    "size": 67144704,
+    "sha256": "3c746d240d2d2386449dba9f4d3794f56d399530321bdca427835fdc27e495b0",
+    "crc32": "D0563541"
+  },
+  "patch": {
+    "path": "D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\battle_voice_engine\\out\\SRWW_K_Kazuma_BattleVoice_v02.bps",
+    "size": 38919,
+    "sha256": "7f90fbaeed1dfa039e093a5356307581699267ac9724df1a3c958601609ee5ea"
+  },
+  "hook": {
+    "address": "0x0200EE50",
+    "destination": "0x02001040",
+    "payload_file_bytes": 3008,
+    "payload_memory_bytes": 7712,
+    "cave": "0x02001040-0x02003000"
+  },
+  "stop_hook": {
+    "address": "0x0200F2E8",
+    "destination": "0x02001060"
+  },
+  "volume_hook": {
+    "address": "0x0200F33C",
+    "destination": "0x02001088"
+  },
+  "audio": [
+    {
+      "bgm_id": 0,
+      "source": "0.strm",
+      "sample_rate": 22050,
+      "strm_bytes": 35776,
+      "adpcm_bytes": 35672,
+      "samples": 69888,
+      "blocks": 182,
+      "channels": 1,
+      "channel_mode": "mono",
+      "rom_offset": "0x04000000",
+      "deduplicated": false
+    }
+  ]
+}

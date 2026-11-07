@@ -1,0 +1,27 @@
+{
+  "controls": {
+    "keyboard": true,
+    "pad_mapping": true,
+    "dpad_priority": true,
+    "four_screen_layouts": true,
+    "large_screen_ratio_3_to_1": true,
+    "gapless_screen_edges": true,
+    "touch_layouts": true,
+    "persistent_settings": true
+  },
+  "lifecycle": {
+    "shared_frames": true,
+    "hd_toggle": true,
+    "save_load": true,
+    "pause": true,
+    "wrong_rom_state_rejected": true,
+    "reopened_other_rom": true
+  },
+  "actions": {
+    "normal_frames": 84,
+    "fast_frames": 172,
+    "restored_frames": 84,
+    "fast_forward_ratio": 2.05,
+    "normal_speed_restored": true
+  }
+}

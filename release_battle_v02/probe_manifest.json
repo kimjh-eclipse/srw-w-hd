@@ -1,0 +1,20 @@
+{
+  "source_sha256": "0a5a22bd6bb25ebe640767e6b422b91358636e9ae1300e61d7e8ac3c5d8cd478",
+  "sample_source": "D:\\패치유틸.xdeltaUI\\work_ogs\\runtime\\qwen_axel_samples\\axel_japanese_reference.wav",
+  "sample_sha256": "5408d7e75cc52e107f23e4e992af3e0a3d257b1c37b507e6b94a3946b99d7929",
+  "upstream_commit": "bd85bf6f65fd7af25ca70416473b3d7542f463fa",
+  "trigger": "each new Kazuma battle-animation caption; no sentence restriction",
+  "loop": false,
+  "once_per_quote": true,
+  "original_bgm_preserved": true,
+  "battle_dialogue_mapping": true,
+  "scenario_dialogue_mapping": false,
+  "audio": {
+    "sample_rate": 22050,
+    "samples": 69888,
+    "channels": 1,
+    "block_count": 182,
+    "block_size": 196,
+    "encoded_bytes": 35672
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "controls": {
+    "keyboard": true,
+    "pad_mapping": true,
+    "dpad_priority": true,
+    "four_screen_layouts": true,
+    "large_screen_ratio_3_to_1": true,
+    "gapless_screen_edges": true,
+    "touch_layouts": true,
+    "persistent_settings": true
+  },
+  "worker": {
+    "shared_frames": true,
+    "hd_toggle": true,
+    "save_load": true,
+    "pause": true,
+    "wrong_rom_state_rejected": true,
+    "reopened_other_rom": true
+  },
+  "gui": {
+    "native_window": true,
+    "controls_dialog": true,
+    "key_rebind_persisted": true,
+    "four_layout_preset_buttons": true,
+    "layout_and_touch": true,
+    "double_click_fullscreen_roundtrip": true,
+    "fullscreen_hides_menus": true,
+    "focus_releases_keys": true,
+    "slot_save_load": true,
+    "rom_switch_preserves_window": true,
+    "detected_gamepads": 0
+  }
+}

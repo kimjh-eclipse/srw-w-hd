@@ -1,0 +1,21 @@
+{
+  "exact_order_ink_and_char_equivalence_cases": 66,
+  "native_match_count": 487,
+  "registered_glyphs_equivalent": 2652,
+  "scan_mean_ms": {
+    "original": 3.074,
+    "row_bits": 1.692,
+    "native_c": 0.312
+  },
+  "speedup": 1.82,
+  "native_only_scan_mean_ms": {
+    "original": 2.717,
+    "row_bits": 1.773,
+    "native_c": 0.316
+  },
+  "native_only_speedup": 1.53,
+  "native_c_speedup": 9.84,
+  "native_c_real_screen_speedup": 8.59,
+  "production_numpy_fallback_verified": true,
+  "allocation": "row uint16 plane and uint64 hash plane; no N x glyph-area copy. Exact bitmap verification after hash lookup."
+}

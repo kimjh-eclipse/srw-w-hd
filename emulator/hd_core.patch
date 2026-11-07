@@ -1,0 +1,835 @@
+diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
+index 026bf14..7652d2e 100644
+--- a/desmume/src/GPU.cpp
++++ b/desmume/src/GPU.cpp
+@@ -38,6 +38,44 @@
+ #include "matrix.h"
+ #include "emufile.h"
+ #include "utils/task.h"
++#include "srww_hd.h"
++#include "srww_hd_signatures.h"
++#include "srww_parts_impl.h" // Async fallbacks and exact runtime texture assembly.
++
++uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
++struct SRWWCutin { uint32_t id,width,height; };
++static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
++void SRWWRegisterCutins(const uint32_t *rows,unsigned count) {
++    SRWWCutins.clear();
++    for(unsigned i=0;i<count;i++) {
++        const uint32_t *r=rows+i*5;
++        if(r[1]>1 && r[2]<4)SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};
++    }
++}
++bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t x,uint32_t y,uint32_t priority,uint32_t master)
++{
++    if (!SRWWHD_Enabled || engine!=SRWWTargetEngine() || layer>3 || (layer!=1 && SRWWCutins.empty())) return false;
++    static uint32_t checked[4]={~0u,~0u,~0u,~0u},oldMap[4]={0},oldTiles[4]={0},oldBase[4]={0},ids[4]={0},widths[4]={0},heights[4]={0};
++    const uint32_t base=LE_TO_LOCAL_16(*(u16*)MMU_gpu_map(map))&1023u;
++    if (checked[layer]!=SRWWHD_Frame || oldMap[layer]!=map || oldTiles[layer]!=tiles || oldBase[layer]!=base) {
++        checked[layer]=SRWWHD_Frame;oldMap[layer]=map;oldTiles[layer]=tiles;oldBase[layer]=base;ids[layer]=0;
++        const uint8_t *data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+1024u);
++        uint32_t hash=2166136261u;
++        for (unsigned i=0;i<2048;i++) hash=(hash^data[i])*16777619u;
++        const auto found=SRWWCutins.find(((uint64_t)layer<<32)|hash);
++        if(found!=SRWWCutins.end()) {ids[layer]=found->second.id;widths[layer]=found->second.width;heights[layer]=found->second.height;}
++        else if(layer==1 && engine==0) {
++            for (unsigned i=0;i<sizeof(SRWWHD_SIGNATURES)/sizeof(SRWWHD_SIGNATURES[0]);i++)
++                if (hash==SRWWHD_SIGNATURES[i]) {ids[layer]=1;widths[layer]=256;heights[layer]=192;break;}
++        }
++    }
++    if (!ids[layer]) return false;
++    if(ids[layer]>1 && SRWWHD_Info[0]==ids[layer]) return false; // Keep the first raster window.
++    SRWWHD_Info[0]=ids[layer];SRWWHD_Info[1]=x;SRWWHD_Info[2]=y;
++    SRWWHD_Info[3]=widths[layer];SRWWHD_Info[4]=heights[layer];SRWWHD_Info[5]=layer;
++    SRWWHD_Info[6]=priority;SRWWHD_Info[7]=master;SRWWHD_Info[8]=base;
++    return ids[layer]==1; // Observed cut-ins retain native UI and raster windows.
++}
+ 
+ 
+ #ifdef FASTBUILD
+@@ -4103,6 +4141,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
+ template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST>
+ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo &compInfo, const size_t srcX, u16 srcColor16, bool opaque)
+ {
++    if(this->_engineID==SRWWTargetEngine() && SRWWHD_Enabled && SRWWBGMask[compInfo.renderState.selectedLayerID][compInfo.line.indexNative*256+srcX])return;
+ 	if (MOSAIC)
+ 	{
+ 		//due to this early out, we will get incorrect behavior in cases where
+@@ -5217,6 +5256,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+ 	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
+ 	{
+ 		OAMAttributes spriteInfo = this->_oamList[spriteNum];
++
++        if (!ISDEBUGRENDER && SRWWHD_ShouldSkipRobot(this->_engineID,spriteNum,this->_oamList)) continue;
+ 		
+ 		//for each sprite:
+ 		if (cost >= 2130)
+@@ -5633,6 +5674,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+ 	//how it interacts with this. I wish we knew why we needed this
+ 	
+ 	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
++    if(this->_engineID==SRWWTargetEngine())memcpy(SRWWNativeOwner+compInfo.line.indexNative*256,this->_sprNum,256);
+ 	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
+ 	
+ 	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
+@@ -6395,6 +6437,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+ template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
+ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
+ {
++    const BGLayerInfo &hdLayer=*compInfo.renderState.selectedBGLayer;
++    if (SRWWHD_ShouldSkip(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,
++                         hdLayer.xOffset,hdLayer.yOffset,hdLayer.priority,this->_IORegisterMap->MASTER_BRIGHT.value)) return;
++    if(!(SRWWHD_Info[0]>1 && SRWWHD_Info[5]==hdLayer.layerID) && hdLayer.type==BGType_Text && (!hdLayer.BGnCNT.PaletteMode || !(this->_IORegisterMap->DISPCNT.value&0x40000000u)))
++        SRWWPrepareBG(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,hdLayer.xOffset,hdLayer.yOffset,hdLayer.size.width,hdLayer.size.height,hdLayer.BGnCNT.PaletteMode,hdLayer.priority);
+ #ifndef DISABLE_MOSAIC
+ 	if (compInfo.renderState.selectedBGLayer->isMosaic && compInfo.renderState.isBGMosaicSet)
+ 	{
+diff --git a/desmume/src/GPU.h b/desmume/src/GPU.h
+index 5807cef..402b70b 100644
+--- a/desmume/src/GPU.h
++++ b/desmume/src/GPU.h
+@@ -1642,6 +1642,7 @@ public:
+ 	template<NDSColorFormat OUTPUTFORMAT, bool ISFULLINTENSITYHINT> void ApplyMasterBrightness(void *dst, const size_t pixCount, const GPUMasterBrightMode mode, const u8 intensity);
+ 	
+ 	const BGLayerInfo& GetBGLayerInfoByID(const GPULayerID layerID);
++	const u8* SRWWGetNativeLayerIDs() const { return &this->_renderLineLayerIDNative[0][0]; }
+ 	
+ 	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
+ 	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
+diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
+index 2314af9..f32f48f 100644
+--- a/desmume/src/frontend/libretro/libretro.cpp
++++ b/desmume/src/frontend/libretro/libretro.cpp
+@@ -14,6 +14,10 @@
+ #include "saves.h"
+ #include "firmware.h"
+ #include "GPU.h"
++#include "srww_hd.h"
++#ifdef HAVE_JIT
++#include "arm_jit.h"
++#endif
+ #include "SPU.h"
+ #include "emufile.h"
+ #include "common.h"
+@@ -70,6 +74,67 @@ enum {
+ 
+ retro_log_printf_t log_cb = NULL;
+ static retro_video_refresh_t video_cb = NULL;
++
++// Project-local renderer bridge for external HD 2D cut-in assets.
++// The DS CPU, game data and native framebuffer remain unchanged.
++extern "C" RETRO_API void retro_srw_set_main_layers(unsigned mask)
++{
++   if (!GPU) return;
++   for (unsigned i=0;i<5;i++) GPU->GetEngineMain()->SetLayerEnableState(i,(mask&(1u<<i))!=0);
++}
++
++extern "C" RETRO_API int retro_srw_get_bg_info(unsigned layer, unsigned *out)
++{
++   if (!GPU || layer>3 || !out) return 0;
++   GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();
++   const BGLayerInfo &b=engine->GetBGLayerInfoByID((GPULayerID)layer);
++   out[0]=b.BGnCNT.value;out[1]=b.tileMapAddress;out[2]=b.tileEntryAddress;
++   out[3]=b.xOffset;out[4]=b.yOffset;out[5]=b.size.width;out[6]=b.size.height;
++   out[7]=b.isVisible?1:0;out[8]=b.priority;
++   return 1;
++}
++
++extern "C" RETRO_API int retro_srw_copy_vram(unsigned address, void *out, unsigned count)
++{
++   if (!out || count>0x20000 || address<0x06000000 || address>=0x068a4000) return 0;
++   memcpy(out,MMU_gpu_map(address),count);
++   return 1;
++}
++
++extern "C" RETRO_API void retro_srw_set_hd_enabled(unsigned enabled) { SRWWHD_Enabled=enabled?1:0; }
++extern "C" RETRO_API void retro_srw_copy_obj_debug(void *oam, void *palette, void *registers) {
++   if(oam) memcpy(oam,MMU.ARM9_OAM,1024);
++   if(palette) memcpy(palette,MMU.ARM9_VMEM+512,512);
++   if(registers) memcpy(registers,MMU.ARM9_REG,128);
++}
++extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
++extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
++extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
++extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
++extern "C" RETRO_API void retro_srw_register_indexed_parts(const unsigned *hashes,const unsigned *bindings,unsigned count) { if(hashes && bindings && count<200000) SRWWRegisterIndexedParts(hashes,bindings,count); }
++extern "C" RETRO_API void retro_srw_register_cutins(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutins(rows,count); }
++extern "C" RETRO_API unsigned retro_srw_native_hd_fallback() { return 1; }
++extern "C" RETRO_API void retro_srw_texture_cache_stats(unsigned *out) { if(out)memcpy(out,SRWWTextureCacheStats,sizeof(SRWWTextureCacheStats)); }
++extern "C" RETRO_API unsigned retro_srw_dynamic_parts() { return 200000; }
++extern "C" RETRO_API void retro_srw_add_dynamic_part(unsigned hash,unsigned material,unsigned binding) { SRWWAddDynamicPart(hash,material,binding); }
++extern "C" RETRO_API void retro_srw_copy_unknown_parts(void *rows,void *pixels,void *palettes) {
++   if(rows)memcpy(rows,SRWWUnknownParts,sizeof(SRWWUnknownParts));
++   if(pixels)memcpy(pixels,SRWWUnknownPixels,sizeof(SRWWUnknownPixels));
++   if(palettes)memcpy(palettes,SRWWUnknownPalettes,sizeof(SRWWUnknownPalettes));
++}
++extern "C" RETRO_API void retro_srw_set_ready_parts(const unsigned *ids,unsigned count) { if(count<200000)SRWWSetReadyParts(ids,count); }
++extern "C" RETRO_API void retro_srw_copy_part_palettes(void *out) { if(out)memcpy(out,SRWWPartPalettes,sizeof(SRWWPartPalettes)); }
++extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
++   if(parts)memcpy(parts,SRWWParts,sizeof(SRWWParts));
++   if(owners)memcpy(owners,SRWWNativeOwner,sizeof(SRWWNativeOwner));
++}
++extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
++extern "C" RETRO_API void retro_srw_copy_layer_ids(void *out) { if(out&&GPU) { GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();memcpy(out,engine->SRWWGetNativeLayerIDs(),256*192); } }
++extern "C" RETRO_API void retro_srw_reset_code_cache() {
++#ifdef HAVE_JIT
++   arm_jit_reset(CommonSettings.use_jit,true);
++#endif
++}
+ static retro_input_poll_t poll_cb = NULL;
+ static retro_input_state_t input_cb = NULL;
+ retro_audio_sample_batch_t audio_batch_cb = NULL;
+@@ -2075,10 +2140,13 @@ void retro_run (void)
+    // RUN
+    frameIndex ++;
+    bool skipped = frameIndex <= frameSkip;
++   // Cursor lifetime follows emulated ticks, including undisplayed frames.
++   if(skipped && FramesWithPointer>=0)FramesWithPointer--;
+ 
+    if (skipped)
+       NDS_SkipNextFrame();
+ 
++   SRWWHD_Frame++;SRWWHD_Info[0]=0;SRWWRobot_Info[0]=0;SRWWBeginPartsFrame();
+    NDS_exec<false>();
+ 
+    SPU_Emulate_user();
+diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
+new file mode 100644
+--- /dev/null
++++ b/desmume/src/srww_hd.h
+@@ -0,0 +1,30 @@
++// Project-local GPL-2.0-or-later HD cut-in bridge.
++#ifndef SRWW_HD_H
++#define SRWW_HD_H
++#include <stdint.h>
++extern uint32_t SRWWHD_Enabled;
++extern uint32_t SRWWHD_Frame;
++extern uint32_t SRWWHD_Info[12];
++extern int32_t SRWWRobot_Info[8];
++extern uint8_t SRWWRobot_OAM[1024];
++extern uint8_t SRWWNativeOwner[256*192];
++extern uint32_t SRWWParts[128*8];
++extern uint16_t SRWWPartPalettes[128*16];
++extern uint32_t SRWWBGParts[4*800*8];
++extern uint8_t SRWWBGMask[4][256*192];
++extern uint32_t SRWWUnknownParts[128*8];
++extern uint8_t SRWWUnknownPixels[128*4096];
++extern uint16_t SRWWUnknownPalettes[128*16];
++void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding);
++void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
++void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
++void SRWWRegisterCutins(const uint32_t *rows,unsigned count);
++void SRWWSetReadyParts(const uint32_t *ids,unsigned count);
++void SRWWBeginPartsFrame();
++uint32_t SRWWTargetEngine();
++void SRWWPrepareBG(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t x,uint32_t y,uint32_t w,uint32_t h,uint32_t eight,uint32_t priority);
++bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam);
++bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t x,uint32_t y,uint32_t priority,uint32_t master);
++#endif
++
++extern uint32_t SRWWTextureCacheStats[6];
+diff --git a/desmume/src/srww_hd_signatures.h b/desmume/src/srww_hd_signatures.h
+new file mode 100644
+--- /dev/null
++++ b/desmume/src/srww_hd_signatures.h
+@@ -0,0 +1,1 @@
++static const uint32_t SRWWHD_SIGNATURES[] = {0xccfc5ffeu,0x8de594b8u,0x7f3b714cu,0x3123c16cu,0x7f442362u,0x8760a14bu,0xf986463eu,0xe6220939u,0x8bdee166u,0xeb31506au,0x890caa57u,0x91b765c7u,0xea50a54eu,0x6c564b2fu,0x5f429e5au,0x6f562e5du};
+diff --git a/desmume/src/srww_parts_impl.h b/desmume/src/srww_parts_impl.h
+new file mode 100644
+--- /dev/null
++++ b/desmume/src/srww_parts_impl.h
+@@ -0,0 +1,135 @@
++// Project-local GPL-2.0-or-later content-addressed HD OBJ renderer bridge.
++#include <unordered_map>
++#include <vector>
++int32_t SRWWRobot_Info[8]={0};
++uint8_t SRWWRobot_OAM[1024]={0};
++uint8_t SRWWNativeOwner[256*192]={0};
++uint32_t SRWWParts[128*8]={0};
++uint16_t SRWWPartPalettes[128*16]={0};
++uint32_t SRWWBGParts[4*800*8]={0};
++uint8_t SRWWBGMask[4][256*192]={0};
++uint32_t SRWWUnknownParts[128*8]={0};
++uint8_t SRWWUnknownPixels[128*4096]={0};
++uint16_t SRWWUnknownPalettes[128*16]={0};
++static uint32_t SRWWCrcTable[256];
++#include "srww_texture_cache.h"
++static std::unordered_map<uint32_t,uint32_t> SRWWPartBindings;
++static std::unordered_map<uint32_t,uint32_t> SRWWIndexedBindings;
++static std::unordered_map<uint64_t,uint32_t> SRWWDynamicBindings;
++static bool SRWWAsyncParts=false;
++static uint8_t SRWWReadyParts[200000]={0};
++void SRWWSetReadyParts(const uint32_t *ids,unsigned count) {
++    SRWWAsyncParts=true;memset(SRWWReadyParts,0,sizeof(SRWWReadyParts));
++    for(unsigned i=0;i<count;i++)if(ids[i]<200000)SRWWReadyParts[ids[i]]=1;
++}
++void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding) {
++    if(binding && binding<200000)SRWWDynamicBindings[((uint64_t)hash<<32)|material]=binding;
++}
++void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count) {
++    SRWWIndexedBindings.clear();
++    for(unsigned i=0;i<count;i++)if(!SRWWIndexedBindings.count(hashes[i]))SRWWIndexedBindings[hashes[i]]=bindings[i];
++}
++uint32_t SRWWTargetEngine() { return GPU->GetEngineMain()->GetTargetDisplayByID()==NDSDisplayID_Main?0:1; }
++void SRWWRegisterParts(const uint32_t *hashes,unsigned count) {
++    SRWWAsyncParts=false;SRWWResetTextureCache();
++    SRWWDynamicBindings.clear();
++    SRWWPartBindings.clear();
++    for(unsigned i=0;i<256;i++) {uint32_t c=i;for(unsigned j=0;j<8;j++)c=(c>>1)^((c&1)?0xedb88320u:0);SRWWCrcTable[i]=c;}
++    for(unsigned i=0;i<count;i++)if(hashes[i])SRWWPartBindings[hashes[i]]=i+1;
++}
++bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
++    if(engine!=SRWWTargetEngine())return false;
++    static uint32_t checked=~0u;
++    if(checked!=SRWWHD_Frame) {
++        checked=SRWWHD_Frame;memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWRobot_Info,0,sizeof(SRWWRobot_Info));
++        memcpy(SRWWRobot_OAM,oam,sizeof(SRWWRobot_OAM));
++        if(!SRWWHD_Enabled)return false;
++        const u16 *raw=(const u16*)oam;
++        const uint8_t *regs=MMU.ARM9_REG+(engine?0x1000:0);
++        const uint32_t disp=LE_TO_LOCAL_32(*(u32*)regs);
++        const bool oneD=(disp&16)!=0;
++        const unsigned boundary=oneD?5+((disp>>20)&3):5;
++        static const int widths[3][4]={{8,16,32,64},{16,32,32,64},{8,8,16,32}};
++        static const int heights[3][4]={{8,16,32,64},{8,8,16,32},{16,32,32,64}};
++        for(unsigned i=0;i<128;i++) {
++            const unsigned a=LE_TO_LOCAL_16(raw[i*4]),b=LE_TO_LOCAL_16(raw[i*4+1]),c=LE_TO_LOCAL_16(raw[i*4+2]);
++            if((!(a&256)&&(a&512)) || (a>>14)==3 || ((a>>10)&3)>=2)continue;
++            const unsigned shape=a>>14,size=b>>14,w=widths[shape][size],h=heights[shape][size];
++            int screenX=b&511,screenY=a&255;
++            if(screenX>=256)screenX-=512;
++            if(screenY>=192)screenY-=256;
++            const unsigned extent=((a&256)&&(a&512))?2:1;
++            if(screenX>=256 || screenY>=192 || screenX+(int)(w*extent)<=0 || screenY+(int)(h*extent)<=0)continue;
++            const bool eight=(a&8192)!=0;
++            if(eight && (disp&0x80000000u))continue; // extended OBJ palettes stay native
++            const unsigned base=(engine?0x06600000u:0x06400000u)+((c&1023)<<boundary),tileBytes=eight?64:32;
++            const unsigned stride=oneD?(w/8)*tileBytes:1024;
++            const u16 *palette=(const u16*)(MMU.ARM9_VMEM+(engine?1536:512)+(eight?0:(c>>12)*32));
++            const auto &texture=SRWWCachedOBJ(engine,i,base,stride,w,h,eight,palette);
++            const uint32_t hash=texture.hash,indexHash=texture.indexHash,material=texture.material,usedMask=texture.usedMask,opaque=texture.opaque;
++            const uint8_t *nativeIndices=texture.indices;
++            const auto found=SRWWPartBindings.find(hash);
++            uint32_t binding=found==SRWWPartBindings.end()?0:found->second;
++            if(!binding && !eight) {
++                const auto indexed=SRWWIndexedBindings.find(indexHash);
++                if(indexed!=SRWWIndexedBindings.end())binding=indexed->second;
++            }
++            if(!binding && !eight) {
++                const auto dynamic=SRWWDynamicBindings.find(((uint64_t)indexHash<<32)|material);
++                if(dynamic!=SRWWDynamicBindings.end())binding=dynamic->second;
++            }
++            if(!binding) {
++                unsigned colors=0;for(uint32_t mask=usedMask;mask;mask&=mask-1)colors++;
++                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<120) {
++                    uint32_t *unknown=SRWWUnknownParts+i*8;
++                    unknown[0]=indexHash;unknown[1]=w;unknown[2]=h;unknown[3]=a;unknown[4]=b;unknown[5]=c;unknown[6]=hash;unknown[7]=material;
++                    memcpy(SRWWUnknownPixels+i*4096,nativeIndices,w*h);
++                    for(unsigned k=0;k<16;k++)SRWWUnknownPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
++                }
++                continue;
++            }
++            uint32_t *part=SRWWParts+i*8;
++            part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
++            for(unsigned k=0;k<16;k++)SRWWPartPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
++            part[5]=LE_TO_LOCAL_16(*(u16*)(regs+0x6c));
++            part[6]=LE_TO_LOCAL_16(*(u16*)(regs+0x52));
++            part[7]=LE_TO_LOCAL_16(*(u16*)(regs+0x50))|((SRWWAsyncParts && !SRWWReadyParts[binding])?0x80000000u:0);
++            SRWWRobot_Info[0]++;
++        }
++    }
++    // Keep a native fallback underneath asynchronously prepared HD textures.
++    // The frontend can display a new animation immediately while its art warms.
++    const unsigned binding=SRWWParts[sprite*8];
++    return binding && (!SRWWAsyncParts || SRWWReadyParts[binding]);
++}
++
++void SRWWBeginPartsFrame() {
++    memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
++    memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWBGParts,0,sizeof(SRWWBGParts));memset(SRWWBGMask,0,sizeof(SRWWBGMask));
++}
++
++void SRWWPrepareBG(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t scrollX,uint32_t scrollY,uint32_t w,uint32_t h,uint32_t eight,uint32_t priority) {
++    if(engine!=SRWWTargetEngine() || layer>3 || !SRWWHD_Enabled || SRWWPartBindings.empty())return;
++    static uint32_t checked[4]={~0u,~0u,~0u,~0u};
++    if(checked[layer]==SRWWHD_Frame)return;checked[layer]=SRWWHD_Frame;
++    unsigned count=0;
++    for(int sy=-(int)(scrollY&7);sy<192;sy+=8)for(int sx=-(int)(scrollX&7);sx<256;sx+=8) {
++        if(layer==0 && sy>=120)continue; // dialogue/font/portraits have their own high-resolution path
++        const unsigned tx=((sx+scrollX)&(w-1))/8,ty=((sy+scrollY)&(h-1))/8;
++        const unsigned block=(ty/32)*(w/256)+tx/32,entryIndex=block*1024+(ty&31)*32+(tx&31);
++        const unsigned entry=LE_TO_LOCAL_16(*(u16*)MMU_gpu_map(map+entryIndex*2));
++        const unsigned tile=entry&1023;
++        const u16 *pal=(const u16*)(MMU.ARM9_VMEM+(engine?1024:0)+(eight?0:(entry>>12)*32));
++        const uint8_t *data=(const uint8_t*)MMU_gpu_map(tiles+tile*(eight?64:32));
++        const uint32_t hash=SRWWCachedBG(engine,layer,tile,eight!=0,data,pal);
++        const auto found=SRWWPartBindings.find(hash);
++        if(found==SRWWPartBindings.end())continue;
++        if(count>=800)continue;
++        uint32_t *p=SRWWBGParts+(layer*800+count++)*8;
++        p[0]=found->second;p[1]=entry&0xc00;p[2]=sx;p[3]=sy;p[4]=layer;p[5]=priority;
++        const uint8_t *regs=MMU.ARM9_REG+(engine?0x1000:0);
++        p[6]=LE_TO_LOCAL_16(*(u16*)(regs+0x6c));p[7]=LE_TO_LOCAL_16(*(u16*)(regs+0x50))|((SRWWAsyncParts && !SRWWReadyParts[found->second])?0x80000000u:0);
++        if(!SRWWAsyncParts || SRWWReadyParts[found->second])
++            for(int y=std::max(sy,0);y<std::min(sy+8,192);y++)for(int x=std::max(sx,0);x<std::min(sx+8,256);x++)SRWWBGMask[layer][y*256+x]=1;
++    }
++}
+diff --git a/desmume/src/srww_robot_signatures.h b/desmume/src/srww_robot_signatures.h
+new file mode 100644
+--- /dev/null
++++ b/desmume/src/srww_robot_signatures.h
+@@ -0,0 +1,384 @@
++// Generated live OBJ topology; GPL-2.0-or-later.
++struct SRWWRobotPart { int a,b,c; };
++struct SRWWRobotPose { const SRWWRobotPart *parts; int n,asset,anchor,offsetX,offsetY,w,h; };
++static const SRWWRobotPart SRWWRobotGroup1[]={
++{16384,16384,2076},
++{0,32768,2048},
++{0,16384,2073},
++{0,32768,2069},
++{0,16384,2141},
++};
++static const SRWWRobotPart SRWWRobotGroup2[]={
++{0,0,2143},
++{16384,16384,2076},
++{0,32768,2048},
++{0,32768,2053},
++{16384,32768,2057},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{0,32768,2069},
++{0,16384,2141},
++};
++static const SRWWRobotPart SRWWRobotGroup3[]={
++{0,32768,2064},
++{0,16384,2139},
++{0,32768,2060},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,32768,2053},
++{16384,32768,2057},
++{16384,32768,2121},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{0,32768,2069},
++{0,16384,2141},
++{16384,0,2108},
++{16384,0,2110},
++};
++static const SRWWRobotPart SRWWRobotGroup4[]={
++{32768,16384,2068},
++{0,32768,2064},
++{0,16384,2139},
++{0,32768,2060},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,32768,2053},
++{16384,32768,2057},
++{16384,32768,2121},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{0,32768,2069},
++{0,16384,2141},
++{16384,0,2108},
++{16384,0,2110},
++};
++static const SRWWRobotPart SRWWRobotGroup5[]={
++{0,16384,2139},
++{32768,16384,2068},
++{0,32768,2064},
++{0,32768,2060},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,32768,2053},
++{16384,32768,2057},
++{16384,32768,2121},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{0,32768,2069},
++{0,16384,2141},
++{16384,0,2108},
++{16384,0,2110},
++};
++static const SRWWRobotPart SRWWRobotGroup6[]={
++{0,16384,2118},
++{0,16384,2139},
++{32768,16384,2068},
++{0,32768,2064},
++{0,32768,2060},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,32768,2053},
++{16384,32768,2057},
++{16384,32768,2121},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{0,32768,2069},
++{0,16384,2141},
++{16384,0,2108},
++{16384,0,2110},
++};
++static const SRWWRobotPart SRWWRobotGroup7[]={
++{16384,32768,2568},
++{0,16384,2266},
++{16384,36864,2568},
++{0,16384,2202},
++{16384,32768,2057},
++{0,32768,2437},
++{0,16384,2511},
++{0,32768,2060},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{32768,0,2075},
++{0,16384,2073},
++{0,16384,2137},
++{16384,0,2108},
++{16384,0,2110},
++{0,32768,2571},
++{0,16384,2334},
++};
++static const SRWWRobotPart SRWWRobotGroup8[]={
++{0,32768,2183},
++{32768,32768,2187},
++{16384,32768,2376},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,32768,2443},
++{16384,0,2332},
++{16384,32768,2057},
++{0,32768,2176},
++{16384,32768,2180},
++{16384,32768,2312},
++{0,32768,2193},
++{16384,32768,2260},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++};
++static const SRWWRobotPart SRWWRobotGroup9[]={
++{16384,32768,2568},
++{0,16384,2266},
++{0,32768,2189},
++{16384,32768,2196},
++{16384,32768,2057},
++{0,32768,2176},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,0,2108},
++{16384,0,2110},
++{0,16384,2141},
++{0,32768,2571},
++{0,16384,2334},
++};
++static const SRWWRobotPart SRWWRobotGroup10[]={
++{16384,32768,2568},
++{0,16384,2266},
++{0,32768,2189},
++{16384,32768,2196},
++{16384,32768,2057},
++{0,32768,2176},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,0,2108},
++{16384,0,2110},
++{0,24576,2141},
++{0,32768,2571},
++{0,16384,2334},
++};
++static const SRWWRobotPart SRWWRobotGroup11[]={
++{16384,32768,2568},
++{0,16384,2266},
++{0,32768,2189},
++{16384,32768,2196},
++{16384,32768,2057},
++{0,32768,2176},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,0,2108},
++{16384,0,2110},
++{0,28672,2141},
++{0,16384,2266},
++{0,32768,2571},
++{0,16384,2334},
++};
++static const SRWWRobotPart SRWWRobotGroup12[]={
++{16384,32768,2568},
++{0,16384,2266},
++{0,32768,2189},
++{16384,32768,2196},
++{16384,32768,2057},
++{0,32768,2176},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,0,2108},
++{16384,0,2110},
++{0,28672,2141},
++{0,16384,2266},
++{0,32768,2571},
++{0,16384,2334},
++{16384,0,2364},
++};
++static const SRWWRobotPart SRWWRobotGroup13[]={
++{16384,32768,2568},
++{0,32768,2189},
++{16384,32768,2196},
++{16384,32768,2057},
++{0,32768,2176},
++{0,16384,2270},
++{16384,32768,2204},
++{16384,0,2364},
++{32768,16384,2436},
++{0,32768,2432},
++{16384,32768,2121},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,0,2108},
++{16384,0,2110},
++{0,24576,2141},
++{0,32768,2571},
++{0,16384,2334},
++};
++static const SRWWRobotPart SRWWRobotGroup14[]={
++{0,32768,2176},
++{16384,32768,2180},
++{16384,4096,2332},
++{0,16384,2141},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,36864,2183},
++{32768,36864,2187},
++{0,20480,2266},
++{0,36864,2053},
++{16384,32768,2057},
++{16384,32768,2312},
++{0,36864,2193},
++{16384,36864,2260},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++{0,20480,2268},
++};
++static const SRWWRobotPart SRWWRobotGroup15[]={
++{0,32768,2176},
++{16384,32768,2180},
++{16384,4096,2332},
++{0,16384,2141},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,36864,2183},
++{32768,36864,2187},
++{0,20480,2266},
++{0,36864,2053},
++{16384,32768,2057},
++{16384,32768,2312},
++{0,36864,2193},
++{16384,36864,2260},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++{0,20480,2268},
++{0,16384,2200},
++};
++static const SRWWRobotPart SRWWRobotGroup16[]={
++{0,32768,2176},
++{16384,32768,2180},
++{16384,4096,2332},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,36864,2183},
++{32768,36864,2187},
++{0,20480,2266},
++{0,36864,2053},
++{16384,32768,2057},
++{16384,32768,2312},
++{0,36864,2193},
++{16384,36864,2260},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++{0,20480,2268},
++{0,16384,2137},
++};
++static const SRWWRobotPart SRWWRobotGroup17[]={
++{16384,4096,2332},
++{0,32768,2176},
++{16384,32768,2180},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,36864,2183},
++{32768,36864,2187},
++{0,20480,2266},
++{0,36864,2053},
++{16384,32768,2057},
++{16384,32768,2312},
++{0,36864,2193},
++{16384,36864,2260},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++{0,20480,2268},
++{0,16384,2137},
++};
++static const SRWWRobotPart SRWWRobotGroup18[]={
++{16384,4096,2332},
++{0,32768,2176},
++{16384,32768,2180},
++{0,0,2143},
++{16384,16384,2076},
++{32768,16384,2052},
++{0,32768,2048},
++{0,36864,2183},
++{32768,36864,2187},
++{0,20480,2266},
++{0,36864,2053},
++{16384,32768,2057},
++{16384,32768,2312},
++{0,16384,2200},
++{16384,32768,2244},
++{16384,32768,2447},
++{0,16384,2137},
++{0,36864,2193},
++{16384,36864,2260},
++{0,20480,2268},
++};
++static const SRWWRobotPose SRWWRobotPoses[]={
++{SRWWRobotGroup1,5,1,1,11,0,76,67},
++{SRWWRobotGroup2,10,1,2,11,0,76,67},
++{SRWWRobotGroup3,17,1,5,43,0,76,67},
++{SRWWRobotGroup4,18,1,6,43,0,76,67},
++{SRWWRobotGroup5,18,1,6,43,0,76,67},
++{SRWWRobotGroup6,19,1,7,43,0,76,67},
++{SRWWRobotGroup7,21,3,0,13,10,59,61},
++{SRWWRobotGroup8,18,2,5,32,4,73,60},
++{SRWWRobotGroup9,19,4,1,24,17,64,65},
++{SRWWRobotGroup10,19,4,1,24,17,64,65},
++{SRWWRobotGroup11,20,4,1,24,17,64,65},
++{SRWWRobotGroup12,21,4,1,24,17,64,65},
++{SRWWRobotGroup13,18,4,9,13,0,64,65},
++{SRWWRobotGroup14,20,5,7,21,0,83,66},
++{SRWWRobotGroup15,21,5,7,21,0,83,66},
++{SRWWRobotGroup16,20,5,6,21,0,83,66},
++{SRWWRobotGroup17,20,6,14,20,8,66,72},
++{SRWWRobotGroup18,20,6,18,20,8,66,72},
++};
++static const unsigned SRWWRobotAtlasHash=0xe9c6d093u;
+diff --git a/desmume/src/srww_texture_cache.h b/desmume/src/srww_texture_cache.h
+new file mode 100644
+--- /dev/null
++++ b/desmume/src/srww_texture_cache.h
+@@ -0,0 +1,65 @@
++// GPL-2.0-or-later. Content-validated cache; VRAM and palettes are compared
++// every frame, so animation uploads, recolors, bank remaps and state reloads
++// invalidate naturally. Never key a texture by its address alone.
++struct SRWWTextureIdentity {
++    bool valid=false,eight=false;
++    unsigned w=0,h=0;
++    uint8_t raw[4096],indices[4096];
++    uint16_t palette[256];
++    uint32_t hash=0,indexHash=0,material=0,usedMask=0,opaque=0;
++};
++struct SRWWBGTextureIdentity {
++    bool valid=false,eight=false;
++    uint8_t raw[64];uint16_t palette[256];uint32_t hash=0;
++};
++static SRWWTextureIdentity SRWWObjTextures[2][128];
++static SRWWBGTextureIdentity SRWWBGTextures[2][4][1024];
++uint32_t SRWWTextureCacheStats[6]={0};
++static void SRWWResetTextureCache() {
++    for(unsigned e=0;e<2;e++) {
++        for(unsigned i=0;i<128;i++)SRWWObjTextures[e][i].valid=false;
++        for(unsigned l=0;l<4;l++)for(unsigned i=0;i<1024;i++)SRWWBGTextures[e][l][i].valid=false;
++    }
++    memset(SRWWTextureCacheStats,0,sizeof(SRWWTextureCacheStats));
++}
++static SRWWTextureIdentity &SRWWCachedOBJ(unsigned engine,unsigned sprite,unsigned base,unsigned stride,unsigned w,unsigned h,bool eight,const u16 *palette) {
++    auto &cache=SRWWObjTextures[engine][sprite];const unsigned tileBytes=eight?64:32,paletteBytes=eight?512:32,tilesWide=w/8;
++    uint8_t packed[4096];unsigned bytes=0;
++    for(unsigned ty=0;ty<h/8;ty++)for(unsigned tx=0;tx<tilesWide;tx++) {
++        memcpy(packed+bytes,MMU_gpu_map(base+ty*stride+tx*tileBytes),tileBytes);bytes+=tileBytes;
++    }
++    SRWWTextureCacheStats[0]++;
++    if(cache.valid && cache.w==w && cache.h==h && cache.eight==eight && !memcmp(cache.raw,packed,bytes) && !memcmp(cache.palette,palette,paletteBytes)) {
++        SRWWTextureCacheStats[1]++;return cache;
++    }
++    SRWWTextureCacheStats[2]++;cache.valid=true;cache.w=w;cache.h=h;cache.eight=eight;
++    memcpy(cache.raw,packed,bytes);memcpy(cache.palette,palette,paletteBytes);
++    uint32_t crc=~0u,indexCrc=~0u,material=2166136261u,usedMask=0,opaque=0;
++    for(unsigned y=0;y<h;y++)for(unsigned x=0;x<w;x++) {
++        const unsigned at=((y/8)*tilesWide+x/8)*tileBytes+(y&7)*(eight?8:4)+(eight?(x&7):((x&7)/2));
++        const unsigned index=eight?packed[at]:((packed[at]>>((x&1)*4))&15);
++        cache.indices[y*w+x]=(uint8_t)index;
++        if(!eight) {
++            material=(material^index)*16777619u;if(index){usedMask|=1u<<index;opaque++;}
++            indexCrc=SRWWCrcTable[(indexCrc^index)&255]^(indexCrc>>8);
++            indexCrc=SRWWCrcTable[(indexCrc^(index?128:0))&255]^(indexCrc>>8);
++        }
++        const unsigned color=index?(LE_TO_LOCAL_16(palette[index])|0x8000):0;
++        crc=SRWWCrcTable[(crc^(color&255))&255]^(crc>>8);crc=SRWWCrcTable[(crc^(color>>8))&255]^(crc>>8);
++    }
++    cache.hash=(~crc)^(w<<16)^h;cache.indexHash=(~indexCrc)^(w<<16)^h;cache.material=material;cache.usedMask=usedMask;cache.opaque=opaque;
++    return cache;
++}
++static uint32_t SRWWCachedBG(unsigned engine,unsigned layer,unsigned tile,bool eight,const uint8_t *data,const u16 *palette) {
++    auto &cache=SRWWBGTextures[engine][layer][tile];const unsigned bytes=eight?64:32,paletteBytes=eight?512:32;SRWWTextureCacheStats[3]++;
++    if(cache.valid && cache.eight==eight && !memcmp(cache.raw,data,bytes) && !memcmp(cache.palette,palette,paletteBytes)) {
++        SRWWTextureCacheStats[4]++;return cache.hash;
++    }
++    SRWWTextureCacheStats[5]++;cache.valid=true;cache.eight=eight;memcpy(cache.raw,data,bytes);memcpy(cache.palette,palette,paletteBytes);
++    uint32_t crc=~0u;
++    for(unsigned i=0;i<64;i++) {
++        const unsigned index=eight?data[i]:((data[i/2]>>((i&1)*4))&15),color=index?(LE_TO_LOCAL_16(palette[index])|0x8000):0;
++        crc=SRWWCrcTable[(crc^(color&255))&255]^(crc>>8);crc=SRWWCrcTable[(crc^(color>>8))&255]^(crc>>8);
++    }
++    return cache.hash=(~crc)^(8<<16)^8;
++}

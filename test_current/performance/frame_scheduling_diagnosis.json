@@ -1,0 +1,152 @@
+{
+  "frameskip": 0,
+  "video_cadence": {
+    "ability": {
+      "retro_runs": 120,
+      "video_callbacks": 120,
+      "runs_without_video": 0,
+      "callback_delta_counts": {
+        "1": 120
+      },
+      "core_run": {
+        "mean_ms": 5.9264,
+        "p95_ms": 9.0123,
+        "max_ms": 18.1554
+      }
+    },
+    "battle": {
+      "retro_runs": 120,
+      "video_callbacks": 120,
+      "runs_without_video": 0,
+      "callback_delta_counts": {
+        "1": 120
+      },
+      "core_run": {
+        "mean_ms": 8.8455,
+        "p95_ms": 10.0803,
+        "max_ms": 22.0349
+      }
+    }
+  },
+  "snapshot_bytes": 505557,
+  "snapshot_copy": {
+    "mean_ms": 0.1577,
+    "p95_ms": 0.2387,
+    "max_ms": 0.3975
+  },
+  "pickle": {
+    "mean_ms": 0.2587,
+    "p95_ms": 0.4103,
+    "max_ms": 1.3447
+  },
+  "pool_echo_roundtrip": {
+    "mean_ms": 1.3223,
+    "p95_ms": 1.6002,
+    "max_ms": 1.959
+  },
+  "pool_delivery_to_child": {
+    "mean_ms": 1.142,
+    "p95_ms": 1.4146,
+    "max_ms": 1.788
+  },
+  "scheduler_simulation": [
+    {
+      "render_ms": 0,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 0,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 4,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 4,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 8,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 8,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 12,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 12,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 15,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 15,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 59.8
+    },
+    {
+      "render_ms": 18,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 47.8
+    },
+    {
+      "render_ms": 18,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 47.8
+    },
+    {
+      "render_ms": 24,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": true,
+      "composition_fps": 37.3
+    },
+    {
+      "render_ms": 24,
+      "core_ms": 4,
+      "ipc_ms": 1,
+      "rate_gate": false,
+      "composition_fps": 37.3
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+         347628 function calls (347601 primitive calls) in 5.425 seconds
+
+   Ordered by: cumulative time
+   List reduced from 345 to 22 due to restriction <22>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.003    0.003    5.425    5.425 <string>:1(<listcomp>)
+       80    0.090    0.001    4.143    0.052 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:50(render_top)
+       80    0.066    0.001    2.770    0.035 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:36(compose)
+     1913    0.025    0.000    1.351    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1840(paste)
+     1913    1.290    0.001    1.290    0.001 {method 'paste' of 'ImagingCore' objects}
+       80    0.929    0.012    1.279    0.016 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_core.py:146(run)
+       80    0.597    0.007    1.091    0.014 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:22(grid)
+       80    0.059    0.001    0.760    0.010 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:196(compose)
+  867/840    0.014    0.000    0.687    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:2329(resize)
+      840    0.652    0.001    0.652    0.001 {method 'resize' of 'ImagingCore' objects}
+       90    0.001    0.000    0.269    0.003 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1356(copy)
+       90    0.263    0.003    0.263    0.003 {method 'copy' of 'ImagingCore' objects}
+       80    0.103    0.001    0.232    0.003 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_core.py:100(video)
+       60    0.110    0.002    0.188    0.003 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:171(_heal_native)
+      724    0.007    0.000    0.145    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1017(convert)
+       80    0.003    0.000    0.133    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:17(load)
+      713    0.010    0.000    0.124    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1932(alpha_composite)
+       80    0.095    0.001    0.118    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:95(recognize)
+       20    0.002    0.000    0.108    0.005 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\ImageFile.py:291(load)
+      854    0.105    0.000    0.105    0.000 {method 'decode' of 'ImagingDecoder' objects}
+      830    0.019    0.000    0.105    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:3378(fromarray)
+       80    0.089    0.001    0.091    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\shape_base.py:378(stack)
+
+
+Microphone successfully inited.
+DeSmuME 0.9.12 git#0 x64-JIT SSE2
+SoftRasterizer: Running directly on the emulation thread. (Multithreading disabled.)
+
+ROM game code: AS6J
+ROM crc: 2D5AC67C
+ROM serial: NTR-AS6J-JPN
+ROM chipID: 00003FC2
+ROM internal name: SRW-W      
+ROM developer: Unknown
+
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot 2: None
+Savestate info:
+	DeSmuME version: 0.9.12 svn 0
+	Save created: 2026-NOV-07 Sat 19:02:36
+JIT: max block size 12 instruction(s)

@@ -1,0 +1,53 @@
+{
+  "renderers": 2,
+  "registered_each": 548,
+  "constructor_ms": [
+    92.21780000370927,
+    2.1090999944135547
+  ],
+  "memory_before": {
+    "working_mib": 54.629,
+    "private_mib": 525.422
+  },
+  "memory_after_init": {
+    "working_mib": 63.035,
+    "private_mib": 533.941
+  },
+  "memory_after_warm": {
+    "working_mib": 85.688,
+    "private_mib": 556.508
+  },
+  "memory_after_40_faces": {
+    "working_mib": 86.371,
+    "private_mib": 557.164
+  },
+  "cold_pair": {
+    "mean_ms": 0.749,
+    "p95_ms": 1.034,
+    "max_ms": 1.243
+  },
+  "cold_file_reads": 0,
+  "cold_render_thread_reference_reads": 0,
+  "cold_render_thread_hd_reads": 0,
+  "warm_pair": {
+    "mean_ms": 0.763,
+    "p95_ms": 0.925,
+    "max_ms": 1.86
+  },
+  "warm_file_reads": 0,
+  "miss_pair": {
+    "mean_ms": 0.45,
+    "p95_ms": 0.974,
+    "max_ms": 1.078
+  },
+  "miss_file_reads": 0,
+  "hd_cache_sizes": [
+    32,
+    32
+  ],
+  "reference_cache_sizes": [
+    40,
+    40
+  ],
+  "note": "Cold means empty application asset cache; Windows filesystem cache is not forcibly cleared."
+}

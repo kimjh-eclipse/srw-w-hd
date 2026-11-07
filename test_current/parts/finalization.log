@@ -1,0 +1,26 @@
+START install_full_attack_parts.py
+{'script': 'install_full_attack_parts.py', 'exit_code': 0, 'seconds': 67.82}
+START install_shared_attack_parts.py
+{'script': 'install_shared_attack_parts.py', 'exit_code': 0, 'seconds': 27.53}
+START audit_generated_bindings.py
+{'script': 'audit_generated_bindings.py', 'exit_code': 0, 'seconds': 58.91}
+START verify_all_unit_coverage.py
+{'script': 'verify_all_unit_coverage.py', 'exit_code': 0, 'seconds': 6.37}
+START build_tile_library.py
+{'script': 'build_tile_library.py', 'exit_code': 0, 'seconds': 33.91}
+START verify_compound_parts.py
+{'script': 'verify_compound_parts.py', 'exit_code': 0, 'seconds': 9.87}
+START verify_dynamic_parts.py
+{'script': 'verify_dynamic_parts.py', 'exit_code': 0, 'seconds': 25.79}
+START verify_async_parts.py
+{'script': 'verify_async_parts.py', 'exit_code': 0, 'seconds': 35.74}
+START verify_frame_compositor.py
+{'script': 'verify_frame_compositor.py', 'exit_code': 1, 'seconds': 22.91}
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\finalize_hd_assets.py", line 25, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\finalize_hd_assets.py", line 22, in main
+    if result.returncode:raise RuntimeError('Check failed: '+name)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Check failed: verify_frame_compositor.py

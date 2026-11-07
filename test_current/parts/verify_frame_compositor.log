@@ -1,0 +1,51 @@
+{'scene': 'target', 'emulated_fps': 49.7, 'display_frames': 53, 'seconds': 4.22}
+Microphone successfully inited.
+DeSmuME 0.9.12 git#0 x64-JIT SSE2
+SoftRasterizer: Running directly on the emulation thread. (Multithreading disabled.)
+
+ROM game code: AS6J
+ROM crc: 2D5AC67C
+ROM serial: NTR-AS6J-JPN
+ROM chipID: 00003FC2
+ROM internal name: SRW-W      
+ROM developer: Unknown
+
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot1 auto-selected device type: Retail MC+ROM
+Slot2 auto-selected device type: None (0xFF)
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Slot 2: None
+Savestate info:
+	DeSmuME version: 0.9.12 svn 0
+	Save created: 2026-NOV-06 Fri 11:06:45
+JIT: max block size 12 instruction(s)
+Slot1 auto-selected device type: Retail MC+ROM
+BackupDevice: size = 2 Mbit
+CPU mode: JIT
+JIT: max block size 12 instruction(s)
+Already decrypted.
+WIFI: MAC Address = 00:09:BF:12:34:56
+WIFI: Emulation level is OFF.
+Savestate info:
+	DeSmuME version: 0.9.12 svn 0
+	Save created: 2026-NOV-07 Sat 14:05:23
+JIT: max block size 12 instruction(s)
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\verify_frame_compositor.py", line 26, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\verify_frame_compositor.py", line 22, in main
+    assert fps>54,result
+AssertionError: {'scene': 'target', 'emulated_fps': 49.7, 'display_frames': 53, 'seconds': 4.22}

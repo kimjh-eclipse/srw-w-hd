@@ -1,0 +1,71 @@
+Source: https://github.com/libretro/desmume
+Commit: 95b4d798731caa809125b6c3c11d17cc332ff6ef
+Build: w64devkit x64 2.11.0; make -f Makefile.libretro platform=win -j6
+Directory: desmume/desmume/src/frontend/libretro
+Modified: GPU.h, GPU.cpp, frontend/libretro/libretro.cpp; added srww_hd.h, srww_hd_signatures.h, srww_robot_signatures.h, srww_parts_impl.h
+License: DeSmuME GPL-2.0-or-later; complete modified source is included in desmume/.
+Frontend: Python 3.11, pygame, Pillow, numpy.
+Player actions: player_shortcuts.py; configurable keyboard and gamepad bindings; hold-to-fast-forward at requested 2/4/8/16x with native CPU limits, audio/rumble suppressed while accelerated.
+Default action keys: Tab hold, F5 save, F8 load, Space pause/resume, Pause pause, F6 resume. Saves use selected slot 1-5.
+Window focus changes release inputs/rumble/acceleration without pausing emulation. Fixed outer layout padding is zero; both screens use the same native-to-1440x1080 nearest grid before layout resizing.
+Action/display/speed checks: verify_player_actions.py. Native SDL gamepad action checks: verify_pad_hotplug.py.
+Current desktop UI: hd_emulator.py (Tkinter), player_worker.py (isolated core/audio), player_controls.py.
+Desktop launchers use the menu UI; hd_player.py remains for graphics verification.
+Joystick API reference: https://www.pygame.org/docs/ref/joystick.html
+Pad hot-plug fix: Tk owns window input; SDL state is pumped and its queue flushed without pygame.event.get() joystick-event conversion.
+Controller capture uses rising button states; known device exceptions release pad/rumble while the Tk poll continues.
+Regression: verify_pad_hotplug.py reproduces the original native stale-removal SystemError, then exercises 20 stale events and 3 SDL virtual-controller connect/input/capture/disconnect cycles.
+All-unit assets: graphics/all_units/; ROM IMG/PLT/PAT extraction, 64 AI-redrawn UV sheets.
+Scope: 269 primary forms plus 69 auxiliary mechanical packages. Duplicate forms are included.
+Core bridge: RGB555 part identity first; indexed identity fallback plus render-time 16-color palette capture.
+Indexed-only aliases pass RGB identity 0 to preserve approved RGB binding precedence.
+Renderer: original OAM transforms/order, lazy atlas LRU 4, prepared part LRU 512.
+Reproduction: catalog_rom_graphics.py -> prepare_all_unit_assets.py -> prepare_all_unit_batches.py (initial packing only).
+Do not repack existing generated sheets; batches.json stores their registered UV positions.
+Generation prompts/tool mode: graphics/all_units/prompts.json. Built-in image_gen; project copies retained.
+Install/verify: audit_all_unit_assets.py, install_all_unit_parts.py, build_registration_cache.py,
+render_all_unit_gallery.py, verify_indexed_parts.py, verify_parts.py and verify_player.worker_checks().
+Gallery is static PAT assembly; it does not establish complete in-game attack coverage.
+Expansion audit: audit_animation_resources.py parses all 1866 variable-length PATs.
+IMG/PAT group associations and out-of-bounds references are still under investigation.
+Additional approved-art reuse: 3027 exact matches; 6 ambiguous CRC keys are globally excluded.
+Additional basic art: 9 AI sheets; 851 candidates, 691 appended bindings.
+Late battle art: 3 AI sheets for 60 source images; 1000 appended part bindings.
+Source/prompt/UV manifests: graphics/animation_parts/.
+Verification: verify_animation_expansion.py, verify_late_attack_parts.py; these do not prove full-game completion.
+
+2026-11-07 renderer update:
+- Separate native simulation/audio, process-isolated immutable HD frame composition and texture registration.
+- Exact 8x8 source material index; coherent groups sampled as whole blocks, not independent tiles.
+- Dynamic OBJ identities require both CRC32 and FNV32. Native fallback until registration is ready; capacity 200000.
+- First-seen black/faded textures use canonical source material colors so later normal palettes retain HD detail.
+- Runtime lossless SQLite cache and crop-before-upscale lazy images; NPZ stamp limited to approved initial assets.
+- Six observed background layers preserve native referenced-tile/map signatures, scrolling and visibility masks.
+- 548 portrait resources use exact two-stage native comparison, bounded async prepared-texture cache, both displays.
+- Gauron body/face cutins preserve native HUD and first-raster scroll position.
+- Source/prompt manifests: graphics/animation_parts/, graphics/observed_parts/, graphics/backgrounds/, graphics/portraits/.
+- Tests and limits: README.md and graphics/animation_parts/completion_status.json. Full campaign playback remains unverified.
+
+Final runtime changes:
+- Frame renderer writes the existing GUI shared buffer directly; no full FHD pixels traverse the game-process result pipe.
+- Native OBJ/BG identity cache validates actual VRAM bytes and palette bytes, not addresses. Cache equivalence checked over 540 frames.
+- Normal gameplay simulates every tick/audio buffer while producing complete video/metadata pairs every second tick. Fast-forward uses a larger video interval.
+- Skipped video never exposes partially cleared HD metadata. Paused pending parts repaint without advancing game state.
+- Pointer lifetime follows emulated ticks. Source addition: srww_texture_cache.h. Python frame_process.py owns FHD composition.
+- Headless worker lifecycle/actions, video/audio cadence, dynamic registration and actual scene checks are separate from desktop UI tests.
+
+- HD font presentation: exact Korean bitmap mapping plus original Shift-JIS keys for patched narrow glyphs; compact HUD IMG4651 glyphs with source hash in graphics/fonts/. Both displays use the frame compositor.
+
+2026-11-08 presentation update:
+- Normal emulation/video cadence 59.8261 Hz without the redundant wall-clock submission gate.
+- Both displays use a common adaptive 512..1440-pixel render width, based on the visible screen sizes.
+- Optional offscreen ModernGL source-over compositor; project-local moderngl/glcontext under tools/gpu_py.
+- RGBA shared-memory transport, atomic dimensions/frame/bottom-revision header, lazy bottom reuse.
+- ARB_buffer_storage persistent/coherent double PBO readback with fences and exact frame/bottom tags; ordinary PBO fallback when unsupported.
+- Windows GUI timer precision is scoped to the application lifetime, paired BeginPeriod/EndPeriod.
+- Native exact font scanner: native_font_scan.c/.dll; rebuild with build_native_font_scan.py.
+- Native exact part visibility: native_composition.c/.dll; rebuild with build_native_composition.py.
+- Both accelerators preserve the NumPy fallback; emulator core DLL is unchanged.
+- Font field cache updates only changed labels/numbers, with exact native underlay-neighbor caching.
+- Scenario graphics catalog: 247 entries; tactical maps: 114; map icon resources: 336; chapter title cards: 70.
+- Counts describe registered resources, not a completed campaign playthrough.

@@ -1,0 +1,32 @@
+         76165 function calls in 0.230 seconds
+
+   Ordered by: cumulative time
+   List reduced from 114 to 24 due to restriction <24>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       12    0.004    0.000    0.230    0.019 <stdin>:6(compose)
+       12    0.000    0.000    0.157    0.013 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:41(render_top)
+       24    0.005    0.000    0.113    0.005 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:185(compose)
+       24    0.005    0.000    0.082    0.003 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:94(recognize)
+       96    0.076    0.001    0.076    0.001 {method 'reduce' of 'numpy.ufunc' objects}
+       12    0.000    0.000    0.069    0.006 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:73(render_bottom)
+       12    0.018    0.001    0.069    0.006 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_parts.py:231(compose)
+       72    0.000    0.000    0.057    0.001 {method 'min' of 'numpy.ndarray' objects}
+       72    0.000    0.000    0.057    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\_methods.py:43(_amin)
+      672    0.003    0.000    0.047    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:1840(paste)
+      672    0.040    0.000    0.040    0.000 {method 'paste' of 'ImagingCore' objects}
+       24    0.000    0.000    0.036    0.002 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:2329(resize)
+       24    0.036    0.001    0.036    0.001 {method 'resize' of 'ImagingCore' objects}
+       24    0.000    0.000    0.019    0.001 {method 'max' of 'numpy.ndarray' objects}
+       24    0.000    0.000    0.019    0.001 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\_methods.py:39(_amax)
+      504    0.003    0.000    0.012    0.000 {built-in method numpy.asarray}
+      480    0.002    0.000    0.010    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:3378(fromarray)
+      456    0.001    0.000    0.009    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:804(__array_interface__)
+      480    0.001    0.000    0.008    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:3288(frombuffer)
+      456    0.003    0.000    0.007    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:842(tobytes)
+      228    0.001    0.000    0.006    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:2917(transform)
+       24    0.000    0.000    0.005    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_portraits.py:108(compose)
+      708    0.001    0.000    0.005    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:3193(new)
+     3180    0.002    0.000    0.005    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:968(load)
+
+
