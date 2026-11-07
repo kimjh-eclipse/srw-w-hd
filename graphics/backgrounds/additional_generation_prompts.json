@@ -1,0 +1,39 @@
+{
+  "forest": {
+    "prompt": "Redraw this exact square scrolling battle background texture as smooth high resolution 2D anime game art. Preserve its intentionally monochrome green/dark-purple night-vision palette and all scene bands/positions. The upper area has sparse green cloud-like foliage shapes on a flat dark purple sky, distant low green hills, then a bright green tree line at native y104/256 and textured grassy ground down to exactly y160. The entire lower96/256 must remain pure white unused texture space, not additional scenery. Keep exact horizon/ground heights, object placement and scale. No characters, no robots, no text. Do not turn the green sky into a blue daytime sky or change the color effect. Crisp organic painting inside existing composition, no pixelated stair steps. Perfect left/right repeat tiling, continuous tree line and ground at edges.",
+    "source": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1ae5f-b72a-7381-9484-facc1f5556b3\\exec-c784260f-b487-49b2-8a83-dfaaced28d31.png"
+  },
+  "extra": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "tower",
+        "prompt": "Redraw this exact futuristic gray coastal tower complex in crisp polished hand-painted anime background style for a Super Robot Wars W HD texture. Keep exact source composition and silhouette, same 136:104 aspect ratio, same placement and size of every building. Main central tiered tower, two slanted pylons, low gray side buildings. Preserve camera angle and perspective, no invented new towers. All green/empty background must be fully transparent, no green fringe. No sky, no ground, no shadow outside silhouette, no characters, no text. Exact registration to source silhouette is critical, including empty top third. Smooth clean linework, subtle detailed gray metal/stone shading."
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "space",
+        "prompt": "Redraw the supplied square starfield game texture as a smooth high-resolution 2D anime space background. Match exact vivid cobalt/ultramarine palette, bright cyan-blue tiny stars, wispy pale blue nebulas in the same positions. Preserve overall brightness and relative cloud patterns, no planets, no ships, no characters, no text, no HUD. The texture MUST tile perfectly in both horizontal and vertical directions: exact matching edge colors and nebula continuity, no visible straight seam when repeated. Avoid pixelation, large starburst flares or heavy photographic detail. Smooth painted anime art, fine star points."
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "deck",
+        "prompt": "Redraw this exact square scrolling game background in crisp detailed 2D anime painting style for Super Robot Wars W HD. Keep exact geometry and band positions: deep blue starfield at top, horizon at native y104/256, large light-gray sci-fi spaceship hull/deck from y104 to y160, then pure black unused texture area from y160 to y256. Preserve all gray panel line layout, vents, narrow lights, low railing and perspective. No characters or robots or writing. Do not extend scene into bottom black region. Make left/right edges tile seamlessly in every scene band with identical edge colors and uninterrupted deck edges. Exact framing/registration and band heights, no pixelated staircase edges."
+      }
+    }
+  ],
+  "seams": [
+    {
+      "name": "city",
+      "prompt": "Fix only the horizontal tiling seam of this scrolling game background texture. Keep the exact square canvas, scene band heights and positions, all architecture/skyline/cloud/road/ground details and bottom unused blank region. Make leftmost and rightmost edges connect PERFECTLY with identical color, horizon and texture continuity when this image is tiled horizontally: no vertical line, no abrupt cloud cut, no color step. Use minimal changes confined to narrow left and right edge bands, maintain the central scene entirely. Crisp polished anime background. No characters, no text. Output full original square texture."
+    },
+    {
+      "name": "field",
+      "prompt": "Fix only the horizontal tiling seam of this scrolling game background texture. Keep the exact square canvas, scene band heights and positions, all architecture/skyline/cloud/road/ground details and bottom unused blank region. Make leftmost and rightmost edges connect PERFECTLY with identical color, horizon and texture continuity when this image is tiled horizontally: no vertical line, no abrupt cloud cut, no color step. Use minimal changes confined to narrow left and right edge bands, maintain the central scene entirely. Crisp polished anime background. No characters, no text. Output full original square texture."
+    }
+  ]
+}

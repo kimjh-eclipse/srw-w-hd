@@ -1,0 +1,742 @@
+{
+  "tool": "built-in image_gen",
+  "assigned_jobs": [
+    32,
+    66
+  ],
+  "source_count": 35,
+  "prompt": "Edit target is a strict production atlas containing TWO independent top-down tactical-map images side by side, split exactly at 50% width. Redraw both reference maps as clean high-resolution hand-painted Japanese mecha strategy-game terrain. Preserve ALL landforms, roads, cliffs, coastlines, buildings, vegetation, rocks, object counts, scale, colors and exact XY positions in each map. Strict orthographic overhead view; no perspective, isometric angle, horizon or camera tilt. The maps remain square and independently framed, equal in size; do not crop, enlarge, shift, merge or rearrange any map feature. Do not add terrain, roads, buildings or objects. Smooth natural terrain detail and crisp fine mechanical edges, no pixels or blur. No grid lines, text, labels, UI, units, characters, mechs, markers, captions, gutters, borders or separator lines. Keep the exact 2:1 atlas aspect ratio and the central seam at exactly 50% width. Every source map detail must be redrawn, not copied as pixel art.",
+  "pairs": [
+    {
+      "name": "icon_pair_00",
+      "job_indices": [
+        32,
+        33
+      ],
+      "maps": [
+        3735,
+        3742
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_00_reference.png",
+      "generated": "icon_pair_00_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-69f7ef6d-c007-4a65-af45-fb4e0aefbb24.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3735,
+          "file": "map_3735_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "2cff835fc1d516cc9ac08fa6bb909c41f51e840c946cd8b82dd9dd99c5fedef6"
+        },
+        {
+          "map": 3742,
+          "file": "map_3742_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "7f2cd06ecfd6432429b16c96ce1f951efcb6483075ccad5d211d249573b96ede"
+        }
+      ],
+      "atlas_sha256": "03ec64fbd00a3e9fda1d776adc217822a3a10aac02e60a42bfa5be37a779ad33"
+    },
+    {
+      "name": "icon_pair_01",
+      "job_indices": [
+        34,
+        35
+      ],
+      "maps": [
+        3750,
+        3755
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_01_reference.png",
+      "generated": "icon_pair_01_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-78c2ed84-b2a1-4a99-b0f9-be8f2182a525.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3750,
+          "file": "map_3750_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "08d30744e392f7b81b2313861bec48f292a858a4eca815d058ea77a0b0027c0c"
+        },
+        {
+          "map": 3755,
+          "file": "map_3755_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "80796934fbc1f3969cf0801a384b29931bd66c7f4bf1a26e8bc7378fa1316a8c"
+        }
+      ],
+      "atlas_sha256": "4f8bca3f625ef64d6bc22e56cb4b337485c1ed0d92d00cf08f644328ab2af56c"
+    },
+    {
+      "name": "icon_pair_02",
+      "job_indices": [
+        36,
+        37
+      ],
+      "maps": [
+        3759,
+        3763
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_02_reference.png",
+      "generated": "icon_pair_02_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-fcc1794a-f0d7-4cc5-99b7-73815e4f53b7.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3759,
+          "file": "map_3759_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "54e09198609753680d228d84fac80235a44634f603789da3cabd1bd56be15c5f"
+        },
+        {
+          "map": 3763,
+          "file": "map_3763_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "9d27157bb2a89d49d4492e141efca95e186fe509efd6f1b68c87254e83f2053a"
+        }
+      ],
+      "atlas_sha256": "6f7fa2e6fab2de001bece45029aacb550874b5c3314862475bce69e26efc36e0"
+    },
+    {
+      "name": "icon_pair_03",
+      "job_indices": [
+        38,
+        39
+      ],
+      "maps": [
+        3767,
+        3773
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_03_reference.png",
+      "generated": "icon_pair_03_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-6d1763e3-d58f-4e7d-8600-937482204b3c.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3767,
+          "file": "map_3767_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "d21e709d81ffaaf0f5f4760ae77634f5d423eaca86dddeb1ffe5694bda328664"
+        },
+        {
+          "map": 3773,
+          "file": "map_3773_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "f0f41fa60bcf16ee745bf931643dd4eed4e7e661cf9c9a0f8ea63d8a7b09b9f7"
+        }
+      ],
+      "atlas_sha256": "17df055f607af13152f33711b079a6f9fe783fed55be2b1303a354cb93917140"
+    },
+    {
+      "name": "icon_pair_04",
+      "job_indices": [
+        40,
+        41
+      ],
+      "maps": [
+        3784,
+        3790
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_04_reference.png",
+      "generated": "icon_pair_04_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-4f60bdc6-ca55-452a-b6a3-f579123e21ac.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3784,
+          "file": "map_3784_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "f79fa3398cbad52db620f0578209715ae29516cdbe4863e6abf9992de7403554"
+        },
+        {
+          "map": 3790,
+          "file": "map_3790_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "fb2454c9f09cf1fb2aed3e48acd809cca7e410fb9d3930fbb6345eb13deb3a87"
+        }
+      ],
+      "atlas_sha256": "98bc47db2e280179dda24c448c798ab2c189940a53781e7df5b52d1ae3d4963e"
+    },
+    {
+      "name": "icon_pair_05",
+      "job_indices": [
+        42,
+        43
+      ],
+      "maps": [
+        3794,
+        3800
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_05_reference.png",
+      "generated": "icon_pair_05_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-0362b1c7-4a39-4bbc-91a5-63e7605d50c9.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3794,
+          "file": "map_3794_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "aeed80a436675e7a2f7bb26470c8d6d95bd863ec25880428b089e2feac299dd7"
+        },
+        {
+          "map": 3800,
+          "file": "map_3800_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "c76abd430eaaa6948880a620e753705a1632871f97512d8ef259c8b64863d5c6"
+        }
+      ],
+      "atlas_sha256": "0f1150d311c3a438899a1fe0e8a3fa172ae07b1df69646161aadc838d598832a"
+    },
+    {
+      "name": "icon_pair_06",
+      "job_indices": [
+        44,
+        45
+      ],
+      "maps": [
+        3807,
+        3809
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_06_reference.png",
+      "generated": "icon_pair_06_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-27c8428e-b07a-4161-b813-b06ca13892a6.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3807,
+          "file": "map_3807_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "89dbd61e6fffdd3488407f8f2631592137bafc5494a9f0a711f5c8576117b85d"
+        },
+        {
+          "map": 3809,
+          "file": "map_3809_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "0f2a2208e741e5d3b2a0af73fd16b447ddabdf5d56bc684cf48d40f2b63c20b4"
+        }
+      ],
+      "atlas_sha256": "d124c2a9e974bf1930c1fdc6571123bb2e6ab93d098c2365ea14958efbe1fa24"
+    },
+    {
+      "name": "icon_pair_07",
+      "job_indices": [
+        46,
+        47
+      ],
+      "maps": [
+        3815,
+        3821
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_07_reference.png",
+      "generated": "icon_pair_07_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-d37cb0f0-8232-4e83-82c8-01502db2c5dc.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3815,
+          "file": "map_3815_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "3a6e53346ad212e26baeb18fe700056d38dbca422c4adac8157660f49743b446"
+        },
+        {
+          "map": 3821,
+          "file": "map_3821_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "3a79e5f1fe897393b26dcc00fc70cee6dfc794f44adade0d6c3b03494e563e1f"
+        }
+      ],
+      "atlas_sha256": "9a01089f2a77344aa82ba59e4e5b40b4dda544e293fcc372cf8154b471ac0c30"
+    },
+    {
+      "name": "icon_pair_08",
+      "job_indices": [
+        48,
+        49
+      ],
+      "maps": [
+        3828,
+        3837
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_08_reference.png",
+      "generated": "icon_pair_08_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-9953a335-a02d-4bb6-99bb-e6780b3aecb6.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3828,
+          "file": "map_3828_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "6ab7127231be94fd6dbf772051f402e49a368f3d4fca16a8d97b8f25fe783f28"
+        },
+        {
+          "map": 3837,
+          "file": "map_3837_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "6cee52c0b29f4543dbccbdb94d66adaf9c0c1dddf888baca24c06b520ea82ba9"
+        }
+      ],
+      "atlas_sha256": "1ec3618e2480ec52696add86d1310c8254af8a555c5b9326d902b66cd3f6409f"
+    },
+    {
+      "name": "icon_pair_09",
+      "job_indices": [
+        50,
+        51
+      ],
+      "maps": [
+        3844,
+        3848
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_09_reference.png",
+      "generated": "icon_pair_09_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-5979632f-a4a5-4cf9-b27a-be645494a179.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3844,
+          "file": "map_3844_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "cb2907711bfeaeb8b9c221b6841eb794f92e7e2e8451b017ab24b9d85f8465c0"
+        },
+        {
+          "map": 3848,
+          "file": "map_3848_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "40441b3d2fcfd3d2b5a9956a5275be9d5ceb153b11377fca1ef9a43317f4ef80"
+        }
+      ],
+      "atlas_sha256": "bd2e34431a3689192e74b2d17e6b51eba7b0fe4478eded1ead82b0ada2e832a2"
+    },
+    {
+      "name": "icon_pair_10",
+      "job_indices": [
+        52,
+        53
+      ],
+      "maps": [
+        3854,
+        3858
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_10_reference.png",
+      "generated": "icon_pair_10_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-25ed314e-395f-41de-9425-7c895ba5120a.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3854,
+          "file": "map_3854_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "c7cddf0735dad97df1a18b5afb191b397fa7d77d9c9321af9bdd3f6b5f98c1b6"
+        },
+        {
+          "map": 3858,
+          "file": "map_3858_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "4602ade6747117d5b0a84c1a28ffad3a6ed8d8422ccf7461c7b5264ebad708a8"
+        }
+      ],
+      "atlas_sha256": "40a660852a3fe5ff8c3ea30c0dc5bca84f23d6ccba2557454bdd21f67abef656"
+    },
+    {
+      "name": "icon_pair_11",
+      "job_indices": [
+        54,
+        55
+      ],
+      "maps": [
+        3864,
+        3873
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_11_reference.png",
+      "generated": "icon_pair_11_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-8a53241c-7b75-400e-a7de-9e588ca4286a.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3864,
+          "file": "map_3864_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "67edb2376ec382d702f447bd38582431402f16b5b7072bde60f39c04ec0b5207"
+        },
+        {
+          "map": 3873,
+          "file": "map_3873_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "ec3aedf88df26b26e5c16027bc2ebee8123167c2fa81b0423f8f5f88bb21595c"
+        }
+      ],
+      "atlas_sha256": "466c2e4de38c040cd3ab59dd9568935f80fe285d943c1b9eb20a43ca4323c9f1"
+    },
+    {
+      "name": "icon_pair_12",
+      "job_indices": [
+        56,
+        57
+      ],
+      "maps": [
+        3877,
+        3879
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_12_reference.png",
+      "generated": "icon_pair_12_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-3a4669c1-f97d-404c-a6e7-2cb34b65180f.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3877,
+          "file": "map_3877_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "5c9f3e464f340bf436d1c4e60192b08b4102726c0e7d0a3da39611720383e3d9"
+        },
+        {
+          "map": 3879,
+          "file": "map_3879_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "fad99a4bf64a23160fcee02cd7d610c75553ef226153b7e289814eb8465b2a0e"
+        }
+      ],
+      "atlas_sha256": "561ef848913781846de8a0dbd2fef297ae404b48a1c895c4aa9e65ab979fece9"
+    },
+    {
+      "name": "icon_pair_13",
+      "job_indices": [
+        58,
+        59
+      ],
+      "maps": [
+        3886,
+        3895
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_13_reference.png",
+      "generated": "icon_pair_13_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-337bcb94-162c-4e92-a344-264dfe990e74.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3886,
+          "file": "map_3886_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "022647660c1ba69bb02d74ac50aeddfd4c98d4e45b812321d497a931dc942d79"
+        },
+        {
+          "map": 3895,
+          "file": "map_3895_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "a470b8f1170dd5ba0d4657931bdfe0807ec761f88e3abc154496b86a2d56fe95"
+        }
+      ],
+      "atlas_sha256": "6f58d876bc093316633016118cfda342bc0b13d5926c67d9ece07fc46ac40e11"
+    },
+    {
+      "name": "icon_pair_14",
+      "job_indices": [
+        60,
+        61
+      ],
+      "maps": [
+        3899,
+        3906
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_14_reference.png",
+      "generated": "icon_pair_14_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-38909482-f23f-4284-a990-61ef40c32c17.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3899,
+          "file": "map_3899_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "a800c9ec66ea0a40a9f432514abd5ce5b61d3e06e2fa863d3ac9c57d40fcfc99"
+        },
+        {
+          "map": 3906,
+          "file": "map_3906_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "0f5eac2dfdc38999aa0b4f298806eb0ced6341b1d7dd297a784118f3b6402bca"
+        }
+      ],
+      "atlas_sha256": "d8f4900e610cbcbbb00514660e449414faa817e2fc767c6564415a22eeedb676"
+    },
+    {
+      "name": "icon_pair_15",
+      "job_indices": [
+        62,
+        63
+      ],
+      "maps": [
+        3912,
+        3917
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_15_reference.png",
+      "generated": "icon_pair_15_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-eb477920-2dde-4a80-ade1-66ab58481495.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3912,
+          "file": "map_3912_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "6b388553c8eaf98a3381eb89b2120be6ac754733c4ad87d7bab5cbf5dca6bc50"
+        },
+        {
+          "map": 3917,
+          "file": "map_3917_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "deca9837caa8b30e1226dac77098d8016ed2f3be437a147768fe151e3064c997"
+        }
+      ],
+      "atlas_sha256": "1801405bd837fe8e0108b59d5c7bdf48c5d0fb664ecb352acc109f528b0b75fe"
+    },
+    {
+      "name": "icon_pair_16",
+      "job_indices": [
+        64,
+        65
+      ],
+      "maps": [
+        3922,
+        3927
+      ],
+      "unique_outputs": 2,
+      "reference": "icon_pair_16_reference.png",
+      "generated": "icon_pair_16_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-10aaf769-5cdc-4821-9124-aebc359ad2ed.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3922,
+          "file": "map_3922_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "76c5f3129d3ab7403ff341c87bc066b924069aad699c385f8ba01ebf2bae2ec4"
+        },
+        {
+          "map": 3927,
+          "file": "map_3927_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "8cefac5593d01a68c136aea386b7087d4f5b4d8f504afed3b96d9872d3c304ad"
+        }
+      ],
+      "atlas_sha256": "118df76268b54e77c5b8f8bee524c53cfa08f77548be1bb78e260f8fdec59341"
+    },
+    {
+      "name": "icon_pair_17",
+      "job_indices": [
+        66
+      ],
+      "maps": [
+        3937,
+        3937
+      ],
+      "unique_outputs": 1,
+      "reference": "icon_pair_17_reference.png",
+      "generated": "icon_pair_17_hd.png",
+      "status": "generated_runtime_indexed",
+      "source_path": "C:/Users/OXP2/.codex/generated_images/01a1b5fe-d874-7ad2-8837-662d90ca7f55/exec-d3be79cc-8391-4770-9d58-e1a65383670a.png",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "outputs": [
+        {
+          "map": 3937,
+          "file": "map_3937_hd.png",
+          "size": [
+            887,
+            887
+          ],
+          "sha256": "f1b55ac2a55c45ee8aff570ff035e829f512c36ce705226e18fa5b2f4a5718a2"
+        }
+      ],
+      "atlas_sha256": "f294a9f1b7827b1deef34f7fc2d55e873438356ce07317b29902ac8420c3146a"
+    }
+  ],
+  "generated_maps": 35,
+  "verified_generated_and_indexed": 35,
+  "all_outputs_square_887": true
+}

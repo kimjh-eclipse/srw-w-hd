@@ -86,6 +86,10 @@ def main():
                   before=sum(r.get('before',0) for r in rows), after=sum(r.get('after',0) for r in rows),
                   errors=errors, pixel_exact=not errors, entries=rows)
     (target/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+    if not errors:
+        from retag_lossless_asset_caches import retag
+        migration = retag(report)
+        (target/'cache_migration.json').write_text(json.dumps(migration, indent=2), encoding='utf-8')
     print(json.dumps({k:v for k,v in report.items() if k!='entries'}), flush=True)
     return bool(errors)
 

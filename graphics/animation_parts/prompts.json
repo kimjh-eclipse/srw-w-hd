@@ -1,0 +1,53 @@
+{
+  "mode": "built-in image_gen",
+  "transparent_background": true,
+  "prompt": "Use case: precise-object-edit. Edit target: transparent registered sprite-part atlas, 2048x2048 representing native256x256. Restore each existing detached mecha armor/head/hand/foot/weapon/wing/ship fragment IN ITS EXACT RECTANGLE into clean high-resolution 2D anime cel-shaded sprite art. These fragments are clipped crops: keep clipped edges and incomplete pieces incomplete. Preserve positions, sizes, silhouettes, colors, holes, transparency and gaps exactly. Never assemble a whole robot, complete a fragment, move a piece or invent anything in empty space. Keep each design distinct; smooth pixel steps into restrained crisp contours and refine existing panel details. Retain original materials for cloth/skin/energy if present. Black outlines stay opaque, empty areas transparent. No text, labels, grids, background, bloom or new details outside source shapes. Preserve every tiny sliver. Request full2048x2048.",
+  "assets": [
+    {
+      "reference": "basic_extra_000_reference.png",
+      "output": "basic_extra_000_hd.png",
+      "suffix": " Asset identifier: basic_extra_000."
+    },
+    {
+      "reference": "basic_extra_001_reference.png",
+      "output": "basic_extra_001_hd.png",
+      "suffix": " Asset identifier: basic_extra_001."
+    },
+    {
+      "reference": "basic_extra_002_reference.png",
+      "output": "basic_extra_002_hd.png",
+      "suffix": " Asset identifier: basic_extra_002."
+    },
+    {
+      "reference": "basic_extra_003_reference.png",
+      "output": "basic_extra_003_hd.png",
+      "suffix": " Asset identifier: basic_extra_003."
+    },
+    {
+      "reference": "basic_extra_004_reference.png",
+      "output": "basic_extra_004_hd.png",
+      "suffix": " Asset identifier: basic_extra_004."
+    },
+    {
+      "reference": "basic_extra_005_reference.png",
+      "output": "basic_extra_005_hd.png",
+      "suffix": " Asset identifier: basic_extra_005."
+    },
+    {
+      "reference": "basic_extra_006_reference.png",
+      "output": "basic_extra_006_hd.png",
+      "suffix": " Asset identifier: basic_extra_006."
+    },
+    {
+      "reference": "basic_extra_007_reference.png",
+      "output": "basic_extra_007_hd.png",
+      "suffix": " Asset identifier: basic_extra_007."
+    },
+    {
+      "reference": "basic_extra_008_reference.png",
+      "output": "basic_extra_008_hd.png",
+      "suffix": " Asset identifier: basic_extra_008."
+    }
+  ],
+  "reused_slivers": "basic_extra_009 contains two tiny fragments reused from already approved source atlases; no new image generated"
+}

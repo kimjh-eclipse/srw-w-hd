@@ -1,0 +1,652 @@
+{
+  "mode": "built-in image_gen",
+  "intent": "edit",
+  "transparent_background": true,
+  "base_prompt": "Use case: precise-object-edit. Edit target: attached REGISTERED TRANSPARENT TEXTURE ATLAS, square2048x2048 representing native256x256. Restore EVERY existing separate mecha sprite fragment IN PLACE into crisp high-resolution 2D anime cel shaded game art. This is NOT a collage of whole robots to redesign: it is a fixed UV atlas of many detached heads, armor plates, hands, feet, guns, wings, ship hull fragments in horizontal bands. Preserve every fragment's EXACT x/y position, scale, direction, silhouette, cuts, holes and transparent gaps. Keep fragments clipped at band edges exactly as source; DO NOT assemble, complete, center, enlarge or rearrange anything. Keep every original color family and character design distinct, same metallic planes and original sensor colors. Smooth pixel stair steps into fine clean contours, refine existing panel lines and restrained highlights. Preserve ALL tiny slivers and partial pieces, including the strips at extreme left/right/top/bottom. Preserve opaque black outlines and dark armor; outside every original piece must be genuinely transparent. No new parts, no full bodies, no labels, no grid, no text, no background or glow. Target a production-ready high-resolution SD mecha sprite texture atlas, exact source layout, not photorealism. Request full2048x2048 output.",
+  "variants": {
+    "square": "base_prompt + ' Asset identifier: {name}.'",
+    "native_aspect_and_material": "Replace 'square2048x2048 representing native256x256' with '2048x{native_height*8} representing native256x{native_height}'; replace 'Request full2048x2048 output.' with 'Request full2048x{native_height*8} output, preserving the exact source aspect ratio.'; append ' Asset identifier: {name}. Any existing organic, cloth, skin or energy fragments must keep their ORIGINAL material and pattern; do not turn them into mechanical armor. Plain energy strips remain plain energy.'"
+  },
+  "assets": [
+    {
+      "name": "batch_000",
+      "reference": "batch_000_reference.png",
+      "output": "batch_000_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_001",
+      "reference": "batch_001_reference.png",
+      "output": "batch_001_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_002",
+      "reference": "batch_002_reference.png",
+      "output": "batch_002_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_003",
+      "reference": "batch_003_reference.png",
+      "output": "batch_003_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_004",
+      "reference": "batch_004_reference.png",
+      "output": "batch_004_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_005",
+      "reference": "batch_005_reference.png",
+      "output": "batch_005_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_006",
+      "reference": "batch_006_reference.png",
+      "output": "batch_006_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_007",
+      "reference": "batch_007_reference.png",
+      "output": "batch_007_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_008",
+      "reference": "batch_008_reference.png",
+      "output": "batch_008_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_009",
+      "reference": "batch_009_reference.png",
+      "output": "batch_009_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_010",
+      "reference": "batch_010_reference.png",
+      "output": "batch_010_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_011",
+      "reference": "batch_011_reference.png",
+      "output": "batch_011_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_012",
+      "reference": "batch_012_reference.png",
+      "output": "batch_012_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_013",
+      "reference": "batch_013_reference.png",
+      "output": "batch_013_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_014",
+      "reference": "batch_014_reference.png",
+      "output": "batch_014_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_015",
+      "reference": "batch_015_reference.png",
+      "output": "batch_015_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_016",
+      "reference": "batch_016_reference.png",
+      "output": "batch_016_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_017",
+      "reference": "batch_017_reference.png",
+      "output": "batch_017_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_018",
+      "reference": "batch_018_reference.png",
+      "output": "batch_018_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_019",
+      "reference": "batch_019_reference.png",
+      "output": "batch_019_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_020",
+      "reference": "batch_020_reference.png",
+      "output": "batch_020_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_021",
+      "reference": "batch_021_reference.png",
+      "output": "batch_021_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_022",
+      "reference": "batch_022_reference.png",
+      "output": "batch_022_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_023",
+      "reference": "batch_023_reference.png",
+      "output": "batch_023_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_024",
+      "reference": "batch_024_reference.png",
+      "output": "batch_024_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_025",
+      "reference": "batch_025_reference.png",
+      "output": "batch_025_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_026",
+      "reference": "batch_026_reference.png",
+      "output": "batch_026_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_027",
+      "reference": "batch_027_reference.png",
+      "output": "batch_027_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "square"
+    },
+    {
+      "name": "batch_028",
+      "reference": "batch_028_reference.png",
+      "output": "batch_028_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_029",
+      "reference": "batch_029_reference.png",
+      "output": "batch_029_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_030",
+      "reference": "batch_030_reference.png",
+      "output": "batch_030_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_032",
+      "reference": "batch_032_reference.png",
+      "output": "batch_032_hd.png",
+      "native_size": [
+        256,
+        216
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_033",
+      "reference": "batch_033_reference.png",
+      "output": "batch_033_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_034",
+      "reference": "batch_034_reference.png",
+      "output": "batch_034_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_035",
+      "reference": "batch_035_reference.png",
+      "output": "batch_035_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_036",
+      "reference": "batch_036_reference.png",
+      "output": "batch_036_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_037",
+      "reference": "batch_037_reference.png",
+      "output": "batch_037_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_038",
+      "reference": "batch_038_reference.png",
+      "output": "batch_038_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_039",
+      "reference": "batch_039_reference.png",
+      "output": "batch_039_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_040",
+      "reference": "batch_040_reference.png",
+      "output": "batch_040_hd.png",
+      "native_size": [
+        256,
+        208
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_041",
+      "reference": "batch_041_reference.png",
+      "output": "batch_041_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_042",
+      "reference": "batch_042_reference.png",
+      "output": "batch_042_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_043",
+      "reference": "batch_043_reference.png",
+      "output": "batch_043_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_044",
+      "reference": "batch_044_reference.png",
+      "output": "batch_044_hd.png",
+      "native_size": [
+        256,
+        176
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_045",
+      "reference": "batch_045_reference.png",
+      "output": "batch_045_hd.png",
+      "native_size": [
+        256,
+        176
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_046",
+      "reference": "batch_046_reference.png",
+      "output": "batch_046_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_047",
+      "reference": "batch_047_reference.png",
+      "output": "batch_047_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_048",
+      "reference": "batch_048_reference.png",
+      "output": "batch_048_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_049",
+      "reference": "batch_049_reference.png",
+      "output": "batch_049_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_050",
+      "reference": "batch_050_reference.png",
+      "output": "batch_050_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_051",
+      "reference": "batch_051_reference.png",
+      "output": "batch_051_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_052",
+      "reference": "batch_052_reference.png",
+      "output": "batch_052_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_053",
+      "reference": "batch_053_reference.png",
+      "output": "batch_053_hd.png",
+      "native_size": [
+        256,
+        128
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_054",
+      "reference": "batch_054_reference.png",
+      "output": "batch_054_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_055",
+      "reference": "batch_055_reference.png",
+      "output": "batch_055_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_056",
+      "reference": "batch_056_reference.png",
+      "output": "batch_056_hd.png",
+      "native_size": [
+        256,
+        208
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_057",
+      "reference": "batch_057_reference.png",
+      "output": "batch_057_hd.png",
+      "native_size": [
+        256,
+        240
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_058",
+      "reference": "batch_058_reference.png",
+      "output": "batch_058_hd.png",
+      "native_size": [
+        256,
+        248
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_059",
+      "reference": "batch_059_reference.png",
+      "output": "batch_059_hd.png",
+      "native_size": [
+        256,
+        176
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_060",
+      "reference": "batch_060_reference.png",
+      "output": "batch_060_hd.png",
+      "native_size": [
+        256,
+        192
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_061",
+      "reference": "batch_061_reference.png",
+      "output": "batch_061_hd.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_062",
+      "reference": "batch_062_reference.png",
+      "output": "batch_062_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_063",
+      "reference": "batch_063_reference.png",
+      "output": "batch_063_hd.png",
+      "native_size": [
+        256,
+        248
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    },
+    {
+      "name": "batch_064",
+      "reference": "batch_064_reference.png",
+      "output": "batch_064_hd.png",
+      "native_size": [
+        256,
+        224
+      ],
+      "prompt_variant": "native_aspect_and_material"
+    }
+  ]
+}

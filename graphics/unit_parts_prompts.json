@@ -1,0 +1,25 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "mode": "built-in image_gen",
+      "reference": "valhawk_motion_parts_reference.png",
+      "output": "valhawk_motion_parts_hd.png",
+      "transparent_background": true
+    },
+    {
+      "mode": "built-in image_gen",
+      "reference": "space_pirate_parts_reference.png",
+      "output": "space_pirate_parts_hd.png",
+      "transparent_background": true,
+      "prompt": "Use case: precise-object-edit. Edit target: transparent 2048x1536 sprite texture atlas, native256x192 enlarged8x. FOUR columns SIX rows of FIXED512x256 cells. Exactly21 EXISTING separate mechanical fragments occupy the first21 cells in reading order; last3 cells completely empty. Restore each fragment IN PLACE as clean high-resolution 2D cel shaded SD mecha game art: charcoal/olive-gray and gunmetal armor, pale steel highlights, red trim and red/yellow thruster accents. This is a dark enemy transforming mecha/spacecraft texture sheet. Many cells are only tiny joints, hands, panels, gun slivers, triangular fins, clipped face/body fragments; a few wide cells contain partial long spacecraft fuselage. Preserve every fragment's exact shape, size, orientation, screen coordinate, silhouette, cuts and huge unused transparent margins. DO NOT complete partial shapes into whole robots or ships. Do not center fragments. Preserve empty holes and exact cell registration. Smooth stair steps, refine only existing panel facets and contours, keep restrained highlights and original dark gray/red colors. No added parts, no explosions, no jets beyond original silhouette, no labels, grid or border. Genuine transparent background. Keep 4:3 canvas and exact relative layout. Painted clean anime mechanical game sprites, not photorealistic."
+    },
+    {
+      "mode": "built-in image_gen",
+      "reference": "space_pirate_body_parts_reference.png",
+      "output": "space_pirate_body_parts_hd.png",
+      "transparent_background": true,
+      "prompt": "Use case: precise-object-edit. Edit target: transparent1024x1024 atlas of FOUR columns FOUR rows, each cell256x256. Native128x128 enlarged8x. Fourteen EXISTING partial gray/olive enemy SD mecha body fragments occupy first14 cells reading order; last2 cells stay empty. Redraw EACH fragment IN ITS EXACT LOCATION AND SCALE into clean crisp high-resolution cel-shaded anime mecha game art. Dark charcoal/olive-gray armor, pale steel highlights, restrained red/yellow trim and purple-gray joint details. Preserve every irregular clipped silhouette, orientation, cut, hole and large transparent unused area inside every cell. First row includes narrow armor sliver, tiny triangular panel, small clenched hand and foot fragment. Second row first is a pointed red/yellow-trimmed tall shoulder/chest panel, followed by small clipped arm/panels. Third row includes angular forearm, pointed shoulder with partial hand, boot, small round joint. Fourth row begins a long curved gray skirt/armor sliver and a tiny triangle; retain exact incomplete forms. Do not assemble parts, do not complete any shape into a whole robot, do not center pieces or enlarge tiny fragments. Smooth original pixel steps and refine existing mechanical planes only. No added limbs, glow, decorations, text, grid, labels or opaque background. Genuine transparent background. Exact square canvas and exact registration for in-game per-part cropping. Match polished 2D mechanical sprite restoration, not photorealism."
+    }
+  ]
+}

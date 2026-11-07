@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen",
+  "edit_target": "kazuma_face_join_reference.png",
+  "generated_asset": "kazuma_face_repaired.png",
+  "applied_atlas": "kazuma_parts_atlas_facefix.png",
+  "prompt": "Edit target: image 1, an assembled 320x320 transparent head sprite of a blue/silver SD mecha. Image 2 is a close-up showing the defect. Remove ONLY the unnatural perfectly horizontal gray/black seam crossing the lower face at approximately y=256 in image 1 (80% down), where the head and jaw sprites were split. Make the cyan-green eye/visor, white cheek/chin armor and adjoining silver side armor join naturally across that horizontal line. Keep intended angled armor panel outlines; remove the artificial straight rectangular strip and doubled contour so the lower face reads as one continuous, coherent clean anime mecha face. Preserve the exact head identity, LEFT-facing angle, proportions, horn positions, silver/blue colors, magenta forehead sensor, outer silhouette, canvas framing and transparent background. Do not redesign, move, scale or rotate the head, add anatomy, or alter the upper helmet/horns. Only retouch the lower face and seam neighborhood (roughly y=210 to 290); everything else should be unchanged. This will be split back into game parts at the original fixed coordinates, so precise registration matters. Smooth crisp cel-shaded outlines, no text, no background or ground shadow.",
+  "application": "Repaired joined head is split into the original head, side and jaw UV rectangles. Only lower-face RGB is blended; all source alpha and unrelated atlas pixels remain identical. See emulator/apply_face_patch.py."
+}

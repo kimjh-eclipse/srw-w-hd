@@ -1,0 +1,23 @@
+{
+  "source_resource": 6861,
+  "source_sha256": "6467a1977d66063be17253fa6751c3dd9dccdbf381245400e75b5dc498808637",
+  "first_tile": 10,
+  "cell": [
+    8,
+    16
+  ],
+  "foreground_indices": [
+    13,
+    14,
+    15
+  ],
+  "characters": "0123456789/?",
+  "labels": [
+    "HP",
+    "EN"
+  ],
+  "label_reference": "test_current\\font\\combat_hud_native.png",
+  "label_reference_sha256": "b15c48d12dd7029fbe2f13f351b58f0b2c7823f6fb5446b45bbf86b40cdc542d",
+  "label_ink_rule": "R>=180,G>=64,B<64",
+  "digit_comparison": "Exact foreground and opaque stroke; transparent pixels ignore the moving background"
+}

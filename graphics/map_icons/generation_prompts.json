@@ -1,0 +1,65 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: identity-preserve. Edit target is a production map-icon atlas from an existing Japanese robot strategy game. Redraw every occupied icon as crisp HD anime mechanical miniatures with smooth anti-aliased ink outlines, fine armor lines, blue-purple and white armor, small green/yellow sensors matching the original palette. Strict UV atlas, not an illustration: 8 columns by 4 rows, every cell stays at identical exact location, each subject keeps its original pose, viewing angle, proportions, silhouette, extent and center. Each source icon occupies a 96x96 square centered within its 128x128 cell on a 1024x512 canvas; do not move, merge, omit, enlarge or rearrange any icon. Preserve numbers/letters that distinguish variants as small crisp marks in their source positions. Some icons are heads, others ships or vehicles; follow each reference faithfully. Keep the same 2:1 aspect ratio. Genuine zero-alpha transparent background outside each icon and in gaps. Clean opaque bodies, no shadow/glow/cloud/grunge, no labels, no divider lines, no extra subjects or decorations. Draw all 32 icons, including small equipment and tails, no pixelated edges.",
+  "source_count": 340,
+  "unique_including_empty": 337,
+  "generated_nonempty": 336,
+  "sheets": [
+    {
+      "reference": "sheet_00_reference.png",
+      "generated": "sheet_00_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_01_reference.png",
+      "generated": "sheet_01_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_02_reference.png",
+      "generated": "sheet_02_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_03_reference.png",
+      "generated": "sheet_03_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_04_reference.png",
+      "generated": "sheet_04_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_05_reference.png",
+      "generated": "sheet_05_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_06_reference.png",
+      "generated": "sheet_06_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_07_reference.png",
+      "generated": "sheet_07_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_08_reference.png",
+      "generated": "sheet_08_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_09_reference.png",
+      "generated": "sheet_09_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    },
+    {
+      "reference": "sheet_10_reference.png",
+      "generated": "sheet_10_hd.png",
+      "purpose": "Registered 8x4 source UV atlas; empty final cells preserved"
+    }
+  ],
+  "runtime_preparation": "install_map_icons.py crops each generated cell, removes decoder alpha noise below 16, fits its painted body bounding box to the source bounding box, and saves 90x90 RGBA without tracing native pixel contours. Five affiliation palette colors and four flips are runtime variants."
+}

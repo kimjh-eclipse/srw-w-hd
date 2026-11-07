@@ -1,0 +1,9 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "kazuma_weapon_parts_reference.png",
+  "output": "kazuma_weapon_parts_hd.png",
+  "active_cells": ["top-left", "top-middle", "top-right"],
+  "unused_cells": "Bottom-row candidates were excluded after verifying that they occur only during the black scene transition.",
+  "transparent_background": true,
+  "prompt": "Use case: precise-object-edit. Edit target: attached transparent sprite texture atlas, exactly 1536x1024 canvas (native 96x64, enlarged 16x). Restore the FIVE separate partial rifle sprite textures IN PLACE as crisp high-resolution cel-shaded anime mecha weapon art. Preserve the exact 3-column by 2-row registration: each cell is 512x512. Top-left cell contains a narrow upright charcoal/silver rifle barrel/body fragment within its LEFT HALF only. Top-middle cell contains the complementary upright charcoal/silver rifle body fragment, also in LEFT HALF only, with a small magenta-red optical detail at the upper left. Do not widen or complete either fragment; they are separately assembled and rotated by the game. Top-right cell is a curved gray weapon-motion streak occupying the same silhouette. Bottom-left and bottom-middle cells contain tiny incomplete gray/charcoal weapon-motion streaks only near their upper-left areas; preserve their shape and empty space. Bottom-right cell remains ENTIRELY transparent. Smooth pixel stair steps into clean controlled contours, maintain the original silver/gray/charcoal color planes and magenta detail. No complete robot, no hands, no new guns, no embellishments, no labels, no borders. Preserve all object positions, scale, orientation, partial silhouettes, holes, margins and alpha background. Genuine transparent background. Render only the existing five fragments. Keep exactly the same 3:2 canvas and registration. Matching a 2D HD SD mecha sprite restoration."
+}

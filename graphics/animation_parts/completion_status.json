@@ -1,0 +1,238 @@
+{
+  "all_mechs_complete": false,
+  "all_attacks_complete": false,
+  "full_attack_sheets_generated": 136,
+  "full_attack_sheets_planned": 136,
+  "shared_palette_sheets_generated": 8,
+  "shared_palette_sheets_planned": 8,
+  "reviewed_mechanical_source_art_generated": true,
+  "total_bindings": 89296,
+  "blocked_index_collisions": 6,
+  "portraits": 548,
+  "background_layers": 6,
+  "approved_prefix_preserved": true,
+  "approved_face_preserved": true,
+  "canonical_rom_preserved": true,
+  "voice_enabled": false,
+  "exact_dynamic_tile_assembly": true,
+  "tests": {
+    "native_speed": {
+      "path": "test_current/parts/worker_speed.json",
+      "result": [
+        {
+          "scene": "target",
+          "emulated_fps": 59.85,
+          "display_frames": 101,
+          "seconds": 4.22
+        },
+        {
+          "scene": "battle_13620",
+          "emulated_fps": 59.79,
+          "display_frames": 93,
+          "seconds": 4.2
+        }
+      ]
+    },
+    "native_texture_cache": {
+      "path": "test_current/parts/native_cache_verification.json",
+      "result": {
+        "frames": 540,
+        "identical_native_pixels_and_metadata": true,
+        "includes_palette_changes_and_state_reload": true,
+        "obj_checks": 15658,
+        "obj_hits": 9678,
+        "obj_misses": 5980,
+        "bg_checks": 1516935,
+        "bg_hits": 1506678,
+        "bg_misses": 10257
+      }
+    },
+    "video_audio_cadence": {
+      "path": "test_current/parts/video_cadence_verification.json",
+      "result": {
+        "emulated_frames": 540,
+        "complete_video_frames": 270,
+        "skipped_video_frames": 270,
+        "video_and_visible_metadata_match_full_rate_reference": true,
+        "background_owner_bytes_ignored": true,
+        "inactive_object_palette_rows_ignored": true,
+        "audio_bytes": 1592212,
+        "audio_on_skipped_video_bytes": 796104
+      }
+    },
+    "worker_lifecycle_actions": {
+      "path": "test_current/gui/worker_pipeline.json",
+      "result": {
+        "controls": {
+          "keyboard": true,
+          "pad_mapping": true,
+          "dpad_priority": true,
+          "four_screen_layouts": true,
+          "large_screen_ratio_3_to_1": true,
+          "gapless_screen_edges": true,
+          "touch_layouts": true,
+          "persistent_settings": true
+        },
+        "lifecycle": {
+          "shared_frames": true,
+          "hd_toggle": true,
+          "save_load": true,
+          "pause": true,
+          "wrong_rom_state_rejected": true,
+          "reopened_other_rom": true
+        },
+        "actions": {
+          "normal_frames": 84,
+          "fast_frames": 172,
+          "restored_frames": 84,
+          "fast_forward_ratio": 2.05,
+          "normal_speed_restored": true
+        }
+      }
+    },
+    "cold_registration": {
+      "path": "test_current/parts/async_verification.json",
+      "result": {
+        "render_median_ms": 7.643699995242059,
+        "render_p99_ms": 16.19304999621818,
+        "render_max_ms": 41.07670001394581,
+        "native_fallback_parts": 6147,
+        "ready_hd_parts": 663,
+        "prepared": 23,
+        "pending": 39,
+        "errors": {}
+      }
+    },
+    "dynamic_bridge": {
+      "path": "test_current/parts/dynamic_verification.json",
+      "result": {
+        "actual_rom_texture": true,
+        "exact_native_material": true,
+        "binding": 89297,
+        "source_groups": [
+          {
+            "source": 823,
+            "tiles": 14
+          }
+        ],
+        "complete_tile_coverage": true,
+        "native_readiness_transition": true,
+        "eviction_fallback": true,
+        "lossless_cache_recovery": true
+      }
+    },
+    "compound_and_fade": {
+      "path": "test_current/parts/compound_verification.json",
+      "result": {
+        "multiple_source_groups": [
+          {
+            "source": 2,
+            "tiles": 4
+          },
+          {
+            "source": 1,
+            "tiles": 4
+          }
+        ],
+        "exact_tiles": 8,
+        "first_seen_black_retains_colored_art": true,
+        "black_fade_black": true,
+        "alpha_preserved": true
+      }
+    },
+    "generated_identities": {
+      "path": "test_current/parts/generated_bindings_audit.json",
+      "result": {
+        "checked": 72082,
+        "identity_errors": [],
+        "flat_rgb_shapes_guarded": 0,
+        "blocked_index_hashes": 6,
+        "prefix_preserved": true
+      }
+    },
+    "palette_render_cache": {
+      "path": "test_current/parts/palette_render_cache_verification.json",
+      "result": {
+        "cases": 24,
+        "pixel_identical": true,
+        "includes_black_recolor_and_flip": true
+      }
+    },
+    "portraits": {
+      "path": "test_current/portrait/catalog_verification.json",
+      "result": {
+        "catalog_sources": 548,
+        "covered_sources": 548,
+        "registered_items": 548,
+        "missing": [],
+        "checked_positions": 1644,
+        "failures": [],
+        "texture_cache": 32,
+        "reference_cache": 64,
+        "seconds": 11.61
+      }
+    },
+    "portrait_performance": {
+      "path": "test_current/portrait/performance_two_screens.json",
+      "result": {
+        "renderers": 2,
+        "registered_each": 548,
+        "constructor_ms": [
+          92.21780000370927,
+          2.1090999944135547
+        ],
+        "memory_before": {
+          "working_mib": 54.629,
+          "private_mib": 525.422
+        },
+        "memory_after_init": {
+          "working_mib": 63.035,
+          "private_mib": 533.941
+        },
+        "memory_after_warm": {
+          "working_mib": 85.688,
+          "private_mib": 556.508
+        },
+        "memory_after_40_faces": {
+          "working_mib": 86.371,
+          "private_mib": 557.164
+        },
+        "cold_pair": {
+          "mean_ms": 0.749,
+          "p95_ms": 1.034,
+          "max_ms": 1.243
+        },
+        "cold_file_reads": 0,
+        "cold_render_thread_reference_reads": 0,
+        "cold_render_thread_hd_reads": 0,
+        "warm_pair": {
+          "mean_ms": 0.763,
+          "p95_ms": 0.925,
+          "max_ms": 1.86
+        },
+        "warm_file_reads": 0,
+        "miss_pair": {
+          "mean_ms": 0.45,
+          "p95_ms": 0.974,
+          "max_ms": 1.078
+        },
+        "miss_file_reads": 0,
+        "hd_cache_sizes": [
+          32,
+          32
+        ],
+        "reference_cache_sizes": [
+          40,
+          40
+        ],
+        "note": "Cold means empty application asset cache; Windows filesystem cache is not forcibly cleared."
+      }
+    }
+  },
+  "remaining": [
+    "All-unit weapons, transformations, destruction and special scenes have not been replayed through the whole campaign.",
+    "Background coverage currently consists of six observed layers, not every map or story CG.",
+    "Special palette effects and source mismatches retain native graphics."
+  ],
+  "counts_note": "Resources, material variants and bindings are not unique character/mecha counts or a completion percentage."
+}

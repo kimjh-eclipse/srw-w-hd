@@ -1,0 +1,25 @@
+{
+  "tool": "existing project art reuse",
+  "resources": [
+    {
+      "resource": 4797,
+      "source": "backgrounds/earth_region_hd.png",
+      "source_reference_exact": true,
+      "label_ko": "\uc9c0\uad6c\uad8c \uc9c0\uc5ed"
+    },
+    {
+      "resource": 5099,
+      "source": "scenario_backgrounds/scenario_5099_native.png",
+      "reason": "Original has one uniform white color; preserve intentional blank white scene at display texture size",
+      "native_colors": 1,
+      "preparation": "exact solid-color canvas"
+    },
+    {
+      "resource": 5276,
+      "source": "scenario_backgrounds/scenario_5276_native.png",
+      "reason": "Uniform original black scene; normalize AI near-black noise to exact original black",
+      "native_colors": 1,
+      "preparation": "exact solid-color canvas"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Redraw all occupied fixed UV terrain fragments in a 16x16 array, exact coordinates and colors, clean HD anime terrain. Preserve disconnected fragments and empty black regions; no grid, border, labels, objects. Pure-red transparency key becomes flat black void.",
+  "batches": [
+    {
+      "name": "terrain_missing_00",
+      "reference": "missing_batches/terrain_missing_00_reference.png",
+      "image": "missing_batches/terrain_missing_00_hd.png"
+    },
+    {
+      "name": "terrain_missing_01",
+      "reference": "missing_batches/terrain_missing_01_reference.png",
+      "image": "missing_batches/terrain_missing_01_hd.png"
+    },
+    {
+      "name": "terrain_missing_02",
+      "reference": "missing_batches/terrain_missing_02_reference.png",
+      "image": "missing_batches/terrain_missing_02_hd.png"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cutins": [
+    {
+      "id": 2,
+      "name": "gauron_body",
+      "layer": 1,
+      "native_size": [
+        256,
+        192
+      ],
+      "image": "portraits/gauron_body_registered.png",
+      "signatures": [
+        1604487165
+      ],
+      "alpha_iou": 0.9791030238632842,
+      "registration": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "zoom": 1.0,
+        "before_iou": 0.96865,
+        "registered_iou": 0.96865,
+        "filled_edge_pixels": 35833,
+        "reference_fill_pixels": 3889,
+        "contract_pixels": 1466572
+      }
+    },
+    {
+      "id": 3,
+      "name": "gauron_face",
+      "layer": 1,
+      "native_size": [
+        256,
+        192
+      ],
+      "image": "portraits/gauron_face_registered.png",
+      "signatures": [
+        4035572323
+      ],
+      "alpha_iou": 1.0,
+      "registration": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "zoom": 1.0,
+        "before_iou": 0.99153,
+        "registered_iou": 0.99153,
+        "filled_edge_pixels": 0,
+        "reference_fill_pixels": 0,
+        "contract_pixels": 1586982
+      }
+    }
+  ]
+}

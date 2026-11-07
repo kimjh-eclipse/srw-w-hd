@@ -1,0 +1,63 @@
+{
+  "source": "test_current\\font\\scene_1.png",
+  "labels": [
+    {
+      "name": "hp",
+      "text": "HP",
+      "box": [
+        4,
+        96,
+        20,
+        104
+      ],
+      "color": "yellow",
+      "ink_pixels": 42
+    },
+    {
+      "name": "en",
+      "text": "EN",
+      "box": [
+        4,
+        112,
+        20,
+        120
+      ],
+      "color": "yellow",
+      "ink_pixels": 46
+    },
+    {
+      "name": "parts",
+      "text": "PARTS",
+      "box": [
+        96,
+        112,
+        128,
+        120
+      ],
+      "color": "white",
+      "ink_pixels": 67
+    }
+  ],
+  "ability_gates": [
+    [
+      64,
+      16,
+      88,
+      28
+    ],
+    [
+      8,
+      48,
+      32,
+      60
+    ],
+    [
+      8,
+      64,
+      32,
+      76
+    ]
+  ],
+  "registration": "Exact ink bitmaps at native layout positions; no OCR, static screen replacement, or numeric-value templates.",
+  "dynamic_glyphs": "Owned by normal FontRenderer: existing verified CP949 12px, narrow 8x12 and HUD 8x8 ROM tables. No duplicate scan in this module."
+}

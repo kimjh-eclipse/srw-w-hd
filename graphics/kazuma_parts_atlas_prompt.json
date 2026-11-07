@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "kazuma_parts_atlas_reference.png",
+  "asset": "kazuma_parts_atlas_hd.png",
+  "native_atlas_size": [
+    256,
+    128
+  ],
+  "prompt": "Use case: precise-object-edit. Asset: a packed texture atlas of DISASSEMBLED mecha parts for a Nintendo DS emulator HD texture replacement. The reference is a 2048x1024 atlas (native 256x128 scaled 8 times). Redraw each separate armor component in-place in crisp HD 2D Japanese anime cel-shaded line art, preserving the original blue, silver, dark joint colors, cyan visor, magenta and yellow sensors. CRITICAL: this is a texture atlas, NOT a full robot illustration. Do NOT assemble the robot. Do NOT rearrange, move, rotate, resize, merge, add or remove any part. Keep EVERY part in EXACTLY the same position and bounding box relative to the full canvas, including head variants, shoulder variants, fists, feet, torso pieces, joints and weapons. Native game animation cuts rectangular pieces from these exact coordinates, so part registration and spacing must remain exact. Refine within the existing silhouettes: smooth outlines, clear armor planes, fine dark contours, clean cel shading instead of square pixels. Leave transparent gaps where the reference has empty/transparent pixels. Preserve canvas 2:1 aspect ratio, ideally 2048x1024. Genuinely transparent background, no colored field, no shadows, no text, no grid. Keep any pieces cropped by the canvas edge cropped in the same way. This is careful in-place restoration of a packed parts atlas.",
+  "runtime": "Each OBJ or indexed BG tile is identified by native pixel CRC and sampled individually from this atlas. Native OAM position, priority, flips and affine matrices are used. Whole-pose images are not consumed."
+}

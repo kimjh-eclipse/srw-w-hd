@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen",
+  "sheet": "kazuma_robot_transitions_hd.png",
+  "slices": [
+    "kazuma_robot_windup_hd.png",
+    "kazuma_robot_raise_hd.png",
+    "kazuma_robot_dash_hd.png",
+    "kazuma_robot_dash_raise_hd.png"
+  ],
+  "prompt": "Use case: precise-object-edit. Asset type: ONE transparent 2x2 sprite sheet for HD game animation. Image 1 is the exact four-pose pixel-art layout to redraw. Image 2 is the approved HD rendering and identity/style reference of the same robot. Redraw ALL FOUR original poses in image 1 as crisp high-resolution cel-shaded Japanese SD/chibi mecha art, matching image 2's design, colors, fine dark outlines, silver/white and cobalt blue armor, cyan visor, magenta sensors and tiny yellow belt detail. Preserve each pose's exact body direction, limb placement, perspective, proportions and silhouette from image 1. Upper-left: torso turned slightly sideways, arms close across front, near leg bent. Upper-right: torso upright turned LEFT, near clenched fist raised beside forehead, other arm near chest, knees bent. Lower-left: forward sprint facing LEFT, near arm thrust forward to left, far arm back, front knee raised and rear leg extended RIGHT. Lower-right: sprint facing LEFT, near forearm raised upright beside head, far arm back, front knee bent and rear leg stretched RIGHT. Use exactly four full-body separate sprites centered one in each equal quadrant in the SAME 2x2 order as image1. Keep all sprites strictly inside their own quadrant with ample transparent separation for slicing. All limbs, antenna tips and feet must fit; no duplicates, no labels, no text, no guides. Genuinely transparent background, no exhaust, no beams, no floor, no shadows. Do not merely upscale pixels; redraw smooth detailed armor surfaces. Pose accuracy and consistency between the four sprites are essential.",
+  "cleanup_prompt": "Preserve four sprites, remove stray white/gray/blue speckles and fuzzy halos; maintain transparent background and exact poses."
+}
