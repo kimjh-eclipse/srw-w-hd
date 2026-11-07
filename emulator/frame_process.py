@@ -1,6 +1,7 @@
 """HD composition owns its Python interpreter; native audio never waits on its GIL."""
 import os,threading,queue,time
 import numpy as np
+from render_resolution import SCREEN_RGBA_BYTES,DEFAULT_WIDTH
 _renderer=None
 _memory=None
 _lock=None
@@ -59,7 +60,7 @@ def render_snapshot(snapshot,full=False):
 def _render_snapshot(snapshot,full=False):
     global _last_bottom,_last_ready
     native,ids,hd,paused,frame,kwargs=snapshot
-    kwargs=dict(kwargs);_renderer.set_resolution(kwargs.pop('render_width',1440))
+    kwargs=dict(kwargs);_renderer.set_resolution(kwargs.pop('render_width',DEFAULT_WIDTH))
     image=(_renderer.render if full else _renderer.render_top)(native,ids,hd,paused,**kwargs)
     parts=_renderer.parts_renderer;dynamic=[]
     while True:
@@ -87,8 +88,8 @@ def _render_snapshot(snapshot,full=False):
     if _memory is not None:
         with _lock:
             np.frombuffer(_memory.buf,dtype='uint8',count=top.size)[:]=top
-            if bottom is not None:np.frombuffer(_memory.buf,dtype='uint8',count=bottom.size,offset=1440*1080*4)[:]=bottom
-            header_offset=1440*1080*4*2
+            if bottom is not None:np.frombuffer(_memory.buf,dtype='uint8',count=bottom.size,offset=SCREEN_RGBA_BYTES)[:]=bottom
+            header_offset=SCREEN_RGBA_BYTES*2
             if len(_memory.buf)>=header_offset+16:
                 np.frombuffer(_memory.buf,dtype='uint32',count=4,offset=header_offset)[:]=[*_renderer.size,frame,ready[4]]
         return (None,None,frame),ready

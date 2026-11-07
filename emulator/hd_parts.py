@@ -19,14 +19,14 @@ SCALE=1440/256
 class PartsRenderer:
     def __init__(self,async_prepare=False,dynamic_parts=False):
         meta=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text())
-        self.bindings=meta['bindings'];self.atlas=Image.open(ROOT/'graphics'/meta['atlas']).convert('RGBA').resize((2048,1024),Image.Resampling.LANCZOS)
+        self.bindings=meta['bindings'];self.atlas=Image.open(ROOT/'graphics'/meta['atlas']).convert('RGBA').resize((1024,512),Image.Resampling.LANCZOS)
         self.native_atlas=Image.open(ROOT/'graphics/kazuma_parts_atlas_reference.png').convert('RGBA').resize((256,128),Image.Resampling.NEAREST)
         self.atlases={'base':(self.atlas,self.native_atlas)}
         self.atlas_specs=meta.get('atlases',{});self.lazy_atlases=OrderedDict()
         for name,extra in meta.get('atlases',{}).items():
             if extra.get('lazy'):continue
             w,h=extra['native_size']
-            self.atlases[name]=(Image.open(ROOT/'graphics'/extra['image']).convert('RGBA').resize((w*8,h*8),Image.Resampling.LANCZOS),Image.open(ROOT/'graphics'/extra['reference']).convert('RGBA').resize((w,h),Image.Resampling.NEAREST))
+            self.atlases[name]=(Image.open(ROOT/'graphics'/extra['image']).convert('RGBA').resize((w*4,h*4),Image.Resampling.LANCZOS),Image.open(ROOT/'graphics'/extra['reference']).convert('RGBA').resize((w,h),Image.Resampling.NEAREST))
         self.source_palette=np.array(meta.get('source_palette_rgb',[]),dtype='float32');self.palette_lut=None
         if len(self.source_palette):
             codes=np.arange(32768,dtype='uint32');rgb=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
@@ -144,7 +144,9 @@ class PartsRenderer:
         if name in self.lazy_atlases:
             self.lazy_atlases.move_to_end(name);return self.lazy_atlases[name]
         extra=self.atlas_specs[name];w,h=extra['native_size']
-        with Image.open(ROOT/'graphics'/extra['image']) as image:paint=image.convert('RGBA')
+        with Image.open(ROOT/'graphics'/extra['image']) as image:
+            paint=image.convert('RGBA')
+            if paint.width>w*4 and paint.height>h*4:paint=paint.resize((w*4,h*4),Image.Resampling.LANCZOS)
         with Image.open(ROOT/'graphics'/extra['reference']) as image:native=image.convert('RGBA').resize((w,h),Image.Resampling.NEAREST)
         self.lazy_atlases[name]=(paint,native)
         while len(self.lazy_atlases)>4:self.lazy_atlases.popitem(last=False)

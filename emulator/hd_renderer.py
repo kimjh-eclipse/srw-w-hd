@@ -15,19 +15,20 @@ from hd_map_icons import MapIconRenderer
 from hd_localized_screens import LocalizedScreens
 from hd_ui_labels import UILabelRenderer
 from hd_battle_backgrounds import BattleBackgroundRenderer
+from render_resolution import clamp_width,DEFAULT_WIDTH,MAX_WIDTH,MAX_HEIGHT
 
 ROOT=Path(__file__).resolve().parent.parent
 
 class HDRenderer:
     def __init__(self,async_parts=False,dynamic_parts=False,gpu_composition=False):
-        self.size=(1440,1080);self.async_parts=async_parts
+        self.size=None;self.async_parts=async_parts
         self.gpu_composition=False;self.gpu_error=None
         if gpu_composition:
             try:
                 from gpu_surface import backend
                 backend();self.gpu_composition=True
             except Exception as error:self.gpu_error=str(error)
-        self.art=Image.open(ROOT/'graphics/kazuma_cutin_hd.png').convert('RGBA').resize((1440,1080),Image.Resampling.LANCZOS)
+        self.art=Image.open(ROOT/'graphics/kazuma_cutin_hd.png').convert('RGBA').resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
         self.parts_renderer=PartsRenderer(async_prepare=async_parts,dynamic_parts=dynamic_parts)
         self.backgrounds=BackgroundRenderer(async_prepare=async_parts);self.portraits=PortraitRenderer();self.cutins={1:self.art};self.cutin_references={}
         self.text_renderer=FontRenderer();self.bottom_text_renderer=FontRenderer();self.menu_scene=MenuScene(self.parts_renderer)
@@ -41,7 +42,7 @@ class HDRenderer:
         if path.exists():
             import json
             for item in json.loads(path.read_text())['cutins']:
-                self.cutins[item['id']]=Image.open(ROOT/'graphics'/item['image']).convert('RGBA').resize((1440,1080),Image.Resampling.LANCZOS)
+                self.cutins[item['id']]=Image.open(ROOT/'graphics'/item['image']).convert('RGBA').resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
                 self.cutin_references[item['id']]=Image.open(ROOT/'graphics/portraits'/(item['name']+'_native.png')).convert('RGBA')
         self.original_cutins=dict(self.cutins)
         self.font=ImageFont.truetype('C:/Windows/Fonts/malgun.ttf',24)
@@ -60,9 +61,10 @@ class HDRenderer:
                     (950,'R 미리보기 다시 보기',self.small,(220,225,237))]:d.text((30,y),text,font=font,fill=color)
                 if paused:d.text((30,280),'일시정지 · Space 계속',font=self.small,fill=(255,209,115))
                 self.panels[(enabled,paused)]=panel
+        self.set_resolution(DEFAULT_WIDTH)
 
     def set_resolution(self,width):
-        width=max(512,min(1440,int(width)));width=round(width/32)*32
+        width=clamp_width(width)
         size=(width,width*3//4)
         if self.size==size:return
         self.size=size;scale=width/256

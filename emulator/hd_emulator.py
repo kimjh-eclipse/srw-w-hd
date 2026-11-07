@@ -13,6 +13,8 @@ from player_shortcuts import ShortcutMixin
 from gpu_display import GPUDisplay,RGBFrame
 from player_metrics import PlayerMetrics
 from windows_keyboard import WindowsKeyboard
+from render_resolution import DEFAULT_WIDTH,MIN_WIDTH,MAX_WIDTH,clamp_width
+import sdl_pad_state
 
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
 CANONICAL=ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds'
@@ -28,7 +30,7 @@ class EmulatorWindow(ShortcutMixin):
         self.loaded=False;self.opening=False;self.paused=False;self.current_rom=None;self.demo=False;self.save_dir=None
         self.gpu=None;self.gpu_error=None;self.metrics=PlayerMetrics(getattr(args,'metrics',None));self.received_frame=0;self.last_bottom_revision=None
         self.latest=None;self.photos=[];self.rects=[None,None];self.dirty=True;self.held=set();self.touch=None;self.last_input=None
-        self.render_width=1440;self.resolution_changed_at=0
+        self.render_width=DEFAULT_WIDTH;self.resolution_changed_at=0
         self.dialog=None;self.capture=None;self.pad_draft=None;self.devices=[];self.pad=None;self.last_device_refresh=0;self.closed=False;self.session_error=False
         self.rumble=PadRumble()
         self.physical_keyboard=WindowsKeyboard()
@@ -286,6 +288,9 @@ class EmulatorWindow(ShortcutMixin):
 
     def window_configured(self,event):
         if event.widget is not self.root or self.closed:return
+        size=(event.width,event.height)
+        if size==getattr(self,'configured_size',None):return
+        self.configured_size=size
         if self.fit_job:self.root.after_cancel(self.fit_job)
         self.fit_job=self.root.after(150,self.fit_window_content)
 
@@ -305,8 +310,8 @@ class EmulatorWindow(ShortcutMixin):
 
     def desired_render_width(self):
         rects=screen_rectangles(max(1,self.canvas.winfo_width()),max(1,self.canvas.winfo_height()),self.layout_var.get(),self.swap_var.get())
-        width=max((rect[2] for rect in rects if rect),default=1440)
-        return min(1440,max(512,math.ceil(width/32)*32))
+        width=max((rect[2] for rect in rects if rect),default=DEFAULT_WIDTH)
+        return clamp_width(math.ceil(width/32)*32)
 
     def draw(self):
         draw_started=time.perf_counter()
@@ -442,10 +447,9 @@ class EmulatorWindow(ShortcutMixin):
         if not getattr(self,'pygame',None):return set()
         pygame=self.pygame
         try:
-            # Tk owns the window events. Pump SDL state and flush its queue
-            # without converting stale joystick events to Python objects:
-            # pygame.event.get() can raise KeyError/SystemError on hot-plug.
-            pygame.event.pump();pygame.event.clear(pump=False)
+            # SDL's window event pump can reenter Tk with the GIL released.
+            # Read controllers directly; Tk exclusively owns native messages.
+            sdl_pad_state.update(pygame)
             if pygame.joystick.get_count()!=len(self.devices) or time.perf_counter()-self.last_device_refresh>3:self.refresh_devices()
             if not self.pad:
                 self.pad_button_snapshot=(None,set());return set()
@@ -550,10 +554,10 @@ class EmulatorWindow(ShortcutMixin):
             if self.memory and self.lock.acquire(False):
                 try:
                     revision=message.get('bottom_revision')
-                    size=tuple(message.get('render_size',(1440,1080)));rendered_frame=message.get('frame',0)
+                    size=tuple(message.get('render_size',(DEFAULT_WIDTH,DEFAULT_WIDTH*3//4)));rendered_frame=message.get('frame',0)
                     if len(self.memory.buf)>=TOP_BYTES+BOTTOM_BYTES+16:
                         w,h,actual_frame,actual_revision=struct.unpack_from('<IIII',self.memory.buf,TOP_BYTES+BOTTOM_BYTES)
-                        if 256<=w<=1440 and h==w*3//4:size=(w,h);rendered_frame=actual_frame;revision=actual_revision
+                        if MIN_WIDTH<=w<=MAX_WIDTH and h==w*3//4:size=(w,h);rendered_frame=actual_frame;revision=actual_revision
                     count=size[0]*size[1]*4
                     bottom_changed=self.latest is None or size!=self.latest[0].size or revision is None or revision!=self.last_bottom_revision
                     top_bytes=bytes(self.memory.buf[:count])

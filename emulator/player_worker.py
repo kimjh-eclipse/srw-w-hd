@@ -5,9 +5,10 @@ from pathlib import Path
 import hashlib,json,time,traceback,os
 import numpy as np
 from multiprocessing import shared_memory
+from render_resolution import SCREEN_RGBA_BYTES,DEFAULT_WIDTH,clamp_width
 
-TOP_BYTES=1440*1080*4
-BOTTOM_BYTES=1440*1080*4
+TOP_BYTES=SCREEN_RGBA_BYTES
+BOTTOM_BYTES=SCREEN_RGBA_BYTES
 FRAME_BYTES=TOP_BYTES+BOTTOM_BYTES+16
 
 def rom_hash(path):
@@ -39,7 +40,7 @@ def worker_main(pipe,memory_name,lock,config):
         core=Core(rom,enabled=config.get('hd',True),demo=demo,user_dir=directory,frameskip=normal_frameskip)
         native_fallback=hasattr(core.api,'retro_srw_native_hd_fallback')
         compositor=FrameCompositor(async_parts=native_fallback,dynamic_parts=core.dynamic_bridge,memory_name=memory_name,lock=lock);feedback=BattleRumble()
-        compositor.render_width=int(config.get('render_width',1440))
+        compositor.render_width=clamp_width(config.get('render_width',DEFAULT_WIDTH))
         budget=RenderBudget(compositor.render_width,config.get('hd_auto_quality',True))
         try:
             pygame.mixer.init(44100,-16,2,1024);channel=pygame.mixer.Channel(0);channel.set_volume(config.get('volume',70)/100)
@@ -81,7 +82,7 @@ def worker_main(pipe,memory_name,lock,config):
                     elif op=='volume':
                         if channel:channel.set_volume(max(0,min(100,message['value']))/100)
                     elif op=='resolution':
-                        compositor.render_width=budget.configure(width=max(512,min(1440,int(message['width']))));draw_requested=True
+                        compositor.render_width=budget.configure(width=clamp_width(message['width']));draw_requested=True
                     elif op=='quality':
                         compositor.render_width=budget.configure(enabled=bool(message['value']));draw_requested=True
                     elif op=='speed':

@@ -12,7 +12,7 @@ Action/display/speed checks: verify_player_actions.py. Native SDL gamepad action
 Current desktop UI: hd_emulator.py (Tkinter), player_worker.py (isolated core/audio), player_controls.py.
 Desktop launchers use the menu UI; hd_player.py remains for graphics verification.
 Joystick API reference: https://www.pygame.org/docs/ref/joystick.html
-Pad hot-plug fix: Tk owns window input; SDL state is pumped and its queue flushed without pygame.event.get() joystick-event conversion.
+Pad hot-plug fix: Tk exclusively owns native window events. SDL_JoystickUpdate/SDL_FlushEvents run via PyDLL without SDL_PumpEvents or pygame.event.get(). Moving-only Configure events do not invoke the window fitter.
 Controller capture uses rising button states; known device exceptions release pad/rumble while the Tk poll continues.
 Regression: verify_pad_hotplug.py reproduces the original native stale-removal SystemError, then exercises 20 stale events and 3 SDL virtual-controller connect/input/capture/disconnect cycles.
 All-unit assets: graphics/all_units/; ROM IMG/PLT/PAT extraction, 64 AI-redrawn UV sheets.

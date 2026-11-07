@@ -3,6 +3,7 @@ from concurrent.futures import ProcessPoolExecutor
 import multiprocessing as mp,os,queue
 from collections import deque
 from frame_process import start_frame_worker,render_snapshot,close_frame_worker
+from render_resolution import DEFAULT_WIDTH
 
 class ReadyParts:
     def __init__(self):self.ready_generation=-1;self.values=[];self.dynamic_bindings=queue.SimpleQueue()
@@ -10,7 +11,7 @@ class ReadyParts:
 
 class FrameCompositor:
     def __init__(self,async_parts=True,dynamic_parts=True,memory_name=None,lock=None):
-        self.bottom_revision=0;self.render_width=1440;self.render_size=(1440,1080);self.dynamic_parts=dynamic_parts;self.ready=ReadyParts();self.future=None;self.needs_refresh=False
+        self.bottom_revision=0;self.render_width=DEFAULT_WIDTH;self.render_size=(DEFAULT_WIDTH,DEFAULT_WIDTH*3//4);self.dynamic_parts=dynamic_parts;self.ready=ReadyParts();self.future=None;self.needs_refresh=False
         self.render_times=deque(maxlen=120)
         self.executor=ProcessPoolExecutor(max_workers=1,mp_context=mp.get_context('spawn'),initializer=start_frame_worker,initargs=(os.getpid(),async_parts,dynamic_parts,memory_name,lock))
     def snapshot(self,core,paused,frame):

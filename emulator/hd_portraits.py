@@ -7,6 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 import numpy as np
 from PIL import Image,ImageDraw,ImageChops
+from render_resolution import MAX_WIDTH,MAX_HEIGHT
 ROOT=Path(__file__).resolve().parent.parent
 @lru_cache(maxsize=1)
 def _catalog(stamp):
@@ -29,7 +30,7 @@ def _background_priority():
 def _prepare_art_from_source(item):
     x,y,w,h=item['rectangle']
     with Image.open(ROOT/'graphics'/item['path']) as source:
-        art=source.convert('RGBA').resize((round(w*1440/256),round(h*1080/192)),Image.Resampling.LANCZOS)
+        art=source.convert('RGBA').resize((round(w*MAX_WIDTH/256),round(h*MAX_HEIGHT/192)),Image.Resampling.LANCZOS)
     mask=Image.new('L',(w,h));ImageDraw.Draw(mask).polygon([(4,1),(48,1),(52,5),(52,47),(4,47)],fill=255)
     if item.get('portrait_mask'):
         with Image.open(ROOT/'graphics'/item['portrait_mask']) as original:
@@ -37,7 +38,7 @@ def _prepare_art_from_source(item):
     art.putalpha(ImageChops.multiply(art.getchannel('A'),mask.resize(art.size,Image.Resampling.BICUBIC)))
     return art
 def _asset_stamp(item):
-    parts=['portrait-registration-1']
+    parts=[f'portrait-registration-2-{MAX_WIDTH}']
     for key in ('path','portrait_mask'):
         if not item.get(key):continue
         source=(ROOT/'graphics'/item[key]).stat();parts.extend((str(source.st_mtime_ns),str(source.st_size)))

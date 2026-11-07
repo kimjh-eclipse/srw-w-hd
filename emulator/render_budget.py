@@ -1,14 +1,15 @@
 """Bounded HD resolution adjustment for the native 59.8261 Hz frame budget."""
 from collections import deque
 import time
+from render_resolution import clamp_width
 
 class RenderBudget:
     def __init__(self,width,enabled=True):
-        self.maximum=int(width);self.width=int(width);self.enabled=bool(enabled)
+        self.maximum=clamp_width(width);self.width=self.maximum;self.enabled=bool(enabled)
         self.samples=deque(maxlen=90);self.changed=time.monotonic()
 
     def configure(self,width=None,enabled=None):
-        if width is not None:self.maximum=int(width)
+        if width is not None:self.maximum=clamp_width(width)
         if enabled is not None:self.enabled=bool(enabled)
         self.width=min(self.width,self.maximum) if self.enabled else self.maximum
         self.samples.clear();self.changed=time.monotonic()

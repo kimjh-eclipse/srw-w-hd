@@ -67,11 +67,12 @@ try:
         app.poll_pad();assert app.pad is None or app.pad.get_init()
     results['virtual_attach_input_capture_detach_cycles']=3
     results['controller_fast_forward_save_load_pause_resume']=True
-    original_pump=pygame.event.pump
+    import sdl_pad_state
+    original_update=sdl_pad_state.update
     def fail():raise SystemError('simulated device failure')
-    pygame.event.pump=fail
+    sdl_pad_state.update=lambda pygame:fail()
     try:assert app.poll_pad()==set()
-    finally:pygame.event.pump=original_pump
+    finally:sdl_pad_state.update=original_update
     results['system_error_releases_pad_and_rumble']=app.pad is None
     # Exercise the actual Tk callback after the native stale-event failure:
     # another timer must run and the keyboard binding must still be usable.

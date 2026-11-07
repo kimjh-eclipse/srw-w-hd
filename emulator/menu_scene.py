@@ -4,21 +4,23 @@ from collections import Counter
 from pathlib import Path
 import numpy as np
 from PIL import Image
+from menu_texture_cache import open_database,load_texture
+from render_resolution import DEFAULT_WIDTH
 
 ROOT=Path(__file__).resolve().parent.parent
-SCALE=1440/256
+SCALE=DEFAULT_WIDTH/256
 
 class MenuScene:
     def __init__(self,parts_renderer=None):
-        self.folder=ROOT/'graphics/menu_units';self.art={};self.last_scene=None;self.grid_native={};self.width=1440
+        self.folder=ROOT/'graphics/menu_units';self.art={};self.last_scene=None;self.grid_native={};self.width=DEFAULT_WIDTH
         self.parts_renderer=parts_renderer
+        self.texture_database=open_database()
         self.spec=json.loads((self.folder/'scene_runtime.json').read_text()) if (self.folder/'scene_runtime.json').exists() else None
 
     def load(self,names):
         for name in names:
             if name not in self.art:
-                with Image.open(self.folder/self.spec['images'][name]) as opened:art=opened.convert('RGBA')
-                if self.width!=1440:art=art.resize((round(art.width*self.width/1440),round(art.height*self.width/1440)),Image.Resampling.LANCZOS)
+                art,_=load_texture(self.spec['images'][name],self.width,self.texture_database)
                 self.art[name]=art
 
     def identify(self,rows,parts):
