@@ -232,7 +232,14 @@ class PartsRenderer:
             native=spec.get('index_pixels')
             if native is None:native=self.native_material_indices(binding,spec)
             if native is not None:indices=material_indices(native,spec['w'],spec['h'],art.size,indices,palette,strict=True)
-            found=(rgb-palette[indices],indices)
+            residual=rgb-palette[indices]
+            # Material IDs are spatial anchors. A painted highlight from a
+            # different material must not turn a black edge pink/green when
+            # its source palette is changed by an attack or flash.
+            foreign=np.max(np.abs(residual),axis=2)>96
+            if foreign.any():
+                light=np.clip(residual.mean(2),-16,16);residual[foreign]=light[foreign,None]
+            found=(np.clip(residual,-32,32),indices)
         self.material_maps[key]=found
         while len(self.material_maps)>64:self.material_maps.popitem(last=False)
         return found
@@ -297,6 +304,13 @@ class PartsRenderer:
                 shading=np.clip(shading.mean(axis=2,keepdims=True),-8,8)
             rgb=target[indices]+shading
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
+        elif spec.get('dynamic_palette') and source_binding>5263:
+            source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
+            residual,indices=self.material_map(binding,art,source_palette,spec)
+            corrected=np.clip(np.rint(source_palette[indices]+residual),0,255).astype('uint8')
+            pixels=np.array(art)
+            if not np.array_equal(corrected,pixels[:,:,:3]):
+                pixels[:,:,:3]=corrected;art=Image.fromarray(pixels)
         if a&256:
             pa,pb,pc,pd=[v/256 for v in matrix];fw=w*(2 if a&512 else 1);fh=h*(2 if a&512 else 1)
             coeff=(pa,pb,(w/2-fw/2*pa-fh/2*pb)*SCALE,pc,pd,(h/2-fw/2*pc-fh/2*pd)*SCALE)

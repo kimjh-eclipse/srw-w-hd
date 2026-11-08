@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-08",
+  "frontend": "hd_emulator.py desktop player, freshly restarted after material shading fix",
+  "rom_sha256": "0a5a22bd6bb25ebe640767e6b422b91358636e9ae1300e61d7e8ac3c5d8cd478",
+  "observed_scenes": [
+    {
+      "scene": "Shin Getter cut-in",
+      "check": "Opaque and fading pilot cut-in remains ahead of HD unit parts",
+      "result": "observed"
+    },
+    {
+      "scene": "GoLion cut-in",
+      "check": "Fully visible pilot cut-in and fade; HD unit does not cover the pilot",
+      "result": "observed"
+    },
+    {
+      "scene": "Eid demonstration attack",
+      "check": "Attack frame and firing/movement played; no previously reported red/green speckles observed",
+      "result": "observed"
+    },
+    {
+      "scene": "Bonta-kun demonstration attack",
+      "check": "Attack sequence and enlarged insert replayed; residual pink edge found, corrected and rechecked in restarted player",
+      "result": "observed"
+    }
+  ],
+  "limits": "These four demonstration sequences were inspected. This is not every weapon variant or every campaign cut-in; some effect sprites still use native graphics.",
+  "user_game_save_modified": false
+}

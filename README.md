@@ -44,3 +44,6 @@
 두 창의 설정 저장이 충돌해 UI 갱신이 멈추던 문제도 수정했습니다. 각 저장에 별도 임시 파일을 사용하며, Windows의 짧은 파일 잠금은 제한적으로 다시 시도합니다. 동시 저장 120회를 검사했습니다. 실행 중 등록 캐시와 개인 설정·오류 로그는 이번 소스 변경에 포함하지 않습니다.
 
 검사 자료: `test_current/combat/cutin_composition_audit.json`, `test_current/combat/cutin_blend_verification.json`, `test_current/parts/live_effect_palette_verification.json`, `test_current/font/translucent_text_and_palette_verification.json`.
+
+
+최신 실제 창 재검사에서 본타군 확대 연출의 잔여 분홍 테두리를 추가로 발견했습니다. 원본 재질에 다른 재질의 밝은 HD 음영이 과하게 더해지지 않도록 재질별 음영을 제한하고, 자동 생성 파츠의 기본 팔레트 표시에도 같은 보정을 적용했습니다. 파츠 위치·원래 알파는 유지합니다. `verify_edge_palette.py`는 실제 세 저장 장면의 알파 일치와 본타군 확대 프레임의 의도하지 않은 분홍 픽셀 제거를 비교합니다. 이 검사는 전체 무장·전체 캠페인 검증을 대신하지 않습니다.
