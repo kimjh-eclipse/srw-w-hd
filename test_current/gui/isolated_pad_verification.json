@@ -1,0 +1,22 @@
+{
+  "headless": {
+    "physical_devices_detected": [
+      "PS4 Controller",
+      "Xbox 360 Controller"
+    ],
+    "virtual_attach_input_rumble_detach_cycles": 12,
+    "native_helper_crash_survived_and_restarted": true,
+    "hung_helper_released_input_and_restarted": true,
+    "clean_shutdown": true
+  },
+  "gui": {
+    "gpu_hotplug_cycles": 8,
+    "gui_frames": 122,
+    "ui_heartbeat_after_helper_crash": true,
+    "keyboard_after_helper_crash": true,
+    "tk_joystick_subsystem_uninitialized": true,
+    "save_load_shortcuts_once_per_press": true,
+    "fast_forward_and_pause_shortcuts": true,
+    "ui_errors": []
+  }
+}

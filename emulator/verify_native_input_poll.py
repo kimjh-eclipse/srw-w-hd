@@ -129,51 +129,9 @@ class NativeInputTests(unittest.TestCase):
 
 
 def verify_headless_hotplug():
-    """Same native scenarios as verify_pad_hotplug, without its Tk/get prelude."""
-    import pygame
-    from hd_emulator import EmulatorWindow
-    from player_controls import DEFAULTS
-    pygame.display.init(); pygame.joystick.init()
-    app=EmulatorWindow.__new__(EmulatorWindow)
-    app.pygame=pygame; app.settings=copy.deepcopy(DEFAULTS)
-    app.dialog=None; app.loaded=True; app.pad=None; app.devices=[]; app.capture=None; app.pad_draft=None
-    app.pad_status=NS(set=lambda text:None); app.rumble=NS(stop=lambda:None)
-    app.persist=lambda:None; app.has_input_focus=lambda:True
-    app.controller_defaults=lambda:dict(app.settings['pad'])
-    app.last_device_refresh=0; app.pad_button_snapshot=(None,set())
-    commands=[]; app.run_action=commands.append
-    app.settings['pad_hotkeys'].update(fast_forward=8,quick_save=9,quick_load=10,pause_resume=11)
-    sdl=C.CDLL(str(Path(pygame.__file__).parent/'SDL2.dll'))
-    class Event(C.Structure):
-        _fields_=[('type',C.c_uint32),('timestamp',C.c_uint32),('which',C.c_int32),('padding',C.c_ubyte*44)]
-    signatures={'SDL_PushEvent':([C.POINTER(Event)],C.c_int),'SDL_JoystickAttachVirtual':([C.c_int,C.c_int,C.c_int,C.c_int],C.c_int),'SDL_JoystickDetachVirtual':([C.c_int],C.c_int),'SDL_JoystickOpen':([C.c_int],C.c_void_p),'SDL_JoystickClose':([C.c_void_p],None),'SDL_JoystickSetVirtualButton':([C.c_void_p,C.c_int,C.c_ubyte],C.c_int)}
-    for name,(args,result) in signatures.items():
-        fn=getattr(sdl,name);fn.argtypes=args;fn.restype=result
-    with patch.object(pygame.event,'get',side_effect=AssertionError('unsafe event.get called')):
-        for _ in range(20):
-            assert sdl.SDL_PushEvent(C.byref(Event(type=pygame.JOYDEVICEREMOVED,which=2147483000)))==1
-            assert isinstance(app.poll_pad(),set)
-        for _ in range(3):
-            index=sdl.SDL_JoystickAttachVirtual(1,2,12,1); assert index>=0
-            handle=sdl.SDL_JoystickOpen(index); assert handle
-            try:
-                app.refresh_devices();app.pad=pygame.joystick.Joystick(index);app.poll_pad()
-                captured=[];app.capture=('pad','a');app.assign_capture=captured.append
-                assert sdl.SDL_JoystickSetVirtualButton(handle,0,1)==0
-                assert 8 in app.poll_pad();app.poll_pad();assert captured==[0]
-                sdl.SDL_JoystickSetVirtualButton(handle,0,0);app.poll_pad();app.capture=None
-                for button,action in [(8,'fast_forward'),(9,'quick_save'),(10,'quick_load'),(11,'pause_resume')]:
-                    before=commands.count(action);sdl.SDL_JoystickSetVirtualButton(handle,button,1)
-                    app.poll_pad();app.poll_pad();assert commands.count(action)==before+1
-                    if button==8:assert app.pad_fast_forward
-                    sdl.SDL_JoystickSetVirtualButton(handle,button,0);app.poll_pad()
-                    if button==8:assert not app.pad_fast_forward
-            finally:
-                sdl.SDL_JoystickClose(handle);sdl.SDL_JoystickDetachVirtual(index)
-            app.poll_pad();assert app.pad is None or app.pad.get_init()
-        with patch.object(pygame.event,'pump',side_effect=SystemError('simulated native failure')):
-            assert app.poll_pad()==set();assert app.pad is None
-    return {'stale_native_events':20,'virtual_attach_capture_hotkey_detach_cycles':3,'unsafe_event_get_calls':0,'native_error_recovery':True}
+    """Exercise the isolated native worker without opening a Tk window."""
+    from verify_pad_process import run_headless
+    return run_headless()
 
 
 if __name__=='__main__':

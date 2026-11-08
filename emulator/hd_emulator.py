@@ -14,7 +14,7 @@ from gpu_display import GPUDisplay,RGBFrame
 from player_metrics import PlayerMetrics
 from windows_keyboard import WindowsKeyboard
 from render_resolution import DEFAULT_WIDTH,MIN_WIDTH,MAX_WIDTH,clamp_width
-import sdl_pad_state
+from pad_process import PadClient
 
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
 CANONICAL=ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds'
@@ -318,6 +318,8 @@ class EmulatorWindow(ShortcutMixin):
     def draw(self):
         draw_started=time.perf_counter()
         self.dirty=False;width,height=self.canvas.winfo_width(),self.canvas.winfo_height()
+        if width<16 or height<16:
+            self.dirty=True;return
         if not self.latest:
             self.canvas.delete('all');self.photos=[];self.canvas_objects=True
             if self.gpu is not None:self.gpu.clear()
@@ -414,18 +416,15 @@ class EmulatorWindow(ShortcutMixin):
         os.environ['PYGAME_HIDE_SUPPORT_PROMPT']='1';os.environ['SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS']='1'
         try:
             import pygame
-            self.pygame=pygame;pygame.display.init();pygame.joystick.init();self.refresh_devices()
+            self.pygame=pygame;pygame.display.init()
+            self.pad_client=PadClient();self.pad_revision=-1;self.refresh_devices()
         except Exception:self.pygame=None;self.pad_status.set('패드 사용 불가 · 키보드 사용 가능')
 
     def refresh_devices(self):
-        if not getattr(self,'pygame',None):return
-        self.rumble.stop()
-        self.devices=[]
-        try:
-            for i in range(self.pygame.joystick.get_count()):
-                pad=self.pygame.joystick.Joystick(i);pad.init();self.devices.append(pad)
-        except self.pygame.error:pass
+        if not getattr(self,'pad_client',None):return
+        self.pad_client.poll();previous=self.pad;self.devices=self.pad_client.devices();self.pad_revision=self.pad_client.revision
         preferred=self.pad_selection.get() if self.dialog and getattr(self,'pad_selection',None) else self.settings.get('pad_name','');self.pad=next((p for p in self.devices if p.get_name()==preferred),self.devices[0] if self.devices else None)
+        if previous is not self.pad:self.rumble.stop();self.pad_button_snapshot=(None,set())
         if self.pad is not None:
             guid=self.pad.get_guid();profiles=self.settings.setdefault('pad_profiles',{})
             if guid not in profiles:
@@ -436,9 +435,7 @@ class EmulatorWindow(ShortcutMixin):
     def controller_defaults(self):
         if self.pad is not None:
             try:
-                from pygame._sdl2 import controller
-                controller.init();device=controller.Controller.from_joystick(self.pad)
-                return sdl_pad_mapping(device.get_mapping())
+                return dict(self.pad.get_mapping())
             except Exception:pass
         return dict(DEFAULT_PAD)
 
@@ -449,13 +446,13 @@ class EmulatorWindow(ShortcutMixin):
 
     def poll_pad(self):
         self.pad_fast_forward=False
-        if not getattr(self,'pygame',None):return set()
+        if not getattr(self,'pad_client',None):return set()
         pygame=self.pygame
         try:
-            # SDL's window event pump can reenter Tk with the GIL released.
-            # Read controllers directly; Tk exclusively owns native messages.
-            sdl_pad_state.update(pygame)
-            if pygame.joystick.get_count()!=len(self.devices) or time.perf_counter()-self.last_device_refresh>3:self.refresh_devices()
+            # SDL controller APIs live only in a disposable helper process.
+            # The UI reads bounded snapshots; it never opens a native pad.
+            self.pad_client.poll()
+            if self.pad_revision!=self.pad_client.revision or time.perf_counter()-self.last_device_refresh>3:self.refresh_devices()
             if not self.pad:
                 self.pad_button_snapshot=(None,set());return set()
             instance=self.pad.get_instance_id()
@@ -475,7 +472,7 @@ class EmulatorWindow(ShortcutMixin):
             if self.dialog and hasattr(self,'input_preview'):
                 labels=[label for _,label,index in BUTTONS if index in result];self.input_preview.set('입력: '+', '.join(labels) if labels else '패드 입력을 기다리고 있습니다.')
             return result
-        except (pygame.error,SystemError,KeyError):
+        except (pygame.error,SystemError,KeyError,RuntimeError):
             self.rumble.stop();self.pad=None;self.devices=[];self.pad_button_snapshot=(None,set())
             self.pad_status.set('패드 재연결 중 · 키보드 사용 가능')
             return set()
@@ -641,6 +638,7 @@ class EmulatorWindow(ShortcutMixin):
     def close(self):
         if self.closed:return
         self.closed=True;self.settings['geometry']=self.window_geometry if bool(self.root.attributes('-fullscreen')) else self.root.geometry();self.persist();self.stop_worker()
+        if getattr(self,'pad_client',None):self.pad_client.close()
         if getattr(self,'pygame',None):self.pygame.quit()
         if self.timer_precision is not None:self.timer_precision.timeEndPeriod(1);self.timer_precision=None
         self.root.destroy()
@@ -655,6 +653,9 @@ def main():
 
 if __name__=='__main__':
     mp.freeze_support()
+    import faulthandler
+    native_crash_log=open(HERE/'player_native_crash.log','a',encoding='utf-8')
+    faulthandler.enable(file=native_crash_log,all_threads=True)
     try:main()
     except Exception:
         (HERE/'player_ui_error.log').write_text(traceback.format_exc(),encoding='utf-8');raise

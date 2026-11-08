@@ -3,9 +3,13 @@
   "failures": 0,
   "errors": 0,
   "headless_hotplug": {
-    "stale_native_events": 20,
-    "virtual_attach_capture_hotkey_detach_cycles": 3,
-    "unsafe_event_get_calls": 0,
-    "native_error_recovery": true
+    "physical_devices_detected": [
+      "PS4 Controller",
+      "Xbox 360 Controller"
+    ],
+    "virtual_attach_input_rumble_detach_cycles": 12,
+    "native_helper_crash_survived_and_restarted": true,
+    "hung_helper_released_input_and_restarted": true,
+    "clean_shutdown": true
   }
 }
