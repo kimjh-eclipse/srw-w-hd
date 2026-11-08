@@ -1,0 +1,68 @@
+{
+  "native_target_hz": 59.8261,
+  "active_replay_frames": [
+    65401,
+    67499
+  ],
+  "internal_width": 768,
+  "method": "Same saved battle replay in the foreground; no concurrent CPU tests. One-second windows include scene transitions. Frame traces are diagnostic, control playback omits traces.",
+  "runs": {
+    "before": {
+      "render_ms": {
+        "median": 8.538,
+        "p95": 15.935,
+        "p99": 25.961,
+        "max": 106.79
+      },
+      "cold_map_frame_ms": 106.79,
+      "first_menu_frame_ms": 64.042,
+      "presentation_interval_ms": {
+        "median": 16.7,
+        "p95": 25.946,
+        "p99": 28.897,
+        "max": 111.911
+      },
+      "gaps_over_33ms": 12,
+      "gaps_over_50ms": 2,
+      "one_second_samples": 35,
+      "display_fps_mean": 58.997,
+      "display_fps_one_second_low": 46.95,
+      "native_fps_mean": 59.831
+    },
+    "final": {
+      "render_ms": {
+        "median": 7.451,
+        "p95": 14.037,
+        "p99": 19.884,
+        "max": 39.157
+      },
+      "cold_map_frame_ms": 30.387,
+      "first_menu_frame_ms": 39.157,
+      "presentation_interval_ms": {
+        "median": 16.662,
+        "p95": 24.785,
+        "p99": 27.111,
+        "max": 38.305
+      },
+      "gaps_over_33ms": 3,
+      "gaps_over_50ms": 0,
+      "one_second_samples": 36,
+      "display_fps_mean": 59.605,
+      "display_fps_one_second_low": 54.76,
+      "native_fps_mean": 59.831
+    },
+    "control": {
+      "one_second_samples": 35,
+      "display_fps_mean": 59.567,
+      "display_fps_one_second_low": 54.9,
+      "native_fps_mean": 59.83
+    },
+    "repeat": {
+      "one_second_samples": 35,
+      "display_fps_mean": 59.214,
+      "display_fps_one_second_low": 53.98,
+      "native_fps_mean": 59.828
+    }
+  },
+  "locked_native_rate": false
+}

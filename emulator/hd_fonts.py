@@ -61,7 +61,11 @@ class FontRenderer:
         self.hud_label_keys=np.array(sorted(labels),dtype='V32');self.hud_label_characters=[labels[k.tobytes()] for k in self.hud_label_keys]
         self.font_path = 'C:/Windows/Fonts/malgun.ttf'
         self.fonts = {}
-        self.glyph_images = OrderedDict()
+        if not hasattr(_native_scanners,'glyph_tables'):_native_scanners.glyph_tables={}
+        if self.font_path not in _native_scanners.glyph_tables:_native_scanners.glyph_tables[self.font_path]=(OrderedDict(),{})
+        self.glyph_images,self.fonts=_native_scanners.glyph_tables[self.font_path]
+        if not hasattr(_native_scanners,'glyph_shapes'):_native_scanners.glyph_shapes={}
+        self.glyph_shapes=_native_scanners.glyph_shapes.setdefault(self.font_path,OrderedDict())
         self.last_key = None
         self.last_native_key = None
         self.last_matches = []
@@ -234,40 +238,66 @@ class FontRenderer:
     def _glyph(self, char, width, height, color, compact=False, button=False):
         key = char, width, height, color, compact,button
         if key not in self.glyph_images:
-            size = max(6, round(height * (.72 if compact else .80 if button else .94)))
-            if size not in self.fonts:
-                self.fonts[size] = ImageFont.truetype(self.font_path, size)
-            font = self.fonts[size]
-            stroke = 0 if button else max(1, height//45)
-            box = font.getbbox(char)
-            render_width = max(width, box[2]-box[0]+2*stroke+2)
-            image = Image.new('RGBA', (render_width, height))
-            draw = ImageDraw.Draw(image)
-            box = draw.textbbox((0, 0), char, font=font)
-            x = (render_width - (box[2]-box[0])) // 2 - box[0]
-            y = (height - (box[3]-box[1])) // 2 - box[1]
-            draw.text((x, y), char, font=font, fill=color,
-                      stroke_width=stroke, stroke_fill=(8, 16, 20))
-            if render_width != width:
-                image = image.resize((width, height), Image.Resampling.LANCZOS)
-            self.glyph_images[key] = image
-            while len(self.glyph_images) > 1024:
-                self.glyph_images.popitem(last=False)
-        else:
-            self.glyph_images.move_to_end(key)
+            shape_key=char,width,height,compact,button
+            shape=self.glyph_shapes.pop(shape_key,None)
+            if shape is None:
+                shape=self._glyph_shape(char,width,height,compact,button)
+            self.glyph_shapes[shape_key]=shape
+            while len(self.glyph_shapes)>8192:self.glyph_shapes.popitem(last=False)
+            render_width,stroke,outline,fill=shape
+            image=Image.new('RGBA',(render_width,height));draw=ImageDraw.Draw(image)
+            if outline is not None:draw.bitmap(outline[0],outline[1],fill=(8,16,20))
+            if not stroke or tuple(color)!=(8,16,20,255):draw.bitmap(fill[0],fill[1],fill=color)
+            if render_width!=width:image=image.resize((width,height),Image.Resampling.LANCZOS)
+            self.glyph_images[key]=image
+            while len(self.glyph_images)>8192:self.glyph_images.popitem(last=False)
+        else:self.glyph_images.move_to_end(key)
         return self.glyph_images[key]
+
+    def _glyph_shape(self,char,width,height,compact,button):
+        """Cache FreeType coverage independently of the changing native color."""
+        size = max(6, round(height * (.72 if compact else .80 if button else .94)))
+        if size not in self.fonts:self.fonts[size] = ImageFont.truetype(self.font_path, size)
+        font = self.fonts[size];stroke = 0 if button else max(1, height//45)
+        box = font.getbbox(char);render_width = max(width, box[2]-box[0]+2*stroke+2)
+        x = (render_width - (box[2]-box[0])) // 2 - box[0]
+        y = (height - (box[3]-box[1])) // 2 - box[1]
+        def mask(amount):
+            coverage,offset=font.getmask2(char,'L',stroke_width=amount,stroke_filled=True)
+            bitmap=Image.frombytes('L',coverage.size,bytes(coverage))
+            return (x+offset[0],y+offset[1]),bitmap
+        return render_width,stroke,mask(stroke) if stroke else None,mask(0)
+
+    def prewarm_ui(self):
+        """Prepare common UI characters before emulation starts, at all supported sizes."""
+        import math
+        from render_resolution import MIN_WIDTH,MAX_WIDTH
+        words='이동공격변형정신능력레벨기력원공원방요청상태지형방어회피전투행동원군데모사격격투명중기술우주공간파일럿기체무기성장개조자금경험치카즈마발호크지원소비불굴집중응원표시전환항목추가확인취소저장불러오기특수리스트'
+        ascii_chars='0123456789HPENPARTSLRSELON/?:+-%±·.,!「」'
+        white=(255,255,255,255)
+        for screen in range(MIN_WIDTH,MAX_WIDTH+1,32):
+            scale=screen/256
+            sizes={math.floor(12*scale),math.ceil(12*scale)}
+            for w in sizes:
+                for h in sizes:
+                    for char in set(words+ascii_chars):
+                        self._glyph(char,w,h,white);self._glyph(char,w,h,white,button=True)
+            for native_h in (8,12,16):
+                for w in {math.floor(8*scale),math.ceil(8*scale)}:
+                    for h in {math.floor(native_h*scale),math.ceil(native_h*scale)}:
+                        for char in set(ascii_chars):self._glyph(char,w,h,white,compact=native_h in (8,16))
 
     def _heal_plan(self):
         signature=self.last_mask.tobytes()
         if getattr(self,'heal_mask_key',None)!=signature:
-            rows=[];targets=[];lefts=[];rights=[];weights=[]
-            for y in np.flatnonzero(self.last_mask.any(1)):
-                keep=np.flatnonzero(~self.last_mask[y]);xs=np.flatnonzero(self.last_mask[y])
-                if not len(keep):continue
-                slots=np.searchsorted(keep,xs);left=keep[np.maximum(slots-1,0)];right=keep[np.minimum(slots,len(keep)-1)]
-                rows.extend([y]*len(xs));targets.extend(xs);lefts.extend(left);rights.extend(right)
-                weights.extend(np.divide(xs-left,right-left,out=np.zeros(len(xs),dtype='float64'),where=right!=left))
-            self.heal_plan=tuple(np.asarray(a,dtype='intp') for a in (rows,targets,lefts,rights))+(np.asarray(weights,dtype='float64')[:,None],)
+            keep=~self.last_mask;columns=np.arange(keep.shape[1])[None,:]
+            left=np.maximum.accumulate(np.where(keep,columns,-1),axis=1)
+            right=np.minimum.accumulate(np.where(keep,columns,keep.shape[1])[:,::-1],axis=1)[:,::-1]
+            first=keep.argmax(1)[:,None];last=keep.shape[1]-1-keep[:,::-1].argmax(1)[:,None]
+            left=np.where(left<0,first,left);right=np.where(right>=keep.shape[1],last,right)
+            rows,xs=np.where(self.last_mask&keep.any(1)[:,None]);left=left[rows,xs];right=right[rows,xs]
+            weights=np.divide(xs-left,right-left,out=np.zeros(len(xs),dtype='float64'),where=right!=left)
+            self.heal_plan=(rows,xs,left,right,weights[:,None])
             self.heal_mask_key=signature
         return self.heal_plan
 
@@ -304,9 +334,9 @@ class FontRenderer:
         layout_key=(geometry,target.size,hashlib.blake2b(native[self.last_ink].tobytes(),digest_size=8).digest(),tuple(sorted(self.menu_glyphs)))
         if not only_text:
             background_key=None if background is None else hashlib.blake2b(background.tobytes(),digest_size=16).digest()
-            overlay_key=(layout_key,self._underlay_key(native),background_key,bool(getattr(target,'hud_clean',False)))
+            overlay_key=(layout_key,self._underlay_key(native),background_key,bool(getattr(target,'hud_clean',False)),hasattr(target,'draw'))
             if overlay_key==self.overlay_key:
-                for position,patch in self.overlay_patches:target.paste(patch,position,patch)
+                self._paint_overlay(target)
                 return
         if self.layout_key != layout_key:
             positions=tuple((x,y,self.last_sizes[x,y],self.last_heights[x,y]) for x,y,char in matches)
@@ -358,6 +388,12 @@ class FontRenderer:
         for (left, top, right, bottom), position, alpha, text in self.layout_patches:
             if getattr(target,'hud_clean',False) and (left,top,right,bottom) in self.hud_rectangles:
                 self.overlay_patches.append((position,text));continue
+            if background is None and hasattr(target,'draw'):
+                # Upload native-sized background repair and cached HD lettering
+                # separately. Avoid expanding/compositing a new RGBA patch on
+                # the CPU whenever a number, selection or backdrop changes.
+                base=Image.fromarray(healed[top:bottom,left:right])
+                self.overlay_patches.append((position,base,alpha,text));continue
             if background is None:
                 patch = Image.fromarray(healed[top:bottom, left:right]).convert('RGBA').resize(
                     text.size, Image.Resampling.NEAREST)
@@ -367,5 +403,13 @@ class FontRenderer:
             patch.alpha_composite(text)
             self.overlay_patches.append((position, patch))
         self.overlay_key = overlay_key
-        for position, patch in self.overlay_patches:
-            target.paste(patch, position, patch)
+        self._paint_overlay(target)
+
+    def _paint_overlay(self,target):
+        for entry in self.overlay_patches:
+            if len(entry)==2:
+                position,patch=entry;target.paste(patch,position,patch)
+            else:
+                position,base,alpha,text=entry;x,y=position
+                target.draw(base,(x,y,x+alpha.width,y+alpha.height),mask=alpha,nearest=True)
+                target.paste(text,position,text)

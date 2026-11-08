@@ -1,6 +1,6 @@
 """Immutable snapshots cross a process boundary, keeping emulation responsive."""
 from concurrent.futures import ProcessPoolExecutor
-import multiprocessing as mp,os,queue
+import multiprocessing as mp,os,queue,time
 from collections import deque
 from frame_process import start_frame_worker,render_snapshot,close_frame_worker,stream_frames
 from render_resolution import DEFAULT_WIDTH
@@ -77,9 +77,18 @@ class FrameCompositor:
         image,ready=self.executor.submit(render_snapshot,self.snapshot(core,paused,0),True).result();self.update(ready);return image
     def close(self):
         if self.streaming:
-            try:self.requests.put_nowait(None)
-            except queue.Full:pass
-            self.process.join(timeout=1)
+            # A full waiting-frame slot must not discard the shutdown signal.
+            # Keep draining replies so the renderer can finish and save traces.
+            deadline=time.monotonic()+1.5;sent=False
+            while self.process.is_alive() and time.monotonic()<deadline:
+                if not sent:
+                    try:self.requests.put_nowait(None);sent=True
+                    except queue.Full:pass
+                try:
+                    if self.replies.poll(.01):self.replies.recv()
+                    elif sent:self.process.join(timeout=.01)
+                except (EOFError,OSError):break
+            self.process.join(timeout=.05)
             if self.process.is_alive():self.process.terminate();self.process.join(timeout=2)
             self.replies.close();self.requests.cancel_join_thread();self.requests.close();return
         try:self.executor.submit(close_frame_worker).result(timeout=1)

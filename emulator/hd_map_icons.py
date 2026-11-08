@@ -1,5 +1,5 @@
 """Exact native map-icon identities; tiny lazy HD textures for either display."""
-import json,time,zlib
+import json,time,zlib,hashlib
 from collections import OrderedDict,Counter
 from pathlib import Path
 import numpy as np
@@ -46,18 +46,41 @@ class MapIconRenderer:
                     packed=(colors[:,0]>>3)|((colors[:,1]>>3)<<5)|((colors[:,2]>>3)<<10);expected=packed[pixels];run=expected[ay,ax:ax+4];key=sum(int(v)<<(16*j) for j,v in enumerate(run))
                     entry=dict(resource=resource,palette=palette,flip=flip,ax=ax,ay=ay,ys=yy,xs=xx,expected=expected[mask],mask=mask)
                     self.lookup.setdefault(key,[]).append(len(self.entries));self.entries.append(entry)
-        self.keys=np.array(sorted(self.lookup),dtype='uint64');self.stamp=stamp;self.art.clear();self.cache.clear();self.healed.clear()
+        self.keys=np.array(sorted(self.lookup),dtype='uint64');self.stamp=stamp;self.art.clear();self.cache.clear();self.healed.clear();self.previous_code=None;self.previous_matches=[]
+        self.prepared_pixels=None;self.prepared_source_checks={}
+        cache=self.folder/'runtime_textures.json'
+        if cache.exists():
+            try:
+                baked=json.loads(cache.read_text())
+                if baked['signature']==hashlib.sha256(path.read_bytes()).hexdigest():
+                    self.prepared_pixels=np.load(self.folder/'runtime_textures.npy',mmap_mode='r')
+                    self.prepared_resources={int(v):i for i,v in enumerate(baked['resources'])};self.prepared_palettes={int(v):i for i,v in enumerate(baked['palettes'])};self.prepared_stamps=baked['sources']
+            except (OSError,ValueError,KeyError):self.prepared_pixels=None
 
     def recognize(self,native):
         self.refresh();self.last_matches=[]
         if not len(self.keys):return []
         rgb=np.asarray(native)[:192,:256,:3];key=zlib.crc32(rgb.tobytes());cached=self.cache.pop(key,None)
-        if cached is not None:self.cache[key]=cached;return cached
-        code=self.codes(rgb);cursor_pixels=np.isin(code,[1057,32767,1016,992,768,640,512]);a=code.astype('uint64');packed=a[:,:-3]|(a[:,1:-2]<<16)|(a[:,2:-1]<<32)|(a[:,3:]<<48)
-        positions=np.searchsorted(self.keys,packed);inside=positions<len(self.keys);positions=np.minimum(positions,len(self.keys)-1);candidate=inside&(self.keys[positions]==packed);found={}
+        code=self.codes(rgb)
+        if cached is not None:
+            self.cache[key]=cached;self.previous_code=code;self.previous_matches=cached;return cached
+        found={};left=top=0;right=253;bottom=192
+        if self.previous_code is not None:
+            ys,xs=np.where(code!=self.previous_code)
+            if not len(xs):return self.previous_matches
+            x0,x1=int(xs.min()),int(xs.max())+1;y0,y1=int(ys.min()),int(ys.max())+1
+            # An icon identity depends only on its 16x16 pixels. Retain exact
+            # matches outside the changed area, and rescan every possible
+            # anchor of any icon that could overlap that area.
+            for match in self.previous_matches:
+                x,y=match['x'],match['y']
+                if x+16<=x0 or x>=x1 or y+16<=y0 or y>=y1:found[x,y]=match['entry']
+            left=max(0,x0-15);right=min(253,x1+15);top=max(0,y0-15);bottom=min(192,y1+15)
+        cursor_pixels=np.isin(code,[1057,32767,1016,992,768,640,512]);a=code[top:bottom,left:right+3].astype('uint64');packed=a[:,:-3]|(a[:,1:-2]<<16)|(a[:,2:-1]<<32)|(a[:,3:]<<48)
+        positions=np.searchsorted(self.keys,packed);inside=positions<len(self.keys);positions=np.minimum(positions,len(self.keys)-1);candidate=inside&(self.keys[positions]==packed)
         for ry,rx in zip(*np.where(candidate)):
             for index in self.lookup[int(packed[ry,rx])]:
-                entry=self.entries[index];x=int(rx)-entry['ax'];y=int(ry)-entry['ay']
+                entry=self.entries[index];x=int(rx)+left-entry['ax'];y=int(ry)+top-entry['ay']
                 if x<0 or y<0 or x+16>256 or y+16>192:continue
                 actual=code[y+entry['ys'],x+entry['xs']];equal=actual==entry['expected']
                 # The animated selection cursor is drawn over icon corners.
@@ -69,6 +92,7 @@ class MapIconRenderer:
                 old=found.get((x,y))
                 if old is None or len(entry['xs'])>len(self.entries[old]['xs']):found[x,y]=index
         result=[dict(x=x,y=y,entry=index,resource=self.entries[index]['resource'],palette=self.entries[index]['palette'],flip=self.entries[index]['flip']) for (x,y),index in sorted(found.items())]
+        self.previous_code=code;self.previous_matches=result
         self.cache[key]=result
         while len(self.cache)>8:self.cache.popitem(last=False)
         return result
@@ -77,8 +101,15 @@ class MapIconRenderer:
         key=(resource,palette,flip,size);found=self.art.pop(key,None)
         if found is not None:self.art[key]=found;return found
         record=self.records[resource];path=self.folder/record['prepared']
-        with Image.open(path) as image:art=image.convert('RGBA')
-        if palette!=3938:
+        baked=False
+        if self.prepared_pixels is not None and resource in self.prepared_resources and palette in self.prepared_palettes:
+            valid=self.prepared_source_checks.get(resource)
+            if valid is None:
+                valid=self.prepared_stamps.get(str(resource))==hashlib.sha256(path.read_bytes()).hexdigest();self.prepared_source_checks[resource]=valid
+            if valid:art=Image.fromarray(np.asarray(self.prepared_pixels[self.prepared_resources[resource],self.prepared_palettes[palette]]));baked=True
+        if not baked:
+            with Image.open(path) as image:art=image.convert('RGBA')
+        if palette!=3938 and not baked:
             pixels=np.array(art);rgb=pixels[:,:,:3].astype('int16');source=self.palettes[3938].astype('int16');target=self.palettes[palette].astype('int16')
             nearest=np.argmin(((rgb.astype('float32')[:,:,None,:]-source[None,None,:,:])**2).sum(-1),axis=2)
             pixels[:,:,:3]=np.clip(rgb+target[nearest]-source[nearest],0,255).astype('uint8');art=Image.fromarray(pixels)

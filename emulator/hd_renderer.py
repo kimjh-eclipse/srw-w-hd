@@ -33,7 +33,7 @@ class HDRenderer:
         self.backgrounds=BackgroundRenderer(async_prepare=async_parts);self.portraits=PortraitRenderer();self.cutins={1:self.art};self.cutin_references={}
         self.text_renderer=FontRenderer();self.bottom_text_renderer=FontRenderer();self.menu_scene=MenuScene(self.parts_renderer)
         self.scenario_backgrounds=ScenarioBackgrounds(async_prepare=async_parts)
-        self.map_tiles=MapTilesRenderer()
+        self.map_tiles=MapTilesRenderer(async_prepare=async_parts)
         self.map_icons=MapIconRenderer()
         self.localized_screens=LocalizedScreens()
         self.ui_labels=UILabelRenderer()
@@ -80,11 +80,13 @@ class HDRenderer:
 
     def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None):
         if hd[10]:self.parts_renderer.schedule_unknown(unknown)
-        header=native[:16];border=native[124:132]
-        yellow=np.count_nonzero((header[:,:,0]>=160)&(header[:,:,1]>=120)&(header[:,:,2]<96))>=8
+        border=native[124:132]
         cyan=np.count_nonzero((border[:,:,0]<64)&(border[:,:,1]>96)&(border[:,:,2]>96))>=80
         battle_layout=bg_layout is not None and len(bg_layout)==4 and bg_layout[3][2]==0x06018000 and bg_layout[2][2]==0x06010000
-        is_battle=bool(hd[0]) or (battle_layout and yellow and cyan)
+        # HP labels disappear during attacks, but the battle dialogue frame
+        # and its dedicated VRAM banks remain. Keep scanning only text areas
+        # instead of treating every animated star/beam as a possible glyph.
+        is_battle=bool(hd[0]) or (battle_layout and cyan)
         self.text_renderer.set_battle_scan(is_battle)
         if hd[10]:self.text_renderer.recognize(native)
         hud_mask=getattr(self.text_renderer,'hud_mask',None) if hd[10] else None
@@ -144,7 +146,7 @@ class HDRenderer:
 
     def render_bottom(self,native,hd):
         source=native[192:384]
-        pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending)
+        pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending) or bool(self.map_tiles.pending)
         self.scenario_backgrounds.refresh()
         if hasattr(self.map_tiles,'refresh'):self.map_tiles.refresh()
         self.map_icons.refresh()

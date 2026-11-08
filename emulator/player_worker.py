@@ -24,7 +24,13 @@ def worker_main(pipe,memory_name,lock,config):
     from render_budget import RenderBudget
     from battle_rumble import BattleRumble
     import pygame
-    memory=shared_memory.SharedMemory(name=memory_name);core=None;channel=None
+    memory=shared_memory.SharedMemory(name=memory_name);core=None;channel=None;timer=None
+    if os.name=='nt':
+        # Windows timer precision belongs to each process. The UI's request
+        # does not give this separate emulation process accurate 2ms sleeps.
+        import ctypes
+        candidate=ctypes.WinDLL('winmm')
+        if candidate.timeBeginPeriod(1)==0:timer=candidate
     def send(event,**data):
         try:pipe.send(dict(event=event,**data))
         except (BrokenPipeError,EOFError,OSError):pass
@@ -42,6 +48,7 @@ def worker_main(pipe,memory_name,lock,config):
         compositor=FrameCompositor(async_parts=native_fallback,dynamic_parts=core.dynamic_bridge,memory_name=memory_name,lock=lock);feedback=BattleRumble()
         compositor.render_width=clamp_width(config.get('render_width',DEFAULT_WIDTH))
         budget=RenderBudget(compositor.render_width,config.get('hd_auto_quality',True))
+        compositor.render_width=budget.width
         try:
             pygame.mixer.init(44100,-16,2,1024);channel=pygame.mixer.Channel(0);channel.set_volume(config.get('volume',70)/100)
         except pygame.error as error:send('audio_unavailable',message=str(error))
@@ -167,6 +174,7 @@ def worker_main(pipe,memory_name,lock,config):
     except Exception as error:
         (Path(__file__).parent/'player_worker_error.log').write_text(traceback.format_exc(),encoding='utf-8');send('error',message=str(error))
     finally:
+        if timer is not None:timer.timeEndPeriod(1)
         send('rumble',duration=0)
         if core:
             try:core.close()

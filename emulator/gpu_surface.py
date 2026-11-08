@@ -47,9 +47,32 @@ class Backend:
         return tex
 
     def reset_pipeline(self):
+        for name in ('paired_top','paired_bottom'):
+            channel=getattr(self,name,None)
+            if channel is not None:channel.reset()
+        self.paired_previous_bottom=None;self.paired_bottom_pixels={}
         if getattr(self,'persistent',None) is not None:self.persistent.reset()
         for buffer in getattr(self,'read_buffers',[]):buffer.release()
         self.read_buffers=[];self.read_pending=None;self.read_size=None;self.read_slot=0
+
+    def render_pair(self,top,bottom,tag):
+        """Pipeline both screens, reading static lower screens only once."""
+        from gpu_readback import PersistentPBO
+        if getattr(self,'paired_top',None) is None:
+            self.paired_top=PersistentPBO();self.paired_bottom=PersistentPBO()
+            self.paired_previous_bottom=None;self.paired_bottom_pixels={}
+        if self.paired_top.size!=top.size:self.reset_pipeline()
+        top_pixels,previous=self.paired_top.read(top.size,tag,lambda:self.render(top,components=4,draw_only=True))
+        if bottom is not self.paired_previous_bottom:
+            pixels,source=self.paired_bottom.read(bottom.size,bottom,lambda:self.render(bottom,components=4,draw_only=True))
+            self.paired_bottom_pixels[id(source)]=(source,pixels);self.paired_previous_bottom=bottom
+        needed=previous[1]
+        if id(needed) not in self.paired_bottom_pixels:
+            pixels,source=self.paired_bottom.consume(self.paired_bottom.pending)
+            self.paired_bottom_pixels[id(source)]=(source,pixels)
+        pixels=self.paired_bottom_pixels[id(needed)][1]
+        self.paired_bottom_pixels={k:v for k,v in self.paired_bottom_pixels.items() if v[0] is needed or v[0] is bottom}
+        return top_pixels,pixels,previous
 
     def render(self,surface,components=3,pipeline_tag=None,draw_only=False):
         if pipeline_tag is not None and components==4 and not getattr(self,'persistent_disabled',False):
@@ -100,7 +123,7 @@ class Backend:
                     values[1,:oh]=np.asarray(Image.fromarray(np.arange(source.height,dtype='uint8')[:,None]).resize((1,oh),Image.Resampling.NEAREST))[:,0]
                     mapping=self.ctx.texture((values.shape[1],2),1,values.tobytes(),dtype='u1',alignment=1)
                 self.coordinate_maps[mapping_key]=mapping;mapping.use(2)
-                while len(self.coordinate_maps)>12:self.coordinate_maps.popitem(last=False)[1].release()
+                while len(self.coordinate_maps)>64:self.coordinate_maps.popitem(last=False)[1].release()
             mask=op['mask'];mode=0
             if mask is not None:
                 self.texture(mask,True).use(1);mode=2 if mask.mode=='RGBA' else 1

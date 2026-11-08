@@ -40,6 +40,15 @@ class UILabelRenderer:
             while len(self.glyphs)>64:self.glyphs.popitem(last=False)
         return self.glyphs[key]
 
+    def prewarm(self):
+        from render_resolution import MIN_WIDTH,MAX_WIDTH
+        for screen in range(MIN_WIDTH,MAX_WIDTH+1,32):
+            scale=screen/256
+            for row in self.library['labels']:
+                x,y,r,b=row['box'];size=round(r*scale)-round(x*scale),round(b*scale)-round(y*scale)
+                color=(255,232,0,255) if row['color']=='yellow' else (255,255,255,255)
+                self._text(row['text'],size,color)
+
     def compose(self,target,native):
         native=np.asarray(native,dtype='uint8')[:192]
         self.last_matches=[]

@@ -40,7 +40,7 @@ class PartsRenderer:
                 if str(archive['stamp'])==registration_stamp(ROOT,meta):
                     self.registered_cache={key:archive[key] for key in archive.files if key.startswith('part_')}
                     self.cached_stats=json.loads(str(archive['statistics']))
-        self.cache=OrderedDict();self.scaled=OrderedDict();self.material_maps=OrderedDict()
+        self.cache=OrderedDict();self.scaled=OrderedDict();self.material_maps=OrderedDict();self.baked_scales={}
         if async_prepare and self.registered_cache is not None:
             for key in self.registered_cache:
                 spec=self.bindings[int(key[5:])-1]
@@ -197,7 +197,9 @@ class PartsRenderer:
         if key in self.cache:
             self.cache.move_to_end(key);return self.cache[key]
         art=self.scaled.pop(source_binding,None)
-        if art is None:art=self.prepared[source_binding].resize((round(w*SCALE),round(h*SCALE)),Image.Resampling.LANCZOS)
+        if art is None:
+            wanted=(round(w*SCALE),round(h*SCALE));art=self.baked_scales.get((source_binding,round(SCALE*256)))
+            if art is None or art.size!=wanted:art=self.prepared[source_binding].resize(wanted,Image.Resampling.LANCZOS)
         self.scaled[source_binding]=art
         while len(self.scaled)>128:self.scaled.popitem(last=False)
         target_palette=spec.get('palette_rgb')
@@ -230,6 +232,14 @@ class PartsRenderer:
         self.cache[key]=art
         while len(self.cache)>512:self.cache.popitem(last=False)
         return art
+
+    def prewarm_registered(self):
+        """Only the small approved cache, not the 89k-part dynamic catalog."""
+        from render_resolution import MIN_WIDTH,MAX_WIDTH
+        for name,array in (self.registered_cache or {}).items():
+            binding=int(name[5:]);spec=self.bindings[binding-1];source=Image.fromarray(array)
+            for width in range(MIN_WIDTH,MAX_WIDTH+1,32):
+                self.baked_scales[binding,width]=source.resize((round(spec['w']*width/256),round(spec['h']*width/256)),Image.Resampling.LANCZOS)
 
     def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False):
         if self.async_prepare:self.collect_prepared()

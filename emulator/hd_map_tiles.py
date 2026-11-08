@@ -8,15 +8,52 @@ from collections import Counter,OrderedDict
 from pathlib import Path
 import numpy as np
 from PIL import Image
+from concurrent.futures import ThreadPoolExecutor
 ROOT=Path(__file__).resolve().parent.parent
 
+def load_map_art(path):
+    with Image.open(path) as image:return image.convert('RGB')
+
 class MapTilesRenderer:
-    def __init__(self):
+    def __init__(self,async_prepare=False):
         path=ROOT/'graphics/map_tiles/library.json';self.path=path;self.stamp=path.stat().st_mtime_ns if path.exists() else 0;self.checked=0;self.generation=0;self.pending={}
         self.specs=json.loads(path.read_text())['maps'] if path.exists() else []
         self.loaded=False;self.maps={};self.lookup={};self.overviews={};self.art_cache=OrderedDict();self.source_cache=OrderedDict();self.world_views=OrderedDict();self.overview_art=OrderedDict();self.last_matches=[];self.plans=OrderedDict();self.last_ms=0;self.last_background=None;self.compiled=None;self.overview_lookup={}
+        self.executor=None;self.index_future=None;self.prepare_errors={};self.cell_matches=OrderedDict()
+        if async_prepare:
+            from hd_portraits import _background_priority
+            self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='map-HD',initializer=_background_priority)
+            self.index_future=self.executor.submit(self.load_compiled);self.pending['index']=self.index_future
+
+    def collect(self):
+        for key,future in list(self.pending.items()):
+            if not future.done():continue
+            del self.pending[key]
+            try:
+                result=future.result()
+                if key!='index':
+                    if key[0]=='art':self.art_cache[key[1]]=result
+                    else:self.world_views[key]=result
+                    self.plans.clear();self.generation+=1
+                    if hasattr(self,'viewports'):self.viewports.clear()
+            except Exception as error:self.prepare_errors[str(key)]=str(error)
+        while len(self.world_views)>2:self.world_views.popitem(last=False)
+        while len(self.art_cache)>2:self.art_cache.popitem(last=False)
+
+    def art(self,mid,spec):
+        art=self.art_cache.pop(mid,None)
+        if art is not None:self.art_cache[mid]=art;return art
+        path=ROOT/'graphics/map_tiles'/spec['image']
+        if self.executor:
+            key=('art',mid)
+            if key not in self.pending and str(key) not in self.prepare_errors:self.pending[key]=self.executor.submit(load_map_art,path)
+            return None
+        art=load_map_art(path);self.art_cache[mid]=art
+        while len(self.art_cache)>2:self.art_cache.popitem(last=False)
+        return art
 
     def refresh(self):
+        self.collect()
         now=time.monotonic()
         if now-self.checked<2:return
         self.checked=now
@@ -25,11 +62,18 @@ class MapTilesRenderer:
         try:specs=json.loads(self.path.read_text())['maps'] if stamp else []
         except (OSError,ValueError):return
         old={r['id']:r.get('source_sha256') for r in self.specs};new={r['id']:r.get('source_sha256') for r in specs}
+        for key,future in list(self.pending.items()):
+            if key!='index':future.cancel();del self.pending[key]
+        self.prepare_errors.clear()
         if any(new.get(i)!=sha for i,sha in old.items()):self.maps.clear();self.lookup.clear()
-        self.specs=specs;self.stamp=stamp;self.loaded=False;self.art_cache.clear();self.world_views.clear();self.overview_art.clear();self.plans.clear();self.generation+=1
+        self.specs=specs;self.stamp=stamp;self.loaded=False;self.art_cache.clear();self.world_views.clear();self.overview_art.clear();self.plans.clear();self.cell_matches.clear();self.generation+=1
 
     def load(self):
         if self.loaded:return
+        if self.index_future is not None:
+            if not self.index_future.done():return
+            self.collect();self.index_future=None
+            if self.loaded:return
         if self.load_compiled():return
         folder=ROOT/'graphics/map_tiles'
         for spec in self.specs:
@@ -56,7 +100,7 @@ class MapTilesRenderer:
         folder=ROOT/'graphics/map_tiles/runtime_index';path=folder/'index.json'
         if not path.exists():return False
         if self.compiled is None:
-            self.compiled=json.loads(path.read_text())['maps'];self.index_keys=np.load(folder/'keys.npy',mmap_mode='r');self.index_offsets=np.load(folder/'offsets.npy',mmap_mode='r');self.index_coords=np.load(folder/'coordinates.npy',mmap_mode='r');self.index_overviews=np.load(folder/'overviews.npy',mmap_mode='r')
+            self.compiled=json.loads(path.read_text())['maps'];self.index_keys=np.load(folder/'keys.npy');self.index_offsets=np.load(folder/'offsets.npy');self.index_coords=np.load(folder/'coordinates.npy');self.index_overviews=np.load(folder/'overviews.npy')
         if any(str(s['id']) not in self.compiled or self.compiled[str(s['id'])]['source_sha256']!=s['source_sha256'] for s in self.specs):return False
         self.maps={s['id']:(None,s) for s in self.specs};self.available=np.zeros(65536,dtype='bool');self.overviews={};self.overview_lookup={}
         for spec in self.specs:
@@ -70,7 +114,7 @@ class MapTilesRenderer:
         source,spec=self.maps[mid]
         if source is not None:return source,spec
         source=self.source_cache.pop(mid,None)
-        if source is None:source=np.load(ROOT/'graphics/map_tiles/runtime_index'/self.compiled[str(mid)]['source'],mmap_mode='r')
+        if source is None:source=np.load(ROOT/'graphics/map_tiles/runtime_index'/self.compiled[str(mid)]['source'])
         self.source_cache[mid]=source
         while len(self.source_cache)>2:self.source_cache.popitem(last=False)
         return source,spec
@@ -84,7 +128,9 @@ class MapTilesRenderer:
         red=outer[:,:,0];green=outer[:,:,1].astype('int16');blue=outer[:,:,2].astype('int16')
         grid=(red<12)&(np.abs(green-blue)<8)
         if np.count_nonzero(grid)<grid.size*.92 or np.count_nonzero(grid&(green>20))<grid.size*.02:return None
-        self.load();q=native>>3;lines=[row.tobytes() for row in q];fast_candidates=Counter()
+        self.load()
+        if not self.loaded:return None
+        q=native>>3;lines=[row.tobytes() for row in q];fast_candidates=Counter()
         if self.overview_lookup:
             for y in range(0,185,8):
                 for x in range(0,249,8):
@@ -106,10 +152,8 @@ class MapTilesRenderer:
                 if votes<2 or min(x,y)<0 or x+w>256 or y+h>192:continue
                 visible=np.all(q[y:y+h,x:x+w]==reference,axis=2)
                 if visible.mean()<.80:continue
-                source,row=self.source(mid);art=self.art_cache.pop(mid,None)
-                if art is None:art=Image.open(ROOT/'graphics/map_tiles'/row['image']).convert('RGB')
-                self.art_cache[mid]=art
-                while len(self.art_cache)>2:self.art_cache.popitem(last=False)
+                source,row=self.source(mid);art=self.art(mid,row)
+                if art is None:return None
                 left=round(x*size[0]/256);top=round(y*size[1]/192);right=round((x+w)*size[0]/256);bottom=round((y+h)*size[1]/192)
                 cachekey=(mid,size,spec.get('image_sha256'));viewport=self.overview_art.pop(cachekey,None)
                 if viewport is None:
@@ -133,15 +177,22 @@ class MapTilesRenderer:
     def plan(self,native,size,gpu=False):
         phase=self.phase(native)
         if phase is None:return self.overview_plan(native,size)
-        self.load();q=native>>3;xp,yp=phase;votes=Counter()
+        self.load()
+        if not self.loaded:return None
+        q=native>>3;xp,yp=phase;votes=Counter()
         for y in range(yp,177,16):
             for x in range(xp,241,16):
                 sample=q[y+1:y+16,x+1:x+16].tobytes()
-                if self.compiled is not None and self.overview_lookup:
+                found=self.cell_matches.pop(sample,None)
+                if found is not None:pass
+                elif self.compiled is not None and self.overview_lookup:
                     key=int.from_bytes(hashlib.blake2b(sample,digest_size=8).digest(),'little');loc=int(np.searchsorted(self.index_keys,key))
-                    if loc>=len(self.index_keys) or int(self.index_keys[loc])!=key:continue
-                    start,length=map(int,self.index_offsets[loc]);coordinates=self.index_coords[start:start+length];found=coordinates[self.available[coordinates[:,0]]]
+                    if loc>=len(self.index_keys) or int(self.index_keys[loc])!=key:found=()
+                    else:
+                        start,length=map(int,self.index_offsets[loc]);coordinates=self.index_coords[start:start+length];found=coordinates[self.available[coordinates[:,0]]]
                 else:found=self.lookup.get(sample,())
+                self.cell_matches[sample]=found
+                while len(self.cell_matches)>2048:self.cell_matches.popitem(last=False)
                 # Uniform ocean/space cells have many equally valid locations;
                 # landmarks alone establish the camera without quadratic work.
                 if self.compiled is None and len(found)>8:continue
@@ -150,10 +201,6 @@ class MapTilesRenderer:
         (mid,dx,dy),count=votes.most_common(1)[0]
         if count<6:return None
         source,spec=self.source(mid);h,w=source.shape[:2]
-        art=self.art_cache.pop(mid,None)
-        if art is None:art=Image.open(ROOT/'graphics/map_tiles'/spec['image']).convert('RGB')
-        self.art_cache[mid]=art
-        while len(self.art_cache)>2:self.art_cache.popitem(last=False)
         yy=np.arange(192)+dy;xx=np.arange(256)+dx
         valid=(yy[:,None]>=0)&(yy[:,None]<h)&(xx[None,:]>=0)&(xx[None,:]<w)
         expected=source[np.clip(yy,0,h-1)][:,np.clip(xx,0,w-1)]
@@ -163,16 +210,34 @@ class MapTilesRenderer:
             for x in range(xp-16,256,16):
                 region=mask[max(0,y):min(192,y+16),max(0,x):min(256,x+16)]
                 if np.count_nonzero(region)<region.size*.38:region[:]=False
+        art=self.art(mid,spec)
+        if art is None:
+            # Do not run the iterative sprite eraser while HD terrain decodes.
+            # Native map references already provide the unobscured background.
+            codes=expected.astype('uint16');codes=codes[:,:,0]|codes[:,:,1]<<5|codes[:,:,2]<<10
+            values=np.arange(32768,dtype='uint16');channels=np.stack((values&31,(values>>5)&31,(values>>10)&31),axis=-1).astype('uint8')
+            lookup=(channels<<3)|(channels>>2)
+            if mask.any():
+                unique,indices=np.unique(codes[mask],return_index=True);lookup[unique]=native[mask][indices]
+            background=Image.fromarray(lookup[codes]).resize(size,Image.Resampling.NEAREST)
+            return [],dict(map=mid,camera=[dx,dy],landmark_votes=count,pixels=int(mask.sum()),loading=True),background
         # A moving camera only crops a display-sized world texture. Repeating
         # Lanczos for every one-pixel scroll was far costlier than decoding it.
         viewkey=(mid,size,spec.get('image_sha256'));world=self.world_views.pop(viewkey,None);sx=size[0]/256;sy=size[1]/192
-        if world is None:world=art.resize((round(w*sx),round(h*sy)),Image.Resampling.LANCZOS)
-        self.world_views[viewkey]=world
+        if world is None:
+            if self.executor:
+                if viewkey not in self.pending:self.pending[viewkey]=self.executor.submit(art.resize,(round(w*sx),round(h*sy)),Image.Resampling.LANCZOS)
+            else:world=art.resize((round(w*sx),round(h*sy)),Image.Resampling.LANCZOS)
+        if world is not None:self.world_views[viewkey]=world
         while len(self.world_views)>2:self.world_views.popitem(last=False)
         viewportkey=(viewkey,dx,dy)
         if not hasattr(self,'viewports'):self.viewports=OrderedDict()
         viewport=self.viewports.pop(viewportkey,None)
-        if viewport is None:viewport=world.crop((round(dx*sx),round(dy*sy),round(dx*sx)+size[0],round(dy*sy)+size[1]))
+        if viewport is None:
+            box=(round(dx*sx),round(dy*sy),round(dx*sx)+size[0],round(dy*sy)+size[1])
+            if world is None:
+                viewport=self.resize_viewport(art,(round(w*sx),round(h*sy)),box)
+            else:viewport=world.crop(box)
         self.viewports[viewportkey]=viewport
         while len(self.viewports)>2:self.viewports.popitem(last=False)
         alpha=Image.fromarray(mask.astype('uint8')*255).resize(size,Image.Resampling.NEAREST)
@@ -186,6 +251,21 @@ class MapTilesRenderer:
                 l,t,r,b=bounds;box=(box[0]+l,box[1]+t,box[0]+r,box[1]+b);patchmask=patchmask.crop(bounds)
                 patches.append((viewport.crop(box),box[:2],None if patchmask.getextrema()==(255,255) else patchmask))
         return patches,dict(map=mid,camera=[dx,dy],landmark_votes=count,pixels=int(mask.sum())),viewport
+
+    @staticmethod
+    def resize_viewport(art,world_size,box):
+        """Prepare only visible pixels while the full world is built off-thread."""
+        left,top,right,bottom=box;w,h=world_size
+        l,t,r,b=max(0,left),max(0,top),min(w,right),min(h,bottom)
+        result=Image.new('RGB',(right-left,bottom-top))
+        if l<r and t<b:
+            crop=(l*art.width/w,t*art.height/h,r*art.width/w,b*art.height/h)
+            piece=art.resize((r-l,b-t),Image.Resampling.LANCZOS,box=crop)
+            result.paste(piece,(l-left,t-top))
+        return result
+
+    def close(self):
+        if self.executor:self.executor.shutdown(wait=False,cancel_futures=True)
 
     def compose(self,image,native):
         start=time.perf_counter();self.refresh();native=np.asarray(native,dtype='uint8')[:192];gpu=hasattr(image,'draw');key=(zlib.crc32(native.tobytes()),image.size,gpu)

@@ -600,6 +600,8 @@ class EmulatorWindow(ShortcutMixin):
 
     def poll(self):
         if self.closed:return
+        trace=[] if self.metrics.detail_path else None
+        if trace is not None:trace.append(time.perf_counter())
         try:
             if self.pipe:
                 # The pixel buffer already contains the latest frame. Never
@@ -613,19 +615,27 @@ class EmulatorWindow(ShortcutMixin):
                 if pending_frame:self.receive(pending_frame)
                 if self.waiting_frame:self.receive(self.waiting_frame)
         except (EOFError,BrokenPipeError,OSError):pass
+        if trace is not None:trace.append(time.perf_counter())
         if self.process and not self.process.is_alive() and (self.loaded or self.opening):
             self.rumble.stop()
             self.loaded=False;self.opening=False;self.update_buttons();self.status_var.set('게임 실행이 종료되었습니다. 롬을 다시 열 수 있습니다.')
         if self.gpu is not None:self.gpu.events(self)
+        if trace is not None:trace.append(time.perf_counter())
         self.physical_keyboard.poll(self)
+        if trace is not None:trace.append(time.perf_counter())
         pad=self.poll_pad()
+        if trace is not None:trace.append(time.perf_counter())
         active=self.has_input_focus() and not self.dialog
         self.set_fast_forward(active and (self.pad_fast_forward or self.settings['hotkeys']['fast_forward'] in self.action_keys_down))
         self.last_pad_buttons=pad;self.flush_game_input(pad)
+        if trace is not None:trace.append(time.perf_counter())
         if self.dirty:self.draw()
+        if trace is not None:trace.append(time.perf_counter())
         if self.metrics.path is not None:
             self.metrics.worker.update(focus_widget=str(self.root.focus_get()),held=sorted(self.held),sdl_keyboard_events=self.gpu.keyboard_events if self.gpu else 0,physical_keyboard_events=self.physical_keyboard.events,foreground=self.has_input_focus(),render_width=self.latest[0].width if self.latest else self.render_width,frame_lock_retries=self.frame_lock_retries)
         self.metrics.update('gpu' if self.gpu is not None else 'software')
+        if trace is not None and len(self.metrics.polls)<50000:
+            trace.append(time.perf_counter());self.metrics.polls.append(trace)
         self.root.after(1 if self.gpu is not None else 4,self.poll)
 
     def close(self):
