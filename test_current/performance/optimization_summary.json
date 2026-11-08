@@ -1,14 +1,14 @@
 {
-  "test": "same fixed battle replay at width 768, before 30 seconds and after 40 seconds; window focus coverage differs",
+  "test": "same fixed battle replay at width 768, 40 seconds each, all valid samples foreground; comparison isolates the final display-stage changes",
   "before": {
-    "mode": "battle",
-    "samples": 26,
-    "foreground_samples": 18,
-    "display_fps": 56.684,
-    "foreground_fps": 56.576,
-    "composition_fps": 56.728,
-    "emulation_fps": 59.835,
-    "display_ms": 2.263,
+    "mode": "final_battle",
+    "samples": 37,
+    "foreground_samples": 37,
+    "display_fps": 55.097,
+    "foreground_fps": 55.097,
+    "composition_fps": 59.077,
+    "emulation_fps": 59.832,
+    "display_ms": 1.943,
     "render_width": 768
   },
   "after": {
@@ -22,7 +22,7 @@
     "display_ms": 1.945,
     "render_width": 768
   },
-  "display_gain_percent": 4.142262366805438,
+  "display_gain_percent": 7.1419496524311565,
   "observed_one_second_min_fps": 48.96,
   "observed_one_second_max_fps": 60.94,
   "background_filter": {
