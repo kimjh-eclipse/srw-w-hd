@@ -28,3 +28,21 @@ asynchronous dynamic textures and sends their ready bindings back to the native
 core: the menu must remain correct after the first frame, not merely when paused.
 Horizontal 16-pixel button ramps are kept out of robot texture matching so the
 font renderer retains the actual selection backdrop on both displays.
+
+`prepare_images.py` keeps native recognition/approved seed PNGs unchanged. Other
+art is packaged as WebP, at most 960 pixels on its longest side, with RGB
+precision bounded to 2/255 and alpha preserved exactly after sizing. Every
+encoded file is decoded again and checked. Original editing PNGs stay in the
+source workspace. `AssetPath` resolves catalog PNG names to packaged WebP files.
+
+Decoded assets share a 1 GiB stage cache. Normal small working-set eviction
+retains the object until the next exactly recognized chapter title, unless the
+global cap is exceeded: then the least recently used asset is removed. A small
+batch of related unit parts is prefetched after current visible requests finish.
+Resolution changes retain decoded assets; resolution-dependent textures use
+separate keys. `SRWW_STAGE_CACHE_MB` can override the cap for testing.
+
+`archive_portable.py` produces a complete ZIP plus separate Program/Assets ZIPs
+for GitHub Releases. Extract both separate ZIPs into the same directory. Keep
+the user's `data` directory when updating. These archives follow the release
+manifest and cannot contain ROMs, states, battery saves, settings or logs.

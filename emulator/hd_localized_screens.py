@@ -4,7 +4,8 @@ from pathlib import Path
 from collections import OrderedDict
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 class LocalizedScreens:
     def __init__(self):
@@ -21,6 +22,12 @@ class LocalizedScreens:
             if stamp[1]:meta['titles'].extend(json.loads(credits.read_text(encoding='utf-8'))['screens'])
         except (ValueError,OSError):return
         self.items={r['ink_sha256']:r for r in meta['titles'] if r.get('image') or r.get('lines')};self.images.clear();self.stamp=stamp;self.generation+=1
+
+    def stage_key(self,native):
+        self.refresh()
+        a=np.asarray(native,dtype='uint8')[:192];ink=np.all(a[:,:,:3]>210,axis=2)
+        row=self.items.get(hashlib.sha256(np.packbits(ink).tobytes()).hexdigest())
+        return row.get('episode') if row is not None else None
 
     def compose(self,image,native):
         self.refresh();self.last_match=None

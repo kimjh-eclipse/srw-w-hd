@@ -9,7 +9,8 @@ import json,zlib
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 class UILabelRenderer:
     def __init__(self):

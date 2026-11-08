@@ -5,12 +5,14 @@ uses the original layer's RGB555 palette and its live hardware scroll offsets.
 """
 import argparse,json,time,zlib
 from pathlib import Path
+from stage_cache import StageCache
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image,ImageFilter
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 FOLDER=ROOT/'graphics/battle_backgrounds'
 
 def rgb555(a):
@@ -50,7 +52,7 @@ def prepare_texture(item,owner,size,hardware):
 class BattleBackgroundRenderer:
     def __init__(self,async_prepare=True):
         self.catalog_stamp=0;self.cached_rows=[];self.path=FOLDER/'catalog.json';self.index_path=FOLDER/'runtime_index/index.json';self.next_scan=0;self.index_stamp=0;self.generation=0
-        self.sample_plans=OrderedDict();self.gpu_masks=OrderedDict();self.uv_corrections={};self.active_layers={};self.items={};self.by_name={};self.references=None;self.layer_indices={};self.pending={};self.errors={};self.art=OrderedDict();self.viewports=OrderedDict();self.identifications=OrderedDict();self.last_matches=[];self.matched_layers=set();self.last_rows=[];self.last_identification=[];self.last_ms=0
+        self.sample_plans=OrderedDict();self.gpu_masks=OrderedDict();self.uv_corrections={};self.active_layers={};self.items={};self.by_name={};self.references=None;self.layer_indices={};self.pending={};self.errors={};self.art=StageCache();self.viewports=OrderedDict();self.identifications=OrderedDict();self.last_matches=[];self.matched_layers=set();self.last_rows=[];self.last_identification=[];self.last_ms=0
         self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='battle-BG-HD') if async_prepare else None
 
     def collect(self):
@@ -180,6 +182,8 @@ class BattleBackgroundRenderer:
             if art is None:continue
             if hasattr(image,'draw'):
                 extra=getattr(self,'hud_mask',None) if layer==3 else None
+                restoration=getattr(self,'restoration_mask',None) if layer==getattr(self,'restoration_layer',None) else None
+                if restoration is not None:extra=restoration if extra is None else (extra|restoration)
                 mask_key=(self.current_ids_signature,layer,image.size,None if extra is None else extra.tobytes())
                 mask=self.gpu_masks.pop(mask_key,None)
                 if mask is None:mask=Image.fromarray(((layer_ids==layer) if extra is None else ((layer_ids==layer)|extra)).astype('uint8')*255).resize(image.size,Image.Resampling.NEAREST)
@@ -201,6 +205,7 @@ class BattleBackgroundRenderer:
             self.viewports[key]=viewport
             while len(self.viewports)>2:self.viewports.popitem(last=False)
             visible=layer_ids==layer
+            if layer==getattr(self,'restoration_layer',None) and getattr(self,'restoration_mask',None) is not None:visible=visible|self.restoration_mask
             if layer==3 and getattr(self,'hud_mask',None) is not None:visible=visible|self.hud_mask
             mask=Image.fromarray(visible.astype('uint8')*255).resize(image.size,Image.Resampling.NEAREST);alpha=np.asarray(mask,dtype='uint16')*np.asarray(viewport.getchannel('A'),dtype='uint16')//255
             image.paste(viewport,(0,0),Image.fromarray(alpha.astype('uint8')));self.last_matches.append(name);self.matched_layers.add(layer);self.last_rows.append((name,row))

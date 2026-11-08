@@ -1,6 +1,7 @@
 """Exact face lookup; cold HD preparation never blocks the game frame."""
 import json,zlib,weakref,sys,sqlite3
 from contextlib import closing
+from stage_cache import StageCache
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
@@ -8,7 +9,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image,ImageDraw,ImageChops
 from render_resolution import MAX_WIDTH,MAX_HEIGHT
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 @lru_cache(maxsize=1)
 def _catalog(stamp):
     return tuple(json.loads((ROOT/'graphics/portraits/library.json').read_text())['portraits'])
@@ -54,7 +56,7 @@ def _prepare_art(item):
     return _prepare_art_from_source(item)
 class PortraitRenderer:
     def __init__(self,async_prepare=True):
-        path=ROOT/'graphics/portraits/library.json';self.items=[];self.groups={};self.cache=OrderedDict();self.references=OrderedDict();self.last_match=None;self.last_rectangle=None;self.fastmatch=None;self.fastmatches=[];self.position_cache={};self.scan_stamp=None;self.last_matches=[];self.last_rectangles=[]
+        path=ROOT/'graphics/portraits/library.json';self.items=[];self.groups={};self.cache=StageCache();self.references=OrderedDict();self.last_match=None;self.last_rectangle=None;self.fastmatch=None;self.fastmatches=[];self.position_cache={};self.scan_stamp=None;self.last_matches=[];self.last_rectangles=[]
         self.pending={};self.prepare_errors={};self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='portrait-HD',initializer=_background_priority) if async_prepare else None
         # Collection or process shutdown owns the executor; callers need no new
         # close hook. Jobs use a module function, so they cannot retain self.

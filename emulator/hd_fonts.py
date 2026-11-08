@@ -10,7 +10,8 @@ import unicodedata,threading
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT =asset_root(Path(__file__).resolve().parent.parent)
 _native_scanners=threading.local()
 
 

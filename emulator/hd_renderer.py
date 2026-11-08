@@ -16,8 +16,10 @@ from hd_localized_screens import LocalizedScreens
 from hd_ui_labels import UILabelRenderer
 from hd_battle_backgrounds import BattleBackgroundRenderer
 from render_resolution import clamp_width,DEFAULT_WIDTH,MAX_WIDTH,MAX_HEIGHT
+from painted_edges import clean_alpha,cutin_visibility
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 class HDRenderer:
     def __init__(self,async_parts=False,dynamic_parts=False,gpu_composition=False):
@@ -42,7 +44,9 @@ class HDRenderer:
         if path.exists():
             import json
             for item in json.loads(path.read_text())['cutins']:
-                self.cutins[item['id']]=Image.open(ROOT/'graphics'/item['image']).convert('RGBA').resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
+                painted=Image.open(ROOT/'graphics'/item.get('paint_image',item['image'])).convert('RGBA')
+                if item.get('paint_image'):painted=clean_alpha(painted)
+                self.cutins[item['id']]=painted.resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
                 reference=item.get('reference','portraits/'+item['name']+'_native.png')
                 self.cutin_references[item['id']]=Image.open(ROOT/'graphics'/reference).convert('RGBA')
         self.original_cutins=dict(self.cutins)
@@ -73,15 +77,19 @@ class HDRenderer:
         hd_parts.SCALE=scale;hd_backgrounds.SCALE=scale;menu_scene.SCALE=scale;hd_scenario_backgrounds.SCALE=scale
         self.parts_renderer.cache.clear();self.parts_renderer.scaled.clear();self.parts_renderer.material_maps.clear()
         self.cutins={key:art.resize(size,Image.Resampling.LANCZOS) for key,art in self.original_cutins.items()};self.art=self.cutins[1]
-        self.backgrounds.close();self.backgrounds=BackgroundRenderer(async_prepare=self.async_parts)
-        for future in self.scenario_backgrounds.pending.values():future.cancel()
-        self.scenario_backgrounds.pending.clear();self.scenario_backgrounds.art.clear();self.scenario_backgrounds.generation+=1
+        self.backgrounds.viewports.clear();self.backgrounds.mask_plans.clear()
+        self.scenario_backgrounds.generation+=1
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
     def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None):
+        stage=self.localized_screens.stage_key(native)
+        if stage is not None:
+            from stage_cache import begin_stage
+            if begin_stage(stage):self.parts_renderer.prefetched_groups.clear()
         self.sub_parts=sub_parts
         self.sub_paused=paused
+        parts_layer_ids=layer_ids
         if hd[10]:self.parts_renderer.schedule_unknown(unknown)
         border=native[124:132]
         cyan=np.count_nonzero((border[:,:,0]<64)&(border[:,:,1]>96)&(border[:,:,2]>96))>=80
@@ -102,7 +110,7 @@ class HDRenderer:
             if menu_kind=='favorite':native_top.paste(Image.fromarray(native[160:192]).resize((self.size[0],self.size[1]//6),Image.Resampling.NEAREST),(0,self.size[1]*5//6))
             top=native_top
         else:
-            display_native=self.text_renderer.clean_native(native) if hd[0]==1 else native[:192]
+            display_native=self.text_renderer.clean_native(native) if hd[0] else native[:192]
             if hud_mask is not None and hud_mask.any():
                 display_native=display_native.copy();healed=self.text_renderer._heal_native(native)
                 display_native[hud_mask]=healed[hud_mask]
@@ -112,6 +120,20 @@ class HDRenderer:
         if hd[10]:
             parts=self.menu_scene.compose(top,native,backgrounds,parts,obj)
             if self.menu_scene.last_scene is None:
+                restoration=None;restore_layer=None
+                if hd[0]>1 and bgpriors is not None:
+                    behind=[i for i in range(4) if int(bgpriors[i])>int(hd[6])]
+                    if behind:
+                        restoration=layer_ids==hd[5]
+                        known=self.battle_backgrounds.matched_layers|{int(row[3]) for row in (backgrounds or ())}
+                        candidates=[i for i in behind if i in known]
+                        # Empty/effect BG planes may sit between the portrait
+                        # and the actual scenery. Erase against a real matched
+                        # backdrop, rather than leaving old native edge pixels.
+                        restore_layer=max(candidates or behind,key=lambda i:(int(bgpriors[i]),i))
+                        parts_layer_ids=layer_ids.copy();parts_layer_ids[restoration]=restore_layer
+                for bg in (self.battle_backgrounds,self.backgrounds):
+                    bg.restoration_mask=restoration;bg.restoration_layer=restore_layer
                 self.battle_backgrounds.compose(top,native,layer_ids,bg_layout)
                 replaced={row[1][0] for row in self.battle_backgrounds.last_rows}
                 self.backgrounds.compose(top,native,layer_ids,[row for row in (backgrounds or ()) if row[3] not in replaced])
@@ -120,7 +142,7 @@ class HDRenderer:
                 terrain=self.map_tiles.compose(top,native)
                 if terrain or self.map_tiles.phase(native[:192]) is not None:self.map_icons.compose(top,native,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
         if parts is not None:
-            self.parts_renderer.compose(top,parts,obj,layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused)
+            self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused)
         if hd[0]:
             x=hd[1] if hd[1]<256 else hd[1]-512
             y=hd[2] if hd[2]<256 else hd[2]-512
@@ -128,14 +150,17 @@ class HDRenderer:
             position=(round(-x*self.size[0]/256),round(-y*self.size[1]/192))
             if hd[0]==1:top.paste(art,position,art)
             else:
-                reference=Image.new('RGBA',(256,192));reference.paste(self.cutin_references[int(hd[0])],(-x,-y));expected=np.asarray(reference)
-                visible=(expected[:,:,3]>0)&(layer_ids==hd[5])
-                # Keep the painted antialiased contour outside the native pixel
-                # staircase, without filling holes hidden by foreground layers.
-                fringe=np.asarray(Image.fromarray(visible.astype('uint8')*255).filter(ImageFilter.MaxFilter(3)))>0
-                visible|=fringe&(expected[:,:,3]==0)
+                visible=np.array(cutin_visibility(layer_ids,int(hd[5]),int(hd[6]),bgpriors,owners,obj))
+                # Native dialogue cells are opaque DS tiles. They must not
+                # punch rectangular holes through a painted foreground cut-in;
+                # transparent HD lettering is drawn after the complete scene.
+                for tx,ty,char in self.text_renderer.last_matches:
+                    if ty<120:continue
+                    tw=self.text_renderer.last_sizes[tx,ty];th=self.text_renderer.last_heights[tx,ty]
+                    visible[max(0,ty-2):min(192,ty+th+2),max(0,tx-2):min(256,tx+tw+2)]=255
+                visible=Image.fromarray(visible)
                 viewport=Image.new('RGBA',self.size);viewport.paste(art,position)
-                mask=np.asarray(Image.fromarray(visible.astype('uint8')*255).resize(self.size,Image.Resampling.NEAREST),dtype='uint16')
+                mask=np.asarray(visible.resize(self.size,Image.Resampling.NEAREST),dtype='uint16')
                 mask=Image.fromarray((mask*np.asarray(viewport.getchannel('A'),dtype='uint16')//255).astype('uint8'))
                 top.paste(viewport,(0,0),mask)
         if hd[0]==1:
@@ -145,8 +170,9 @@ class HDRenderer:
                 mask=Image.fromarray(ui.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)
                 top.paste(native_top,(0,0),mask)
             self.text_renderer.compose(top,native,only_text=True)
+        elif hd[0]:self.text_renderer.compose(top,native,only_text=True)
         if hd[10]:self.portraits.compose(top,native)
-        if hd[10] and hd[0]!=1:self.text_renderer.compose(top,native)
+        if hd[10] and not hd[0]:self.text_renderer.compose(top,native)
         if hd[10]:self.ui_labels.compose(top,native)
         if hd[10]:self.localized_screens.compose(top,native)
         return top

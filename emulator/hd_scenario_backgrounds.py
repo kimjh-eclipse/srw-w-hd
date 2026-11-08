@@ -4,13 +4,15 @@ Only generated project assets participate. Text, portraits, markers and other
 pixels that do not equal the original background remain owned by the game.
 """
 import json,time,zlib
+from stage_cache import StageCache
 from collections import Counter,OrderedDict,defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
 from PIL import Image
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
 
 def rgb555(rgb):
@@ -20,7 +22,7 @@ def rgb555(rgb):
 class ScenarioBackgrounds:
     def __init__(self,async_prepare=True):
         self.path=ROOT/'graphics/scenario_backgrounds/catalog.json'
-        self.sources={};self.index=defaultdict(list);self.art=OrderedDict();self.pending={};self.errors={}
+        self.sources={};self.index=defaultdict(list);self.art=StageCache();self.pending={};self.errors={}
         self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='scenario-HD') if async_prepare else None
         self.next_scan=0.;self.last_match=None;self.cache=OrderedDict();self.generation=0
         self.native_cache=None
@@ -73,10 +75,11 @@ class ScenarioBackgrounds:
                 self.generation+=1
             except (OSError,ValueError) as error:self.errors[name]=str(error)
 
-    def prepare(self,name):
+    def prepare(self,name,scale=None):
+        scale=SCALE if scale is None else scale
         item,reference=self.sources[name];h,w=reference.shape
         with Image.open(ROOT/'graphics'/item['image']) as opened:
-            return opened.convert('RGB').resize((round(w*SCALE),round(h*SCALE)),Image.Resampling.LANCZOS)
+            return opened.convert('RGB').resize((round(w*scale),round(h*scale)),Image.Resampling.LANCZOS)
 
     def texture(self,name):
         for key,future in list(self.pending.items()):
@@ -84,13 +87,14 @@ class ScenarioBackgrounds:
             del self.pending[key]
             try:self.art[key]=future.result();self.generation+=1
             except Exception as error:self.errors[key]=str(error)
-        if name in self.art:
-            image=self.art.pop(name);self.art[name]=image;return image
-        if name in self.errors:return None
+        cachekey=(name,round(SCALE*256))
+        if cachekey in self.art:
+            image=self.art.pop(cachekey);self.art[cachekey]=image;return image
+        if cachekey in self.errors:return None
         if self.executor:
-            if name not in self.pending:self.pending[name]=self.executor.submit(self.prepare,name)
+            if cachekey not in self.pending:self.pending[cachekey]=self.executor.submit(self.prepare,name,SCALE)
             return None
-        self.art[name]=self.prepare(name);return self.art[name]
+        self.art[cachekey]=self.prepare(name,SCALE);return self.art[cachekey]
 
     def compose(self,target,native):
         self.last_match=None;self.refresh()

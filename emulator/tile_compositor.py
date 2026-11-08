@@ -7,7 +7,8 @@ from PIL import Image
 from palette_materials import material_indices
 from hd_parts_registration import register_part
 from tile_group_paint import complete_origins,paint_group
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 class TileCompositor:
     def __init__(self):

@@ -30,10 +30,13 @@ def main():
             while True:
                 image=renderer.capture(c,True)
                 if not renderer.needs_refresh or time.monotonic()-start>40:break
-                c.set_ready_parts(renderer.ready);c.refresh_video();c.audio.clear();time.sleep(.05)
+                c.set_ready_parts(renderer.ready)
+                if args.state:c.load(args.state)
+                c.refresh_video();c.audio.clear();time.sleep(.05)
             pixels=np.asarray(image);assert pixels.max()>0 and pixels.std()>10,'Empty game frame'
             image.save(args.self_test.with_suffix('.png'))
-            result.update(native_core=True,hd_frame_size=list(image.size),frame_worker=True,prepared_parts=len(renderer.ready.values))
+            result.update(native_core=True,hd_frame_size=list(image.size),frame_worker=True,prepared_parts=len(renderer.ready.values),hd_cutin_id=int(c.hd[0]))
+            if args.state and args.state.stem=='quatre_cutin_full':assert c.hd[0]==7,'Quatre cut-in was not registered in the frozen core'
         finally:renderer.close();c.close()
     args.self_test.parent.mkdir(parents=True,exist_ok=True);args.self_test.write_text(json.dumps(result,indent=2),encoding='utf-8')
 

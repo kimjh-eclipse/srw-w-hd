@@ -1,15 +1,17 @@
 """Exact native map-icon identities; tiny lazy HD textures for either display."""
 import json,time,zlib,hashlib
+from stage_cache import StageCache
 from collections import OrderedDict,Counter
 from pathlib import Path
 import numpy as np
 from PIL import Image
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 class MapIconRenderer:
     def __init__(self):
-        self.folder=ROOT/'graphics/map_icons';self.stamp=None;self.next_check=0.;self.records={};self.entries=[];self.lookup={};self.keys=np.array([],dtype='uint64');self.art=OrderedDict();self.cache=OrderedDict();self.healed=OrderedDict();self.pending={};self.last_matches=[];self.prepare_errors={};self.refresh()
+        self.folder=ROOT/'graphics/map_icons';self.stamp=None;self.next_check=0.;self.records={};self.entries=[];self.lookup={};self.keys=np.array([],dtype='uint64');self.art=StageCache();self.cache=OrderedDict();self.healed=OrderedDict();self.pending={};self.last_matches=[];self.prepare_errors={};self.refresh()
 
     @staticmethod
     def codes(rgb):
@@ -155,11 +157,25 @@ class MapIconRenderer:
                 while len(self.healed)>64:self.healed.popitem(last=False)
             # Replace old opaque sprite pixels, retaining external selection
             # arrows and cell markers, then draw the smooth painted alpha.
-            erase=Image.fromarray(entry['mask'].astype('uint8')*255).resize((size,size),Image.Resampling.NEAREST)
+            erase_pixels=entry['mask'].copy()
+            if background is not None:
+                # Terrain replacement can deliberately omit a whole occupied
+                # cell. Restore all of that cell, not only the old icon ink.
+                # Otherwise the native space-blue matte survives on HD terrain.
+                erase_pixels[:]=True
+                from hd_map_tiles import MapTilesRenderer
+                phase=MapTilesRenderer.phase(np.asarray(native)[:192])
+                if phase is not None:
+                    xp,yp=phase
+                    erase_pixels[:,(np.arange(16)+x-xp)%16==0]=False
+                    erase_pixels[(np.arange(16)+y-yp)%16==0,:]=False
+            erase=Image.fromarray(erase_pixels.astype('uint8')*255).resize((size,size),Image.Resampling.NEAREST)
             target.paste(patch,box[:2],erase);target.paste(art,box[:2],art)
             # Selection corners are drawn above the native icon. Restore
             # their exact overlay colors above the replacement as well.
             cursor=np.isin(self.codes(original),[1057,32767,1016,992,768,640,512])
+            exact=np.zeros((16,16),dtype='bool');exact[entry['ys'],entry['xs']]=self.codes(original)[entry['ys'],entry['xs']]==entry['expected']
+            cursor&=~exact
             if cursor.any():
                 overlay=Image.fromarray(original).resize((size,size),Image.Resampling.NEAREST);mask=Image.fromarray(cursor.astype('uint8')*255).resize((size,size),Image.Resampling.NEAREST);target.paste(overlay,box[:2],mask)
         return len(matches)

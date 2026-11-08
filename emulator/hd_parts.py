@@ -4,6 +4,7 @@ import json,struct,hashlib,queue,base64,zlib
 import math
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing as mp,os
+from stage_cache import StageCache
 from collections import OrderedDict
 import numpy as np
 from PIL import Image
@@ -13,7 +14,8 @@ from palette_materials import material_indices
 from texture_preparation import prepare_task,prepare_composite_task,start_texture_worker
 from native_composition import PartVisibility
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
 
 def is_menu_gradient(indices,w,h):
@@ -46,7 +48,7 @@ class PartsRenderer:
         except (OSError,ValueError,KeyError):pass
         self.native_atlas=Image.open(ROOT/'graphics/kazuma_parts_atlas_reference.png').convert('RGBA').resize((256,128),Image.Resampling.NEAREST)
         self.atlases={'base':(self.atlas,self.native_atlas)}
-        self.atlas_specs=meta.get('atlases',{});self.lazy_atlases=OrderedDict()
+        self.atlas_specs=meta.get('atlases',{});self.lazy_atlases=StageCache()
         for name,extra in meta.get('atlases',{}).items():
             if extra.get('lazy'):continue
             w,h=extra['native_size']
@@ -56,7 +58,7 @@ class PartsRenderer:
             codes=np.arange(32768,dtype='uint32');rgb=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
             self.palette_lut=(np.argmin(((rgb[:,None,:]-self.source_palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
         self.palette_luts={self.source_palette.tobytes():self.palette_lut}
-        self.prepared=OrderedDict();self.registration_stats={}
+        self.prepared=StageCache();self.registration_stats={}
         self.registered_cache=None;self.cached_stats={}
         cache_path=ROOT/'graphics'/meta.get('registration_cache','kazuma_parts_registration.npz')
         if cache_path.exists():
@@ -79,6 +81,29 @@ class PartsRenderer:
         for index,binding in enumerate(self.bindings,1):self.ready_aliases.setdefault(binding.get('source_binding',index),[]).append(index)
         self.dynamic_parts=bool(dynamic_parts and async_prepare and (ROOT/'graphics/parts_tile_library.sqlite').exists())
         self.dynamic_bindings=queue.SimpleQueue();self.unmapped_pending={};self.unmapped_seen=set();self.unmapped_misses={};self.runtime_requests={}
+        self.prepared.on_evict=lambda:setattr(self,'ready_generation',self.ready_generation+1)
+        self.prefetch_groups={};self.prefetched_groups=set()
+        for bid,spec in enumerate(self.bindings,1):
+            if spec.get('source_binding') or spec['w']>32 or spec['h']>32:continue
+            key=(spec.get('atlas_id','base'),spec.get('resource'))
+            self.prefetch_groups.setdefault(key,[]).append(bid)
+
+    def prefetch_related(self,parts):
+        if not self.async_prepare or self.pending:return
+        # Current visible requests always win; queue a small neighboring batch
+        # only when preparation is idle, never the whole 91k-part catalog.
+        for raw in parts[:,0]:
+            if not raw:continue
+            spec=self.bindings[int(raw)-1];key=(spec.get('atlas_id','base'),spec.get('resource'))
+            if key in self.prefetched_groups:continue
+            self.prefetched_groups.add(key);queued=0
+            for bid in self.prefetch_groups.get(key,()):
+                if bid in self.prepared or bid in self.pending:continue
+                candidate=self.bindings[bid-1]
+                self.pending[bid]=self.executor.submit(prepare_task,bid,candidate['w'],candidate['h'],self.prepare_delay)
+                queued+=1
+                if queued>=8:break
+            if queued:break
 
     def schedule_unknown(self,snapshot):
         if not self.dynamic_parts or snapshot is None:return
@@ -110,7 +135,7 @@ class PartsRenderer:
             self.unmapped_seen.add(identity);self.unmapped_pending[identity]=(future,request,descriptor)
 
     def ready_bindings(self):
-        sources=set(self.prepared)
+        sources=set(self.prepared)|set(self.prepared.retained)
         if self.registered_cache is not None:sources.update(int(k[5:]) for k in self.registered_cache)
         return [alias for source in sources for alias in self.ready_aliases.get(source,())]
 
@@ -123,7 +148,7 @@ class PartsRenderer:
             if palette_key not in self.palette_luts:
                 codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
                 self.palette_luts[palette_key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
-        identity=[self.registration_version,'native-crop-v2',x,y,w,h]
+        identity=[self.registration_version,'painted-wing-v2' if name=='wing_primary' else 'native-crop-v2',x,y,w,h]
         for path in (ROOT/'graphics'/spec['image'],ROOT/'graphics'/spec['reference']):
             stat=path.stat();identity.extend([str(path),stat.st_mtime_ns,stat.st_size])
         key=hashlib.sha256(json.dumps(identity).encode()).hexdigest()
@@ -135,6 +160,13 @@ class PartsRenderer:
         sx=paint_atlas.width/native_atlas.width;sy=paint_atlas.height/native_atlas.height
         paint=paint_atlas.crop((round(x*sx),round(y*sy),round((x+w)*sx),round((y+h)*sy))).resize((w*8,h*8),Image.Resampling.LANCZOS)
         aligned,stats=register_part(paint,native_atlas.crop((x,y,x+w,y+h)))
+        if name=='wing_primary':
+            # The native silhouette contract must not refill the painted
+            # V-fin/cape contour with stair-stepped source pixels.
+            from painted_edges import clean_alpha
+            zoom=stats['zoom'];dx=stats['dx'];dy=stats['dy']
+            coeff=(1/zoom,0,(w/2-(w/2+dx)/zoom)*8,0,1/zoom,(h/2-(h/2+dy)/zoom)*8)
+            aligned=clean_alpha(paint.transform(aligned.size,Image.Transform.AFFINE,coeff,Image.Resampling.BICUBIC))
         if self.async_prepare:
             try:self.disk_cache.put(key,aligned,stats)
             except Exception:pass
@@ -327,7 +359,7 @@ class PartsRenderer:
                 shading=np.clip(shading.mean(axis=2,keepdims=True),-8,8)
             rgb=target[indices]+shading
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
-        elif spec.get('dynamic_palette') and source_binding>5263 and not spec.get('preserve_canonical_paint',spec.get('wing_live_palette',False)):
+        elif spec.get('dynamic_palette') and source_binding>5263 and not (self.bindings[source_binding-1].get('wing_img_first') or spec.get('preserve_canonical_paint',spec.get('wing_live_palette',False))):
             source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
             residual,indices=self.material_map(binding,art,source_palette,spec)
             corrected=np.clip(np.rint(source_palette[indices]+residual),0,255).astype('uint8')
@@ -418,4 +450,5 @@ class PartsRenderer:
                 opacity=np.where(np.asarray(blend)>0,min(int(row[6])&31,16)/16,1.)
                 mask=Image.fromarray((np.asarray(mask)*opacity).astype('uint8'))
             top.paste(art,(px,py),mask)
+        self.prefetch_related(parts)
         return len(tasks)

@@ -4,12 +4,14 @@ Grid, units, selection overlays and menus retain their live native pixels.
 Only pixels equal to the registered terrain at the inferred camera are replaced.
 """
 import json,zlib,time,hashlib
+from stage_cache import StageCache
 from collections import Counter,OrderedDict
 from pathlib import Path
 import numpy as np
 from PIL import Image
 from concurrent.futures import ThreadPoolExecutor
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
 def load_map_art(path):
     with Image.open(path) as image:return image.convert('RGB')
@@ -18,7 +20,7 @@ class MapTilesRenderer:
     def __init__(self,async_prepare=False):
         path=ROOT/'graphics/map_tiles/library.json';self.path=path;self.stamp=path.stat().st_mtime_ns if path.exists() else 0;self.checked=0;self.generation=0;self.pending={}
         self.specs=json.loads(path.read_text())['maps'] if path.exists() else []
-        self.loaded=False;self.maps={};self.lookup={};self.overviews={};self.art_cache=OrderedDict();self.source_cache=OrderedDict();self.world_views=OrderedDict();self.overview_art=OrderedDict();self.last_matches=[];self.plans=OrderedDict();self.last_ms=0;self.last_background=None;self.compiled=None;self.overview_lookup={}
+        self.loaded=False;self.maps={};self.lookup={};self.overviews={};self.art_cache=StageCache();self.source_cache=OrderedDict();self.world_views=OrderedDict();self.overview_art=OrderedDict();self.last_matches=[];self.plans=OrderedDict();self.last_ms=0;self.last_background=None;self.compiled=None;self.overview_lookup={}
         self.executor=None;self.index_future=None;self.prepare_errors={};self.cell_matches=OrderedDict()
         if async_prepare:
             from hd_portraits import _background_priority

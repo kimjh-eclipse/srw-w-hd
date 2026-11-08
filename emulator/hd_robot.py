@@ -5,7 +5,8 @@ import numpy as np
 from PIL import Image
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
 
 class RobotAnimator:

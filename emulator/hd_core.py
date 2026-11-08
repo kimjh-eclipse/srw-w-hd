@@ -4,9 +4,10 @@ import ctypes as C
 import json
 import hashlib,os,queue
 import numpy as np
+from asset_paths import asset_root
 
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parent
+ROOT=asset_root(HERE.parent)
 ENV=C.CFUNCTYPE(C.c_bool,C.c_uint,C.c_void_p)
 VIDEO=C.CFUNCTYPE(None,C.c_void_p,C.c_uint,C.c_uint,C.c_size_t)
 AUDIO=C.CFUNCTYPE(None,C.c_int16,C.c_int16)

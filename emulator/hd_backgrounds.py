@@ -1,11 +1,13 @@
 """Registered full-layer art with native foreground and scrolling preserved."""
 import json,zlib
+from stage_cache import StageCache
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image
 from pathlib import Path
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
 
 def periodic_texture(image,vertical=False):
@@ -21,13 +23,14 @@ def periodic_texture(image,vertical=False):
         pixels[-band:]=pixels[-band:]*(1-weight[::-1])+target[None,:,:]*weight[::-1]
     return Image.fromarray(np.clip(np.rint(pixels),0,255).astype('uint8'))
 
-def prepare_background(item):
+def prepare_background(item,scale=None):
+    scale=SCALE if scale is None else scale
     with Image.open(ROOT/'graphics'/item['image']) as opened:
         art=opened.convert('RGB')
     with Image.open(ROOT/'graphics'/item['native']) as opened:
         native=opened.convert('RGB')
     w,h=native.size
-    art=art.resize((round(w*SCALE),round(h*SCALE)),Image.Resampling.LANCZOS)
+    art=art.resize((round(w*scale),round(h*scale)),Image.Resampling.LANCZOS)
     if item.get('periodic',item['name']!='tower'):
         art=periodic_texture(art,vertical=item['name']=='space')
     return art,np.asarray(native)
@@ -35,7 +38,7 @@ def prepare_background(item):
 
 class BackgroundRenderer:
     def __init__(self,async_prepare=False):
-        self.items=OrderedDict();self.last_matches=[];self.pending={};self.prepare_errors={};self.mask_plans=OrderedDict();self.viewports=OrderedDict()
+        self.items=StageCache();self.last_matches=[];self.pending={};self.prepare_errors={};self.mask_plans=OrderedDict();self.viewports=OrderedDict()
         path=ROOT/'graphics/backgrounds/library.json'
         self.specs={item['id']:item for item in json.loads(path.read_text())['backgrounds']} if path.exists() else {}
         self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='background-HD') if async_prepare else None
@@ -46,13 +49,14 @@ class BackgroundRenderer:
             del self.pending[key]
             try:self.items[key]=future.result()
             except Exception as error:self.prepare_errors[key]=str(error)
-        if bid in self.items:
-            value=self.items.pop(bid);self.items[bid]=value;return value
-        if bid not in self.specs or bid in self.prepare_errors:return None
+        cachekey=(bid,round(SCALE*256))
+        if cachekey in self.items:
+            value=self.items.pop(cachekey);self.items[cachekey]=value;return value
+        if bid not in self.specs or cachekey in self.prepare_errors:return None
         if self.executor is not None:
-            if bid not in self.pending:self.pending[bid]=self.executor.submit(prepare_background,self.specs[bid])
+            if cachekey not in self.pending:self.pending[cachekey]=self.executor.submit(prepare_background,self.specs[bid],SCALE)
             return None
-        value=prepare_background(self.specs[bid]);self.items[bid]=value
+        value=prepare_background(self.specs[bid],SCALE);self.items[cachekey]=value
         while len(self.items)>4:self.items.popitem(last=False)
         return value
 
@@ -97,6 +101,7 @@ class BackgroundRenderer:
             sample=np.flatnonzero(visible)[::max(1,np.count_nonzero(visible)//96)]
             error=np.median(np.abs(native[:192].reshape(-1,3)[sample].astype('int16')-expected.reshape(-1,3)[sample].astype('int16')).mean(axis=1))
             if error>5:continue
+            if layer==getattr(self,'restoration_layer',None) and getattr(self,'restoration_mask',None) is not None:visible=visible|self.restoration_mask
             if layer==3 and getattr(self,'hud_mask',None) is not None:visible=visible|self.hud_mask
             if hasattr(top,'draw'):
                 mask=Image.fromarray(visible.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)

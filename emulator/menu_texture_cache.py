@@ -7,7 +7,8 @@ import sqlite3
 import zlib
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT =asset_root(Path(__file__).resolve().parent.parent)
 FOLDER = ROOT/'graphics/menu_units'
 DATABASE = FOLDER/'display_sizes.sqlite'
 

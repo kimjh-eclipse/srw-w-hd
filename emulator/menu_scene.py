@@ -7,7 +7,8 @@ from PIL import Image
 from menu_texture_cache import open_database,load_texture
 from render_resolution import DEFAULT_WIDTH
 
-ROOT=Path(__file__).resolve().parent.parent
+from asset_paths import asset_root
+ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=DEFAULT_WIDTH/256
 
 class MenuScene:
