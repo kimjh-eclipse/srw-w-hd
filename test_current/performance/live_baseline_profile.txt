@@ -1,0 +1,53 @@
+         544745 function calls (543441 primitive calls) in 1.596 seconds
+
+   Ordered by: cumulative time
+   List reduced from 752 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      180    0.043    0.000    1.596    0.009 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\frame_process.py:60(_render_snapshot)
+      180    0.047    0.000    1.086    0.006 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:81(render_top)
+      376    0.305    0.001    0.455    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:133(recognize)
+  376/196    0.041    0.000    0.345    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:54(render)
+      180    0.001    0.000    0.294    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:186(rgba_pipeline)
+      180    0.009    0.000    0.293    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_readback.py:55(read)
+      196    0.017    0.000    0.181    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:286(compose)
+      180    0.001    0.000    0.155    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:61(<lambda>)
+      180    0.008    0.000    0.151    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_battle_backgrounds.py:156(compose)
+     5565    0.144    0.000    0.144    0.000 {method 'copy' of 'numpy.ndarray' objects}
+      180    0.006    0.000    0.129    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_readback.py:47(consume)
+      141    0.001    0.000    0.114    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_battle_backgrounds.py:163(<listcomp>)
+      282    0.044    0.000    0.113    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_battle_backgrounds.py:114(identify)
+      180    0.003    0.000    0.111    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_renderer.py:145(render_bottom)
+       88    0.002    0.000    0.094    0.001 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:190(compose)
+      180    0.021    0.000    0.090    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_parts.py:234(compose)
+       48    0.012    0.000    0.086    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_map_tiles.py:133(plan)
+      621    0.002    0.000    0.085    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:102(_scan)
+      621    0.070    0.000    0.083    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\native_font_scan.py:12(scan)
+      308    0.001    0.000    0.076    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:84(_scan_active)
+     3036    0.012    0.000    0.062    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:37(texture)
+       16    0.003    0.000    0.054    0.003 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:185(rgba)
+      196    0.022    0.000    0.053    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_portraits.py:117(compose)
+     6895    0.047    0.000    0.047    0.000 {built-in method zlib.crc32}
+     3643    0.003    0.000    0.047    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\fromnumeric.py:48(_wrapfunc)
+     1689    0.001    0.000    0.042    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\_core\fromnumeric.py:1421(searchsorted)
+     1689    0.039    0.000    0.040    0.000 {method 'searchsorted' of 'numpy.ndarray' objects}
+     6391    0.039    0.000    0.039    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+      164    0.021    0.000    0.037    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_fonts.py:268(_heal_native)
+       16    0.000    0.000    0.036    0.002 D:\패치유틸.xdeltaUI\work_srw_w_voice\tools\gpu_py\moderngl\__init__.py:362(read)
+       16    0.036    0.002    0.036    0.002 {method 'read_into' of 'mgl.Framebuffer' objects}
+       88    0.004    0.000    0.035    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_scenario_backgrounds.py:95(compose)
+      360    0.002    0.000    0.033    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:26(identify)
+      122    0.001    0.000    0.032    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\lib\_arraysetops_impl.py:145(unique)
+      360    0.005    0.000    0.031    0.000 {built-in method builtins.sum}
+      122    0.001    0.000    0.031    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\lib\_arraysetops_impl.py:350(_unique1d)
+    11458    0.006    0.000    0.029    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\tools\gpu_py\moderngl\__init__.py:414(__setitem__)
+      196    0.023    0.000    0.029    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_localized_screens.py:25(compose)
+      335    0.005    0.000    0.028    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:842(tobytes)
+        1    0.000    0.000    0.028    0.028 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\numpy\__init__.py:717(__getattr__)
+      3/1    0.000    0.000    0.028    0.028 <frozen importlib._bootstrap>:1167(_find_and_load)
+      3/1    0.000    0.000    0.027    0.027 <frozen importlib._bootstrap>:1122(_find_and_load_unlocked)
+      298    0.005    0.000    0.027    0.000 C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PIL\Image.py:3378(fromarray)
+      196    0.002    0.000    0.027    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_surface.py:134(from_native)
+    46440    0.026    0.000    0.026    0.000 D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\menu_scene.py:29(<genexpr>)
+
+

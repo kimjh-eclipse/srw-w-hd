@@ -5,6 +5,11 @@ Directory: desmume/desmume/src/frontend/libretro
 Modified: GPU.h, GPU.cpp, frontend/libretro/libretro.cpp; added srww_hd.h, srww_hd_signatures.h, srww_robot_signatures.h, srww_parts_impl.h
 License: DeSmuME GPL-2.0-or-later; complete modified source is included in desmume/.
 Frontend: Python 3.11, pygame, Pillow, numpy.
+Frame transport: one running render plus at most one queued immutable snapshot; no unbounded frame backlog. ProcessPool fallback remains available with SRWW_STREAMING_FRAMES=0.
+Native font color masks: build_native_font_pixels.py (-O3 -DNDEBUG), exact RGB/RGBA predicates with NumPy fallback. Random/recorded masks and existing font regressions passed.
+Battle background filter: RAM-resident reference table and conservative RGB555 palette rejection before UV search. 326 recorded live-frame layer queries kept identical choices/UVs; measured identification speedup 4.71x.
+Display: SDL drawing no longer deletes/repaints the Tk canvas every frame; occupied shared-buffer locks retain the latest notification for retry.
+Latest 768-wide foreground replay: 40 seconds, average actual display 59.032 fps, emulation 59.829 fps. One-second lows remain (~49 fps); fixed 60 fps and full campaign coverage are not claimed. Details: test_current/performance/optimization_summary.json and live_final_display_metrics.json.
 Player actions: player_shortcuts.py; configurable keyboard and gamepad bindings; hold-to-fast-forward at requested 2/4/8/16x with native CPU limits, audio/rumble suppressed while accelerated.
 Default action keys: Tab hold, F5 save, F8 load, Space pause/resume, Pause pause, F6 resume. Saves use selected slot 1-5.
 Window focus changes release inputs/rumble/acceleration without pausing emulation. Fixed outer layout padding is zero; both screens use the same native-to-1440x1080 nearest grid before layout resizing.

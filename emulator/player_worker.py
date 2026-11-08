@@ -154,7 +154,8 @@ def worker_main(pipe,memory_name,lock,config):
                 sequence+=1;send('frame',sequence=sequence,frame=rendered_frame,bottom_revision=compositor.bottom_revision,render_size=compositor.render_size)
             if native_fallback:core.set_ready_parts(compositor.ready)
             if compositor.future is None and (paused or not video_started or draw_requested or core.video_epoch!=last_video_epoch) and (draw_requested or ((paused or not video_started) and compositor.needs_refresh and now-last_draw>=.1) or (not paused and video_started and (speed==1 or now-last_draw>=1/15))):
-                compositor.submit(core,paused or not video_started,frame);last_draw=now;last_video_epoch=core.video_epoch;draw_requested=False
+                if compositor.submit(core,paused or not video_started,frame):
+                    last_draw=now;last_video_epoch=core.video_epoch;draw_requested=False
             if now-last_status>1:
                 costs=list(compositor.render_times)
                 send('status',frame=frame,paused=paused,hd=core.enabled,parts=int((core.parts[:,0]>0).sum()),demo=demo,speed=speed,render_ms=sum(costs)/len(costs) if costs else None,render_p95_ms=sorted(costs)[min(len(costs)-1,int(len(costs)*.95))] if costs else None,emulation_fps=(frame-status_frame)/max(.001,now-status_time),composition_fps=(sequence-status_sequence)/max(.001,now-status_time));last_status=now;status_time=now;status_frame=frame;status_sequence=sequence

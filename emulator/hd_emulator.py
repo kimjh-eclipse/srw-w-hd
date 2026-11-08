@@ -30,6 +30,7 @@ class EmulatorWindow(ShortcutMixin):
         self.loaded=False;self.opening=False;self.paused=False;self.current_rom=None;self.demo=False;self.save_dir=None
         self.gpu=None;self.gpu_error=None;self.metrics=PlayerMetrics(getattr(args,'metrics',None));self.received_frame=0;self.last_bottom_revision=None
         self.latest=None;self.photos=[];self.rects=[None,None];self.dirty=True;self.held=set();self.touch=None;self.last_input=None
+        self.waiting_frame=None;self.frame_lock_retries=0;self.canvas_objects=False
         self.render_width=DEFAULT_WIDTH;self.resolution_changed_at=0
         self.dialog=None;self.capture=None;self.pad_draft=None;self.devices=[];self.pad=None;self.last_device_refresh=0;self.closed=False;self.session_error=False
         self.rumble=PadRumble()
@@ -138,6 +139,7 @@ class EmulatorWindow(ShortcutMixin):
             except (BrokenPipeError,EOFError,OSError):pass
 
     def stop_worker(self):
+        self.waiting_frame=None
         self.release_shortcuts()
         self.rumble.stop()
         if self.process:
@@ -315,8 +317,9 @@ class EmulatorWindow(ShortcutMixin):
 
     def draw(self):
         draw_started=time.perf_counter()
-        self.dirty=False;width,height=self.canvas.winfo_width(),self.canvas.winfo_height();self.canvas.delete('all');self.photos=[]
+        self.dirty=False;width,height=self.canvas.winfo_width(),self.canvas.winfo_height()
         if not self.latest:
+            self.canvas.delete('all');self.photos=[];self.canvas_objects=True
             if self.gpu is not None:self.gpu.clear()
             text='게임 화면을 준비하고 있습니다…' if self.opening else '슈퍼로봇대전 W HD'
             self.canvas.create_text(width/2,height/2-20,text=text,fill='#e6edf7',font=('맑은 고딕',22))
@@ -329,8 +332,10 @@ class EmulatorWindow(ShortcutMixin):
             try:self.gpu=GPUDisplay(self.canvas)
             except Exception as error:self.gpu_error=repr(error)
         if self.gpu is not None:
+            if self.canvas_objects:self.canvas.delete('all');self.photos=[];self.canvas_objects=False
             self.gpu.draw(self.latest,self.rects)
         else:
+            self.canvas.delete('all');self.photos=[];self.canvas_objects=True
             for number,(source,rect) in enumerate(zip(self.latest,self.rects)):
                 if rect is None:continue
                 x,y,w,h=rect;image=source.resize((w,h),Image.Resampling.LANCZOS);photo=ImageTk.PhotoImage(image);self.photos.append(photo)
@@ -551,7 +556,12 @@ class EmulatorWindow(ShortcutMixin):
         if event=='loaded':
             self.loaded=True;self.opening=False;self.save_dir=Path(message['save_dir']);self.paused=message['paused'];self.demo=message['demo'];self.update_buttons();self.refresh_slots();self.canvas.focus_set()
         elif event=='frame':
-            if self.memory and self.lock.acquire(False):
+            if self.memory and not self.lock.acquire(False):
+                # A writer may be copying the next frame. Retry next UI tick
+                # instead of permanently dropping this frame notification.
+                self.waiting_frame=message;self.frame_lock_retries+=1;return
+            if self.memory:
+                self.waiting_frame=None
                 try:
                     revision=message.get('bottom_revision')
                     size=tuple(message.get('render_size',(DEFAULT_WIDTH,DEFAULT_WIDTH*3//4)));rendered_frame=message.get('frame',0)
@@ -601,6 +611,7 @@ class EmulatorWindow(ShortcutMixin):
                     else:self.receive(message)
                     if time.perf_counter()>=deadline:break
                 if pending_frame:self.receive(pending_frame)
+                if self.waiting_frame:self.receive(self.waiting_frame)
         except (EOFError,BrokenPipeError,OSError):pass
         if self.process and not self.process.is_alive() and (self.loaded or self.opening):
             self.rumble.stop()
@@ -613,7 +624,7 @@ class EmulatorWindow(ShortcutMixin):
         self.last_pad_buttons=pad;self.flush_game_input(pad)
         if self.dirty:self.draw()
         if self.metrics.path is not None:
-            self.metrics.worker.update(focus_widget=str(self.root.focus_get()),held=sorted(self.held),sdl_keyboard_events=self.gpu.keyboard_events if self.gpu else 0,physical_keyboard_events=self.physical_keyboard.events,foreground=self.has_input_focus(),render_width=self.latest[0].width if self.latest else self.render_width)
+            self.metrics.worker.update(focus_widget=str(self.root.focus_get()),held=sorted(self.held),sdl_keyboard_events=self.gpu.keyboard_events if self.gpu else 0,physical_keyboard_events=self.physical_keyboard.events,foreground=self.has_input_focus(),render_width=self.latest[0].width if self.latest else self.render_width,frame_lock_retries=self.frame_lock_retries)
         self.metrics.update('gpu' if self.gpu is not None else 'software')
         self.root.after(1 if self.gpu is not None else 4,self.poll)
 

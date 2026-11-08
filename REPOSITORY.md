@@ -34,3 +34,10 @@ images and the approved initial part sources are preserved. See
 `test_current/image_optimization/resized_art.json` for the 1,009 changed assets.
 Menu textures are prebaked for the seven supported widths (84 textures total),
 and all 548 portrait cache entries were rebuilt at the new maximum scale.
+
+The subsequent frame-rate pass removes per-frame task/future turnaround waits,
+adds conservative background color rejection, native font color masks, and stops
+invalidating the Tk canvas during SDL presentation. A 40-second foreground battle
+replay at width 768 averaged 59.032 displayed fps, with one-second lows near 49.
+This is not a locked-60 or full-campaign result. Streaming capture, resolution
+changes, input acknowledgement, pause/save/load, HD toggling and shutdown passed.

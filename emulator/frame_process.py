@@ -99,3 +99,21 @@ def close_frame_worker():
     if _renderer is not None:
         _renderer.parts_renderer.close();_renderer.backgrounds.close();_renderer.scenario_backgrounds.close();_renderer.map_icons.close();_renderer.battle_backgrounds.close()
     if _memory is not None:_memory.close()
+
+def stream_frames(parent_pid,async_parts,dynamic_parts,memory_name,lock,requests,replies):
+    """Keep the renderer fed without waiting for a future round trip per frame."""
+    try:
+        start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name,lock)
+        while True:
+            request=requests.get()
+            if request is None:break
+            kind,snapshot=request
+            result,ready=render_snapshot(snapshot,full=kind=='capture')
+            replies.send((kind,result,ready))
+    except (EOFError,BrokenPipeError):pass
+    except BaseException:
+        import traceback
+        try:replies.send(('error',traceback.format_exc(),None))
+        except (EOFError,BrokenPipeError,OSError):pass
+    finally:
+        close_frame_worker();replies.close()

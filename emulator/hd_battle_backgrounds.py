@@ -69,23 +69,25 @@ class BattleBackgroundRenderer:
         catalog_stamp=self.path.stat().st_mtime_ns
         rows=self.cached_rows
         if catalog_stamp!=self.catalog_stamp:rows=json.loads(self.path.read_text(encoding='utf-8'))['resources']
-        stamp=self.index_path.stat().st_mtime_ns;meta=None;references=None
+        stamp=self.index_path.stat().st_mtime_ns;meta=None;references=None;colors=None
         if stamp!=self.index_stamp:
-            meta=json.loads(self.index_path.read_text());references=np.load(FOLDER/'runtime_index/references.npy',mmap_mode='r')
+            meta=json.loads(self.index_path.read_text());references=np.load(FOLDER/'runtime_index/references.npy')
+            from background_color_filter import possible_colors
+            colors=possible_colors(references,FOLDER/'runtime_index')
         by_name={row['name']:row for row in rows};stamps={}
         for path in {row['image'] for row in rows}:
             try:stamps[path]=(ROOT/'graphics'/path).stat().st_mtime_ns
             except OSError:pass
         ready={name:row for name,row in by_name.items() if row['image'] in stamps}
         signature=tuple(sorted((name,row['image'],stamps[row['image']],row.get('art_owner')) for name,row in ready.items()))
-        return rows,catalog_stamp,stamp,meta,references,by_name,ready,signature
+        return rows,catalog_stamp,stamp,meta,references,by_name,ready,signature,colors
 
     def apply_assets(self,result):
         if result is None:return
-        rows,catalog_stamp,stamp,meta,references,by_name,ready,signature=result
+        rows,catalog_stamp,stamp,meta,references,by_name,ready,signature,colors=result
         self.cached_rows=rows;self.catalog_stamp=catalog_stamp
         if meta is not None:
-            self.references=references;self.names=meta['names'];self.native_sizes=meta['sizes'];self.layer_indices={layer:np.array([i for i,ls in enumerate(meta['layers']) if layer in ls],dtype='int32') for layer in (2,3)};self.index_stamp=stamp;self.identifications.clear()
+            self.references=references;self.palette_possible=colors;self.names=meta['names'];self.native_sizes=meta['sizes'];self.layer_indices={layer:np.array([i for i,ls in enumerate(meta['layers']) if layer in ls],dtype='int32') for layer in (2,3)};self.index_stamp=stamp;self.identifications.clear()
         if signature!=getattr(self,'asset_signature',None):
             self.asset_signature=signature;self.items=ready;self.by_name=by_name;self.identifications.clear();self.viewports.clear();self.art.clear();self.errors.clear();self.generation+=1
 
@@ -126,6 +128,16 @@ class BattleBackgroundRenderer:
         candidates=[previous] if previous is not None and self.names[previous] in self.items else self.layer_indices.get(layer,())
         candidates=np.array([int(i) for i in candidates if self.names[int(i)] in self.items],dtype='int32')
         if not len(candidates):return None
+        colors=getattr(self,'palette_possible',None)
+        if colors is not None:
+            # At least 75% of samples must be valid, and 90% of those must
+            # match within one RGB555 step. Global palette membership is a
+            # necessary condition, independent of the nine UV offsets.
+            minimum=int(np.ceil(np.ceil(len(sample)*.75)*.90))
+            candidates=candidates[colors[candidates[:,None],actual[None,:]].sum(1)>=minimum]
+            if not len(candidates):
+                if previous is not None:return self.identify(native,layer_ids,row,preferred=False)
+                return None
         # End-of-frame BG registers can be one pixel ahead of the displayed
         # raster. Validate nearby UVs rather than silently painting shifted art.
         offsets=((0,0),(1,-1),(-1,1),(1,0),(-1,0),(0,1),(0,-1),(1,1),(-1,-1));last_offset=self.uv_corrections.get(layer,(0,0))

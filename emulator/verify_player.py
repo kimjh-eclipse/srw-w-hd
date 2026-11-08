@@ -60,7 +60,10 @@ class Session:
             if not self.process.is_alive():raise AssertionError(f'worker exit: {self.process.exitcode}')
         raise AssertionError(f'timeout waiting for {event}')
     def image(self):
-        with self.lock:return np.frombuffer(bytes(self.memory.buf[:TOP_BYTES]),dtype='uint8').reshape(1080,1440,4)[:,:,:3].copy()
+        with self.lock:
+            w,h,_,_=np.frombuffer(self.memory.buf,dtype='uint32',count=4,offset=TOP_BYTES*2)
+            assert 768<=w<=960 and h==w*3//4
+            return np.frombuffer(bytes(self.memory.buf[:int(w*h*4)]),dtype='uint8').reshape(int(h),int(w),4)[:,:,:3].copy()
     def close(self):
         self.send('quit');self.process.join(5)
         if self.process.is_alive():self.process.terminate();self.process.join();raise AssertionError('worker did not close')
@@ -106,7 +109,7 @@ def gui_checks():
             elif phase==1 and app.loaded and app.latest:
                 assert app.play_button.instate(['!disabled'])
                 width,height=app.latest[0].size
-                assert app.latest[1].size==(width,height) and 512<=width<=1440 and width%32==0 and height==width*3//4
+                assert app.latest[1].size==(width,height) and 768<=width<=960 and width%32==0 and height==width*3//4
                 app.controls_dialog();app.begin_capture('key','a');app.assign_capture('k')
                 apply=next(w for w in descendants(app.dialog) if isinstance(w,ttk.Button) and w.cget('text')=='적용');apply.invoke()
                 assert app.settings['keys']['a']=='k';assert read_settings(args.config)['keys']['a']=='k'

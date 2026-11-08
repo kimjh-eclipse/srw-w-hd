@@ -1,0 +1,46 @@
+{
+  "test": "same fixed battle replay at width 768, before 30 seconds and after 40 seconds; window focus coverage differs",
+  "before": {
+    "mode": "battle",
+    "samples": 26,
+    "foreground_samples": 18,
+    "display_fps": 56.684,
+    "foreground_fps": 56.576,
+    "composition_fps": 56.728,
+    "emulation_fps": 59.835,
+    "display_ms": 2.263,
+    "render_width": 768
+  },
+  "after": {
+    "mode": "final_display",
+    "samples": 36,
+    "foreground_samples": 36,
+    "display_fps": 59.032,
+    "foreground_fps": 59.032,
+    "composition_fps": 59.108,
+    "emulation_fps": 59.829,
+    "display_ms": 1.945,
+    "render_width": 768
+  },
+  "display_gain_percent": 4.142262366805438,
+  "observed_one_second_min_fps": 48.96,
+  "observed_one_second_max_fps": 60.94,
+  "background_filter": {
+    "samples": 326,
+    "identified": 39,
+    "identical_choices_and_uvs": true,
+    "exhaustive_ms": 905.5261999019422,
+    "filtered_ms": 192.2096000635065,
+    "speedup": 4.711139295866357
+  },
+  "streaming_controls": {
+    "shared_resolution_boundaries": true,
+    "input_to_emulation_ms": 23.575700004585087,
+    "capture_without_deadlock": true,
+    "pause_save_load": true,
+    "hd_toggle": true,
+    "clean_process_shutdown": true
+  },
+  "locked_60fps": false,
+  "full_campaign_verified": false
+}

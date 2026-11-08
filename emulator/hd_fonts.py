@@ -136,16 +136,26 @@ class FontRenderer:
         native_key = hashlib.blake2b(checked.tobytes(), digest_size=16).digest()
         if native_key == self.last_native_key:
             return self.last_matches
-        red, green, blue = native[:,:,0], native[:,:,1], native[:,:,2]
-        low = np.minimum(np.minimum(red, green), blue)
-        high = np.maximum(np.maximum(red, green), blue)
-        neutral = high.astype('int16') - low < 8
-        bright = (low >= 80) & neutral
-        white = (low >= 232) & neutral
+        pixel_scanner=getattr(_native_scanners,'pixels',None)
+        if pixel_scanner is None:
+            try:
+                from native_font_pixels import NativeFontPixels
+                pixel_scanner=NativeFontPixels()
+            except (OSError,ImportError):pixel_scanner=False
+            _native_scanners.pixels=pixel_scanner
+        if pixel_scanner is not False:
+            bright,white,selected_green,hud_ink,hud_gold=pixel_scanner.masks(native)
+        else:
+            red, green, blue = native[:,:,0], native[:,:,1], native[:,:,2]
+            low = np.minimum(np.minimum(red, green), blue)
+            high = np.maximum(np.maximum(red, green), blue)
+            neutral = high.astype('int16') - low < 8
+            bright = (low >= 80) & neutral
+            white = (low >= 232) & neutral
+            selected_green=(red<48)&(green>=48)&(blue<48)
+            hud_ink=(green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80)
+            hud_gold=(red[:32]>=180)&(green[:32]>=64)&(blue[:32]<64)
         if self.battle_scan:bright&=self.scan_mask;white&=self.scan_mask
-        selected_green=(red<48)&(green>=48)&(blue<48)
-        hud_ink=(green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80)
-        hud_gold=(red[:32]>=180)&(green[:32]>=64)&(blue[:32]<64)
         key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes(), digest_size=16).digest()
         self.last_native_key = native_key
         if key == self.last_key:
