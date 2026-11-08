@@ -21,7 +21,7 @@ images={};patterns={};banks={}
 for p in audit['patterns']:
     group=p['image_group']
     for image in group:
-        if not (1260<=image<3500 or 4395<image<=22696):continue
+        if not (1156<=image<3500 or 4395<image<=22696):continue
         images.setdefault(image,set()).update((q['tile'],q['w'],q['h'],q['palette_bank']) for q in p['parts'])
         patterns.setdefault(image,set()).add(p['pattern']);banks[image]=p['palette']
 novel={};covered=0;invalid=[];empty=0;total=0;image_stats=[];started=time.time()

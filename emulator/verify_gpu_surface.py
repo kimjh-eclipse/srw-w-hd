@@ -9,8 +9,10 @@ def main():
     assert gpu.gpu_composition,gpu.gpu_error
     c=Core(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds',demo=True,user_dir=out/'gpu_saves');rows=[]
     try:
-        for state in ['formation/favorite_base.state','formation/formation.state','font/cutin_dialogue.state','scenario/final.state','map_icons/all_enemies_visible.state','localized_screens/chapter.state']:
-            c.load(ROOT/'test_current'/state);c.run();kw=dict(parts=c.parts,obj=c.obj.raw,owners=c.owners,bgpriors=c.bgpriors,bgparts=c.bgparts,part_palettes=c.part_palettes,backgrounds=c.backgrounds)
+        scenes=['formation/favorite_base.state','formation/formation.state','font/cutin_dialogue.state','scenario/final.state','map_icons/all_enemies_visible.state','localized_screens/chapter.state']
+        scenes += [f'combat/{name}.state' for name in ('duo_cutin_full','quatre_cutin_full','duo_smile_cutin_full','sandrock_closeup_cutin_full','sandrock_weapons','duo_weapons') if (ROOT/f'test_current/combat/{name}.state').exists()]
+        for state in scenes:
+            c.load(ROOT/'test_current'/state);c.run();kw=dict(paused=True,parts=c.parts,obj=c.obj.raw,owners=c.owners,bgpriors=c.bgpriors,bgparts=c.bgparts,part_palettes=c.part_palettes,backgrounds=c.backgrounds,bg_layout=c.bg_layout,sub_parts=(c.sub_parts,c.sub_owners,c.sub_oam.raw,c.sub_palettes,c.sub_ids,c.sub_priorities))
             for screen in range(2):
                 render=lambda r:r.render_top(c.native,c.ids,c.hd,**kw) if screen==0 else r.render_bottom(c.native,c.hd)
                 a=np.asarray(render(cpu));b=np.asarray(render(gpu));delta=np.abs(a.astype('int16')-b.astype('int16'))

@@ -23,7 +23,7 @@ def main():
     routes=[dict(id=1,name='kazuma',route='dedicated foreground overlay')]
     for item in library['cutins']:
         assert (ROOT/'graphics'/item['image']).is_file()
-        assert (ROOT/'graphics/portraits'/(item['name']+'_native.png')).is_file()
+        assert (ROOT/'graphics'/item.get('reference','portraits/'+item['name']+'_native.png')).is_file()
         routes.append(dict(id=item['id'],name=item['name'],layer=item['layer'],route='native foreground visibility mask'))
     report=dict(shared_obj_bg_blend_cases=checks,second_target_coefficients=list(range(17)),registered_cutin_routes=routes,generic_cutins='All BG layers use the shared native priority and blend path.',scope='Exhaustive compositor combinations; not a replay of every campaign cut-in.')
     (ROOT/'test_current/combat/cutin_composition_audit.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

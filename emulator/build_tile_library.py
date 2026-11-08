@@ -34,6 +34,21 @@ def main():
             raw=np.load(effects.parent/item['native']);a=raw['indices']
             add('observed_effect',-1,'observed_parts/effects/hd.png',manifest['native_size'],item['x'],item['y'],a,item['palette_rgb'],4)
     packages={p['resource']:p for p in json.loads((OUT/'all_units/catalog.json').read_text())['packages']}
+    wing=OUT/'wing_parts/installed.json'
+    if wing.exists():
+        for resource,dy in ((1164,0),(1180,32)):
+            pal=g.palette(g.decompress(rom[g.BASE+offsets[resource+1]:g.BASE+offsets[resource+2]]))
+            add('wing_primary',resource,'wing_parts/primary_hd.png',[256,64],0,dy,pixels(resource),[list(c[:3]) for c in pal[:16]],4)
+    closeup=OUT/'wing_parts/closeup_installed.json'
+    if closeup.exists():
+        installed=json.loads(closeup.read_text());i=installed['resource']
+        add('wing_closeup',i,'wing_parts/sandrock_closeup_hd.png',installed['native_size'],0,0,pixels(i),installed['palette_rgb'],5)
+    supplement=OUT/'img_first/sheets.json'
+    if supplement.exists():
+        for sheet in json.loads(supplement.read_text())['sheets']:
+            for s in sheet['segments']:
+                i=s['resource']
+                add(sheet['name'],i,'img_first/'+sheet['name']+'_hd.png',sheet['native_size'],s['atlas_x'],s['atlas_y'],pixels(i),s['palette_rgb'],4)
     for sheet in json.loads((OUT/'all_units/batches.json').read_text())['batches']:
         if not sheet.get('required'):continue
         for s in sheet['segments']:

@@ -5,17 +5,17 @@
     "max_error": 1,
     "mean_error": 0.03308738425925926,
     "above_3": 0,
-    "cpu_ms": 11.045,
-    "gpu_ms": 5.127
+    "cpu_ms": 11.224,
+    "gpu_ms": 4.09
   },
   {
     "scene": "formation/favorite_base.state",
     "screen": 1,
     "max_error": 1,
-    "mean_error": 0.0004214891975308642,
+    "mean_error": 0.0012229938271604939,
     "above_3": 0,
-    "cpu_ms": 2.056,
-    "gpu_ms": 0.812
+    "cpu_ms": 3.554,
+    "gpu_ms": 2.065
   },
   {
     "scene": "formation/formation.state",
@@ -23,8 +23,8 @@
     "max_error": 2,
     "mean_error": 0.030575327932098766,
     "above_3": 0,
-    "cpu_ms": 11.03,
-    "gpu_ms": 7.61
+    "cpu_ms": 8.806,
+    "gpu_ms": 6.287
   },
   {
     "scene": "formation/formation.state",
@@ -32,17 +32,17 @@
     "max_error": 1,
     "mean_error": 6.076388888888889e-05,
     "above_3": 0,
-    "cpu_ms": 1.81,
-    "gpu_ms": 0.106
+    "cpu_ms": 1.323,
+    "gpu_ms": 0.186
   },
   {
     "scene": "font/cutin_dialogue.state",
     "screen": 0,
     "max_error": 1,
-    "mean_error": 0.043531539351851854,
+    "mean_error": 0.0435228587962963,
     "above_3": 0,
-    "cpu_ms": 15.673,
-    "gpu_ms": 10.409
+    "cpu_ms": 14.596,
+    "gpu_ms": 9.58
   },
   {
     "scene": "font/cutin_dialogue.state",
@@ -50,8 +50,8 @@
     "max_error": 1,
     "mean_error": 0.00011670524691358024,
     "above_3": 0,
-    "cpu_ms": 1.463,
-    "gpu_ms": 0.396
+    "cpu_ms": 1.354,
+    "gpu_ms": 0.19
   },
   {
     "scene": "scenario/final.state",
@@ -59,8 +59,8 @@
     "max_error": 1,
     "mean_error": 1.54320987654321e-05,
     "above_3": 0,
-    "cpu_ms": 17.483,
-    "gpu_ms": 12.637
+    "cpu_ms": 16.575,
+    "gpu_ms": 11.819
   },
   {
     "scene": "scenario/final.state",
@@ -68,8 +68,8 @@
     "max_error": 1,
     "mean_error": 0.0012991898148148149,
     "above_3": 0,
-    "cpu_ms": 2.291,
-    "gpu_ms": 1.08
+    "cpu_ms": 2.297,
+    "gpu_ms": 1.157
   },
   {
     "scene": "map_icons/all_enemies_visible.state",
@@ -77,8 +77,8 @@
     "max_error": 1,
     "mean_error": 0.00020785108024691358,
     "above_3": 0,
-    "cpu_ms": 8.29,
-    "gpu_ms": 6.62
+    "cpu_ms": 7.583,
+    "gpu_ms": 6.968
   },
   {
     "scene": "map_icons/all_enemies_visible.state",
@@ -86,8 +86,8 @@
     "max_error": 1,
     "mean_error": 0.00018952546296296295,
     "above_3": 0,
-    "cpu_ms": 1.536,
-    "gpu_ms": 0.123
+    "cpu_ms": 1.291,
+    "gpu_ms": 0.187
   },
   {
     "scene": "localized_screens/chapter.state",
@@ -95,8 +95,8 @@
     "max_error": 0,
     "mean_error": 0.0,
     "above_3": 0,
-    "cpu_ms": 5.229,
-    "gpu_ms": 4.933
+    "cpu_ms": 5.323,
+    "gpu_ms": 5.489
   },
   {
     "scene": "localized_screens/chapter.state",
@@ -104,7 +104,115 @@
     "max_error": 0,
     "mean_error": 0.0,
     "above_3": 0,
-    "cpu_ms": 1.342,
-    "gpu_ms": 0.106
+    "cpu_ms": 1.482,
+    "gpu_ms": 0.152
+  },
+  {
+    "scene": "combat/duo_cutin_full.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.0008916859567901235,
+    "above_3": 0,
+    "cpu_ms": 21.688,
+    "gpu_ms": 17.674
+  },
+  {
+    "scene": "combat/duo_cutin_full.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 9.693287037037037e-05,
+    "above_3": 0,
+    "cpu_ms": 1.542,
+    "gpu_ms": 0.204
+  },
+  {
+    "scene": "combat/quatre_cutin_full.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.0022935956790123458,
+    "above_3": 0,
+    "cpu_ms": 53.023,
+    "gpu_ms": 33.284
+  },
+  {
+    "scene": "combat/quatre_cutin_full.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 0.00011140046296296297,
+    "above_3": 0,
+    "cpu_ms": 1.523,
+    "gpu_ms": 0.182
+  },
+  {
+    "scene": "combat/duo_smile_cutin_full.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.001312692901234568,
+    "above_3": 0,
+    "cpu_ms": 35.994,
+    "gpu_ms": 29.708
+  },
+  {
+    "scene": "combat/duo_smile_cutin_full.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 9.693287037037037e-05,
+    "above_3": 0,
+    "cpu_ms": 1.609,
+    "gpu_ms": 0.218
+  },
+  {
+    "scene": "combat/sandrock_closeup_cutin_full.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.003283179012345679,
+    "above_3": 0,
+    "cpu_ms": 16.315,
+    "gpu_ms": 12.528
+  },
+  {
+    "scene": "combat/sandrock_closeup_cutin_full.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 0.00011140046296296297,
+    "above_3": 0,
+    "cpu_ms": 1.078,
+    "gpu_ms": 0.153
+  },
+  {
+    "scene": "combat/sandrock_weapons.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.00032744984567901233,
+    "above_3": 0,
+    "cpu_ms": 4.514,
+    "gpu_ms": 5.752
+  },
+  {
+    "scene": "combat/sandrock_weapons.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 0.0012080439814814814,
+    "above_3": 0,
+    "cpu_ms": 0.96,
+    "gpu_ms": 0.133
+  },
+  {
+    "scene": "combat/duo_weapons.state",
+    "screen": 0,
+    "max_error": 1,
+    "mean_error": 0.00024739583333333335,
+    "above_3": 0,
+    "cpu_ms": 5.675,
+    "gpu_ms": 5.5
+  },
+  {
+    "scene": "combat/duo_weapons.state",
+    "screen": 1,
+    "max_error": 1,
+    "mean_error": 0.0010575810185185185,
+    "above_3": 0,
+    "cpu_ms": 1.115,
+    "gpu_ms": 0.139
   }
 ]

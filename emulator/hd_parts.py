@@ -237,9 +237,17 @@ class PartsRenderer:
             # different material must not turn a black edge pink/green when
             # its source palette is changed by an attack or flash.
             foreign=np.max(np.abs(residual),axis=2)>96
+            ink=(rgb.max(2)<72)&((rgb.max(2)-rgb.min(2))<40)
             if foreign.any():
                 light=np.clip(residual.mean(2),-16,16);residual[foreign]=light[foreign,None]
-            found=(np.clip(residual,-32,32),indices)
+            residual=np.clip(residual,-32,32)
+            # Neutral painted ink can cross a native material boundary. Keep
+            # its HD contour instead of replacing it with the old bright pixel
+            # blocks; saturated key-color fringes remain bounded above.
+            if ink.any():
+                delta=rgb.mean(2)-palette[indices].mean(2)
+                residual[ink]=np.minimum(delta[ink,None],0)
+            found=(residual,indices)
         self.material_maps[key]=found
         while len(self.material_maps)>64:self.material_maps.popitem(last=False)
         return found
@@ -304,13 +312,22 @@ class PartsRenderer:
                 shading=np.clip(shading.mean(axis=2,keepdims=True),-8,8)
             rgb=target[indices]+shading
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
-        elif spec.get('dynamic_palette') and source_binding>5263:
+        elif spec.get('dynamic_palette') and source_binding>5263 and not spec.get('preserve_canonical_paint',spec.get('wing_live_palette',False)):
             source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
             residual,indices=self.material_map(binding,art,source_palette,spec)
             corrected=np.clip(np.rint(source_palette[indices]+residual),0,255).astype('uint8')
             pixels=np.array(art)
-            if not np.array_equal(corrected,pixels[:,:,:3]):
-                pixels[:,:,:3]=corrected;art=Image.fromarray(pixels)
+            rgb=pixels[:,:,:3].astype('float32');used=self.used_palette_indices(binding,source_palette,spec)
+            if used is None or not len(used):used=np.arange(1,len(source_palette))
+            colors=source_palette[used];chroma=rgb-rgb.mean(2,keepdims=True);reference_chroma=colors-colors.mean(1,keepdims=True)
+            # Preserve canonical HD paint. Only reject colored key fringes
+            # absent from the native materials; replacing every painted pixel
+            # by a native material ID recreates the low-resolution pixel grid.
+            color_distance=np.min(np.sum((rgb[:,:,None,:]-colors[None,None,:,:])**2,axis=3),axis=2)
+            chroma_distance=np.min(np.sum((chroma[:,:,None,:]-reference_chroma[None,None,:,:])**2,axis=3),axis=2)
+            suspect=(color_distance>32**2)&(chroma_distance>20**2)&((rgb.max(2)-rgb.min(2))>40)
+            if suspect.any():
+                pixels[:,:,:3][suspect]=corrected[suspect];art=Image.fromarray(pixels)
         if a&256:
             pa,pb,pc,pd=[v/256 for v in matrix];fw=w*(2 if a&512 else 1);fh=h*(2 if a&512 else 1)
             coeff=(pa,pb,(w/2-fw/2*pa-fh/2*pb)*SCALE,pc,pd,(h/2-fw/2*pc-fh/2*pd)*SCALE)

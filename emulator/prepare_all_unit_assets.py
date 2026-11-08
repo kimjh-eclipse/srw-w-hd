@@ -9,17 +9,31 @@ ROOT=g.ROOT;OUT=ROOT/'graphics/all_units';OUT.mkdir(exist_ok=True)
 rom=(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds').read_bytes();offsets=g.archive(rom)
 def resource(i):return g.decompress(rom[g.BASE+offsets[i]:g.BASE+offsets[i+1]])
 candidates=json.loads((ROOT/'test_current/rom_catalog/sprite_packages.json').read_text());packages=[];rejected=[]
+# Some unit archives store IMG/PLT/PAT instead of PLT/IMG/PAT. Discover
+# both orders from headers rather than silently excluding the former.
+rows=json.loads((ROOT/'test_current/rom_catalog/catalog.json').read_text())['records'];byid={r['id']:r for r in rows}
+present={r['id'] for r in candidates}
+for r in rows:
+    i=r['id']
+    if r['kind']=='IMG' and byid.get(i+1,{}).get('kind')=='PLT' and byid.get(i+2,{}).get('kind')=='PAT' and i not in present:
+        candidates.append(dict(r,palette_resource=i+1,pattern_resource=i+2));present.add(i)
+candidates.sort(key=lambda r:r['id'])
 for record in candidates:
-    i=record['id'];raw=resource(i);pat=resource(i+1);palette=resource(i-1)
+    i=record['id'];palette_id=record.get('palette_resource',i-1);pattern_id=record.get('pattern_resource',i+1)
+    raw=resource(i);pat=resource(pattern_id);palette=resource(palette_id)
     n=struct.unpack_from('<I',pat,4)[0]
     if n>10000 or 8+n*4>len(pat):rejected.append([i,'PAT header']);continue
     poses=[];rectangles=set()
     try:
         for j in range(n):
             at=struct.unpack_from('<I',pat,8+j*4)[0];count=struct.unpack_from('<H',pat,at)[0]
-            if at+2+count*8>len(pat):continue
-            pose=[]
-            for flags,x,y,tile in struct.iter_unpack('<HhhH',pat[at+2:at+2+count*8]):
+            pose=[];cursor=at+2
+            for _ in range(count):
+                flags=struct.unpack_from('<H',pat,cursor)[0];cursor+=2;x=y=0
+                if flags&0x2000:x,y=struct.unpack_from('<hh',pat,cursor);cursor+=4
+                tile=struct.unpack_from('<H',pat,cursor)[0]&4095;cursor+=2
+                if flags&0x4000:cursor+=4
+                if flags&0x8000:cursor+=2
                 w=8<<(flags&3);h=8<<((flags>>2)&3);u=tile%32*8;v=tile//32*8
                 if u+w>record['w'] or v+h>record['h']:continue
                 rectangles.add((u,v,w,h));pose.append(dict(flags=flags,x=x,y=y,tile=tile,u=u,v=v,w=w,h=h))
@@ -37,7 +51,7 @@ for record in candidates:
         index_data=np.where(indices!=0,indices.astype('uint16')|0x8000,0).astype('<u2')
         parts.append(dict(x=u,y=v,w=w,h=h,hash=zlib.crc32(encoded.tobytes())^(w<<16)^h,index_hash=zlib.crc32(index_data.tobytes())^(w<<16)^h))
     if not parts:continue
-    packages.append(dict(resource=i,palette_resource=i-1,pattern_resource=i+1,width=record['w'],height=record['h'],palette_rgb=pal[:,:3].tolist(),parts=parts,poses=poses))
+    packages.append(dict(resource=i,palette_resource=palette_id,pattern_resource=pattern_id,width=record['w'],height=record['h'],palette_rgb=pal[:,:3].tolist(),parts=parts,poses=poses))
     # Independent native assembly is a review aid, not the replacement asset.
     pose=next((p for p in poses if p),[]);assembled=Image.new('RGBA',(256,192))
     for p in reversed(pose):

@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import OrderedDict
 import zlib
 import numpy as np
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image,ImageDraw,ImageFont,ImageFilter
 from hd_parts import PartsRenderer
 from hd_portraits import PortraitRenderer
 from hd_backgrounds import BackgroundRenderer
@@ -43,7 +43,8 @@ class HDRenderer:
             import json
             for item in json.loads(path.read_text())['cutins']:
                 self.cutins[item['id']]=Image.open(ROOT/'graphics'/item['image']).convert('RGBA').resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
-                self.cutin_references[item['id']]=Image.open(ROOT/'graphics/portraits'/(item['name']+'_native.png')).convert('RGBA')
+                reference=item.get('reference','portraits/'+item['name']+'_native.png')
+                self.cutin_references[item['id']]=Image.open(ROOT/'graphics'/reference).convert('RGBA')
         self.original_cutins=dict(self.cutins)
         self.font=ImageFont.truetype('C:/Windows/Fonts/malgun.ttf',24)
         self.small=ImageFont.truetype('C:/Windows/Fonts/malgun.ttf',19)
@@ -129,6 +130,10 @@ class HDRenderer:
             else:
                 reference=Image.new('RGBA',(256,192));reference.paste(self.cutin_references[int(hd[0])],(-x,-y));expected=np.asarray(reference)
                 visible=(expected[:,:,3]>0)&(layer_ids==hd[5])
+                # Keep the painted antialiased contour outside the native pixel
+                # staircase, without filling holes hidden by foreground layers.
+                fringe=np.asarray(Image.fromarray(visible.astype('uint8')*255).filter(ImageFilter.MaxFilter(3)))>0
+                visible|=fringe&(expected[:,:,3]==0)
                 viewport=Image.new('RGBA',self.size);viewport.paste(art,position)
                 mask=np.asarray(Image.fromarray(visible.astype('uint8')*255).resize(self.size,Image.Resampling.NEAREST),dtype='uint16')
                 mask=Image.fromarray((mask*np.asarray(viewport.getchannel('A'),dtype='uint16')//255).astype('uint8'))
