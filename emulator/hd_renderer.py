@@ -17,6 +17,7 @@ from hd_ui_labels import UILabelRenderer
 from hd_battle_backgrounds import BattleBackgroundRenderer
 from render_resolution import clamp_width,DEFAULT_WIDTH,MAX_WIDTH,MAX_HEIGHT
 from painted_edges import clean_alpha,cutin_visibility
+from cutin_assets import CutinAssets
 
 from asset_paths import asset_root
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
@@ -40,16 +41,7 @@ class HDRenderer:
         self.localized_screens=LocalizedScreens()
         self.ui_labels=UILabelRenderer()
         self.battle_backgrounds=BattleBackgroundRenderer(async_prepare=async_parts)
-        path=ROOT/'graphics/cutins_library.json'
-        if path.exists():
-            import json
-            for item in json.loads(path.read_text())['cutins']:
-                painted=Image.open(ROOT/'graphics'/item.get('paint_image',item['image'])).convert('RGBA')
-                if item.get('paint_image'):painted=clean_alpha(painted)
-                self.cutins[item['id']]=painted.resize((MAX_WIDTH,MAX_HEIGHT),Image.Resampling.LANCZOS)
-                reference=item.get('reference','portraits/'+item['name']+'_native.png')
-                self.cutin_references[item['id']]=Image.open(ROOT/'graphics'/reference).convert('RGBA')
-        self.original_cutins=dict(self.cutins)
+        self.cutins=CutinAssets(ROOT,self.art,MAX_WIDTH)
         self.font=ImageFont.truetype('C:/Windows/Fonts/malgun.ttf',24)
         self.small=ImageFont.truetype('C:/Windows/Fonts/malgun.ttf',19)
         self.panels={}
@@ -76,7 +68,7 @@ class HDRenderer:
         import hd_parts,hd_backgrounds,menu_scene,hd_scenario_backgrounds
         hd_parts.SCALE=scale;hd_backgrounds.SCALE=scale;menu_scene.SCALE=scale;hd_scenario_backgrounds.SCALE=scale
         self.parts_renderer.cache.clear();self.parts_renderer.scaled.clear();self.parts_renderer.material_maps.clear()
-        self.cutins={key:art.resize(size,Image.Resampling.LANCZOS) for key,art in self.original_cutins.items()};self.art=self.cutins[1]
+        self.cutins.set_width(width);self.art=self.cutins[1]
         self.backgrounds.viewports.clear();self.backgrounds.mask_plans.clear()
         self.scenario_backgrounds.generation+=1
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None

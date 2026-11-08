@@ -1,8 +1,8 @@
 diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
-index 026bf14..7652d2e 100644
+index 026bf14..7e00ff1 100644
 --- a/desmume/src/GPU.cpp
 +++ b/desmume/src/GPU.cpp
-@@ -38,6 +38,44 @@
+@@ -38,6 +38,88 @@
  #include "matrix.h"
  #include "emufile.h"
  #include "utils/task.h"
@@ -13,11 +13,13 @@ index 026bf14..7652d2e 100644
 +uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
 +struct SRWWCutin { uint32_t id,width,height; };
 +static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
++static bool SRWWCutinOrigin8192=false;
++static bool SRWWCutinPadded=false;
 +void SRWWRegisterCutins(const uint32_t *rows,unsigned count) {
-+    SRWWCutins.clear();
++    SRWWCutins.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
 +    for(unsigned i=0;i<count;i++) {
 +        const uint32_t *r=rows+i*5;
-+        if(r[1]>1 && r[2]<4)SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};
++        if(r[1]>1 && (r[2]&~768u)<4){SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};if((r[2]&768u)==512u)SRWWCutinOrigin8192=true;if((r[2]&768u)==768u)SRWWCutinPadded=true;}
 +    }
 +}
 +bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t x,uint32_t y,uint32_t priority,uint32_t master)
@@ -32,7 +34,49 @@ index 026bf14..7652d2e 100644
 +        for (unsigned i=0;i<2048;i++) hash=(hash^data[i])*16777619u;
 +        const auto found=SRWWCutins.find(((uint64_t)layer<<32)|hash);
 +        if(found!=SRWWCutins.end()) {ids[layer]=found->second.id;widths[layer]=found->second.width;heights[layer]=found->second.height;}
-+        else if(layer==1 && engine==0) {
++        if(!ids[layer]) {
++            // Cropped cut-ins often reference a final blank tile in SCR[0].
++            // Their explicit mode samples the actual IMG upload origin.
++            data=(const uint8_t*)MMU_gpu_map(tiles+1024u);hash=2166136261u;
++            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
++            const auto origin=SRWWCutins.find(((uint64_t)(layer|256u)<<32)|hash);
++            if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
++        }
++        if(!ids[layer] && SRWWCutinOrigin8192) {
++            data=(const uint8_t*)MMU_gpu_map(tiles+8192u);hash=2166136261u;
++            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
++            const auto origin=SRWWCutins.find(((uint64_t)(layer|512u)<<32)|hash);
++            if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
++        }
++        if(!ids[layer] && SRWWCutinPadded) {
++            // IMG rows narrower than 32 tiles are uploaded with VRAM row
++            // padding. A 512-byte sample stays inside the second valid row,
++            // avoiding uninitialized padding between uploaded scanlines.
++            data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+1024u);hash=2166136261u;
++            for(unsigned i=0;i<512;i++)hash=(hash^data[i])*16777619u;
++            const auto padded=SRWWCutins.find(((uint64_t)(layer|768u)<<32)|hash);
++            if(padded!=SRWWCutins.end()){ids[layer]=padded->second.id;widths[layer]=padded->second.width;heights[layer]=padded->second.height;}
++        }
++        if(!ids[layer] && base) {
++            // Battle loaders reserve tiles before the IMG upload. Some also
++            // reserve two blank tiles (GoLion); SCR[0] still names the blank
++            // tile at the reservation boundary. Match complete 2 KiB probes
++            // at both observed upload origins, never colors or silhouettes.
++            for(unsigned padding=0;padding<=64 && !ids[layer];padding+=64) {
++                for(unsigned mode=256;mode<=512 && !ids[layer];mode+=256) {
++                    if(mode==512 && !SRWWCutinOrigin8192)continue;
++                    data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+padding+(mode==256?1024u:8192u));
++                    hash=2166136261u;
++                    for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
++                    const auto origin=SRWWCutins.find(((uint64_t)(layer|mode)<<32)|hash);
++                    if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
++                }
++            }
++        }
++        if(!ids[layer] && layer==1 && engine==0) {
++            // Built-in signatures retain their historical tile-relative mode.
++            data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+1024u);hash=2166136261u;
++            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
 +            for (unsigned i=0;i<sizeof(SRWWHD_SIGNATURES)/sizeof(SRWWHD_SIGNATURES[0]);i++)
 +                if (hash==SRWWHD_SIGNATURES[i]) {ids[layer]=1;widths[layer]=256;heights[layer]=192;break;}
 +        }
@@ -47,7 +91,7 @@ index 026bf14..7652d2e 100644
  
  
  #ifdef FASTBUILD
-@@ -4103,6 +4141,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
+@@ -4103,6 +4185,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo &compInfo, const size_t srcX, u16 srcColor16, bool opaque)
  {
@@ -55,7 +99,7 @@ index 026bf14..7652d2e 100644
  	if (MOSAIC)
  	{
  		//due to this early out, we will get incorrect behavior in cases where
-@@ -5217,6 +5256,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+@@ -5217,6 +5300,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
  	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
  	{
  		OAMAttributes spriteInfo = this->_oamList[spriteNum];
@@ -64,15 +108,15 @@ index 026bf14..7652d2e 100644
  		
  		//for each sprite:
  		if (cost >= 2130)
-@@ -5633,6 +5674,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+@@ -5633,6 +5718,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
  	//how it interacts with this. I wish we knew why we needed this
  	
  	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
-+    if(this->_engineID==SRWWTargetEngine())memcpy(SRWWNativeOwner+compInfo.line.indexNative*256,this->_sprNum,256);
++    memcpy((this->_engineID==SRWWTargetEngine()?SRWWNativeOwner:SRWWSubOwner)+compInfo.line.indexNative*256,this->_sprNum,256);
  	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
  	
  	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
-@@ -6395,6 +6437,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+@@ -6395,6 +6481,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
  {
@@ -97,7 +141,7 @@ index 5807cef..402b70b 100644
  	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
  	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
 diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
-index 2314af9..f32f48f 100644
+index 2314af9..b046e82 100644
 --- a/desmume/src/frontend/libretro/libretro.cpp
 +++ b/desmume/src/frontend/libretro/libretro.cpp
 @@ -14,6 +14,10 @@
@@ -111,7 +155,7 @@ index 2314af9..f32f48f 100644
  #include "SPU.h"
  #include "emufile.h"
  #include "common.h"
-@@ -70,6 +74,67 @@ enum {
+@@ -70,6 +74,82 @@ enum {
  
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
@@ -163,6 +207,11 @@ index 2314af9..f32f48f 100644
 +   if(pixels)memcpy(pixels,SRWWUnknownPixels,sizeof(SRWWUnknownPixels));
 +   if(palettes)memcpy(palettes,SRWWUnknownPalettes,sizeof(SRWWUnknownPalettes));
 +}
++extern "C" RETRO_API void retro_srw_copy_sub_unknown_parts(void *rows,void *pixels,void *palettes) {
++   if(rows)memcpy(rows,SRWWSubUnknownParts,sizeof(SRWWSubUnknownParts));
++   if(pixels)memcpy(pixels,SRWWSubUnknownPixels,sizeof(SRWWSubUnknownPixels));
++   if(palettes)memcpy(palettes,SRWWSubUnknownPalettes,sizeof(SRWWSubUnknownPalettes));
++}
 +extern "C" RETRO_API void retro_srw_set_ready_parts(const unsigned *ids,unsigned count) { if(count<200000)SRWWSetReadyParts(ids,count); }
 +extern "C" RETRO_API void retro_srw_copy_part_palettes(void *out) { if(out)memcpy(out,SRWWPartPalettes,sizeof(SRWWPartPalettes)); }
 +extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
@@ -170,6 +219,16 @@ index 2314af9..f32f48f 100644
 +   if(owners)memcpy(owners,SRWWNativeOwner,sizeof(SRWWNativeOwner));
 +}
 +extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
++extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
++   if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
++   if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));
++   if(oam)memcpy(oam,SRWWSubOAM,sizeof(SRWWSubOAM));
++   if(palettes)memcpy(palettes,SRWWSubPalettes,sizeof(SRWWSubPalettes));
++   if(!GPU)return;
++   GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineMain():(GPUEngineBase*)GPU->GetEngineSub();
++   if(layers)memcpy(layers,engine->SRWWGetNativeLayerIDs(),256*192);
++   if(priorities)for(unsigned i=0;i<4;i++)((uint8_t*)priorities)[i]=engine->GetBGLayerInfoByID((GPULayerID)i).priority;
++}
 +extern "C" RETRO_API void retro_srw_copy_layer_ids(void *out) { if(out&&GPU) { GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();memcpy(out,engine->SRWWGetNativeLayerIDs(),256*192); } }
 +extern "C" RETRO_API void retro_srw_reset_code_cache() {
 +#ifdef HAVE_JIT
@@ -179,7 +238,7 @@ index 2314af9..f32f48f 100644
  static retro_input_poll_t poll_cb = NULL;
  static retro_input_state_t input_cb = NULL;
  retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -2075,10 +2140,13 @@ void retro_run (void)
+@@ -2075,10 +2155,13 @@ void retro_run (void)
     // RUN
     frameIndex ++;
     bool skipped = frameIndex <= frameSkip;
@@ -197,7 +256,7 @@ diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd.h
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,37 @@
 +// Project-local GPL-2.0-or-later HD cut-in bridge.
 +#ifndef SRWW_HD_H
 +#define SRWW_HD_H
@@ -208,6 +267,10 @@ new file mode 100644
 +extern int32_t SRWWRobot_Info[8];
 +extern uint8_t SRWWRobot_OAM[1024];
 +extern uint8_t SRWWNativeOwner[256*192];
++extern uint8_t SRWWSubOwner[256*192];
++extern uint8_t SRWWSubOAM[1024];
++extern uint32_t SRWWSubParts[128*8];
++extern uint16_t SRWWSubPalettes[128*16];
 +extern uint32_t SRWWParts[128*8];
 +extern uint16_t SRWWPartPalettes[128*16];
 +extern uint32_t SRWWBGParts[4*800*8];
@@ -215,6 +278,9 @@ new file mode 100644
 +extern uint32_t SRWWUnknownParts[128*8];
 +extern uint8_t SRWWUnknownPixels[128*4096];
 +extern uint16_t SRWWUnknownPalettes[128*16];
++extern uint32_t SRWWSubUnknownParts[128*8];
++extern uint8_t SRWWSubUnknownPixels[128*4096];
++extern uint16_t SRWWSubUnknownPalettes[128*16];
 +void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding);
 +void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
 +void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
@@ -232,19 +298,23 @@ diff --git a/desmume/src/srww_hd_signatures.h b/desmume/src/srww_hd_signatures.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd_signatures.h
-@@ -0,0 +1,1 @@
+@@ -0,0 +1 @@
 +static const uint32_t SRWWHD_SIGNATURES[] = {0xccfc5ffeu,0x8de594b8u,0x7f3b714cu,0x3123c16cu,0x7f442362u,0x8760a14bu,0xf986463eu,0xe6220939u,0x8bdee166u,0xeb31506au,0x890caa57u,0x91b765c7u,0xea50a54eu,0x6c564b2fu,0x5f429e5au,0x6f562e5du};
 diff --git a/desmume/src/srww_parts_impl.h b/desmume/src/srww_parts_impl.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_parts_impl.h
-@@ -0,0 +1,135 @@
+@@ -0,0 +1,147 @@
 +// Project-local GPL-2.0-or-later content-addressed HD OBJ renderer bridge.
 +#include <unordered_map>
 +#include <vector>
 +int32_t SRWWRobot_Info[8]={0};
 +uint8_t SRWWRobot_OAM[1024]={0};
 +uint8_t SRWWNativeOwner[256*192]={0};
++uint8_t SRWWSubOwner[256*192]={0};
++uint8_t SRWWSubOAM[1024]={0};
++uint32_t SRWWSubParts[128*8]={0};
++uint16_t SRWWSubPalettes[128*16]={0};
 +uint32_t SRWWParts[128*8]={0};
 +uint16_t SRWWPartPalettes[128*16]={0};
 +uint32_t SRWWBGParts[4*800*8]={0};
@@ -252,6 +322,9 @@ new file mode 100644
 +uint32_t SRWWUnknownParts[128*8]={0};
 +uint8_t SRWWUnknownPixels[128*4096]={0};
 +uint16_t SRWWUnknownPalettes[128*16]={0};
++uint32_t SRWWSubUnknownParts[128*8]={0};
++uint8_t SRWWSubUnknownPixels[128*4096]={0};
++uint16_t SRWWSubUnknownPalettes[128*16]={0};
 +static uint32_t SRWWCrcTable[256];
 +#include "srww_texture_cache.h"
 +static std::unordered_map<uint32_t,uint32_t> SRWWPartBindings;
@@ -279,11 +352,14 @@ new file mode 100644
 +    for(unsigned i=0;i<count;i++)if(hashes[i])SRWWPartBindings[hashes[i]]=i+1;
 +}
 +bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
-+    if(engine!=SRWWTargetEngine())return false;
-+    static uint32_t checked=~0u;
-+    if(checked!=SRWWHD_Frame) {
-+        checked=SRWWHD_Frame;memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWRobot_Info,0,sizeof(SRWWRobot_Info));
-+        memcpy(SRWWRobot_OAM,oam,sizeof(SRWWRobot_OAM));
++    const bool secondary=engine!=SRWWTargetEngine();
++    uint32_t *parts=secondary?SRWWSubParts:SRWWParts;
++    uint16_t *palettes=secondary?SRWWSubPalettes:SRWWPartPalettes;
++    static uint32_t checked[2]={~0u,~0u};
++    if(checked[engine]!=SRWWHD_Frame) {
++        checked[engine]=SRWWHD_Frame;memset(parts,0,128*8*sizeof(uint32_t));
++        if(!secondary)memset(SRWWRobot_Info,0,sizeof(SRWWRobot_Info));
++        memcpy(secondary?SRWWSubOAM:SRWWRobot_OAM,oam,1024);
 +        if(!SRWWHD_Enabled)return false;
 +        const u16 *raw=(const u16*)oam;
 +        const uint8_t *regs=MMU.ARM9_REG+(engine?0x1000:0);
@@ -321,31 +397,33 @@ new file mode 100644
 +            }
 +            if(!binding) {
 +                unsigned colors=0;for(uint32_t mask=usedMask;mask;mask&=mask-1)colors++;
-+                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<120) {
-+                    uint32_t *unknown=SRWWUnknownParts+i*8;
++                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<(secondary?192:120)) {
++                    uint32_t *unknown=(secondary?SRWWSubUnknownParts:SRWWUnknownParts)+i*8;
 +                    unknown[0]=indexHash;unknown[1]=w;unknown[2]=h;unknown[3]=a;unknown[4]=b;unknown[5]=c;unknown[6]=hash;unknown[7]=material;
-+                    memcpy(SRWWUnknownPixels+i*4096,nativeIndices,w*h);
-+                    for(unsigned k=0;k<16;k++)SRWWUnknownPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
++                    memcpy((secondary?SRWWSubUnknownPixels:SRWWUnknownPixels)+i*4096,nativeIndices,w*h);
++                    for(unsigned k=0;k<16;k++)(secondary?SRWWSubUnknownPalettes:SRWWUnknownPalettes)[i*16+k]=LE_TO_LOCAL_16(palette[k]);
 +                }
 +                continue;
 +            }
-+            uint32_t *part=SRWWParts+i*8;
++            uint32_t *part=parts+i*8;
 +            part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
-+            for(unsigned k=0;k<16;k++)SRWWPartPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
++            for(unsigned k=0;k<16;k++)palettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
 +            part[5]=LE_TO_LOCAL_16(*(u16*)(regs+0x6c));
 +            part[6]=LE_TO_LOCAL_16(*(u16*)(regs+0x52));
 +            part[7]=LE_TO_LOCAL_16(*(u16*)(regs+0x50))|((SRWWAsyncParts && !SRWWReadyParts[binding])?0x80000000u:0);
-+            SRWWRobot_Info[0]++;
++            if(!secondary)SRWWRobot_Info[0]++;
 +        }
 +    }
 +    // Keep a native fallback underneath asynchronously prepared HD textures.
 +    // The frontend can display a new animation immediately while its art warms.
-+    const unsigned binding=SRWWParts[sprite*8];
++    const unsigned binding=parts[sprite*8];
 +    return binding && (!SRWWAsyncParts || SRWWReadyParts[binding]);
 +}
 +
 +void SRWWBeginPartsFrame() {
++    memset(SRWWSubParts,0,sizeof(SRWWSubParts));
 +    memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
++    memset(SRWWSubUnknownParts,0,sizeof(SRWWSubUnknownParts));
 +    memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWBGParts,0,sizeof(SRWWBGParts));memset(SRWWBGMask,0,sizeof(SRWWBGMask));
 +}
 +

@@ -74,7 +74,8 @@ class Core:
             for cutin in json.loads(cutins_path.read_text())['cutins']:
                 if not (ROOT/'graphics'/cutin['image']).exists():continue
                 for signature in cutin['signatures']:
-                    for layer in cutin.get('layers',[cutin['layer']]):rows.extend([signature,cutin['id'],layer,*cutin['native_size']])
+                    mode={'image_origin':256,'origin_8192':512,'row_padded':768}.get(cutin.get('signature_mode'),0)
+                    for layer in cutin.get('layers',[cutin['layer']]):rows.extend([signature,cutin['id'],layer|mode,*cutin['native_size']])
             self.api.retro_srw_register_cutins.argtypes=[C.POINTER(C.c_uint),C.c_uint]
             values=(C.c_uint*len(rows))(*rows);self.api.retro_srw_register_cutins(values,len(rows)//5)
         self.api.retro_srw_copy_parts.argtypes=[C.c_void_p,C.c_void_p]

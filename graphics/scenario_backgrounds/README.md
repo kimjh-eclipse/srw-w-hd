@@ -13,7 +13,7 @@ Artwork is split from exact 2 by 2 or 1 by 2 atlas panels. Most textures are app
 Recheck files and synchronize catalog readiness with:
 
 ```powershell
-python -X utf8 emulator/audit_all_scenario_assets.py
+python -X utf8 scripts/assets/audit_all_scenario_assets.py
 ```
 
 The audit also overwrites the fixed CG contact sheets in `test_current/scenario_backgrounds/`. File readiness alone does not establish actual game coverage: registration and game verification remain separate fields and must come from runtime testing. No ROM copy or extra patch version is produced by this asset workflow.

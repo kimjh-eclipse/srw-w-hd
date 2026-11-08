@@ -1,13 +1,28 @@
-200 2543 2101
-400 2543 3994
-600 2543 5628
-800 2543 20798
-1000 2543 50463
-1200 2543 52940
-1400 2543 54085
-1600 2543 54709
-1800 2543 54973
-2000 2543 115289
-2200 2543 200130
-2400 2543 270890
-{"sources": 2543, "tiles": 292938, "seconds": 3.44, "all_source_sheets_generated": false}
+200 3657 2737
+400 3657 4097
+600 3657 5888
+800 3657 12957
+1000 3657 32317
+1200 3657 57817
+1400 3657 59953
+1600 3657 61024
+1800 3657 61568
+2000 3657 63725
+2200 3657 144289
+2400 3657 224079
+2600 3657 290432
+2800 3657 343158
+3000 3657 379558
+3200 3657 402061
+3400 3657 420134
+3600 3657 436496
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\assets\build_tile_library.py", line 102, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\assets\build_tile_library.py", line 98, in main
+    db.commit();db.close();temporary.replace(TARGET)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\pathlib.py", line 1188, in replace
+    os.replace(self, target)
+PermissionError: [WinError 5] 액세스가 거부되었습니다: 'D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\graphics\\parts_tile_library.tmp.sqlite' -> 'D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\graphics\\parts_tile_library.sqlite'

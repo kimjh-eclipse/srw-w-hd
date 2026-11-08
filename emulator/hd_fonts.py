@@ -33,6 +33,11 @@ class FontRenderer:
             self.hud_patterns=[(str(ch),a>=13,a>0) for a,ch in zip(source['indices'],source['characters'])]
         self.hud_keys=np.array(sorted(hud),dtype='V16');self.hud_characters=[hud[k.tobytes()] for k in self.hud_keys]
         self.hud_label_keys=np.array(sorted(labels),dtype='V32');self.hud_label_characters=[labels[k.tobytes()] for k in self.hud_label_keys]
+        self.forecast_patterns=[]
+        forecast=ROOT/'graphics/fonts/forecast_glyphs.npz'
+        if forecast.exists():
+            with np.load(forecast,allow_pickle=False) as source:
+                self.forecast_patterns=[(str(ch),a>1,a>0) for a,ch in zip(source['indices'],source['characters'])]
         self.font_path = 'C:/Windows/Fonts/malgun.ttf'
         self.fonts = {}
         if not hasattr(_native_scanners,'glyph_tables'):_native_scanners.glyph_tables={}
@@ -132,7 +137,7 @@ class FontRenderer:
             bright = (low >= 80) & neutral
             white = (low >= 232) & neutral
             selected_green=(red<48)&(green>=48)&(blue<48)
-            hud_ink=(green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80)
+            hud_ink=((green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80))|((red[:32]>=128)&(green[:32]<64)&(blue[:32]<64))|((red[:32]>=128)&(green[:32]>=128)&(blue[:32]<64))
             hud_gold=(red[:32]>=180)&(green[:32]>=64)&(blue[:32]<64)
         if self.battle_scan:bright&=self.scan_mask;white&=self.scan_mask
         # A translucent button exposes animated gray pixels behind its text.
@@ -186,10 +191,27 @@ class FontRenderer:
         candidates = hud+full + [row for row in narrow if row[1] in text_rows or
                              any((row[0]+dx, row[1]) in positions for dx in (-16, -8, 8, 16))]
         compact=[]
-        for mask in masks:compact.extend(self._scan_active(mask,8,8,self.compact_keys,self.compact_characters,5,60))
+        # The compact HUD has a white face AND a gray bevel (indices 15/14).
+        # Separate exact-color menu masks split every digit in half. Scan the
+        # complete bevel only for the compact font, including warning colors.
+        compact_masks=masks+[bright,(red5>=10)&(green5<2)&(blue5<2),
+                             (red5>=10)&(green5>=10)&(blue5<2)]
+        for mask in compact_masks:
+            if mask.any():compact.extend(self._scan_active(mask,8,8,self.compact_keys,self.compact_characters,5,60))
         positions = {(x, y) for x, y, ch, w, h, ink in compact}
         candidates.extend(row for row in compact if row[1] in text_rows or
                           any((row[0]+dx, row[1]) in positions for dx in (-16, -8, 8, 16)))
+        if not self.battle_scan and sum(y<24 for x,y,ch,*_ in compact)>=8 and self.forecast_patterns:
+            # Large percentages are assembled from flipped 16x8 pieces. They
+            # are a different ROM font from both the compact HP and battle HUD.
+            cyan=(native[:,:,1]>=180)&(native[:,:,2]>=180)
+            for left,right in ((0,72),(184,256)):
+                windows=np.lib.stride_tricks.sliding_window_view(cyan[76:100,left:right],(16,16))
+                for char,ink,opaque in self.forecast_patterns:
+                    ys,xs=np.where(np.all(windows[:,:,opaque]==ink[opaque],axis=2))
+                    for yy,xx in zip(ys,xs):
+                        x,y=left+int(xx),76+int(yy)
+                        candidates.insert(0,(x,y,char,16,16,ink));hud_erasers.append((x,y,opaque))
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
         candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)

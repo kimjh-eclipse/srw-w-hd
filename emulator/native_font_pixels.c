@@ -15,6 +15,10 @@ API void font_pixel_masks(const uint8_t *restrict rgb,int height,int width,
   int hi=r>g?r:g;hi=hi>b?hi:b;
   bright[i]=(lo>=80 && hi-lo<8);white[i]=(lo>=232 && hi-lo<8);
   selected[i]=(r<48 && g>=48 && b<48);
-  if(i<header){hud_ink[i]=(g>=232 && b>=232 && r>=80);hud_gold[i]=(r>=180 && g>=64 && b<64);}
+  if(i<header){
+   hud_ink[i]=(g>=232 && b>=232 && r>=80) ||
+              (r>=128 && g<64 && b<64) || (r>=128 && g>=128 && b<64);
+   hud_gold[i]=(r>=180 && g>=64 && b<64);
+  }
  }
 }

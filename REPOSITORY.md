@@ -1,5 +1,10 @@
 # Repository snapshot
 
+Source layout: player modules remain in `emulator/`; asset tools, checks,
+diagnostics and native-build helpers live under `scripts/`. Earlier voice
+experiments and historical outputs are preserved in `research/legacy/`.
+See `docs/SOURCE_LAYOUT.md` and `docs/source_moves.json` for the layout and path map.
+
 This repository preserves the SRW W HD development work: the modified DeSmuME
 sources and frontend, generated HD artwork and asset mappings, preparation tools,
 and verification records. Large files use Git LFS; install Git LFS before cloning.

@@ -4,12 +4,20 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^
   File "C:\Program Files\Python311\Lib\tkinter\__init__.py", line 861, in callit
     func(*args)
-  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 591, in poll
-    if self.dirty:self.draw()
-                  ^^^^^^^^^^^
-  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 314, in draw
-    self.gpu.draw(self.latest,self.rects)
-  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\gpu_display.py", line 54, in draw
-    if self.textures[number] is None or self.sources[number].size!=image.size:
-                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'size'
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 623, in poll
+    pad=self.poll_pad()
+        ^^^^^^^^^^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 455, in poll_pad
+    if self.pad_revision!=self.pad_client.revision or time.perf_counter()-self.last_device_refresh>3:self.refresh_devices()
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 431, in refresh_devices
+    profiles[guid]=self.controller_defaults();self.persist()
+                                              ^^^^^^^^^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\hd_emulator.py", line 128, in persist
+    write_settings(self.config_path,self.settings)
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\emulator\player_controls.py", line 49, in write_settings
+    temp.write_text(json.dumps(settings,ensure_ascii=False,indent=2),encoding='utf-8');temp.replace(path)
+                                                                                       ^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\pathlib.py", line 1188, in replace
+    os.replace(self, target)
+PermissionError: [WinError 32] 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다: 'D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\test_current\\performance\\live_alpha_fix_settings.tmp' -> 'D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\test_current\\performance\\live_alpha_fix_settings.json'

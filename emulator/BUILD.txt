@@ -7,38 +7,38 @@ Modified: GPU.h, GPU.cpp, frontend/libretro/libretro.cpp; added srww_hd.h, srww_
 License: DeSmuME GPL-2.0-or-later; complete modified source is included in desmume/.
 Frontend: Python 3.11, pygame, Pillow, numpy.
 Frame transport: one running render plus at most one queued immutable snapshot; no unbounded frame backlog. ProcessPool fallback remains available with SRWW_STREAMING_FRAMES=0.
-Native font color masks: build_native_font_pixels.py (-O3 -DNDEBUG), exact RGB/RGBA predicates with NumPy fallback. Random/recorded masks and existing font regressions passed.
+Native font color masks: scripts/build/build_native_font_pixels.py (-O3 -DNDEBUG), exact RGB/RGBA predicates with NumPy fallback. Random/recorded masks and existing font regressions passed.
 Battle background filter: RAM-resident reference table and conservative RGB555 palette rejection before UV search. 326 recorded live-frame layer queries kept identical choices/UVs; measured identification speedup 4.71x.
 Display: SDL drawing no longer deletes/repaints the Tk canvas every frame; occupied shared-buffer locks retain the latest notification for retry.
 Latest 768-wide foreground replay: 40 seconds, average actual display 59.032 fps, emulation 59.829 fps. One-second lows remain (~49 fps); fixed 60 fps and full campaign coverage are not claimed. Details: test_current/performance/optimization_summary.json and live_final_display_metrics.json.
 Player actions: player_shortcuts.py; configurable keyboard and gamepad bindings; hold-to-fast-forward at requested 2/4/8/16x with native CPU limits, audio/rumble suppressed while accelerated.
 Default action keys: Tab hold, F5 save, F8 load, Space pause/resume, Pause pause, F6 resume. Saves use selected slot 1-5.
 Window focus changes release inputs/rumble/acceleration without pausing emulation. Fixed outer layout padding is zero; both screens use the same native-to-1440x1080 nearest grid before layout resizing.
-Action/display/speed checks: verify_player_actions.py. Native SDL gamepad action checks: verify_pad_hotplug.py.
+Action/display/speed checks: scripts/verify/verify_player_actions.py. Native SDL gamepad action checks: scripts/verify/verify_pad_hotplug.py.
 Current desktop UI: hd_emulator.py (Tkinter), player_worker.py (isolated core/audio), player_controls.py.
 Desktop launchers use the menu UI; hd_player.py remains for graphics verification.
 Joystick API reference: https://www.pygame.org/docs/ref/joystick.html
 Pad hot-plug fix: Tk exclusively owns native window events. SDL_JoystickUpdate/SDL_FlushEvents run via PyDLL without SDL_PumpEvents or pygame.event.get(). Moving-only Configure events do not invoke the window fitter.
 Controller capture uses rising button states; known device exceptions release pad/rumble while the Tk poll continues.
-Regression: verify_pad_hotplug.py reproduces the original native stale-removal SystemError, then exercises 20 stale events and 3 SDL virtual-controller connect/input/capture/disconnect cycles.
+Regression: scripts/verify/verify_pad_hotplug.py reproduces the original native stale-removal SystemError, then exercises 20 stale events and 3 SDL virtual-controller connect/input/capture/disconnect cycles.
 All-unit assets: graphics/all_units/; ROM IMG/PLT/PAT extraction, 64 AI-redrawn UV sheets.
 Scope: 269 primary forms plus 69 auxiliary mechanical packages. Duplicate forms are included.
 Core bridge: RGB555 part identity first; indexed identity fallback plus render-time 16-color palette capture.
 Indexed-only aliases pass RGB identity 0 to preserve approved RGB binding precedence.
 Renderer: original OAM transforms/order, lazy atlas LRU 4, prepared part LRU 512.
-Reproduction: catalog_rom_graphics.py -> prepare_all_unit_assets.py -> prepare_all_unit_batches.py (initial packing only).
+Reproduction: scripts/assets/catalog_rom_graphics.py -> scripts/assets/prepare_all_unit_assets.py -> scripts/assets/prepare_all_unit_batches.py (initial packing only).
 Do not repack existing generated sheets; batches.json stores their registered UV positions.
 Generation prompts/tool mode: graphics/all_units/prompts.json. Built-in image_gen; project copies retained.
-Install/verify: audit_all_unit_assets.py, install_all_unit_parts.py, build_registration_cache.py,
-render_all_unit_gallery.py, verify_indexed_parts.py, verify_parts.py and verify_player.worker_checks().
+Install/verify: scripts/assets/audit_all_unit_assets.py, scripts/assets/install_all_unit_parts.py, scripts/assets/build_registration_cache.py,
+scripts/assets/render_all_unit_gallery.py, scripts/verify/verify_indexed_parts.py, scripts/verify/verify_parts.py and verify_player.worker_checks().
 Gallery is static PAT assembly; it does not establish complete in-game attack coverage.
-Expansion audit: audit_animation_resources.py parses all 1866 variable-length PATs.
+Expansion audit: scripts/assets/audit_animation_resources.py parses all 1866 variable-length PATs.
 IMG/PAT group associations and out-of-bounds references are still under investigation.
 Additional approved-art reuse: 3027 exact matches; 6 ambiguous CRC keys are globally excluded.
 Additional basic art: 9 AI sheets; 851 candidates, 691 appended bindings.
 Late battle art: 3 AI sheets for 60 source images; 1000 appended part bindings.
 Source/prompt/UV manifests: graphics/animation_parts/.
-Verification: verify_animation_expansion.py, verify_late_attack_parts.py; these do not prove full-game completion.
+Verification: scripts/verify/verify_animation_expansion.py, scripts/verify/verify_late_attack_parts.py; these do not prove full-game completion.
 
 2026-11-07 renderer update:
 - Separate native simulation/audio, process-isolated immutable HD frame composition and texture registration.
@@ -69,8 +69,8 @@ Final runtime changes:
 - RGBA shared-memory transport, atomic dimensions/frame/bottom-revision header, lazy bottom reuse.
 - ARB_buffer_storage persistent/coherent double PBO readback with fences and exact frame/bottom tags; ordinary PBO fallback when unsupported.
 - Windows GUI timer precision is scoped to the application lifetime, paired BeginPeriod/EndPeriod.
-- Native exact font scanner: native_font_scan.c/.dll; rebuild with build_native_font_scan.py.
-- Native exact part visibility: native_composition.c/.dll; rebuild with build_native_composition.py.
+- Native exact font scanner: native_font_scan.c/.dll; rebuild with scripts/build/build_native_font_scan.py.
+- Native exact part visibility: native_composition.c/.dll; rebuild with scripts/build/build_native_composition.py.
 - Both accelerators preserve the NumPy fallback; emulator core DLL is unchanged.
 - Font field cache updates only changed labels/numbers, with exact native underlay-neighbor caching.
 - Scenario graphics catalog: 247 entries; tactical maps: 114; map icon resources: 336; chapter title cards: 70.

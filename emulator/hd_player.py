@@ -10,8 +10,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--demo',action='store_true');parser.add_argument('--verify',action='store_true');parser.add_argument('--frames',type=int,default=0);parser.add_argument('--state',type=Path);parser.add_argument('--state-frame',type=int,default=64700)
     args=parser.parse_args();rom=ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds'
     if args.verify:
-        from verify_parts import verify
-        verify()
+        import runpy
+        runpy.run_path(str(ROOT/'scripts/verify/verify_parts.py'))['verify']()
         return
     core=Core(rom,demo=args.demo or args.verify);renderer=HDRenderer();demo_start=64700;demo_frame=demo_start
     events=json.loads((HERE/'demo_input.json').read_text()) if args.demo or args.verify else []

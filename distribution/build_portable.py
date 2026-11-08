@@ -1,13 +1,14 @@
 """Produce a ROM-free Windows portable folder, notices, source and manifest."""
 from pathlib import Path
 import subprocess,sys,shutil,json,hashlib,zipfile,sqlite3,argparse
+from source_bundle import write_source_bundle
 ROOT=Path(__file__).resolve().parent.parent
 TARGET=ROOT/'dist/SRW_W_HD'
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--assets-only',action='store_true');parser.add_argument('--program-only',action='store_true');args=parser.parse_args()
     if sys.platform!='win32':raise SystemExit('Build this Windows distribution on Windows.')
-    subprocess.run([sys.executable,str(ROOT/'emulator/build_text_patterns.py')],cwd=ROOT,check=True)
+    subprocess.run([sys.executable,str(ROOT/'scripts/assets/build_text_patterns.py')],cwd=ROOT,check=True)
     previous_manifest=json.loads((TARGET/'distribution_manifest.json').read_text()) if args.program_only else None
     if not args.assets_only:
         frozen_dist=ROOT/'build/frozen_update' if args.program_only else ROOT/'dist'
@@ -32,7 +33,7 @@ def main():
     if portrait_db.exists() and not args.program_only:
         with sqlite3.connect(portrait_db) as db:
             for item in json.loads((ROOT/'graphics/portraits/library.json').read_text())['portraits']:
-                stamp=[f'portrait-registration-2-{hd_portraits.MAX_WIDTH}']
+                stamp=[f'portrait-registration-3-{hd_portraits.MAX_WIDTH}']
                 for key in ('path','portrait_mask'):
                     if item.get(key):
                         path=TARGET/'graphics'/item[key]
@@ -47,15 +48,7 @@ def main():
         if source.exists():shutil.copy2(source,licenses/source.name)
     # Include matching sources from the working tree, not an older commit.
     source_dir=TARGET/'source';source_dir.mkdir(exist_ok=True)
-    tracked=subprocess.check_output(['git','ls-files','-z','emulator','distribution','REPOSITORY.md','README.md'],cwd=ROOT).decode().split('\0')
-    candidates=set(x for x in tracked if x)
-    candidates.update(p.relative_to(ROOT).as_posix() for p in (ROOT/'distribution').glob('*') if p.is_file())
-    candidates.update(p.relative_to(ROOT).as_posix() for p in (ROOT/'emulator').glob('portable*.py'))
-    candidates.add('emulator/runtime_paths.py');candidates.add('emulator/build_text_patterns.py')
-    with zipfile.ZipFile(source_dir/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
-        for name in sorted(candidates):
-            source=ROOT/name
-            if source.is_file() and source.suffix.lower() not in ('.dll','.exe','.state','.nds','.bin','.log','.npz','.npy','.json','.png','.wav','.pcm') and source.name!='player_settings.json':archive.write(source,name)
+    write_source_bundle(source_dir/'source.zip')
     core_license=ROOT/'emulator/desmume/desmume/COPYING'
     if core_license.exists():shutil.copy2(core_license,licenses/'DeSmuME-GPL.txt')
     manifest=[]

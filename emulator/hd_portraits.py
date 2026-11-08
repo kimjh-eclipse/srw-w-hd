@@ -37,10 +37,14 @@ def _prepare_art_from_source(item):
     if item.get('portrait_mask'):
         with Image.open(ROOT/'graphics'/item['portrait_mask']) as original:
             mask=ImageChops.multiply(mask,original.convert('RGBA').getchannel('A'))
-    art.putalpha(ImageChops.multiply(art.getchannel('A'),mask.resize(art.size,Image.Resampling.BICUBIC)))
+    scaled_mask=mask.resize(art.size,Image.Resampling.BICUBIC)
+    # Bicubic alpha can bleed into the cyan frame's first row. The native
+    # portrait border owns that row regardless of the portrait artwork.
+    ImageDraw.Draw(scaled_mask).line((0,0,art.width-1,0),fill=0)
+    art.putalpha(ImageChops.multiply(art.getchannel('A'),scaled_mask))
     return art
 def _asset_stamp(item):
-    parts=[f'portrait-registration-2-{MAX_WIDTH}']
+    parts=[f'portrait-registration-3-{MAX_WIDTH}']
     for key in ('path','portrait_mask'):
         if not item.get(key):continue
         source=(ROOT/'graphics'/item[key]).stat();parts.extend((str(source.st_mtime_ns),str(source.st_size)))
@@ -107,7 +111,12 @@ class PortraitRenderer:
         if art.size!=wanted:
             if not hasattr(self,'scaled_art'):self.scaled_art=OrderedDict()
             key=(item['path'],wanted);scaled=self.scaled_art.pop(key,None)
-            if scaled is None:scaled=art.resize(wanted,Image.Resampling.LANCZOS)
+            if scaled is None:
+                scaled=art.resize(wanted,Image.Resampling.LANCZOS)
+                # Scaling must not reintroduce opacity over the native frame.
+                alpha=scaled.getchannel('A')
+                ImageDraw.Draw(alpha).line((0,0,scaled.width-1,0),fill=0)
+                scaled.putalpha(alpha)
             self.scaled_art[key]=scaled
             while len(self.scaled_art)>32:self.scaled_art.popitem(last=False)
             art=scaled

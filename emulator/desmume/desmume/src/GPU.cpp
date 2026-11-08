@@ -45,11 +45,13 @@
 uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
+static bool SRWWCutinOrigin8192=false;
+static bool SRWWCutinPadded=false;
 void SRWWRegisterCutins(const uint32_t *rows,unsigned count) {
-    SRWWCutins.clear();
+    SRWWCutins.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
     for(unsigned i=0;i<count;i++) {
         const uint32_t *r=rows+i*5;
-        if(r[1]>1 && r[2]<4)SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};
+        if(r[1]>1 && (r[2]&~768u)<4){SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};if((r[2]&768u)==512u)SRWWCutinOrigin8192=true;if((r[2]&768u)==768u)SRWWCutinPadded=true;}
     }
 }
 bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tiles,uint32_t x,uint32_t y,uint32_t priority,uint32_t master)
@@ -64,7 +66,49 @@ bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tile
         for (unsigned i=0;i<2048;i++) hash=(hash^data[i])*16777619u;
         const auto found=SRWWCutins.find(((uint64_t)layer<<32)|hash);
         if(found!=SRWWCutins.end()) {ids[layer]=found->second.id;widths[layer]=found->second.width;heights[layer]=found->second.height;}
-        else if(layer==1 && engine==0) {
+        if(!ids[layer]) {
+            // Cropped cut-ins often reference a final blank tile in SCR[0].
+            // Their explicit mode samples the actual IMG upload origin.
+            data=(const uint8_t*)MMU_gpu_map(tiles+1024u);hash=2166136261u;
+            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
+            const auto origin=SRWWCutins.find(((uint64_t)(layer|256u)<<32)|hash);
+            if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
+        }
+        if(!ids[layer] && SRWWCutinOrigin8192) {
+            data=(const uint8_t*)MMU_gpu_map(tiles+8192u);hash=2166136261u;
+            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
+            const auto origin=SRWWCutins.find(((uint64_t)(layer|512u)<<32)|hash);
+            if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
+        }
+        if(!ids[layer] && SRWWCutinPadded) {
+            // IMG rows narrower than 32 tiles are uploaded with VRAM row
+            // padding. A 512-byte sample stays inside the second valid row,
+            // avoiding uninitialized padding between uploaded scanlines.
+            data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+1024u);hash=2166136261u;
+            for(unsigned i=0;i<512;i++)hash=(hash^data[i])*16777619u;
+            const auto padded=SRWWCutins.find(((uint64_t)(layer|768u)<<32)|hash);
+            if(padded!=SRWWCutins.end()){ids[layer]=padded->second.id;widths[layer]=padded->second.width;heights[layer]=padded->second.height;}
+        }
+        if(!ids[layer] && base) {
+            // Battle loaders reserve tiles before the IMG upload. Some also
+            // reserve two blank tiles (GoLion); SCR[0] still names the blank
+            // tile at the reservation boundary. Match complete 2 KiB probes
+            // at both observed upload origins, never colors or silhouettes.
+            for(unsigned padding=0;padding<=64 && !ids[layer];padding+=64) {
+                for(unsigned mode=256;mode<=512 && !ids[layer];mode+=256) {
+                    if(mode==512 && !SRWWCutinOrigin8192)continue;
+                    data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+padding+(mode==256?1024u:8192u));
+                    hash=2166136261u;
+                    for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
+                    const auto origin=SRWWCutins.find(((uint64_t)(layer|mode)<<32)|hash);
+                    if(origin!=SRWWCutins.end()){ids[layer]=origin->second.id;widths[layer]=origin->second.width;heights[layer]=origin->second.height;}
+                }
+            }
+        }
+        if(!ids[layer] && layer==1 && engine==0) {
+            // Built-in signatures retain their historical tile-relative mode.
+            data=(const uint8_t*)MMU_gpu_map(tiles+base*32u+1024u);hash=2166136261u;
+            for(unsigned i=0;i<2048;i++)hash=(hash^data[i])*16777619u;
             for (unsigned i=0;i<sizeof(SRWWHD_SIGNATURES)/sizeof(SRWWHD_SIGNATURES[0]);i++)
                 if (hash==SRWWHD_SIGNATURES[i]) {ids[layer]=1;widths[layer]=256;heights[layer]=192;break;}
         }

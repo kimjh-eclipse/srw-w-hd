@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\verify\verify_portraits.py", line 51, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\verify\verify_portraits.py", line 28, in main
+    yy=round(y*1080/192);assert not changed[yy].any(),name
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: gai
