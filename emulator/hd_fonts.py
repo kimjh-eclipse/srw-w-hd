@@ -16,38 +16,11 @@ _native_scanners=threading.local()
 
 class FontRenderer:
     def __init__(self):
-        rom = (ROOT / 'baseline/SRWW_Korean_1.0.8.nds').read_bytes()
-        glyphs = {}
-        narrow = {}
-        original = (ROOT / 'inputs/SRWW_Japan.nds').read_bytes()
-        # The Japanese table has a two-byte Shift-JIS key and twelve bitmap rows.
-        for off in range(0x445fc, 0x4d530, 26):
-            try:
-                ch = original[off:off+2].decode('cp932')
-            except UnicodeError:
-                continue
-            normalized = unicodedata.normalize('NFKC', ch)
-            ch = normalized if len(normalized) == 1 else ch
-            if ch == '・':
-                ch = '·'
-            if len(ch) == 1 and (ch.isascii() or unicodedata.category(ch)[0] in 'PS'):
-                data = rom[off+2:off+26]
-                pixels = np.unpackbits(np.frombuffer(data, dtype='uint8')).reshape(12, 16)
-                if not pixels[:, 8:].any():
-                    self._add(narrow, data, ch, 8)
-                else:
-                    self._add(glyphs, data, ch)
-        chars = [bytes((a, b)).decode('cp949')
-                 for a in range(0xb0, 0xc9) for b in range(0xa1, 0xff)]
-        for i, ch in enumerate(chars):
-            off = 0x4d530 + i * 26
-            self._add(glyphs, rom[off+2:off+26], ch)
-        glyphs = {k: v for k, v in glyphs.items() if v is not None}
-        self.keys = np.array(sorted(glyphs), dtype='V18')
-        self.characters = [glyphs[k.tobytes()] for k in self.keys]
-        narrow = {k: v for k, v in narrow.items() if v is not None}
-        self.narrow_keys = np.array(sorted(narrow), dtype='V12')
-        self.narrow_characters = [narrow[k.tobytes()] for k in self.narrow_keys]
+        # Prepared recognition data is sufficient for distribution: neither
+        # the Japanese source ROM nor a second Korean ROM belongs in the app.
+        with np.load(ROOT/'graphics/fonts/text_patterns.npz',allow_pickle=False) as source:
+            self.keys=source['keys'];self.characters=source['characters'].tolist()
+            self.narrow_keys=source['narrow_keys'];self.narrow_characters=source['narrow_characters'].tolist()
         with np.load(ROOT / 'graphics/fonts/hud_glyphs.npz') as source:
             self.compact_patterns = {np.packbits((a == 14) | (a == 15)).tobytes(): str(ch)
                                      for a, ch in zip(source['indices'], source['characters'])}
@@ -172,7 +145,7 @@ class FontRenderer:
             for foreground in foregrounds:foreground&=self.scan_mask
         strong_green=(red5<6)&(green5>=24)&(blue5<6)
         primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
-        primary_key=(primary_signal,tuple(self._selected_run(strong_green,*run[:3]) for run in getattr(self,'menu_runs',())))
+        primary_key=(primary_signal,tuple(self._selected_run(selected_green,*run[:3]) for run in getattr(self,'menu_runs',())))
         if getattr(self,'primary_mode',False) and primary_key==getattr(self,'primary_key',None):
             self.last_native_key=native_key;return self.last_matches
         key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes()+b''.join(m.tobytes() for m in foregrounds), digest_size=16).digest()
@@ -245,14 +218,14 @@ class FontRenderer:
         for y,cells in lines.items():
             runs=[]
             for x,w in sorted(cells):
-                if runs and x<=runs[-1][1]+1:runs[-1][1]=max(runs[-1][1],x+w);runs[-1][2].append(x)
+                if runs and x<=runs[-1][1]+8:runs[-1][1]=max(runs[-1][1],x+w);runs[-1][2].append(x)
                 else:runs.append([x,x+w,[x]])
             for left,right,xs in runs:
                 self.menu_runs.append((left,right,y,xs))
-                if not self._selected_run(strong_green,left,right,y):continue
+                if not self._selected_run(selected_green,left,right,y):continue
                 # A selected button has a solid green center. Repair its whole
                 # text strip so no old bitmap/outline survives between strokes.
-                mask[y:y+12,max(0,left-2):min(256,right+2)]=True
+                mask[max(0,y-2):min(192,y+14),max(0,left-2):min(256,right+2)]=True
                 self.menu_glyphs.update((x,y) for x in xs)
         self.menu_repairs=[]
         # Treat a selected button as one background, including words separated
@@ -260,7 +233,8 @@ class FontRenderer:
         for y,cells in lines.items():
             selected=[x+sizes[x,y]/2 for x,_ in cells if (x,y) in self.menu_glyphs]
             if not selected:continue
-            spans=[]
+            spans=[span for left,right,yy,xs in self.menu_runs if yy==y and any((x,y) in self.menu_glyphs for x in xs)
+                   if (span:=self._selected_span(selected_green,left,right,y)) is not None]
             for green_row in strong_green[y+8:min(192,y+16)]:
                 changes=np.flatnonzero(np.diff(np.pad(green_row.astype('int8'),1)))
                 spans.extend((int(l),int(r)) for l,r in zip(changes[::2],changes[1::2]) if r-l>=12 and any(l<=cx<r for cx in selected))
@@ -270,17 +244,32 @@ class FontRenderer:
             if not members:continue
             for x,w in members:self.menu_glyphs.add((x,y))
             left=max(0,min(x for x,w in members)-2);right=min(256,max(x+w for x,w in members)+2)
-            mask[y:y+12,left:right]=True
+            mask[max(0,y-2):min(192,y+14),left:right]=True
             self.menu_repairs.append((left,max(0,y-2),right,min(192,y+14),button_left,button_right))
         self.last_key, self.last_matches, self.last_mask = key, accepted, mask
-        self.primary_key=(primary_signal,tuple(self._selected_run(strong_green,*run[:3]) for run in self.menu_runs))
+        self.primary_key=(primary_signal,tuple(self._selected_run(selected_green,*run[:3]) for run in self.menu_runs))
         return accepted
 
     @staticmethod
     def _selected_run(green,left,right,y):
         if y+12>192:return False
         strip=green[y+8:min(192,y+16),max(0,left-2):min(256,right+2)]
-        return bool(strip.size and np.any(strip.mean(1)>=.8))
+        return bool(strip.size and np.any(strip.mean(1)>=.8)) or FontRenderer._selected_span(green,left,right,y) is not None
+
+    @staticmethod
+    def _selected_span(green,left,right,y):
+        # The game's opaque bitmap bed may hide every green pixel beneath a
+        # word. Find the button beside the word, bridging only its text cell;
+        # selection must not depend on seeing a bright row through the letters.
+        l=max(0,left-4);r=min(256,right+4);spans=[]
+        for row in green[max(0,y-2):min(192,y+14)]:
+            blocked_left=np.flatnonzero(~row[:l]);blocked_right=np.flatnonzero(~row[r:])
+            a=int(blocked_left[-1])+1 if len(blocked_left) else 0
+            b=r+int(blocked_right[0]) if len(blocked_right) else 256
+            if b-a>=24 and np.count_nonzero(row[a:b])>=8:spans.append((a,b))
+        if len(spans)<3:return None
+        a,b=np.median(spans,axis=0).astype('int32')
+        return int(a),int(b)
 
     def _glyph(self, char, width, height, color, compact=False, button=False):
         key = char, width, height, color, compact,button

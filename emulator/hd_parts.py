@@ -16,6 +16,18 @@ from native_composition import PartVisibility
 ROOT=Path(__file__).resolve().parent.parent
 SCALE=1440/256
 
+def is_menu_gradient(indices,w,h):
+    """Button centers and beveled ends are horizontal palette ramps, not units.
+
+    Replacing these OBJ strips removes the native selection color needed by
+    the font compositor. Keep every palette variant in the native UI path.
+    """
+    if h!=16 or w<16:return False
+    rows=np.asarray(indices,dtype='uint8').reshape(h,w)
+    counts=np.stack([np.bincount(row,minlength=256) for row in rows])
+    modes=counts.argmax(1)
+    return bool((counts.max(1)>=w*.8).all() and len(np.unique(modes))>=8 and (modes!=0).sum()>=14)
+
 class PartsRenderer:
     def __init__(self,async_prepare=False,dynamic_parts=False):
         meta=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text())
@@ -87,7 +99,10 @@ class PartsRenderer:
         for i in np.flatnonzero(rows[:,0]):
             row=rows[i];identity=(int(row[0]),int(row[7]))
             if identity in self.unmapped_seen or len(self.unmapped_pending)>=12:continue
-            w,h=int(row[1]),int(row[2]);encoded=base64.b64encode(zlib.compress(pixels[i,:w*h].tobytes())).decode('ascii');palette=palettes[i].tolist()
+            w,h=int(row[1]),int(row[2])
+            if is_menu_gradient(pixels[i,:w*h],w,h):
+                self.unmapped_seen.add(identity);continue
+            encoded=base64.b64encode(zlib.compress(pixels[i,:w*h].tobytes())).decode('ascii');palette=palettes[i].tolist()
             request=(encoded,w,h,palette);colors=np.asarray(palette,dtype='uint32');rgb=np.stack([(colors&31)*255//31,((colors>>5)&31)*255//31,((colors>>10)&31)*255//31],-1).tolist()
             descriptor=dict(hash=int(row[6]),index_hash=int(row[0]),w=w,h=h,x=0,y=0,runtime_texture=True,dynamic_palette=True,original_palette_rgb=rgb,index_pixels=encoded)
             try:future=self.executor.submit(prepare_composite_task,*request)

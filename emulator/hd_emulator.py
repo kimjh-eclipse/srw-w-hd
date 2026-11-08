@@ -14,14 +14,16 @@ from gpu_display import GPUDisplay,RGBFrame
 from player_metrics import PlayerMetrics
 from windows_keyboard import WindowsKeyboard
 from render_resolution import DEFAULT_WIDTH,MIN_WIDTH,MAX_WIDTH,clamp_width
+from runtime_paths import FROZEN,APP_DIR,data_dir,log_path
 from pad_process import PadClient
 
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
-CANONICAL=ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds'
+CANONICAL=APP_DIR/'roms/SRW_W.nds' if FROZEN else ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds'
 
 class EmulatorWindow(ShortcutMixin):
     def __init__(self,root,args):
-        self.root=root;self.args=args;self.config_path=args.config or HERE/'player_settings.json';self.settings=read_settings(self.config_path)
+        self.root=root;self.args=args;self.config_path=args.config or (data_dir()/'player_settings.json' if FROZEN else HERE/'player_settings.json');self.settings=read_settings(self.config_path)
+        if FROZEN and args.save_root is None:args.save_root=data_dir()/'saves'
         self.timer_precision=None
         if os.name=='nt':
             import ctypes
@@ -79,7 +81,7 @@ class EmulatorWindow(ShortcutMixin):
         file.add_command(label='스크린샷 저장…',command=self.screenshot);file.add_separator();file.add_command(label='종료',command=self.close)
         game=tk.Menu(bar,tearoff=False);self.game_menu=game;bar.add_cascade(label='게임',menu=game)
         game.add_command(label='계속 / 일시정지',accelerator='Space',command=self.toggle_pause);game.add_command(label='다시 시작',accelerator='Ctrl+R',command=self.restart)
-        game.add_command(label='HD 전투 미리보기',accelerator='Ctrl+D',command=self.start_demo);game.add_separator()
+        game.add_command(label='HD 전투 미리보기',accelerator='Ctrl+D',command=self.start_demo,state='disabled' if FROZEN else 'normal');game.add_separator()
         slots=tk.Menu(game,tearoff=False);self.slot_menu=slots;game.add_cascade(label='저장 칸 선택',menu=slots)
         for i in range(1,6):slots.add_radiobutton(label=f'{i}번',value=i,variable=self.slot_var,command=self.set_slot)
         game.add_command(label='선택한 칸에 저장',accelerator='F5',command=self.quick_save);game.add_command(label='선택한 칸 불러오기',accelerator='F8',command=self.quick_load)
@@ -110,7 +112,7 @@ class EmulatorWindow(ShortcutMixin):
         self.slot_label=ttk.Label(toolbar,text='1번 칸');self.slot_label.pack(side='left',padx=4)
         ttk.Separator(toolbar,orient='vertical').pack(side='left',fill='y',padx=7)
         ttk.Checkbutton(toolbar,text='HD 그래픽',variable=self.hd_var,command=self.set_hd).pack(side='left',padx=3)
-        ttk.Button(toolbar,text='HD 미리보기',command=self.start_demo).pack(side='left',padx=8)
+        if not FROZEN:ttk.Button(toolbar,text='HD 미리보기',command=self.start_demo).pack(side='left',padx=8)
         ttk.Label(toolbar,text='소리').pack(side='left',padx=(10,3));ttk.Scale(toolbar,from_=0,to=100,variable=self.volume_var,command=self.set_volume,length=100).pack(side='left')
         self.update_buttons()
 
@@ -176,7 +178,7 @@ class EmulatorWindow(ShortcutMixin):
         else:self.restore_after_dialog(old)
 
     def start_demo(self):
-        if not self.dialog:self.start_session(CANONICAL,True)
+        if not FROZEN and not self.dialog:self.start_session(CANONICAL,True)
 
     def restart(self):
         if self.current_rom and not self.dialog:self.start_session(self.current_rom,self.demo)
@@ -325,7 +327,7 @@ class EmulatorWindow(ShortcutMixin):
             if self.gpu is not None:self.gpu.clear()
             text='게임 화면을 준비하고 있습니다…' if self.opening else '슈퍼로봇대전 W HD'
             self.canvas.create_text(width/2,height/2-20,text=text,fill='#e6edf7',font=('맑은 고딕',22))
-            self.canvas.create_text(width/2,height/2+25,text='파일 → 롬 열기  또는  HD 미리보기',fill='#9faec3',font=('맑은 고딕',12));return
+            self.canvas.create_text(width/2,height/2+25,text='파일 → 롬 열기에서 게임을 선택하세요.' if FROZEN else '파일 → 롬 열기  또는  HD 미리보기',fill='#9faec3',font=('맑은 고딕',12));return
         self.rects=screen_rectangles(width,height,self.layout_var.get(),self.swap_var.get())
         desired=self.desired_render_width()
         if desired!=self.render_width and self.loaded and time.perf_counter()-self.resolution_changed_at>.3:
@@ -654,8 +656,8 @@ def main():
 if __name__=='__main__':
     mp.freeze_support()
     import faulthandler
-    native_crash_log=open(HERE/'player_native_crash.log','a',encoding='utf-8')
+    native_crash_log=open(log_path('player_native_crash.log'),'a',encoding='utf-8')
     faulthandler.enable(file=native_crash_log,all_threads=True)
     try:main()
     except Exception:
-        (HERE/'player_ui_error.log').write_text(traceback.format_exc(),encoding='utf-8');raise
+        log_path('player_ui_error.log').write_text(traceback.format_exc(),encoding='utf-8');raise

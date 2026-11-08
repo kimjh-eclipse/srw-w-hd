@@ -172,7 +172,8 @@ def worker_main(pipe,memory_name,lock,config):
                 if delay>0:time.sleep(min(.002,delay))
     except (EOFError,BrokenPipeError):pass
     except Exception as error:
-        (Path(__file__).parent/'player_worker_error.log').write_text(traceback.format_exc(),encoding='utf-8');send('error',message=str(error))
+        from runtime_paths import log_path
+        log_path('player_worker_error.log').write_text(traceback.format_exc(),encoding='utf-8');send('error',message=str(error))
     finally:
         if timer is not None:timer.timeEndPeriod(1)
         send('rumble',duration=0)

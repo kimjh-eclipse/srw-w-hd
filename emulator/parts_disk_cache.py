@@ -3,7 +3,9 @@ import hashlib,json,sqlite3,zlib
 from PIL import Image
 
 class PartsDiskCache:
-    def __init__(self,path):self.path=path;self.connection=None
+    def __init__(self,path):
+        from runtime_paths import texture_cache
+        self.path=texture_cache(path);self.connection=None
     def db(self):
         if self.connection is None:
             self.connection=sqlite3.connect(self.path,timeout=2)

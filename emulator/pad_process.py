@@ -6,7 +6,8 @@ from pathlib import Path
 
 def pad_worker(commands,updates,parent_pid,testing=False):
     import faulthandler
-    crash_log=open(Path(__file__).with_name('pad_native_crash.log'),'a',encoding='utf-8')
+    from runtime_paths import log_path
+    crash_log=open(log_path('pad_native_crash.log'),'a',encoding='utf-8')
     faulthandler.enable(file=crash_log,all_threads=True)
     os.environ['PYGAME_HIDE_SUPPORT_PROMPT']='1'
     os.environ['SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS']='1'

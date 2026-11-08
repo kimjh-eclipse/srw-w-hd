@@ -40,7 +40,8 @@ def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,loc
     _trace=install(_renderer)
     import json
     from pathlib import Path
-    capability=Path(__file__).resolve().parent.parent/'test_current/performance/gpu_compositor_status.json'
+    from runtime_paths import FROZEN,log_path
+    capability=log_path('gpu_compositor_status.json') if FROZEN else Path(__file__).resolve().parent.parent/'test_current/performance/gpu_compositor_status.json'
     try:
         capability.parent.mkdir(parents=True,exist_ok=True)
         capability.write_text(json.dumps(dict(enabled=_renderer.gpu_composition,error=_renderer.gpu_error)))

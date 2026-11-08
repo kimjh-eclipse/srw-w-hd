@@ -42,3 +42,7 @@ tools/*.zip
 tools/*.exe
 test_current/image_optimization/live_metrics.json
 /emulator/*_native_crash.log
+
+# Portable distribution output; never commit bundled user data.
+/dist/
+/build/portable/
