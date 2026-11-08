@@ -31,3 +31,16 @@
 검사 결과는 `test_current/parts/`, `test_current/portrait/`, `test_current/gui/`에 있습니다. 생성 프롬프트와 원본 생성 그림의 출처는 각 `graphics/` 하위 자료에 기록했습니다. 원본·기준 한글 ROM·다른 프로젝트 파일은 보존합니다. 유일한 시험 ROM은 `release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds`입니다.
 
 소스는 DeSmuME GPL-2.0-or-later이며 전체 수정 소스는 `emulator/desmume/`, 변경분은 `emulator/hd_core.patch`, 빌드 정보는 `emulator/BUILD.txt`에 있습니다. 이전 음성 실험의 엔진·음원·조사 자료는 보존하지만 현재 기능은 비활성입니다.
+
+
+## 2026-11-08 공통 합성 수정
+
+반투명 메뉴 배경의 회색 무늬를 글자로 오인해 HD 글자가 깜빡이던 경로를 수정했습니다. 전투 확인·무기 선택 화면을 각각 120프레임 재생해 글자와 선택 상태가 유지되는지 검사했습니다.
+
+컷인 앞뒤 순서에서는 BG가 앞에 있을 때 뒤쪽 기체에 적용할 두 번째 혼합 계수를 반영합니다. 진겟타·고라이온의 실제 데모 저장 장면에서 수정 전후를 확인했고, OBJ/BG 우선순위·혼합 모드·계수 0~16 조합 139,264건과 별도 등록 컷인 세 경로를 검사했습니다. 이 숫자는 모든 캠페인 컷인을 실제로 재생했다는 뜻이 아닙니다. 특수 창·래스터 연출과 전체 캠페인 실재생 검증은 계속 필요합니다.
+
+에이드·포신·본타군을 포함한 공격 팔레트 검사에서는 원본에서 쓰지 않는 색 슬롯을 HD 음영이 선택하지 못하게 했습니다. 추가로 원본 인덱스 해시가 일치한 16,355개 파츠의 재질 번호를 약 1.69 MB 캐시로 준비했습니다. 큰 색 변환에서는 원본 재질 위치와 제한된 밝기 세부를 사용합니다. 원본 파츠의 투명도와 배치는 보존합니다. 일부 생성 그림의 연결선과 미등록 파츠의 원본 표시는 여전히 남을 수 있습니다.
+
+두 창의 설정 저장이 충돌해 UI 갱신이 멈추던 문제도 수정했습니다. 각 저장에 별도 임시 파일을 사용하며, Windows의 짧은 파일 잠금은 제한적으로 다시 시도합니다. 동시 저장 120회를 검사했습니다. 실행 중 등록 캐시와 개인 설정·오류 로그는 이번 소스 변경에 포함하지 않습니다.
+
+검사 자료: `test_current/combat/cutin_composition_audit.json`, `test_current/combat/cutin_blend_verification.json`, `test_current/parts/live_effect_palette_verification.json`, `test_current/font/translucent_text_and_palette_verification.json`.

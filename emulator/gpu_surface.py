@@ -23,15 +23,15 @@ class Backend:
         void main(){ vec2 p=vec2((gl_VertexID==1||gl_VertexID==3)?1:0,(gl_VertexID>=2)?1:0);
         uv=p;pixel=rectangle.xy+p*rectangle.zw;gl_Position=vec4(pixel.x/viewport_size.x*2-1,1-pixel.y/viewport_size.y*2,0,1); }
         ''',fragment_shader='''#version 330
-        uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
+        uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform usampler2D mask_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
         in vec2 uv; in vec2 pixel; out vec4 color;
         void main(){ vec4 p;
         if(nearest_picture==1){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(rectangle.xy);ivec2 index=ivec2(texelFetch(source_coordinates,ivec2(d.x,0),0).r,texelFetch(source_coordinates,ivec2(d.y,1),0).r);p=texelFetch(picture,index,0);}
         else p=texture(picture,uv); float a=source_alpha==1?p.a:1.0;
-        if(mask_mode>0){vec2 m=(pixel-mask_rectangle.xy)/mask_rectangle.zw;vec4 v=texture(opacity,m);a*=mask_mode==2?v.a:v.r;}
+        if(mask_mode>0){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(mask_rectangle.xy);d=clamp(d,ivec2(0),ivec2(mask_rectangle.zw)-ivec2(1));ivec2 index=ivec2(texelFetch(mask_coordinates,ivec2(d.x,0),0).r,texelFetch(mask_coordinates,ivec2(d.y,1),0).r);vec4 v=texelFetch(opacity,index,0);a*=mask_mode==2?v.a:v.r;}
         color=vec4(p.rgb,a); }
         ''')
-        self.vao=self.ctx.vertex_array(self.program,[]);self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2
+        self.vao=self.ctx.vertex_array(self.program,[]);self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
         self.ctx.enable(gl.BLEND);self.ctx.blend_func=(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA)
 
     def texture(self,image,nearest=False):
@@ -45,6 +45,20 @@ class Backend:
         tex.repeat_x=False;tex.repeat_y=False;self.textures[key]=(weakref.ref(image),tex)
         while len(self.textures)>192:self.textures.popitem(last=False)[1][1].release()
         return tex
+
+    def coordinate_map(self,size,width,height):
+        key=(size,width,height);mapping=self.coordinate_maps.pop(key,None)
+        if mapping is None:
+            # Use Pillow's exact nearest-neighbor tie rule for both pictures
+            # and masks. Normalized GL coordinates can choose a different
+            # boundary pixel from Pillow at fractional DS enlargement ratios.
+            values=np.zeros((2,max(width,height)),dtype='uint16')
+            values[0,:width]=np.asarray(Image.fromarray(np.arange(size[0],dtype='int32')[None,:]).resize((width,1),Image.Resampling.NEAREST))[0]
+            values[1,:height]=np.asarray(Image.fromarray(np.arange(size[1],dtype='int32')[:,None]).resize((1,height),Image.Resampling.NEAREST))[:,0]
+            mapping=self.ctx.texture((values.shape[1],2),1,values.tobytes(),dtype='u2',alignment=1)
+        self.coordinate_maps[key]=mapping
+        while len(self.coordinate_maps)>192:self.coordinate_maps.popitem(last=False)[1].release()
+        return mapping
 
     def reset_pipeline(self):
         for name in ('paired_top','paired_bottom'):
@@ -113,21 +127,20 @@ class Backend:
             l,t,r,b=clip;self.ctx.scissor=(round(l),height-round(b),round(r)-round(l),round(b)-round(t))
             self.program['rectangle']=(left,top,right-left,bottom-top)
             self.program['nearest_picture']=int(op['nearest'])
-            self.texture(op['image'],op['nearest']).use(0)
-            if op['nearest']:
-                source=op['image'];mapping_key=(source.size,round(right-left),round(bottom-top))
-                mapping=self.coordinate_maps.pop(mapping_key,None)
-                if mapping is None:
-                    ow,oh=mapping_key[1:];values=np.zeros((2,max(ow,oh)),dtype='uint8')
-                    values[0,:ow]=np.asarray(Image.fromarray(np.arange(source.width,dtype='uint8')[None,:]).resize((ow,1),Image.Resampling.NEAREST))[0]
-                    values[1,:oh]=np.asarray(Image.fromarray(np.arange(source.height,dtype='uint8')[:,None]).resize((1,oh),Image.Resampling.NEAREST))[:,0]
-                    mapping=self.ctx.texture((values.shape[1],2),1,values.tobytes(),dtype='u1',alignment=1)
-                self.coordinate_maps[mapping_key]=mapping;mapping.use(2)
-                while len(self.coordinate_maps)>64:self.coordinate_maps.popitem(last=False)[1].release()
+            picture=self.texture(op['image'],op['nearest'])
+            picture_coordinates=self.coordinate_map(op['image'].size,round(right-left),round(bottom-top)) if op['nearest'] else None
             mask=op['mask'];mode=0
+            opacity=None;mask_coordinates=None
             if mask is not None:
-                self.texture(mask,True).use(1);mode=2 if mask.mode=='RGBA' else 1
+                opacity=self.texture(mask,True);mode=2 if mask.mode=='RGBA' else 1
                 ml,mt,mr,mb=op['mask_rect'];self.program['mask_rectangle']=(ml,mt,mr-ml,mb-mt)
+                mask_coordinates=self.coordinate_map(mask.size,round(mr-ml),round(mb-mt))
+            # Resource creation/upload can alter texture-unit bindings. Bind
+            # all four samplers only after every resource for this draw exists.
+            picture.use(0)
+            if opacity is not None:opacity.use(1)
+            if picture_coordinates is not None:picture_coordinates.use(2)
+            if mask_coordinates is not None:mask_coordinates.use(3)
             self.program['mask_mode']=mode;self.program['source_alpha']=int(op['alpha'])
             self.vao.render(self.gl.TRIANGLE_STRIP,vertices=4)
         self.ctx.scissor=None

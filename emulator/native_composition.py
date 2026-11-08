@@ -23,16 +23,32 @@ class PartVisibility:
         self.api=library() if native else False
         if self.api is False:
             self.bg_all=self.bg[np.minimum(self.layers,5)];self.obj_all=self.obj[self.owners]
-    def mask(self,left,top,right,bottom,priority,kind,item,control):
+    def mask(self,left,top,right,bottom,priority,kind,item,control,blend=None):
         shape=(bottom-top,right-left)
         if self.api is not False:
             output=np.empty(shape,dtype='uint8')
             state=self.api.part_visibility(*self.pointers,self.stride,left,top,shape[1],shape[0],priority,kind,item,control,output.ctypes.data)
-            return output,state
+            return self.blend_mask(output,state,left,top,priority,kind,item,control,blend)
         layers=self.layers[top:bottom,left:right];owners=self.owners[top:bottom,left:right]
         bgprio=self.bg_all[top:bottom,left:right];prio=self.obj_all[top:bottom,left:right]
         visible=((layers<4)&((bgprio>priority)|((bgprio==priority)&((layers>item) if kind else True))))|(layers==5)
         if control&0xc0==0x40 and control&(1<<(8+item if kind else 12)):
             visible|=(layers<4)&(((control>>layers.astype('uint32'))&1)!=0)
         visible|=(layers==4)&((prio>priority)|((prio==priority)&(owners>=item)&(not kind)))
-        return visible.astype('uint8')*255,0 if not visible.any() else 2 if visible.all() else 1
+        output=visible.astype('uint8')*255
+        return self.blend_mask(output,0 if not visible.any() else 2 if visible.all() else 1,left,top,priority,kind,item,control,blend)
+
+    def blend_mask(self,mask,state,left,top,priority,kind,item,control,blend):
+        # A foreground BG may expose this second-target part through alpha.
+        # Visibility alone does not mean the part can cover the BG opaquely.
+        bit=8+item if kind else 12
+        if state==0 or blend is None or control&0xc0!=0x40 or not control&(1<<bit):return mask,state
+        weight=min((blend>>8)&31,16)
+        if weight==16:return mask,state
+        h,w=mask.shape;layers=self.layers[top:top+h,left:left+w]
+        priorities=self.bg[np.minimum(layers,5)]
+        front=(priorities<priority)|((priorities==priority)&(layers<item)&bool(kind))
+        eligible=(layers<4)&front&(((control>>layers.astype('uint32'))&1)!=0)
+        if not eligible.any():return mask,state
+        mask[eligible]=(mask[eligible].astype('uint16')*weight//16).astype('uint8')
+        return mask,0 if not mask.any() else 2 if np.all(mask==255) else 1

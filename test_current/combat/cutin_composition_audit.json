@@ -1,0 +1,43 @@
+{
+  "shared_obj_bg_blend_cases": 139264,
+  "second_target_coefficients": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "registered_cutin_routes": [
+    {
+      "id": 1,
+      "name": "kazuma",
+      "route": "dedicated foreground overlay"
+    },
+    {
+      "id": 2,
+      "name": "gauron_body",
+      "layer": 1,
+      "route": "native foreground visibility mask"
+    },
+    {
+      "id": 3,
+      "name": "gauron_face",
+      "layer": 1,
+      "route": "native foreground visibility mask"
+    }
+  ],
+  "generic_cutins": "All BG layers use the shared native priority and blend path.",
+  "scope": "Exhaustive compositor combinations; not a replay of every campaign cut-in."
+}

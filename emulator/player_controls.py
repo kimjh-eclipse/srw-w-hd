@@ -1,6 +1,6 @@
 """Persistent player preferences and device-independent DS input mappings."""
 from pathlib import Path
-import copy,json
+import copy,json,tempfile,os,time
 
 BUTTONS=[('up','위',4),('down','아래',5),('left','왼쪽',6),('right','오른쪽',7),('a','A · 확인',8),('b','B · 취소',0),('x','X',9),('y','Y',1),('l','L',10),('r','R',11),('start','Start',3),('select','Select',2)]
 DEFAULT_KEYS=dict(up='Up',down='Down',left='Left',right='Right',a='z',b='x',x='c',y='v',l='a',r='s',start='Return',select='Shift_R')
@@ -45,8 +45,17 @@ def sdl_pad_mapping(sdl_mapping):
     return result
 
 def write_settings(path,settings):
-    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True);temp=path.with_suffix('.tmp')
-    temp.write_text(json.dumps(settings,ensure_ascii=False,indent=2),encoding='utf-8');temp.replace(path)
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    # Each player owns its temporary file, even when sharing one config.
+    fd,name=tempfile.mkstemp(prefix=path.stem+'-',suffix='.tmp',dir=path.parent);temp=Path(name)
+    try:
+        with os.fdopen(fd,'w',encoding='utf-8') as stream:stream.write(json.dumps(settings,ensure_ascii=False,indent=2))
+        for attempt in range(10):
+            try:temp.replace(path);break
+            except PermissionError:
+                if attempt==9:raise
+                time.sleep(.01)
+    finally:temp.unlink(missing_ok=True)
 
 def key_buttons(held,mapping):
     return {index for name,_,index in BUTTONS if mapping.get(name) in held}

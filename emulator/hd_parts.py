@@ -20,6 +20,18 @@ class PartsRenderer:
     def __init__(self,async_prepare=False,dynamic_parts=False):
         meta=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text())
         self.bindings=meta['bindings'];self.atlas=Image.open(ROOT/'graphics'/meta['atlas']).convert('RGBA').resize((1024,512),Image.Resampling.LANCZOS)
+        self.material_slot_masks=None;self.material_slot_references={};self.material_slot_verified={}
+        try:
+            compiled=json.loads((ROOT/'graphics/material_slots.json').read_text())
+            if compiled['library_sha256']==hashlib.sha256((ROOT/'graphics/kazuma_parts_library.json').read_bytes()).hexdigest():
+                self.material_slot_masks=np.load(ROOT/'graphics/material_slots.npy',allow_pickle=False);self.material_slot_references=compiled['references']
+        except (OSError,ValueError,KeyError):pass
+        self.native_materials=None
+        try:
+            material_meta=json.loads((ROOT/'graphics/native_materials.json').read_text())
+            if material_meta['library_sha256']==hashlib.sha256((ROOT/'graphics/kazuma_parts_library.json').read_bytes()).hexdigest():
+                with np.load(ROOT/'graphics/native_materials.npz',allow_pickle=False) as archive:self.native_materials={key:archive[key] for key in archive.files}
+        except (OSError,ValueError,KeyError):pass
         self.native_atlas=Image.open(ROOT/'graphics/kazuma_parts_atlas_reference.png').convert('RGBA').resize((256,128),Image.Resampling.NEAREST)
         self.atlases={'base':(self.atlas,self.native_atlas)}
         self.atlas_specs=meta.get('atlases',{});self.lazy_atlases=OrderedDict()
@@ -159,12 +171,67 @@ class PartsRenderer:
             self.palette_luts[key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
         return self.palette_luts[key]
 
+    def native_material_indices(self,binding,spec):
+        cache=getattr(self,'native_materials',None)
+        if cache is not None and binding<=len(cache['lengths']) and cache['lengths'][binding-1]==spec['w']*spec['h']:
+            start=int(cache['starts'][binding-1]);length=int(cache['lengths'][binding-1])
+            return cache['pixels'][start:start+length].reshape(spec['h'],spec['w'])
+        return None
+
+    def used_palette_indices(self,binding,palette,spec):
+        if spec.get('index_pixels'):
+            used=np.unique(np.frombuffer(zlib.decompress(base64.b64decode(spec['index_pixels'])),dtype='uint8'))
+            return used[(used>0)&(used<len(palette))]
+        native=self.native_material_indices(binding,spec)
+        if native is not None:
+            used=np.unique(native);return used[(used>0)&(used<len(palette))]
+        if not hasattr(self,'used_palette_cache'):self.used_palette_cache=OrderedDict();self.native_palette_references=OrderedDict()
+        source_binding=spec.get('source_binding',binding);key=(source_binding,palette.tobytes())
+        if key in self.used_palette_cache:return self.used_palette_cache[key]
+        source=self.bindings[source_binding-1];name=source.get('atlas_id','base');used=None
+        reference_spec=self.atlas_specs.get(name,{'reference':'kazuma_parts_atlas_reference.png'})
+        compiled=getattr(self,'material_slot_masks',None)
+        if compiled is not None and binding<=len(compiled) and int(compiled[binding-1]):
+            if name not in self.material_slot_verified:
+                path=ROOT/'graphics'/reference_spec['reference']
+                self.material_slot_verified[name]=path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==self.material_slot_references.get(name)
+            if self.material_slot_verified[name]:
+                used=np.flatnonzero(int(compiled[binding-1])&(1<<np.arange(len(palette))))
+                self.used_palette_cache[key]=used;return used
+        try:
+            reference=self.native_palette_references.pop(name,None)
+            if reference is None:
+                with Image.open(ROOT/'graphics'/reference_spec['reference']) as opened:reference=opened.convert('RGBA')
+                native_size=tuple(reference_spec.get('native_size',(256,128)))
+                if reference.size!=native_size:reference=reference.resize(native_size,Image.Resampling.NEAREST)
+            self.native_palette_references[name]=reference
+            while len(self.native_palette_references)>4:self.native_palette_references.popitem(last=False)
+            x,y,w,h=(source[k] for k in ('x','y','w','h'));pixels=np.asarray(reference.crop((x,y,x+w,y+h)))
+            colors=pixels[:,:,:3][pixels[:,:,3]>0];five=np.rint(colors.astype('float32')*31/255).astype('uint32');codes=five[:,0]|five[:,1]<<5|five[:,2]<<10
+            native=np.rint(palette*31/255).astype('uint32');slots=native[:,0]|native[:,1]<<5|native[:,2]<<10
+            used=np.flatnonzero(np.isin(slots,np.unique(codes)));used=used[used>0]
+        except (OSError,ValueError,KeyError):pass
+        self.used_palette_cache[key]=used
+        while len(self.used_palette_cache)>256:self.used_palette_cache.popitem(last=False)
+        return used
+
     def material_map(self,binding,art,palette,spec):
         key=(binding,palette.tobytes());found=self.material_maps.pop(key,None)
         if found is None:
             rgb=np.asarray(art)[:,:,:3].astype('float32');q=np.rint(rgb*31/255).astype('uint32')
-            indices=self.get_palette_lut(palette)[q[:,:,0]|q[:,:,1]<<5|q[:,:,2]<<10]
-            if spec.get('index_pixels'):indices=material_indices(spec['index_pixels'],spec['w'],spec['h'],art.size,indices,palette)
+            used=self.used_palette_indices(binding,palette,spec)
+            if used is not None and len(used) and len(used)<len(palette)-1:
+                # Unused OBJ palette slots may be reused by muzzle flashes or
+                # other units. HD antialias/shading colors must never pick an
+                # unused slot merely because its old RGB happened to be close.
+                packed=q[:,:,0]|q[:,:,1]<<5|q[:,:,2]<<10;codes,inverse=np.unique(packed,return_inverse=True)
+                colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
+                nearest=np.argmin(((colors[:,None,:]-palette[None,used,:])**2).sum(-1),axis=1)
+                indices=used[nearest][inverse].reshape(q.shape[:2])
+            else:indices=self.get_palette_lut(palette)[q[:,:,0]|q[:,:,1]<<5|q[:,:,2]<<10]
+            native=spec.get('index_pixels')
+            if native is None:native=self.native_material_indices(binding,spec)
+            if native is not None:indices=material_indices(native,spec['w'],spec['h'],art.size,indices,palette,strict=True)
             found=(rgb-palette[indices],indices)
         self.material_maps[key]=found
         while len(self.material_maps)>64:self.material_maps.popitem(last=False)
@@ -213,8 +280,22 @@ class PartsRenderer:
             residual,indices=self.material_map(binding,art,source_palette,spec)
             pixels=np.array(art)
             target=np.asarray(target_palette,dtype='float32');src_lum=source_palette@np.array([.2126,.7152,.0722]);dst_lum=target@np.array([.2126,.7152,.0722])
-            gain=float(dst_lum[1:].sum()/max(src_lum[1:].sum(),1));detail=np.minimum((dst_lum+1)/(src_lum+1),max(0,gain*1.5)).clip(0,2)
-            rgb=target[indices]+residual*detail[indices,None]
+            used=np.unique(indices[np.asarray(art.getchannel('A'))>0]);used=used[used>0]
+            gain=float(dst_lum[used].sum()/max(src_lum[used].sum(),1));detail=np.minimum((dst_lum+1)/(src_lum+1),max(0,gain*1.5)).clip(0,2)
+            # Flash/monochrome palettes deliberately collapse several source
+            # materials to one solid color. Do not reintroduce their old HD
+            # shading as colored boxes across independently cropped pieces.
+            same_target=np.all(target[:,None,:]==target[None,:,:],axis=2)
+            different_source=np.any(source_palette[:,None,:]!=source_palette[None,:,:],axis=2)
+            active=np.zeros(len(target),dtype=bool);active[used]=True
+            collapsed=np.any(same_target&different_source&active[None,:],axis=1)
+            detail[collapsed]=0
+            shading=residual*detail[indices,None]
+            if len(used) and np.mean(np.abs(target[used]-source_palette[used]))>48:
+                # A large material recolor must not carry unrelated painted
+                # RGB blocks into the new palette. Keep bounded light detail.
+                shading=np.clip(shading.mean(axis=2,keepdims=True),-8,8)
+            rgb=target[indices]+shading
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
         if a&256:
             pa,pb,pc,pd=[v/256 for v in matrix];fw=w*(2 if a&512 else 1);fh=h*(2 if a&512 else 1)
@@ -251,6 +332,7 @@ class PartsRenderer:
             for index in np.flatnonzero(bgparts[:,0]):
                 row=bgparts[index];tasks.append((int(row[5]),1,int(row[4]),row))
         visibility=PartVisibility(layer_ids,owners,bgpriors,native_priority)
+        background_blend=int(parts[active[0],6]) if active else None
         for priority,kind,i,original in sorted(tasks,key=lambda task:task[:3],reverse=True):
             if kind:
                 bid,flip,x,y,layer,_,bright,control=map(int,original)
@@ -271,7 +353,7 @@ class PartsRenderer:
             layers=layer_ids[upper:lower,left:right]
             # Compare native BG priorities and surviving native OBJ ownership.
             # This retains enemies/effects in the same relative draw order.
-            visible,visibility_state=visibility.mask(left,upper,right,lower,priority,kind,i,control)
+            visible,visibility_state=visibility.mask(left,upper,right,lower,priority,kind,i,control,int(row[6]) if not kind else background_blend)
             # Alpha-blended BG effects retain a BG layer ID even when the
             # underlying OBJ is visible through them (e.g. the battle flash).
             if visibility_state==0:continue

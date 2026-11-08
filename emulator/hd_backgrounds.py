@@ -116,14 +116,12 @@ class BackgroundRenderer:
                         if l<r and u<b:viewport.paste(art.crop((l-dx,u-dy,r-dx,b-dy)),(l,u))
             self.viewports[key]=viewport
             while len(self.viewports)>2:self.viewports.popitem(last=False)
-            full,edges=self._mask_plan(visible)
-            for left,upper,right,lower in full:
-                box=tuple(round(value*SCALE) for value in (left,upper,right,lower))
-                top.paste(viewport.crop(box),box[:2])
-            for left,upper,right,lower in edges:
-                box=tuple(round(value*SCALE) for value in (left,upper,right,lower))
-                mask=Image.fromarray(visible[upper:lower,left:right].astype('uint8')*255).resize((box[2]-box[0],box[3]-box[1]),Image.Resampling.NEAREST)
-                top.paste(viewport.crop(box),box[:2],mask)
+            # Resize the whole visibility mask on one pixel grid. Resizing
+            # separate tile-edge rectangles changes nearest-neighbor ties at
+            # fractional scales and leaves native-color specks at boundaries.
+            mask=Image.fromarray(visible.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)
+            box=mask.getbbox()
+            if box is not None:top.paste(viewport.crop(box),box[:2],mask.crop(box))
             self.last_matches.append(bid)
 
 

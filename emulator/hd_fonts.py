@@ -84,6 +84,7 @@ class FontRenderer:
         self.scan_mask=np.zeros((192,256),dtype=bool) if value else None
         if value:self.scan_mask[:16]=True;self.scan_mask[120:]=True;self.scan_mask[136:184,:56]=False
         self.last_native_key=None;self.last_key=None;self.overlay_key=None
+        self.primary_mode=False;self.primary_key=None
 
     def _scan_active(self,mask,height,width,keys,characters,minimum=1,maximum=144):
         if not self.battle_scan:return self._scan(mask,height,width,keys,characters,minimum,maximum)
@@ -160,16 +161,37 @@ class FontRenderer:
             hud_ink=(green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80)
             hud_gold=(red[:32]>=180)&(green[:32]>=64)&(blue[:32]<64)
         if self.battle_scan:bright&=self.scan_mask;white&=self.scan_mask
-        key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes(), digest_size=16).digest()
+        # A translucent button exposes animated gray pixels behind its text.
+        # Thresholding all bright grays merges those pixels into the glyph and
+        # makes exact recognition alternate between HD and native lettering.
+        # Test the actual solid DS foreground colors first, independently.
+        red5=native[:,:,0]>>3;green5=native[:,:,1]>>3;blue5=native[:,:,2]>>3
+        neutral5=(red5==green5)&(green5==blue5)
+        foregrounds=[neutral5&(red5==31),neutral5&(red5==20),(red5==31)&(green5==0)&(blue5==0)]
+        if self.battle_scan:
+            for foreground in foregrounds:foreground&=self.scan_mask
+        strong_green=(red5<6)&(green5>=24)&(blue5<6)
+        primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
+        primary_key=(primary_signal,tuple(self._selected_run(strong_green,*run[:3]) for run in getattr(self,'menu_runs',())))
+        if getattr(self,'primary_mode',False) and primary_key==getattr(self,'primary_key',None):
+            self.last_native_key=native_key;return self.last_matches
+        key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes()+b''.join(m.tobytes() for m in foregrounds), digest_size=16).digest()
         self.last_native_key = native_key
-        if key == self.last_key:
+        if key == self.last_key and not getattr(self,'primary_mode',False):
             return self.last_matches
-        masks = (bright,) if np.array_equal(bright, white) else (bright, white)
+        masks=[]
+        for candidate_mask in foregrounds:
+            if candidate_mask.any() and not any(np.array_equal(candidate_mask,previous) for previous in masks):masks.append(candidate_mask)
         full = []
         narrow = []
         for mask in masks:
             full.extend(self._scan_active(mask, 12, 12, self.keys, self.characters, 5, 100))
             narrow.extend(self._scan_active(mask, 12, 8, self.narrow_keys, self.narrow_characters, 1, 80))
+        self.primary_mode=any(row[2].isalnum() for row in full+narrow) or bool(hud_ink.any() and hud_gold.any())
+        if not self.primary_mode:
+            for mask in (bright,white):
+                if not mask.any() or any(np.array_equal(mask,previous) for previous in masks):continue
+                masks.append(mask);full.extend(self._scan_active(mask,12,12,self.keys,self.characters,5,100));narrow.extend(self._scan_active(mask,12,8,self.narrow_keys,self.narrow_characters,1,80))
         text_rows = {y for x, y, ch, w, h, ink in full}
         positions = {(x, y) for x, y, ch, w, h, ink in narrow}
         hud_labels=self._scan(hud_gold,16,16,self.hud_label_keys,self.hud_label_characters,5,200)
@@ -189,12 +211,13 @@ class FontRenderer:
                 hud_erasers.append((x,yy,erase))
         candidates = hud+full + [row for row in narrow if row[1] in text_rows or
                              any((row[0]+dx, row[1]) in positions for dx in (-16, -8, 8, 16))]
-        compact = self._scan_active(bright, 8, 8, self.compact_keys, self.compact_characters, 5, 60)
+        compact=[]
+        for mask in masks:compact.extend(self._scan_active(mask,8,8,self.compact_keys,self.compact_characters,5,60))
         positions = {(x, y) for x, y, ch, w, h, ink in compact}
         candidates.extend(row for row in compact if row[1] in text_rows or
                           any((row[0]+dx, row[1]) in positions for dx in (-16, -8, 8, 16)))
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
-        candidates=[row for row in candidates if row[2]!='_' or any((row[0]+dx,row[1]) in anchors for dx in (-12,-8,8,12))]
+        candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)
         accepted = []
         sizes, heights = {}, {}
@@ -210,13 +233,13 @@ class FontRenderer:
             sizes[x, y], heights[x, y] = width, height
         self.last_sizes, self.last_heights = sizes, heights
         self.last_ink = mask.copy()
-        padded = np.pad(mask, 1)
+        padded = np.pad(mask, 2)
         mask = np.logical_or.reduce([padded[dy:dy+192, dx:dx+256]
-                                     for dy in range(3) for dx in range(3)])
+                                     for dy in range(5) for dx in range(5)])
         self.hud_mask=np.zeros((192,256),dtype=bool);self.hud_positions={(x,y) for x,y,*_ in hud}
         for x,y,erase in hud_erasers:self.hud_mask[y:y+erase.shape[0],x:x+erase.shape[1]]|=erase
         mask|=self.hud_mask
-        self.menu_glyphs=set();lines={}
+        self.menu_glyphs=set();self.menu_runs=[];lines={}
         for x,y,char in accepted:
             if heights[x,y]==12:lines.setdefault(y,[]).append((x,sizes[x,y]))
         for y,cells in lines.items():
@@ -225,15 +248,21 @@ class FontRenderer:
                 if runs and x<=runs[-1][1]+1:runs[-1][1]=max(runs[-1][1],x+w);runs[-1][2].append(x)
                 else:runs.append([x,x+w,[x]])
             for left,right,xs in runs:
-                if left<4 or right>251 or y+12>192:continue
-                side=selected_green[y+2:y+8,[left-3,right+3]]
-                if side.mean()<.8:continue
+                self.menu_runs.append((left,right,y,xs))
+                if not self._selected_run(strong_green,left,right,y):continue
                 # A selected button has a solid green center. Repair its whole
                 # text strip so no old bitmap/outline survives between strokes.
-                mask[y:y+12,left-2:right+2]=True
+                mask[y:y+12,max(0,left-2):min(256,right+2)]=True
                 self.menu_glyphs.update((x,y) for x in xs)
         self.last_key, self.last_matches, self.last_mask = key, accepted, mask
+        self.primary_key=(primary_signal,tuple(self._selected_run(strong_green,*run[:3]) for run in self.menu_runs))
         return accepted
+
+    @staticmethod
+    def _selected_run(green,left,right,y):
+        if y+12>192:return False
+        strip=green[y+8:min(192,y+16),max(0,left-2):min(256,right+2)]
+        return bool(strip.size and np.any(strip.mean(1)>=.8))
 
     def _glyph(self, char, width, height, color, compact=False, button=False):
         key = char, width, height, color, compact,button
@@ -343,7 +372,7 @@ class FontRenderer:
             if getattr(self,'field_positions',None)!=positions:
                 rectangles=[]
                 for x,y,w,h in positions:
-                    rect=[max(0,x-1),max(0,y-1),min(256,x+w+1),min(192,y+h+1)]
+                    rect=[max(0,x-2),max(0,y-2),min(256,x+w+2),min(192,y+h+2)]
                     again=True
                     while again:
                         again=False
