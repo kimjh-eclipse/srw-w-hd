@@ -5674,7 +5674,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
 	//how it interacts with this. I wish we knew why we needed this
 	
 	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
-    if(this->_engineID==SRWWTargetEngine())memcpy(SRWWNativeOwner+compInfo.line.indexNative*256,this->_sprNum,256);
+    memcpy((this->_engineID==SRWWTargetEngine()?SRWWNativeOwner:SRWWSubOwner)+compInfo.line.indexNative*256,this->_sprNum,256);
 	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
 	
 	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)

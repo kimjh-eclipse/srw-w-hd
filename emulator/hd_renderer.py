@@ -78,7 +78,9 @@ class HDRenderer:
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
-    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None):
+    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None):
+        self.sub_parts=sub_parts
+        self.sub_paused=paused
         if hd[10]:self.parts_renderer.schedule_unknown(unknown)
         border=native[124:132]
         cyan=np.count_nonzero((border[:,:,0]<64)&(border[:,:,1]>96)&(border[:,:,2]>96))>=80
@@ -146,12 +148,14 @@ class HDRenderer:
 
     def render_bottom(self,native,hd):
         source=native[192:384]
-        pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending) or bool(self.map_tiles.pending)
+        pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending) or bool(self.map_tiles.pending) or bool(self.parts_renderer.pending)
         self.scenario_backgrounds.refresh()
         if hasattr(self.map_tiles,'refresh'):self.map_tiles.refresh()
         self.map_icons.refresh()
         self.localized_screens.refresh()
-        key=(bool(hd[10]),zlib.crc32(source.tobytes()),self.scenario_backgrounds.generation,getattr(self.map_tiles,'generation',0),self.map_icons.stamp,self.localized_screens.generation)
+        sub=getattr(self,'sub_parts',None)
+        part_key=tuple(zlib.crc32(v if isinstance(v,bytes) else v.tobytes()) for v in sub) if sub is not None else None
+        key=(bool(hd[10]),zlib.crc32(source.tobytes()),self.scenario_backgrounds.generation,getattr(self.map_tiles,'generation',0),self.map_icons.stamp,self.localized_screens.generation,part_key,self.parts_renderer.ready_generation)
         if not pending and getattr(self,'bottom_frame_key',None)==key:return self.bottom_frame
         if self.gpu_composition:
             from gpu_surface import Surface
@@ -161,6 +165,9 @@ class HDRenderer:
             self.scenario_backgrounds.compose(bottom,source)
             terrain=self.map_tiles.compose(bottom,source)
             if terrain or self.map_tiles.phase(source) is not None:self.map_icons.compose(bottom,source,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
+            if sub is not None:
+                parts,owners,oam,palettes,layers,priorities=sub
+                self.parts_renderer.compose(bottom,parts,oam,layers,owners,priorities,None,palettes,allow_native_fallback=getattr(self,'sub_paused',False))
             if not hasattr(self,'bottom_portraits'):self.bottom_portraits=PortraitRenderer()
             self.bottom_portraits.compose(bottom,source)
             self.bottom_text_renderer.compose(bottom,source)
@@ -169,8 +176,8 @@ class HDRenderer:
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
 
-    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None):
-        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout)
+    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None):
+        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts)
         if hasattr(top,'to_pil'):top=top.to_pil()
         if top.size!=(1440,1080):top=top.resize((1440,1080),Image.Resampling.LANCZOS)
         canvas=Image.new('RGB',(1920,1080));canvas.paste(top,(0,0))

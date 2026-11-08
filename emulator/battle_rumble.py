@@ -1,10 +1,4 @@
-"""Observe W's native impact palette animation without editing the ROM.
-
-The verified preview uses OBJ palettes 13/14 for the battling target's hit flash.
-It shows repeated bright pulses on those palettes while ordinary movement, menus,
-loading fades and dialogue do not. This follows the pulses, not elapsed frames,
-HP counting, audio volume, or the optional HD replacements.
-"""
+"""Observe active native OBJ hit palettes and energy textures in battle."""
 import ctypes as C
 import numpy as np
 from beam_rumble import BeamObserver
@@ -20,21 +14,23 @@ class BattleRumble:
             stopped=self.was_active;self.reset()
             return dict(duration=0,reason='battle_end') if stopped else None
         self.was_active=True;self.age+=1;self.tick+=1
-        colors=np.asarray(palette[13:15,1:],dtype='uint32')
+        colors=np.asarray(palette[:,1:],dtype='uint32')
         rgb=np.stack([colors&31,(colors>>5)&31,(colors>>10)&31],-1).astype('float32')
         light=rgb.mean((1,2));previous=self.previous;self.previous=light
         if previous is None or self.age<30:return None
         attrs=np.asarray(oam,dtype='uint16');a,b,c=attrs[:,:3].T
         y=a&255;x=b&511;pal=c>>12
         visible=((a&0x300)!=0x200)&((a>>14)!=3)&(((a>>10)&3)<2)&(y<120)&((x<256)|(x>448))
-        used=np.array([np.any(visible&(pal==i)) for i in (13,14)])
+        used=np.array([np.any(visible&(pal==i)) for i in range(16)])
         pulse=(light>=25)&(previous>=5)&(light-previous>=5)&used
         if pulse.any() and self.tick-self.last_hit>=5:
             repeated=self.tick-self.last_hit<=24;self.last_hit=self.tick
             return dict(low=.9 if repeated else 1.,high=1.,duration=95 if repeated else 155,reason='impact_flash',repeated=repeated)
         if beam and self.tick-self.last_hit>=8 and self.tick-self.last_beam>=4:
             self.last_beam=self.tick
-            return dict(low=.38,high=1.,duration=42,reason='beam_stream',repeated=True)
+            # Overlapping pulses let physical motors spin up despite IPC latency.
+            # Modulate the heavy motor for a buzz rather than isolated taps.
+            return dict(low=.9 if (self.tick//4)%2 else .65,high=1.,duration=110,reason='beam_stream',repeated=True)
         return None
     def sample(self,core):
         if not core.clean_korean:return None

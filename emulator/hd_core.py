@@ -79,6 +79,13 @@ class Core:
         self.api.retro_srw_set_hd_enabled(int(enabled))
         self.api.retro_srw_copy_layer_ids.argtypes=[C.c_void_p]
         self.api.retro_srw_get_hd_state.argtypes=[C.POINTER(C.c_uint)]
+        self.sub_parts=np.zeros((128,8),dtype='uint32');self.sub_owners=np.zeros((192,256),dtype='uint8')
+        self.sub_oam=C.create_string_buffer(1024);self.sub_palettes=np.zeros((128,16),dtype='uint16')
+        self.sub_ids=np.zeros((192,256),dtype='uint8');self.sub_priorities=np.full(6,4,dtype='uint8')
+        self.sub_bridge=hasattr(self.api,'retro_srw_copy_sub_parts')
+        if self.sub_bridge:self.api.retro_srw_copy_sub_parts.argtypes=[C.c_void_p]*6
+        self.sub_unknown_bridge=hasattr(self.api,'retro_srw_copy_sub_unknown_parts')
+        if self.sub_unknown_bridge:self.api.retro_srw_copy_sub_unknown_parts.argtypes=[C.c_void_p]*3
 
     def environment(self,cmd,data):
         if cmd in (9,30,31):C.cast(data,C.POINTER(C.c_char_p))[0]=self.directory;return True
@@ -137,10 +144,13 @@ class Core:
 
     def _read_unknown_snapshot(self):
         if not self.dynamic_bridge or not self.enabled:return None
-        rows=np.empty((128,8),dtype='uint32');self.api.retro_srw_copy_unknown_parts(rows.ctypes.data,None,None)
+        count=256 if self.sub_unknown_bridge else 128
+        rows=np.empty((count,8),dtype='uint32');self.api.retro_srw_copy_unknown_parts(rows.ctypes.data,None,None)
+        if self.sub_unknown_bridge:self.api.retro_srw_copy_sub_unknown_parts(rows[128:].ctypes.data,None,None)
         if not rows[:,0].any():return None
-        pixels=np.empty((128,4096),dtype='uint8');palettes=np.empty((128,16),dtype='uint16')
+        pixels=np.empty((count,4096),dtype='uint8');palettes=np.empty((count,16),dtype='uint16')
         self.api.retro_srw_copy_unknown_parts(None,pixels.ctypes.data,palettes.ctypes.data)
+        if self.sub_unknown_bridge:self.api.retro_srw_copy_sub_unknown_parts(None,pixels[128:].ctypes.data,palettes[128:].ctypes.data)
         return rows,pixels,palettes
 
     def run(self):
@@ -153,6 +163,7 @@ class Core:
         self.api.retro_srw_copy_parts(self.parts.ctypes.data,self.owners.ctypes.data)
         if self.indexed_bridge:self.api.retro_srw_copy_part_palettes(self.part_palettes.ctypes.data)
         self.api.retro_srw_copy_bg_parts(self.bgparts.ctypes.data)
+        if self.sub_bridge:self.api.retro_srw_copy_sub_parts(self.sub_parts.ctypes.data,self.sub_owners.ctypes.data,self.sub_oam,self.sub_palettes.ctypes.data,self.sub_ids.ctypes.data,self.sub_priorities.ctypes.data)
         self.backgrounds=[];background_layout=[]
         for layer in range(4):
             info=(C.c_uint*9)();self.api.retro_srw_get_bg_info(layer,info);self.bgpriors[layer]=info[8]

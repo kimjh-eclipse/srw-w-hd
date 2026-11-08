@@ -4,6 +4,10 @@
 int32_t SRWWRobot_Info[8]={0};
 uint8_t SRWWRobot_OAM[1024]={0};
 uint8_t SRWWNativeOwner[256*192]={0};
+uint8_t SRWWSubOwner[256*192]={0};
+uint8_t SRWWSubOAM[1024]={0};
+uint32_t SRWWSubParts[128*8]={0};
+uint16_t SRWWSubPalettes[128*16]={0};
 uint32_t SRWWParts[128*8]={0};
 uint16_t SRWWPartPalettes[128*16]={0};
 uint32_t SRWWBGParts[4*800*8]={0};
@@ -11,6 +15,9 @@ uint8_t SRWWBGMask[4][256*192]={0};
 uint32_t SRWWUnknownParts[128*8]={0};
 uint8_t SRWWUnknownPixels[128*4096]={0};
 uint16_t SRWWUnknownPalettes[128*16]={0};
+uint32_t SRWWSubUnknownParts[128*8]={0};
+uint8_t SRWWSubUnknownPixels[128*4096]={0};
+uint16_t SRWWSubUnknownPalettes[128*16]={0};
 static uint32_t SRWWCrcTable[256];
 #include "srww_texture_cache.h"
 static std::unordered_map<uint32_t,uint32_t> SRWWPartBindings;
@@ -38,11 +45,14 @@ void SRWWRegisterParts(const uint32_t *hashes,unsigned count) {
     for(unsigned i=0;i<count;i++)if(hashes[i])SRWWPartBindings[hashes[i]]=i+1;
 }
 bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
-    if(engine!=SRWWTargetEngine())return false;
-    static uint32_t checked=~0u;
-    if(checked!=SRWWHD_Frame) {
-        checked=SRWWHD_Frame;memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWRobot_Info,0,sizeof(SRWWRobot_Info));
-        memcpy(SRWWRobot_OAM,oam,sizeof(SRWWRobot_OAM));
+    const bool secondary=engine!=SRWWTargetEngine();
+    uint32_t *parts=secondary?SRWWSubParts:SRWWParts;
+    uint16_t *palettes=secondary?SRWWSubPalettes:SRWWPartPalettes;
+    static uint32_t checked[2]={~0u,~0u};
+    if(checked[engine]!=SRWWHD_Frame) {
+        checked[engine]=SRWWHD_Frame;memset(parts,0,128*8*sizeof(uint32_t));
+        if(!secondary)memset(SRWWRobot_Info,0,sizeof(SRWWRobot_Info));
+        memcpy(secondary?SRWWSubOAM:SRWWRobot_OAM,oam,1024);
         if(!SRWWHD_Enabled)return false;
         const u16 *raw=(const u16*)oam;
         const uint8_t *regs=MMU.ARM9_REG+(engine?0x1000:0);
@@ -80,31 +90,33 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
             }
             if(!binding) {
                 unsigned colors=0;for(uint32_t mask=usedMask;mask;mask&=mask-1)colors++;
-                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<120) {
-                    uint32_t *unknown=SRWWUnknownParts+i*8;
+                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<(secondary?192:120)) {
+                    uint32_t *unknown=(secondary?SRWWSubUnknownParts:SRWWUnknownParts)+i*8;
                     unknown[0]=indexHash;unknown[1]=w;unknown[2]=h;unknown[3]=a;unknown[4]=b;unknown[5]=c;unknown[6]=hash;unknown[7]=material;
-                    memcpy(SRWWUnknownPixels+i*4096,nativeIndices,w*h);
-                    for(unsigned k=0;k<16;k++)SRWWUnknownPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
+                    memcpy((secondary?SRWWSubUnknownPixels:SRWWUnknownPixels)+i*4096,nativeIndices,w*h);
+                    for(unsigned k=0;k<16;k++)(secondary?SRWWSubUnknownPalettes:SRWWUnknownPalettes)[i*16+k]=LE_TO_LOCAL_16(palette[k]);
                 }
                 continue;
             }
-            uint32_t *part=SRWWParts+i*8;
+            uint32_t *part=parts+i*8;
             part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
-            for(unsigned k=0;k<16;k++)SRWWPartPalettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
+            for(unsigned k=0;k<16;k++)palettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
             part[5]=LE_TO_LOCAL_16(*(u16*)(regs+0x6c));
             part[6]=LE_TO_LOCAL_16(*(u16*)(regs+0x52));
             part[7]=LE_TO_LOCAL_16(*(u16*)(regs+0x50))|((SRWWAsyncParts && !SRWWReadyParts[binding])?0x80000000u:0);
-            SRWWRobot_Info[0]++;
+            if(!secondary)SRWWRobot_Info[0]++;
         }
     }
     // Keep a native fallback underneath asynchronously prepared HD textures.
     // The frontend can display a new animation immediately while its art warms.
-    const unsigned binding=SRWWParts[sprite*8];
+    const unsigned binding=parts[sprite*8];
     return binding && (!SRWWAsyncParts || SRWWReadyParts[binding]);
 }
 
 void SRWWBeginPartsFrame() {
+    memset(SRWWSubParts,0,sizeof(SRWWSubParts));
     memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
+    memset(SRWWSubUnknownParts,0,sizeof(SRWWSubUnknownParts));
     memset(SRWWParts,0,sizeof(SRWWParts));memset(SRWWBGParts,0,sizeof(SRWWBGParts));memset(SRWWBGMask,0,sizeof(SRWWBGMask));
 }
 

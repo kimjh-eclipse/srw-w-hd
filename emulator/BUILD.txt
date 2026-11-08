@@ -1,4 +1,5 @@
 Source: https://github.com/libretro/desmume
+2026-11-08: Rebuild GPU.cpp and frontend/libretro/libretro.cpp for retro_srw_copy_sub_parts / retro_srw_copy_sub_unknown_parts. The secondary display shares registered texture identities and readiness, with separate OAM, ownership, palettes and native layer priorities. Python falls back safely with older cores; older cores cannot replace secondary display units.
 Commit: 95b4d798731caa809125b6c3c11d17cc332ff6ef
 Build: w64devkit x64 2.11.0; make -f Makefile.libretro platform=win -j6
 Directory: desmume/desmume/src/frontend/libretro

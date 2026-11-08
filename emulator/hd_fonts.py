@@ -254,6 +254,24 @@ class FontRenderer:
                 # text strip so no old bitmap/outline survives between strokes.
                 mask[y:y+12,max(0,left-2):min(256,right+2)]=True
                 self.menu_glyphs.update((x,y) for x in xs)
+        self.menu_repairs=[]
+        # Treat a selected button as one background, including words separated
+        # by spaces. Sampling at each glyph edge can sample its black shadow.
+        for y,cells in lines.items():
+            selected=[x+sizes[x,y]/2 for x,_ in cells if (x,y) in self.menu_glyphs]
+            if not selected:continue
+            spans=[]
+            for green_row in strong_green[y+8:min(192,y+16)]:
+                changes=np.flatnonzero(np.diff(np.pad(green_row.astype('int8'),1)))
+                spans.extend((int(l),int(r)) for l,r in zip(changes[::2],changes[1::2]) if r-l>=12 and any(l<=cx<r for cx in selected))
+            if not spans:continue
+            button_left,button_right=max(spans,key=lambda span:span[1]-span[0])
+            members=[(x,w) for x,w in cells if button_left<=x+w/2<button_right]
+            if not members:continue
+            for x,w in members:self.menu_glyphs.add((x,y))
+            left=max(0,min(x for x,w in members)-2);right=min(256,max(x+w for x,w in members)+2)
+            mask[y:y+12,left:right]=True
+            self.menu_repairs.append((left,max(0,y-2),right,min(192,y+14),button_left,button_right))
         self.last_key, self.last_matches, self.last_mask = key, accepted, mask
         self.primary_key=(primary_signal,tuple(self._selected_run(strong_green,*run[:3]) for run in self.menu_runs))
         return accepted
@@ -332,13 +350,22 @@ class FontRenderer:
 
     def _underlay_key(self,native):
         rows,xs,left,right,weights=self._heal_plan()
-        return hashlib.blake2b(native[rows,left].tobytes()+native[rows,right].tobytes()+native[self.last_mask.all(1)].tobytes(),digest_size=16).digest()
+        selected=b''.join(native[top:bottom,sample_left:sample_right].tobytes() for left,top,right,bottom,sample_left,sample_right in getattr(self,'menu_repairs',()))
+        return hashlib.blake2b(native[rows,left].tobytes()+native[rows,right].tobytes()+native[self.last_mask.all(1)].tobytes()+selected,digest_size=16).digest()
 
     def _heal_native(self, native):
         native=np.asarray(native)[:192]
         healed=native.copy();rows,xs,left,right,weights=self._heal_plan()
         a=native[rows,left].astype('float64');b=native[rows,right].astype('float64')
         healed[rows,xs]=(a+(b-a)*weights).astype('uint8')
+        for left,top,right,bottom,sample_left,sample_right in getattr(self,'menu_repairs',()):
+            samples=native[top:bottom,sample_left:sample_right].astype('int16')
+            green=(samples[:,:,1]>samples[:,:,0]+16)&(samples[:,:,1]>samples[:,:,2]+16)
+            for yy in range(bottom-top):
+                if np.count_nonzero(green[yy])<4:continue
+                color=np.median(samples[yy][green[yy]],axis=0).astype('uint8')
+                erase=self.last_mask[top+yy,left:right]
+                healed[top+yy,left:right][erase]=color
         return healed
 
     def clean_native(self,native):

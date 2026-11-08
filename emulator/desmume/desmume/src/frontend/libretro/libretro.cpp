@@ -122,6 +122,11 @@ extern "C" RETRO_API void retro_srw_copy_unknown_parts(void *rows,void *pixels,v
    if(pixels)memcpy(pixels,SRWWUnknownPixels,sizeof(SRWWUnknownPixels));
    if(palettes)memcpy(palettes,SRWWUnknownPalettes,sizeof(SRWWUnknownPalettes));
 }
+extern "C" RETRO_API void retro_srw_copy_sub_unknown_parts(void *rows,void *pixels,void *palettes) {
+   if(rows)memcpy(rows,SRWWSubUnknownParts,sizeof(SRWWSubUnknownParts));
+   if(pixels)memcpy(pixels,SRWWSubUnknownPixels,sizeof(SRWWSubUnknownPixels));
+   if(palettes)memcpy(palettes,SRWWSubUnknownPalettes,sizeof(SRWWSubUnknownPalettes));
+}
 extern "C" RETRO_API void retro_srw_set_ready_parts(const unsigned *ids,unsigned count) { if(count<200000)SRWWSetReadyParts(ids,count); }
 extern "C" RETRO_API void retro_srw_copy_part_palettes(void *out) { if(out)memcpy(out,SRWWPartPalettes,sizeof(SRWWPartPalettes)); }
 extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
@@ -129,6 +134,16 @@ extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
    if(owners)memcpy(owners,SRWWNativeOwner,sizeof(SRWWNativeOwner));
 }
 extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
+extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
+   if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
+   if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));
+   if(oam)memcpy(oam,SRWWSubOAM,sizeof(SRWWSubOAM));
+   if(palettes)memcpy(palettes,SRWWSubPalettes,sizeof(SRWWSubPalettes));
+   if(!GPU)return;
+   GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineMain():(GPUEngineBase*)GPU->GetEngineSub();
+   if(layers)memcpy(layers,engine->SRWWGetNativeLayerIDs(),256*192);
+   if(priorities)for(unsigned i=0;i<4;i++)((uint8_t*)priorities)[i]=engine->GetBGLayerInfoByID((GPULayerID)i).priority;
+}
 extern "C" RETRO_API void retro_srw_copy_layer_ids(void *out) { if(out&&GPU) { GPUEngineBase *engine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();memcpy(out,engine->SRWWGetNativeLayerIDs(),256*192); } }
 extern "C" RETRO_API void retro_srw_reset_code_cache() {
 #ifdef HAVE_JIT

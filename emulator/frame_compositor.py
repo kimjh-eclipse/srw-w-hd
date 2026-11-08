@@ -27,6 +27,7 @@ class FrameCompositor:
         kwargs=dict(robot=tuple(core.robot),obj=bytes(core.obj.raw),parts=core.parts.copy(),owners=core.owners.copy(),bgpriors=core.bgpriors.copy(),bgparts=core.bgparts.copy(),part_palettes=core.part_palettes.copy(),backgrounds=list(core.backgrounds))
         kwargs['render_width']=self.render_width
         kwargs['bg_layout']=list(core.bg_layout)
+        kwargs['sub_parts']=(core.sub_parts.copy(),core.sub_owners.copy(),bytes(core.sub_oam.raw),core.sub_palettes.copy(),core.sub_ids.copy(),core.sub_priorities.copy()) if core.sub_bridge else None
         if self.dynamic_parts:kwargs['unknown']=core.unknown_snapshot()
         return core.native.copy(),core.ids.copy(),tuple(core.hd),paused,frame,kwargs
     def submit(self,core,paused,frame):

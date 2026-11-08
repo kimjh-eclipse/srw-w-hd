@@ -11,7 +11,7 @@ class BeamObserver:
     @staticmethod
     def energy_table(palette):
         p=np.asarray(palette,dtype='uint16');r=p&31;g=(p>>5)&31;b=(p>>10)&31
-        return ((g>=24)&(g>=r+5)&(g+5>=b))|((g>=25)&(b>=25)&(r<=19))|((b>=27)&(r<=18)&(g>=15))|((r>=28)&(g>=27)&(b<=19))|((r>=27)&(b>=27)&(g<=18))
+        return ((g>=24)&(g>=r+5)&(g+5>=b))|((g>=25)&(b>=25)&(r<=19))|((b>=27)&(r<=18)&(g>=15))|((r>=28)&(g>=27)&(b<=19))|((r>=27)&(b>=27)&(g<=18))|((r>=28)&(g<=22)&(b<=18))|((r>=28)&(g>=28)&(b>=28))
 
     @staticmethod
     def classify(indices,palette):
@@ -24,15 +24,23 @@ class BeamObserver:
         colors=np.asarray(palette,dtype='uint16')[indices[mask]];r=colors&31;g=(colors>>5)&31;b=(colors>>10)&31
         green=int(np.count_nonzero((g>=25)&(r<=18)&(b<=25)))
         opaque=int(np.count_nonzero(indices))
-        return (width>=max(18,height*2.5) and int(mask.sum(1).max())>=12) or (green>=max(24,opaque*.55) and 10<=width<=24 and 4<=height<=24)
+        saturated=(np.maximum.reduce([r,g,b])-np.minimum.reduce([r,g,b]))>=8
+        stream=width>=max(18,height*2.5) and int(mask.sum(1).max())>=12
+        # Broad white armor is common; only a dense, very thin white core
+        # qualifies without a saturated energy color around it.
+        if np.count_nonzero(saturated)<24:
+            stream=width>=max(24,height*4) and len(xs)>=opaque*.8
+        return stream or (green>=max(24,opaque*.55) and 10<=width<=24 and 4<=height<=24)
 
     def active(self,core,oam,palette,registers):
         if not self.bound:
             core.api.retro_srw_copy_vram.argtypes=[C.c_uint,C.c_void_p,C.c_uint];self.bound=True
         disp=int(registers[0])|(int(registers[1])<<16);one_d=bool(disp&16);boundary=5+((disp>>20)&3) if one_d else 5
-        visible=np.bincount(core.owners[:120][core.ids[:120]==4],minlength=128);checked=0
+        # Native owners exclude sprites suppressed for HD replacement. Read OAM
+        # directly so enabling HD cannot disable weapon feedback.
+        eligible=self.energy_table(palette);eligible[:,0]=False
+        banks=eligible.any(axis=1)
         for index,(a,b,c,_) in enumerate(np.asarray(oam,dtype='uint16')):
-            if visible[index]<4:continue
             a,b,c=int(a),int(b),int(c);shape=a>>14;size=b>>14
             if shape==3 or ((a>>10)&3)>=2 or (not a&256 and a&512):continue
             x=b&511;y=a&255;x=x-512 if x>=256 else x;y=y-256 if y>=192 else y
@@ -40,10 +48,8 @@ class BeamObserver:
             if x>=256 or y>=120 or x+w*2<=0 or y+h*2<=0:continue
             eight=bool(a&8192)
             if eight and disp&0x80000000:continue
+            if not (banks.any() if eight else banks[c>>12]):continue
             colors=palette.reshape(-1) if eight else palette[c>>12]
-            if not (self.energy_table(colors)[1:]).any():continue
-            checked+=1
-            if checked>20:break
             tile_bytes=64 if eight else 32;stride=w//8*tile_bytes if one_d else 1024
             length=(h//8-1)*stride+w//8*tile_bytes
             base=0x06400000+((c&1023)<<boundary)
