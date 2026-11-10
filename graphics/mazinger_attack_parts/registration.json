@@ -1,0 +1,190 @@
+{
+  "applied": true,
+  "accepted": [
+    {
+      "resource": 2613,
+      "alpha_iou": 0.9068191444303262,
+      "one_pixel_precision": 0.9993451211525868,
+      "bindings": 19,
+      "one_pixel_recall": 0.9972869093375537,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "a43ccac33659b189aa868e1b82a843fbbfb044b0ba94aa80048b88a35e917484",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 2645,
+      "alpha_iou": 0.8918316141622525,
+      "one_pixel_precision": 0.9994095069382934,
+      "bindings": 15,
+      "one_pixel_recall": 0.990879670491321,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "3a9acbf7ce2f7c0f046874e85c1dffb11bff5a7c57526812907f5dc125a12ecd",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 2654,
+      "alpha_iou": 0.8520286396181385,
+      "one_pixel_precision": 0.9960762331838565,
+      "bindings": 18,
+      "one_pixel_recall": 0.9956088992974239,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "2ce4646c50797e650f690c4e2ec9b3c4d18bebc6c678a57c12bdefb9f139e78d",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 14462,
+      "alpha_iou": 0.8843261231281198,
+      "one_pixel_precision": 0.9952440033085195,
+      "bindings": 51,
+      "one_pixel_recall": 0.9868878585917126,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "14a94a43af3833f7323d64b3ba1d07dac98d61ee8fe1e9c0250fa635ec48d6fa",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 14510,
+      "alpha_iou": 0.8004903463070794,
+      "one_pixel_precision": 0.973811833171678,
+      "bindings": 11,
+      "one_pixel_recall": 0.9960460100647016,
+      "rounded_tolerance": true,
+      "joined_wing_iou": null,
+      "component_adjustments": [
+        {
+          "source": [
+            0,
+            0,
+            48,
+            64
+          ],
+          "target": [
+            1,
+            1,
+            47,
+            64
+          ]
+        },
+        {
+          "source": [
+            64,
+            15,
+            112,
+            49
+          ],
+          "target": [
+            65,
+            15,
+            111,
+            48
+          ]
+        },
+        {
+          "source": [
+            111,
+            0,
+            144,
+            64
+          ],
+          "target": [
+            112,
+            0,
+            144,
+            64
+          ]
+        }
+      ],
+      "generated_sha256": "03df5acd9300bd49a366fb0bf19794dbe4d2c38435af640827b8b031442f5226",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 14882,
+      "alpha_iou": 0.8638954073080791,
+      "one_pixel_precision": 0.995085995085995,
+      "bindings": 82,
+      "one_pixel_recall": 0.9959424566580598,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "f93dded24131792f1437e999297f26a59bf0bfbaf6689ce86b340053b902c69b",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 14886,
+      "alpha_iou": 0.8633926395320497,
+      "one_pixel_precision": 0.9929033075655811,
+      "bindings": 129,
+      "one_pixel_recall": 0.9991891891891892,
+      "rounded_tolerance": false,
+      "joined_wing_iou": 0.8457207207207207,
+      "component_adjustments": [],
+      "generated_sha256": "4aec83335ac72443304a95effd6305d7c8d03cfbb6630b7fa8352bc05bf5dd68",
+      "actual_game_verified": false
+    },
+    {
+      "resource": 14887,
+      "alpha_iou": 0.8842737241928567,
+      "one_pixel_precision": 0.9968173138128581,
+      "bindings": 174,
+      "one_pixel_recall": 0.9924901973815379,
+      "rounded_tolerance": false,
+      "joined_wing_iou": null,
+      "component_adjustments": [],
+      "generated_sha256": "53bd896d5bfdd4cde2c1f1cdb28af3836bd9f96713b9fec2e292859634e888f6",
+      "actual_game_verified": false
+    }
+  ],
+  "rejected": [],
+  "unmatched": [],
+  "native_engine_replay": {
+    "frames": [
+      {
+        "frame": 1400,
+        "active_resources": [
+          14462,
+          14510
+        ],
+        "unprepared_bindings": [],
+        "image": "hd_1400.png"
+      },
+      {
+        "frame": 1560,
+        "active_resources": [
+          6253,
+          14528,
+          14886
+        ],
+        "unprepared_bindings": [],
+        "image": "hd_1560.png"
+      },
+      {
+        "frame": 1800,
+        "active_resources": [],
+        "unprepared_bindings": [],
+        "image": "hd_1800.png"
+      },
+      {
+        "frame": 1920,
+        "active_resources": [
+          2613,
+          2645,
+          2654,
+          14882,
+          14886,
+          14887
+        ],
+        "unprepared_bindings": [],
+        "image": "hd_1920.png"
+      }
+    ],
+    "reviewed_getter_wing_join": true,
+    "scope": "These captured frames only, not every pose in each bank."
+  }
+}

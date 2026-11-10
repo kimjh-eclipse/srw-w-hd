@@ -151,7 +151,8 @@ class PartsRenderer:
             if palette_key not in self.palette_luts:
                 codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
                 self.palette_luts[palette_key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
-        registration_mode='painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2')
+        registration_mode=('painted-attack-bank-v2' if source.get('registered_attack_bank') else
+            'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
         identity=[self.registration_version,registration_mode,x,y,w,h]
         for path in (ROOT/'graphics'/spec['image'],ROOT/'graphics'/spec['reference']):
             stat=path.stat();identity.extend([str(path),stat.st_mtime_ns,stat.st_size])
@@ -163,11 +164,12 @@ class PartsRenderer:
         paint_atlas,native_atlas=self.atlas_pair(name)
         sx=paint_atlas.width/native_atlas.width;sy=paint_atlas.height/native_atlas.height
         paint=paint_atlas.crop((round(x*sx),round(y*sy),round((x+w)*sx),round((y+h)*sy))).resize((w*8,h*8),Image.Resampling.LANCZOS)
-        if source.get('secondary_unit'):
-            # These whole mini poses were registered offline. They have no
-            # moving attachment seam to pin to a low-resolution pixel mask.
+        if source.get('secondary_unit') or source.get('registered_attack_bank'):
+            # These atlases were registered offline in exact source texel
+            # coordinates. Keep shared seams at their original OAM pivots;
+            # a per-crop shift would move overlapping pieces independently.
             from painted_edges import clean_alpha
-            aligned=clean_alpha(paint)
+            aligned=paint if source.get('registered_attack_bank') else clean_alpha(paint)
             stats=dict(dx=0,dy=0,zoom=1,offline_registered=True,reference_fill_pixels=0,filled_edge_pixels=0)
         else:aligned,stats=register_part(paint,native_atlas.crop((x,y,x+w,y+h)))
         if name=='wing_primary':

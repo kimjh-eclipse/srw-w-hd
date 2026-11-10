@@ -1,0 +1,53 @@
+{
+  "generator": "built-in image_gen",
+  "style": "Smooth anime ink and cel shading; exact source atlas coordinates and attachment pivots; transparent canvas.",
+  "revisions": {
+    "14462": "Reject initial distorted faces; use two eyes, green forehead jewel and clear silver faceplate.",
+    "14510": "Replace angular armor with rounded cylindrical limbs; match corrected silver mechanical faceplate.",
+    "2613": "Reject first candidate failing geometry; redraw without completing or moving fragments.",
+    "14886": "Paint joined wing before slicing at the two original OBJ rectangles; remove exterior bloom using its painted ink contour.",
+    "14887": "Correct the front-facing Getter helmet: two eyes, single forehead jewel, clear silver faceplate; retain original atlas layout."
+  },
+  "items": [
+    {
+      "resource": 2613,
+      "reference": "bank_2613_reference.png",
+      "selected": "bank_2613_generated.png"
+    },
+    {
+      "resource": 2645,
+      "reference": "bank_2645_reference.png",
+      "selected": "bank_2645_generated.png"
+    },
+    {
+      "resource": 2654,
+      "reference": "bank_2654_reference.png",
+      "selected": "bank_2654_generated.png"
+    },
+    {
+      "resource": 14462,
+      "reference": "bank_14462_reference.png",
+      "selected": "bank_14462_generated.png"
+    },
+    {
+      "resource": 14510,
+      "reference": "bank_14510_reference.png",
+      "selected": "bank_14510_generated.png"
+    },
+    {
+      "resource": 14882,
+      "reference": "bank_14882_reference.png",
+      "selected": "bank_14882_generated.png"
+    },
+    {
+      "resource": 14886,
+      "reference": "bank_14886_reference.png",
+      "selected": "bank_14886_generated.png"
+    },
+    {
+      "resource": 14887,
+      "reference": "bank_14887_reference.png",
+      "selected": "bank_14887_generated.png"
+    }
+  ]
+}

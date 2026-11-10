@@ -54,6 +54,25 @@ The exact source audit remains in the fixed native capture folder.
 
 ## Historical missing-texture audit
 
+### Corrections after the FDS visual review
+
+The earlier native bank contact sheet was an extraction reference, not an HD
+result. New dedicated paintings cover banks 2613, 2645, 2654, 14462, 14510,
+14882, 14886 and 14887. Their 499 existing OBJ rectangles now use exact ROM
+index coordinates in separate bounded 768-wide atlases. Rounded Getter armor
+and corrected simple mechanical faces replace the rejected initial drawings.
+The shared purple wing is painted as one surface and split at the original
+two OAM rectangles, including their one-row offset and native mirroring.
+This avoids the independent crop registration that caused wing seams.
+
+Compact cut-ins now require the complete normalized 512-cell SCR signature.
+The earlier 16-cell prefix could consist entirely of blank tiles and matched
+stale face/effect uploads during unrelated attacks. The native-state check
+retains simultaneous IDs 171/172 at frame 360 and 175/177/178 at frame 720,
+while rejecting the stale blue band at frame 1320. Modified partial maps
+without an exact complete signature fall back to native graphics; that is
+not a certificate that every intermediate cut-in phase is HD.
+
 The audit now includes locked-animation previews. Of 3,902 retained native
 rectangle inputs, the current production tile assembler resolves 414; 3,488
 still fail that assembly path. A direct indexed-binding cross-check found no

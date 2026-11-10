@@ -1,5 +1,5 @@
 diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
-index 026bf14..d406d36 100644
+index 026bf14..4e9b718 100644
 --- a/desmume/src/GPU.cpp
 +++ b/desmume/src/GPU.cpp
 @@ -24,6 +24,7 @@
@@ -10,7 +10,7 @@ index 026bf14..d406d36 100644
  #include <iostream>
  
  #include "common.h"
-@@ -38,6 +39,143 @@
+@@ -38,6 +39,154 @@
  #include "matrix.h"
  #include "emufile.h"
  #include "utils/task.h"
@@ -23,14 +23,23 @@ index 026bf14..d406d36 100644
 +struct SRWWCutin { uint32_t id,width,height; };
 +static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 +static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
++static std::unordered_map<uint32_t,uint32_t> SRWWCutinMapWindows;
++static std::unordered_map<uint32_t,uint32_t> SRWWCutinMapCounts;
 +static std::unordered_set<uint32_t> SRWWCutinMapSet;
 +void SRWWRegisterCutinMaps(const uint32_t *rows,unsigned count) {
 +    SRWWCutinMaps.clear();SRWWCutinMapSet.clear();
 +    for(unsigned i=0;i<count;i++){SRWWCutinMaps[rows[i*2]]=rows[i*2+1];SRWWCutinMapSet.insert(rows[i*2+1]);}
 +}
-+static uint32_t SRWWCutinMapHash(uint32_t map,unsigned origin) {
++void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count) {
++    SRWWCutinMapWindows.clear();SRWWCutinMapCounts.clear();
++    for(unsigned i=0;i<count;i++) {
++        const uint32_t *r=rows+i*3;
++        if(r[2]>16 && r[2]<=512){SRWWCutinMapWindows[r[0]]=r[1];SRWWCutinMapCounts[r[0]]=r[2];}
++    }
++}
++static uint32_t SRWWCutinMapHash(uint32_t map,unsigned origin,unsigned count=16) {
 +    const u16 *entries=(const u16*)MMU_gpu_map(map);uint32_t hash=2166136261u;
-+    for(unsigned i=0;i<16;i++) {
++    for(unsigned i=0;i<count;i++) {
 +        unsigned value=LE_TO_LOCAL_16(entries[i]);
 +        value=(((value&1023u)-origin)&1023u)|(value&3072u);
 +        hash=(hash^(value&255u))*16777619u;hash=(hash^(value>>8))*16777619u;
@@ -38,13 +47,15 @@ index 026bf14..d406d36 100644
 +    return hash;
 +}
 +static bool SRWWCutinMapMatches(unsigned id,uint32_t map,unsigned origin) {
++    const auto window=SRWWCutinMapWindows.find(id);
++    if(window!=SRWWCutinMapWindows.end())return window->second==SRWWCutinMapHash(map,origin,SRWWCutinMapCounts[id]);
 +    const auto item=SRWWCutinMaps.find(id);
 +    return item==SRWWCutinMaps.end() || item->second==SRWWCutinMapHash(map,origin);
 +}
 +static bool SRWWCutinOrigin8192=false;
 +static bool SRWWCutinPadded=false;
 +void SRWWRegisterCutins(const uint32_t *rows,unsigned count) {
-+    SRWWCutins.clear();SRWWCutinMaps.clear();SRWWCutinMapSet.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
++    SRWWCutins.clear();SRWWCutinMaps.clear();SRWWCutinMapSet.clear();SRWWCutinMapWindows.clear();SRWWCutinMapCounts.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
 +    for(unsigned i=0;i<count;i++) {
 +        const uint32_t *r=rows+i*5;
 +        if(r[1]>1 && (r[2]&~768u)<4){SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};if((r[2]&768u)==512u)SRWWCutinOrigin8192=true;if((r[2]&768u)==768u)SRWWCutinPadded=true;}
@@ -154,7 +165,7 @@ index 026bf14..d406d36 100644
  
  
  #ifdef FASTBUILD
-@@ -4103,6 +4241,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
+@@ -4103,6 +4252,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo &compInfo, const size_t srcX, u16 srcColor16, bool opaque)
  {
@@ -162,7 +173,7 @@ index 026bf14..d406d36 100644
  	if (MOSAIC)
  	{
  		//due to this early out, we will get incorrect behavior in cases where
-@@ -5217,6 +5356,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+@@ -5217,6 +5367,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
  	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
  	{
  		OAMAttributes spriteInfo = this->_oamList[spriteNum];
@@ -171,7 +182,7 @@ index 026bf14..d406d36 100644
  		
  		//for each sprite:
  		if (cost >= 2130)
-@@ -5633,6 +5774,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+@@ -5633,6 +5785,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
  	//how it interacts with this. I wish we knew why we needed this
  	
  	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
@@ -179,7 +190,7 @@ index 026bf14..d406d36 100644
  	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
  	
  	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
-@@ -6395,6 +6537,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+@@ -6395,6 +6548,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
  {
@@ -204,7 +215,7 @@ index 5807cef..402b70b 100644
  	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
  	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
 diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
-index 2314af9..0ade88f 100644
+index 2314af9..d70c79f 100644
 --- a/desmume/src/frontend/libretro/libretro.cpp
 +++ b/desmume/src/frontend/libretro/libretro.cpp
 @@ -14,6 +14,10 @@
@@ -218,7 +229,7 @@ index 2314af9..0ade88f 100644
  #include "SPU.h"
  #include "emufile.h"
  #include "common.h"
-@@ -70,6 +74,93 @@ enum {
+@@ -70,6 +74,94 @@ enum {
  
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
@@ -265,6 +276,7 @@ index 2314af9..0ade88f 100644
 +}
 +extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
 +extern "C" RETRO_API void retro_srw_get_hd_layers(unsigned *out) { if(out) memcpy(out,SRWWHD_Layers,sizeof(SRWWHD_Layers)); }
++extern "C" RETRO_API void retro_srw_register_cutin_map_windows(const unsigned *rows,unsigned count) { SRWWRegisterCutinMapWindows(rows,count); }
 +extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 +extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 +extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
@@ -312,7 +324,7 @@ index 2314af9..0ade88f 100644
  static retro_input_poll_t poll_cb = NULL;
  static retro_input_state_t input_cb = NULL;
  retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -2075,10 +2166,13 @@ void retro_run (void)
+@@ -2075,10 +2167,13 @@ void retro_run (void)
     // RUN
     frameIndex ++;
     bool skipped = frameIndex <= frameSkip;
@@ -330,7 +342,7 @@ diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd.h
-@@ -0,0 +1,38 @@
+@@ -0,0 +1,39 @@
 +// Project-local GPL-2.0-or-later HD cut-in bridge.
 +#ifndef SRWW_HD_H
 +#define SRWW_HD_H
@@ -360,6 +372,7 @@ new file mode 100644
 +void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
 +void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
 +void SRWWRegisterCutins(const uint32_t *rows,unsigned count);
++void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count);
 +void SRWWSetReadyParts(const uint32_t *ids,unsigned count);
 +void SRWWBeginPartsFrame();
 +uint32_t SRWWTargetEngine();

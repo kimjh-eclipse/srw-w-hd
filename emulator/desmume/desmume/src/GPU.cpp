@@ -48,14 +48,23 @@ uint32_t SRWWHD_Layers[4][12]={0};
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
+static std::unordered_map<uint32_t,uint32_t> SRWWCutinMapWindows;
+static std::unordered_map<uint32_t,uint32_t> SRWWCutinMapCounts;
 static std::unordered_set<uint32_t> SRWWCutinMapSet;
 void SRWWRegisterCutinMaps(const uint32_t *rows,unsigned count) {
     SRWWCutinMaps.clear();SRWWCutinMapSet.clear();
     for(unsigned i=0;i<count;i++){SRWWCutinMaps[rows[i*2]]=rows[i*2+1];SRWWCutinMapSet.insert(rows[i*2+1]);}
 }
-static uint32_t SRWWCutinMapHash(uint32_t map,unsigned origin) {
+void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count) {
+    SRWWCutinMapWindows.clear();SRWWCutinMapCounts.clear();
+    for(unsigned i=0;i<count;i++) {
+        const uint32_t *r=rows+i*3;
+        if(r[2]>16 && r[2]<=512){SRWWCutinMapWindows[r[0]]=r[1];SRWWCutinMapCounts[r[0]]=r[2];}
+    }
+}
+static uint32_t SRWWCutinMapHash(uint32_t map,unsigned origin,unsigned count=16) {
     const u16 *entries=(const u16*)MMU_gpu_map(map);uint32_t hash=2166136261u;
-    for(unsigned i=0;i<16;i++) {
+    for(unsigned i=0;i<count;i++) {
         unsigned value=LE_TO_LOCAL_16(entries[i]);
         value=(((value&1023u)-origin)&1023u)|(value&3072u);
         hash=(hash^(value&255u))*16777619u;hash=(hash^(value>>8))*16777619u;
@@ -63,13 +72,15 @@ static uint32_t SRWWCutinMapHash(uint32_t map,unsigned origin) {
     return hash;
 }
 static bool SRWWCutinMapMatches(unsigned id,uint32_t map,unsigned origin) {
+    const auto window=SRWWCutinMapWindows.find(id);
+    if(window!=SRWWCutinMapWindows.end())return window->second==SRWWCutinMapHash(map,origin,SRWWCutinMapCounts[id]);
     const auto item=SRWWCutinMaps.find(id);
     return item==SRWWCutinMaps.end() || item->second==SRWWCutinMapHash(map,origin);
 }
 static bool SRWWCutinOrigin8192=false;
 static bool SRWWCutinPadded=false;
 void SRWWRegisterCutins(const uint32_t *rows,unsigned count) {
-    SRWWCutins.clear();SRWWCutinMaps.clear();SRWWCutinMapSet.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
+    SRWWCutins.clear();SRWWCutinMaps.clear();SRWWCutinMapSet.clear();SRWWCutinMapWindows.clear();SRWWCutinMapCounts.clear();SRWWCutinOrigin8192=false;SRWWCutinPadded=false;
     for(unsigned i=0;i<count;i++) {
         const uint32_t *r=rows+i*5;
         if(r[1]>1 && (r[2]&~768u)<4){SRWWCutins[((uint64_t)r[2]<<32)|r[0]]={r[1],r[3],r[4]};if((r[2]&768u)==512u)SRWWCutinOrigin8192=true;if((r[2]&768u)==768u)SRWWCutinPadded=true;}

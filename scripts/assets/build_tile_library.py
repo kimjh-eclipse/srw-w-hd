@@ -81,6 +81,12 @@ def main():
     secondary=OUT/'secondary_units/registration.json'
     if secondary.exists() and json.loads(secondary.read_text()).get('applied'):
         for binding in meta['bindings']:
+            if binding.get('registered_attack_bank'):
+                import base64
+                atlas=meta['atlases'][binding['atlas_id']]
+                native=np.frombuffer(zlib.decompress(base64.b64decode(binding['index_pixels'])),dtype='uint8').reshape(binding['h'],binding['w'])
+                add(binding['atlas_id'],binding['resource'],atlas['image'],atlas['native_size'],binding['x'],binding['y'],native,binding['original_palette_rgb'],6,preserve_contour=True)
+                continue
             if not (binding.get('secondary_unit') or binding.get('shared_weapon_frame') or binding.get('named_attack_frame')):continue
             atlas=meta['atlases'][binding['atlas_id']];resource=binding['resource']
             if binding.get('observed_native_rectangle'):

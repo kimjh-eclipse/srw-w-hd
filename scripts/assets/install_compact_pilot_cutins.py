@@ -40,6 +40,7 @@ def main():
         sample=data[8+1024:8+3072];assert len(sample)==2048
         signature=fnv(sample);mapdata=read(item['map'])
         map_signature=fnv(b''.join(struct.pack('<H',v&0xfff) for v in struct.unpack_from('<16H',mapdata,8)))
+        map_window=fnv(b''.join(struct.pack('<H',v&0xfff) for v in struct.unpack_from('<512H',mapdata,8)))
         prior=existing.get(resource);ident=prior['id'] if prior else next_id
         assert signature not in signatures or signatures[signature]==ident,('ambiguous_signature',resource)
         rel=f'compact_pilot_cutins/cutin_{resource}_hd.png'
@@ -47,6 +48,7 @@ def main():
             source_palettes=item['palettes'],layer=1,layers=[0,1,2,3],native_size=[256,128],
             restore_rect=[0,0,256,128],image=rel,paint_image=rel,signatures=[signature],
             map_signature=map_signature,signature_mode='image_origin',alpha_iou=iou,
+            map_window_signature=map_window,map_window_entries=512,
             gameplay_verified=False,simultaneous_layers=True)
         if args.apply:
             art.save(ROOT/'graphics'/rel,optimize=True)

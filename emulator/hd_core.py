@@ -76,6 +76,7 @@ class Core:
             rows=[]
             for cutin in json.loads(cutins_path.read_text())['cutins']:
                 if not (ROOT/'graphics'/cutin['image']).exists():continue
+                if cutin.get('map_window_entries') and not hasattr(self.api,'retro_srw_register_cutin_map_windows'):continue
                 for signature in cutin['signatures']:
                     mode={'image_origin':256,'origin_8192':512,'row_padded':768}.get(cutin.get('signature_mode'),0)
                     for layer in cutin.get('layers',[cutin['layer']]):rows.extend([signature,cutin['id'],layer|mode,*cutin['native_size']])
@@ -87,6 +88,12 @@ class Core:
                     if 'map_signature' in cutin:maps.extend([cutin['id'],cutin['map_signature']])
                 self.api.retro_srw_register_cutin_maps.argtypes=[C.POINTER(C.c_uint),C.c_uint]
                 packed=(C.c_uint*len(maps))(*maps);self.api.retro_srw_register_cutin_maps(packed,len(maps)//2)
+            if hasattr(self.api,'retro_srw_register_cutin_map_windows'):
+                windows=[]
+                for cutin in json.loads(cutins_path.read_text())['cutins']:
+                    if cutin.get('map_window_entries'):windows.extend([cutin['id'],cutin['map_window_signature'],cutin['map_window_entries']])
+                self.api.retro_srw_register_cutin_map_windows.argtypes=[C.POINTER(C.c_uint),C.c_uint]
+                packed=(C.c_uint*len(windows))(*windows);self.api.retro_srw_register_cutin_map_windows(packed,len(windows)//3)
         self.api.retro_srw_copy_parts.argtypes=[C.c_void_p,C.c_void_p]
         self.api.retro_srw_set_hd_enabled(int(enabled))
         self.api.retro_srw_copy_layer_ids.argtypes=[C.c_void_p]

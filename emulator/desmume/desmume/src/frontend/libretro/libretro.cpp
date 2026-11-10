@@ -117,6 +117,7 @@ extern "C" RETRO_API unsigned retro_srw_copy_effect_debug(void *oam, void *objPa
 }
 extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
 extern "C" RETRO_API void retro_srw_get_hd_layers(unsigned *out) { if(out) memcpy(out,SRWWHD_Layers,sizeof(SRWWHD_Layers)); }
+extern "C" RETRO_API void retro_srw_register_cutin_map_windows(const unsigned *rows,unsigned count) { SRWWRegisterCutinMapWindows(rows,count); }
 extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }

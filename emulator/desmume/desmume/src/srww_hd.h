@@ -27,6 +27,7 @@ void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding);
 void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
 void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
 void SRWWRegisterCutins(const uint32_t *rows,unsigned count);
+void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count);
 void SRWWSetReadyParts(const uint32_t *ids,unsigned count);
 void SRWWBeginPartsFrame();
 uint32_t SRWWTargetEngine();
