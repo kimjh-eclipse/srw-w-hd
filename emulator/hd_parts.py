@@ -151,7 +151,7 @@ class PartsRenderer:
             if palette_key not in self.palette_luts:
                 codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
                 self.palette_luts[palette_key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
-        registration_mode=('painted-attack-bank-v2' if source.get('registered_attack_bank') else
+        registration_mode=('painted-attack-bank-v3' if source.get('registered_attack_bank') else
             'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
         identity=[self.registration_version,registration_mode,x,y,w,h]
         for path in (ROOT/'graphics'/spec['image'],ROOT/'graphics'/spec['reference']):
@@ -169,8 +169,12 @@ class PartsRenderer:
             # coordinates. Keep shared seams at their original OAM pivots;
             # a per-crop shift would move overlapping pieces independently.
             from painted_edges import clean_alpha
-            aligned=paint if source.get('registered_attack_bank') else clean_alpha(paint)
+            if source.get('registered_attack_bank'):
+                from painted_edges import remove_unattached_paint
+                aligned,removed=remove_unattached_paint(paint,native_atlas.crop((x,y,x+w,y+h)))
+            else:aligned=clean_alpha(paint);removed=0
             stats=dict(dx=0,dy=0,zoom=1,offline_registered=True,reference_fill_pixels=0,filled_edge_pixels=0)
+            stats['unattached_paint_components_removed']=removed
         else:aligned,stats=register_part(paint,native_atlas.crop((x,y,x+w,y+h)))
         if name=='wing_primary':
             # The native silhouette contract must not refill the painted

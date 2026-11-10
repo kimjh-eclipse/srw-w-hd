@@ -64,6 +64,10 @@ and corrected simple mechanical faces replace the rejected initial drawings.
 The shared purple wing is painted as one surface and split at the original
 two OAM rectangles, including their one-row offset and native mirroring.
 This avoids the independent crop registration that caused wing seams.
+Per-crop cleanup also removes disconnected painted strokes with no native
+foreground seed. These were fragments of neighboring atlas objects appearing
+across Getter's cheek. Connected HD contours and separate supported particles
+retain their painted alpha; they are not clipped to the DS pixel silhouette.
 
 Compact cut-ins now require the complete normalized 512-cell SCR signature.
 The earlier 16-cell prefix could consist entirely of blank tiles and matched
