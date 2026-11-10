@@ -14,13 +14,32 @@ from hd_renderer import HDRenderer
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--frames',type=int,default=180)
+    parser.add_argument('--scenes',help='Comma-separated saved native scene names')
     args=parser.parse_args();out=ROOT/'test_current/combat/current_scenes';out.mkdir(exist_ok=True)
     scenes=['eid_firing','bonta_attack','vulcan','quatre_cutin_full','duo_cutin_full','getter_cutin','golion_cutin_full','sandrock_forecast','duo_map_forecast']
+    if args.scenes:scenes=args.scenes.split(',')
     c=Core(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds',demo=True,user_dir=out/'isolated_saves')
-    renderer=HDRenderer(async_parts=False,dynamic_parts=True);renderer.set_resolution(768)
+    renderer=HDRenderer(async_parts=True,dynamic_parts=True);renderer.set_resolution(768)
     rows=[];cards=[]
     try:
         for scene in scenes:
+            c.load(ROOT/f'test_current/combat/{scene}.state')
+            # Finish cold texture preparation while the diagnostic is paused.
+            # A binding ID alone is not evidence of a displayed HD texture.
+            c.run();c.audio.clear();deadline=time.monotonic()+30
+            prefetch_groups=renderer.parts_renderer.prefetch_groups
+            renderer.parts_renderer.prefetch_groups={}
+            while True:
+                renderer.render_top(c.native,c.ids,c.hd,paused=True,parts=c.parts,obj=c.obj.raw,
+                    owners=c.owners,bgpriors=c.bgpriors,bgparts=c.bgparts,part_palettes=c.part_palettes,
+                    backgrounds=c.backgrounds,bg_layout=c.bg_layout,unknown=c.unknown_snapshot(),
+                    sub_parts=(c.sub_parts,c.sub_owners,c.sub_oam.raw,c.sub_palettes,c.sub_ids,c.sub_priorities))
+                if not (renderer.parts_renderer.pending or renderer.parts_renderer.unmapped_pending):break
+                if time.monotonic()>=deadline:
+                    (out/'warmup_timeout.json').write_text(json.dumps(dict(scene=scene,pending=[renderer.parts_renderer.bindings[b-1] for b in renderer.parts_renderer.pending],unknown_pending=[dict(key=key,descriptor=entry[2],request=entry[1]) for key,entry in renderer.parts_renderer.unmapped_pending.items()],errors=renderer.parts_renderer.prepare_errors),indent=2))
+                    raise AssertionError((scene,'HD preparation timed out'))
+                time.sleep(.02)
+            renderer.parts_renderer.prefetch_groups=prefetch_groups
             c.load(ROOT/f'test_current/combat/{scene}.state')
             seen=set();cutins=set();durations=[];active_frames=0
             c.api.retro_get_memory_data.restype=C.c_void_p;ram=c.api.retro_get_memory_data(2)

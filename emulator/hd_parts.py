@@ -106,7 +106,7 @@ class PartsRenderer:
             if queued:break
 
     def schedule_unknown(self,snapshot):
-        if not self.dynamic_parts or snapshot is None:return
+        if not self.dynamic_parts:return
         for key,(future,request,descriptor) in list(self.unmapped_pending.items()):
             if not future.done():continue
             del self.unmapped_pending[key]
@@ -120,6 +120,9 @@ class PartsRenderer:
             self.runtime_requests[binding]=request;self.ready_aliases[binding]=[binding]
             if lut is not None:self.palette_luts[palette_key]=np.frombuffer(lut,dtype='uint8').copy()
             self.dynamic_bindings.put((key[0],key[1],binding));self.ready_generation+=1
+        # Finished work still belongs in the stage cache after its source OBJ
+        # disappears. Empty frames must drain the queue too.
+        if snapshot is None:return
         rows,pixels,palettes=snapshot
         for i in np.flatnonzero(rows[:,0]):
             row=rows[i];identity=(int(row[0]),int(row[7]))
@@ -148,7 +151,8 @@ class PartsRenderer:
             if palette_key not in self.palette_luts:
                 codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
                 self.palette_luts[palette_key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
-        identity=[self.registration_version,'painted-wing-v2' if name=='wing_primary' else 'native-crop-v2',x,y,w,h]
+        registration_mode='painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2')
+        identity=[self.registration_version,registration_mode,x,y,w,h]
         for path in (ROOT/'graphics'/spec['image'],ROOT/'graphics'/spec['reference']):
             stat=path.stat();identity.extend([str(path),stat.st_mtime_ns,stat.st_size])
         key=hashlib.sha256(json.dumps(identity).encode()).hexdigest()
@@ -159,7 +163,13 @@ class PartsRenderer:
         paint_atlas,native_atlas=self.atlas_pair(name)
         sx=paint_atlas.width/native_atlas.width;sy=paint_atlas.height/native_atlas.height
         paint=paint_atlas.crop((round(x*sx),round(y*sy),round((x+w)*sx),round((y+h)*sy))).resize((w*8,h*8),Image.Resampling.LANCZOS)
-        aligned,stats=register_part(paint,native_atlas.crop((x,y,x+w,y+h)))
+        if source.get('secondary_unit'):
+            # These whole mini poses were registered offline. They have no
+            # moving attachment seam to pin to a low-resolution pixel mask.
+            from painted_edges import clean_alpha
+            aligned=clean_alpha(paint)
+            stats=dict(dx=0,dy=0,zoom=1,offline_registered=True,reference_fill_pixels=0,filled_edge_pixels=0)
+        else:aligned,stats=register_part(paint,native_atlas.crop((x,y,x+w,y+h)))
         if name=='wing_primary':
             # The native silhouette contract must not refill the painted
             # V-fin/cape contour with stair-stepped source pixels.

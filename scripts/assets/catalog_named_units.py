@@ -22,6 +22,9 @@ UNIT_STATS=0x763e0
 UNIT_GFX=0x716d8
 WEAPON_MAP=0x708c0
 WEAPON_STATS=0x80d58
+PILOT_MAP=0x70074
+PILOT_STATS=0x90b0c
+PILOT_COUNT=(WEAPON_MAP-PILOT_MAP)//4
 UNIT_COUNT=493
 WEAPON_COUNT=(UNIT_GFX-WEAPON_MAP)//2
 
@@ -88,6 +91,10 @@ def catalog():
         if not b.get('disabled') and 'resource' in b:registered[b['resource']].append(bid)
     primary=json.loads((ROOT/'graphics/all_units/installed.json').read_text())
     for row in primary['coverage']:registered[row['resource']].extend(row['bindings'])
+    pilots=[]
+    for pid in range(PILOT_COUNT):
+        stats,slot=struct.unpack_from('<hh',original,PILOT_MAP+pid*4)
+        pilots.append(dict(pilot_id=pid,stats_id=stats,roster_slot=slot,**names(PILOT_STATS+stats*168)))
     units=[]
     for uid in range(UNIT_COUNT):
         stats,secondary=struct.unpack_from('<hh',original,UNIT_MAP+uid*4)
@@ -95,11 +102,19 @@ def catalog():
         off=UNIT_STATS+88*stats;gfx=UNIT_GFX+40*uid
         start,end=struct.unpack_from('<HH',original,gfx+32)
         img=struct.unpack_from('<H',original,gfx+8)[0]
+        small=struct.unpack_from('<H',original,gfx+4)[0]
         palette,pattern=struct.unpack_from('<HH',original,gfx+10)
         series_ptr=struct.unpack_from('<I',original,off+12)[0]
+        pilot_id=struct.unpack_from('<H',original,off+38)[0]
+        pilot=pilots[pilot_id] if pilot_id<PILOT_COUNT else None
         units.append(dict(unit_id=uid,stats_id=stats,secondary_map_id=secondary,**names(off),
+                          default_pilot_id=pilot_id if pilot else None,
+                          default_pilot_name_ja=pilot['name_ja'] if pilot else None,
+                          default_pilot_roster_slot=pilot['roster_slot'] if pilot else None,
+                          default_pilot_ids=[p for p in struct.unpack_from('<6H',original,off+38) if p<PILOT_COUNT],
                           series_ja=text(original,series_ptr),
                           primary_image=img if kinds.get(img)=='IMG' else None,
+                          secondary_image=small if kinds.get(small)=='IMG' else None,
                           resource_start=start if start!=65535 else None,
                           resource_end=end if end!=65535 else None,
                           registered_primary_bindings=len(set(registered[img])),
@@ -129,11 +144,11 @@ def catalog():
                 scope='ROM-defined records, including enemy/stat/transform variants; not unique designs',
                 units_with_unmapped_primary_parts=[u['unit_id'] for u in units if u['primary_part_coverage'].get('unmapped_parts')],
                 units_with_primary_bounds_issues=[u['unit_id'] for u in units if u['primary_part_coverage'].get('out_of_bounds')],
-                units=units,weapons=weapons)
+                pilots=pilots,units=units,weapons=weapons)
 
 def main():
     result=catalog();out=ROOT/'test_current/parts/named_unit_catalog.json'
     out.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
-    print(json.dumps({k:v for k,v in result.items() if k not in ('units','weapons')},ensure_ascii=False))
+    print(json.dumps({k:v for k,v in result.items() if k not in ('units','weapons','pilots')},ensure_ascii=False))
 
 if __name__=='__main__':main()

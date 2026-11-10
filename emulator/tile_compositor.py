@@ -88,5 +88,9 @@ class TileCompositor:
             uncovered.difference_update(matches);groups.append(dict(source=identifier,tiles=len(matches)))
         if uncovered:return None,dict(reason='incomplete coherent assembly',uncovered=len(uncovered))
         native=Image.fromarray(np.dstack([target_rgb[indices].astype('uint8'),(indices!=0).astype('uint8')*255]))
-        art,stats=register_part(canvas,native);stats['tile_groups']=groups;stats['exact_tiles']=len(tiles)
+        if all(self.source(group['source'])[0].get('preserve_contour') for group in groups):
+            from painted_edges import clean_alpha
+            art=clean_alpha(canvas);stats=dict(dx=0,dy=0,zoom=1,offline_registered=True,reference_fill_pixels=0,filled_edge_pixels=0)
+        else:art,stats=register_part(canvas,native)
+        stats['tile_groups']=groups;stats['exact_tiles']=len(tiles)
         return art,stats

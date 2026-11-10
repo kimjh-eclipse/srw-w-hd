@@ -78,6 +78,12 @@ class Core:
                     for layer in cutin.get('layers',[cutin['layer']]):rows.extend([signature,cutin['id'],layer|mode,*cutin['native_size']])
             self.api.retro_srw_register_cutins.argtypes=[C.POINTER(C.c_uint),C.c_uint]
             values=(C.c_uint*len(rows))(*rows);self.api.retro_srw_register_cutins(values,len(rows)//5)
+            if hasattr(self.api,'retro_srw_register_cutin_maps'):
+                maps=[]
+                for cutin in json.loads(cutins_path.read_text())['cutins']:
+                    if 'map_signature' in cutin:maps.extend([cutin['id'],cutin['map_signature']])
+                self.api.retro_srw_register_cutin_maps.argtypes=[C.POINTER(C.c_uint),C.c_uint]
+                packed=(C.c_uint*len(maps))(*maps);self.api.retro_srw_register_cutin_maps(packed,len(maps)//2)
         self.api.retro_srw_copy_parts.argtypes=[C.c_void_p,C.c_void_p]
         self.api.retro_srw_set_hd_enabled(int(enabled))
         self.api.retro_srw_copy_layer_ids.argtypes=[C.c_void_p]

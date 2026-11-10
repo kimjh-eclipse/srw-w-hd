@@ -18,11 +18,11 @@ def main():
     @lru_cache(maxsize=256)
     def pixels(i):return g.pixels(g.decompress(rom[g.BASE+offsets[i]:g.BASE+offsets[i+1]]))
     meta=json.loads((OUT/'kazuma_parts_library.json').read_text());sources=[];seen=set()
-    def add(name,resource,image,native_size,x,y,a,pal,priority):
+    def add(name,resource,image,native_size,x,y,a,pal,priority,preserve_contour=False):
         if not (OUT/image).exists() or a.max()>15:return
         identity=(image,x,y,a.shape)
         if identity in seen:return
-        seen.add(identity);sources.append(dict(name=name,resource=resource,image=image,native_size=native_size,x=x,y=y,w=a.shape[1],h=a.shape[0],palette=pal,priority=priority,indices=a))
+        seen.add(identity);sources.append(dict(name=name,resource=resource,image=image,native_size=native_size,x=x,y=y,w=a.shape[1],h=a.shape[0],palette=pal,priority=priority,indices=a,preserve_contour=preserve_contour))
     raw_path=ROOT/'test_current/robot/vram_65340.bin'
     if raw_path.exists():
         raw=np.frombuffer(raw_path.read_bytes()[:16384],dtype='uint8');a=np.stack([raw&15,raw>>4],-1).reshape(16,32,8,8).transpose(0,2,1,3).reshape(128,256)
@@ -78,6 +78,12 @@ def main():
             for s in sheet['segments']:
                 a=pixels(s['image'])[s['y']:s['y']+s['h'],s['x']:s['x']+s['w']]
                 add(sheet['name'],s['image'],'named_variants/'+sheet['image'],sheet['native_size'],s['atlas_x'],s['atlas_y'],a,s['palette_rgb'],5)
+    secondary=OUT/'secondary_units/registration.json'
+    if secondary.exists() and json.loads(secondary.read_text()).get('applied'):
+        for binding in meta['bindings']:
+            if not (binding.get('secondary_unit') or binding.get('shared_weapon_frame')):continue
+            atlas=meta['atlases'][binding['atlas_id']];resource=binding['resource']
+            add(binding['atlas_id'],resource,atlas['image'],atlas['native_size'],0,0,pixels(resource),binding['original_palette_rgb'],5,preserve_contour=bool(binding.get('secondary_unit')))
     sources.sort(key=lambda s:-s['priority']);temporary=TARGET.with_suffix('.tmp.sqlite')
     if temporary.exists():temporary.unlink()
     db=sqlite3.connect(temporary);db.execute('PRAGMA journal_mode=OFF');db.execute('PRAGMA synchronous=OFF')

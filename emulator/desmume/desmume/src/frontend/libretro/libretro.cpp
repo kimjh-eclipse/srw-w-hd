@@ -107,12 +107,22 @@ extern "C" RETRO_API void retro_srw_copy_obj_debug(void *oam, void *palette, voi
    if(palette) memcpy(palette,MMU.ARM9_VMEM+512,512);
    if(registers) memcpy(registers,MMU.ARM9_REG,128);
 }
+extern "C" RETRO_API unsigned retro_srw_copy_effect_debug(void *oam, void *objPalette, void *bgPalette, void *registers) {
+   const unsigned engine=SRWWTargetEngine();
+   if(oam) memcpy(oam,MMU.ARM9_OAM+engine*1024,1024);
+   if(objPalette) memcpy(objPalette,MMU.ARM9_VMEM+engine*1024+512,512);
+   if(bgPalette) memcpy(bgPalette,MMU.ARM9_VMEM+engine*1024,512);
+   if(registers) memcpy(registers,MMU.ARM9_REG+engine*4096,128);
+   return engine+1;
+}
 extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
 extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
 extern "C" RETRO_API void retro_srw_register_indexed_parts(const unsigned *hashes,const unsigned *bindings,unsigned count) { if(hashes && bindings && count<200000) SRWWRegisterIndexedParts(hashes,bindings,count); }
 extern "C" RETRO_API void retro_srw_register_cutins(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutins(rows,count); }
+extern void SRWWRegisterCutinMaps(const unsigned *rows,unsigned count);
+extern "C" RETRO_API void retro_srw_register_cutin_maps(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutinMaps(rows,count); }
 extern "C" RETRO_API unsigned retro_srw_native_hd_fallback() { return 1; }
 extern "C" RETRO_API void retro_srw_texture_cache_stats(unsigned *out) { if(out)memcpy(out,SRWWTextureCacheStats,sizeof(SRWWTextureCacheStats)); }
 extern "C" RETRO_API unsigned retro_srw_dynamic_parts() { return 200000; }

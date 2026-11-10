@@ -1,0 +1,4100 @@
+{
+  "scope": "Exercise named unit attacks through the game's normal weapon/target menus.\n\nOnly an isolated state's unit record is substituted. Canonical pilots with\nan existing roster slot are selected from the verified ROM pilot table.\nNever counts a menu-only run as an attack or certifies campaign legality.\n",
+  "selected_units": 1,
+  "unit_ids": [
+    405
+  ],
+  "attempted": 3,
+  "full_replays": 3,
+  "rows": [
+    {
+      "unit_id": 405,
+      "name_ja": "メカブラック獣人ガルラ",
+      "name_ko": "메카블랙수인 가루라",
+      "weapon_id": 1593,
+      "weapon_name": "ガルラウイング",
+      "battle_started": true,
+      "active_battle_frames": 1054,
+      "frames": 1066,
+      "cutin_ids": [],
+      "observed_bindings": [
+        6555,
+        6556,
+        6557,
+        6558,
+        6559,
+        6560,
+        6561,
+        6562,
+        6563,
+        6564,
+        6565,
+        6566,
+        6567,
+        6568,
+        8485,
+        8486,
+        8487,
+        8488,
+        8489,
+        8490,
+        8491,
+        8492,
+        8493,
+        8494,
+        8495,
+        8496,
+        8497,
+        8498,
+        8499,
+        8501,
+        15506,
+        15507,
+        15508,
+        15509,
+        15510,
+        15511,
+        15512,
+        15514,
+        15518,
+        15520,
+        15521,
+        15523,
+        15524,
+        15526,
+        15528,
+        15529,
+        15530,
+        15531,
+        15532,
+        15534,
+        15535,
+        15537,
+        15538,
+        15540,
+        15541,
+        15543,
+        15544,
+        15547,
+        15548,
+        15551,
+        15553,
+        15555,
+        15556,
+        15557,
+        15558,
+        16084,
+        16085,
+        16086,
+        16087,
+        16147,
+        16149,
+        16152,
+        16246,
+        16248,
+        16398,
+        16760,
+        16867,
+        16869,
+        17078,
+        17171,
+        17211,
+        17212,
+        60243,
+        60281,
+        60284,
+        60289,
+        60292,
+        60297,
+        78116,
+        78118,
+        78119,
+        78121,
+        78143,
+        78144,
+        78145,
+        78146,
+        88014,
+        88016,
+        88018,
+        88020,
+        88023,
+        88026,
+        88029,
+        88030,
+        88031,
+        88032,
+        88035,
+        88037,
+        88039,
+        88041,
+        88042,
+        88043,
+        88044,
+        88045,
+        88046,
+        88047,
+        88048,
+        90965,
+        90966,
+        90967,
+        90968,
+        90969,
+        90970
+      ],
+      "errors": {},
+      "seconds": 10.67,
+      "rumble_events": [
+        {
+          "frame": 316,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 320,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 321,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 155,
+          "reason": "impact_flash",
+          "repeated": false
+        },
+        {
+          "frame": 324,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 332,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 333,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 341,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 345,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 350,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 357,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 365,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 369,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 372,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 380,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 381,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 389,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 393,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 396,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 404,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 406,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 414,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 417,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 488,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 492,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 496,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 500,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 504,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 508,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 512,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 516,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 520,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 524,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 528,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 532,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 536,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 540,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 566,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 574,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 590,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 600,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 606,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 614,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 864,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 918,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 922,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 924,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 932,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 952,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 958,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 972,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1066,
+          "duration": 0,
+          "reason": "battle_end"
+        }
+      ],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 432,
+      "all_poses_verified": false,
+      "observed_weapon_id": 1593,
+      "native_menu_weapon_ids": [
+        1593,
+        1594,
+        1595
+      ],
+      "native_menu_position": 0,
+      "native_menu_initial_cursor": 0,
+      "blocked_reason": null,
+      "weapon_routed_correctly": true,
+      "battle_completed": true,
+      "full_replay_verified": true,
+      "verification_revision": "7c004a841d120a83bf6f2108825ba337d8c44fdfd10ecee1a875a4a0a8ba1eea",
+      "new_unmapped_textures": {
+        "(507954986, 3249140432)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            254428858,
+            3354981787
+          ]
+        },
+        "(2756732883, 70203283)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2482429798,
+            3676282443
+          ]
+        },
+        "(1129970785, 1141289420)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1989686617,
+            3084999059
+          ]
+        },
+        "(3233708637, 3479624161)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            3143371316,
+            4256585292
+          ]
+        },
+        "(4161486476, 139772317)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            211176445,
+            544525639,
+            655667694,
+            3703445226
+          ]
+        },
+        "(3593349209, 1408962973)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2035519937,
+            2859794733,
+            3624527375,
+            3972042553
+          ]
+        },
+        "(3646749868, 1619189243)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            561606202,
+            2729633328,
+            3905170054,
+            3946002764
+          ]
+        },
+        "(381772351, 4030697032)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            36724343,
+            1364140951,
+            1981880841,
+            2370242007
+          ]
+        },
+        "(149430646, 2707135610)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            126290394,
+            647519020,
+            764700513,
+            1453536972,
+            1613865093,
+            1832390039,
+            1853760849,
+            1992052158,
+            2207337656,
+            2344923760,
+            2476158847,
+            2559818461,
+            2651772664,
+            2835136223,
+            2942018155,
+            2949194057,
+            3109322191,
+            3131665771,
+            3246859078,
+            3426336751,
+            3513594390,
+            3816800116,
+            3933152445,
+            3940908277,
+            4048622014,
+            4058873972
+          ]
+        },
+        "(2242236950, 3660911059)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            94604514,
+            100786416,
+            198695858,
+            418817578,
+            868967822,
+            1061774606,
+            1320761095,
+            1347337756,
+            1441178383,
+            1479982001,
+            1528425551,
+            1721043184,
+            2267658214,
+            2288106625,
+            3069897201,
+            3240215730,
+            3391427836,
+            3487504335,
+            3917281471,
+            3952003707
+          ]
+        },
+        "(3924063281, 2979066125)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            198695858,
+            1061774606,
+            1347337756,
+            1479982001,
+            1528425551,
+            2267658214,
+            2288106625,
+            3069897201,
+            3391427836,
+            3487504335
+          ]
+        },
+        "(3929497395, 3346585719)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            94604514,
+            100786416,
+            418817578,
+            868967822,
+            1320761095,
+            1441178383,
+            1721043184,
+            3240215730,
+            3917281471,
+            3952003707
+          ]
+        },
+        "(254324767, 78494629)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            705951439,
+            1057538356,
+            1659989044,
+            1947264376,
+            2345018139,
+            3254968503,
+            3651070983,
+            3991845651
+          ]
+        },
+        "(935965848, 1397273948)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            96189137,
+            782443534,
+            1314989409,
+            1844230107,
+            1971947034,
+            2052544193,
+            2223410579,
+            2253292899,
+            2383382691,
+            2488159504,
+            2659165479,
+            2676213898,
+            2941397091,
+            3389723960,
+            3493440097,
+            3600334859
+          ]
+        },
+        "(935817542, 1029412233)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            906040803,
+            1122979302,
+            1265985033,
+            1267647701,
+            1449738387,
+            1499014634,
+            2183982737,
+            2385994407,
+            2494238369,
+            2527364308,
+            2545729594,
+            2551565966,
+            3301872090,
+            3336475143,
+            3353732962,
+            3437489820,
+            3496821497,
+            3549762148,
+            3643365969,
+            3788494263,
+            3965914198,
+            4151101662
+          ]
+        },
+        "(184208831, 707980474)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            528520315,
+            1004669165,
+            1385268218,
+            1421449255,
+            1523358541,
+            1951261726,
+            2096628921,
+            2239527423,
+            2978302809,
+            3370462725,
+            3953403538,
+            4156787736
+          ]
+        },
+        "(323919254, 4048739328)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            928411876,
+            1406377639,
+            1661797771,
+            1774633649,
+            2093327406,
+            2233132945,
+            3480215667,
+            4270707537
+          ]
+        },
+        "(1026483675, 3432656307)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            850019685,
+            1596222046,
+            1619724781,
+            2015482943,
+            2151325146,
+            2676472392,
+            3131349821,
+            3507965913
+          ]
+        },
+        "(3165574890, 75430708)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            257819829,
+            394231666,
+            510179287,
+            892208726,
+            1313642696,
+            1663272127,
+            1863822317,
+            2564349984,
+            2709788290,
+            2850114378,
+            3151357676,
+            3265457971,
+            3338668058,
+            3762386421,
+            3787908801,
+            3811585543
+          ]
+        },
+        "(368539798, 3782393294)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            25526131,
+            73081710,
+            599516490,
+            788377500,
+            909430520,
+            1412673719,
+            1504851691,
+            1602215984,
+            2331583518,
+            2624716711,
+            3187160798,
+            3392469279,
+            3537927822
+          ]
+        },
+        "(755207278, 3773313034)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            7961911,
+            251851104,
+            384524311,
+            965845367,
+            1422063786,
+            2020871186,
+            2174820802,
+            2407271277,
+            2687382313,
+            2996348750,
+            3281526566,
+            3301806300,
+            3500052320,
+            4170896865
+          ]
+        },
+        "(1798712255, 3793273174)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            132733845,
+            134891784,
+            1105982970,
+            1229968861,
+            1828753920,
+            1962434565,
+            1967104205,
+            2324783175,
+            2508495362,
+            2774997059,
+            3075418896,
+            3566798892,
+            3644086366,
+            4090575176
+          ]
+        },
+        "(3091735291, 520960)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            7961911,
+            25526131,
+            73081710,
+            132733845,
+            134891784,
+            187367881,
+            251851104,
+            384524311,
+            533395580,
+            599516490,
+            788377500,
+            843077226,
+            909430520,
+            965845367,
+            1004330254,
+            1096952441,
+            1105982970,
+            1229968861,
+            1412673719,
+            1422063786,
+            1504851691,
+            1602215984,
+            1828753920,
+            1962434565,
+            1966345343,
+            1967104205,
+            2020871186,
+            2174820802,
+            2324783175,
+            2331583518,
+            2407271277,
+            2493999635,
+            2508495362,
+            2566413556,
+            2624716711,
+            2687382313,
+            2774997059,
+            2790653705,
+            2996348750,
+            3075418896,
+            3187160798,
+            3281526566,
+            3301806300,
+            3392469279,
+            3500052320,
+            3537927822,
+            3566798892,
+            3644086366,
+            3802432996,
+            4006347233,
+            4045072139,
+            4090575176,
+            4170896865
+          ]
+        },
+        "(2636765913, 3780188642)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            705366009,
+            1436944460,
+            2136458103,
+            2410214473,
+            2805338851
+          ]
+        },
+        "(147496676, 3377576069)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            162293780,
+            339019260,
+            1032927505,
+            1059358799,
+            1192745116,
+            1217426498,
+            1636352529,
+            2285244822,
+            2340823539,
+            2592503861,
+            3041077299,
+            3389022981,
+            4141182576,
+            4269394304
+          ]
+        },
+        "(2663250646, 773582093)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            53242952,
+            162293780,
+            292529461,
+            339019260,
+            705366009,
+            934418687,
+            950105124,
+            1032927505,
+            1059358799,
+            1127444616,
+            1192745116,
+            1217426498,
+            1436944460,
+            1441474134,
+            1636352529,
+            2136458103,
+            2285244822,
+            2340823539,
+            2410214473,
+            2413721039,
+            2592503861,
+            2805338851,
+            3041077299,
+            3389022981,
+            3606373776,
+            4141182576,
+            4269394304
+          ]
+        },
+        "(1956964416, 3708255237)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            833689441,
+            991224152,
+            1141214455,
+            1326890996,
+            1700173654,
+            1787188147,
+            1869504379,
+            2131253763,
+            2749216012,
+            2834008145,
+            3033898898,
+            4055993150,
+            4118281432
+          ]
+        },
+        "(564214542, 304543476)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            217393764,
+            293501730,
+            902925199,
+            1144129114,
+            1199506659,
+            1813253907,
+            1903922146,
+            2106506751,
+            2485655632,
+            2505379660,
+            2564869609,
+            3526779093,
+            3738550245,
+            4196049995
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "466665808:1276981753": {
+          "width": 8,
+          "height": 8
+        },
+        "2978719332:1655507514": {
+          "width": 8,
+          "height": 8
+        },
+        "4161486476:139772317": {
+          "width": 16,
+          "height": 16
+        },
+        "3593349209:1408962973": {
+          "width": 16,
+          "height": 16
+        },
+        "3646749868:1619189243": {
+          "width": 16,
+          "height": 16
+        },
+        "381772351:4030697032": {
+          "width": 16,
+          "height": 16
+        },
+        "149430646:2707135610": {
+          "width": 64,
+          "height": 64
+        },
+        "2242236950:3660911059": {
+          "width": 64,
+          "height": 64
+        },
+        "1533947072:3320490733": {
+          "width": 16,
+          "height": 8
+        },
+        "3854952644:2964200156": {
+          "width": 32,
+          "height": 32
+        },
+        "4156243906:3200620055": {
+          "width": 32,
+          "height": 32
+        },
+        "1386799820:2580494605": {
+          "width": 32,
+          "height": 32
+        },
+        "54003465:876761708": {
+          "width": 32,
+          "height": 32
+        },
+        "1933338915:1087215540": {
+          "width": 16,
+          "height": 8
+        },
+        "398679749:1352786109": {
+          "width": 64,
+          "height": 32
+        },
+        "4239242233:3909387603": {
+          "width": 16,
+          "height": 16
+        },
+        "4228203532:269674243": {
+          "width": 32,
+          "height": 32
+        },
+        "2055912097:4114999008": {
+          "width": 16,
+          "height": 32
+        },
+        "3231185640:3228968053": {
+          "width": 16,
+          "height": 32
+        },
+        "1330206858:239908736": {
+          "width": 64,
+          "height": 64
+        },
+        "1002118003:1200390940": {
+          "width": 32,
+          "height": 32
+        },
+        "3354803117:2220417443": {
+          "width": 32,
+          "height": 32
+        },
+        "1712885694:2770314456": {
+          "width": 32,
+          "height": 16
+        },
+        "1131496738:2668997365": {
+          "width": 16,
+          "height": 16
+        },
+        "2885513948:1321251699": {
+          "width": 32,
+          "height": 32
+        },
+        "1630923065:2902362768": {
+          "width": 16,
+          "height": 32
+        },
+        "3777526978:2473973238": {
+          "width": 64,
+          "height": 64
+        },
+        "1110793008:887886171": {
+          "width": 16,
+          "height": 32
+        },
+        "153632298:373195388": {
+          "width": 64,
+          "height": 64
+        },
+        "2604773069:533064931": {
+          "width": 32,
+          "height": 32
+        },
+        "370091212:3151164094": {
+          "width": 16,
+          "height": 16
+        },
+        "3924063281:2979066125": {
+          "width": 64,
+          "height": 32
+        },
+        "3929497395:3346585719": {
+          "width": 64,
+          "height": 32
+        },
+        "254324767:78494629": {
+          "width": 16,
+          "height": 32
+        },
+        "935965848:1397273948": {
+          "width": 32,
+          "height": 32
+        },
+        "935817542:1029412233": {
+          "width": 64,
+          "height": 32
+        },
+        "184208831:707980474": {
+          "width": 32,
+          "height": 32
+        },
+        "323919254:4048739328": {
+          "width": 32,
+          "height": 16
+        },
+        "1026483675:3432656307": {
+          "width": 16,
+          "height": 32
+        },
+        "3165574890:75430708": {
+          "width": 32,
+          "height": 32
+        },
+        "368539798:3782393294": {
+          "width": 32,
+          "height": 32
+        },
+        "755207278:3773313034": {
+          "width": 32,
+          "height": 32
+        },
+        "1798712255:3793273174": {
+          "width": 32,
+          "height": 32
+        },
+        "3091735291:520960": {
+          "width": 64,
+          "height": 64
+        },
+        "2636765913:3780188642": {
+          "width": 16,
+          "height": 32
+        },
+        "147496676:3377576069": {
+          "width": 32,
+          "height": 32
+        },
+        "2663250646:773582093": {
+          "width": 64,
+          "height": 32
+        },
+        "1956964416:3708255237": {
+          "width": 32,
+          "height": 32
+        },
+        "3790284814:311830707": {
+          "width": 16,
+          "height": 16
+        },
+        "564214542:304543476": {
+          "width": 32,
+          "height": 32
+        },
+        "1579736530:2203811428": {
+          "width": 16,
+          "height": 16
+        },
+        "2182002188:3839935804": {
+          "width": 16,
+          "height": 16
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {
+        "beam_stream": 25,
+        "impact_flash": 8,
+        "background_explosion": 14,
+        "energy_orb": 3
+      },
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true
+    },
+    {
+      "unit_id": 405,
+      "name_ja": "メカブラック獣人ガルラ",
+      "name_ko": "메카블랙수인 가루라",
+      "weapon_id": 1594,
+      "weapon_name": "シールドビーム",
+      "battle_started": true,
+      "active_battle_frames": 1083,
+      "frames": 1095,
+      "cutin_ids": [],
+      "observed_bindings": [
+        6555,
+        6556,
+        6557,
+        6558,
+        6559,
+        6560,
+        6561,
+        6562,
+        6563,
+        6564,
+        6565,
+        6566,
+        6567,
+        6568,
+        8485,
+        8486,
+        8487,
+        8488,
+        8489,
+        8490,
+        8491,
+        8492,
+        8493,
+        8494,
+        8495,
+        8496,
+        8497,
+        8498,
+        8499,
+        8501,
+        11899,
+        15506,
+        15507,
+        15509,
+        15510,
+        15511,
+        15512,
+        15514,
+        15515,
+        15518,
+        15520,
+        15521,
+        15522,
+        15526,
+        15527,
+        15528,
+        15529,
+        15530,
+        15531,
+        15532,
+        15534,
+        15535,
+        15537,
+        15538,
+        15540,
+        15543,
+        15544,
+        15547,
+        15548,
+        15549,
+        15550,
+        15551,
+        15553,
+        15554,
+        15555,
+        15556,
+        15557,
+        15558,
+        60243,
+        60249,
+        60284,
+        60297,
+        73367,
+        73372,
+        73377,
+        73379,
+        73381,
+        73382,
+        73383,
+        73384,
+        73385,
+        73386,
+        73391,
+        73392,
+        73396,
+        73398,
+        73399,
+        73400,
+        73403,
+        74676,
+        74677,
+        74680,
+        74701,
+        90965,
+        90966,
+        90968,
+        90969,
+        90970,
+        91260,
+        91261,
+        91265
+      ],
+      "errors": {},
+      "seconds": 10.75,
+      "rumble_events": [
+        {
+          "frame": 284,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 288,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 292,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 294,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 155,
+          "reason": "impact_flash",
+          "repeated": false
+        },
+        {
+          "frame": 295,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 303,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 304,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 312,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 320,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 324,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 332,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 340,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 344,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 352,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 360,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 364,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 372,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 380,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 384,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 392,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 400,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 404,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 412,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 420,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 424,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 432,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 440,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 444,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 452,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 510,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 514,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 522,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 524,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 532,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 536,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 544,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 552,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 556,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 564,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 572,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 576,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 584,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 592,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 596,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 604,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 612,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 616,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 624,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 632,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 636,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 640,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 646,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 894,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 946,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 950,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 954,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 962,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 982,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 990,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1000,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1095,
+          "duration": 0,
+          "reason": "battle_end"
+        }
+      ],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 432,
+      "all_poses_verified": false,
+      "observed_weapon_id": 1594,
+      "native_menu_weapon_ids": [
+        1593,
+        1594,
+        1595
+      ],
+      "native_menu_position": 1,
+      "native_menu_initial_cursor": 0,
+      "blocked_reason": null,
+      "weapon_routed_correctly": true,
+      "battle_completed": true,
+      "full_replay_verified": true,
+      "verification_revision": "7c004a841d120a83bf6f2108825ba337d8c44fdfd10ecee1a875a4a0a8ba1eea",
+      "new_unmapped_textures": {
+        "(3889871525, 2614704770)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            270667715,
+            1436566504,
+            2145809540,
+            2398575644
+          ]
+        },
+        "(2179441058, 2240021611)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1821170987,
+            3174294009
+          ]
+        },
+        "(1935199897, 144028789)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            110215389,
+            154657752,
+            214470576,
+            382868084,
+            500617412,
+            718408217,
+            831396959,
+            1129707149,
+            1269744866,
+            1436566504,
+            1460702755,
+            1511865156,
+            1571562442,
+            1692608732,
+            1821170987,
+            1984222999,
+            2086353219,
+            2138613076,
+            2145809540,
+            2557220441,
+            2979551496,
+            3034635769,
+            3073525254,
+            3115932441,
+            3174294009,
+            3355337629,
+            3600423423,
+            3820693691,
+            4053365602
+          ]
+        },
+        "(3970383840, 1310313576)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            437416646,
+            2392006220,
+            3061647324,
+            3916606172,
+            4134791576
+          ]
+        },
+        "(2889077021, 1267820672)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            125164923,
+            227510130,
+            270667715,
+            410601751,
+            703402664,
+            781111719,
+            811461228,
+            912209625,
+            927020660,
+            999273488,
+            1098675466,
+            1444556347,
+            1646262435,
+            1667354303,
+            1689382827,
+            2274068438,
+            2326431419,
+            2363597310,
+            2398575644,
+            2458168531,
+            2502556590,
+            2624571107,
+            2897207112,
+            3419378606,
+            3519759897,
+            3621788898,
+            3663086042,
+            3767837448,
+            4056544623,
+            4217189124
+          ]
+        },
+        "(4169761715, 4212227558)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            195997169,
+            3487237271,
+            3613428392,
+            4056005991
+          ]
+        },
+        "(3660558906, 2757250145)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            14117765,
+            658656199,
+            2103608000,
+            2244984031,
+            2405477425,
+            3891247259,
+            4044254935
+          ]
+        },
+        "(1024258115, 1527220858)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            61451162,
+            121129372,
+            456386709,
+            576360237,
+            666693462,
+            682475942,
+            707644415,
+            892702585,
+            906904587,
+            1003511968,
+            1128782212,
+            1321627465,
+            1359954424,
+            1568273052,
+            1589576587,
+            1975944581,
+            2452573862,
+            2495831620,
+            2682452128,
+            2802304184,
+            2975309515,
+            3142083992,
+            3257770875,
+            3968346771
+          ]
+        },
+        "(198744236, 3935801553)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            312697601,
+            339914558,
+            398318227,
+            426995795,
+            621025136,
+            863189262,
+            929012850,
+            942608357,
+            1155433588,
+            1198059024,
+            1298045563,
+            1731480273,
+            1892843904,
+            2168747568,
+            2444103941,
+            2446383098,
+            2490786979,
+            2506289429,
+            2576196741,
+            2770274857,
+            2839821588,
+            3034118095,
+            3129817310,
+            3234825753,
+            3298491887,
+            3364907172,
+            3440848569,
+            3631653840,
+            3770074869,
+            3788019266,
+            3788876033
+          ]
+        },
+        "(1217851439, 3539336744)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            160055385,
+            215714965,
+            223902041,
+            403103466,
+            515984146,
+            555441658,
+            605940326,
+            761909974,
+            773012143,
+            846010604,
+            950174918,
+            1074196548,
+            1126692375,
+            1427506738,
+            1526566275,
+            1637525894,
+            1916816921,
+            2198765053,
+            2271743843,
+            2310015084,
+            2314079392,
+            2511816593,
+            3072531642,
+            3597023206,
+            3764531056,
+            3822676055,
+            3947135856,
+            3978548407,
+            4218555029,
+            4264853098
+          ]
+        },
+        "(575484753, 480675172)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1022727677,
+            1217504020,
+            1792481170,
+            1826150391,
+            2188217358,
+            2377015240,
+            2444075369,
+            2987124511,
+            3038625023,
+            3104404082,
+            3124823082,
+            3330848053,
+            3340519288,
+            4001910427,
+            4059318601,
+            4083766833
+          ]
+        },
+        "(728290074, 2865430119)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            101425213,
+            294205515,
+            597826859,
+            692737679,
+            806634055,
+            984009704,
+            1414611458,
+            1871759024,
+            1950937108,
+            2007732677,
+            2535576464,
+            2559042642,
+            2734761101,
+            2901029785,
+            2982167578,
+            3187323235,
+            3235034310,
+            3274959218,
+            3277358226,
+            3281715083,
+            3288224126,
+            3414312010,
+            3636929845,
+            3644214659,
+            3678858714,
+            3955079376,
+            3956042721,
+            4160490772,
+            4242210397
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "4161486476:139772317": {
+          "width": 16,
+          "height": 16
+        },
+        "3593349209:1408962973": {
+          "width": 16,
+          "height": 16
+        },
+        "3646749868:1619189243": {
+          "width": 16,
+          "height": 16
+        },
+        "381772351:4030697032": {
+          "width": 16,
+          "height": 16
+        },
+        "149430646:2707135610": {
+          "width": 64,
+          "height": 64
+        },
+        "2242236950:3660911059": {
+          "width": 64,
+          "height": 64
+        },
+        "1533947072:3320490733": {
+          "width": 16,
+          "height": 8
+        },
+        "3854952644:2964200156": {
+          "width": 32,
+          "height": 32
+        },
+        "4156243906:3200620055": {
+          "width": 32,
+          "height": 32
+        },
+        "1386799820:2580494605": {
+          "width": 32,
+          "height": 32
+        },
+        "54003465:876761708": {
+          "width": 32,
+          "height": 32
+        },
+        "1933338915:1087215540": {
+          "width": 16,
+          "height": 8
+        },
+        "398679749:1352786109": {
+          "width": 64,
+          "height": 32
+        },
+        "4239242233:3909387603": {
+          "width": 16,
+          "height": 16
+        },
+        "4228203532:269674243": {
+          "width": 32,
+          "height": 32
+        },
+        "2055912097:4114999008": {
+          "width": 16,
+          "height": 32
+        },
+        "2977545260:3918348102": {
+          "width": 32,
+          "height": 64
+        },
+        "21644074:628790480": {
+          "width": 32,
+          "height": 32
+        },
+        "3977101766:1959166535": {
+          "width": 32,
+          "height": 32
+        },
+        "2257824925:4057453752": {
+          "width": 32,
+          "height": 32
+        },
+        "3602188523:161025167": {
+          "width": 32,
+          "height": 16
+        },
+        "2944093753:314173128": {
+          "width": 8,
+          "height": 32
+        },
+        "3788484810:2739046352": {
+          "width": 32,
+          "height": 64
+        },
+        "3698594453:2944374295": {
+          "width": 32,
+          "height": 8
+        },
+        "3889871525:2614704770": {
+          "width": 8,
+          "height": 32
+        },
+        "2179441058:2240021611": {
+          "width": 8,
+          "height": 32
+        },
+        "2994103906:89849544": {
+          "width": 32,
+          "height": 64
+        },
+        "3722724670:1199901480": {
+          "width": 32,
+          "height": 32
+        },
+        "1935199897:144028789": {
+          "width": 64,
+          "height": 32
+        },
+        "3970383840:1310313576": {
+          "width": 32,
+          "height": 16
+        },
+        "4169761715:4212227558": {
+          "width": 32,
+          "height": 8
+        },
+        "3660558906:2757250145": {
+          "width": 32,
+          "height": 16
+        },
+        "2889077021:1267820672": {
+          "width": 64,
+          "height": 32
+        },
+        "1024258115:1527220858": {
+          "width": 32,
+          "height": 64
+        },
+        "198744236:3935801553": {
+          "width": 64,
+          "height": 64
+        },
+        "1217851439:3539336744": {
+          "width": 32,
+          "height": 64
+        },
+        "575484753:480675172": {
+          "width": 32,
+          "height": 32
+        },
+        "728290074:2865430119": {
+          "width": 32,
+          "height": 64
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {
+        "beam_stream": 24,
+        "impact_flash": 1,
+        "background_explosion": 35
+      },
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true
+    },
+    {
+      "unit_id": 405,
+      "name_ja": "メカブラック獣人ガルラ",
+      "name_ko": "메카블랙수인 가루라",
+      "weapon_id": 1595,
+      "weapon_name": "ガルラトマホーク",
+      "battle_started": true,
+      "active_battle_frames": 1794,
+      "frames": 1806,
+      "cutin_ids": [],
+      "observed_bindings": [
+        6555,
+        6556,
+        6557,
+        6558,
+        6559,
+        6560,
+        6561,
+        6562,
+        6563,
+        6564,
+        6565,
+        6566,
+        6567,
+        6568,
+        8485,
+        8486,
+        8487,
+        8488,
+        8489,
+        8490,
+        8491,
+        8492,
+        8493,
+        8494,
+        8495,
+        8496,
+        8497,
+        8498,
+        8499,
+        8501,
+        11898,
+        15506,
+        15507,
+        15508,
+        15509,
+        15510,
+        15511,
+        15512,
+        15514,
+        15515,
+        15520,
+        15521,
+        15522,
+        15525,
+        15526,
+        15527,
+        15528,
+        15529,
+        15530,
+        15531,
+        15532,
+        15533,
+        15534,
+        15535,
+        15537,
+        15540,
+        15543,
+        15544,
+        15548,
+        15549,
+        15550,
+        15553,
+        15555,
+        15556,
+        15557,
+        15558,
+        15999,
+        16035,
+        16037,
+        16085,
+        16086,
+        16087,
+        16147,
+        16149,
+        16152,
+        16246,
+        16248,
+        16867,
+        16869,
+        17078,
+        17212,
+        30461,
+        30464,
+        30467,
+        30470,
+        30483,
+        30484,
+        30486,
+        30488,
+        30490,
+        60249,
+        60281,
+        60284,
+        60289,
+        60296,
+        60297,
+        60323,
+        60324,
+        60341,
+        61372,
+        61373,
+        61375,
+        61384,
+        61398,
+        61401,
+        61417,
+        62345,
+        78116,
+        78118,
+        78119,
+        78121,
+        78143,
+        78144,
+        78145,
+        78146,
+        90965,
+        90966,
+        90967,
+        90969,
+        90970,
+        91260,
+        91261,
+        91262,
+        91263,
+        91264,
+        91265,
+        91266,
+        91267,
+        91268,
+        91269,
+        91270,
+        91271,
+        91272,
+        91273,
+        91274,
+        91281,
+        91282,
+        91283,
+        91284,
+        91285,
+        91286,
+        91287,
+        91288,
+        91289,
+        91291,
+        91292,
+        91293,
+        91294,
+        91295,
+        91296,
+        91297,
+        91298,
+        91299,
+        91301,
+        91302,
+        91311,
+        91312,
+        91313,
+        91314,
+        91315,
+        91316,
+        91317,
+        91318,
+        91319,
+        91320,
+        91322,
+        91327,
+        91330
+      ],
+      "errors": {},
+      "seconds": 17.33,
+      "rumble_events": [
+        {
+          "frame": 298,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 338,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 464,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 155,
+          "reason": "impact_flash",
+          "repeated": false
+        },
+        {
+          "frame": 465,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 473,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 680,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 704,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 724,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 739,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 754,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 769,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 784,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 799,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 814,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 830,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 870,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 878,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 890,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 902,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 913,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 914,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 928,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 943,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 958,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 973,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 988,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1021,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 155,
+          "reason": "impact_flash",
+          "repeated": false
+        },
+        {
+          "frame": 1109,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 155,
+          "reason": "impact_flash",
+          "repeated": false
+        },
+        {
+          "frame": 1118,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1132,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1147,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1162,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1177,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1192,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1207,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1222,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1240,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1242,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1251,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 95,
+          "reason": "impact_flash",
+          "repeated": true
+        },
+        {
+          "frame": 1290,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1294,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1298,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1304,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1326,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1332,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 1338,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 1344,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 1350,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 1358,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1604,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1658,
+          "low": 0.9,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1662,
+          "low": 0.65,
+          "high": 1.0,
+          "duration": 110,
+          "reason": "beam_stream",
+          "repeated": true
+        },
+        {
+          "frame": 1664,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1672,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1692,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1698,
+          "low": 0.85,
+          "high": 1.0,
+          "duration": 125,
+          "reason": "energy_orb",
+          "repeated": true
+        },
+        {
+          "frame": 1712,
+          "low": 1.0,
+          "high": 1.0,
+          "duration": 180,
+          "reason": "background_explosion",
+          "repeated": true
+        },
+        {
+          "frame": 1806,
+          "duration": 0,
+          "reason": "battle_end"
+        }
+      ],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 432,
+      "all_poses_verified": false,
+      "observed_weapon_id": 1595,
+      "native_menu_weapon_ids": [
+        1593,
+        1594,
+        1595
+      ],
+      "native_menu_position": 2,
+      "native_menu_initial_cursor": 0,
+      "blocked_reason": null,
+      "weapon_routed_correctly": true,
+      "battle_completed": true,
+      "full_replay_verified": true,
+      "verification_revision": "7c004a841d120a83bf6f2108825ba337d8c44fdfd10ecee1a875a4a0a8ba1eea",
+      "new_unmapped_textures": {
+        "(3232673513, 1262669209)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            506813953,
+            523423452,
+            1247366329,
+            2028448412,
+            2055222963,
+            2808911588,
+            3068634823,
+            3204574751,
+            3224309051,
+            3537912734,
+            3739777319,
+            3772400483,
+            3776257589,
+            3815272208,
+            4073092893,
+            4108135354
+          ]
+        },
+        "(3279530199, 280702802)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            487824112,
+            706962472,
+            899178645,
+            1003004410,
+            1039405835,
+            1089041265,
+            1437692463,
+            1883425693,
+            2524389134,
+            2616399157,
+            3313862364,
+            3635793502,
+            4040603798
+          ]
+        },
+        "(1866924703, 732593055)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1393846521,
+            3092063076,
+            3932578374
+          ]
+        },
+        "(2408559435, 2703175562)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            26036469,
+            1702637118,
+            2281268072,
+            4041949872
+          ]
+        },
+        "(702430049, 2264837257)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            237250361,
+            341353100,
+            1949262328,
+            2304003804,
+            2503962977,
+            2862447894,
+            3347864364
+          ]
+        },
+        "(415469904, 1565526493)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            180812791,
+            237250361,
+            341353100,
+            417848945,
+            986697557,
+            1949262328,
+            2304003804,
+            2468724924,
+            2503962977,
+            2862447894,
+            2975187448,
+            3287393012,
+            3347864364,
+            3590398244,
+            3619155774
+          ]
+        },
+        "(1161317929, 1622301738)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            578976496,
+            1005444373,
+            1121621898,
+            1195947884,
+            1465585194,
+            1759590722,
+            2091126385,
+            2326132438,
+            2573045343,
+            2573349268,
+            3030855926,
+            3375263221,
+            3438040214,
+            3986298992,
+            3993552589
+          ]
+        },
+        "(1074440551, 2094410499)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            19499343,
+            30900263,
+            101662857,
+            279955098,
+            415395515,
+            480003896,
+            727839835,
+            756951622,
+            763060093,
+            778316483,
+            1076166274,
+            1202108000,
+            1293184511,
+            1725448810,
+            1738108915,
+            1941721817,
+            2056224399,
+            2192185753,
+            2366228510,
+            2467286877,
+            2717737253,
+            2759238592,
+            3753795284,
+            3765856486,
+            3991745421,
+            4032972669,
+            4034593886
+          ]
+        },
+        "(805778416, 1457833336)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            71015739,
+            91102755,
+            171288056,
+            507069181,
+            598644081,
+            629997181,
+            633170791,
+            718145313,
+            834594114,
+            1282100999,
+            1319411586,
+            1934419432,
+            1989381748,
+            2010021110,
+            2052720196,
+            2282457368,
+            2369871099,
+            2680065924,
+            2957522734,
+            3106777529,
+            3279769511,
+            3476617130,
+            3508940467,
+            3555966228,
+            3632231070,
+            3648515433,
+            3969277963,
+            4157441721,
+            4214760087
+          ]
+        },
+        "(1690177020, 1715996104)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            58257648,
+            1326325655,
+            1640536956,
+            1890291708,
+            2133018562,
+            2273337280,
+            2555866724,
+            2672660029,
+            3122562433,
+            3420316178,
+            3734584431
+          ]
+        },
+        "(3003703859, 4187727567)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            58257648,
+            583382696,
+            1045728123,
+            1314295147,
+            1326325655,
+            1845692079,
+            1929979491,
+            2273337280,
+            2825872006,
+            3007656644,
+            3157423615,
+            3287981904,
+            3312783813,
+            4108419334,
+            4210829300
+          ]
+        },
+        "(3203892062, 2841558875)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2389453596,
+            2639964896,
+            2702231831,
+            3113197497
+          ]
+        },
+        "(4257331517, 2183394671)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            632195938,
+            814734778,
+            960640321,
+            1244653458,
+            1545110931,
+            2311697475,
+            2464373228,
+            3810533693
+          ]
+        },
+        "(3670751463, 3304786142)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            142662233,
+            1770275181
+          ]
+        },
+        "(369374233, 1489450890)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            304771873,
+            1222163040,
+            1322446732,
+            1457538671,
+            1459167498,
+            1515724855,
+            1567727956,
+            2044766808,
+            3012640799,
+            3194243885,
+            3345669581,
+            3470140137,
+            3659790457,
+            4133447938
+          ]
+        },
+        "(4256454371, 926573146)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            84799945,
+            987046184,
+            2246186678,
+            3028676463
+          ]
+        },
+        "(1641279356, 2610468045)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            645794148,
+            713914275,
+            1085124767,
+            1569321149,
+            1839994214,
+            2709882280,
+            2785240278,
+            2817764022,
+            3158308106,
+            3251765780,
+            3476429443,
+            3793161058,
+            3805312919,
+            3850598914,
+            4051444705,
+            4233432216
+          ]
+        },
+        "(285070076, 220917365)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            346374182,
+            382405168,
+            744741786,
+            1576043421,
+            1953899393,
+            2139815793,
+            2930504519,
+            3884197870
+          ]
+        },
+        "(1452056071, 2840152029)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            224054197,
+            284184451,
+            521918286,
+            1027039544,
+            1691467435,
+            2249223843,
+            2329131540,
+            2709250992,
+            2762785259,
+            3129652377,
+            3196468320,
+            3616690188,
+            3737964035,
+            3816865148
+          ]
+        },
+        "(2614995160, 3539446193)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            299173033,
+            333883524,
+            516836515,
+            844921717,
+            1187503566,
+            1485662766,
+            1957055219,
+            2013699444,
+            2186212760,
+            2195712850,
+            2705687588,
+            2728568521,
+            3352072590,
+            3438488463,
+            3467380101,
+            4104104449
+          ]
+        },
+        "(232057198, 950427522)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            502436052,
+            835568768,
+            1275278034,
+            1636182261,
+            2333602391,
+            2454893077,
+            2556648665,
+            2770186436,
+            3355288726,
+            3728623080,
+            3731591157,
+            3999078127
+          ]
+        },
+        "(2202559354, 4286029350)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            743808765,
+            1664241590,
+            3645962968,
+            4187476213
+          ]
+        },
+        "(414127538, 117677198)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            545358869,
+            550634199,
+            743808765,
+            877144125,
+            1231602003,
+            1648368869,
+            1664241590,
+            1840125533,
+            2052419227,
+            2445670127,
+            2499265521,
+            3092774622,
+            3573373967,
+            3645962968,
+            4006638081,
+            4187476213
+          ]
+        },
+        "(3154957108, 3715151545)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            612714586,
+            3419523762
+          ]
+        },
+        "(565245503, 177062143)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1774910787,
+            2113155885,
+            2762879705,
+            3716374923
+          ]
+        },
+        "(3833883691, 3731592711)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            109548988,
+            540700926,
+            718145313,
+            1138298616,
+            1319411586,
+            1591256499,
+            1794857567,
+            2045143938,
+            2885825839,
+            3110235029,
+            3614882049,
+            3716992328,
+            3935167801,
+            4214760087
+          ]
+        },
+        "(2181132677, 2777824506)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            206132349,
+            475733426,
+            481718864,
+            604435903,
+            902823341,
+            1550858571,
+            1649423244,
+            2159767288,
+            2529710398,
+            3822861333,
+            3833748311,
+            4006829111
+          ]
+        },
+        "(1999004257, 1839644406)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            402982550,
+            691989308,
+            1402105107,
+            1983474294,
+            2264087786,
+            2993845430,
+            3399507547,
+            3856467208,
+            4020215329,
+            4051795088
+          ]
+        },
+        "(3348865356, 1892908280)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            248386664,
+            352159253,
+            494407938,
+            686808089,
+            1238865510,
+            1298358332,
+            1346324945,
+            1432264344,
+            1440967134,
+            2283136665,
+            2544205079,
+            4070452239
+          ]
+        },
+        "(481195609, 2713729797)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            309287316,
+            659085925,
+            1115659615,
+            1165986730,
+            1196697827,
+            1471297467,
+            1784526695,
+            2638656060,
+            2807646843,
+            3168258334,
+            3618090189
+          ]
+        },
+        "(1962686230, 3129675884)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            67905087,
+            1646332180,
+            1724756853,
+            1847996667,
+            2026388853,
+            3844152867,
+            4292775490
+          ]
+        },
+        "(1826598102, 3471670533)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1197893007,
+            1291323378,
+            1352701186,
+            2918928355
+          ]
+        },
+        "(1195915861, 1045552271)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            213529172,
+            418735247,
+            1521011134,
+            2114614089,
+            2244758778
+          ]
+        },
+        "(1538393523, 1254690195)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            59422499,
+            874175521,
+            1189336801,
+            1268748634,
+            1535189873,
+            2635620377,
+            3317270111,
+            3519584111,
+            4089506473
+          ]
+        },
+        "(237594902, 691338543)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            593955972,
+            802242644,
+            1202208037,
+            2484838668,
+            2939913377,
+            3268460634,
+            3629603465,
+            3701593855
+          ]
+        },
+        "(1937419619, 4148531868)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            632195938,
+            1244653458
+          ]
+        },
+        "(3655588589, 1639280626)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            92156974,
+            240386285,
+            352026951,
+            366349432,
+            650258716,
+            814734778,
+            890302660,
+            960640321,
+            1155958276,
+            1240862437,
+            1507076985,
+            1545110931,
+            2065158574,
+            2125849661,
+            2311697475,
+            2561877159,
+            2798052572,
+            2852498587,
+            3651572224,
+            3673568500,
+            3674532254,
+            4117721161
+          ]
+        },
+        "(3679536270, 727169922)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            142662233,
+            1770275181,
+            2389453596,
+            2639964896,
+            2702231831,
+            3113197497
+          ]
+        },
+        "(2357182557, 3605179481)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            53242952,
+            292529461,
+            705366009,
+            934418687,
+            950105124,
+            1127444616,
+            1436944460,
+            1441474134,
+            2136458103,
+            2410214473,
+            2413721039,
+            2805338851,
+            3606373776
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "4161486476:139772317": {
+          "width": 16,
+          "height": 16
+        },
+        "3593349209:1408962973": {
+          "width": 16,
+          "height": 16
+        },
+        "3646749868:1619189243": {
+          "width": 16,
+          "height": 16
+        },
+        "381772351:4030697032": {
+          "width": 16,
+          "height": 16
+        },
+        "149430646:2707135610": {
+          "width": 64,
+          "height": 64
+        },
+        "2242236950:3660911059": {
+          "width": 64,
+          "height": 64
+        },
+        "2002528299:201629476": {
+          "width": 32,
+          "height": 16
+        },
+        "558185598:2360532312": {
+          "width": 16,
+          "height": 16
+        },
+        "3231185640:3228968053": {
+          "width": 16,
+          "height": 32
+        },
+        "1330206858:239908736": {
+          "width": 64,
+          "height": 64
+        },
+        "1262600460:2630697852": {
+          "width": 16,
+          "height": 16
+        },
+        "3354803117:2220417443": {
+          "width": 32,
+          "height": 32
+        },
+        "1712885694:2770314456": {
+          "width": 32,
+          "height": 16
+        },
+        "1131496738:2668997365": {
+          "width": 16,
+          "height": 16
+        },
+        "2885513948:1321251699": {
+          "width": 32,
+          "height": 32
+        },
+        "640952979:4016850141": {
+          "width": 16,
+          "height": 16
+        },
+        "817000053:3318264936": {
+          "width": 32,
+          "height": 16
+        },
+        "4119268151:3544590749": {
+          "width": 32,
+          "height": 8
+        },
+        "721248078:3205047589": {
+          "width": 16,
+          "height": 16
+        },
+        "773304507:2917584455": {
+          "width": 32,
+          "height": 16
+        },
+        "2079911953:667303459": {
+          "width": 16,
+          "height": 16
+        },
+        "625481351:875031593": {
+          "width": 16,
+          "height": 16
+        },
+        "2080153119:3888250391": {
+          "width": 32,
+          "height": 8
+        },
+        "2319871821:3892002218": {
+          "width": 16,
+          "height": 32
+        },
+        "1185013058:2247985213": {
+          "width": 16,
+          "height": 16
+        },
+        "1337143630:3262270609": {
+          "width": 32,
+          "height": 16
+        },
+        "4244877686:353018928": {
+          "width": 32,
+          "height": 16
+        },
+        "2077356115:3812191667": {
+          "width": 32,
+          "height": 16
+        },
+        "3203892062:2841558875": {
+          "width": 16,
+          "height": 16
+        },
+        "4257331517:2183394671": {
+          "width": 32,
+          "height": 16
+        },
+        "2196597897:3303744566": {
+          "width": 32,
+          "height": 16
+        },
+        "3232673513:1262669209": {
+          "width": 32,
+          "height": 32
+        },
+        "3279530199:280702802": {
+          "width": 32,
+          "height": 32
+        },
+        "1866924703:732593055": {
+          "width": 16,
+          "height": 16
+        },
+        "2408559435:2703175562": {
+          "width": 16,
+          "height": 16
+        },
+        "702430049:2264837257": {
+          "width": 32,
+          "height": 16
+        },
+        "415469904:1565526493": {
+          "width": 32,
+          "height": 32
+        },
+        "1161317929:1622301738": {
+          "width": 32,
+          "height": 32
+        },
+        "1074440551:2094410499": {
+          "width": 64,
+          "height": 32
+        },
+        "501501426:3715321233": {
+          "width": 64,
+          "height": 32
+        },
+        "287704542:1917554359": {
+          "width": 64,
+          "height": 64
+        },
+        "3698594453:2944374295": {
+          "width": 32,
+          "height": 8
+        },
+        "2548899381:2714987263": {
+          "width": 32,
+          "height": 32
+        },
+        "2943726972:1641082603": {
+          "width": 32,
+          "height": 16
+        },
+        "805778416:1457833336": {
+          "width": 64,
+          "height": 32
+        },
+        "1690177020:1715996104": {
+          "width": 32,
+          "height": 32
+        },
+        "3003703859:4187727567": {
+          "width": 32,
+          "height": 32
+        },
+        "1712305822:4216422125": {
+          "width": 32,
+          "height": 16
+        },
+        "4261635382:2975510327": {
+          "width": 32,
+          "height": 32
+        },
+        "3670751463:3304786142": {
+          "width": 16,
+          "height": 8
+        },
+        "369374233:1489450890": {
+          "width": 32,
+          "height": 32
+        },
+        "4256454371:926573146": {
+          "width": 16,
+          "height": 16
+        },
+        "1641279356:2610468045": {
+          "width": 32,
+          "height": 32
+        },
+        "285070076:220917365": {
+          "width": 32,
+          "height": 32
+        },
+        "1452056071:2840152029": {
+          "width": 32,
+          "height": 32
+        },
+        "2614995160:3539446193": {
+          "width": 32,
+          "height": 32
+        },
+        "232057198:950427522": {
+          "width": 32,
+          "height": 32
+        },
+        "2683215640:1578477856": {
+          "width": 32,
+          "height": 32
+        },
+        "3814360920:4084131898": {
+          "width": 32,
+          "height": 32
+        },
+        "1329168291:2126769799": {
+          "width": 32,
+          "height": 16
+        },
+        "3099687000:4020074916": {
+          "width": 32,
+          "height": 32
+        },
+        "3175233131:1614311067": {
+          "width": 16,
+          "height": 32
+        },
+        "2218490609:2231918513": {
+          "width": 8,
+          "height": 32
+        },
+        "1127492089:2644810879": {
+          "width": 32,
+          "height": 16
+        },
+        "3387510493:2766868700": {
+          "width": 32,
+          "height": 32
+        },
+        "2202559354:4286029350": {
+          "width": 16,
+          "height": 16
+        },
+        "414127538:117677198": {
+          "width": 32,
+          "height": 32
+        },
+        "3154957108:3715151545": {
+          "width": 32,
+          "height": 8
+        },
+        "565245503:177062143": {
+          "width": 8,
+          "height": 32
+        },
+        "3833883691:3731592711": {
+          "width": 32,
+          "height": 32
+        },
+        "1097848890:3664527767": {
+          "width": 32,
+          "height": 32
+        },
+        "4152243440:429564143": {
+          "width": 32,
+          "height": 16
+        },
+        "2913621843:2643264796": {
+          "width": 8,
+          "height": 32
+        },
+        "646280670:1995756242": {
+          "width": 32,
+          "height": 16
+        },
+        "4011374149:3834582050": {
+          "width": 32,
+          "height": 32
+        },
+        "1569752718:3649175803": {
+          "width": 16,
+          "height": 16
+        },
+        "2181132677:2777824506": {
+          "width": 32,
+          "height": 32
+        },
+        "1999004257:1839644406": {
+          "width": 32,
+          "height": 32
+        },
+        "3348865356:1892908280": {
+          "width": 32,
+          "height": 32
+        },
+        "481195609:2713729797": {
+          "width": 32,
+          "height": 32
+        },
+        "1538393523:1254690195": {
+          "width": 32,
+          "height": 32
+        },
+        "1195915861:1045552271": {
+          "width": 16,
+          "height": 32
+        },
+        "1962686230:3129675884": {
+          "width": 16,
+          "height": 32
+        },
+        "1826598102:3471670533": {
+          "width": 8,
+          "height": 32
+        },
+        "1617108543:1042250240": {
+          "width": 16,
+          "height": 16
+        },
+        "698202703:615680185": {
+          "width": 8,
+          "height": 32
+        },
+        "1444084922:3353036529": {
+          "width": 32,
+          "height": 32
+        },
+        "711776253:2796332129": {
+          "width": 16,
+          "height": 16
+        },
+        "915111470:2841636133": {
+          "width": 16,
+          "height": 16
+        },
+        "3790266051:2222739435": {
+          "width": 32,
+          "height": 32
+        },
+        "564106186:1023804897": {
+          "width": 16,
+          "height": 8
+        },
+        "1458292513:884685292": {
+          "width": 16,
+          "height": 8
+        },
+        "1378210216:1533031093": {
+          "width": 16,
+          "height": 8
+        },
+        "1162641706:555748386": {
+          "width": 16,
+          "height": 16
+        },
+        "832500643:1664016117": {
+          "width": 8,
+          "height": 16
+        },
+        "2851768352:1773657270": {
+          "width": 8,
+          "height": 8
+        },
+        "4249166768:3196078572": {
+          "width": 16,
+          "height": 16
+        },
+        "853212426:1094601754": {
+          "width": 8,
+          "height": 16
+        },
+        "796432684:438974443": {
+          "width": 16,
+          "height": 8
+        },
+        "323919254:4048739328": {
+          "width": 32,
+          "height": 16
+        },
+        "1026483675:3432656307": {
+          "width": 16,
+          "height": 32
+        },
+        "3165574890:75430708": {
+          "width": 32,
+          "height": 32
+        },
+        "237594902:691338543": {
+          "width": 32,
+          "height": 32
+        },
+        "1937419619:4148531868": {
+          "width": 16,
+          "height": 8
+        },
+        "3655588589:1639280626": {
+          "width": 64,
+          "height": 32
+        },
+        "3679536270:727169922": {
+          "width": 32,
+          "height": 32
+        },
+        "935817542:1029412233": {
+          "width": 64,
+          "height": 32
+        },
+        "3091735291:520960": {
+          "width": 64,
+          "height": 64
+        },
+        "368539798:3782393294": {
+          "width": 32,
+          "height": 32
+        },
+        "755207278:3773313034": {
+          "width": 32,
+          "height": 32
+        },
+        "1798712255:3793273174": {
+          "width": 32,
+          "height": 32
+        },
+        "254324767:78494629": {
+          "width": 16,
+          "height": 32
+        },
+        "935965848:1397273948": {
+          "width": 32,
+          "height": 32
+        },
+        "2663250646:773582093": {
+          "width": 64,
+          "height": 32
+        },
+        "1956964416:3708255237": {
+          "width": 32,
+          "height": 32
+        },
+        "147496676:3377576069": {
+          "width": 32,
+          "height": 32
+        },
+        "1027589714:4235866421": {
+          "width": 16,
+          "height": 16
+        },
+        "2357182557:3605179481": {
+          "width": 32,
+          "height": 32
+        },
+        "564214542:304543476": {
+          "width": 32,
+          "height": 32
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {
+        "beam_stream": 9,
+        "background_explosion": 16,
+        "impact_flash": 27,
+        "energy_orb": 5
+      },
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true
+    }
+  ]
+}

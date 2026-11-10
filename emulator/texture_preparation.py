@@ -4,6 +4,9 @@ _renderer=None
 _tiles=None
 
 def start_texture_worker(parent_pid):
+    if os.environ.get('SRWW_TEXTURE_TRACE')=='1':
+        import faulthandler
+        faulthandler.dump_traceback_later(10,repeat=True)
     def watch_parent():
         if os.name=='nt':
             import ctypes as C

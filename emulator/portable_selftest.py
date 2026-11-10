@@ -36,6 +36,8 @@ def main():
             pixels=np.asarray(image);assert pixels.max()>0 and pixels.std()>10,'Empty game frame'
             image.save(args.self_test.with_suffix('.png'))
             result.update(native_core=True,hd_frame_size=list(image.size),frame_worker=True,prepared_parts=len(renderer.ready.values),hd_cutin_id=int(c.hd[0]))
+            result['native_energy_feedback_bridge']=hasattr(c.api,'retro_srw_copy_effect_debug')
+            assert result['native_energy_feedback_bridge'],'Updated energy-feedback bridge missing'
             if args.state and args.state.stem=='quatre_cutin_full':assert c.hd[0]==7,'Quatre cut-in was not registered in the frozen core'
         finally:renderer.close();c.close()
     args.self_test.parent.mkdir(parents=True,exist_ok=True);args.self_test.write_text(json.dumps(result,indent=2),encoding='utf-8')

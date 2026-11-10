@@ -22,8 +22,9 @@ def fnv(data):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', action='store_true')
+    parser.add_argument('--folder',default='pilot_cutins',choices=['pilot_cutins','mechanical_cutins'])
     args = parser.parse_args()
-    folder = ROOT/'graphics/pilot_cutins'
+    folder = ROOT/'graphics'/args.folder
     plan = json.loads((folder/'plan.json').read_text())
     library_path = ROOT/'graphics/cutins_library.json'
     library = json.loads(library_path.read_text())
@@ -52,8 +53,22 @@ def main():
         for item in pair['items']:
             index = item['image']; slot = item['slot']
             crop = paint.crop((0, round(slot*paint.height/2), paint.width, round((slot+1)*paint.height/2)))
-            crop = crop.resize((960,960), Image.Resampling.LANCZOS)
             reference = np.asarray(native)[slot*256:(slot+1)*256,:,3] > 64
+            # Explicit atlas-coordinate correction for a generated cell whose
+            # artwork was displaced. Resample the painted contour itself; never
+            # stamp the low-resolution source alpha over the HD boundary.
+            alignment=None
+            if item.get('align_bounding_box'):
+                ys,xs=np.where(np.asarray(crop)[:,:,3]>64)
+                ry,rx=np.where(reference)
+                source_box=(int(xs.min()),int(ys.min()),int(xs.max()+1),int(ys.max()+1))
+                target_box=tuple(round(v*960/256) for v in (rx.min(),ry.min(),rx.max()+1,ry.max()+1))
+                aligned=Image.new('RGBA',(960,960))
+                aligned.paste(crop.crop(source_box).resize((target_box[2]-target_box[0],target_box[3]-target_box[1]),Image.Resampling.LANCZOS),target_box[:2])
+                crop=aligned
+                alignment=dict(source=list(source_box),destination=list(target_box))
+            else:
+                crop = crop.resize((960,960), Image.Resampling.LANCZOS)
             width,height = item['size']
             # A few source pictures contain a deliberately opaque black bed.
             # Transparency generation can mistake this for unused atlas space.
@@ -76,6 +91,7 @@ def main():
                 rejected.append(dict(resource=index,canvas=pair['name'],alpha_iou=iou))
                 continue
             data = resource(index); mapdata = resource(item['map'])
+            map_signature=fnv(b''.join(struct.pack('<H',v&0xfff) for v in struct.unpack_from('<16H',mapdata,8)))
             assert data[:4] == b'IMG\0', (index, data[:4])
             tile_width,tile_height=struct.unpack_from('<HH',data,4)
             padded=tile_width!=32
@@ -101,21 +117,25 @@ def main():
             assert signature not in signatures or signatures[signature] == ident, ('signature collision',index,signature)
             record = dict(resource=index,signature=signature,alpha_iou=iou,
                           canvas=pair['name'],gameplay_verified=False)
+            if alignment:record['atlas_alignment']=alignment
             checked.append(record)
             if prior:
                 signatures[signature]=ident
                 if args.apply:
                     crop.save(ROOT/'graphics'/prior.get('paint_image',prior['image']),optimize=True)
                     prior['alpha_iou']=iou
+                    prior['map_signature']=map_signature
                     prior['signatures']=[signature]
                     prior['signature_mode']='row_padded' if padded else ('origin_8192' if sample_offset==8192 else 'image_origin')
                 continue
-            rel = f'pilot_cutins/cutin_{index}_hd.png'
-            row = dict(id=ident,name=f'pilot_bg_{index}',resource=index,
+            rel = f'{args.folder}/cutin_{index}_hd.png'
+            row = dict(id=ident,name=f'{args.folder}_bg_{index}',resource=index,
                        layer=1,layers=[0,1,2,3],native_size=[256,256],
                        image=rel,paint_image=rel,signatures=[signature],
                        alpha_iou=iou,source_map=item['map'],source_palette=item['palette'],
+                       map_signature=map_signature,
                        generation_canvas=pair['name'],signature_mode='row_padded' if padded else ('origin_8192' if sample_offset==8192 else 'image_origin'),gameplay_verified=False)
+            if alignment:row['atlas_alignment']=alignment
             if args.apply:
                 crop.save(ROOT/'graphics'/rel,optimize=True)
             added.append(row); signatures[signature]=ident;next_id+=1

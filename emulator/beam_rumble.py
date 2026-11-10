@@ -6,7 +6,28 @@ import numpy as np
 class BeamObserver:
     WIDTHS=((8,16,32,64),(16,32,32,64),(8,8,16,32))
     HEIGHTS=((8,16,32,64),(8,8,16,32),(16,32,32,64))
-    def __init__(self):self.cache=OrderedDict();self.raw=np.empty(8192,dtype='uint8');self.bound=False
+    def __init__(self):self.cache=OrderedDict();self.raw=np.empty(8192,dtype='uint8');self.bound=False;self.orb_active=False;self.orb_token=None
+
+    @staticmethod
+    def classify_white_orb(indices,palette):
+        p=np.asarray(palette,dtype='uint16');white=((p&31)>=28)&(((p>>5)&31)>=28)&(((p>>10)&31)>=28);white[0]=False
+        mask=white[indices];ys,xs=np.nonzero(mask)
+        if len(xs)<120:return False
+        width=int(xs.max()-xs.min()+1);height=int(ys.max()-ys.min()+1)
+        fill=len(xs)/(width*height)
+        return min(width,height)>=16 and .7<=width/height<=1.4 and .5<=fill<=.88 and len(xs)>=np.count_nonzero(indices)*.85
+
+    @staticmethod
+    def classify_orb(indices,palette):
+        lookup=BeamObserver.energy_table(palette);lookup[0]=False
+        mask=lookup[indices];ys,xs=np.nonzero(mask)
+        if len(xs)<80:return False
+        width=int(xs.max()-xs.min()+1);height=int(ys.max()-ys.min()+1)
+        if min(width,height)<12 or max(width,height)>min(width,height)*2.5:return False
+        colors=np.asarray(palette,dtype='uint16')[indices[mask]]
+        r=colors&31;g=(colors>>5)&31;b=(colors>>10)&31
+        colored=np.count_nonzero(np.maximum.reduce([r,g,b])-np.minimum.reduce([r,g,b])>=7)
+        return len(xs)>=width*height*.3 and (colored>=32 or BeamObserver.classify_white_orb(indices,palette))
 
     @staticmethod
     def energy_table(palette):
@@ -32,7 +53,8 @@ class BeamObserver:
             stream=width>=max(24,height*4) and len(xs)>=opaque*.8
         return stream or (green>=max(24,opaque*.55) and 10<=width<=24 and 4<=height<=24)
 
-    def active(self,core,oam,palette,registers):
+    def active(self,core,oam,palette,registers,engine=0):
+        self.orb_active=False;self.orb_token=None
         if not self.bound:
             core.api.retro_srw_copy_vram.argtypes=[C.c_uint,C.c_void_p,C.c_uint];self.bound=True
         disp=int(registers[0])|(int(registers[1])<<16);one_d=bool(disp&16);boundary=5+((disp>>20)&3) if one_d else 5
@@ -52,7 +74,7 @@ class BeamObserver:
             colors=palette.reshape(-1) if eight else palette[c>>12]
             tile_bytes=64 if eight else 32;stride=w//8*tile_bytes if one_d else 1024
             length=(h//8-1)*stride+w//8*tile_bytes
-            base=0x06400000+((c&1023)<<boundary)
+            base=(0x06600000 if engine else 0x06400000)+((c&1023)<<boundary)
             core.api.retro_srw_copy_vram(base,self.raw.ctypes.data,length)
             data=self.raw[:length].tobytes();key=(w,h,eight,stride,data,colors.tobytes())
             found=self.cache.pop(key,None)
@@ -63,8 +85,12 @@ class BeamObserver:
                     pairs=np.stack((tiles&15,tiles>>4),axis=-1)
                     indices=pairs.reshape(h//8,w//8,8,8)
                 indices=indices.transpose(0,2,1,3).reshape(h,w)
-                found=self.classify(indices,colors)
+                found=(self.classify(indices,colors),self.classify_orb(indices,colors),self.classify_white_orb(indices,colors))
             self.cache[key]=found
             while len(self.cache)>96:self.cache.popitem(last=False)
-            if found:return True
+            # Round energy clouds are common translucent OBJ. Opaque white
+            # armor and static bright background objects are not orb signals.
+            if (((a>>10)&3)==1 and found[1]) or found[2]:
+                self.orb_active=True;self.orb_token=(index,hash(data),hash(colors.tobytes()))
+            if found[0]:return True
         return False
