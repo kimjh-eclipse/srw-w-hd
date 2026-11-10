@@ -35,6 +35,9 @@ class Core:
         self.api.retro_load_game.argtypes=[C.POINTER(Game)];self.api.retro_load_game.restype=C.c_bool
         if not self.api.retro_load_game(C.byref(game)):raise RuntimeError('롬을 열지 못했습니다.')
         self.ids=np.zeros((192,256),dtype='uint8');self.hd=(C.c_uint*12)();self.enabled=enabled
+        self.cutin_layers=np.zeros((4,12),dtype='uint32')
+        self.layer_cutin_bridge=hasattr(self.api,'retro_srw_get_hd_layers')
+        if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers.argtypes=[C.c_void_p]
         self.robot=(C.c_int*8)()
         self.obj=C.create_string_buffer(1024)
         self.api.retro_srw_get_robot_state.argtypes=[C.POINTER(C.c_int)]
@@ -166,6 +169,7 @@ class Core:
         epoch=self.video_epoch;self.api.retro_run()
         if self.video_epoch==epoch:return False
         self.api.retro_srw_get_hd_state(self.hd)
+        if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers(self.cutin_layers.ctypes.data)
         self.api.retro_srw_copy_layer_ids(self.ids.ctypes.data);self.hd[10]=int(self.enabled)
         self.api.retro_srw_get_robot_state(self.robot)
         self.api.retro_srw_copy_rendered_obj(self.obj)

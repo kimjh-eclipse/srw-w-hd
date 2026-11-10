@@ -116,6 +116,7 @@ extern "C" RETRO_API unsigned retro_srw_copy_effect_debug(void *oam, void *objPa
    return engine+1;
 }
 extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
+extern "C" RETRO_API void retro_srw_get_hd_layers(unsigned *out) { if(out) memcpy(out,SRWWHD_Layers,sizeof(SRWWHD_Layers)); }
 extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
@@ -2171,7 +2172,7 @@ void retro_run (void)
    if (skipped)
       NDS_SkipNextFrame();
 
-   SRWWHD_Frame++;SRWWHD_Info[0]=0;SRWWRobot_Info[0]=0;SRWWBeginPartsFrame();
+   SRWWHD_Frame++;SRWWHD_Info[0]=0;memset(SRWWHD_Layers,0,sizeof(SRWWHD_Layers));SRWWRobot_Info[0]=0;SRWWBeginPartsFrame();
    NDS_exec<false>();
 
    SPU_Emulate_user();

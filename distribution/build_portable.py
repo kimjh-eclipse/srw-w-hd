@@ -9,7 +9,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--assets-only',action='store_true');parser.add_argument('--program-only',action='store_true');args=parser.parse_args()
     if sys.platform!='win32':raise SystemExit('Build this Windows distribution on Windows.')
     subprocess.run([sys.executable,str(ROOT/'scripts/assets/build_text_patterns.py')],cwd=ROOT,check=True)
-    previous_manifest=json.loads((TARGET/'distribution_manifest.json').read_text()) if args.program_only else None
+    manifest_path=TARGET/'distribution_manifest.json'
+    previous_manifest=json.loads(manifest_path.read_text()) if manifest_path.exists() else None
     if not args.assets_only:
         frozen_dist=ROOT/'build/frozen_update' if args.program_only else ROOT/'dist'
         subprocess.run([sys.executable,'-m','PyInstaller','--noconfirm','--clean','--distpath',str(frozen_dist),'--workpath',str(ROOT/'build/portable'),str(ROOT/'distribution/SRW_W_HD.spec')],cwd=ROOT,check=True)
@@ -17,13 +18,19 @@ def main():
     if not args.program_only:subprocess.run([sys.executable,str(ROOT/'distribution/prepare_images.py')],cwd=ROOT,check=True)
     optimization=json.loads((ROOT/'test_current/image_optimization/package_images.json').read_text())
     optimized={r['path']:r for r in optimization['entries'] if r.get('encoded')}
-    assets=[]
+    assets=[];unchanged_assets=set();copied_assets=0
     for source in ([] if args.program_only else (ROOT/'graphics').rglob('*')):
         if not source.is_file() or source.name.startswith('parts_registered.sqlite') or source.suffix in ('.lock','.html') or source.name.endswith(('-wal','-shm')):continue
         if source.suffix.lower() not in ('.png','.json','.npz','.npy','.sqlite','.md','.txt','.otf'):continue
         relative=source.relative_to(ROOT);row=optimized.get(source.relative_to(ROOT/'graphics').as_posix())
         if row:source=ROOT/row['encoded'];relative=Path('graphics')/row['output']
-        dest=TARGET/relative;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest);assets.append(relative.as_posix())
+        dest=TARGET/relative;dest.parent.mkdir(parents=True,exist_ok=True)
+        source_stat=source.stat();target_stat=dest.stat() if dest.exists() else None
+        if target_stat and (target_stat.st_size,target_stat.st_mtime_ns)==(source_stat.st_size,source_stat.st_mtime_ns):
+            unchanged_assets.add(relative.as_posix())
+        else:shutil.copy2(source,dest);copied_assets+=1
+        assets.append(relative.as_posix())
+    print(json.dumps(dict(copied_assets=copied_assets,unchanged_assets=len(unchanged_assets))),flush=True)
     (TARGET/'image_optimization.json').write_text(json.dumps({k:v for k,v in optimization.items() if k!='entries'},indent=2),encoding='utf-8')
     # Retain the already-prepared portraits: only their packaged file stamps
     # changed, not the portrait identities or source design.
@@ -31,6 +38,7 @@ def main():
     import hd_portraits
     portrait_db=TARGET/'graphics/portraits/prepared.sqlite'
     if portrait_db.exists() and not args.program_only:
+        unchanged_assets.discard('graphics/portraits/prepared.sqlite')
         with sqlite3.connect(portrait_db) as db:
             for item in json.loads((ROOT/'graphics/portraits/library.json').read_text())['portraits']:
                 stamp=[f'portrait-registration-3-{hd_portraits.MAX_WIDTH}']
@@ -58,7 +66,8 @@ def main():
         if not file.is_file() or 'data' in file.relative_to(TARGET).parts or file.name=='distribution_manifest.json':continue
         assert file.suffix.lower() not in forbidden,file
         name=file.relative_to(TARGET).as_posix()
-        manifest.append(previous_assets[name] if name in previous_assets else dict(path=name,bytes=file.stat().st_size,sha256=hashlib.sha256(file.read_bytes()).hexdigest()))
+        reusable=name in previous_assets and (args.program_only or name in unchanged_assets) and previous_assets[name]['bytes']==file.stat().st_size
+        manifest.append(previous_assets[name] if reusable else dict(path=name,bytes=file.stat().st_size,sha256=hashlib.sha256(file.read_bytes()).hexdigest()))
     (TARGET/'distribution_manifest.json').write_text(json.dumps(dict(format=1,python_install_required=False,roms_included=False,saves_included=False,files=manifest),indent=2),encoding='utf-8')
     print(json.dumps(dict(executable=str(TARGET/'SRW_W_HD.exe'),files=len(manifest),bytes=sum(x['bytes'] for x in manifest)),ensure_ascii=False),flush=True)
 

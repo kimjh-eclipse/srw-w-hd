@@ -3,9 +3,9 @@
   "attempted": 1804,
   "units": 473,
   "counts": {
-    "completed": 1499,
-    "weapon_absent_from_native_menu": 229,
-    "not_started": 73,
+    "completed": 1702,
+    "weapon_absent_from_native_menu": 87,
+    "not_started": 12,
     "unfinished": 3
   },
   "observed_cutin_ids": [
@@ -18,6 +18,7 @@
     10,
     11,
     12,
+    13,
     14,
     15,
     17,
@@ -26,6 +27,7 @@
     22,
     23,
     24,
+    27,
     28,
     29,
     30,
@@ -64,6 +66,7 @@
     75,
     76,
     77,
+    78,
     79,
     80,
     81,
@@ -113,6 +116,7 @@
     128,
     129,
     130,
+    131,
     132,
     133,
     136,
@@ -122,9 +126,13 @@
     140,
     141,
     142,
+    143,
     144,
     145,
     146,
+    147,
+    148,
+    149,
     150,
     151,
     152,
@@ -142,346 +150,10 @@
   ],
   "failures": [
     {
-      "unit_id": 104,
-      "name_ja": "アストレイBフレームセカンドL",
-      "weapon_id": 435,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 104,
-      "name_ja": "アストレイBフレームセカンドL",
-      "weapon_id": 436,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 104,
-      "name_ja": "アストレイBフレームセカンドL",
-      "weapon_id": 437,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 105,
-      "name_ja": "アストレイBFセカンドL・LL",
-      "weapon_id": 441,
-      "weapon_name": "ローエングリンランチャー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 105,
-      "name_ja": "アストレイBFセカンドL・LL",
-      "weapon_id": 443,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 105,
-      "name_ja": "アストレイBFセカンドL・LL",
-      "weapon_id": 444,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 105,
-      "name_ja": "アストレイBFセカンドL・LL",
-      "weapon_id": 445,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 122,
-      "name_ja": "リジェネレイト",
-      "weapon_id": 508,
-      "weapon_name": "ライトクラフト・プロパルジョン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 139,
-      "name_ja": "エステバリス0Gアキト",
-      "weapon_id": 577,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 140,
-      "name_ja": "エステバリス0Gガイ",
-      "weapon_id": 582,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 141,
-      "name_ja": "エステバリス0Gリョーコ",
-      "weapon_id": 587,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 141,
-      "name_ja": "エステバリス0Gリョーコ",
-      "weapon_id": 588,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 142,
-      "name_ja": "エステバリス0Gヒカル",
-      "weapon_id": 593,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 142,
-      "name_ja": "エステバリス0Gヒカル",
-      "weapon_id": 594,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 143,
-      "name_ja": "エステバリス0Gイズミ",
-      "weapon_id": 599,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 143,
-      "name_ja": "エステバリス0Gイズミ",
-      "weapon_id": 600,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 145,
-      "name_ja": "エステバリス空戦アキト",
-      "weapon_id": 610,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 146,
-      "name_ja": "エステバリス空戦ガイ",
-      "weapon_id": 616,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 147,
-      "name_ja": "エステバリス空戦リョーコ",
-      "weapon_id": 622,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 147,
-      "name_ja": "エステバリス空戦リョーコ",
-      "weapon_id": 623,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 148,
-      "name_ja": "エステバリス空戦ヒカル",
-      "weapon_id": 629,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 148,
-      "name_ja": "エステバリス空戦ヒカル",
-      "weapon_id": 630,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 149,
-      "name_ja": "エステバリス空戦イズミ",
-      "weapon_id": 636,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 149,
-      "name_ja": "エステバリス空戦イズミ",
-      "weapon_id": 637,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 151,
-      "name_ja": "エステバリス陸戦アキト",
-      "weapon_id": 648,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 152,
-      "name_ja": "エステバリス陸戦ガイ",
-      "weapon_id": 654,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 153,
-      "name_ja": "エステバリス陸戦リョーコ",
-      "weapon_id": 660,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 153,
-      "name_ja": "エステバリス陸戦リョーコ",
-      "weapon_id": 661,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 154,
-      "name_ja": "エステバリス陸戦ヒカル",
-      "weapon_id": 667,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 154,
-      "name_ja": "エステバリス陸戦ヒカル",
-      "weapon_id": 668,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 155,
-      "name_ja": "エステバリス陸戦イズミ",
-      "weapon_id": 674,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 155,
-      "name_ja": "エステバリス陸戦イズミ",
-      "weapon_id": 675,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 157,
-      "name_ja": "エステバリス砲戦アキト",
-      "weapon_id": 682,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 157,
-      "name_ja": "エステバリス砲戦アキト",
-      "weapon_id": 684,
-      "weapon_name": "ガンガーフォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 158,
-      "name_ja": "エステバリス砲戦ガイ",
-      "weapon_id": 686,
-      "weapon_name": "必殺ゲキガンショット",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 158,
-      "name_ja": "エステバリス砲戦ガイ",
-      "weapon_id": 688,
-      "weapon_name": "ガンガーフォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 159,
-      "name_ja": "エステバリス砲戦リョーコ",
-      "weapon_id": 690,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 159,
-      "name_ja": "エステバリス砲戦リョーコ",
-      "weapon_id": 692,
-      "weapon_name": "フォーメーションアタック",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 16,
       "name_ja": "ストライクガンダム",
       "weapon_id": 56,
       "weapon_name": "アストレイ・フォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 160,
-      "name_ja": "エステバリス砲戦ヒカル",
-      "weapon_id": 694,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 160,
-      "name_ja": "エステバリス砲戦ヒカル",
-      "weapon_id": 696,
-      "weapon_name": "フォーメーションアタック",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 161,
-      "name_ja": "エステバリス砲戦イズミ",
-      "weapon_id": 698,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 161,
-      "name_ja": "エステバリス砲戦イズミ",
-      "weapon_id": 700,
-      "weapon_name": "フォーメーションアタック",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 162,
-      "name_ja": "エステバリス砲戦アカツキ",
-      "weapon_id": 702,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 163,
-      "name_ja": "エステバリス月面アキト",
-      "weapon_id": 707,
-      "weapon_name": "ガンガーフォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 164,
-      "name_ja": "エステバリス月面ガイ",
-      "weapon_id": 711,
-      "weapon_name": "ガンガーフォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 165,
-      "name_ja": "エステバリス月面リョーコ",
-      "weapon_id": 715,
-      "weapon_name": "フォーメーションアタック",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 166,
-      "name_ja": "エステバリス月面ヒカル",
-      "weapon_id": 719,
-      "weapon_name": "フォーメーションアタック",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 167,
-      "name_ja": "エステバリス月面イズミ",
-      "weapon_id": 723,
-      "weapon_name": "フォーメーションアタック",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -490,13 +162,6 @@
       "weapon_id": 60,
       "weapon_name": "アストレイ・フォーメーション",
       "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 171,
-      "name_ja": "ナデシコ(Yユニット)",
-      "weapon_id": 735,
-      "weapon_name": "相転移砲",
-      "reason": "not_started"
     },
     {
       "unit_id": 18,
@@ -520,88 +185,11 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 190,
-      "name_ja": "エステバリスカスタムアキト",
-      "weapon_id": 790,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 191,
-      "name_ja": "エステバリスカスタムリョーコ",
-      "weapon_id": 794,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 191,
-      "name_ja": "エステバリスカスタムリョーコ",
-      "weapon_id": 795,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 192,
-      "name_ja": "エステバリスカスタムヒカル",
-      "weapon_id": 799,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 192,
-      "name_ja": "エステバリスカスタムヒカル",
-      "weapon_id": 800,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 193,
-      "name_ja": "エステバリスカスタムイズミ",
-      "weapon_id": 804,
-      "weapon_name": "フォーメーションアタック射撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 193,
-      "name_ja": "エステバリスカスタムイズミ",
-      "weapon_id": 805,
-      "weapon_name": "フォーメーションアタック格闘",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 194,
-      "name_ja": "エステバリスカスタムガイ",
-      "weapon_id": 809,
-      "weapon_name": "ダブルゲキガンフレア",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 2,
-      "name_ja": "ガンダムヘビーアームズ改",
-      "weapon_id": 10,
-      "weapon_name": "マイクロ・ミサイル",
-      "reason": "not_started"
-    },
-    {
       "unit_id": 20,
       "name_ja": "ランチャーストライクガンダム",
       "weapon_id": 73,
       "weapon_name": "アストレイ・フォーメーション",
       "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 201,
-      "name_ja": "ナデシコC",
-      "weapon_id": 821,
-      "weapon_name": "相転移砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 206,
-      "name_ja": "オーガン",
-      "weapon_id": 834,
-      "weapon_name": "アンク・アタック",
-      "reason": "not_started"
     },
     {
       "unit_id": 207,
@@ -660,13 +248,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 220,
-      "name_ja": "オーガン",
-      "weapon_id": 879,
-      "weapon_name": "アンク・アタック",
-      "reason": "not_started"
-    },
-    {
       "unit_id": 223,
       "name_ja": "テッカマンブレード+ペガス",
       "weapon_id": 890,
@@ -702,27 +283,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 224,
-      "name_ja": "テッカマンブレード",
-      "weapon_id": 899,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 224,
-      "name_ja": "テッカマンブレード",
-      "weapon_id": 900,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 224,
-      "name_ja": "テッカマンブレード",
-      "weapon_id": 901,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 225,
       "name_ja": "テッカマンブレード+ペガス",
       "weapon_id": 905,
@@ -744,52 +304,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 225,
-      "name_ja": "テッカマンブレード+ペガス",
-      "weapon_id": 908,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 225,
-      "name_ja": "テッカマンブレード+ペガス",
-      "weapon_id": 909,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 225,
-      "name_ja": "テッカマンブレード+ペガス",
-      "weapon_id": 910,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 226,
       "name_ja": "ブラスターテッカマンブレード",
       "weapon_id": 913,
       "weapon_name": "ボルテッカクラッシュイントルード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 226,
-      "name_ja": "ブラスターテッカマンブレード",
-      "weapon_id": 916,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 226,
-      "name_ja": "ブラスターテッカマンブレード",
-      "weapon_id": 917,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 226,
-      "name_ja": "ブラスターテッカマンブレード",
-      "weapon_id": 918,
-      "weapon_name": "ダブル・ボルテッカ",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -800,38 +318,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 227,
-      "name_ja": "ブラスターブレード+ペガス",
-      "weapon_id": 925,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 227,
-      "name_ja": "ブラスターブレード+ペガス",
-      "weapon_id": 926,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 227,
-      "name_ja": "ブラスターブレード+ペガス",
-      "weapon_id": 927,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 228,
       "name_ja": "ブルーアース",
       "weapon_id": 929,
       "weapon_name": "フェルミオン砲",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 229,
-      "name_ja": "ソルテッカマン1号機改",
-      "weapon_id": 932,
-      "weapon_name": "ダブルフェルミオン砲",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -842,171 +332,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 230,
-      "name_ja": "ソルテッカマン2号機",
-      "weapon_id": 935,
-      "weapon_name": "ダブルフェルミオン砲",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 231,
-      "name_ja": "テッカマンレイピア",
-      "weapon_id": 955,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 231,
-      "name_ja": "テッカマンレイピア",
-      "weapon_id": 956,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 231,
-      "name_ja": "テッカマンレイピア",
-      "weapon_id": 957,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 231,
-      "name_ja": "テッカマンレイピア",
-      "weapon_id": 958,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 24,
       "name_ja": "スカイグラスパー1",
       "weapon_id": 91,
       "weapon_name": "アストレイ・フォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 243,
-      "name_ja": "テッカマンイーベル",
-      "weapon_id": 982,
-      "weapon_name": "リアクターボルテッカ",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 243,
-      "name_ja": "テッカマンイーベル",
-      "weapon_id": 984,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 243,
-      "name_ja": "テッカマンイーベル",
-      "weapon_id": 985,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 243,
-      "name_ja": "テッカマンイーベル",
-      "weapon_id": 986,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 244,
-      "name_ja": "テッカマンイーベル+γ号",
-      "weapon_id": 989,
-      "weapon_name": "リアクターボルテッカ",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 244,
-      "name_ja": "テッカマンイーベル+γ号",
-      "weapon_id": 991,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 244,
-      "name_ja": "テッカマンイーベル+γ号",
-      "weapon_id": 992,
-      "weapon_name": "ダブル・リアクターボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 244,
-      "name_ja": "テッカマンイーベル+γ号",
-      "weapon_id": 993,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 245,
-      "name_ja": "テッカマンゾマー",
-      "weapon_id": 998,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 245,
-      "name_ja": "テッカマンゾマー",
-      "weapon_id": 999,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 246,
-      "name_ja": "テッカマンゾマー+β号",
-      "weapon_id": 1005,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 246,
-      "name_ja": "テッカマンゾマー+β号",
-      "weapon_id": 1006,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 247,
-      "name_ja": "テッカマンベスナー",
-      "weapon_id": 1010,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 247,
-      "name_ja": "テッカマンベスナー",
-      "weapon_id": 1011,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 248,
-      "name_ja": "テッカマンベスナー+α号",
-      "weapon_id": 1016,
-      "weapon_name": "ダブル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 248,
-      "name_ja": "テッカマンベスナー+α号",
-      "weapon_id": 1017,
-      "weapon_name": "トリプル・ボルテッカ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 249,
-      "name_ja": "テッカマンアキ",
-      "weapon_id": 1020,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 249,
-      "name_ja": "テッカマンアキ",
-      "weapon_id": 1021,
-      "weapon_name": "ダブル・ランサーコンビネーション",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1017,52 +346,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 250,
-      "name_ja": "テッカマンアキ+ペガスII",
-      "weapon_id": 1025,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 250,
-      "name_ja": "テッカマンアキ+ペガスII",
-      "weapon_id": 1026,
-      "weapon_name": "ダブル・ランサーコンビネーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 26,
       "name_ja": "エールスカイグラスパー1",
       "weapon_id": 101,
       "weapon_name": "アストレイ・フォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 260,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1061,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1066,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1067,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1068,
-      "weapon_name": "ウルズ・ストライク",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1073,94 +360,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1070,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1071,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 261,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1072,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1077,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1078,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1079,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 262,
       "name_ja": "M9 ガーンズバック",
       "weapon_id": 1080,
       "weapon_name": "ウルズ・スペシャル",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1081,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1082,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 262,
-      "name_ja": "M9 ガーンズバック",
-      "weapon_id": 1083,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 263,
-      "name_ja": "ARX-7 アーバレスト",
-      "weapon_id": 1088,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 264,
-      "name_ja": "ARX-7 アーバレスト",
-      "weapon_id": 1093,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 265,
-      "name_ja": "ARX-7 アーバレスト",
-      "weapon_id": 1098,
-      "weapon_name": "ウルズ・ストライク",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1169,48 +372,6 @@
       "weapon_id": 1102,
       "weapon_name": "量産型ボン太くん",
       "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 267,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1103,
-      "weapon_name": "Mk48ADCAP魚雷",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 267,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1104,
-      "weapon_name": "対艦ミサイル・ハープーン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 267,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1105,
-      "weapon_name": "巡航ミサイル・トマホーク",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 268,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1106,
-      "weapon_name": "Mk48ADCAP魚雷",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 268,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1107,
-      "weapon_name": "対艦ミサイル・ハープーン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 268,
-      "name_ja": "トゥアハー・デ・ダナン",
-      "weapon_id": 1108,
-      "weapon_name": "巡航ミサイル・トマホーク",
-      "reason": "not_started"
     },
     {
       "unit_id": 27,
@@ -1262,41 +423,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 294,
-      "name_ja": "マジンガーZ",
-      "weapon_id": 1187,
-      "weapon_name": "ダブルロケットパンチ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 294,
-      "name_ja": "マジンガーZ",
-      "weapon_id": 1188,
-      "weapon_name": "ダブルバーニングファイヤー",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 295,
-      "name_ja": "マジンカイザー",
-      "weapon_id": 1194,
-      "weapon_name": "ダブルロケットパンチ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 295,
-      "name_ja": "マジンカイザー",
-      "weapon_id": 1195,
-      "weapon_name": "ダブルバーニングファイヤー",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 297,
-      "name_ja": "マジンカイザーKS",
-      "weapon_id": 1209,
-      "weapon_name": "ダブルロケットパンチ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 297,
       "name_ja": "マジンカイザーKS",
       "weapon_id": 1210,
@@ -1320,50 +446,15 @@
     {
       "unit_id": 297,
       "name_ja": "マジンカイザーKS",
-      "weapon_id": 1213,
-      "weapon_name": "ファイナルダイナミックスペシャル",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 297,
-      "name_ja": "マジンカイザーKS",
       "weapon_id": 1214,
       "weapon_name": "カイザーノヴァ",
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 298,
-      "name_ja": "グレートマジンガー",
-      "weapon_id": 1220,
-      "weapon_name": "ダブルロケットパンチ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 298,
-      "name_ja": "グレートマジンガー",
-      "weapon_id": 1221,
-      "weapon_name": "ダブルロケットパンチ",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 298,
-      "name_ja": "グレートマジンガー",
-      "weapon_id": 1222,
-      "weapon_name": "ダブルバーニングファイヤー",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 298,
-      "name_ja": "グレートマジンガー",
-      "weapon_id": 1223,
-      "weapon_name": "ダブルバーニングファイヤー",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 299,
-      "name_ja": "グレートマジンガー",
-      "weapon_id": 1230,
-      "weapon_name": "ダブルロケットパンチ",
+      "unit_id": 297,
+      "name_ja": "マジンカイザーKS",
+      "weapon_id": 1213,
+      "weapon_name": "ファイナルダイナミックスペシャル",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1444,41 +535,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 325,
-      "name_ja": "氷竜",
-      "weapon_id": 1324,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 326,
-      "name_ja": "炎竜",
-      "weapon_id": 1319,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 327,
-      "name_ja": "風龍",
-      "weapon_id": 1328,
-      "weapon_name": "風龍・雷龍アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 328,
-      "name_ja": "雷龍",
-      "weapon_id": 1333,
-      "weapon_name": "風龍・雷龍アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 329,
-      "name_ja": "超竜神",
-      "weapon_id": 1337,
-      "weapon_name": "超竜神・撃龍神アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 329,
       "name_ja": "超竜神",
       "weapon_id": 1338,
@@ -1495,29 +551,8 @@
     {
       "unit_id": 330,
       "name_ja": "撃龍神",
-      "weapon_id": 1343,
-      "weapon_name": "超竜神・撃龍神アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 330,
-      "name_ja": "撃龍神",
       "weapon_id": 1344,
       "weapon_name": "自爆",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 331,
-      "name_ja": "幻竜神",
-      "weapon_id": 1348,
-      "weapon_name": "マキシマムトゥロン",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 332,
-      "name_ja": "強龍神",
-      "weapon_id": 1352,
-      "weapon_name": "マキシマムトゥロン",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1530,16 +565,16 @@
     {
       "unit_id": 336,
       "name_ja": "マイク・サウンダース13世・B",
-      "weapon_id": 1362,
+      "weapon_id": 1363,
       "weapon_name": "ディスクP",
-      "reason": "weapon_absent_from_native_menu"
+      "reason": "not_started"
     },
     {
       "unit_id": 336,
       "name_ja": "マイク・サウンダース13世・B",
-      "weapon_id": 1363,
+      "weapon_id": 1362,
       "weapon_name": "ディスクP",
-      "reason": "not_started"
+      "reason": "weapon_absent_from_native_menu"
     },
     {
       "unit_id": 336,
@@ -1577,25 +612,11 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 339,
-      "name_ja": "EI-01",
-      "weapon_id": 1377,
-      "weapon_name": "全方位レーザー攻撃",
-      "reason": "not_started"
-    },
-    {
       "unit_id": 34,
       "name_ja": "ソードスカイグラスパー2",
       "weapon_id": 141,
       "weapon_name": "アストレイ・フォーメーション",
       "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 345,
-      "name_ja": "EI-27",
-      "weapon_id": 1393,
-      "weapon_name": "一斉射撃",
-      "reason": "not_started"
     },
     {
       "unit_id": 35,
@@ -1605,13 +626,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 354,
-      "name_ja": "ZX-16",
-      "weapon_id": 1410,
-      "weapon_name": "羽ミサイル",
-      "reason": "not_started"
-    },
-    {
       "unit_id": 36,
       "name_ja": "ライトニングスカイグラスパー2",
       "weapon_id": 152,
@@ -1619,80 +633,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 362,
-      "name_ja": "氷竜",
-      "weapon_id": 1441,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 363,
-      "name_ja": "炎竜",
-      "weapon_id": 1436,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 369,
-      "name_ja": "氷竜",
-      "weapon_id": 1472,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 37,
       "name_ja": "IWSPスカイグラスパー2",
       "weapon_id": 157,
       "weapon_name": "アストレイ・フォーメーション",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 370,
-      "name_ja": "炎竜",
-      "weapon_id": 1467,
-      "weapon_name": "氷竜・炎竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 371,
-      "name_ja": "風龍",
-      "weapon_id": 1476,
-      "weapon_name": "風竜・雷竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 372,
-      "name_ja": "雷龍",
-      "weapon_id": 1481,
-      "weapon_name": "風竜・雷竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 373,
-      "name_ja": "超竜神",
-      "weapon_id": 1485,
-      "weapon_name": "超竜神・撃龍神アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 374,
-      "name_ja": "撃龍神",
-      "weapon_id": 1490,
-      "weapon_name": "超竜神・撃龍神アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 375,
-      "name_ja": "幻竜神",
-      "weapon_id": 1494,
-      "weapon_name": "マキシマムトゥロン",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 376,
-      "name_ja": "強龍神",
-      "weapon_id": 1498,
-      "weapon_name": "マキシマムトゥロン",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1714,13 +658,6 @@
       "name_ja": "マイク・サウンダース13世・B",
       "weapon_id": 1509,
       "weapon_name": "ディスクP",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 380,
-      "name_ja": "マイク・サウンダース13世・B",
-      "weapon_id": 1510,
-      "weapon_name": "ディスクM",
       "reason": "not_started"
     },
     {
@@ -1752,24 +689,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 388,
-      "name_ja": "光竜",
-      "weapon_id": 1543,
-      "weapon_name": "光竜・闇竜アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 389,
       "name_ja": "闇竜",
       "weapon_id": 1546,
       "weapon_name": "ルネ援護攻撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 389,
-      "name_ja": "闇竜",
-      "weapon_id": 1547,
-      "weapon_name": "光竜・闇竜アサルト",
       "reason": "weapon_absent_from_native_menu"
     },
     {
@@ -1824,30 +747,9 @@
     {
       "unit_id": 415,
       "name_ja": "ヴァルストーク",
-      "weapon_id": 1619,
-      "weapon_name": "誘導マイクロミサイル",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 415,
-      "name_ja": "ヴァルストーク",
       "weapon_id": 1622,
       "weapon_name": "プロトンキャノン・フォーカス",
       "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 416,
-      "name_ja": "ヴァルガード",
-      "weapon_id": 1624,
-      "weapon_name": "誘導マイクロミサイル",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 417,
-      "name_ja": "ヴァルザカード",
-      "weapon_id": 1630,
-      "weapon_name": "エクサノヴァシュート",
-      "reason": "not_started"
     },
     {
       "unit_id": 42,
@@ -1927,269 +829,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 450,
-      "name_ja": "ナデシコ(Yユニット)",
-      "weapon_id": 1768,
-      "weapon_name": "相転移砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 455,
-      "name_ja": "エステバリス砲戦アキト",
-      "weapon_id": 1670,
-      "weapon_name": "120ミリカノン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 46,
-      "name_ja": "フリーダムガンダム",
-      "weapon_id": 201,
-      "weapon_name": "コンビネーション・アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 47,
-      "name_ja": "フリーダムガンダム(M)",
-      "weapon_id": 208,
-      "weapon_name": "コンビネーション・ソード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 473,
-      "name_ja": "ゾノ",
-      "weapon_id": 1725,
-      "weapon_name": "6連装魚雷発射管",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 473,
-      "name_ja": "ゾノ",
-      "weapon_id": 1726,
-      "weapon_name": "フォノン・メーザー砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 473,
-      "name_ja": "ゾノ",
-      "weapon_id": 1727,
-      "weapon_name": "近接戦闘用クロー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 48,
-      "name_ja": "ジャスティスガンダム",
-      "weapon_id": 215,
-      "weapon_name": "コンビネーション・アサルト",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 480,
-      "name_ja": "ARX-7 アーバレスト",
-      "weapon_id": 1754,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 481,
       "name_ja": "ARX-7 アーバレスト",
       "weapon_id": 1757,
       "weapon_name": "57mm散弾砲ボクサー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 481,
-      "name_ja": "ARX-7 アーバレスト",
-      "weapon_id": 1759,
-      "weapon_name": "ウルズ・ストライク",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 49,
-      "name_ja": "ジャスティスガンダム(M)",
-      "weapon_id": 222,
-      "weapon_name": "コンビネーション・ソード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 64,
-      "name_ja": "ラゴゥ",
-      "weapon_id": 286,
-      "weapon_name": "2連ビームキャノン砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 64,
-      "name_ja": "ラゴゥ",
-      "weapon_id": 287,
-      "weapon_name": "2連装ビーム・サーベル",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 65,
-      "name_ja": "バクゥ",
-      "weapon_id": 288,
-      "weapon_name": "2連装レールガン",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 65,
-      "name_ja": "バクゥ",
-      "weapon_id": 289,
-      "weapon_name": "2連装ビーム・サーベル",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 66,
-      "name_ja": "バクゥ",
-      "weapon_id": 290,
-      "weapon_name": "13連装ミサイルポッド",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 66,
-      "name_ja": "バクゥ",
-      "weapon_id": 291,
-      "weapon_name": "2連装ビーム・サーベル",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 67,
-      "name_ja": "レセップス",
-      "weapon_id": 292,
-      "weapon_name": "機関砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 67,
-      "name_ja": "レセップス",
-      "weapon_id": 293,
-      "weapon_name": "垂直ミサイルランチャー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 67,
-      "name_ja": "レセップス",
-      "weapon_id": 294,
-      "weapon_name": "40センチ砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 68,
-      "name_ja": "ゾノ",
-      "weapon_id": 295,
-      "weapon_name": "6連装魚雷発射管",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 68,
-      "name_ja": "ゾノ",
-      "weapon_id": 296,
-      "weapon_name": "フォノン・メーザー砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 68,
-      "name_ja": "ゾノ",
-      "weapon_id": 297,
-      "weapon_name": "近接戦闘用クロー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 69,
-      "name_ja": "グーン",
-      "weapon_id": 298,
-      "weapon_name": "7連装魚雷発射管",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 69,
-      "name_ja": "グーン",
-      "weapon_id": 299,
-      "weapon_name": "フォノン・メーザー砲",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 69,
-      "name_ja": "グーン",
-      "weapon_id": 300,
-      "weapon_name": "体当たり",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 70,
-      "name_ja": "ディン",
-      "weapon_id": 301,
-      "weapon_name": "76ミリ重突撃機銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 70,
-      "name_ja": "ディン",
-      "weapon_id": 302,
-      "weapon_name": "6連装多目的ランチャー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 70,
-      "name_ja": "ディン",
-      "weapon_id": 303,
-      "weapon_name": "90ミリ対空散弾銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 71,
-      "name_ja": "ディン",
-      "weapon_id": 304,
-      "weapon_name": "76ミリ重突撃機銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 71,
-      "name_ja": "ディン",
-      "weapon_id": 305,
-      "weapon_name": "6連装多目的ランチャー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 71,
-      "name_ja": "ディン",
-      "weapon_id": 306,
-      "weapon_name": "90ミリ対空散弾銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 72,
-      "name_ja": "ディン",
-      "weapon_id": 307,
-      "weapon_name": "76ミリ重突撃機銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 72,
-      "name_ja": "ディン",
-      "weapon_id": 308,
-      "weapon_name": "6連装多目的ランチャー",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 72,
-      "name_ja": "ディン",
-      "weapon_id": 309,
-      "weapon_name": "90ミリ対空散弾銃",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 73,
-      "name_ja": "ボズゴロフ級",
-      "weapon_id": 310,
-      "weapon_name": "対空ミサイルポッド",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 73,
-      "name_ja": "ボズゴロフ級",
-      "weapon_id": 311,
-      "weapon_name": "魚雷発射管",
       "reason": "not_started"
     },
     {
@@ -2207,20 +850,6 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 96,
-      "name_ja": "アストレイRフレーム",
-      "weapon_id": 397,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 96,
-      "name_ja": "アストレイRフレーム",
-      "weapon_id": 398,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
       "unit_id": 97,
       "name_ja": "アストレイRフレームF",
       "weapon_id": 403,
@@ -2228,52 +857,10 @@
       "reason": "weapon_absent_from_native_menu"
     },
     {
-      "unit_id": 97,
-      "name_ja": "アストレイRフレームF",
-      "weapon_id": 404,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 97,
-      "name_ja": "アストレイRフレームF",
-      "weapon_id": 405,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 98,
-      "name_ja": "アストレイRフレームP",
-      "weapon_id": 408,
-      "weapon_name": "150ガーベラ・ストレート",
-      "reason": "not_started"
-    },
-    {
-      "unit_id": 99,
-      "name_ja": "パワードレッド",
-      "weapon_id": 413,
-      "weapon_name": "150ガーベラ・ストレート",
-      "reason": "not_started"
-    },
-    {
       "unit_id": 99,
       "name_ja": "パワードレッド",
       "weapon_id": 415,
       "weapon_name": "赤い一撃",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 99,
-      "name_ja": "パワードレッド",
-      "weapon_id": 416,
-      "weapon_name": "アストレイ・ダブル・ブレード",
-      "reason": "weapon_absent_from_native_menu"
-    },
-    {
-      "unit_id": 99,
-      "name_ja": "パワードレッド",
-      "weapon_id": 417,
-      "weapon_name": "アストレイ・ダブル・ブレード",
       "reason": "weapon_absent_from_native_menu"
     }
   ],

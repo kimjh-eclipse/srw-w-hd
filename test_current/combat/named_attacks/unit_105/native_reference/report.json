@@ -1,0 +1,55 @@
+{
+  "scope": "Exercise named unit attacks through the game's normal weapon/target menus.\n\nOnly an isolated state's unit record is substituted. Canonical pilots with\nan existing roster slot are selected from the verified ROM pilot table.\nNever counts a menu-only run as an attack or certifies campaign legality.\n",
+  "selected_units": 1,
+  "unit_ids": [
+    105
+  ],
+  "attempted": 1,
+  "full_replays": 0,
+  "rows": [
+    {
+      "unit_id": 105,
+      "name_ja": "アストレイBFセカンドL・LL",
+      "name_ko": "건담 아스트레이BSLL",
+      "weapon_id": 441,
+      "weapon_name": "ローエングリンランチャー",
+      "battle_started": false,
+      "active_battle_frames": 0,
+      "frames": 601,
+      "cutin_ids": [],
+      "observed_bindings": [],
+      "errors": {},
+      "seconds": 4.89,
+      "rumble_events": [],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 75,
+      "all_poses_verified": false,
+      "observed_weapon_id": null,
+      "native_menu_weapon_ids": [
+        438,
+        439,
+        440,
+        441,
+        442
+      ],
+      "native_menu_position": 3,
+      "native_menu_initial_cursor": 0,
+      "extra_forecast_confirmation": true,
+      "forecast_confirmation_count": 4,
+      "blocked_reason": null,
+      "weapon_routed_correctly": false,
+      "battle_completed": false,
+      "full_replay_verified": false,
+      "verification_revision": "a1b4a6894f971ea3575f7cdd60025850182e6a8e8bb66e9e7aaa56554aed3127",
+      "new_unmapped_textures": {},
+      "unknown_native_rectangles": {},
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {},
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true,
+      "combination_fixture": null
+    }
+  ]
+}

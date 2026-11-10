@@ -14,6 +14,13 @@ def main():
         observed_cutin_ids=sorted({i for r in rows for i in r.get('cutin_ids',[])}),
         failures=failures,all_hd_poses_visually_verified=False,campaign_legality_verified=False)
     (base/'catalog_summary.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+    previews=[r for path in sorted(base.glob('unit_*/diagnostic_preview/report.json')) for r in json.loads(path.read_text(encoding='utf-8'))['rows']]
+    preview_result=dict(scope='Separate locked-animation diagnostics, not normal menu/campaign coverage',attempted=len(previews),
+        completed=sum(bool(r.get('animation_preview_verified') or r.get('full_replay_verified')) for r in previews),
+        cutin_ids=sorted({i for r in previews for i in r.get('cutin_ids',[])}),
+        cases=[dict(unit_id=r['unit_id'],weapon_id=r['weapon_id'],weapon_name=r['weapon_name'],completed=bool(r.get('animation_preview_verified') or r.get('full_replay_verified')),menu_entry_injected=r.get('native_menu_entry_injected',False)) for r in previews],
+        normal_menu_legality_verified=False,all_hd_poses_visually_verified=False)
+    (base/'preview_summary.json').write_text(json.dumps(preview_result,ensure_ascii=False,indent=2),encoding='utf-8')
     catalog=json.loads((ROOT/'test_current/parts/named_unit_catalog.json').read_text());by_unit={}
     for row in rows:by_unit.setdefault(row['unit_id'],[]).append(row)
     groups={}
@@ -27,6 +34,7 @@ def main():
         '| 작품 | 기체 레코드 | 서브 그림 | 무장 레코드 | 공격 재생 완료 |','|---|---:|---:|---:|---:|']
     for name,s in groups.items():lines.append(f"| {name} | {s['units']} | {len(s['secondary'])} | {s['weapons']} | {s['completed']} |")
     lines+=['',f"전체 재생 검사: {len(rows)}건. 분류: {dict(counts)}.",'',
+        f"별도의 잠금 연출 검사: {preview_result['attempted']}건 중 {preview_result['completed']}건 재생 완료. 시험용 메뉴 항목을 주입한 경우가 포함되므로 정상 해금·캠페인 검증 수치에는 합산하지 않습니다.",'',
         '미완료 항목과 실제 관측 컷인 ID는 `test_current/combat/named_attacks/catalog_summary.json`에 기록합니다.']
     (ROOT/'docs/NAMED_COVERAGE.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print(json.dumps(dict(attempted=len(rows),counts=dict(counts),observed_cutins=len(result['observed_cutin_ids']))))

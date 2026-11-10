@@ -1,0 +1,130 @@
+{
+  "scope": "Exercise named unit attacks through the game's normal weapon/target menus.\n\nOnly an isolated state's unit record is substituted. Canonical pilots with\nan existing roster slot are selected from the verified ROM pilot table.\nNever counts a menu-only run as an attack or certifies campaign legality.\n",
+  "selected_units": 1,
+  "unit_ids": [
+    224
+  ],
+  "attempted": 1,
+  "full_replays": 0,
+  "rows": [
+    {
+      "unit_id": 224,
+      "name_ja": "テッカマンブレード",
+      "name_ko": "테카맨 블레이드",
+      "weapon_id": 898,
+      "weapon_name": "ボルテッカクラッシュイントルード",
+      "battle_started": false,
+      "active_battle_frames": 0,
+      "frames": 601,
+      "cutin_ids": [],
+      "observed_bindings": [],
+      "errors": {},
+      "seconds": 6.5,
+      "rumble_events": [],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 208,
+      "all_poses_verified": false,
+      "observed_weapon_id": null,
+      "native_menu_weapon_ids": [
+        898,
+        895,
+        896,
+        897
+      ],
+      "native_menu_position": 0,
+      "native_menu_initial_cursor": 1,
+      "extra_forecast_confirmation": true,
+      "forecast_confirmation_count": 4,
+      "blocked_reason": null,
+      "weapon_routed_correctly": false,
+      "battle_completed": false,
+      "full_replay_verified": false,
+      "animation_preview_verified": false,
+      "native_menu_entry_injected": true,
+      "verification_revision": "7f1421f0a3b10655b51d658dfdad22d40968d804b3d79996a833a042e08b2f57",
+      "cache_warm_replay_pass": 1,
+      "observed_source_resources": [],
+      "new_unmapped_textures": {
+        "(3233708637, 3479624161)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            3143371316,
+            4256585292
+          ]
+        },
+        "(3875739213, 2329649494)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            55877255,
+            3434005946
+          ]
+        },
+        "(507954986, 3249140432)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            254428858,
+            3354981787
+          ]
+        },
+        "(1129970785, 1141289420)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1989686617,
+            3084999059
+          ]
+        },
+        "(2756732883, 70203283)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2482429798,
+            3676282443
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "3233708637:3479624161": {
+          "width": 8,
+          "height": 16
+        },
+        "3875739213:2329649494": {
+          "width": 8,
+          "height": 16
+        },
+        "507954986:3249140432": {
+          "width": 8,
+          "height": 16
+        },
+        "1129970785:1141289420": {
+          "width": 8,
+          "height": 16
+        },
+        "2756732883:70203283": {
+          "width": 8,
+          "height": 16
+        },
+        "1943822947:727326245": {
+          "width": 32,
+          "height": 16
+        },
+        "4292556941:1839084172": {
+          "width": 32,
+          "height": 16
+        },
+        "2091002739:4006663127": {
+          "width": 32,
+          "height": 16
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {},
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true,
+      "diagnostic_terrain_ratings_override": true,
+      "diagnostic_level_99_override": true,
+      "combination_fixture": null,
+      "map_target_fixture": null
+    }
+  ]
+}

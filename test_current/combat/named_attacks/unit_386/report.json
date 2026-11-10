@@ -7968,76 +7968,6 @@
       "unit_id": 386,
       "name_ja": "ガオファイガー",
       "name_ko": "가오파이가",
-      "weapon_id": 1531,
-      "weapon_name": "ハンマーヘルアンドヘヴン",
-      "battle_started": false,
-      "active_battle_frames": 0,
-      "frames": 181,
-      "cutin_ids": [],
-      "observed_bindings": [],
-      "errors": {},
-      "seconds": 1.69,
-      "rumble_events": [],
-      "canonical_pilot_selected": true,
-      "default_pilot_id": 392,
-      "all_poses_verified": false,
-      "observed_weapon_id": null,
-      "native_menu_weapon_ids": [
-        1528,
-        1527,
-        1532,
-        1529,
-        1530
-      ],
-      "native_menu_position": null,
-      "native_menu_initial_cursor": 0,
-      "blocked_reason": "weapon_absent_from_native_menu",
-      "weapon_routed_correctly": false,
-      "battle_completed": false,
-      "full_replay_verified": false,
-      "verification_revision": "7c004a841d120a83bf6f2108825ba337d8c44fdfd10ecee1a875a4a0a8ba1eea",
-      "new_unmapped_textures": {},
-      "unknown_native_rectangles": {
-        "2756732883:70203283": {
-          "width": 8,
-          "height": 16
-        },
-        "1129970785:1141289420": {
-          "width": 8,
-          "height": 16
-        },
-        "3875739213:2329649494": {
-          "width": 8,
-          "height": 16
-        },
-        "507954986:3249140432": {
-          "width": 8,
-          "height": 16
-        },
-        "1943822947:727326245": {
-          "width": 32,
-          "height": 16
-        },
-        "4292556941:1839084172": {
-          "width": 32,
-          "height": 16
-        },
-        "2091002739:4006663127": {
-          "width": 32,
-          "height": 16
-        }
-      },
-      "dynamic_fallback_enabled": true,
-      "dynamic_requests_pending": 0,
-      "rumble_counts": {},
-      "fixture_morale_override": 150,
-      "fixture_pilot_stats_synthesized": true,
-      "diagnostic_requirements_override": true
-    },
-    {
-      "unit_id": 386,
-      "name_ja": "ガオファイガー",
-      "name_ko": "가오파이가",
       "weapon_id": 1532,
       "weapon_name": "ガトリングドライバー",
       "battle_started": true,
@@ -10005,6 +9935,113 @@
       "fixture_morale_override": 150,
       "fixture_pilot_stats_synthesized": true,
       "diagnostic_requirements_override": true
+    },
+    {
+      "unit_id": 386,
+      "name_ja": "ガオファイガー",
+      "name_ko": "가오파이가",
+      "weapon_id": 1531,
+      "weapon_name": "ハンマーヘルアンドヘヴン",
+      "battle_started": false,
+      "active_battle_frames": 0,
+      "frames": 181,
+      "cutin_ids": [],
+      "observed_bindings": [],
+      "errors": {},
+      "seconds": 3.49,
+      "rumble_events": [],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 392,
+      "all_poses_verified": false,
+      "observed_weapon_id": null,
+      "native_menu_weapon_ids": [
+        1528,
+        1527,
+        1532,
+        1529,
+        1530
+      ],
+      "native_menu_position": null,
+      "native_menu_initial_cursor": 0,
+      "extra_forecast_confirmation": false,
+      "forecast_confirmation_count": 0,
+      "blocked_reason": "weapon_absent_from_native_menu",
+      "weapon_routed_correctly": false,
+      "battle_completed": false,
+      "full_replay_verified": false,
+      "verification_revision": "1769973ea2ba74875ca2100ee0ab528022c0abca7556ca0c30bc3b16dae240fc",
+      "cache_warm_replay_pass": 1,
+      "observed_source_resources": [],
+      "new_unmapped_textures": {
+        "(2756732883, 70203283)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2482429798,
+            3676282443
+          ]
+        },
+        "(1129970785, 1141289420)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1989686617,
+            3084999059
+          ]
+        },
+        "(3875739213, 2329649494)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            55877255,
+            3434005946
+          ]
+        },
+        "(507954986, 3249140432)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            254428858,
+            3354981787
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "2756732883:70203283": {
+          "width": 8,
+          "height": 16
+        },
+        "1129970785:1141289420": {
+          "width": 8,
+          "height": 16
+        },
+        "3875739213:2329649494": {
+          "width": 8,
+          "height": 16
+        },
+        "507954986:3249140432": {
+          "width": 8,
+          "height": 16
+        },
+        "1943822947:727326245": {
+          "width": 32,
+          "height": 16
+        },
+        "4292556941:1839084172": {
+          "width": 32,
+          "height": 16
+        },
+        "2091002739:4006663127": {
+          "width": 32,
+          "height": 16
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {},
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true,
+      "diagnostic_terrain_ratings_override": true,
+      "diagnostic_level_99_override": true,
+      "combination_fixture": null,
+      "map_target_fixture": null
     }
   ]
 }

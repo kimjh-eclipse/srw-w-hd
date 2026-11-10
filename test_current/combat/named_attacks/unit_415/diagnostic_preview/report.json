@@ -1,0 +1,143 @@
+{
+  "scope": "Exercise named unit attacks through the game's normal weapon/target menus.\n\nOnly an isolated state's unit record is substituted. Canonical pilots with\nan existing roster slot are selected from the verified ROM pilot table.\nNever counts a menu-only run as an attack or certifies campaign legality.\n",
+  "selected_units": 1,
+  "unit_ids": [
+    415
+  ],
+  "attempted": 1,
+  "full_replays": 0,
+  "rows": [
+    {
+      "unit_id": 415,
+      "name_ja": "ヴァルストーク",
+      "name_ko": "발스토크",
+      "weapon_id": 1622,
+      "weapon_name": "プロトンキャノン・フォーカス",
+      "battle_started": false,
+      "active_battle_frames": 0,
+      "frames": 601,
+      "cutin_ids": [],
+      "observed_bindings": [],
+      "errors": {},
+      "seconds": 6.31,
+      "rumble_events": [],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 444,
+      "all_poses_verified": false,
+      "observed_weapon_id": null,
+      "native_menu_weapon_ids": [
+        1622,
+        1619,
+        1620,
+        1621
+      ],
+      "native_menu_position": 0,
+      "native_menu_initial_cursor": 0,
+      "extra_forecast_confirmation": true,
+      "forecast_confirmation_count": 4,
+      "blocked_reason": null,
+      "weapon_routed_correctly": false,
+      "battle_completed": false,
+      "full_replay_verified": false,
+      "animation_preview_verified": false,
+      "native_menu_entry_injected": true,
+      "verification_revision": "d30f1ea331ed1c19d6755d98242994f72115f8828a2d1ea5a546342034b88cbd",
+      "cache_warm_replay_pass": 1,
+      "observed_source_resources": [],
+      "new_unmapped_textures": {
+        "(3233708637, 3479624161)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            3143371316,
+            4256585292
+          ]
+        },
+        "(3379495356, 1445847606)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2732069655,
+            2920118284
+          ]
+        },
+        "(3875739213, 2329649494)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            55877255,
+            3434005946
+          ]
+        }
+      },
+      "unknown_native_rectangles": {
+        "3233708637:3479624161": {
+          "width": 8,
+          "height": 16
+        },
+        "3379495356:1445847606": {
+          "width": 8,
+          "height": 16
+        },
+        "3875739213:2329649494": {
+          "width": 8,
+          "height": 16
+        },
+        "1943822947:727326245": {
+          "width": 32,
+          "height": 16
+        },
+        "4292556941:1839084172": {
+          "width": 32,
+          "height": 16
+        },
+        "2091002739:4006663127": {
+          "width": 32,
+          "height": 16
+        }
+      },
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {},
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": false,
+      "diagnostic_requirements_override": true,
+      "diagnostic_terrain_ratings_override": true,
+      "diagnostic_level_99_override": true,
+      "combination_fixture": {
+        "recipe_id": 60,
+        "recipe_bytes_preserved": true,
+        "partners": [
+          {
+            "unit_id": 413,
+            "live_unit_slot": 3,
+            "map_object_slot": 10,
+            "pilot_ids": [
+              440,
+              442
+            ],
+            "offset": [
+              1,
+              0
+            ]
+          }
+        ],
+        "native_recipe_members": [
+          413,
+          415
+        ],
+        "native_recipe_alternatives": [
+          [
+            413,
+            415
+          ]
+        ],
+        "candidate_variants": {
+          "('roster', 110)": [
+            413
+          ]
+        },
+        "partner_costs_relaxed": true,
+        "campaign_legality_verified": false
+      },
+      "map_target_fixture": null
+    }
+  ]
+}

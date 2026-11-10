@@ -44,6 +44,7 @@
 #include "srww_parts_impl.h" // Async fallbacks and exact runtime texture assembly.
 
 uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
+uint32_t SRWWHD_Layers[4][12]={0};
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -160,6 +161,14 @@ bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tile
         }
     }
     if (!ids[layer]) return false;
+    // Combined attacks can show several independently scrolled pilot planes.
+    // Retain the first raster window of each plane, not just the frontmost one.
+    uint32_t *plane=SRWWHD_Layers[layer];
+    if(!plane[0]) {
+        plane[0]=ids[layer];plane[1]=x;plane[2]=y;
+        plane[3]=widths[layer];plane[4]=heights[layer];plane[5]=layer;
+        plane[6]=priority;plane[7]=master;plane[8]=base;
+    }
     if(SRWWHD_Info[0] && SRWWHD_Info[0]!=ids[layer] && (priority>SRWWHD_Info[6] || (priority==SRWWHD_Info[6] && layer>SRWWHD_Info[5])))return false;
     if(ids[layer]>1 && SRWWHD_Info[0]==ids[layer]) return false; // Keep the first raster window.
     SRWWHD_Info[0]=ids[layer];SRWWHD_Info[1]=x;SRWWHD_Info[2]=y;
@@ -6531,7 +6540,7 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &com
     const BGLayerInfo &hdLayer=*compInfo.renderState.selectedBGLayer;
     if (SRWWHD_ShouldSkip(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,
                          hdLayer.xOffset,hdLayer.yOffset,hdLayer.priority,this->_IORegisterMap->MASTER_BRIGHT.value)) return;
-    if(!(SRWWHD_Info[0]>1 && SRWWHD_Info[5]==hdLayer.layerID) && hdLayer.type==BGType_Text && (!hdLayer.BGnCNT.PaletteMode || !(this->_IORegisterMap->DISPCNT.value&0x40000000u)))
+    if(!(this->_engineID==SRWWTargetEngine() && SRWWHD_Layers[hdLayer.layerID][0]>1) && hdLayer.type==BGType_Text && (!hdLayer.BGnCNT.PaletteMode || !(this->_IORegisterMap->DISPCNT.value&0x40000000u)))
         SRWWPrepareBG(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,hdLayer.xOffset,hdLayer.yOffset,hdLayer.size.width,hdLayer.size.height,hdLayer.BGnCNT.PaletteMode,hdLayer.priority);
 #ifndef DISABLE_MOSAIC
 	if (compInfo.renderState.selectedBGLayer->isMosaic && compInfo.renderState.isBGMosaicSet)

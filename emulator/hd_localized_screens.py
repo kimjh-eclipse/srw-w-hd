@@ -25,7 +25,7 @@ class LocalizedScreens:
 
     def stage_key(self,native):
         self.refresh()
-        a=np.asarray(native,dtype='uint8')[:192];ink=np.all(a[:,:,:3]>210,axis=2)
+        a=np.asarray(native,dtype='uint8')[:192];ink=(a[:,:,0]>210)&(a[:,:,1]>210)&(a[:,:,2]>210)
         row=self.items.get(hashlib.sha256(np.packbits(ink).tobytes()).hexdigest())
         return row.get('episode') if row is not None else None
 

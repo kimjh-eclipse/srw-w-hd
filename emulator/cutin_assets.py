@@ -18,6 +18,14 @@ class CutinAssets:
         if key not in self:return default
         return self[key]
 
+    def region(self,key):
+        """Cache the painted extent so transparent canvas never gets uploaded."""
+        cachekey=('region',int(key),self.width)
+        if cachekey not in self.cache:
+            image=self[key];box=image.getbbox() or (0,0,1,1)
+            self.cache[cachekey]=(image.crop(box),box)
+        return self.cache[cachekey]
+
     def __getitem__(self,key):
         cachekey=(int(key),self.width)
         if cachekey in self.cache:return self.cache[cachekey]

@@ -1,5 +1,5 @@
 diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
-index 026bf14..7f3e1f3 100644
+index 026bf14..d406d36 100644
 --- a/desmume/src/GPU.cpp
 +++ b/desmume/src/GPU.cpp
 @@ -24,6 +24,7 @@
@@ -10,7 +10,7 @@ index 026bf14..7f3e1f3 100644
  #include <iostream>
  
  #include "common.h"
-@@ -38,6 +39,134 @@
+@@ -38,6 +39,143 @@
  #include "matrix.h"
  #include "emufile.h"
  #include "utils/task.h"
@@ -19,6 +19,7 @@ index 026bf14..7f3e1f3 100644
 +#include "srww_parts_impl.h" // Async fallbacks and exact runtime texture assembly.
 +
 +uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
++uint32_t SRWWHD_Layers[4][12]={0};
 +struct SRWWCutin { uint32_t id,width,height; };
 +static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 +static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -135,6 +136,14 @@ index 026bf14..7f3e1f3 100644
 +        }
 +    }
 +    if (!ids[layer]) return false;
++    // Combined attacks can show several independently scrolled pilot planes.
++    // Retain the first raster window of each plane, not just the frontmost one.
++    uint32_t *plane=SRWWHD_Layers[layer];
++    if(!plane[0]) {
++        plane[0]=ids[layer];plane[1]=x;plane[2]=y;
++        plane[3]=widths[layer];plane[4]=heights[layer];plane[5]=layer;
++        plane[6]=priority;plane[7]=master;plane[8]=base;
++    }
 +    if(SRWWHD_Info[0] && SRWWHD_Info[0]!=ids[layer] && (priority>SRWWHD_Info[6] || (priority==SRWWHD_Info[6] && layer>SRWWHD_Info[5])))return false;
 +    if(ids[layer]>1 && SRWWHD_Info[0]==ids[layer]) return false; // Keep the first raster window.
 +    SRWWHD_Info[0]=ids[layer];SRWWHD_Info[1]=x;SRWWHD_Info[2]=y;
@@ -145,7 +154,7 @@ index 026bf14..7f3e1f3 100644
  
  
  #ifdef FASTBUILD
-@@ -4103,6 +4232,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
+@@ -4103,6 +4241,7 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo &compInfo, const size_t srcX, u16 srcColor16, bool opaque)
  {
@@ -153,7 +162,7 @@ index 026bf14..7f3e1f3 100644
  	if (MOSAIC)
  	{
  		//due to this early out, we will get incorrect behavior in cases where
-@@ -5217,6 +5347,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+@@ -5217,6 +5356,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
  	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
  	{
  		OAMAttributes spriteInfo = this->_oamList[spriteNum];
@@ -162,7 +171,7 @@ index 026bf14..7f3e1f3 100644
  		
  		//for each sprite:
  		if (cost >= 2130)
-@@ -5633,6 +5765,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+@@ -5633,6 +5774,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
  	//how it interacts with this. I wish we knew why we needed this
  	
  	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
@@ -170,14 +179,14 @@ index 026bf14..7f3e1f3 100644
  	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
  	
  	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
-@@ -6395,6 +6528,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+@@ -6395,6 +6537,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
  {
 +    const BGLayerInfo &hdLayer=*compInfo.renderState.selectedBGLayer;
 +    if (SRWWHD_ShouldSkip(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,
 +                         hdLayer.xOffset,hdLayer.yOffset,hdLayer.priority,this->_IORegisterMap->MASTER_BRIGHT.value)) return;
-+    if(!(SRWWHD_Info[0]>1 && SRWWHD_Info[5]==hdLayer.layerID) && hdLayer.type==BGType_Text && (!hdLayer.BGnCNT.PaletteMode || !(this->_IORegisterMap->DISPCNT.value&0x40000000u)))
++    if(!(this->_engineID==SRWWTargetEngine() && SRWWHD_Layers[hdLayer.layerID][0]>1) && hdLayer.type==BGType_Text && (!hdLayer.BGnCNT.PaletteMode || !(this->_IORegisterMap->DISPCNT.value&0x40000000u)))
 +        SRWWPrepareBG(this->_engineID,hdLayer.layerID,hdLayer.tileMapAddress,hdLayer.tileEntryAddress,hdLayer.xOffset,hdLayer.yOffset,hdLayer.size.width,hdLayer.size.height,hdLayer.BGnCNT.PaletteMode,hdLayer.priority);
  #ifndef DISABLE_MOSAIC
  	if (compInfo.renderState.selectedBGLayer->isMosaic && compInfo.renderState.isBGMosaicSet)
@@ -195,7 +204,7 @@ index 5807cef..402b70b 100644
  	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
  	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
 diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
-index 2314af9..64ef305 100644
+index 2314af9..0ade88f 100644
 --- a/desmume/src/frontend/libretro/libretro.cpp
 +++ b/desmume/src/frontend/libretro/libretro.cpp
 @@ -14,6 +14,10 @@
@@ -209,7 +218,7 @@ index 2314af9..64ef305 100644
  #include "SPU.h"
  #include "emufile.h"
  #include "common.h"
-@@ -70,6 +74,92 @@ enum {
+@@ -70,6 +74,93 @@ enum {
  
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
@@ -255,6 +264,7 @@ index 2314af9..64ef305 100644
 +   return engine+1;
 +}
 +extern "C" RETRO_API void retro_srw_get_hd_state(unsigned *out) { if(out) memcpy(out,SRWWHD_Info,sizeof(SRWWHD_Info)); }
++extern "C" RETRO_API void retro_srw_get_hd_layers(unsigned *out) { if(out) memcpy(out,SRWWHD_Layers,sizeof(SRWWHD_Layers)); }
 +extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 +extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 +extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
@@ -302,7 +312,7 @@ index 2314af9..64ef305 100644
  static retro_input_poll_t poll_cb = NULL;
  static retro_input_state_t input_cb = NULL;
  retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -2075,10 +2165,13 @@ void retro_run (void)
+@@ -2075,10 +2166,13 @@ void retro_run (void)
     // RUN
     frameIndex ++;
     bool skipped = frameIndex <= frameSkip;
@@ -312,7 +322,7 @@ index 2314af9..64ef305 100644
     if (skipped)
        NDS_SkipNextFrame();
  
-+   SRWWHD_Frame++;SRWWHD_Info[0]=0;SRWWRobot_Info[0]=0;SRWWBeginPartsFrame();
++   SRWWHD_Frame++;SRWWHD_Info[0]=0;memset(SRWWHD_Layers,0,sizeof(SRWWHD_Layers));SRWWRobot_Info[0]=0;SRWWBeginPartsFrame();
     NDS_exec<false>();
  
     SPU_Emulate_user();
@@ -320,7 +330,7 @@ diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd.h
-@@ -0,0 +1,37 @@
+@@ -0,0 +1,38 @@
 +// Project-local GPL-2.0-or-later HD cut-in bridge.
 +#ifndef SRWW_HD_H
 +#define SRWW_HD_H
@@ -328,6 +338,7 @@ new file mode 100644
 +extern uint32_t SRWWHD_Enabled;
 +extern uint32_t SRWWHD_Frame;
 +extern uint32_t SRWWHD_Info[12];
++extern uint32_t SRWWHD_Layers[4][12];
 +extern int32_t SRWWRobot_Info[8];
 +extern uint8_t SRWWRobot_OAM[1024];
 +extern uint8_t SRWWNativeOwner[256*192];

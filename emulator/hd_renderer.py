@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import OrderedDict
 import zlib
 import numpy as np
-from PIL import Image,ImageDraw,ImageFont,ImageFilter
+from PIL import Image,ImageDraw,ImageFont,ImageFilter,ImageChops
 from hd_parts import PartsRenderer
 from hd_portraits import PortraitRenderer
 from hd_backgrounds import BackgroundRenderer
@@ -74,7 +74,13 @@ class HDRenderer:
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
-    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None):
+    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None):
+        cutins=[hd] if hd[0] else []
+        if hd[10] and cutin_layers is not None:
+            planes=[row for row in cutin_layers if row[0] and int(row[0]) in self.cutins]
+            if planes:
+                # Back to front: native ties put the smaller BG number on top.
+                cutins=sorted(planes,key=lambda row:(int(row[6]),int(row[5])),reverse=True)
         stage=self.localized_screens.stage_key(native)
         if stage is not None:
             from stage_cache import begin_stage
@@ -114,9 +120,19 @@ class HDRenderer:
             if self.menu_scene.last_scene is None:
                 restoration=None;restore_layer=None
                 if hd[0]>1 and bgpriors is not None:
-                    behind=[i for i in range(4) if int(bgpriors[i])>int(hd[6])]
+                    behind=[i for i in range(4) if int(bgpriors[i])>min(int(row[6]) for row in cutins)]
                     if behind:
-                        restoration=layer_ids==hd[5]
+                        restoration=np.zeros_like(layer_ids,dtype=bool)
+                        for row in cutins:
+                            if row[0]<=1:continue
+                            area=layer_ids==row[5]
+                            rect=self.cutins.specs.get(int(row[0]),{}).get('restore_rect')
+                            if rect:
+                                x=int(row[1]);y=int(row[2]);x=x if x<256 else x-512;y=y if y<256 else y-512
+                                yy,xx=np.indices(area.shape)
+                                left,upper,right,lower=rect
+                                area&=(xx>=left-x)&(xx<right-x)&(yy>=upper-y)&(yy<lower-y)
+                            restoration|=area
                         known=self.battle_backgrounds.matched_layers|{int(row[3]) for row in (backgrounds or ())}
                         candidates=[i for i in behind if i in known]
                         # Empty/effect BG planes may sit between the portrait
@@ -135,14 +151,13 @@ class HDRenderer:
                 if terrain or self.map_tiles.phase(native[:192]) is not None:self.map_icons.compose(top,native,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
         if parts is not None:
             self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused)
-        if hd[0]:
-            x=hd[1] if hd[1]<256 else hd[1]-512
-            y=hd[2] if hd[2]<256 else hd[2]-512
-            art=self.cutins.get(int(hd[0]),self.art)
+        for cutin in cutins:
+            x=int(cutin[1]);y=int(cutin[2]);x=x if x<256 else x-512;y=y if y<256 else y-512
+            art=self.cutins.get(int(cutin[0]),self.art)
             position=(round(-x*self.size[0]/256),round(-y*self.size[1]/192))
-            if hd[0]==1:top.paste(art,position,art)
+            if cutin[0]==1:top.paste(art,position,art)
             else:
-                visible=np.array(cutin_visibility(layer_ids,int(hd[5]),int(hd[6]),bgpriors,owners,obj))
+                visible=np.array(cutin_visibility(layer_ids,int(cutin[5]),int(cutin[6]),bgpriors,owners,obj))
                 # Native dialogue cells are opaque DS tiles. They must not
                 # punch rectangular holes through a painted foreground cut-in;
                 # transparent HD lettering is drawn after the complete scene.
@@ -151,10 +166,17 @@ class HDRenderer:
                     tw=self.text_renderer.last_sizes[tx,ty];th=self.text_renderer.last_heights[tx,ty]
                     visible[max(0,ty-2):min(192,ty+th+2),max(0,tx-2):min(256,tx+tw+2)]=255
                 visible=Image.fromarray(visible)
-                viewport=Image.new('RGBA',self.size);viewport.paste(art,position)
-                mask=np.asarray(visible.resize(self.size,Image.Resampling.NEAREST),dtype='uint16')
-                mask=Image.fromarray((mask*np.asarray(viewport.getchannel('A'),dtype='uint16')//255).astype('uint8'))
-                top.paste(viewport,(0,0),mask)
+                region,box=self.cutins.region(int(cutin[0]))
+                left,upper=position[0]+box[0],position[1]+box[1]
+                rect=(left,upper,left+region.width,upper+region.height)
+                if self.gpu_composition:
+                    # Keep native visibility in its 256x192 texture. The GPU
+                    # combines it with the cached painted alpha, avoiding a
+                    # full-screen RGBA canvas and several large array copies.
+                    top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True)
+                else:
+                    mask=visible.resize(self.size,Image.Resampling.NEAREST).crop(rect)
+                    top.paste(region,(left,upper),ImageChops.multiply(mask,region.getchannel('A')))
         if hd[0]==1:
             ui=((layer_ids==4)|(layer_ids==0))&(np.arange(192)[:,None]>=120)
             if self.text_renderer.last_matches:ui&=~self.text_renderer.last_mask
@@ -199,8 +221,8 @@ class HDRenderer:
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
 
-    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None):
-        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts)
+    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None):
+        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers)
         if hasattr(top,'to_pil'):top=top.to_pil()
         if top.size!=(1440,1080):top=top.resize((1440,1080),Image.Resampling.LANCZOS)
         canvas=Image.new('RGB',(1920,1080));canvas.paste(top,(0,0))

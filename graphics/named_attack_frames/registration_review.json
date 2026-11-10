@@ -1,0 +1,168 @@
+{
+  "scope": "Register reviewed omitted attack fragments with bounded size and alpha checks.",
+  "applied": false,
+  "accepted": [
+    {
+      "resource": 8287,
+      "alpha_iou": 0.8286908077994429,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 0.9957805907172996,
+      "low_alpha_spill": 0.019973368841544607,
+      "alias_tolerance_used": false,
+      "max_dimension": 640,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 15026,
+      "alpha_iou": 0.8249075215782984,
+      "one_pixel_recall": 0.9980092899800929,
+      "one_pixel_precision": 1.0,
+      "low_alpha_spill": 0.0,
+      "alias_tolerance_used": false,
+      "max_dimension": 832,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 11079,
+      "alpha_iou": 0.8441320293398533,
+      "one_pixel_recall": 0.9682119205298013,
+      "one_pixel_precision": 0.9873921698739216,
+      "low_alpha_spill": 0.02278481012658228,
+      "alias_tolerance_used": false,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 8805,
+      "alpha_iou": 0.98828125,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 1.0,
+      "low_alpha_spill": 0.0,
+      "alias_tolerance_used": false,
+      "max_dimension": 256,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 8826,
+      "alpha_iou": 0.9120689655172414,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 0.9964664310954063,
+      "low_alpha_spill": 0.004934210526315789,
+      "alias_tolerance_used": false,
+      "max_dimension": 512,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 8832,
+      "alpha_iou": 0.872870249017038,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 0.9959349593495935,
+      "low_alpha_spill": 0.005121638924455826,
+      "alias_tolerance_used": false,
+      "max_dimension": 768,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 18170,
+      "alpha_iou": 0.7331288343558282,
+      "one_pixel_recall": 0.9825174825174825,
+      "one_pixel_precision": 0.9874551971326165,
+      "low_alpha_spill": 0.01904761904761905,
+      "alias_tolerance_used": true,
+      "max_dimension": 384,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 10780,
+      "alpha_iou": 0.8861788617886179,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 1.0,
+      "low_alpha_spill": 0.0019723865877712033,
+      "alias_tolerance_used": false,
+      "max_dimension": 512,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 7152,
+      "alpha_iou": 0.9678770949720671,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 1.0,
+      "low_alpha_spill": 0.0,
+      "alias_tolerance_used": false,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 17168,
+      "alpha_iou": 0.9794854548511854,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 0.9995796199764587,
+      "low_alpha_spill": 0.0014227131977571344,
+      "alias_tolerance_used": false,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    }
+  ],
+  "rejected": [
+    {
+      "resource": 8264,
+      "alpha_iou": 0.7010209042294604,
+      "one_pixel_recall": 0.9779286926994907,
+      "one_pixel_precision": 0.9740184757505773,
+      "low_alpha_spill": 0.034074074074074076,
+      "alias_tolerance_used": true,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 8265,
+      "alpha_iou": 0.7010209042294604,
+      "one_pixel_recall": 0.9779286926994907,
+      "one_pixel_precision": 0.9740184757505773,
+      "low_alpha_spill": 0.034074074074074076,
+      "alias_tolerance_used": true,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 11202,
+      "alpha_iou": 0.51242983159583,
+      "one_pixel_recall": 0.9748358862144421,
+      "one_pixel_precision": 0.9886831275720165,
+      "low_alpha_spill": 0.04258064516129032,
+      "alias_tolerance_used": false,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 8812,
+      "alpha_iou": 0.8768361581920904,
+      "one_pixel_recall": 0.9987531172069826,
+      "one_pixel_precision": 0.9965075669383003,
+      "low_alpha_spill": 0.03351351351351351,
+      "alias_tolerance_used": false,
+      "max_dimension": 640,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 1775,
+      "alpha_iou": 0.5683962264150944,
+      "one_pixel_recall": 0.9043927648578811,
+      "one_pixel_precision": 0.9796163069544365,
+      "low_alpha_spill": 0.04136690647482014,
+      "alias_tolerance_used": false,
+      "max_dimension": 512,
+      "actual_game_verified": false
+    },
+    {
+      "resource": 7656,
+      "alpha_iou": 0.7147791759190723,
+      "one_pixel_recall": 1.0,
+      "one_pixel_precision": 0.9621689785624212,
+      "low_alpha_spill": 0.06471135940409684,
+      "alias_tolerance_used": false,
+      "max_dimension": 960,
+      "actual_game_verified": false
+    }
+  ]
+}

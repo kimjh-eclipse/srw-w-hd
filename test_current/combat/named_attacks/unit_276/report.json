@@ -4159,7 +4159,7 @@
       "cutin_ids": [],
       "observed_bindings": [],
       "errors": {},
-      "seconds": 1.86,
+      "seconds": 3.4,
       "rumble_events": [],
       "canonical_pilot_selected": true,
       "default_pilot_id": 248,
@@ -4172,12 +4172,45 @@
       ],
       "native_menu_position": null,
       "native_menu_initial_cursor": 0,
+      "extra_forecast_confirmation": false,
+      "forecast_confirmation_count": 0,
       "blocked_reason": "weapon_absent_from_native_menu",
       "weapon_routed_correctly": false,
       "battle_completed": false,
       "full_replay_verified": false,
-      "verification_revision": "7c004a841d120a83bf6f2108825ba337d8c44fdfd10ecee1a875a4a0a8ba1eea",
-      "new_unmapped_textures": {},
+      "verification_revision": "1769973ea2ba74875ca2100ee0ab528022c0abca7556ca0c30bc3b16dae240fc",
+      "cache_warm_replay_pass": 1,
+      "observed_source_resources": [],
+      "new_unmapped_textures": {
+        "(507954986, 3249140432)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            254428858,
+            3354981787
+          ]
+        },
+        "(1129970785, 1141289420)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            1989686617,
+            3084999059
+          ]
+        },
+        "(2756732883, 70203283)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            2482429798,
+            3676282443
+          ]
+        },
+        "(3233708637, 3479624161)": {
+          "reason": "unpainted native tile",
+          "missing_tiles": [
+            3143371316,
+            4256585292
+          ]
+        }
+      },
       "unknown_native_rectangles": {
         "507954986:3249140432": {
           "width": 8,
@@ -4213,7 +4246,62 @@
       "rumble_counts": {},
       "fixture_morale_override": 150,
       "fixture_pilot_stats_synthesized": true,
-      "diagnostic_requirements_override": true
+      "diagnostic_requirements_override": true,
+      "diagnostic_terrain_ratings_override": true,
+      "diagnostic_level_99_override": true,
+      "combination_fixture": {
+        "recipe_id": 43,
+        "recipe_bytes_preserved": true,
+        "partners": [
+          {
+            "unit_id": 261,
+            "live_unit_slot": 3,
+            "map_object_slot": 10,
+            "pilot_ids": [
+              231
+            ],
+            "offset": [
+              1,
+              0
+            ]
+          },
+          {
+            "unit_id": 262,
+            "live_unit_slot": 2,
+            "map_object_slot": 2,
+            "pilot_ids": [
+              230
+            ],
+            "offset": [
+              0,
+              -1
+            ]
+          }
+        ],
+        "native_recipe_members": [
+          276,
+          261,
+          262
+        ],
+        "native_recipe_alternatives": [
+          [
+            276,
+            261,
+            262
+          ]
+        ],
+        "candidate_variants": {
+          "('roster', 64)": [
+            261
+          ],
+          "('roster', 63)": [
+            262
+          ]
+        },
+        "partner_costs_relaxed": true,
+        "campaign_legality_verified": false
+      },
+      "map_target_fixture": null
     }
   ]
 }

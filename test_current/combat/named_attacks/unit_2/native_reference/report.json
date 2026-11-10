@@ -1,0 +1,52 @@
+{
+  "scope": "Exercise named unit attacks through the game's normal weapon/target menus.\n\nOnly an isolated state's unit record is substituted. Canonical pilots with\nan existing roster slot are selected from the verified ROM pilot table.\nNever counts a menu-only run as an attack or certifies campaign legality.\n",
+  "selected_units": 1,
+  "unit_ids": [
+    2
+  ],
+  "attempted": 1,
+  "full_replays": 0,
+  "rows": [
+    {
+      "unit_id": 2,
+      "name_ja": "ガンダムヘビーアームズ改",
+      "name_ko": "건담 헤비암즈�",
+      "weapon_id": 10,
+      "weapon_name": "マイクロ・ミサイル",
+      "battle_started": false,
+      "active_battle_frames": 0,
+      "frames": 181,
+      "cutin_ids": [],
+      "observed_bindings": [],
+      "errors": {},
+      "seconds": 1.65,
+      "rumble_events": [],
+      "canonical_pilot_selected": true,
+      "default_pilot_id": 2,
+      "all_poses_verified": false,
+      "observed_weapon_id": null,
+      "native_menu_weapon_ids": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "native_menu_position": 2,
+      "native_menu_initial_cursor": 0,
+      "blocked_reason": null,
+      "weapon_routed_correctly": false,
+      "battle_completed": false,
+      "full_replay_verified": false,
+      "verification_revision": "389af9a2845ea79c3ce4a8aebe392c4aed8bb1368a42dd898b5c667bb51a197a",
+      "new_unmapped_textures": {},
+      "unknown_native_rectangles": {},
+      "dynamic_fallback_enabled": true,
+      "dynamic_requests_pending": 0,
+      "rumble_counts": {},
+      "fixture_morale_override": 150,
+      "fixture_pilot_stats_synthesized": true,
+      "diagnostic_requirements_override": true
+    }
+  ]
+}

@@ -81,9 +81,13 @@ def main():
     secondary=OUT/'secondary_units/registration.json'
     if secondary.exists() and json.loads(secondary.read_text()).get('applied'):
         for binding in meta['bindings']:
-            if not (binding.get('secondary_unit') or binding.get('shared_weapon_frame')):continue
+            if not (binding.get('secondary_unit') or binding.get('shared_weapon_frame') or binding.get('named_attack_frame')):continue
             atlas=meta['atlases'][binding['atlas_id']];resource=binding['resource']
-            add(binding['atlas_id'],resource,atlas['image'],atlas['native_size'],0,0,pixels(resource),binding['original_palette_rgb'],5,preserve_contour=bool(binding.get('secondary_unit')))
+            if binding.get('observed_native_rectangle'):
+                import base64
+                native=np.frombuffer(zlib.decompress(base64.b64decode(binding['index_pixels'])),dtype='uint8').reshape(binding['h'],binding['w'])
+            else:native=pixels(resource)
+            add(binding['atlas_id'],resource,atlas['image'],atlas['native_size'],0,0,native,binding['original_palette_rgb'],5,preserve_contour=bool(binding.get('secondary_unit')))
     sources.sort(key=lambda s:-s['priority']);temporary=TARGET.with_suffix('.tmp.sqlite')
     if temporary.exists():temporary.unlink()
     db=sqlite3.connect(temporary);db.execute('PRAGMA journal_mode=OFF');db.execute('PRAGMA synchronous=OFF')

@@ -1,0 +1,402 @@
+{
+  "scope": "Compare cached cut-in regions with full-canvas alpha on CPU and GPU.",
+  "cases": 36,
+  "rows": [
+    {
+      "cutin": 6,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 365568
+    },
+    {
+      "cutin": 6,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 365568
+    },
+    {
+      "cutin": 6,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 365568
+    },
+    {
+      "cutin": 7,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 313920
+    },
+    {
+      "cutin": 7,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 313920
+    },
+    {
+      "cutin": 7,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 442368,
+      "region_pixels": 313920
+    },
+    {
+      "cutin": 90,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 406208
+    },
+    {
+      "cutin": 90,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 406208
+    },
+    {
+      "cutin": 90,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 406208
+    },
+    {
+      "cutin": 107,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 355392
+    },
+    {
+      "cutin": 107,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 355392
+    },
+    {
+      "cutin": 107,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 589824,
+      "region_pixels": 355392
+    },
+    {
+      "cutin": 171,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 98688
+    },
+    {
+      "cutin": 171,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 98688
+    },
+    {
+      "cutin": 171,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 98688
+    },
+    {
+      "cutin": 172,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 208896
+    },
+    {
+      "cutin": 172,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 208896
+    },
+    {
+      "cutin": 172,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 208896
+    },
+    {
+      "cutin": 174,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 69738
+    },
+    {
+      "cutin": 174,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 69738
+    },
+    {
+      "cutin": 174,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 69738
+    },
+    {
+      "cutin": 175,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 89832
+    },
+    {
+      "cutin": 175,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 89832
+    },
+    {
+      "cutin": 175,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 89832
+    },
+    {
+      "cutin": 177,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 254976
+    },
+    {
+      "cutin": 177,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 254976
+    },
+    {
+      "cutin": 177,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 254976
+    },
+    {
+      "cutin": 178,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 201216
+    },
+    {
+      "cutin": 178,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 201216
+    },
+    {
+      "cutin": 178,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 201216
+    },
+    {
+      "cutin": 180,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 221952
+    },
+    {
+      "cutin": 180,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 221952
+    },
+    {
+      "cutin": 180,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 221952
+    },
+    {
+      "cutin": 181,
+      "position": [
+        0,
+        0
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 207360
+    },
+    {
+      "cutin": 181,
+      "position": [
+        -47,
+        -21
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 207360
+    },
+    {
+      "cutin": 181,
+      "position": [
+        59,
+        37
+      ],
+      "cpu_exact": true,
+      "gpu_max_error": 1,
+      "full_pixels": 294912,
+      "region_pixels": 207360
+    }
+  ]
+}

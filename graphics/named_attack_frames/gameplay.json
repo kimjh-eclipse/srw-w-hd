@@ -1,0 +1,329 @@
+{
+  "scope": "Replay the native attacks in which newly painted fragments were captured.",
+  "resource_native_cases": {
+    "10780": [
+      151,
+      645
+    ],
+    "11079": [
+      170,
+      729
+    ],
+    "7152": [
+      2,
+      12
+    ],
+    "15026": [
+      300,
+      1234
+    ],
+    "17168": [
+      348,
+      1400
+    ],
+    "18170": [
+      398,
+      1571
+    ],
+    "8264": [
+      50,
+      226
+    ],
+    "8265": [
+      83,
+      355
+    ],
+    "8287": [
+      51,
+      229
+    ],
+    "8805": [
+      90,
+      373
+    ],
+    "8812": [
+      90,
+      374
+    ],
+    "8826": [
+      91,
+      376
+    ],
+    "8832": [
+      91,
+      377
+    ]
+  },
+  "results": [
+    {
+      "unit_id": 170,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 729,
+          "weapon_name": "ミサイル",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 70,
+          "observed_new_source_resources": [
+            11079
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 2,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 12,
+          "weapon_name": "フルオープンアタック",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 93,
+          "observed_new_source_resources": [
+            7152
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            15
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 151,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 645,
+          "weapon_name": "フィールドランサー",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 175,
+          "observed_new_source_resources": [
+            10780
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            168
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 300,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 1234,
+          "weapon_name": "ミサイル",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 87,
+          "observed_new_source_resources": [
+            15026
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            81
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 348,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 1400,
+          "weapon_name": "体当たり",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 99,
+          "observed_new_source_resources": [
+            17168
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 398,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 1571,
+          "weapon_name": "体当たり",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 101,
+          "observed_new_source_resources": [
+            18170
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 50,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 226,
+          "weapon_name": "ゴットフリートMk71",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 84,
+          "observed_new_source_resources": [
+            8264
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            50
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 83,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 355,
+          "weapon_name": "ゴットフリートMk71",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 81,
+          "observed_new_source_resources": [
+            8264,
+            8265
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            51
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 51,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 229,
+          "weapon_name": "高エネルギー収束火線砲",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 163,
+          "observed_new_source_resources": [
+            8287
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            28
+          ],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 90,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 373,
+          "weapon_name": "6連装魚雷発射管",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 85,
+          "observed_new_source_resources": [
+            8805
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            57
+          ],
+          "errors": {}
+        },
+        {
+          "weapon_id": 374,
+          "weapon_name": "フォノン・メーザー砲",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 90,
+          "observed_new_source_resources": [
+            8812
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [],
+          "errors": {}
+        }
+      ]
+    },
+    {
+      "unit_id": 91,
+      "exit_code": 0,
+      "rows": [
+        {
+          "weapon_id": 376,
+          "weapon_name": "7連装魚雷発射管",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 78,
+          "observed_new_source_resources": [
+            8826
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [
+            55
+          ],
+          "errors": {}
+        },
+        {
+          "weapon_id": 377,
+          "weapon_name": "フォノン・メーザー砲",
+          "full_replay_verified": true,
+          "routed_correctly": true,
+          "observed_binding_count": 77,
+          "observed_new_source_resources": [
+            8832
+          ],
+          "cache_warm_replay_pass": 2,
+          "cutin_ids": [],
+          "errors": {}
+        }
+      ]
+    }
+  ],
+  "observed_new_resources": [
+    7152,
+    8264,
+    8265,
+    8287,
+    8805,
+    8812,
+    8826,
+    8832,
+    10780,
+    11079,
+    15026,
+    17168,
+    18170
+  ],
+  "not_observed_new_resources": [],
+  "all_sampled_attacks_completed": true,
+  "all_gameplay_poses_visually_verified": false
+}

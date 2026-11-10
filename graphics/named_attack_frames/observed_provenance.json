@@ -1,0 +1,75 @@
+{
+  "method": "built-in image_gen",
+  "source": "Exact native hardware rectangles in observed_plan.json",
+  "drawings": [
+    {
+      "index_hash": 780470759,
+      "file": "fragment_780470759_generated.png",
+      "generation_file": "exec-975e862e-782c-45cd-b72c-ad78bfba4378.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 3426681605,
+      "file": "fragment_3426681605_generated.png",
+      "generation_file": "exec-a17e67b7-69b8-41b8-a721-f9eb369b83c4.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 1187428423,
+      "file": "fragment_1187428423_generated.png",
+      "generation_file": "exec-b921f0e2-8839-4fda-9167-469f19c08865.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 677346715,
+      "file": "fragment_677346715_generated.png",
+      "generation_file": "exec-dee19723-af6c-4ff3-a8e4-3ba043acfc8a.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 2774102847,
+      "file": "fragment_2774102847_generated.png",
+      "generation_file": "exec-62d3b6e1-ef53-4d01-96fc-519fcb944b9a.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 2240806356,
+      "file": "fragment_2240806356_generated.png",
+      "generation_file": "exec-2e5d1119-c43e-4d08-80b4-d487edb26145.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 2707740757,
+      "file": "fragment_2707740757_generated.png",
+      "generation_file": "exec-6dc1f481-cacf-43b3-ac68-24dc85b76a66.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    },
+    {
+      "index_hash": 3290514407,
+      "file": "fragment_3290514407_generated.png",
+      "generation_file": "exec-63801b2a-fb3e-4118-9e48-282c863a38fb.png",
+      "style_approved": false,
+      "reason": "Generated output retained pixel stair steps; not registered."
+    }
+  ],
+  "rouge": {
+    "file": "rouge_connector_generated.png",
+    "generation_file": "exec-5cc92207-4f70-4929-a868-cd69c1348ff3.png",
+    "style_approved": true,
+    "alpha_iou": 0.956140350877193
+  },
+  "smooth_flash": {
+    "file": "fragment_2774102847_smooth_generated.png",
+    "generation_file": "exec-7f96092c-9349-4f5a-b1cf-c704c65dfc54.png",
+    "style_approved": true,
+    "geometry_accepted": false
+  },
+  "prompt_template": "Faithfully redraw this exact technical 2D game sprite fragment as a smooth HD sprite. Preserve the simple original silhouette, original proportions and source colors exactly. The reference is a tiny cropped fragment, not a whole object: do NOT complete it, do NOT add new features, do NOT turn it into a full scene. Keep the same geometry and flat cel-shaded color regions with crisp smooth edges, only removing pixel stair steps. No glow bloom, no halos, no shadows, no gradients outside the silhouette. Genuine transparent alpha everywhere outside the source fragment. Preserve existing cropped edges without inventing caps or rounding them. No text or framing."
+}
