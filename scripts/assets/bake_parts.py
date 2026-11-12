@@ -51,6 +51,7 @@ def main():
         if key not in present:todo.append((spec.get('atlas_id','base'),binding,key))
     # Neighbouring parts share an atlas; keep each worker on one at a time.
     todo.sort();todo=[(binding,key) for _,binding,key in todo]
+    _renderer.save_atlas_digests()   # workers read the recorded hashes instead of each hashing every atlas
     print(f'{total} source parts, {total-len(todo)} already baked, {len(todo)} missing, {args.workers} workers',flush=True)
     if args.limit:todo=todo[:args.limit]
     started=time.perf_counter();done=0;errors={}

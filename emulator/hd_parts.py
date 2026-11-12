@@ -81,7 +81,10 @@ class PartsRenderer:
         self.prepare_delay=0
         self.executor=ProcessPoolExecutor(max_workers=1,mp_context=mp.get_context('spawn'),initializer=start_texture_worker,initargs=(os.getpid(),)) if async_prepare else None
         self.disk_cache=PartsDiskCache(ROOT/'graphics/parts_baked.sqlite');self.legacy_cache=None
-        self.registration_version=hashlib.sha256((Path(__file__).parent/'hd_parts_registration.py').read_bytes()).hexdigest()
+        registration_source=(Path(__file__).parent/'hd_parts_registration.py').read_bytes()
+        self.registration_version=hashlib.sha256(registration_source).hexdigest()
+        # The same code must give the same texture keys whichever line endings a checkout produced.
+        self.registration_content=hashlib.sha256(registration_source.replace(b'\r\n',b'\n')).hexdigest()
         self.baked=set();self.baked_ready=np.zeros(0,dtype='uint32');self.miss_stamp=None
         if async_prepare and os.environ.get('SRWW_BAKED_PARTS','1')!='0':
             self.load_baked()
@@ -186,18 +189,61 @@ class PartsRenderer:
         extra=np.fromiter((alias for source in sources for alias in self.ready_aliases.get(source,())),dtype='uint32')
         return np.concatenate([self.baked_ready,extra])
 
-    def texture_key(self,binding,w,h,legacy=False,cut_policy=True):
-        """Content address of one registered texture in the baked store."""
+    def atlas_digests(self):
+        """Whole-file hashes of the atlases, computed once and kept beside them."""
+        if getattr(self,'digest_table',None) is None:
+            from runtime_paths import texture_cache
+            self.digest_table={};self.digests_dirty=False;bundled=ROOT/'graphics/atlas_digests.json'
+            for path in dict.fromkeys((bundled,texture_cache(bundled))):
+                try:self.digest_table.update(json.loads(path.read_text(encoding='utf-8')))
+                except (OSError,ValueError):pass
+        return self.digest_table
+
+    def save_atlas_digests(self):
+        if not getattr(self,'digests_dirty',False):return
+        from runtime_paths import texture_cache
+        path=texture_cache(ROOT/'graphics/atlas_digests.json')
+        try:
+            temporary=path.with_suffix('.json.tmp');temporary.write_text(json.dumps(self.digest_table,sort_keys=True,indent=0),encoding='utf-8');temporary.replace(path);self.digests_dirty=False
+        except OSError:pass
+
+    def atlas_identity(self,file):
+        """Name, size and content hash of one atlas.
+
+        Nothing here depends on where the project lives or when a file was
+        copied, so a store baked on one machine is found on another. The
+        modification time only decides whether a recorded hash can be reused.
+        """
+        known=self.__dict__.setdefault('atlas_ids',{}).get(file)
+        if known is None:
+            path=ROOT/'graphics'/file;stat=path.stat();recorded=self.atlas_digests().get(file)
+            if recorded and recorded[0]==stat.st_size and recorded[1]==stat.st_mtime_ns:digest=recorded[2]
+            else:
+                digest=hashlib.blake2b(path.read_bytes(),digest_size=16).hexdigest()
+                self.digest_table[file]=[stat.st_size,stat.st_mtime_ns,digest];self.digests_dirty=True
+            known=self.atlas_ids[file]=[file,stat.st_size,digest]
+        return known
+
+    def texture_key(self,binding,w,h,legacy=False,cut_policy=True,path_bound=False):
+        """Content address of one registered texture in the baked store.
+
+        path_bound=True gives the earlier key, which contained the atlas's
+        absolute path and modification time (the old registered store and
+        the re-keying tool need it).
+        """
         source=self.bindings[binding-1];x,y=source['x'],source['y'];name=source.get('atlas_id','base')
         spec=self.atlas_specs.get(name,{'image':'kazuma_parts_atlas_facefix.png','reference':'kazuma_parts_atlas_reference.png'})
         registration_mode=('painted-attack-bank-v3' if source.get('registered_attack_bank') else
             'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
         from part_cut_edges import POLICY
-        identity=[self.registration_version,registration_mode,x,y,w,h]
+        path_bound=path_bound or legacy
+        identity=[self.registration_version if path_bound else self.registration_content,registration_mode,x,y,w,h]
         if cut_policy:identity.append(POLICY)
         if not legacy:identity.append(f'store-{STORE_SCALE}x-webp')
+        if not path_bound:identity.append('atlas-content-v1')
         stats=self.__dict__.setdefault('atlas_stats',{})
         for file in (spec['image'],spec['reference']):
+            if not path_bound:identity.extend(self.atlas_identity(file));continue
             if file not in stats:
                 path=ROOT/'graphics'/file;stat=path.stat();stats[file]=[str(path),stat.st_mtime_ns,stat.st_size]
             identity.extend(stats[file])
@@ -217,6 +263,7 @@ class PartsRenderer:
             try:
                 if self.texture_key(binding,spec['w'],spec['h']) in keys:self.baked.add(binding)
             except (OSError,KeyError):pass
+        self.save_atlas_digests()
 
     def prepare_texture(self,binding,w,h):
         source=self.bindings[binding-1];x,y=source['x'],source['y'];name=source.get('atlas_id','base')
