@@ -45,6 +45,8 @@
 
 uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
 uint32_t SRWWHD_Layers[4][12]={0};
+uint64_t SRWWForeground[256*192]={0};
+uint32_t SRWWForegroundActive=0;
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -4252,7 +4254,6 @@ TILEENTRY GPUEngineBase::_GetTileEntry(const u32 tileMapAddress, const u16 xOffs
 template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST>
 FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo &compInfo, const size_t srcX, u16 srcColor16, bool opaque)
 {
-    if(this->_engineID==SRWWTargetEngine() && SRWWHD_Enabled && SRWWBGMask[compInfo.renderState.selectedLayerID][compInfo.line.indexNative*256+srcX])return;
 	if (MOSAIC)
 	{
 		//due to this early out, we will get incorrect behavior in cases where
@@ -4288,6 +4289,17 @@ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo
 	compInfo.target.lineColor32 = (FragmentColor *)compInfo.target.lineColorHeadNative + srcX;
 	
 	const bool enableColorEffect = (WILLPERFORMWINDOWTEST) ? (this->_enableColorEffectNative[compInfo.renderState.selectedLayerID][compInfo.target.xNative] != 0) : true;
+	if(SRWWHD_Enabled && this->_engineID==SRWWTargetEngine() && compInfo.renderState.selectedLayerID<4 && srcX<256 && compInfo.line.indexNative<192) {
+		const unsigned layer=compInfo.renderState.selectedLayerID;
+		if(enableColorEffect && compInfo.renderState.colorEffect==ColorEffect_Blend && compInfo.renderState.srcEffectEnable[layer]) {
+			const unsigned eva=std::min(16u,(unsigned)compInfo.renderState.blendEVA),evb=std::min(16u,(unsigned)compInfo.renderState.blendEVB);
+			uint64_t targets=0;for(unsigned target=0;target<5;target++)if(compInfo.renderState.dstBlendEnable[target])targets|=1ull<<target;
+			const uint64_t destination=(*compInfo.target.lineLayerID)&7u;
+			SRWWForeground[compInfo.line.indexNative*256+srcX]=(srcColor16&0x7fffu)|((layer+1u)<<15)|(eva<<18)|(evb<<23)|(targets<<32)|(destination<<37);
+			SRWWForegroundActive=1;
+		}
+		if(SRWWBGMask[layer][compInfo.line.indexNative*256+srcX])return;
+	}
 	this->_PixelComposite<COMPOSITORMODE, OUTPUTFORMAT, GPULayerType_BG>(compInfo, srcColor16, enableColorEffect, 0, 0);
 }
 

@@ -10,24 +10,26 @@ class ReadyParts:
     def ready_bindings(self):return self.values
 
 class FrameCompositor:
-    def __init__(self,async_parts=True,dynamic_parts=True,memory_name=None,lock=None):
+    def __init__(self,async_parts=True,dynamic_parts=True,memory_name=None,lock=None,present=None):
         self.bottom_revision=0;self.render_width=DEFAULT_WIDTH;self.render_size=(DEFAULT_WIDTH,DEFAULT_WIDTH*3//4);self.dynamic_parts=dynamic_parts;self.ready=ReadyParts();self.future=None;self.needs_refresh=False
-        self.render_times=deque(maxlen=120)
+        self.render_times=deque(maxlen=120);self.layout=dict(present) if present else None
         self.streaming=bool(memory_name) and os.environ.get('SRWW_STREAMING_FRAMES','1')!='0'
         ctx=mp.get_context('spawn')
         if self.streaming:
             # Only one waiting snapshot: slow rendering cannot accumulate an
             # ever older input/video backlog. The running frame is independent.
             self.requests=ctx.Queue(maxsize=1);self.replies,child=ctx.Pipe(duplex=False)
-            self.process=ctx.Process(target=stream_frames,args=(os.getpid(),async_parts,dynamic_parts,memory_name,lock,self.requests,child))
+            self.process=ctx.Process(target=stream_frames,args=(os.getpid(),async_parts,dynamic_parts,memory_name,lock,self.requests,child,present.get('hwnd') if present else None))
             self.process.start();child.close();self.executor=None
         else:
             self.executor=ProcessPoolExecutor(max_workers=1,mp_context=ctx,initializer=start_frame_worker,initargs=(os.getpid(),async_parts,dynamic_parts,memory_name,lock))
     def snapshot(self,core,paused,frame):
         kwargs=dict(robot=tuple(core.robot),obj=bytes(core.obj.raw),parts=core.parts.copy(),owners=core.owners.copy(),bgpriors=core.bgpriors.copy(),bgparts=core.bgparts.copy(),part_palettes=core.part_palettes.copy(),backgrounds=list(core.backgrounds))
         kwargs['render_width']=self.render_width
+        if self.layout is not None and self.streaming:kwargs['present_layout']=self.layout
         kwargs['bg_layout']=list(core.bg_layout)
         kwargs['cutin_layers']=core.cutin_layers.copy()
+        kwargs['effect_foreground']=core.effect_foreground.copy() if core.effect_foreground is not None else None
         kwargs['sub_parts']=(core.sub_parts.copy(),core.sub_owners.copy(),bytes(core.sub_oam.raw),core.sub_palettes.copy(),core.sub_ids.copy(),core.sub_priorities.copy()) if core.sub_bridge else None
         if self.dynamic_parts:kwargs['unknown']=core.unknown_snapshot()
         return core.native.copy(),core.ids.copy(),tuple(core.hd),paused,frame,kwargs

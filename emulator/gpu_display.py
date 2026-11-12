@@ -82,13 +82,20 @@ class GPUDisplay:
             self.pointer_api=C.windll.user32;self.pointer_point=wintypes.POINT()
             self.pointer_api.GetCursorPos.argtypes=[C.POINTER(wintypes.POINT)]
             self.pointer_api.ScreenToClient.argtypes=[C.c_void_p,C.POINTER(wintypes.POINT)]
+            self.pointer_api.WindowFromPoint.argtypes=[wintypes.POINT];self.pointer_api.WindowFromPoint.restype=C.c_void_p
+            self.pointer_api.IsChild.argtypes=[C.c_void_p,C.c_void_p]
             self.pointer_down=False;self.pointer_tracking=False;self.pointer_last=None;self.pointer_click=None
         api=self.pointer_api;pressed=bool(api.GetAsyncKeyState(1)&0x8000)
-        if app.dialog or not app.loaded or not self.focused():
+        if app.dialog or not app.loaded or app.ui_popup_active() or not self.focused():
             if self.pointer_tracking:app.mouse_up(None)
             self.pointer_down=pressed;self.pointer_tracking=False;return
-        point=self.pointer_point;api.GetCursorPos(C.byref(point));api.ScreenToClient(self.canvas_id,C.byref(point));x,y=point.x,point.y
-        inside=0<=x<app.canvas.winfo_width() and 0<=y<app.canvas.winfo_height();now=time.perf_counter()
+        point=self.pointer_point;api.GetCursorPos(C.byref(point))
+        hit=api.WindowFromPoint(point)
+        # An open Tcl list can cover the SDL canvas while the top-level HWND
+        # still has focus. Do not turn its clicks into game touch/focus events.
+        over_canvas=hit==self.canvas_id or bool(api.IsChild(self.canvas_id,hit))
+        api.ScreenToClient(self.canvas_id,C.byref(point));x,y=point.x,point.y
+        inside=over_canvas and 0<=x<app.canvas.winfo_width() and 0<=y<app.canvas.winfo_height();now=time.perf_counter()
         kind='down' if pressed else 'up';seen=getattr(app,'tk_pointer_seen',None)
         duplicate=bool(seen and seen[:3]==(kind,x,y) and now-seen[3]<.04)
         item=SimpleNamespace(x=x,y=y)
@@ -104,3 +111,16 @@ class GPUDisplay:
             self.pointer_tracking=False
         elif pressed and self.pointer_tracking and self.pointer_last!=(x,y):app.mouse_drag(item)
         self.pointer_down=pressed;self.pointer_last=(x,y)
+
+
+class DirectFrame:
+    """Stands for a frame that stays on the GPU of the composing process."""
+    def __init__(self,size):self.size=tuple(size);self.width,self.height=self.size
+
+
+class DirectDisplay(GPUDisplay):
+    """Input polling only: the composing process draws into the canvas itself."""
+    def __init__(self,canvas):
+        self.canvas_id=canvas.winfo_id();self.forwarded_keys={};self.keyboard_events=0;self.mouse_events=0;self.presented=0;self.last_ms=0
+    def draw(self,images,rectangles):self.presented+=1
+    def clear(self):pass

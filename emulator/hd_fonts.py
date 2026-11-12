@@ -5,7 +5,7 @@ Unknown, clipped and partially revealed glyphs remain native.
 """
 from pathlib import Path
 from collections import OrderedDict
-import hashlib,zlib
+import hashlib,zlib,os
 import unicodedata,threading
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -14,6 +14,10 @@ from asset_paths import asset_root
 ROOT =asset_root(Path(__file__).resolve().parent.parent)
 _native_scanners=threading.local()
 
+
+# SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
+SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
+_selected_runs={};_selected_spans={}
 
 class FontRenderer:
     def __init__(self):
@@ -62,7 +66,7 @@ class FontRenderer:
         self.battle_scan=value;self.active_rows=np.r_[0:16,120:192] if value else None
         self.scan_mask=np.zeros((192,256),dtype=bool) if value else None
         if value:self.scan_mask[:16]=True;self.scan_mask[120:]=True;self.scan_mask[136:184,:56]=False
-        self.last_native_key=None;self.last_key=None;self.overlay_key=None
+        self.last_native_key=None;self.last_key=None;self.overlay_key=None;self.frame_memo=None
         self.primary_mode=False;self.primary_key=None
 
     def _scan_active(self,mask,height,width,keys,characters,minimum=1,maximum=144):
@@ -115,9 +119,26 @@ class FontRenderer:
                 for x, y, i in zip(xs[valid], ys[valid], indices[valid])]
 
     def recognize(self, native):
+        # One frame asks for the same answer several times (the scan itself,
+        # glyph erasing, the dialogue restore, the text pass). The renderer
+        # numbers its frames; within one frame the same screen array always
+        # gives the result already computed, without hashing it again.
+        token=getattr(self,'frame_token',None)
+        if token is not None and SHORTCUTS:
+            # Callers pass the screen or its first 192 rows; both start at the same address.
+            memo=(token,np.asarray(native).__array_interface__['data'][0])
+            if getattr(self,'frame_memo',None)==memo:return self.last_matches
+            self.frame_memo=memo
+        return self._recognize(native)
+
+    def _recognize(self, native):
         native = np.asarray(native)[:192]
-        checked=native if self.active_rows is None else native[self.scan_mask]
-        native_key = hashlib.blake2b(checked.tobytes(), digest_size=16).digest()
+        if not SHORTCUTS:
+            checked=native if self.active_rows is None else native[self.scan_mask]
+            native_key = hashlib.blake2b(checked.tobytes(), digest_size=16).digest()
+        elif self.active_rows is None:native_key=native.tobytes()
+        # The same pixels scan_mask selects, taken as four plain blocks.
+        else:native_key=native[:16].tobytes()+native[120:136].tobytes()+native[136:184,56:].tobytes()+native[184:].tobytes()
         if native_key == self.last_native_key:
             return self.last_matches
         pixel_scanner=getattr(_native_scanners,'pixels',None)
@@ -150,11 +171,15 @@ class FontRenderer:
         if self.battle_scan:
             for foreground in foregrounds:foreground&=self.scan_mask
         strong_green=(red5<6)&(green5>=24)&(blue5<6)
-        primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
+        if SHORTCUTS:
+            bits=lambda *planes:b''.join(np.packbits(plane).tobytes() for plane in planes)
+            primary_signal=bits(*foregrounds,hud_ink,hud_gold)
+        else:primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
         primary_key=(primary_signal,tuple(self._selected_run(selected_green,*run[:3]) for run in getattr(self,'menu_runs',())))
         if getattr(self,'primary_mode',False) and primary_key==getattr(self,'primary_key',None):
             self.last_native_key=native_key;return self.last_matches
-        key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes()+b''.join(m.tobytes() for m in foregrounds), digest_size=16).digest()
+        if SHORTCUTS:key=bits(bright,white,selected_green)+primary_signal
+        else:key = hashlib.blake2b(bright.tobytes()+white.tobytes()+selected_green.tobytes()+hud_ink.tobytes()+hud_gold.tobytes()+b''.join(m.tobytes() for m in foregrounds), digest_size=16).digest()
         self.last_native_key = native_key
         if key == self.last_key and not getattr(self,'primary_mode',False):
             return self.last_matches
@@ -229,9 +254,15 @@ class FontRenderer:
             sizes[x, y], heights[x, y] = width, height
         self.last_sizes, self.last_heights = sizes, heights
         self.last_ink = mask.copy()
-        padded = np.pad(mask, 2)
-        mask = np.logical_or.reduce([padded[dy:dy+192, dx:dx+256]
-                                     for dy in range(5) for dx in range(5)])
+        if not SHORTCUTS:
+            padded = np.pad(mask, 2)
+            mask = np.logical_or.reduce([padded[dy:dy+192, dx:dx+256]
+                                         for dy in range(5) for dx in range(5)])
+        elif accepted:
+            wide=mask.copy()
+            for step in (1,2):wide[:,step:]|=mask[:,:-step];wide[:,:-step]|=mask[:,step:]
+            mask=wide.copy()
+            for step in (1,2):mask[step:]|=wide[:-step];mask[:-step]|=wide[step:]
         self.hud_mask=np.zeros((192,256),dtype=bool);self.hud_positions={(x,y) for x,y,*_ in hud}
         for x,y,erase in hud_erasers:self.hud_mask[y:y+erase.shape[0],x:x+erase.shape[1]]|=erase
         mask|=self.hud_mask
@@ -276,11 +307,29 @@ class FontRenderer:
     @staticmethod
     def _selected_run(green,left,right,y):
         if y+12>192:return False
+        if SHORTCUTS:
+            key=(left,right,y,green[max(0,y-2):min(192,y+16)].tobytes());found=_selected_runs.get(key)
+            if found is None:
+                strip=green[y+8:min(192,y+16),max(0,left-2):min(256,right+2)]
+                found=bool(strip.size and np.any(strip.mean(1)>=.8)) or FontRenderer._selected_span(green,left,right,y) is not None
+                if len(_selected_runs)>2048:_selected_runs.clear()
+                _selected_runs[key]=found
+            return found
         strip=green[y+8:min(192,y+16),max(0,left-2):min(256,right+2)]
         return bool(strip.size and np.any(strip.mean(1)>=.8)) or FontRenderer._selected_span(green,left,right,y) is not None
 
     @staticmethod
     def _selected_span(green,left,right,y):
+        if SHORTCUTS:
+            key=(left,right,y,green[max(0,y-2):min(192,y+14)].tobytes())
+            if key not in _selected_spans:
+                if len(_selected_spans)>2048:_selected_spans.clear()
+                _selected_spans[key]=FontRenderer._selected_span_scan(green,left,right,y)
+            return _selected_spans[key]
+        return FontRenderer._selected_span_scan(green,left,right,y)
+
+    @staticmethod
+    def _selected_span_scan(green,left,right,y):
         # The game's opaque bitmap bed may hide every green pixel beneath a
         # word. Find the button beside the word, bridging only its text cell;
         # selection must not depend on seeing a bright row through the letters.
@@ -384,6 +433,15 @@ class FontRenderer:
         """Erase glyphs at native resolution before an HD scene is composited."""
         native=np.asarray(native)[:192]
         if not self.recognize(native):return native
+        token=getattr(self,'frame_token',None)
+        if token is not None and SHORTCUTS:
+            # Asked twice per battle frame (the scene and the dialogue strip).
+            memo=(token,native.__array_interface__['data'][0])
+            if getattr(self,'clean_memo',None)==memo:return self.clean_result
+            self.clean_memo=memo;self.clean_result=self._clean_native(native);return self.clean_result
+        return self._clean_native(native)
+
+    def _clean_native(self,native):
         key=(self.last_mask.tobytes(),self._underlay_key(native))
         if getattr(self,'erased_native_key',None)!=key:
             self.erased_native_pixels=self._heal_native(native)[self.last_mask]

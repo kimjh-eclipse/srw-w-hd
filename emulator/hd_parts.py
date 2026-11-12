@@ -17,6 +17,11 @@ from native_composition import PartVisibility
 from asset_paths import asset_root
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
+# Finished textures are kept at this multiple of the native part size. The
+# largest render width is 960 px (3.75x), so 4x loses nothing on screen.
+STORE_SCALE=4
+# SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
+SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 
 def is_menu_gradient(indices,w,h):
     """Button centers and beveled ends are horizontal palette ramps, not units.
@@ -75,44 +80,56 @@ class PartsRenderer:
         self.async_prepare=async_prepare;self.pending={};self.prepare_errors={}
         self.prepare_delay=0
         self.executor=ProcessPoolExecutor(max_workers=1,mp_context=mp.get_context('spawn'),initializer=start_texture_worker,initargs=(os.getpid(),)) if async_prepare else None
-        self.disk_cache=PartsDiskCache(ROOT/'graphics/parts_registered.sqlite')
+        self.disk_cache=PartsDiskCache(ROOT/'graphics/parts_baked.sqlite');self.legacy_cache=None
         self.registration_version=hashlib.sha256((Path(__file__).parent/'hd_parts_registration.py').read_bytes()).hexdigest()
+        self.baked=set();self.baked_ready=np.zeros(0,dtype='uint32');self.miss_stamp=None
+        if async_prepare and os.environ.get('SRWW_BAKED_PARTS','1')!='0':
+            self.load_baked()
         self.ready_generation=0;self.ready_aliases={}
         for index,binding in enumerate(self.bindings,1):self.ready_aliases.setdefault(binding.get('source_binding',index),[]).append(index)
+        self.baked_ready=np.fromiter((alias for source in self.baked for alias in self.ready_aliases.get(source,())),dtype='uint32')
         self.dynamic_parts=bool(dynamic_parts and async_prepare and (ROOT/'graphics/parts_tile_library.sqlite').exists())
         self.dynamic_bindings=queue.SimpleQueue();self.unmapped_pending={};self.unmapped_seen=set();self.unmapped_misses={};self.runtime_requests={}
         self.prepared.on_evict=lambda:setattr(self,'ready_generation',self.ready_generation+1)
+        if self.dynamic_parts and os.environ.get('SRWW_ASSEMBLY_MISSES','1')!='0':self.load_misses()
         self.prefetch_groups={};self.prefetched_groups=set()
         for bid,spec in enumerate(self.bindings,1):
-            if spec.get('source_binding') or spec['w']>32 or spec['h']>32:continue
+            if spec.get('source_binding') or spec['w']>64 or spec['h']>64:continue
             key=(spec.get('atlas_id','base'),spec.get('resource'))
             self.prefetch_groups.setdefault(key,[]).append(bid)
 
     def prefetch_related(self,parts):
-        if not self.async_prepare or self.pending:return
+        if not self.async_prepare or self.pending or getattr(self,'unmapped_on_screen',False):return
         # Current visible requests always win; queue a small neighboring batch
         # only when preparation is idle, never the whole 91k-part catalog.
         for raw in parts[:,0]:
             if not raw:continue
             spec=self.bindings[int(raw)-1];key=(spec.get('atlas_id','base'),spec.get('resource'))
             if key in self.prefetched_groups:continue
-            self.prefetched_groups.add(key);queued=0
+            queued=0;complete=True
             for bid in self.prefetch_groups.get(key,()):
-                if bid in self.prepared or bid in self.pending:continue
+                if bid in self.prepared or bid in self.pending or bid in self.prepare_errors:continue
                 candidate=self.bindings[bid-1]
                 self.pending[bid]=self.executor.submit(prepare_task,bid,candidate['w'],candidate['h'],self.prepare_delay)
                 queued+=1
-                if queued>=8:break
+                if queued>=8:complete=False;break
+            if complete:self.prefetched_groups.add(key)
             if queued:break
 
     def schedule_unknown(self,snapshot):
+        self.unmapped_on_screen=snapshot is not None and bool(snapshot[0][:,0].any())
         if not self.dynamic_parts:return
+        # Drain completed speculative work BEFORE deciding whether the queue
+        # is busy. Otherwise every frame can requeue prefetch before a visible
+        # unknown rectangle ever gets a turn.
+        self.collect_prepared()
         for key,(future,request,descriptor) in list(self.unmapped_pending.items()):
             if not future.done():continue
             del self.unmapped_pending[key]
             try:art,stats,palette_key,lut=future.result()
             except Exception as error:art=None;stats=dict(reason=str(error))
-            if art is None:self.unmapped_misses[key]=stats;continue
+            if art is None:
+                self.unmapped_misses[key]=stats;self.record_miss(key);continue
             binding=len(self.bindings)+1
             if binding>=200000:self.unmapped_misses[key]=dict(reason='runtime texture capacity');continue
             descriptor['hash']=stats['reference_hash'];descriptor['original_palette_rgb']=stats['reference_palette_rgb']
@@ -123,10 +140,13 @@ class PartsRenderer:
         # Finished work still belongs in the stage cache after its source OBJ
         # disappears. Empty frames must drain the queue too.
         if snapshot is None:return
+        # Speculative unknown effects must not sit ahead of visible registered
+        # body parts in the single texture worker's queue.
+        if self.pending:return
         rows,pixels,palettes=snapshot
-        for i in np.flatnonzero(rows[:,0]):
+        for i in sorted(np.flatnonzero(rows[:,0]),key=lambda i:-int(rows[i,1])*int(rows[i,2])):
             row=rows[i];identity=(int(row[0]),int(row[7]))
-            if identity in self.unmapped_seen or len(self.unmapped_pending)>=12:continue
+            if identity in self.unmapped_seen or len(self.unmapped_pending)>=2:continue
             w,h=int(row[1]),int(row[2])
             if is_menu_gradient(pixels[i,:w*h],w,h):
                 self.unmapped_seen.add(identity);continue
@@ -137,30 +157,93 @@ class PartsRenderer:
             except Exception as error:self.unmapped_misses[identity]=dict(reason=str(error));continue
             self.unmapped_seen.add(identity);self.unmapped_pending[identity]=(future,request,descriptor)
 
+    def load_misses(self):
+        """Runtime assemblies that already failed with the current tiles.
+
+        Retrying them every session only occupies the texture process. The
+        record is tied to the tile library and assembly code, so new art or
+        a code change makes every one of them eligible again.
+        """
+        try:
+            from tile_compositor import TileCompositor
+            self.miss_stamp=hashlib.sha256((TileCompositor().stamp+self.registration_version).encode()).hexdigest()
+            db=self.disk_cache.db();db.execute('CREATE TABLE IF NOT EXISTS assembly_misses (stamp TEXT,index_hash INTEGER,material INTEGER,PRIMARY KEY(stamp,index_hash,material))')
+            self.unmapped_seen.update((int(a),int(b)) for a,b in db.execute('SELECT index_hash,material FROM assembly_misses WHERE stamp=?',(self.miss_stamp,)))
+        except Exception:self.miss_stamp=None
+
+    def record_miss(self,identity):
+        if self.miss_stamp is None:return
+        try:
+            with self.disk_cache.db() as db:db.execute('INSERT OR IGNORE INTO assembly_misses VALUES (?,?,?)',(self.miss_stamp,int(identity[0]),int(identity[1])))
+        except Exception:pass
+
     def ready_bindings(self):
         sources=set(self.prepared)|set(self.prepared.retained)
         if self.registered_cache is not None:sources.update(int(k[5:]) for k in self.registered_cache)
-        return [alias for source in sources for alias in self.ready_aliases.get(source,())]
+        sources.difference_update(self.baked)
+        # One contiguous array: the list is ~90k entries once parts are baked,
+        # and it crosses a process boundary and a C call whenever it changes.
+        extra=np.fromiter((alias for source in sources for alias in self.ready_aliases.get(source,())),dtype='uint32')
+        return np.concatenate([self.baked_ready,extra])
+
+    def texture_key(self,binding,w,h,legacy=False,cut_policy=True):
+        """Content address of one registered texture in the baked store."""
+        source=self.bindings[binding-1];x,y=source['x'],source['y'];name=source.get('atlas_id','base')
+        spec=self.atlas_specs.get(name,{'image':'kazuma_parts_atlas_facefix.png','reference':'kazuma_parts_atlas_reference.png'})
+        registration_mode=('painted-attack-bank-v3' if source.get('registered_attack_bank') else
+            'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
+        from part_cut_edges import POLICY
+        identity=[self.registration_version,registration_mode,x,y,w,h]
+        if cut_policy:identity.append(POLICY)
+        if not legacy:identity.append(f'store-{STORE_SCALE}x-webp')
+        stats=self.__dict__.setdefault('atlas_stats',{})
+        for file in (spec['image'],spec['reference']):
+            if file not in stats:
+                path=ROOT/'graphics'/file;stat=path.stat();stats[file]=[str(path),stat.st_mtime_ns,stat.st_size]
+            identity.extend(stats[file])
+        return hashlib.sha256(json.dumps(identity).encode()).hexdigest()
+
+    def load_baked(self):
+        """Bindings whose finished texture is already on disk.
+
+        These need no registration work: the core may hide their native
+        pixels at once and the renderer reads the picture when it is drawn.
+        """
+        self.baked=set()
+        try:keys=self.disk_cache.keys()
+        except Exception:return
+        for binding,spec in enumerate(self.bindings,1):
+            if spec.get('source_binding') or spec.get('runtime_texture') or spec.get('disabled'):continue
+            try:
+                if self.texture_key(binding,spec['w'],spec['h']) in keys:self.baked.add(binding)
+            except (OSError,KeyError):pass
 
     def prepare_texture(self,binding,w,h):
         source=self.bindings[binding-1];x,y=source['x'],source['y'];name=source.get('atlas_id','base')
         spec=self.atlas_specs.get(name,{'image':'kazuma_parts_atlas_facefix.png','reference':'kazuma_parts_atlas_reference.png'})
         if self.async_prepare:
             palette=np.asarray(source.get('palette_source_rgb',source.get('original_palette_rgb',self.source_palette)),dtype='float32')
-            palette_key=palette.tobytes()
-            if palette_key not in self.palette_luts:
-                codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
-                self.palette_luts[palette_key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
-        registration_mode=('painted-attack-bank-v3' if source.get('registered_attack_bank') else
-            'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
-        identity=[self.registration_version,registration_mode,x,y,w,h]
-        for path in (ROOT/'graphics'/spec['image'],ROOT/'graphics'/spec['reference']):
-            stat=path.stat();identity.extend([str(path),stat.st_mtime_ns,stat.st_size])
-        key=hashlib.sha256(json.dumps(identity).encode()).hexdigest()
+            palette_key=palette.tobytes();self.get_palette_lut(palette)
+        key=self.texture_key(binding,w,h)
         if self.async_prepare:
             try:found=self.disk_cache.get(key)
             except Exception:found=None
             if found:return found
+        store=(w*STORE_SCALE,h*STORE_SCALE)
+        # Reuse the already aligned 4x texture when only the cut-edge policy
+        # changed. No resampling or alignment search needs to be repeated.
+        if not self.async_prepare:
+            prior=self.disk_cache.get(self.texture_key(binding,w,h,cut_policy=False))
+            if prior:
+                from part_cut_edges import repair_crop_ink
+                _,native_atlas=self.atlas_pair(name)
+                aligned,count=repair_crop_ink(prior[0],native_atlas,(x,y,x+w,y+h))
+                return aligned,dict(prior[1],artificial_cut_ink_pixels=count,reused_aligned_texture=True)
+        if self.legacy_cache is not None:
+            # Bake only: an identical registration from the earlier 8x store.
+            try:found=self.legacy_cache.get(self.texture_key(binding,w,h,legacy=True))
+            except Exception:found=None
+            if found:return found[0].resize(store,Image.Resampling.LANCZOS),found[1]
         paint_atlas,native_atlas=self.atlas_pair(name)
         sx=paint_atlas.width/native_atlas.width;sy=paint_atlas.height/native_atlas.height
         paint=paint_atlas.crop((round(x*sx),round(y*sy),round((x+w)*sx),round((y+h)*sy))).resize((w*8,h*8),Image.Resampling.LANCZOS)
@@ -183,6 +266,10 @@ class PartsRenderer:
             zoom=stats['zoom'];dx=stats['dx'];dy=stats['dy']
             coeff=(1/zoom,0,(w/2-(w/2+dx)/zoom)*8,0,1/zoom,(h/2-(h/2+dy)/zoom)*8)
             aligned=clean_alpha(paint.transform(aligned.size,Image.Transform.AFFINE,coeff,Image.Resampling.BICUBIC))
+        from part_cut_edges import repair_crop_ink
+        aligned,cut_pixels=repair_crop_ink(aligned,native_atlas,(x,y,x+w,y+h))
+        stats=dict(stats,artificial_cut_ink_pixels=cut_pixels)
+        if aligned.size!=store:aligned=aligned.resize(store,Image.Resampling.LANCZOS)
         if self.async_prepare:
             try:self.disk_cache.put(key,aligned,stats)
             except Exception:pass
@@ -199,7 +286,9 @@ class PartsRenderer:
                     self.prepare_errors[binding]=stats.get('reason','texture unavailable');continue
                 self.prepared[binding]=aligned;self.registration_stats[binding]=stats
                 if lut is not None:self.palette_luts[palette_key]=np.frombuffer(lut,dtype='uint8').copy()
-                changed=True
+                # Baked parts are already advertised; warming them in memory
+                # must not resend the whole ready set to the core.
+                if binding not in self.baked:changed=True
             except Exception as error:self.prepare_errors[binding]=str(error)
         while len(self.prepared)>512:self.prepared.popitem(last=False);changed=True
         if changed:self.ready_generation+=1
@@ -227,9 +316,21 @@ class PartsRenderer:
         while len(self.lazy_atlases)>4:self.lazy_atlases.popitem(last=False)
         return paint,native
 
+    def baked_lut(self,key):
+        """Colour-to-palette-slot table computed by the bake, if present."""
+        if getattr(self,'baked_luts',None) is None:
+            self.baked_luts={}
+            try:
+                with np.load(ROOT/'graphics/palette_luts.npz',allow_pickle=False) as archive:
+                    tables=archive['tables'];self.baked_luts={str(name):tables[i] for i,name in enumerate(archive['keys'])}
+            except (OSError,ValueError,KeyError):pass
+        return self.baked_luts.get(hashlib.sha1(key).hexdigest())
+
     def get_palette_lut(self,palette):
         key=palette.tobytes()
         if key not in self.palette_luts:
+            found=self.baked_lut(key)
+            if found is not None:self.palette_luts[key]=found;return found
             codes=np.arange(32768,dtype='uint32');colors=np.stack([(codes&31)*255/31,((codes>>5)&31)*255/31,((codes>>10)&31)*255/31],-1).astype('float32')
             self.palette_luts[key]=(np.argmin(((colors[:,None,:]-palette[None,1:,:])**2).sum(-1),axis=1)+1).astype('uint8')
         return self.palette_luts[key]
@@ -315,7 +416,26 @@ class PartsRenderer:
         while len(self.material_maps)>64:self.material_maps.popitem(last=False)
         return found
 
-    def sprite(self,row,oam,palette=None):
+    def rescue(self,binding,source,w,h):
+        """Produce a texture now for a part the core has already hidden.
+
+        The core decides to skip a native OBJ/BG tile from the ready set it
+        held when the frame was emulated. A cache eviction or stage reset in
+        this process between that decision and this draw would otherwise
+        leave neither the native pixels nor the HD picture on screen.
+        """
+        try:
+            if source.get('runtime_texture'):
+                future=self.pending.get(binding)
+                if future is None:future=self.pending[binding]=self.executor.submit(prepare_composite_task,*self.runtime_requests[binding])
+                aligned,stats,palette_key,lut=future.result(timeout=.5)
+                if aligned is None:return None
+                if lut is not None:self.palette_luts[palette_key]=np.frombuffer(lut,dtype='uint8').copy()
+                return aligned,stats
+            return self.prepare_texture(binding,w,h)
+        except Exception:return None
+
+    def sprite(self,row,oam,palette=None,required=False):
         binding,a,b,c,_,brightness,alpha,_=map(int,row);spec=self.bindings[binding-1]
         w,h=spec['w'],spec['h'];matrix=()
         if a&256:
@@ -327,17 +447,24 @@ class PartsRenderer:
             if self.registered_cache is not None and cache_key in self.registered_cache:
                 aligned=Image.fromarray(self.registered_cache[cache_key]);stats=self.cached_stats[str(source_binding)]
             else:
-                if self.async_prepare:
+                baked=source_binding in self.baked
+                rescued=self.rescue(source_binding,source,w,h) if self.async_prepare and (required or baked) else None
+                if rescued is not None:
+                    aligned,stats=rescued
+                    if not baked:self.rescued=getattr(self,'rescued',0)+1
+                elif self.async_prepare:
                     if source_binding not in self.pending and source_binding not in self.prepare_errors and len(self.pending)<48:
                         try:
                             if source.get('runtime_texture'):self.pending[source_binding]=self.executor.submit(prepare_composite_task,*self.runtime_requests[source_binding])
                             else:self.pending[source_binding]=self.executor.submit(prepare_task,source_binding,w,h,self.prepare_delay)
                         except Exception as error:self.prepare_errors[source_binding]=str(error)
                     return None
-                aligned,stats=self.prepare_texture(source_binding,w,h)
+                else:aligned,stats=self.prepare_texture(source_binding,w,h)
             self.prepared[source_binding]=aligned;self.registration_stats[source_binding]=stats
             while len(self.prepared)>512:self.prepared.popitem(last=False)
-            if self.async_prepare:self.ready_generation+=1
+            # A baked binding is advertised from the start; reading it does
+            # not change what the core may hide.
+            if self.async_prepare and source_binding not in self.baked:self.ready_generation+=1
         self.prepared.move_to_end(source_binding)
         if key in self.cache:
             self.cache.move_to_end(key);return self.cache[key]
@@ -416,7 +543,17 @@ class PartsRenderer:
             for width in range(MIN_WIDTH,MAX_WIDTH+1,32):
                 self.baked_scales[binding,width]=source.resize((round(spec['w']*width/256),round(spec['h']*width/256)),Image.Resampling.LANCZOS)
 
-    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False):
+    def native_mask(self,left,upper,visible):
+        """A part's visibility as a whole-screen native-resolution picture."""
+        key=(left,upper,visible.shape,visible.tobytes());masks=self.__dict__.setdefault('native_masks',OrderedDict())
+        image=masks.pop(key,None)
+        if image is None:
+            full=np.zeros((192,256),dtype='uint8');full[upper:upper+visible.shape[0],left:left+visible.shape[1]]=visible;image=Image.fromarray(full)
+        masks[key]=image
+        while len(masks)>256:masks.popitem(last=False)
+        return image
+
+    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False,effect_foreground=None,background_planes=()):
         if self.async_prepare:self.collect_prepared()
         active=[i for i in range(128) if parts[i,0]]
         native_attrs=np.frombuffer(oam,dtype='<u2').reshape(128,4)
@@ -425,9 +562,25 @@ class PartsRenderer:
         if bgparts is not None:
             for index in np.flatnonzero(bgparts[:,0]):
                 row=bgparts[index];tasks.append((int(row[5]),1,int(row[4]),row))
+        tasks.extend((int(priority),1,int(layer),draw) for priority,layer,draw in background_planes)
         visibility=PartVisibility(layer_ids,owners,bgpriors,native_priority)
         background_blend=int(parts[active[0],6]) if active else None
+        foreground_images={}
+        # Most parts are nowhere near a blending BG. Decide that once per
+        # frame instead of unpacking the 64-bit records for every part.
+        foreground_active=None
+        if effect_foreground is not None:
+            from foreground_blend import active as _active
+            foreground_active=_active(effect_foreground)
+            if not foreground_active.any():effect_foreground=None
+        # Outcome counters, in native pixels, for the runtime-path verifier.
+        # "vanished" is a part the core hid that received no HD picture.
+        stats=dict(beam_tie_pixels=0,drawn=0,waiting=0,vanished=0,occluded=0,drawn_area=0,waiting_area=0,vanished_area=0);rescued=getattr(self,'rescued',0)
+        self.last_stats=stats
         for priority,kind,i,original in sorted(tasks,key=lambda task:task[:3],reverse=True):
+            if callable(original):
+                original(top)
+                continue
             if kind:
                 bid,flip,x,y,layer,_,bright,control=map(int,original)
                 if x>=2**31:x-=2**32
@@ -438,8 +591,12 @@ class PartsRenderer:
                 row=original;a,b,c=map(int,row[1:4]);control=int(row[7]);x=b&511;y=a&255
                 if x>=256:x-=512
                 if y>=192:y-=256
-            art=self.sprite(row,oam,None if kind or part_palettes is None else part_palettes[i])
-            if art is None or (control&0x80000000 and not allow_native_fallback):continue
+            native_hidden=self.async_prepare and not control&0x80000000
+            art=self.sprite(row,oam,None if kind or part_palettes is None else part_palettes[i],required=native_hidden)
+            spec=self.bindings[int(row[0])-1];area=spec['w']*spec['h']
+            if art is None or (control&0x80000000 and not allow_native_fallback):
+                outcome='vanished' if art is None and native_hidden else 'waiting'
+                stats[outcome]+=1;stats[outcome+'_area']+=area;continue
             px,py=round(x*SCALE),round(y*SCALE)
             left=max(0,math.floor(px/SCALE));upper=max(0,math.floor(py/SCALE))
             right=min(256,math.ceil((px+art.width)/SCALE)+1);lower=min(192,math.ceil((py+art.height)/SCALE)+1)
@@ -448,16 +605,57 @@ class PartsRenderer:
             # Compare native BG priorities and surviving native OBJ ownership.
             # This retains enemies/effects in the same relative draw order.
             visible,visibility_state=visibility.mask(left,upper,right,lower,priority,kind,i,control,int(row[6]) if not kind else background_blend)
+            foreground=None
+            if effect_foreground is not None and foreground_active[upper:lower,left:right].any():
+                from foreground_blend import eligibility_region
+                packed=effect_foreground[upper:lower,left:right]
+                eligible=eligibility_region(effect_foreground,(left,upper,right,lower),layer_ids,bgpriors,priority,i if kind else 4)
+                # A surviving front OBJ (enemy, projectile or UI) must still
+                # occlude the unit. Tie-promoted energy cannot reveal it.
+                eligible&=(layers!=4)|(visible!=0)
+                if eligible.any():
+                    if not kind:
+                        front_layer=((packed>>15)&7).astype('int16')-1
+                        same_priority=np.asarray(bgpriors)[np.clip(front_layer,0,5)]==priority
+                        stats['beam_tie_pixels']+=int(np.count_nonzero(eligible&same_priority&((packed&32767)!=0)))
+                    # The DS blends the front BG color into the OBJ color;
+                    # alpha attenuation alone cannot reproduce that ordering.
+                    visible=visible.copy();visible[eligible]=255
+                    visibility_state=1;foreground=(packed,eligible)
             # Alpha-blended BG effects retain a BG layer ID even when the
             # underlying OBJ is visible through them (e.g. the battle flash).
-            if visibility_state==0:continue
+            if visibility_state==0:stats['occluded']+=1;continue
+            stats['drawn']+=1;stats['drawn_area']+=area
             if visibility_state==2 and (kind or (a>>10)&3!=1):
                 top.paste(art,(px,py),art)
                 continue
             coeff=(1/SCALE,0,px/SCALE-left,0,1/SCALE,py/SCALE-upper)
+            if SHORTCUTS and hasattr(top,'draw') and (kind or (a>>10)&3!=1):
+                # The GPU enlarges the native-resolution mask itself (with the
+                # same nearest-pixel rule), so no HD-sized mask is built or
+                # uploaded here. An unchanged mask reuses its texture.
+                effect=None
+                if foreground is not None:
+                    effect_key=(priority,i if kind else 4)
+                    if effect_key not in foreground_images:
+                        from foreground_blend import gpu_plane
+                        foreground_images[effect_key]=gpu_plane(effect_foreground,layer_ids,bgpriors,priority,i if kind else 4)
+                    effect=foreground_images[effect_key]
+                top.draw(art,(px,py,px+art.width,py+art.height),mask=self.native_mask(left,upper,visible),mask_rect=(0,0,*top.size),alpha=True,foreground=effect,foreground_rect=(0,0,*top.size))
+                continue
             local=Image.fromarray(visible).transform(art.size,Image.Transform.AFFINE,coeff,Image.Resampling.NEAREST)
+            if foreground is not None and (not hasattr(top,'draw') or (a>>10)&3==1):
+                from foreground_blend import blend_part
+                art=blend_part(art,*foreground,coeff)
             if hasattr(top,'draw') and (kind or (a>>10)&3!=1):
-                top.draw(art,(px,py,px+art.width,py+art.height),mask=local,alpha=True)
+                effect=None
+                if foreground is not None:
+                    effect_key=(priority,i if kind else 4)
+                    if effect_key not in foreground_images:
+                        from foreground_blend import gpu_plane
+                        foreground_images[effect_key]=gpu_plane(effect_foreground,layer_ids,bgpriors,priority,i if kind else 4)
+                    effect=foreground_images[effect_key]
+                top.draw(art,(px,py,px+art.width,py+art.height),mask=local,alpha=True,foreground=effect,foreground_rect=(0,0,*top.size))
                 continue
             mask=Image.fromarray((np.asarray(art.getchannel('A'),dtype='uint16')*np.asarray(local,dtype='uint16')//255).astype('uint8'))
             if not kind and (a>>10)&3==1:
@@ -466,5 +664,6 @@ class PartsRenderer:
                 opacity=np.where(np.asarray(blend)>0,min(int(row[6])&31,16)/16,1.)
                 mask=Image.fromarray((np.asarray(mask)*opacity).astype('uint8'))
             top.paste(art,(px,py),mask)
+        stats['rescued']=getattr(self,'rescued',0)-rescued
         self.prefetch_related(parts)
         return len(tasks)

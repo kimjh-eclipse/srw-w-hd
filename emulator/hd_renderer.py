@@ -22,6 +22,10 @@ from cutin_assets import CutinAssets
 from asset_paths import asset_root
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
 
+def character_cutin(spec,identifier):
+    """Presentation role follows the asset family, including compact pilots."""
+    return identifier==1 or spec.get('presentation_role')=='pilot_foreground' or spec.get('name','').startswith('compact_pilot_bg_') or spec.get('image','').startswith('compact_pilot_cutins/')
+
 class HDRenderer:
     def __init__(self,async_parts=False,dynamic_parts=False,gpu_composition=False):
         self.size=None;self.async_parts=async_parts
@@ -74,7 +78,14 @@ class HDRenderer:
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
-    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None):
+    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None):
+        self.frame_number=getattr(self,'frame_number',0)+1;self.text_renderer.frame_token=self.frame_number
+        if effect_foreground is not None:
+            # No blending BG anywhere on this frame: skip every per-layer test.
+            from foreground_blend import active
+            if not active(effect_foreground).any():effect_foreground=None
+        from foreground_blend import begin_frame
+        begin_frame(effect_foreground,bgpriors)
         cutins=[hd] if hd[0] else []
         if hd[10] and cutin_layers is not None:
             planes=[row for row in cutin_layers if row[0] and int(row[0]) in self.cutins]
@@ -95,7 +106,7 @@ class HDRenderer:
         # HP labels disappear during attacks, but the battle dialogue frame
         # and its dedicated VRAM banks remain. Keep scanning only text areas
         # instead of treating every animated star/beam as a possible glyph.
-        is_battle=bool(hd[0]) or (battle_layout and cyan)
+        is_battle=bool(hd[0]) or battle_layout
         self.text_renderer.set_battle_scan(is_battle)
         if hd[10]:self.text_renderer.recognize(native)
         hud_mask=getattr(self.text_renderer,'hud_mask',None) if hd[10] else None
@@ -108,7 +119,7 @@ class HDRenderer:
             if menu_kind=='favorite':native_top.paste(Image.fromarray(native[160:192]).resize((self.size[0],self.size[1]//6),Image.Resampling.NEAREST),(0,self.size[1]*5//6))
             top=native_top
         else:
-            display_native=self.text_renderer.clean_native(native) if hd[0] else native[:192]
+            display_native=self.text_renderer.clean_native(native) if hd[0] or is_battle else native[:192]
             if hud_mask is not None and hud_mask.any():
                 display_native=display_native.copy();healed=self.text_renderer._heal_native(native)
                 display_native[hud_mask]=healed[hud_mask]
@@ -149,50 +160,85 @@ class HDRenderer:
             if self.menu_scene.last_scene is None and not is_battle:
                 terrain=self.map_tiles.compose(top,native)
                 if terrain or self.map_tiles.phase(native[:192]) is not None:self.map_icons.compose(top,native,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
-        if parts is not None:
-            self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused)
+        draw_cutins=[]
         for cutin in cutins:
+            spec=self.cutins.specs.get(int(cutin[0]),{})
+            layer=int(cutin[5])
+            if spec.get('repeat_native_plane') and bg_layout is not None and tuple(bg_layout[layer][5:7])==(256,256):
+                # Full opaque 256x256 BG pictures wrap in DS hardware. A
+                # single shifted HD rectangle leaves a native strip at seams.
+                for x in (int(cutin[1])%256,int(cutin[1])%256-256):
+                    for y in (int(cutin[2])%256,int(cutin[2])%256-256):
+                        copy=list(cutin);copy[1]=x;copy[2]=y;draw_cutins.append(copy)
+            else:draw_cutins.append(cutin)
+        def draw_cutin(top,cutin):
             x=int(cutin[1]);y=int(cutin[2]);x=x if x<256 else x-512;y=y if y<256 else y-512
             art=self.cutins.get(int(cutin[0]),self.art)
             position=(round(-x*self.size[0]/256),round(-y*self.size[1]/192))
-            if cutin[0]==1:top.paste(art,position,art)
+            presentation=character_cutin(self.cutins.specs.get(int(cutin[0]),{}),int(cutin[0]))
+            visible=np.array(cutin_visibility(layer_ids,int(cutin[5]),int(cutin[6]),bgpriors,None if presentation else owners,None if presentation else obj))
+            foreground=None;foreground_mask=None
+            if effect_foreground is not None:
+                from foreground_blend import eligibility,gpu_plane
+                foreground_mask=eligibility(effect_foreground,layer_ids,bgpriors,int(cutin[6]),int(cutin[5]))
+                if foreground_mask.any():
+                    visible[foreground_mask]=255
+                    if self.gpu_composition:foreground=gpu_plane(effect_foreground,layer_ids,bgpriors,int(cutin[6]),int(cutin[5]))
+            # Native dialogue cells are opaque DS tiles. They must not
+            # punch rectangular holes through a painted foreground cut-in;
+            # transparent HD lettering is drawn after the complete scene.
+            for tx,ty,char in self.text_renderer.last_matches:
+                if ty<120:continue
+                tw=self.text_renderer.last_sizes[tx,ty];th=self.text_renderer.last_heights[tx,ty]
+                visible[max(0,ty-2):min(192,ty+th+2),max(0,tx-2):min(256,tx+tw+2)]=255
+            visible=Image.fromarray(visible)
+            region,box=self.cutins.region(int(cutin[0]))
+            left,upper=position[0]+box[0],position[1]+box[1]
+            rect=(left,upper,left+region.width,upper+region.height)
+            if self.gpu_composition:
+                # Keep native visibility in its 256x192 texture. The GPU
+                # combines it with the cached painted alpha, avoiding a
+                # full-screen RGBA canvas and several large array copies.
+                top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True,foreground=foreground,foreground_rect=(0,0,*self.size))
             else:
-                visible=np.array(cutin_visibility(layer_ids,int(cutin[5]),int(cutin[6]),bgpriors,owners,obj))
-                # Native dialogue cells are opaque DS tiles. They must not
-                # punch rectangular holes through a painted foreground cut-in;
-                # transparent HD lettering is drawn after the complete scene.
-                for tx,ty,char in self.text_renderer.last_matches:
-                    if ty<120:continue
-                    tw=self.text_renderer.last_sizes[tx,ty];th=self.text_renderer.last_heights[tx,ty]
-                    visible[max(0,ty-2):min(192,ty+th+2),max(0,tx-2):min(256,tx+tw+2)]=255
-                visible=Image.fromarray(visible)
-                region,box=self.cutins.region(int(cutin[0]))
-                left,upper=position[0]+box[0],position[1]+box[1]
-                rect=(left,upper,left+region.width,upper+region.height)
-                if self.gpu_composition:
-                    # Keep native visibility in its 256x192 texture. The GPU
-                    # combines it with the cached painted alpha, avoiding a
-                    # full-screen RGBA canvas and several large array copies.
-                    top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True)
-                else:
-                    mask=visible.resize(self.size,Image.Resampling.NEAREST).crop(rect)
-                    top.paste(region,(left,upper),ImageChops.multiply(mask,region.getchannel('A')))
-        if hd[0]==1:
-            ui=((layer_ids==4)|(layer_ids==0))&(np.arange(192)[:,None]>=120)
-            if self.text_renderer.last_matches:ui&=~self.text_renderer.last_mask
-            if ui.any():
-                mask=Image.fromarray(ui.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)
-                top.paste(native_top,(0,0),mask)
-            self.text_renderer.compose(top,native,only_text=True)
-        elif hd[0]:self.text_renderer.compose(top,native,only_text=True)
+                if foreground_mask is not None and foreground_mask.any():
+                    from foreground_blend import blend_part
+                    scale=self.size[0]/256
+                    region=blend_part(region,effect_foreground,foreground_mask,(1/scale,0,left/scale,0,1/scale,upper/scale))
+                mask=visible.resize(self.size,Image.Resampling.NEAREST).crop(rect)
+                top.paste(region,(left,upper),ImageChops.multiply(mask,region.getchannel('A')))
+        pilots=[row for row in draw_cutins if character_cutin(self.cutins.specs.get(int(row[0]),{}),int(row[0]))]
+        planes=[(int(row[6]),int(row[5]),lambda target,row=row:draw_cutin(target,row)) for row in draw_cutins if not any(row is pilot for pilot in pilots)]
+        if parts is not None:
+            # BG effects/cut-ins and OBJ parts share one native priority order.
+            # A cloudy BG must not be drawn over an already painted front OBJ.
+            self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused,effect_foreground=effect_foreground,background_planes=planes)
+        else:
+            for _,_,paint in sorted(planes,key=lambda row:row[:2],reverse=True):paint(top)
+        # Character presentation is above units/weapons, below final dialogue.
+        # Mechanical cut-ins and opaque effect BGs retain native priority.
+        for pilot in pilots:draw_cutin(top,pilot)
+        if hd[10] and is_battle and cyan:
+            # Dialogue is a final presentation plane, above every HD asset.
+            # Native ownership alone is insufficient: raster changes and
+            # transparent BG effects can leave another layer ID in this strip.
+            # Repair native glyphs before restoring the UI; HD text and faces
+            # are painted below, after its frame and background are in place.
+            ui=Image.fromarray(self.text_renderer.clean_native(native)[128:192])
+            upper=round(128*self.size[1]/192)
+            if hasattr(top,'draw'):top.draw(ui,(0,upper,*self.size),nearest=True)
+            else:top.paste(ui.resize((self.size[0],self.size[1]-upper),Image.Resampling.NEAREST),(0,upper))
+        if hd[0]:self.text_renderer.compose(top,native,only_text=True)
         if hd[10]:self.portraits.compose(top,native)
-        if hd[10] and not hd[0]:self.text_renderer.compose(top,native)
+        # Battle effects already cover the repaired native lettering. Never
+        # paint old opaque glyph beds back above HD smoke, flashes or beams.
+        if hd[10] and not hd[0]:self.text_renderer.compose(top,native,only_text=is_battle)
         if hd[10]:self.ui_labels.compose(top,native)
         if hd[10]:self.localized_screens.compose(top,native)
         return top
 
     def render_bottom(self,native,hd):
-        source=native[192:384]
+        source=native[192:384];self.bottom_text_renderer.frame_token=getattr(self,'frame_number',0)
         pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending) or bool(self.map_tiles.pending) or bool(self.parts_renderer.pending)
         self.scenario_backgrounds.refresh()
         if hasattr(self.map_tiles,'refresh'):self.map_tiles.refresh()
@@ -221,8 +267,8 @@ class HDRenderer:
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
 
-    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None):
-        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers)
+    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None):
+        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers,effect_foreground)
         if hasattr(top,'to_pil'):top=top.to_pil()
         if top.size!=(1440,1080):top=top.resize((1440,1080),Image.Resampling.LANCZOS)
         canvas=Image.new('RGB',(1920,1080));canvas.paste(top,(0,0))

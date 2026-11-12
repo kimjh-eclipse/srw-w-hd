@@ -9,6 +9,9 @@ from stage_cache import StageCache
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
+import os as _os
+# SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
+SHORTCUTS=_os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 from PIL import Image,ImageFilter
 
 from asset_paths import asset_root
@@ -127,6 +130,20 @@ class BattleBackgroundRenderer:
         ys,xs=plan;sample=ys;pixels=native[ys,xs].astype('uint16')>>3;actual=pixels[:,0]|(pixels[:,1]<<5)|(pixels[:,2]<<10)
         if len(np.unique(actual))<3:return None
         previous=self.active_layers.get(layer) if preferred else None
+        if SHORTCUTS and previous is None:
+            # Searching every known background costs about a millisecond. When
+            # that search has just failed for this layer (an effect plane, an
+            # unregistered scene), try again a few frames later, not every frame.
+            tick=getattr(self,'identify_tick',0);failed=self.__dict__.setdefault('full_search_failed',{})
+            if tick-failed.get(layer,-99)<4:return None
+            found=self._identify_full(native,layer_ids,row,plan)
+            if found is None:failed[layer]=tick
+            else:failed.pop(layer,None)
+            return found
+        return self._identify_full(native,layer_ids,row,plan,previous,preferred)
+
+    def _identify_full(self,native,layer_ids,row,plan,previous=None,preferred=False):
+        layer,x,y,w,h=row;ys,xs=plan;sample=ys;pixels=native[ys,xs].astype('uint16')>>3;actual=pixels[:,0]|(pixels[:,1]<<5)|(pixels[:,2]<<10)
         candidates=[previous] if previous is not None and self.names[previous] in self.items else self.layer_indices.get(layer,())
         candidates=np.array([int(i) for i in candidates if self.names[int(i)] in self.items],dtype='int32')
         if not len(candidates):return None
@@ -169,6 +186,7 @@ class BattleBackgroundRenderer:
 
     def compose(self,image,native,layer_ids,bg_layout):
         start=time.perf_counter();self.last_matches=[];self.matched_layers=set();self.last_rows=[];self.last_identification=[];rows=self.battle_layers(bg_layout)
+        self.identify_tick=getattr(self,'identify_tick',0)+1
         if not rows:self.last_ms=(time.perf_counter()-start)*1000;return False
         self.refresh()
         if not rows or self.references is None or not self.items:self.last_ms=(time.perf_counter()-start)*1000;return False
@@ -186,7 +204,9 @@ class BattleBackgroundRenderer:
                 if restoration is not None:extra=restoration if extra is None else (extra|restoration)
                 mask_key=(self.current_ids_signature,layer,image.size,None if extra is None else extra.tobytes())
                 mask=self.gpu_masks.pop(mask_key,None)
-                if mask is None:mask=Image.fromarray(((layer_ids==layer) if extra is None else ((layer_ids==layer)|extra)).astype('uint8')*255).resize(image.size,Image.Resampling.NEAREST)
+                if mask is None:
+                    mask=Image.fromarray(((layer_ids==layer) if extra is None else ((layer_ids==layer)|extra)).astype('uint8')*255)
+                    if not SHORTCUTS:mask=mask.resize(image.size,Image.Resampling.NEAREST)
                 self.gpu_masks[mask_key]=mask
                 while len(self.gpu_masks)>2:self.gpu_masks.popitem(last=False)
                 px=round((x%w)*image.width/256);py=round((y%h)*image.height/192)

@@ -9,6 +9,9 @@ from collections import Counter,OrderedDict,defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
+import os as _os
+# SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
+SHORTCUTS=_os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 from PIL import Image
 
 from asset_paths import asset_root
@@ -122,6 +125,17 @@ class ScenarioBackgrounds:
         if cached is False:return False
         name,dy,mask=cached;art=self.texture(name)
         if art is None:return False
+        if SHORTCUTS and hasattr(target,'draw'):
+            # Same picture as the full-screen copy below (black where the art
+            # does not reach), drawn from the cached art and the native mask.
+            if getattr(self,'mask_source',None) is not mask:self.mask_source=mask;self.mask_image=Image.fromarray(mask)
+            if not hasattr(self,'black'):self.black=Image.new('RGB',(1,1))
+            upper=round(-dy*SCALE);full=(0,0,*target.size)
+            target.draw(self.black,full,mask=self.mask_image,mask_rect=full)
+            target.draw(art,(0,upper,art.width,upper+art.height),mask=self.mask_image,mask_rect=full)
+            self.last_match=dict(name=name,source_offset_y=dy,replaced_pixels=int(np.count_nonzero(mask)))
+            while len(self.art)>2:self.art.popitem(last=False)
+            return True
         viewport=Image.new('RGB',target.size);viewport.paste(art,(0,round(-dy*SCALE)))
         target.paste(viewport,(0,0),Image.fromarray(mask).resize(target.size,Image.Resampling.NEAREST))
         self.last_match=dict(name=name,source_offset_y=dy,replaced_pixels=int(np.count_nonzero(mask)))

@@ -6,6 +6,8 @@ extern uint32_t SRWWHD_Enabled;
 extern uint32_t SRWWHD_Frame;
 extern uint32_t SRWWHD_Info[12];
 extern uint32_t SRWWHD_Layers[4][12];
+extern uint64_t SRWWForeground[256*192];
+extern uint32_t SRWWForegroundActive;
 extern int32_t SRWWRobot_Info[8];
 extern uint8_t SRWWRobot_OAM[1024];
 extern uint8_t SRWWNativeOwner[256*192];

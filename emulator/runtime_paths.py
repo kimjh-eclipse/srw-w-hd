@@ -24,4 +24,8 @@ def log_path(name):
 
 def texture_cache(default):
     if not FROZEN:return default
-    folder=data_dir()/'cache';folder.mkdir(exist_ok=True);return folder/'parts_registered.sqlite'
+    workspace=os.environ.get('SRWW_TEST_WORKSPACE')
+    if workspace:
+        prepared=Path(workspace)/'graphics'/Path(default).name
+        if prepared.is_file():return prepared
+    folder=data_dir()/'cache';folder.mkdir(exist_ok=True);return folder/Path(default).name

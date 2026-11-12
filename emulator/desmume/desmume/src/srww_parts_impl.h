@@ -24,6 +24,9 @@ static std::unordered_map<uint32_t,uint32_t> SRWWPartBindings;
 static std::unordered_map<uint32_t,uint32_t> SRWWIndexedBindings;
 static std::unordered_map<uint64_t,uint32_t> SRWWDynamicBindings;
 static bool SRWWAsyncParts=false;
+#ifndef SRWW_UNIT_FALLBACK_DEFAULT
+#define SRWW_UNIT_FALLBACK_DEFAULT 10
+#endif
 static uint8_t SRWWReadyParts[200000]={0};
 void SRWWSetReadyParts(const uint32_t *ids,unsigned count) {
     SRWWAsyncParts=true;memset(SRWWReadyParts,0,sizeof(SRWWReadyParts));
@@ -61,6 +64,8 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
         const unsigned boundary=oneD?5+((disp>>20)&3):5;
         static const int widths[3][4]={{8,16,32,64},{16,32,32,64},{8,8,16,32}};
         static const int heights[3][4]={{8,16,32,64},{8,8,16,32},{16,32,32,64}};
+        // Per palette group: 0 absent, 1 native only, 2 has an HD binding.
+        uint8_t unitState[128]={0},unitGroup[128]={0};uint16_t unitOpaque[128]={0};
         for(unsigned i=0;i<128;i++) {
             const unsigned a=LE_TO_LOCAL_16(raw[i*4]),b=LE_TO_LOCAL_16(raw[i*4+1]),c=LE_TO_LOCAL_16(raw[i*4+2]);
             if((!(a&256)&&(a&512)) || (a>>14)==3 || ((a>>10)&3)>=2)continue;
@@ -78,6 +83,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
             const auto &texture=SRWWCachedOBJ(engine,i,base,stride,w,h,eight,palette);
             const uint32_t hash=texture.hash,indexHash=texture.indexHash,material=texture.material,usedMask=texture.usedMask,opaque=texture.opaque;
             const uint8_t *nativeIndices=texture.indices;
+            unitGroup[i]=eight?16:(c>>12);unitOpaque[i]=(uint16_t)opaque;unitState[i]=1;
             const auto found=SRWWPartBindings.find(hash);
             uint32_t binding=found==SRWWPartBindings.end()?0:found->second;
             if(!binding && !eight) {
@@ -98,6 +104,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
                 }
                 continue;
             }
+            unitState[i]=2;
             uint32_t *part=parts+i*8;
             part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
             for(unsigned k=0;k<16;k++)palettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
@@ -106,14 +113,33 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
             part[7]=LE_TO_LOCAL_16(*(u16*)(regs+0x50))|((SRWWAsyncParts && !SRWWReadyParts[binding])?0x80000000u:0);
             if(!secondary)SRWWRobot_Info[0]++;
         }
+        // A battle unit is drawn from many OBJ that share one palette slot.
+        // Replacing only the pieces that have HD art joins painted limbs to
+        // native ones. Keep the whole group native for this frame until the
+        // native share falls under the limit; its textures still load.
+        static int limit=-1;
+        if(limit<0) {const char *text=getenv("SRWW_UNIT_FALLBACK_PERCENT");limit=text?atoi(text):SRWW_UNIT_FALLBACK_DEFAULT;if(limit<0||limit>100)limit=SRWW_UNIT_FALLBACK_DEFAULT;}
+        if(limit && GPU && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG3).tileEntryAddress==0x06018000u && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG2).tileEntryAddress==0x06010000u) {
+            unsigned painted[17]={0},kept[17]={0};
+            for(unsigned i=0;i<128;i++) {
+                if(!unitState[i])continue;
+                if(unitState[i]==2 && !(parts[i*8+7]&0x80000000u))painted[unitGroup[i]]+=unitOpaque[i];
+                else kept[unitGroup[i]]+=unitOpaque[i];
+            }
+            for(unsigned i=0;i<128;i++) {
+                const unsigned group=unitGroup[i];
+                if(unitState[i]==2 && kept[group]*100u>=(unsigned)limit*(painted[group]+kept[group]))parts[i*8+7]|=0x80000000u;
+            }
+        }
     }
     // Keep a native fallback underneath asynchronously prepared HD textures.
     // The frontend can display a new animation immediately while its art warms.
-    const unsigned binding=parts[sprite*8];
-    return binding && (!SRWWAsyncParts || SRWWReadyParts[binding]);
+    // Bit 31 is this frame's decision, shared with the frontend: native stays.
+    return parts[sprite*8] && !(parts[sprite*8+7]&0x80000000u);
 }
 
 void SRWWBeginPartsFrame() {
+    memset(SRWWForeground,0,sizeof(SRWWForeground));SRWWForegroundActive=0;
     memset(SRWWSubParts,0,sizeof(SRWWSubParts));
     memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
     memset(SRWWSubUnknownParts,0,sizeof(SRWWSubUnknownParts));

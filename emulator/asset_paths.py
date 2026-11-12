@@ -10,4 +10,10 @@ class AssetPath(type(Path())):
             if not path.exists() and alternate.exists():return alternate
         return path
 
-def asset_root(path):return AssetPath(path)
+def asset_root(path):
+    # Local fixture EXE uses the reviewed workspace pack, never stale dist art.
+    workspace=os.environ.get('SRWW_TEST_WORKSPACE') if getattr(sys,'frozen',False) else None
+    if workspace:
+        candidate=Path(workspace)
+        if (candidate/'graphics/kazuma_parts_library.json').is_file():return AssetPath(candidate)
+    return AssetPath(path)

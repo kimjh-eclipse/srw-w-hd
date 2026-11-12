@@ -4,6 +4,9 @@ from stage_cache import StageCache
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
+import os as _os
+# SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
+SHORTCUTS=_os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 from PIL import Image
 from pathlib import Path
 from asset_paths import asset_root
@@ -104,7 +107,12 @@ class BackgroundRenderer:
             if layer==getattr(self,'restoration_layer',None) and getattr(self,'restoration_mask',None) is not None:visible=visible|self.restoration_mask
             if layer==3 and getattr(self,'hud_mask',None) is not None:visible=visible|self.hud_mask
             if hasattr(top,'draw'):
-                mask=Image.fromarray(visible.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)
+                if SHORTCUTS:
+                    masks=self.__dict__.setdefault('native_masks',{});mask_key=(layer,visible.tobytes());mask=masks.get(mask_key)
+                    if mask is None:
+                        if len(masks)>8:masks.clear()
+                        mask=masks[mask_key]=Image.fromarray(visible.astype('uint8')*255)
+                else:mask=Image.fromarray(visible.astype('uint8')*255).resize(top.size,Image.Resampling.NEAREST)
                 px,py=round(x*SCALE),round(y*SCALE)
                 for dx in (-px,art.width-px):
                     for dy in (-py,art.height-py):

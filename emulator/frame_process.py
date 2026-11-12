@@ -11,8 +11,10 @@ _profile_count=0
 _last_bottom=None
 _last_ready=-1
 _trace=None
+_window=None
+_present_error=[None]
 
-def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,lock=None):
+def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,lock=None,present=None):
     if os.name=='nt':
         import ctypes as C
         api=C.windll.kernel32;api.GetCurrentProcess.restype=C.c_void_p;api.SetPriorityClass.argtypes=[C.c_void_p,C.c_uint]
@@ -27,7 +29,14 @@ def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,loc
         import cProfile
         _profile=cProfile.Profile()
     from hd_renderer import HDRenderer
-    global _renderer,_memory,_lock
+    global _renderer,_memory,_lock,_window
+    if present and os.environ.get('SRWW_GPU_COMPOSITOR','1')!='0':
+        # Own the on-screen GL context before any GPU resource exists. If
+        # this machine cannot do it, the shared-memory path below still works.
+        try:
+            from gpu_surface import attach_window
+            _window=attach_window(int(present))
+        except Exception as error:_window=None;_present_error[0]=repr(error)
     if memory_name:
         from multiprocessing import shared_memory
         _memory=shared_memory.SharedMemory(name=memory_name);_lock=lock
@@ -44,7 +53,7 @@ def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,loc
     capability=log_path('gpu_compositor_status.json') if FROZEN else Path(__file__).resolve().parent.parent/'test_current/performance/gpu_compositor_status.json'
     try:
         capability.parent.mkdir(parents=True,exist_ok=True)
-        capability.write_text(json.dumps(dict(enabled=_renderer.gpu_composition,error=_renderer.gpu_error)))
+        capability.write_text(json.dumps(dict(enabled=_renderer.gpu_composition,error=_renderer.gpu_error,direct_present=_window is not None and _renderer.gpu_composition,direct_present_error=_present_error[0])))
     except OSError:pass
 
 def render_snapshot(snapshot,full=False):
@@ -70,7 +79,7 @@ def render_snapshot(snapshot,full=False):
 def _render_snapshot(snapshot,full=False):
     global _last_bottom,_last_ready
     native,ids,hd,paused,frame,kwargs=snapshot
-    kwargs=dict(kwargs);_renderer.set_resolution(kwargs.pop('render_width',DEFAULT_WIDTH))
+    kwargs=dict(kwargs);_renderer.set_resolution(kwargs.pop('render_width',DEFAULT_WIDTH));layout=kwargs.pop('present_layout',None)
     image=(_renderer.render if full else _renderer.render_top)(native,ids,hd,paused,**kwargs)
     parts=_renderer.parts_renderer;dynamic=[]
     while True:
@@ -83,6 +92,12 @@ def _render_snapshot(snapshot,full=False):
     _last_ready=parts.ready_generation
     ready=(parts.ready_generation,values,dynamic,pending,getattr(_renderer,'bottom_generation',0),_renderer.size)
     if full:return image,ready
+    if _window is not None and layout is not None and hasattr(image,'ops') and hasattr(bottom_image,'ops'):
+        # Same context composes and displays: nothing is read back.
+        from gpu_surface import backend
+        if backend().present(image,bottom_image,layout):
+            _last_bottom=bottom_image
+            return ('direct',None,frame),ready
     bottom_pixels=None
     if not paused and hasattr(image,'rgba_pipeline'):
         if hasattr(bottom_image,'ops') and os.environ.get('SRWW_JOINT_READBACK','1')!='0' and not getattr(__import__('gpu_surface').backend(),'paired_disabled',False):
@@ -120,12 +135,19 @@ def close_frame_worker():
         _renderer.parts_renderer.close();_renderer.backgrounds.close();_renderer.scenario_backgrounds.close();_renderer.map_icons.close();_renderer.map_tiles.close();_renderer.battle_backgrounds.close()
     if _memory is not None:_memory.close()
 
-def stream_frames(parent_pid,async_parts,dynamic_parts,memory_name,lock,requests,replies):
+def stream_frames(parent_pid,async_parts,dynamic_parts,memory_name,lock,requests,replies,present=None):
     """Keep the renderer fed without waiting for a future round trip per frame."""
     try:
-        start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name,lock)
+        start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name,lock,present)
+        import queue as _queue
         while True:
-            request=requests.get()
+            if _window is not None:
+                # A window must answer its messages even while the game is
+                # paused and no frame arrives.
+                _window.pump()
+                try:request=requests.get(timeout=.03)
+                except _queue.Empty:continue
+            else:request=requests.get()
             if request is None:break
             kind,snapshot=request
             result,ready=render_snapshot(snapshot,full=kind=='capture')

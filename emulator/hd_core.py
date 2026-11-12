@@ -20,7 +20,17 @@ class Game(C.Structure):_fields_=[('path',C.c_char_p),('data',C.c_void_p),('size
 
 class Core:
     def __init__(self,rom,enabled=True,demo=False,user_dir=None,frameskip=0):
-        self.api=C.CDLL(os.environ.get('SRWW_CORE_PATH',str(HERE/'desmume/desmume/src/frontend/libretro/desmume_libretro.dll')))
+        default_core=HERE/'desmume/desmume/src/frontend/libretro/desmume_libretro.dll'
+        selected_core=Path(os.environ.get('SRWW_CORE_PATH',str(default_core)))
+        self.api=C.CDLL(str(selected_core))
+        # Developer preview windows can outlive an experimental bridge build.
+        # Never interpret its older pixel layout as the current ABI. Prefer
+        # the validated installed core before initializing either library.
+        if hasattr(self.api,'retro_srw_copy_foreground') and not hasattr(self.api,'retro_srw_foreground_format') and selected_core.resolve()!=default_core.resolve():
+            installed=C.CDLL(str(default_core))
+            if hasattr(installed,'retro_srw_foreground_format') and installed.retro_srw_foreground_format()==3:
+                self.api=installed;selected_core=default_core
+        self.core_path=str(selected_core)
         self.frameskip=max(0,min(1,int(frameskip)));self.video_epoch=0;self.last_unknown=None
         self.rom=Path(rom).resolve();self.pixel=0;self.vars={};self.vars_changed=False;self.buttons=set();self.touch=None
         self.native=np.zeros((384,256,3),dtype='uint8');self.audio=bytearray()
@@ -36,6 +46,9 @@ class Core:
         if not self.api.retro_load_game(C.byref(game)):raise RuntimeError('롬을 열지 못했습니다.')
         self.ids=np.zeros((192,256),dtype='uint8');self.hd=(C.c_uint*12)();self.enabled=enabled
         self.cutin_layers=np.zeros((4,12),dtype='uint32')
+        self.foreground_buffer=np.zeros((192,256),dtype='uint64');self.effect_foreground=None
+        self.foreground_bridge=hasattr(self.api,'retro_srw_foreground_format') and self.api.retro_srw_foreground_format()==3
+        if self.foreground_bridge:self.api.retro_srw_copy_foreground.argtypes=[C.c_void_p]
         self.layer_cutin_bridge=hasattr(self.api,'retro_srw_get_hd_layers')
         if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers.argtypes=[C.c_void_p]
         self.robot=(C.c_int*8)()
@@ -62,10 +75,11 @@ class Core:
         if self.dynamic_bridge:
             self.api.retro_srw_add_dynamic_part.argtypes=[C.c_uint,C.c_uint,C.c_uint]
             self.api.retro_srw_copy_unknown_parts.argtypes=[C.c_void_p,C.c_void_p,C.c_void_p]
-        self.backgrounds=[];self.bg_layout=[];self.background_specs={};self.background_maps={}
+        self.backgrounds=[];self.bg_layout=[];self.background_specs={};self.background_maps={};self.configuration_background_ids={7,8}
         background_path=ROOT/'graphics/backgrounds/library.json'
         if background_path.exists():
             for item in json.loads(background_path.read_text())['backgrounds']:
+                if item.get('menu_configuration'):self.configuration_background_ids.add(item['id'])
                 for signature in item['signatures']:
                     self.background_specs[(item['layer'],*signature)]=item['id']
                     self.background_maps.setdefault((item['layer'],signature[1]),[]).append(item)
@@ -155,8 +169,8 @@ class Core:
                 self.api.retro_srw_add_dynamic_part(identity,material,binding)
         if not hasattr(self.api,'retro_srw_set_ready_parts') or renderer.ready_generation==self.ready_generation:return
         generation=renderer.ready_generation
-        values=renderer.ready_bindings();ids=(C.c_uint*len(values))(*values)
-        self.api.retro_srw_set_ready_parts(ids,len(values));self.ready_generation=generation
+        values=np.ascontiguousarray(renderer.ready_bindings(),dtype='uint32')
+        self.api.retro_srw_set_ready_parts(values.ctypes.data_as(C.POINTER(C.c_uint)),len(values));self.ready_generation=generation
 
     def unknown_snapshot(self):
         return self.last_unknown if self.frameskip else self._read_unknown_snapshot()
@@ -178,6 +192,7 @@ class Core:
         self.api.retro_srw_get_hd_state(self.hd)
         if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers(self.cutin_layers.ctypes.data)
         self.api.retro_srw_copy_layer_ids(self.ids.ctypes.data);self.hd[10]=int(self.enabled)
+        self.effect_foreground=self.foreground_buffer if self.foreground_bridge and self.api.retro_srw_copy_foreground(self.foreground_buffer.ctypes.data) else None
         self.api.retro_srw_get_robot_state(self.robot)
         self.api.retro_srw_copy_rendered_obj(self.obj)
         self.api.retro_srw_copy_parts(self.parts.ctypes.data,self.owners.ctypes.data)
@@ -200,7 +215,7 @@ class Core:
                     if bid:self.backgrounds.append((bid,int(info[3]),int(info[4]),layer));break
 
         self.bg_layout=background_layout
-        if self.enabled and ({7,8}<={row[0] for row in self.backgrounds} or sum(int(row[0]) in self.menu_bindings for row in self.parts)>=20):
+        if self.enabled and (any(row[0] in self.configuration_background_ids for row in self.backgrounds) or sum(int(row[0]) in self.menu_bindings for row in self.parts)>=20):
             self.backgrounds.extend((9+layer-2,int(background_layout[layer][3]),int(background_layout[layer][4]),layer) for layer in (2,3))
         if self.frameskip:self.last_unknown=self._read_unknown_snapshot()
         return True

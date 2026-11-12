@@ -10,7 +10,7 @@ from player_controls import BUTTONS,DEFAULT_KEYS,DEFAULT_PAD,DEFAULTS,LAYOUTS,sd
 from player_worker import worker_main,TOP_BYTES,BOTTOM_BYTES,FRAME_BYTES
 from player_rumble import PadRumble
 from player_shortcuts import ShortcutMixin
-from gpu_display import GPUDisplay,RGBFrame
+from gpu_display import GPUDisplay,RGBFrame,DirectDisplay,DirectFrame
 from player_metrics import PlayerMetrics
 from windows_keyboard import WindowsKeyboard
 from render_resolution import DEFAULT_WIDTH,MIN_WIDTH,MAX_WIDTH,clamp_width
@@ -163,6 +163,11 @@ class EmulatorWindow(ShortcutMixin):
         self.render_width=self.desired_render_width()
         config=dict(rom=str(path),demo=demo,hd=self.hd_var.get(),volume=int(self.volume_var.get()),paused=paused,state=str(state) if state else None,state_frame=state_frame,save_root=str(self.args.save_root) if self.args.save_root else None,legacy_timing=bool(getattr(self.args,'legacy_timing',False)),profile_render=str(self.args.profile_render) if getattr(self.args,'profile_render',None) else None,render_width=self.render_width)
         config['hd_auto_quality']=self.auto_quality_var.get()
+        self.layout_sent=None
+        if os.environ.get('SRWW_DIRECT_PRESENT','1')!='0' and not getattr(self.args,'software_display',False):
+            # The composing process draws into this canvas itself; see direct_present.py.
+            self.root.update_idletasks();width,height=max(1,self.canvas.winfo_width()),max(1,self.canvas.winfo_height())
+            config['present']=dict(hwnd=self.canvas.winfo_id(),size=(width,height),rects=screen_rectangles(width,height,self.layout_var.get(),self.swap_var.get()))
         self.process=self.ctx.Process(target=worker_main,args=(child,self.memory.name,self.lock,config),daemon=False);self.process.start();child.close()
         self.settings['recent']=[str(path)]+[p for p in self.settings['recent'] if p!=str(path)];self.settings['recent']=self.settings['recent'][:6];self.persist();self.refresh_recent();self.canvas.focus_set()
 
@@ -266,8 +271,13 @@ class EmulatorWindow(ShortcutMixin):
         old=self.pause_for_dialog();path=filedialog.asksaveasfilename(parent=self.root,title='게임 화면 저장',defaultextension='.png',initialfile='SRWW_HD.png',filetypes=[('PNG 그림','*.png')])
         if path:
             width,height=max(self.canvas.winfo_width(),1),max(self.canvas.winfo_height(),1);image=Image.new('RGB',(width,height),'#10151f')
-            for source,rect in zip(self.latest,screen_rectangles(width,height,self.layout_var.get(),self.swap_var.get())):
-                if rect:image.paste(source.resize(rect[2:],Image.Resampling.LANCZOS),rect[:2])
+            if isinstance(self.latest[0],DirectFrame):
+                # The frame lives on the composing process's GPU; take what the canvas shows.
+                from PIL import ImageGrab
+                x,y=self.canvas.winfo_rootx(),self.canvas.winfo_rooty();self.root.update();image=ImageGrab.grab((x,y,x+width,y+height))
+            else:
+                for source,rect in zip(self.latest,screen_rectangles(width,height,self.layout_var.get(),self.swap_var.get())):
+                    if rect:image.paste(source.resize(rect[2:],Image.Resampling.LANCZOS),rect[:2])
             image.save(path);self.status_var.set('게임 화면을 저장했습니다.')
         self.restore_after_dialog(old)
 
@@ -332,6 +342,13 @@ class EmulatorWindow(ShortcutMixin):
         desired=self.desired_render_width()
         if desired!=self.render_width and self.loaded and time.perf_counter()-self.resolution_changed_at>.3:
             self.render_width=desired;self.resolution_changed_at=time.perf_counter();self.send('resolution',width=desired)
+        if isinstance(self.latest[0],DirectFrame):
+            if self.canvas_objects:self.canvas.delete('all');self.photos=[];self.canvas_objects=False
+            if not isinstance(self.gpu,DirectDisplay):self.gpu=DirectDisplay(self.canvas)
+            layout=((width,height),tuple(self.rects))
+            if layout!=self.layout_sent:self.layout_sent=layout;self.send('layout',size=(width,height),rects=self.rects)
+            self.gpu.draw(None,None);self.metrics.present(self.received_frame,(time.perf_counter()-draw_started)*1000);return
+        if isinstance(self.gpu,DirectDisplay):self.gpu=None
         if self.gpu is None and self.gpu_error is None and not getattr(self.args,'software_display',False) and self.canvas.winfo_viewable():
             try:self.gpu=GPUDisplay(self.canvas)
             except Exception as error:self.gpu_error=repr(error)
@@ -346,8 +363,22 @@ class EmulatorWindow(ShortcutMixin):
                 self.canvas.create_image(x,y,image=photo,anchor='nw')
         self.metrics.present(self.received_frame,(time.perf_counter()-draw_started)*1000)
 
+    def focus_path(self):
+        # Ttk combobox popdowns are Tcl widgets without Python Widget objects.
+        # focus_get()/focus_displayof() try nametowidget() and raise KeyError
+        # for their internal .popdown.f.l listbox, stopping the frame timer.
+        try:return str(self.root.tk.call('focus','-displayof',self.root._w))
+        except tk.TclError:return ''
+
     def has_input_focus(self):
-        return self.gpu.focused() if self.gpu is not None else self.root.focus_displayof() is not None
+        path=self.focus_path()
+        if self.ui_popup_active():return False
+        return self.gpu.focused() if self.gpu is not None else bool(path)
+
+    def ui_popup_active(self):
+        try:grab=str(self.root.tk.call('grab','current',self.root._w))
+        except tk.TclError:grab=''
+        return '.popdown' in self.focus_path() or '.popdown' in grab
 
     def bound_shortcut(self,event,callback):
         self.tk_key_seen[event.keysym,True]=time.perf_counter()
@@ -381,6 +412,7 @@ class EmulatorWindow(ShortcutMixin):
         return 'break'
     def key_down(self,event):
         if not getattr(event,'from_sdl',False):self.tk_key_seen[event.keysym,True]=time.perf_counter()
+        if self.ui_popup_active():return
         if self.dialog or event.state&0x000c:return
         key=event.keysym.lower() if len(event.keysym)==1 else event.keysym
         action=next((name for name,value in self.settings['hotkeys'].items() if value and value==key),None)
@@ -389,7 +421,7 @@ class EmulatorWindow(ShortcutMixin):
             if action=='fast_forward':self.set_fast_forward(True)
             elif not repeated:self.run_action(action)
             return 'break'
-        if getattr(event,'from_sdl',False) or self.root.focus_get() is self.canvas:
+        if getattr(event,'from_sdl',False) or self.focus_path()==str(self.canvas):
             self.held.add(event.keysym.lower() if len(event.keysym)==1 else event.keysym);self.flush_game_input()
     def key_up(self,event):
         if not getattr(event,'from_sdl',False):self.tk_key_seen[event.keysym,False]=time.perf_counter()
@@ -554,6 +586,10 @@ class EmulatorWindow(ShortcutMixin):
             return
         if event=='loaded':
             self.loaded=True;self.opening=False;self.save_dir=Path(message['save_dir']);self.paused=message['paused'];self.demo=message['demo'];self.update_buttons();self.refresh_slots();self.canvas.focus_set()
+        elif event=='frame' and message.get('direct'):
+            size=tuple(message.get('render_size',(DEFAULT_WIDTH,DEFAULT_WIDTH*3//4)))
+            if not self.latest or not isinstance(self.latest[0],DirectFrame) or self.latest[0].size!=size:self.latest=(DirectFrame(size),DirectFrame(size))
+            self.waiting_frame=None;self.received_frame=message.get('frame',0);self.dirty=True
         elif event=='frame':
             if self.memory and not self.lock.acquire(False):
                 # A writer may be copying the next frame. Retry next UI tick
@@ -631,7 +667,7 @@ class EmulatorWindow(ShortcutMixin):
         if self.dirty:self.draw()
         if trace is not None:trace.append(time.perf_counter())
         if self.metrics.path is not None:
-            self.metrics.worker.update(focus_widget=str(self.root.focus_get()),held=sorted(self.held),sdl_keyboard_events=self.gpu.keyboard_events if self.gpu else 0,physical_keyboard_events=self.physical_keyboard.events,foreground=self.has_input_focus(),render_width=self.latest[0].width if self.latest else self.render_width,frame_lock_retries=self.frame_lock_retries)
+            self.metrics.worker.update(focus_widget=self.focus_path(),held=sorted(self.held),sdl_keyboard_events=self.gpu.keyboard_events if self.gpu else 0,physical_keyboard_events=self.physical_keyboard.events,foreground=self.has_input_focus(),render_width=self.latest[0].width if self.latest else self.render_width,frame_lock_retries=self.frame_lock_retries)
         self.metrics.update('gpu' if self.gpu is not None else 'software')
         if trace is not None and len(self.metrics.polls)<50000:
             trace.append(time.perf_counter());self.metrics.polls.append(trace)

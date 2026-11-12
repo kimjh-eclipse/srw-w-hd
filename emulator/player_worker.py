@@ -45,7 +45,7 @@ def worker_main(pipe,memory_name,lock,config):
         display_rate=30 if config.get('legacy_timing') else 60
         core=Core(rom,enabled=config.get('hd',True),demo=demo,user_dir=directory,frameskip=normal_frameskip)
         native_fallback=hasattr(core.api,'retro_srw_native_hd_fallback')
-        compositor=FrameCompositor(async_parts=native_fallback,dynamic_parts=core.dynamic_bridge,memory_name=memory_name,lock=lock);feedback=BattleRumble()
+        compositor=FrameCompositor(async_parts=native_fallback,dynamic_parts=core.dynamic_bridge,memory_name=memory_name,lock=lock,present=config.get('present'));feedback=BattleRumble()
         compositor.render_width=clamp_width(config.get('render_width',DEFAULT_WIDTH))
         budget=RenderBudget(compositor.render_width,config.get('hd_auto_quality',True))
         compositor.render_width=budget.width
@@ -90,6 +90,9 @@ def worker_main(pipe,memory_name,lock,config):
                         if channel:channel.set_volume(max(0,min(100,message['value']))/100)
                     elif op=='resolution':
                         compositor.render_width=budget.configure(width=clamp_width(message['width']));draw_requested=True
+                    elif op=='layout':
+                        if compositor.layout is not None:
+                            compositor.layout=dict(compositor.layout,size=tuple(message['size']),rects=[tuple(r) if r else None for r in message['rects']]);draw_requested=True
                     elif op=='quality':
                         compositor.render_width=budget.configure(enabled=bool(message['value']));draw_requested=True
                     elif op=='speed':
@@ -153,12 +156,12 @@ def worker_main(pipe,memory_name,lock,config):
                 if not video_started:
                     if video_ready_deadline is None:video_ready_deadline=time.perf_counter()+2
                     if not compositor.needs_refresh or time.perf_counter()>=video_ready_deadline:video_started=True;next_frame=time.perf_counter()
-                top,bottom,rendered_frame=finished
-                if top is not None:
+                top,bottom,rendered_frame=finished;direct=isinstance(top,str)
+                if top is not None and not direct:
                     with lock:
                         np.frombuffer(memory.buf,dtype='uint8',count=TOP_BYTES)[:]=top
                         np.frombuffer(memory.buf,dtype='uint8',count=BOTTOM_BYTES,offset=TOP_BYTES)[:]=bottom
-                sequence+=1;send('frame',sequence=sequence,frame=rendered_frame,bottom_revision=compositor.bottom_revision,render_size=compositor.render_size)
+                sequence+=1;send('frame',sequence=sequence,frame=rendered_frame,bottom_revision=compositor.bottom_revision,render_size=compositor.render_size,direct=direct)
             if native_fallback:core.set_ready_parts(compositor.ready)
             if compositor.future is None and (paused or not video_started or draw_requested or core.video_epoch!=last_video_epoch) and (draw_requested or ((paused or not video_started) and compositor.needs_refresh and now-last_draw>=.1) or (not paused and video_started and (speed==1 or now-last_draw>=1/15))):
                 if compositor.submit(core,paused or not video_started,frame):

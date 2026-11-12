@@ -146,6 +146,8 @@ extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
    if(owners)memcpy(owners,SRWWNativeOwner,sizeof(SRWWNativeOwner));
 }
 extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
+extern "C" RETRO_API int retro_srw_copy_foreground(void *out) { if(out && SRWWForegroundActive)memcpy(out,SRWWForeground,sizeof(SRWWForeground));return SRWWForegroundActive?1:0; }
+extern "C" RETRO_API unsigned retro_srw_foreground_format(void) { return 3; }
 extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
    if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
    if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));

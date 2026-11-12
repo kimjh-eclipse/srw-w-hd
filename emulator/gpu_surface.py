@@ -8,6 +8,15 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parent.parent
 sys.path.insert(0,str(ROOT/'tools/gpu_py'))
 _backend=None
+_window=None
+
+def attach_window(parent):
+    """Compose in a GL context that belongs to a child window of the UI
+    canvas, so finished frames can be shown without leaving the GPU."""
+    global _window
+    if _backend is not None:raise RuntimeError('The GPU backend already exists')
+    from direct_present import PresentWindow
+    _window=PresentWindow(parent);return _window
 
 def intersect(a,b):
     box=(max(a[0],b[0]),max(a[1],b[1]),min(a[2],b[2]),min(a[3],b[3]))
@@ -16,22 +25,22 @@ def intersect(a,b):
 class Backend:
     def __init__(self):
         import moderngl as gl
-        self.gl=gl;self.ctx=gl.create_standalone_context(require=330);self.textures=OrderedDict();self.frames=OrderedDict();self.coordinate_maps=OrderedDict()
+        self.gl=gl;self.window=_window;self.ctx=gl.create_context(require=330) if _window is not None else gl.create_standalone_context(require=330);self.textures=OrderedDict();self.frames=OrderedDict();self.coordinate_maps=OrderedDict()
         self.program=self.ctx.program(vertex_shader='''#version 330
         uniform vec2 viewport_size; uniform vec4 rectangle;
         out vec2 uv; out vec2 pixel;
         void main(){ vec2 p=vec2((gl_VertexID==1||gl_VertexID==3)?1:0,(gl_VertexID>=2)?1:0);
         uv=p;pixel=rectangle.xy+p*rectangle.zw;gl_Position=vec4(pixel.x/viewport_size.x*2-1,1-pixel.y/viewport_size.y*2,0,1); }
         ''',fragment_shader='''#version 330
-        uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform usampler2D mask_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
+        uniform sampler2D foreground; uniform int foreground_enabled; uniform vec4 foreground_rectangle; uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform usampler2D mask_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
         in vec2 uv; in vec2 pixel; out vec4 color;
         void main(){ vec4 p;
         if(nearest_picture==1){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(rectangle.xy);ivec2 index=ivec2(texelFetch(source_coordinates,ivec2(d.x,0),0).r,texelFetch(source_coordinates,ivec2(d.y,1),0).r);p=texelFetch(picture,index,0);}
         else p=texture(picture,uv); float a=source_alpha==1?p.a:1.0;
         if(mask_mode>0){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(mask_rectangle.xy);d=clamp(d,ivec2(0),ivec2(mask_rectangle.zw)-ivec2(1));ivec2 index=ivec2(texelFetch(mask_coordinates,ivec2(d.x,0),0).r,texelFetch(mask_coordinates,ivec2(d.y,1),0).r);vec4 v=texelFetch(opacity,index,0);a*=mask_mode==2?v.a:v.r;}
-        color=vec4(p.rgb,a); }
+        if(foreground_enabled==1){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);p.rgb=clamp(p.rgb*(e.a*255.0/16.0)+e.rgb,0.0,1.0);} color=vec4(p.rgb,a); }
         ''')
-        self.vao=self.ctx.vertex_array(self.program,[]);self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
+        self.vao=self.ctx.vertex_array(self.program,[]);self.program['foreground']=4;self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
         self.ctx.enable(gl.BLEND);self.ctx.blend_func=(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA)
 
     def texture(self,image,nearest=False):
@@ -43,7 +52,7 @@ class Backend:
             tex=self.ctx.texture(source.size,len(source.getbands()),source.tobytes(),alignment=1)
         tex.filter=(self.gl.NEAREST,self.gl.NEAREST) if nearest else (self.gl.LINEAR,self.gl.LINEAR)
         tex.repeat_x=False;tex.repeat_y=False;self.textures[key]=(weakref.ref(image),tex)
-        while len(self.textures)>192:self.textures.popitem(last=False)[1][1].release()
+        while len(self.textures)>512:self.textures.popitem(last=False)[1][1].release()
         return tex
 
     def coordinate_map(self,size,width,height):
@@ -59,6 +68,39 @@ class Backend:
         self.coordinate_maps[key]=mapping
         while len(self.coordinate_maps)>192:self.coordinate_maps.popitem(last=False)[1].release()
         return mapping
+
+    def present(self,top,bottom,layout):
+        """Draw both screens into the window and swap. No pixel leaves the GPU."""
+        gl=self.gl;window=self.window;size=window.fit()
+        if size is None:return False
+        if getattr(self,'blit',None) is None:
+            self.blit=self.ctx.program(vertex_shader="""#version 330
+            out vec2 uv; void main(){ vec2 p=vec2((gl_VertexID==1||gl_VertexID==3)?1:0,(gl_VertexID>=2)?1:0);uv=p;gl_Position=vec4(p*2-1,0,1); }""",
+            fragment_shader="""#version 330
+            uniform sampler2D picture; in vec2 uv; out vec4 color; void main(){ color=vec4(texture(picture,uv).rgb,1.0); }""")
+            self.blit_vao=self.ctx.vertex_array(self.blit,[]);self.blit['picture']=0;self.present_targets=[None,None];self.present_sources=[None,None]
+        for index,surface in enumerate((top,bottom)):
+            if surface is None or surface is self.present_sources[index]:continue
+            target=self.present_targets[index]
+            if target is None or target.size!=surface.size:
+                if target is not None:target.color_attachments[0].release();target.release()
+                texture=self.ctx.texture(surface.size,4);texture.filter=(gl.LINEAR,gl.LINEAR);texture.repeat_x=False;texture.repeat_y=False
+                target=self.present_targets[index]=self.ctx.framebuffer([texture])
+            self.render(surface,components=4,draw_only=True,target=target);self.present_sources[index]=surface
+        # The layout is expressed in the UI's pixels; this window may be
+        # scaled differently, so place the screens proportionally.
+        width,height=size;sx=width/max(1,layout['size'][0]);sy=height/max(1,layout['size'][1])
+        screen=self.ctx.screen;screen.use();self.ctx.scissor=None;self.ctx.viewport=(0,0,width,height)
+        screen.clear(*[v/255 for v in layout.get('background',(16,21,31))],1)
+        self.ctx.disable(gl.BLEND)
+        try:
+            for index,rect in enumerate(layout['rects']):
+                target=self.present_targets[index]
+                if rect is None or target is None:continue
+                x,y,w,h=rect;self.ctx.viewport=(round(x*sx),height-round((y+h)*sy),max(1,round(w*sx)),max(1,round(h*sy)))
+                target.color_attachments[0].use(0);self.blit_vao.render(gl.TRIANGLE_STRIP,vertices=4)
+        finally:self.ctx.enable(gl.BLEND)
+        window.swap();window.show();return True
 
     def reset_pipeline(self):
         for name in ('paired_top','paired_bottom'):
@@ -88,7 +130,7 @@ class Backend:
         self.paired_bottom_pixels={k:v for k,v in self.paired_bottom_pixels.items() if v[0] is needed or v[0] is bottom}
         return top_pixels,pixels,previous
 
-    def render(self,surface,components=3,pipeline_tag=None,draw_only=False):
+    def render(self,surface,components=3,pipeline_tag=None,draw_only=False,target=None):
         if pipeline_tag is not None and components==4 and not getattr(self,'persistent_disabled',False):
             try:
                 if getattr(self,'persistent',None) is None:
@@ -113,35 +155,49 @@ class Backend:
             if previous is not None:previous_raw=self.read_buffers[previous[0]].read()
         for key,(reference,texture) in list(self.textures.items()):
             if reference() is None:del self.textures[key];texture.release()
-        width,height=surface.size;frame_key=(surface.size,components);frame=self.frames.pop(frame_key,None)
-        if frame is None:frame=self.ctx.simple_framebuffer(surface.size,components=components)
-        self.frames[frame_key]=frame
-        while len(self.frames)>3:self.frames.popitem(last=False)[1].release()
+        width,height=surface.size
+        if target is not None:frame=target
+        else:
+            frame_key=(surface.size,components);frame=self.frames.pop(frame_key,None)
+            if frame is None:frame=self.ctx.simple_framebuffer(surface.size,components=components)
+            self.frames[frame_key]=frame
+            while len(self.frames)>3:self.frames.popitem(last=False)[1].release()
         frame.use();self.ctx.viewport=(0,0,width,height);self.ctx.scissor=None
-        frame.clear(0,0,0,1);self.program['viewport_size']=(width,height)
+        frame.clear(0,0,0,1)
+        # Most draws repeat the previous draw's settings; send only what changed.
+        sent=self.__dict__.setdefault('uniforms_sent',{});program=self.program
+        def uniform(name,value):
+            if sent.get(name)!=value:program[name]=value;sent[name]=value
+        uniform('viewport_size',(width,height))
         for op in surface.ops:
             clip=intersect(op['clip'],(0,0,width,height))
             if clip is None:continue
             left,top,right,bottom=op['rect']
             if right<=left or bottom<=top:continue
             l,t,r,b=clip;self.ctx.scissor=(round(l),height-round(b),round(r)-round(l),round(b)-round(t))
-            self.program['rectangle']=(left,top,right-left,bottom-top)
-            self.program['nearest_picture']=int(op['nearest'])
+            uniform('rectangle',(left,top,right-left,bottom-top))
+            uniform('nearest_picture',int(op['nearest']))
             picture=self.texture(op['image'],op['nearest'])
             picture_coordinates=self.coordinate_map(op['image'].size,round(right-left),round(bottom-top)) if op['nearest'] else None
             mask=op['mask'];mode=0
             opacity=None;mask_coordinates=None
             if mask is not None:
                 opacity=self.texture(mask,True);mode=2 if mask.mode=='RGBA' else 1
-                ml,mt,mr,mb=op['mask_rect'];self.program['mask_rectangle']=(ml,mt,mr-ml,mb-mt)
+                ml,mt,mr,mb=op['mask_rect'];uniform('mask_rectangle',(ml,mt,mr-ml,mb-mt))
                 mask_coordinates=self.coordinate_map(mask.size,round(mr-ml),round(mb-mt))
             # Resource creation/upload can alter texture-unit bindings. Bind
             # all four samplers only after every resource for this draw exists.
+            effect=op.get('foreground');effect_texture=None
+            if effect is not None:
+                effect_texture=self.texture(effect,True)
+                fl,ft,fr,fb=op['foreground_rect'];uniform('foreground_rectangle',(fl,ft,fr-fl,fb-ft))
             picture.use(0)
+            if effect_texture is not None:effect_texture.use(4)
+            uniform('foreground_enabled',int(effect is not None))
             if opacity is not None:opacity.use(1)
             if picture_coordinates is not None:picture_coordinates.use(2)
             if mask_coordinates is not None:mask_coordinates.use(3)
-            self.program['mask_mode']=mode;self.program['source_alpha']=int(op['alpha'])
+            uniform('mask_mode',mode);uniform('source_alpha',int(op['alpha']))
             self.vao.render(self.gl.TRIANGLE_STRIP,vertices=4)
         self.ctx.scissor=None
         if draw_only:return frame
@@ -171,9 +227,9 @@ class Surface:
     def from_native(cls,native,size):
         result=cls(size);result.draw(Image.fromarray(np.asarray(native)),(0,0,*size),nearest=True);return result
 
-    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False):
+    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False,foreground=None,foreground_rect=None):
         self.pixels=None
-        self.ops.append(dict(image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha))
+        self.ops.append(dict(image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha,foreground=foreground,foreground_rect=foreground_rect or rect))
 
     def paste(self,image,box=(0,0),mask=None):
         self.pixels=None
@@ -187,6 +243,8 @@ class Surface:
                 if clip is None:continue
                 op['clip']=clip
                 l,t,r,b=op['mask_rect'];op['mask_rect']=(l+x,t+y,r+x,b+y)
+                if op.get('foreground') is not None:
+                    l,t,r,b=op['foreground_rect'];op['foreground_rect']=(l+x,t+y,r+x,b+y)
                 if mask is not None and mask is not image:
                     op['mask']=mask;op['mask_rect']=(x,y,x+image.width,y+image.height);op['alpha']=False
                 self.ops.append(op)
@@ -208,7 +266,10 @@ class Surface:
             if clip is None:continue
             l,t,r,b=op['rect'];op['rect']=(l-left,t-top,r-left,b-top)
             l,t,r,b=clip;op['clip']=(l-left,t-top,r-left,b-top)
-            l,t,r,b=op['mask_rect'];op['mask_rect']=(l-left,t-top,r-left,b-top);result.ops.append(op)
+            l,t,r,b=op['mask_rect'];op['mask_rect']=(l-left,t-top,r-left,b-top)
+            if op.get('foreground') is not None:
+                l,t,r,b=op['foreground_rect'];op['foreground_rect']=(l-left,t-top,r-left,b-top)
+            result.ops.append(op)
         return result
 
     def __array__(self,dtype=None,copy=None):
