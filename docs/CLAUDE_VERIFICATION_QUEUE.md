@@ -123,3 +123,26 @@ Codex의코어작업은종료했고046a9701에읽기API를남겼습니다. 전�
 - **아스테바리스+90 공전11/육전12,+195 육전19**:기체별actualpalette생성,기존OAM의존별도보존.손목/무장절단면cap·손가락자동완성/색영역/아주작은셀·pose전체선굵기검토.각계약에개별unit/state/OAM/offset.원본IMGindex와동일이지만ROM PLT번호까지전색상확정이라는주장은없음.
 - 전체373입력캔버스/원본계약/nearempty기계검사오류0(PRODUCTION_INPUT_BUILD_CHECK.json).입력품질/게임재생합격은아님.최신104타깃굽기도오류0.빈/nearempty그림하드거부가추가됐고errors>0이면빌드실패.
 - 22378late67계약은shape2의fade. 기본그림2만있고65를자동으로해결한것아님. fade_palette_characterization.json의최대근사잔차16.37/255로단순RGB배율의정확성도보장못함.공통팔레트fade처리검토요청.
+
+
+## 후속72대상 (총445작업타깃,전체누락감소수아님)
+
+- 21667 신규29:실제관측28/소스·팔레트확정미관측1. unit224mechan143,249mechan131/143의+133/+150등,정확개별offset은graphics/rework_effect_21667_twenty_nine/HANDOFF. 노란점/흰궤적·회청기류의곡률/폭/낮은alpha테두리/단색광점확인.
+- 20498 추가미관측8은기존white7/jade6의같은효과자체새그림의정확crop으로공유. source_contract_extensions/new_20498_unobserved_contract.json 및report. source/PAT/actualPLT16근거보존. 실제해당shape를재생에서봤다는주장아님.
+- 20498 추가새그림35:source/PAT/actualPLT16확정,shape재생미관측. 큰불투명연속면은생성alpha가빠져자체생성alpha/색으로복원했으며원본mask/RGB복사없음. x64접합/절단면선/전체단색면·두bank밝기/실제레이어검토. native는256×192fullbankpair,128×64patchpair가아님.
+- 최근72굽기오류0. 현재총445연결항목엔기존그림교체·팔레트별계약포함,11,358총누락에서차감불가. 독립시각/실제재생미검증상태유지.
+
+
+## 신규 효과 5묶음 86계약 (85개 굽기, 1개 교정 중)
+
+- IMG19954 신규16, IMG21921 신규13, IMG22338 신규24, IMG22410 신규19, IMG22497 신규14. 자세한 source/state/frame은 각 graphics/rework_effect_<IMG>_new<개수>/pose_contract.json 및 ART_REVIEW_NOTES.md 참조.
+- 19954 검정 평면1은 source 소유가 모호하여 제외. IMG20928의2개는19954와 raw index/사용색/크기 동일해 중복집계하지 않았습니다.
+- 22410의92493은 굽기 후 거의 투명하여 연결을 비활성화했습니다. native fallback 유지. 후보 교정 뒤 전체19를 다시 구울 때 갱신하겠습니다. 기존85개 굽기는 오류 없는 저장 결과이며 실제 재생/품질 합격이 아닙니다.
+- 서로 다른 팔레트의 색/밝기, crop 경계의 연속면과 인공 외곽선, 반원/원호/광점의 형태, 전경 효과와 대사창 가림을 확인해 주세요. source 미관측과 실제 관측 구분은 계약필드 그대로 유지합니다.
+
+
+## 추가 실제무장9와 효과57
+
+- FMP총92510/92511:unit261 mechanical_cutin_168+15,ROM13662/144,48및120,24. 생성총모양의충실도/총-손목접합/단차와절단면선을우선확인. ground150팔92513~92518:unit151~156+150,기존72OAM보존.19954추가92512는실제+198.
+- 22410의92493교정후19전체재굽기오류0,같은ID활성화완료.다른18crop RGBA불변.여전히입력겹침낮은92489/92490등은형태확인필요하며완료판정아님.
+- IMG22111=24(관측16/미관측8),22342=33(관측15/미관측18) 굽기오류0.각graphics/rework_effect_<IMG>_new<개수>/HANDOFF_ART_TO_CLAUDE.md 및pose_contract.json의source/state/frame참조. 선폭·질감·색단계·파편/연속면과가림검토.

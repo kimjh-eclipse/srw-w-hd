@@ -1,0 +1,173 @@
+{
+  "resource": 22410,
+  "candidate_native_size": [
+    192,
+    64
+  ],
+  "candidate_image_size": [
+    768,
+    256
+  ],
+  "candidate_sha256": "1c3d8b1e865a4beb18cdd49989974c0b478db58a4c76fbf6a169a3e603e7b07d",
+  "ready": 19,
+  "pending": 0,
+  "checks": [
+    {
+      "hash": 3468209058,
+      "max_alpha": 255,
+      "support_area_ratio": 0.43990384615384615,
+      "production_ready": true
+    },
+    {
+      "hash": 722573731,
+      "max_alpha": 255,
+      "support_area_ratio": 0.6675,
+      "production_ready": true
+    },
+    {
+      "hash": 1666561981,
+      "max_alpha": 255,
+      "support_area_ratio": 0.8184782608695652,
+      "production_ready": true
+    },
+    {
+      "hash": 421477538,
+      "max_alpha": 255,
+      "support_area_ratio": 0.8830845771144279,
+      "production_ready": true
+    },
+    {
+      "hash": 4186786283,
+      "max_alpha": 255,
+      "support_area_ratio": 0.8977754237288136,
+      "production_ready": true
+    },
+    {
+      "hash": 2551560286,
+      "max_alpha": 255,
+      "support_area_ratio": 0.7216867469879518,
+      "production_ready": true
+    },
+    {
+      "hash": 3630243752,
+      "max_alpha": 255,
+      "support_area_ratio": 0.8578804347826087,
+      "production_ready": true
+    },
+    {
+      "hash": 3857618960,
+      "max_alpha": 255,
+      "support_area_ratio": 0.8028409090909091,
+      "production_ready": true
+    },
+    {
+      "hash": 1669008151,
+      "max_alpha": 255,
+      "support_area_ratio": 0.5953027950310559,
+      "production_ready": true
+    },
+    {
+      "hash": 3264301133,
+      "max_alpha": 255,
+      "support_area_ratio": 0.7206763698630136,
+      "production_ready": true
+    },
+    {
+      "hash": 2837612692,
+      "max_alpha": 255,
+      "support_area_ratio": 0.46685082872928174,
+      "production_ready": true
+    },
+    {
+      "hash": 1751674790,
+      "max_alpha": 255,
+      "support_area_ratio": 0.7360668789808917,
+      "production_ready": true
+    },
+    {
+      "hash": 750268168,
+      "max_alpha": 255,
+      "support_area_ratio": 0.6726190476190477,
+      "production_ready": true
+    },
+    {
+      "hash": 2822658932,
+      "max_alpha": 255,
+      "support_area_ratio": 0.17266949152542374,
+      "production_ready": true
+    },
+    {
+      "hash": 2615920959,
+      "max_alpha": 255,
+      "support_area_ratio": 0.41220238095238093,
+      "production_ready": true
+    },
+    {
+      "hash": 3532749944,
+      "max_alpha": 255,
+      "support_area_ratio": 1.021195652173913,
+      "production_ready": true
+    },
+    {
+      "hash": 184269363,
+      "max_alpha": 255,
+      "support_area_ratio": 0.9612585616438356,
+      "production_ready": true
+    },
+    {
+      "hash": 3515828585,
+      "max_alpha": 255,
+      "support_area_ratio": 0.7655386740331491,
+      "production_ready": true
+    },
+    {
+      "hash": 2493453328,
+      "max_alpha": 255,
+      "support_area_ratio": 0.9836783439490446,
+      "production_ready": true
+    }
+  ],
+  "registration": [
+    {
+      "group": 0,
+      "generated_file": "exec-287da9e0-214b-4220-aa63-ea14f092a2b7.png",
+      "generated_alpha_threshold": 220,
+      "generated_bbox": [
+        31,
+        180,
+        2172,
+        543
+      ],
+      "source_reference_bbox_for_placement_only": [
+        0,
+        0,
+        192,
+        32
+      ],
+      "offset_y": 0,
+      "native_alpha_or_RGB_stamped": false
+    },
+    {
+      "group": 1,
+      "generated_file": "exec-e6993af1-1094-47d0-85aa-d5602ee48ea7.png",
+      "generated_alpha_threshold": 220,
+      "generated_bbox": [
+        724,
+        0,
+        2172,
+        724
+      ],
+      "source_reference_bbox_for_placement_only": [
+        20,
+        0,
+        96,
+        32
+      ],
+      "offset_y": 32,
+      "native_alpha_or_RGB_stamped": false
+    }
+  ],
+  "formal_QA": false,
+  "HD_playback_verification": false,
+  "repair": "Missing bank1 source(16,0,16,16) separately generated same-effect own RGB/alpha. Native no stamping."
+}

@@ -46,7 +46,9 @@ def main():
     parser.add_argument('--limit',type=int,default=0,help='bake at most this many missing parts')
     parser.add_argument('--resources',type=int,nargs='*',default=[],help='limit a repair bake to these original IMG resources')
     parser.add_argument('--bindings',type=int,nargs='*',default=[],help='limit a repair bake to these exact registered bindings')
+    parser.add_argument('--include-disabled',action='store_true',help='repair explicitly selected disabled bindings without enabling them in the player')
     args=parser.parse_args()
+    if args.include_disabled and not args.bindings:parser.error('--include-disabled requires explicit --bindings')
     out=ROOT/'test_current/parts/bake';out.mkdir(parents=True,exist_ok=True)
     start();cache=_renderer.disk_cache;db=cache.db()
     present=cache.keys()
@@ -54,7 +56,8 @@ def main():
     for binding,spec in enumerate(_renderer.bindings,1):
         if args.bindings and binding not in args.bindings:continue
         if args.resources and spec.get('resource') not in args.resources:continue
-        if spec.get('source_binding') or spec.get('runtime_texture') or spec.get('disabled'):continue
+        if spec.get('source_binding') or spec.get('runtime_texture'):continue
+        if spec.get('disabled') and not args.include_disabled:continue
         total+=1;key=_renderer.texture_key(binding,spec['w'],spec['h'])
         if key not in present:todo.append((spec.get('atlas_id','base'),binding,key))
     # Neighbouring parts share an atlas; keep each worker on one at a time.

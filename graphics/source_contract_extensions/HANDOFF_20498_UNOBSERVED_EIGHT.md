@@ -1,0 +1,20 @@
+# 20498 미관측 PAT shape / 같은 효과 그림 crop 8개
+
+## 계약 확정 범위
+new_20498_unobserved_contract.json 8개는새그림파일없이기존같은효과자체생성fullsheet에서잘라쓸수있는미관측shape계약이다. source IMG20498/PAT20499/PLT20497. animation_audit의image_group은[20498]단일이며PAT를직접읽어shape좌표/크기/bank/pose/record를대조했다.
+PLTbank0/1 각16개rawu16값이기존실제rendered-cache팔레트16개와완전히동일하다. 사용색몇개만같은검사가아니다. 20498_palette_witness.json에실제state/frame/OAM/hash와PLT16증거. palette_bank_exact_scan.json는기존제작범위의후보PLT일치만읽었으며전체누락재감사가아니다.
+
+bank0는현재live observed_effect_20498_white7의기존candidate_white_39.png,bank1는observed_effect_20498_jade6의candidate_jade_plume.png를사용. 원본생성후새로재색칠하지않았고현재live이미지와후보PNG파일bytes SHA동일을확인했다. 기존42개exact/indexed계약은그대로유지. 신규8개는registry없는다른PAT crop이며각행에원본sourceindex/PLTbank,실제palette_witness,source/current색16값및PAT원본record기록.
+
+**이8개shape자체는실제재생에서관측하지않았다.** 원본IMG+단일IMG PAT+완전같은실제팔레트bank에근거한미관측계약이다. 실제보였다고보고하면안된다. source_contract_status/observed_shape=False를명시했다. Claude실재생대기.
+
+## 빈/거의 빈 그림 제외
+이PAT의nonempty85crop을현재연결·기존그림범위로분류하면기존42/같은그림crop가능8/새그림필요35이다. 35개는기존jade아틀라스범위밖18,완전빈8,최대alpha만보면살아있지만원본opaque대비면적0.1미만인거의빈9로분리했다. root의maxA16생산gate만으로는edge1줄만남은거의빈crop이통과할수있어서이9개를인수용8에포함하지않았다. 이분류는현재한IMG의제작픽셀존재검사이며시각품질합격이나전체11,358개잔여재감사가아니다.
+
+pending_20498_unobserved_art.json35개는새로제작할것. 완전빈/근접빈것을nativealpha/RGBstamp나codefill로채우지않음.
+
+## 미해결/Claude 큐
+8개는기존그림과동일파일/같은색구성이나실제그장면에서crop/가림/밝기/레이어가정상인지는미관측이다. 새crop의실루엣/작은파편/절단면이음새는Claude원본PAT조립및보유fixture확장검증대기. 기존producer그림의유기적곡률/미세outline한계도그대로있음.
+19584와21819도PLT16값은actual와완전일치하지만PAT image_group이복수라미관측shape의정확한IMG소유확정위험을별도기록하고이번확장8에는제외. 21657/21948/19600/19645는PLT16값이actual와완전히같지않아추정bank확장하지않음. 22378일치bank는이미기존16연결유지.
+
+liveart/library/DB/core/EXE/설정변경없음. 공식audit/독립QA/후보재생없음. root는8개만기존atlas에추가등록·굽기하고Claude대기로구분할수있음.

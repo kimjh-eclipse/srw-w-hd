@@ -1,4 +1,4 @@
-"""Install the complete 17-part pose from observed RGB/index/palette contracts."""
+"""Install source-contracted 4x artwork into exact RGB bindings."""
 import argparse,base64,hashlib,json,shutil,sys,zlib
 from pathlib import Path
 import numpy as np
@@ -11,10 +11,12 @@ def observed_contract(row):
     if 'atlas_box' in row:return row
     r=dict(row)
     r['atlas_box']=[r[k] for k in ('x','y','w','h')]
-    r['slot']=r.get('slot',r.get('oam',0))
+    r['slot']=r.get('slot',r.get('oam'))
     r['actual_palette_bgr555']=r['palette_15bit']
     r['actual_palette_rgb']=r['original_palette_rgb']
-    r['spec']=dict(resource=r.get('resource'),source_x=r.get('source_x',r['x']),source_y=r.get('source_y',r['y']))
+    resource=r.get('resource')
+    if resource is None:resource=r.get('source_image')
+    r['spec']=dict(resource=resource,source_x=r.get('source_x',r['x']),source_y=r.get('source_y',r['y']))
     return r
 
 def main():
@@ -26,12 +28,16 @@ def main():
     parser.add_argument('--effect',action='store_true',help='mark an explicitly reviewed visual-effect atlas for the core unit guard')
     parser.add_argument('--static-palette',action='store_true',help='exact-RGB artwork only; never recolour this observed variant')
     parser.add_argument('--defer-shape-review',action='store_true',help='record silhouette warnings for the independent reviewer instead of blocking draft installation')
+    parser.add_argument('--new-only',action='store_true',help='preserve already-connected exact RGB artwork while filling missing contracts')
     args=parser.parse_args();source=args.source_dir
     contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text())]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
     assert art.size==(native.width*4,native.height*4),('HD/native canvas ratio must be 4x',art.size,native.size)
     path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text())
     prefix=hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
+    rgb_bindings={}
+    for i,b in enumerate(meta['bindings']):
+        if b.get('rgb_enabled',True) and not b.get('disabled'):rgb_bindings.setdefault(b['hash'],i)
     name=args.atlas_id;rows=[]
     for r in contract:
         x,y,w,h=r['atlas_box'];a=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype=np.uint8).reshape(h,w)
@@ -50,7 +56,10 @@ def main():
         got=np.asarray(art.crop((x*4,y*4,(x+w)*4,(y+h)*4)).getchannel('A').resize((w,h),Image.Resampling.BOX))>64
         iou=float((expected&got).sum()/max(1,(expected|got).sum()))
         if not args.defer_shape_review:assert iou>=.70,(r['slot'],iou)
-        existing=next((j for j,b in enumerate(meta['bindings']) if b['hash']==rgb and b.get('rgb_enabled',True) and not b.get('disabled')),None)
+        existing=rgb_bindings.get(rgb)
+        if args.new_only and existing is not None:
+            rows.append(dict(slot=r['slot'],binding=existing+1,hash=rgb,alpha_iou=iou,new_rgb=False,skipped_existing=True,shape_review_required=False))
+            continue
         # Existing indexed contracts retain their fallback art, so unrelated
         # palette variants do not silently switch to this exact-RGB painting.
         if existing is not None:
@@ -64,10 +73,11 @@ def main():
                   original_palette_rgb=r['actual_palette_rgb'],index_pixels=r['index_pixels'],x=x,y=y,w=w,h=h,atlas_id=name,
                   resource=old.get('resource'),source_x=old.get('source_x',old.get('x',x)),source_y=old.get('source_y',old.get('y',y)),
                   registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,
-                  actual_observed=bool(r.get('actual_observed',True)),
+                  actual_observed=bool(r.get('actual_observed',r.get('observed_shape',True))),
                   independent_visual_verification=False,review_status='pending_claude')
         if args.effect:spec['effect_part']=True
-        if existing is None:meta['bindings'].append(spec);binding=len(meta['bindings'])
+        if existing is None:
+            meta['bindings'].append(spec);binding=len(meta['bindings']);rgb_bindings[rgb]=binding-1
         else:meta['bindings'][existing]=spec;binding=existing+1
         rows.append(dict(slot=r['slot'],binding=binding,hash=rgb,alpha_iou=iou,new_rgb=existing is None,shape_review_required=iou<.70))
     assert len(rows)==len(contract) and rows
