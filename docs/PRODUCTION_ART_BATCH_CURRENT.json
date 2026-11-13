@@ -3311,12 +3311,96 @@
       "warnings": [],
       "actual_observed_targets": 2,
       "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_tenryujin_native\\390_130",
+      "atlas": "tenryu_tekkaman_390_130",
+      "bindings": [
+        93427,
+        93428,
+        93429
+      ],
+      "atlas_sha256": "f073dd7573d3c8ed802178958ec75128638672e581d9ad09df6fe997e2b2d92c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_tenryujin_native\\245_150",
+      "atlas": "tenryu_tekkaman_245_150",
+      "bindings": [
+        93430,
+        93431,
+        93432
+      ],
+      "atlas_sha256": "6935e11839cf712866078423e65e6e1aa384def30a557478553207171f63ccaa",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_tenryujin_native\\247_150",
+      "atlas": "tenryu_tekkaman_247_150",
+      "bindings": [
+        93433,
+        93434,
+        93435,
+        93436
+      ],
+      "atlas_sha256": "93a032864d4c678da4a9e2ca2d30e75c9a2f02d0bde2c1e2f5ce9527ec0aee78",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "cached_only_source_bindings": [
+        93435
+      ]
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_tenryujin_native\\249_365",
+      "atlas": "tenryu_tekkaman_249_365",
+      "bindings": [
+        93437,
+        93438
+      ],
+      "atlas_sha256": "036335d8e47b65c10a45b9ea855dc731722e9e3ac3e5e1c4bab38b2775d78613",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\native_weapon_source_368_1462\\fx_actual",
+      "atlas": "observed_unit368_weapon1462_fx_fourteen",
+      "bindings": [
+        93439,
+        93440,
+        93441,
+        93442,
+        93443,
+        93444,
+        93445,
+        93446,
+        93447,
+        93448,
+        93449,
+        93450,
+        93451,
+        93452
+      ],
+      "atlas_sha256": "e96f4683c55d96b536c1201f4ba08d365c5a774fc99b21a6a07ccdfacbc750f4",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 14,
+      "source_confirmed_unobserved_targets": 0
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1448,
+  "baked_target_count": 1474,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
