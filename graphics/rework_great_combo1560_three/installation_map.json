@@ -1,0 +1,433 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "great_combo1560_pose",
+  "atlas": {
+    "image": "rework_great_combo1560_pose/pose_hd.png",
+    "reference": "rework_great_combo1560_pose/pose_native.png",
+    "native_size": [
+      216,
+      72
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 1708426716,
+      "existing_exact_rgb_binding": null,
+      "legacy_exact_rgb": [],
+      "source_cell": 0,
+      "observed_oam_slots": [
+        16
+      ],
+      "contexts": [
+        {
+          "unit": 298,
+          "oam": 16,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\combat\\mazinger_combination\\frame_1560.state",
+          "frame": 0,
+          "screen": [
+            220,
+            88
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 1708426716,
+        "index_hash": 3444326433,
+        "index_pixels": "eJxjYKA64EDjc6JJM8EU8AIxAAQLADE=",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            172
+          ],
+          [
+            49,
+            82,
+            197
+          ],
+          [
+            238,
+            123,
+            139
+          ],
+          [
+            238,
+            8,
+            8
+          ],
+          [
+            164,
+            8,
+            8
+          ],
+          [
+            246,
+            246,
+            8
+          ],
+          [
+            213,
+            197,
+            16
+          ],
+          [
+            8,
+            74,
+            131
+          ],
+          [
+            106,
+            65,
+            8
+          ],
+          [
+            246,
+            246,
+            246
+          ],
+          [
+            238,
+            213,
+            238
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            139,
+            115,
+            197
+          ],
+          [
+            98,
+            65,
+            131
+          ],
+          [
+            41,
+            41,
+            90
+          ],
+          [
+            16,
+            16,
+            16
+          ]
+        ],
+        "x": 28,
+        "y": 28,
+        "w": 16,
+        "h": 8,
+        "atlas_id": "great_combo1560_pose",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": null,
+        "source_x": 32,
+        "source_y": 40
+      },
+      "classification": "legacy_art_rework_existing_connection",
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 1708426716,
+        "indices_sha256": "616d56d17524793d7f03e665759f986a044ea06ce10991c422058d37752858e7",
+        "resource": 14886,
+        "source_x": 32,
+        "source_y": 40,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0",
+      "source_candidate_matches": [
+        {
+          "cell": 0,
+          "actual_rgb_hash": 1708426716,
+          "indices_sha256": "616d56d17524793d7f03e665759f986a044ea06ce10991c422058d37752858e7",
+          "resource": 14886,
+          "source_x": 32,
+          "source_y": 40,
+          "raw_bytes_equal": true
+        }
+      ],
+      "source_owner_confirmed": false,
+      "source_candidate_search_exhaustive": false
+    },
+    {
+      "actual_rgb_hash": 647563750,
+      "existing_exact_rgb_binding": 68894,
+      "legacy_exact_rgb": [
+        68894
+      ],
+      "source_cell": 1,
+      "observed_oam_slots": [
+        17
+      ],
+      "contexts": [
+        {
+          "unit": 298,
+          "oam": 17,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\combat\\mazinger_combination\\frame_1560.state",
+          "frame": 0,
+          "screen": [
+            204,
+            112
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 647563750,
+        "index_hash": 731125936,
+        "index_pixels": "eJwtiTESAEAMATeVjv//9mRyChZEkWSIXd6cAqk72zWdAPVt5+zrAUKqAaQ=",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            172
+          ],
+          [
+            49,
+            82,
+            197
+          ],
+          [
+            238,
+            123,
+            139
+          ],
+          [
+            238,
+            8,
+            8
+          ],
+          [
+            164,
+            8,
+            8
+          ],
+          [
+            246,
+            246,
+            8
+          ],
+          [
+            213,
+            197,
+            16
+          ],
+          [
+            8,
+            74,
+            131
+          ],
+          [
+            106,
+            65,
+            8
+          ],
+          [
+            246,
+            246,
+            246
+          ],
+          [
+            238,
+            213,
+            238
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            139,
+            115,
+            197
+          ],
+          [
+            98,
+            65,
+            131
+          ],
+          [
+            41,
+            41,
+            90
+          ],
+          [
+            16,
+            16,
+            16
+          ]
+        ],
+        "x": 104,
+        "y": 28,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "great_combo1560_pose",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 14886,
+        "source_x": 32,
+        "source_y": 48
+      },
+      "classification": "legacy_art_rework_existing_connection",
+      "source_byte_identity": {
+        "cell": 1,
+        "actual_rgb_hash": 647563750,
+        "indices_sha256": "8eb98572ec6e10041ffa4d42458a1e6d6d9ed6678c008ca36c4985e2da69de59",
+        "resource": 14886,
+        "source_x": 32,
+        "source_y": 48,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 53746234,
+      "existing_exact_rgb_binding": 68883,
+      "legacy_exact_rgb": [
+        68883
+      ],
+      "source_cell": 2,
+      "observed_oam_slots": [
+        18
+      ],
+      "contexts": [
+        {
+          "unit": 298,
+          "oam": 18,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\combat\\mazinger_combination\\frame_1560.state",
+          "frame": 0,
+          "screen": [
+            212,
+            96
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 53746234,
+        "index_hash": 2534254743,
+        "index_pixels": "eJx1ku2a6yAIhDXaovIx93+3O5g02z15Dv3RyAsDKKV8rB/t/DAtDwMKjtY3nvbkCgq0hsRT48EXBfqbAj6nqT/kl8Fn7VhzLtVHAV9qo2GtqW7+4dQ8/wvc0RsAS3PyQf84BxoDxTtUxmu+YU4r7wTHsbM7Ty6wqDUiKBVlvAhaz3lK7+zcV0wO7iIBRLxG+nu/OF1whYeG+eqvOQtacoZhZH1k7+6GcYx09NNSJg9AduUYrfVgBnbA2JxT8QPhPtrRc1KIQIhH1idK0pA0fLkppwiJsTmbDeevHUl5d5jIMSVlW0Aqp1YGHKRrWfaoVquoAXVfZ4TlfCTqlOMlk4nUEEPJWuEgm7RMGiOYU41YIutLbgWcadTPiyp0aQWHMArlsvDyUcH60LXXL/hcoTXOF4Y6i7ABmysWthd5DfXaA9bNPpjNidienIt8ZUsVvs252tnPHXBjOs+ddIkdUHHzcy3kckgGsDa+8iVF/5yqGn4dO+MO351WvQXrfq7vftJhV4uo8lX9zNgJ+uH/4kvhMwH4luX/9gMDChu9",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            172
+          ],
+          [
+            49,
+            82,
+            197
+          ],
+          [
+            238,
+            123,
+            139
+          ],
+          [
+            238,
+            8,
+            8
+          ],
+          [
+            164,
+            8,
+            8
+          ],
+          [
+            246,
+            246,
+            8
+          ],
+          [
+            213,
+            197,
+            16
+          ],
+          [
+            8,
+            74,
+            131
+          ],
+          [
+            106,
+            65,
+            8
+          ],
+          [
+            246,
+            246,
+            246
+          ],
+          [
+            238,
+            213,
+            238
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            139,
+            115,
+            197
+          ],
+          [
+            98,
+            65,
+            131
+          ],
+          [
+            41,
+            41,
+            90
+          ],
+          [
+            16,
+            16,
+            16
+          ]
+        ],
+        "x": 164,
+        "y": 16,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "great_combo1560_pose",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 14886,
+        "source_x": 192,
+        "source_y": 32
+      },
+      "classification": "legacy_art_rework_existing_connection",
+      "source_byte_identity": {
+        "cell": 2,
+        "actual_rgb_hash": 53746234,
+        "indices_sha256": "8b1d40c0ef6cd04bfc13fd4dd75494011439246d8710d86ad84533788e2dca9c",
+        "resource": 14886,
+        "source_x": 192,
+        "source_y": 32,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}
