@@ -90,7 +90,16 @@ def main():
         for old,new in ((args.drawing,'pose_hd.png'),(args.native,'pose_native.png'),(args.generated,'pose_generated.png')):shutil.copy2(source/old,folder/new)
         shutil.copy2(source/args.contract,folder/'pose_contract.json')
         meta['atlases'][name]=dict(image=f'{args.graphics_dir}/pose_hd.png',reference=f'{args.graphics_dir}/pose_native.png',native_size=list(native.size),lazy=True)
-        temp=path.with_suffix('.tmp.json');temp.write_text(json.dumps(meta,indent=2),encoding='utf-8');temp.replace(path)
+        temp=path.with_suffix('.tmp.json');temp.write_text(json.dumps(meta,indent=2),encoding='utf-8')
+        # Windows readers can briefly hold a handle without FILE_SHARE_DELETE.
+        import time
+        for attempt in range(20):
+            try:
+                temp.replace(path)
+                break
+            except PermissionError:
+                if attempt == 19:raise
+                time.sleep(.15)
     (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
     if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
