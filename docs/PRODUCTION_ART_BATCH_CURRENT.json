@@ -2841,12 +2841,112 @@
       "actual_observed_targets": 2,
       "source_confirmed_unobserved_targets": 0,
       "existing_art_replacement": false
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/fmp_ship_m9_source_missing/fx_eighteen",
+      "atlas": "fmp_ship_smoke_water_eighteen",
+      "bindings": [
+        93238,
+        93239,
+        93240,
+        93241,
+        93242,
+        93243,
+        93244,
+        93245,
+        93246,
+        93247,
+        93248,
+        93249,
+        93250,
+        93251,
+        93252,
+        93253,
+        93254,
+        93255
+      ],
+      "atlas_sha256": "d23b834508b27742f84c363e85fc9ef4174e08c8b22148be18336daae1f4ba86",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 18,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/fmp_mass_bonta_source_missing/fx_two",
+      "atlas": "mass_bonta_explosion_two",
+      "bindings": [
+        93256,
+        93257
+      ],
+      "atlas_sha256": "f8512bc194790ffbaf52735617650673b7bf20beb09eb64f47975d9585360e89",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\sword_units_native_preview\\19_225",
+      "atlas": "sword_native_19_225",
+      "bindings": [
+        93258,
+        93259,
+        93260,
+        93261,
+        93262,
+        93263,
+        93264,
+        93265
+      ],
+      "atlas_sha256": "0526e7d5de1091587fdf5b122cb12cf8bf979d4116f6826d6893c1ca4d553bae",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current\\parts\\sword_units_native_preview\\42_230",
+      "atlas": "sword_native_42_230",
+      "bindings": [
+        93266,
+        93267,
+        93268,
+        93269,
+        93270,
+        93263,
+        93264,
+        93265
+      ],
+      "atlas_sha256": "3a4d36afe4a08233452a61db02156bce645d32ebd64b874f4407d644ef7081c5",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "shared_existing_targets": [
+        93263,
+        93264,
+        93265
+      ]
+    },
+    {
+      "source": "test_current\\parts\\sword_units_native_preview\\131_225",
+      "atlas": "sword_native_131_225",
+      "bindings": [
+        93271,
+        93272
+      ],
+      "atlas_sha256": "b67a384d089b374f2ccb79360e9b37913bb410a001471040aa17427c8784f40d",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "shared_existing_targets": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1259,
+  "baked_target_count": 1294,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
