@@ -1,0 +1,526 @@
+{
+  "보류대상": 93701,
+  "공유의존ID": 93702,
+  "원본IMG": 1200,
+  "원본공유사각형": [
+    176,
+    0,
+    8,
+    16
+  ],
+  "원래공유근거파일": "test_current\\parts\\borrowed_shape_rework\\tallgeese_megacannon_observed_missing\\shared_source_intersection_proof.json",
+  "범위주의": "같은 원본 영역은 같은 생성 RGBA를 유지해야 함. 해당 8×16 공유를 깨는 단독 재제작 설치 금지. 정상 의존 부품 전체 변경 없이 가능한 공동원본 그림 교정 범위 검토 대기.",
+  "target_contract": {
+    "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_5_23_150\\source_pose.state",
+    "frame": 0,
+    "video_epoch": 448,
+    "engine": 0,
+    "oam": 11,
+    "attributes": [
+      16488,
+      32871,
+      2067
+    ],
+    "screen_x": 103,
+    "screen_y": 104,
+    "w": 32,
+    "h": 16,
+    "display_w": 32,
+    "display_h": 16,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 19,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 9830018,
+    "index_hash": 3513619434,
+    "material": 3907159416,
+    "used_mask": 62,
+    "opaque": 185,
+    "binding_id": 24193,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJyNkNsOgCAMQ+nF//9lS4hoZBgbnna6daO13wK+6hgqsHsVUwsXnvLbAB03JaTV4InNWHYJtKhqgyARVhzw2t8ysz84WAVPAscW3OAeL/fmCgNHwnNa1XwdSJbfO/bL5HL0I6KmJyQIATg=",
+    "indices_sha256": "6e2d57bc67ab01b2bff2b8a5a71b7b1b2a0de297400b5e91391a3d47dbd574be",
+    "palette_15bit": [
+      15072,
+      2114,
+      7430,
+      13771,
+      20112,
+      23284,
+      27481,
+      30653,
+      19781,
+      27211,
+      30446,
+      2132,
+      2141,
+      3707,
+      5021,
+      4000
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        57
+      ],
+      [
+        90,
+        115,
+        106
+      ],
+      [
+        131,
+        164,
+        156
+      ],
+      [
+        164,
+        189,
+        180
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        41,
+        82,
+        156
+      ],
+      [
+        90,
+        148,
+        213
+      ],
+      [
+        115,
+        189,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ],
+      [
+        0,
+        238,
+        24
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0",
+    "atlas_box": [
+      144,
+      240,
+      32,
+      16
+    ],
+    "slot": 11,
+    "actual_palette_bgr555": [
+      15072,
+      2114,
+      7430,
+      13771,
+      20112,
+      23284,
+      27481,
+      30653,
+      19781,
+      27211,
+      30446,
+      2132,
+      2141,
+      3707,
+      5021,
+      4000
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        57
+      ],
+      [
+        90,
+        115,
+        106
+      ],
+      [
+        131,
+        164,
+        156
+      ],
+      [
+        164,
+        189,
+        180
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        41,
+        82,
+        156
+      ],
+      [
+        90,
+        148,
+        213
+      ],
+      [
+        115,
+        189,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ],
+      [
+        0,
+        238,
+        24
+      ]
+    ],
+    "spec": {
+      "resource": 1200,
+      "source_x": 152,
+      "source_y": 0
+    }
+  },
+  "dependency_contract": {
+    "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_5_23_150\\source_pose.state",
+    "frame": 0,
+    "video_epoch": 448,
+    "engine": 0,
+    "oam": 12,
+    "attributes": [
+      16475,
+      32858,
+      2070
+    ],
+    "screen_x": 90,
+    "screen_y": 91,
+    "w": 32,
+    "h": 16,
+    "display_w": 32,
+    "display_h": 16,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 22,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 3194739323,
+    "index_hash": 580230748,
+    "material": 1934940549,
+    "used_mask": 62,
+    "opaque": 149,
+    "binding_id": 24194,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJzFkDkOwEAIA9cH//9yAKWDbBtLVGMD8jk/CK0rdsSHgVBB2dPwJiMskIPDZhuc4clhsTYk1pbv7c6RElJLHn2AKWjylGpIaSmg8vUAN9gGmdfqrrWuegAlJgFD",
+    "indices_sha256": "a2440949edd5f5b0c93b2eeaa2fe371c62902b320a67659fc58ebefab0551a3d",
+    "palette_15bit": [
+      15072,
+      2114,
+      7430,
+      13771,
+      20112,
+      23284,
+      27481,
+      30653,
+      19781,
+      27211,
+      30446,
+      2132,
+      2141,
+      3707,
+      5021,
+      4000
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        57
+      ],
+      [
+        90,
+        115,
+        106
+      ],
+      [
+        131,
+        164,
+        156
+      ],
+      [
+        164,
+        189,
+        180
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        41,
+        82,
+        156
+      ],
+      [
+        90,
+        148,
+        213
+      ],
+      [
+        115,
+        189,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ],
+      [
+        0,
+        238,
+        24
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0",
+    "atlas_box": [
+      16,
+      312,
+      32,
+      16
+    ],
+    "slot": 12,
+    "actual_palette_bgr555": [
+      15072,
+      2114,
+      7430,
+      13771,
+      20112,
+      23284,
+      27481,
+      30653,
+      19781,
+      27211,
+      30446,
+      2132,
+      2141,
+      3707,
+      5021,
+      4000
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        57
+      ],
+      [
+        90,
+        115,
+        106
+      ],
+      [
+        131,
+        164,
+        156
+      ],
+      [
+        164,
+        189,
+        180
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        41,
+        82,
+        156
+      ],
+      [
+        90,
+        148,
+        213
+      ],
+      [
+        115,
+        189,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ],
+      [
+        0,
+        238,
+        24
+      ]
+    ],
+    "spec": {
+      "resource": 1200,
+      "source_x": 176,
+      "source_y": 0
+    }
+  },
+  "현재상태": "공유 영역의 원본/기존HD가 투명임을 확인했고 정상93702 RGBA 보존 새후보 shared93701/에 준비. 공식 판정 대기."
+}

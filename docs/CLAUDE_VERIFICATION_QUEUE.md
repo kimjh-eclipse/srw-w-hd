@@ -1,6 +1,6 @@
 # Claude 독립 검증 대기 — 현재 안내
 
-현재 생산 상태는 `HANDOFF_FROM_CODEX_7.md`, 정확한 바인딩·이미지 SHA·관측 구분은 `PRODUCTION_ART_BATCH_CURRENT.json`을 기준으로 읽어 주세요. 이전 세부 검증 큐는 `CLAUDE_VERIFICATION_QUEUE_1.md`로 옮겼습니다. 과거 완료 수를 최신 그림 검증 결과로 승계하지 마세요.
+현재 생산 상태는 `HANDOFF_FROM_CODEX_8.md`, 정확한 바인딩·이미지 SHA·관측 구분은 `PRODUCTION_ART_BATCH_CURRENT.json`을 기준으로 읽어 주세요. 이전 세부 검증 큐는 `CLAUDE_VERIFICATION_QUEUE_1.md`로 옮겼습니다. 과거 완료 수를 최신 그림 검증 결과로 승계하지 마세요.
 
 ## 현재 상태
 
@@ -79,7 +79,7 @@ manifest 마지막9묶음: 테카맨254 2,테드256 3,그레이트 번개298 3,�
 
 ## 최신273 인수 검증 요청
 
-HANDOFF_FROM_CODEX_7.md 최신273절과manifest의해당24atlas를확인하세요. 같은actor packed접합, actual색·안테나·어깨, Sandrock쇼텔3의alpha<64 정리, FX광원/단색/연광과이음매가우선입니다. Providence관측가시10픽셀계약과LauncherRouge Y반올림차이는전체가시확인으로승계하지마세요. Sandrockheated270 6은실패보류폴더이며live아님. 후속FX35와런처25도굽기완료해최신누적2178에포함.
+HANDOFF_FROM_CODEX_8.md 최신273절과manifest의해당24atlas를확인하세요. 같은actor packed접합, actual색·안테나·어깨, Sandrock쇼텔3의alpha<64 정리, FX광원/단색/연광과이음매가우선입니다. Providence관측가시10픽셀계약과LauncherRouge Y반올림차이는전체가시확인으로승계하지마세요. Sandrockheated270 6은실패보류폴더이며live아님. 후속FX35와런처25도굽기완료해최신누적2178에포함.
 
 
 후속60:Agni10의부분교차생성공유/고알파불변정리,런처루주15의실제한기체packed접합과색,FX35의단색면/발사광을검증요청.12281 46은아래최종자기alpha교정본으로반영,검증완료는아닙니다.
@@ -120,4 +120,4 @@ HANDOFF_FROM_CODEX_7.md 최신273절과manifest의해당24atlas를확인하세�
 
 ## 2026-11-14 최신 제작
 
-현재 바인딩 수·대기/보류·fixture 이름 불일치·팔레트 단계는 HANDOFF_FROM_CODEX_7.md 최신 현재 상태를 우선하세요. PRODUCTION_ART_BATCH_CURRENT.json 및 각 graphics/rework_* 계약으로 실제 원본과 색·접합·레이어를 독립 검증해 주세요. EXE는 미갱신입니다.
+현재 바인딩 수·대기/보류·fixture 이름 불일치·팔레트 단계는 HANDOFF_FROM_CODEX_8.md 최신 현재 상태를 우선하세요. PRODUCTION_ART_BATCH_CURRENT.json 및 각 graphics/rework_* 계약으로 실제 원본과 색·접합·레이어를 독립 검증해 주세요. EXE는 미갱신입니다.

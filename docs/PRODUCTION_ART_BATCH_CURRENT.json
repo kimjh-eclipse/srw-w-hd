@@ -2799,7 +2799,8 @@
         null,
         null
       ],
-      "shape_review_deferred": true
+      "shape_review_deferred": true,
+      "observation_scope_correction": "individual cached source only, remainder ROM raw with matching actual full palette; see replacement87 contracts"
     },
     {
       "source": "test_current/parts/borrowed_shape_rework/aestivalis_heavy_lunar_missing",
@@ -12928,6 +12929,292 @@
         4,
         5
       ],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/lost_ground195_wedges2",
+      "atlas": "ground195_wedges_two_corrected",
+      "bindings": [
+        92336,
+        92343
+      ],
+      "atlas_sha256": "c5d82e5e1d82ec143cdbed907a74c917648d47bf828df9a1e233de51d75e6f6d",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/claude_art_correction_next/sol_tekkaman_two",
+      "atlas": "sol_tekkaman_detail_two_corrected",
+      "bindings": [
+        94278,
+        94282
+      ],
+      "atlas_sha256": "19612e85dab6861604ea9fb9b00f0ae77b3ea2800e695f63fbed6f3ecdb7f28c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/claude_art_correction_next/omega_three_v2",
+      "atlas": "tekkaman_omega_three_corrected",
+      "bindings": [
+        94215,
+        94217,
+        94218
+      ],
+      "atlas_sha256": "ac4d14d9cfc3615a6225bc704522fb0d3c89775d60c1f25e2c183b96f3ee6994",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/claude_tallgeese_correction",
+      "atlas": "tallgeese_colour_strip93694_corrected",
+      "bindings": [
+        93694
+      ],
+      "atlas_sha256": "5dd27048dc0efb4ef93054c37e4572d26e96bf058553bba4970b194ef7be3f93",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/claude_tallgeese_correction/shared93701",
+      "atlas": "tallgeese_dark_plate93701_corrected",
+      "bindings": [
+        93701
+      ],
+      "atlas_sha256": "26878a0ef0453cf21c4604cd53ee4bf1dad9dfcec7d134c5b9e1816c1717b6ea",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/effect12077_repair87",
+      "atlas": "effect12077_components_repaired87",
+      "bindings": [
+        92986,
+        92987,
+        92988,
+        92989,
+        92990,
+        92991,
+        92992,
+        92994,
+        92995,
+        92996,
+        92997,
+        92998,
+        92999,
+        93000,
+        93001,
+        93002,
+        93003,
+        93004,
+        93005,
+        93006,
+        93007,
+        93009,
+        93010,
+        93011,
+        93012,
+        93013,
+        93014,
+        93015,
+        93017,
+        93018,
+        93019,
+        93020,
+        93021,
+        93022,
+        93023,
+        93024,
+        93025,
+        93026,
+        93027,
+        93028,
+        93029,
+        93030,
+        93031,
+        93032,
+        93033,
+        93034,
+        93035,
+        93036,
+        93037,
+        93038,
+        93039,
+        93040,
+        93041,
+        93042,
+        93043,
+        93044,
+        93045,
+        93046,
+        93047,
+        93048,
+        93049,
+        93050,
+        93051,
+        93052,
+        93053,
+        93054,
+        93055,
+        93056,
+        93058,
+        93059,
+        93060,
+        93061,
+        93063,
+        93064,
+        93065,
+        93066,
+        93069,
+        93070,
+        93071,
+        93072,
+        93074,
+        93075,
+        93076,
+        93077,
+        93078,
+        93079,
+        93080
+      ],
+      "atlas_sha256": "18029f31246284487c47a36ae8d6b770d768a651245cf57dce20afe3a874a92f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 18,
+      "source_confirmed_unobserved_targets": 69,
+      "source_containment_checks": [
+        {
+          "slot_a": 0,
+          "slot_b": 1,
+          "source_overlap": [
+            0,
+            24,
+            8,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 56,
+          "slot_b": 57,
+          "source_overlap": [
+            152,
+            24,
+            8,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 61,
+          "slot_b": 62,
+          "source_overlap": [
+            160,
+            16,
+            8,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 66,
+          "slot_b": 67,
+          "source_overlap": [
+            176,
+            16,
+            8,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 70,
+          "slot_b": 71,
+          "source_overlap": [
+            192,
+            16,
+            8,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [
+        5,
+        6
+      ],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/lost_guaites_arcs3",
+      "atlas": "guaites_arcs_three_corrected",
+      "bindings": [
+        94608,
+        94609,
+        94611
+      ],
+      "atlas_sha256": "8fd24d294d29177f2a8c994891dce2d0db11a855491e6cf8ea092a5df9ea6178",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [
+        5
+      ],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/claude_peichlon_correction94664",
+      "atlas": "peichlon_dark_plate94664_corrected",
+      "bindings": [
+        94664
+      ],
+      "atlas_sha256": "ed70d8677e6c000c953da416b6586da60ea94808eab9cc04ae5b79c364189e66",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
       "shape_review_deferred": true,
       "warnings": []
     }

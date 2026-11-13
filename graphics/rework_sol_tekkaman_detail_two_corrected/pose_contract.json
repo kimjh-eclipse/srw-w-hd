@@ -1,0 +1,590 @@
+[
+  {
+    "cell": 0,
+    "slot": 7,
+    "binding": 0,
+    "hash": 1570604271,
+    "index_hash": 1588673790,
+    "index_pixels": "eJyt0MEOwCAIA9C1oCHu//93ZadF1NPqwcSHAb2uHwPyyK2dXGxnNwOwZSB55xhjSHv3ZUUyxWbLAt0MUg1M4VygdzMLkKs63FueRoidhUPwTZnsjjdqMXIro03Z/MAyD1bMAdg=",
+    "actual_palette_bgr555": [
+      20992,
+      2114,
+      8454,
+      15819,
+      23184,
+      26356,
+      28504,
+      30652,
+      18690,
+      24931,
+      30148,
+      30347,
+      30546,
+      6394,
+      2589,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        164
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        65
+      ],
+      [
+        90,
+        115,
+        123
+      ],
+      [
+        131,
+        164,
+        180
+      ],
+      [
+        164,
+        189,
+        205
+      ],
+      [
+        197,
+        213,
+        222
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        16,
+        65,
+        148
+      ],
+      [
+        24,
+        90,
+        197
+      ],
+      [
+        32,
+        115,
+        238
+      ],
+      [
+        90,
+        164,
+        238
+      ],
+      [
+        148,
+        213,
+        238
+      ],
+      [
+        213,
+        57,
+        49
+      ],
+      [
+        238,
+        131,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "원본 실제 솔 테카맨 기체색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_230_934/unit230_weapon934_source.state",
+    "frame": 330,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_230_934\\unit230_weapon934_source.state",
+      "frame": 330,
+      "video_epoch": 2209,
+      "engine": 0,
+      "oam": 7,
+      "attributes": [
+        16487,
+        32916,
+        10436
+      ],
+      "screen_x": 148,
+      "screen_y": 103,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 2,
+      "tile_number": 196,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1570604271,
+      "index_hash": 1588673790,
+      "material": 331177330,
+      "used_mask": 3454,
+      "opaque": 153,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyt0MEOwCAIA9C1oCHu//93ZadF1NPqwcSHAb2uHwPyyK2dXGxnNwOwZSB55xhjSHv3ZUUyxWbLAt0MUg1M4VygdzMLkKs63FueRoidhUPwTZnsjjdqMXIro03Z/MAyD1bMAdg=",
+      "indices_sha256": "5a7fe0659a40f67f8c68d4f3712e1c3e0ae7aa1a96232163d6956966578582c2",
+      "palette_15bit": [
+        20992,
+        2114,
+        8454,
+        15819,
+        23184,
+        26356,
+        28504,
+        30652,
+        18690,
+        24931,
+        30148,
+        30347,
+        30546,
+        6394,
+        2589,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          131,
+          164
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          49,
+          65,
+          65
+        ],
+        [
+          90,
+          115,
+          123
+        ],
+        [
+          131,
+          164,
+          180
+        ],
+        [
+          164,
+          189,
+          205
+        ],
+        [
+          197,
+          213,
+          222
+        ],
+        [
+          230,
+          238,
+          238
+        ],
+        [
+          16,
+          65,
+          148
+        ],
+        [
+          24,
+          90,
+          197
+        ],
+        [
+          32,
+          115,
+          238
+        ],
+        [
+          90,
+          164,
+          238
+        ],
+        [
+          148,
+          213,
+          238
+        ],
+        [
+          213,
+          57,
+          49
+        ],
+        [
+          238,
+          131,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 144
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "packed_original_group": "230_330",
+    "packed_original_cell": 1,
+    "packed_original_atlas_box": [
+      72,
+      0,
+      32,
+      16
+    ],
+    "replace_binding": 94278,
+    "replacement_only": true,
+    "source_engine": null
+  },
+  {
+    "cell": 1,
+    "slot": 15,
+    "binding": 0,
+    "hash": 1716388010,
+    "index_hash": 20068729,
+    "index_pixels": "eJx9z1EKACAIA9DmvP+Zm5VhEe2rx4S0tWdgCtY74kqaAL30RtphRebf3Obbdlh/5HKqwtjLctS36zF1fB6E6Q6L/AEe",
+    "actual_palette_bgr555": [
+      20992,
+      2114,
+      8454,
+      15819,
+      23184,
+      26356,
+      28504,
+      30652,
+      18690,
+      24931,
+      30148,
+      30347,
+      30546,
+      6394,
+      2589,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        164
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        49,
+        65,
+        65
+      ],
+      [
+        90,
+        115,
+        123
+      ],
+      [
+        131,
+        164,
+        180
+      ],
+      [
+        164,
+        189,
+        205
+      ],
+      [
+        197,
+        213,
+        222
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        16,
+        65,
+        148
+      ],
+      [
+        24,
+        90,
+        197
+      ],
+      [
+        32,
+        115,
+        238
+      ],
+      [
+        90,
+        164,
+        238
+      ],
+      [
+        148,
+        213,
+        238
+      ],
+      [
+        213,
+        57,
+        49
+      ],
+      [
+        238,
+        131,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "atlas_box": [
+      72,
+      0,
+      16,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "원본 실제 솔 테카맨 기체색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0
+    },
+    "output_size": [
+      16,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_230_934/unit230_weapon934_source.state",
+    "frame": 340,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_230_934\\unit230_weapon934_source.state",
+      "frame": 340,
+      "video_epoch": 3553,
+      "engine": 0,
+      "oam": 15,
+      "attributes": [
+        75,
+        16553,
+        10584
+      ],
+      "screen_x": 169,
+      "screen_y": 75,
+      "w": 16,
+      "h": 16,
+      "display_w": 16,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 2,
+      "tile_number": 344,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1716388010,
+      "index_hash": 20068729,
+      "material": 2257097208,
+      "used_mask": 30,
+      "opaque": 132,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJx9z1EKACAIA9DmvP+Zm5VhEe2rx4S0tWdgCtY74kqaAL30RtphRebf3Obbdlh/5HKqwtjLctS36zF1fB6E6Q6L/AEe",
+      "indices_sha256": "7b185dad31615e2309a844bb18febfb2a205473de5af148afaf8abc188f3175d",
+      "palette_15bit": [
+        20992,
+        2114,
+        8454,
+        15819,
+        23184,
+        26356,
+        28504,
+        30652,
+        18690,
+        24931,
+        30148,
+        30347,
+        30546,
+        6394,
+        2589,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          131,
+          164
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          49,
+          65,
+          65
+        ],
+        [
+          90,
+          115,
+          123
+        ],
+        [
+          131,
+          164,
+          180
+        ],
+        [
+          164,
+          189,
+          205
+        ],
+        [
+          197,
+          213,
+          222
+        ],
+        [
+          230,
+          238,
+          238
+        ],
+        [
+          16,
+          65,
+          148
+        ],
+        [
+          24,
+          90,
+          197
+        ],
+        [
+          32,
+          115,
+          238
+        ],
+        [
+          90,
+          164,
+          238
+        ],
+        [
+          148,
+          213,
+          238
+        ],
+        [
+          213,
+          57,
+          49
+        ],
+        [
+          238,
+          131,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 23
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "packed_original_group": "230_340",
+    "packed_original_cell": 0,
+    "packed_original_atlas_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "replace_binding": 94282,
+    "replacement_only": true,
+    "source_engine": null
+  }
+]

@@ -1,0 +1,1 @@
+최종후보87 PNG불변. normalized/install87의atlas_box/spec x/y를옛live좌표로복원완료. hash동일원본별칭과candidate공간혼동을수정했고source_candidate_coordinate_space_proof87.json에기록. root가87live복원/재굽기중,공식QA는Claude대기. 신규그림87완료로세지않음.

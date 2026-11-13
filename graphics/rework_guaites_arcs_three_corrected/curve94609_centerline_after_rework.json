@@ -1,0 +1,78 @@
+{
+  "purpose": "root요청생산기하원본앵커대조;공식QA아님",
+  "mask_for_measurement_only": true,
+  "no_image_alpha_changed": true,
+  "ordinary_producer_translation_hd": [
+    0,
+    -2
+  ],
+  "anchors": [
+    {
+      "native_x": 0,
+      "native_y_center": 23.0,
+      "candidate_y_center": 23.38653846153846,
+      "delta_native_pixels": 0.3865384615384606
+    },
+    {
+      "native_x": 4,
+      "native_y_center": 17.0,
+      "candidate_y_center": 18.0,
+      "delta_native_pixels": 1.0
+    },
+    {
+      "native_x": 8,
+      "native_y_center": 13.0,
+      "candidate_y_center": 13.5,
+      "delta_native_pixels": 0.5
+    },
+    {
+      "native_x": 12,
+      "native_y_center": 10.0,
+      "candidate_y_center": 10.0,
+      "delta_native_pixels": 0.0
+    },
+    {
+      "native_x": 16,
+      "native_y_center": 7.0,
+      "candidate_y_center": 6.848076923076923,
+      "delta_native_pixels": -0.15192307692307683
+    },
+    {
+      "native_x": 20,
+      "native_y_center": 5.0,
+      "candidate_y_center": 4.5,
+      "delta_native_pixels": -0.5
+    },
+    {
+      "native_x": 24,
+      "native_y_center": 3.5,
+      "candidate_y_center": 2.9375,
+      "delta_native_pixels": -0.5625
+    },
+    {
+      "native_x": 28,
+      "native_y_center": 2.5,
+      "candidate_y_center": 1.7817796610169492,
+      "delta_native_pixels": -0.7182203389830508
+    },
+    {
+      "native_x": 31,
+      "native_y_center": 1.5,
+      "candidate_y_center": 1.5416666666666667,
+      "delta_native_pixels": 0.04166666666666674
+    }
+  ],
+  "max_abs_shift": 1.0,
+  "other_two_candidate_crops_unchanged": [
+    {
+      "cell": 0,
+      "candidate_crop_rgba_unchanged": true,
+      "sha256": "a11a663aef2aaa79ef0fb6ef8cca7a893c614bd48474f1b9403e4946977da9a1"
+    },
+    {
+      "cell": 2,
+      "candidate_crop_rgba_unchanged": true,
+      "sha256": "1b104689cfc57012dd6583b28d5751fe846a9894d4b02ba8ebd00c7c4f6c0eb3"
+    }
+  ]
+}

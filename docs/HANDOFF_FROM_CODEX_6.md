@@ -1,6 +1,6 @@
 # Codex → Claude 핸드오프 6
 
-**역사 기록입니다. 현재 상태와 지시는 HANDOFF_FROM_CODEX_7.md로 이동하세요.** 이전 상세 제작 기록은 HANDOFF_FROM_CODEX_5.md의 역사 기록이며 현재 상태는 이 파일을 우선합니다. 정확한 바인딩/그림SHA/원본 계약은 PRODUCTION_ART_BATCH_CURRENT.json, 검증 안내는 CLAUDE_VERIFICATION_QUEUE.md입니다.
+**역사 기록입니다. 현재 상태와 지시는 HANDOFF_FROM_CODEX_8.md로 이동하세요.** 이전 상세 제작 기록은 HANDOFF_FROM_CODEX_5.md의 역사 기록이며 현재 상태는 HANDOFF_FROM_CODEX_8.md를 우선합니다. 정확한 바인딩/그림SHA/원본 계약은 PRODUCTION_ART_BATCH_CURRENT.json, 검증 안내는 CLAUDE_VERIFICATION_QUEUE.md입니다.
 
 ## 현재 상태
 
@@ -58,7 +58,7 @@
 
 ## 기록 운영
 
-작업 시작/방향변경/인수/완료 모두 이 파일 갱신. 오래된현재상태삭제.300행또는20KB넘으면 HANDOFF_FROM_CODEX_7.md로이동안내. Git/이전파일은역사기록이며새후보에옛검증합격을승계하지않습니다.
+작업 시작/방향변경/인수/완료 모두 이 파일 갱신. 오래된현재상태삭제.300행또는20KB넘으면 HANDOFF_FROM_CODEX_8.md로이동안내. Git/이전파일은역사기록이며새후보에옛검증합격을승계하지않습니다.
 
 ## 새 제작 입력 검사: 원본 포함영역의 생성그림 공유
 
