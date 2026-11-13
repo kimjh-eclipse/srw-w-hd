@@ -1,0 +1,1 @@
+같은기체무손실묶음.개별생성원본/provenance보존.실제HD QA는Claude대기.

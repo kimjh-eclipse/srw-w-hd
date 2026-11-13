@@ -1,0 +1,1 @@
+pose_generated는동일기체무손실설치묶음. 개별생성원본/provenance/cropRGBA동일근거보존. 실제HD QA는Claude대기.

@@ -1,0 +1,1 @@
+같은기체무손실설치묶음.원래생성/원본/계약/provenance와cropRGBA동일근거보존.실제HD QA는Claude대기.
