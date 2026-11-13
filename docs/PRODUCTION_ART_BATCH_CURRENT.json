@@ -2941,12 +2941,45 @@
       "actual_observed_targets": 2,
       "source_confirmed_unobserved_targets": 0,
       "shared_existing_targets": []
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_20214",
+      "atlas": "observed_effect_20214_twenty",
+      "bindings": [
+        93273,
+        93274,
+        93275,
+        93276,
+        93277,
+        93278,
+        93279,
+        93280,
+        93281,
+        93282,
+        93283,
+        93284,
+        93285,
+        93286,
+        93287,
+        93288,
+        93289,
+        93290,
+        93291,
+        93292
+      ],
+      "atlas_sha256": "b25d30aea4e2b80500ce0205a354017c2fb8021c6bbf536d82b76810ba90ffa1",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        0
+      ],
+      "actual_observed_targets": 20,
+      "source_confirmed_unobserved_targets": 0
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1294,
+  "baked_target_count": 1314,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
