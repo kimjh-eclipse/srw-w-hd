@@ -39,12 +39,14 @@ def main():
     parser.add_argument('--workers',type=int,default=max(1,(os.cpu_count() or 4)-4))
     parser.add_argument('--limit',type=int,default=0,help='bake at most this many missing parts')
     parser.add_argument('--resources',type=int,nargs='*',default=[],help='limit a repair bake to these original IMG resources')
+    parser.add_argument('--bindings',type=int,nargs='*',default=[],help='limit a repair bake to these exact registered bindings')
     args=parser.parse_args()
     out=ROOT/'test_current/parts/bake';out.mkdir(parents=True,exist_ok=True)
     start();cache=_renderer.disk_cache;db=cache.db()
     present=cache.keys()
     todo=[];total=0
     for binding,spec in enumerate(_renderer.bindings,1):
+        if args.bindings and binding not in args.bindings:continue
         if args.resources and spec.get('resource') not in args.resources:continue
         if spec.get('source_binding') or spec.get('runtime_texture') or spec.get('disabled'):continue
         total+=1;key=_renderer.texture_key(binding,spec['w'],spec['h'])
@@ -72,11 +74,15 @@ def main():
         if spec.get('source_binding'):continue
         palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',_renderer.source_palette)),dtype='float32')
         if len(palette)>1:palettes.setdefault(hashlib.sha1(palette.tobytes()).hexdigest(),palette)
-    _renderer.baked_luts={}
+    # A one-part repair must not recalculate hundreds of unchanged 32K tables.
+    # The normal renderer already loads these by the exact float32 palette hash.
+    if palettes:_renderer.baked_lut(next(iter(palettes.values())).tobytes())
+    reused=sum(key in (_renderer.baked_luts or {}) for key in palettes)
     tables=np.stack([_renderer.get_palette_lut(palette) for palette in palettes.values()])
-    np.savez_compressed(ROOT/'graphics/palette_luts.npz',keys=np.array(list(palettes)),tables=tables)
-    print(len(palettes),'palette tables',flush=True)
-    report=dict(palette_tables=len(palettes),source_parts=total,baked_now=done-len(errors),errors=len(errors),seconds=round(time.perf_counter()-started,1),store=str(cache.path),store_bytes=Path(cache.path).stat().st_size)
+    lut_path=ROOT/'graphics/palette_luts.npz';temporary=lut_path.with_suffix('.tmp.npz')
+    np.savez_compressed(temporary,keys=np.array(list(palettes)),tables=tables);temporary.replace(lut_path)
+    print(len(palettes),'palette tables,',reused,'reused',flush=True)
+    report=dict(palette_tables=len(palettes),palette_tables_reused=reused,source_parts=total,baked_now=done-len(errors),errors=len(errors),seconds=round(time.perf_counter()-started,1),store=str(cache.path),store_bytes=Path(cache.path).stat().st_size)
     (out/('resource_report.json' if args.resources else 'report.json')).write_text(json.dumps(dict(report,error_detail={str(k):v for k,v in list(errors.items())[:200]}),indent=2),encoding='utf-8')
     print(json.dumps(report))
 
