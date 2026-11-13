@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 from hd_parts_registration import register_part,registration_stamp
 from parts_disk_cache import PartsDiskCache
-from palette_materials import material_indices
+from palette_materials import material_indices,anchored_indices
 from texture_preparation import prepare_task,prepare_composite_task,start_texture_worker
 from native_composition import PartVisibility
 
@@ -20,6 +20,8 @@ SCALE=1440/256
 # Finished textures are kept at this multiple of the native part size. The
 # largest render width is 960 px (3.75x), so 4x loses nothing on screen.
 STORE_SCALE=4
+# SRWW_RECOLOUR_ANCHOR=0 restores slot choice by colour alone.
+RECOLOUR_ANCHOR=os.environ.get('SRWW_RECOLOUR_ANCHOR','1')!='0'
 # SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 
@@ -426,6 +428,37 @@ class PartsRenderer:
         while len(self.used_palette_cache)>256:self.used_palette_cache.popitem(last=False)
         return used
 
+    def native_slot_map(self,binding,spec,palette):
+        """Palette slot of each native texel of a part, or None when it cannot be told."""
+        if spec.get('index_pixels'):return np.frombuffer(zlib.decompress(base64.b64decode(spec['index_pixels'])),dtype='uint8').reshape(spec['h'],spec['w'])
+        found=self.native_material_indices(binding,spec)
+        if found is not None:return found
+        cache=self.__dict__.setdefault('slot_maps',OrderedDict());source_binding=spec.get('source_binding',binding);key=(source_binding,palette.tobytes())
+        if key in cache:cache.move_to_end(key);return cache[key]
+        # No stored map: read it from the atlas's native reference picture.
+        result=None;source=self.bindings[source_binding-1];atlas=self.atlas_specs.get(source.get('atlas_id','base'))
+        try:
+            if atlas is not None and atlas.get('native_size') and len(palette)>1:
+                references=self.__dict__.setdefault('slot_references',OrderedDict());name=atlas['reference'];picture=references.pop(name,None)
+                if picture is None:
+                    with Image.open(ROOT/'graphics'/name) as opened:picture=opened.convert('RGBA')
+                    if picture.size!=tuple(atlas['native_size']):picture=picture.resize(tuple(atlas['native_size']),Image.Resampling.NEAREST)
+                    picture=np.asarray(picture)
+                references[name]=picture
+                while len(references)>4:references.popitem(last=False)
+                x,y,w,h=(source[k] for k in ('x','y','w','h'));crop=picture[y:y+h,x:x+w]
+                if crop.shape[:2]==(h,w):
+                    five=lambda colours:np.rint(np.asarray(colours,dtype='float32')*31/255).astype('uint32');pack=lambda c:c[...,0]|c[...,1]<<5|c[...,2]<<10
+                    codes=pack(five(crop[:,:,:3]));slots=pack(five(palette[1:]));order=np.argsort(slots,kind='stable');ordered=slots[order]
+                    position=np.clip(np.searchsorted(ordered,codes,side='left'),0,len(ordered)-1);visible=crop[:,:,3]>0
+                    slot_map=np.where((ordered[position]==codes)&visible,order[position]+1,0).astype('uint8')
+                    # A reference drawn with another palette would give a wrong map; then leave the part as before.
+                    if visible.any() and np.count_nonzero(slot_map[visible]==0)<=visible.sum()*.02:result=slot_map
+        except (OSError,ValueError,KeyError):result=None
+        cache[key]=result
+        while len(cache)>2048:cache.popitem(last=False)
+        return result
+
     def material_map(self,binding,art,palette,spec):
         key=(binding,palette.tobytes());found=self.material_maps.pop(key,None)
         if found is None:
@@ -442,7 +475,19 @@ class PartsRenderer:
             else:indices=self.get_palette_lut(palette)[q[:,:,0]|q[:,:,1]<<5|q[:,:,2]<<10]
             native=spec.get('index_pixels')
             if native is None:native=self.native_material_indices(binding,spec)
-            if native is not None:indices=material_indices(native,spec['w'],spec['h'],art.size,indices,palette,strict=True)
+            # Original texels only disambiguate equal palette colours. Forcing
+            # every HD pixel to the nearest enlarged native texel stamps the
+            # DS colour staircase back onto smooth painted hands and armour.
+            if native is not None:indices=material_indices(native,spec['w'],spec['h'],art.size,indices,palette)
+            if RECOLOUR_ANCHOR and len(palette)<=32:
+                # Colour alone lets a highlight take any slot of the part (an
+                # eye's slot for a fin's shine); under another palette that
+                # slot is an unrelated colour. Only slots the native texels
+                # around the pixel really use are eligible.
+                slots=self.native_slot_map(binding,spec,palette)
+                anchored=slots is not None
+                if anchored:indices=anchored_indices(slots,rgb,palette,indices)
+            else:anchored=False
             residual=rgb-palette[indices]
             # Material IDs are spatial anchors. A painted highlight from a
             # different material must not turn a black edge pink/green when
@@ -457,7 +502,9 @@ class PartsRenderer:
             # blocks; saturated key-color fringes remain bounded above.
             if ink.any():
                 delta=rgb.mean(2)-palette[indices].mean(2)
-                residual[ink]=np.minimum(delta[ink,None],0)
+                # Anchored to a dark slot, painted dark-grey detail (panel
+                # lines on a black disc) is lighter than the slot: keep it.
+                residual[ink]=np.minimum(delta[ink,None],32 if anchored else 0)
             found=(residual,indices)
         self.material_maps[key]=found
         while len(self.material_maps)>64:self.material_maps.popitem(last=False)
