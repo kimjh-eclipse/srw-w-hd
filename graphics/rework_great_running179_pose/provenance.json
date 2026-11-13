@@ -1,0 +1,91 @@
+{
+  "tool": "built-in image_gen",
+  "sheet_source": "C:/Users/OXP2/.codex/generated_images/01a1d464-543e-7963-ab32-efce66f4194b/exec-4e2db579-7838-41ea-b5e2-1803edeff1f4.png",
+  "helmet_source": "C:/Users/OXP2/.codex/generated_images/01a1d464-543e-7963-ab32-efce66f4194b/exec-160fb840-844b-4910-859c-80dc7a2b4359.png",
+  "native_source": "unit_297 weapon_1213 frame_300.state +179, actual VRAM and palette",
+  "processing": "Own generated alpha opening + detached low-area component removal, crop generated art and fit native visible bounding box; no native alpha stamping or source pixel filling. Two tiny cell crop positions manually corrected. Upper helmet generated independently using actual native geometry and palette. RGB2925529104 reuses exact same existing live7340 art; no recolour. Composite order descending(priority,OAM).",
+  "live_installed": false,
+  "parts": 18,
+  "unique_actual_rgb_hashes": 18,
+  "existing_exact_rgb_count": 5,
+  "new_actual_rgb_count": 13,
+  "atlas_sha256": "3f4cd2c52d4a224adbfa57334238e9e3b1e59f5bc526c44a97fb17fe197258e2",
+  "repair7_source": "exec-d0a30ba3-484a-498c-ac7e-296b91eafa61.png",
+  "repair4_source": "exec-2bbcb3cb-9d71-4fca-8df4-ebec2a3ceda6.png",
+  "repair4_used_slots": [
+    2,
+    6,
+    11
+  ],
+  "repair7_used_slots": [
+    0,
+    10,
+    12,
+    13
+  ],
+  "rejected_faces": [
+    "exec-9296418d-1d64-43fb-b10c-b6736fc65d58.png exaggerated white eye",
+    "exec-dd779c1e-f75c-4db4-91f7-68cdb7ba6917.png colour placement 0.494",
+    "exec-bfaec295-ced5-4b3b-ba9b-e7d7c3f2989b.png pixel mosaic",
+    "exec-9ffe1469-d049-4f27-95cc-a0489a04da5b.png face angle inconsistent/native colour_bad .494",
+    "exec-075b7c10-a84f-49bd-b6ac-93d1a57575b3.png grille framing made too thin, not selected",
+    "exec-47ecba74-7c87-4364-ae42-02777555f77f.png partial generation horizontal eye-boundary defect",
+    "rejected_joint_atlas.png: changing14 hidden internal source creates unsupported other-pose content; do not install"
+  ],
+  "native_colour_warnings": [],
+  "status": "Final18 revised candidate: all alphaIoU>=.70 and native audit flags0; not installed",
+  "face_final_source": "exec-ad3d2bda-35e9-4321-b32c-3089bf3efdc2.png",
+  "face_final_references": [
+    "actual +179 native face",
+    "existing +3 drawn face style/angle only"
+  ],
+  "rigid_registration": {
+    "2": [
+      0.5,
+      0.5
+    ],
+    "11": [
+      0,
+      -0.5
+    ]
+  },
+  "face_final_method": "Use generated continuous head ONLY for foreground face13. Restore good14 original. Head context from actual same-pose13+14 OAM, align generated head +1x,+0.5y native pixels; sample original face13 canvas (32x16), restrict alpha to prior generated13 alpha, never native alpha. Palette same actual179. No sourceRGB fill/recolour.",
+  "original_good15_preserved": true,
+  "changed_slots": [
+    2,
+    11,
+    13
+  ],
+  "final_native_colour": {
+    "0": 0.18,
+    "1": 0.074,
+    "2": 0.193,
+    "3": 0.114,
+    "4": 0.12,
+    "5": 0.095,
+    "6": 0.176,
+    "7": 0.126,
+    "8": 0.233,
+    "9": 0.067,
+    "10": 0.25,
+    "11": 0.14,
+    "12": 0.248,
+    "13": 0.246,
+    "14": 0.179,
+    "15": 0.067,
+    "16": 0.185,
+    "17": 0.255
+  },
+  "slot15_used_baked": false,
+  "slot15_raw_source": "graphics/rework_great_mazinger/pose_hd.png native(160,80,32,8)*4",
+  "slot15_generation_source": "exec-13a0407f-ea08-4f41-9e5a-2e6635d04f58.png",
+  "slot15_final_method": "Two same-unit generated black edge fragments individually fit native component bounding boxes (0,0,3,4) and (17,0,5,4), using generated alpha only; no native RGB/alpha copy and no recolour.",
+  "slot15_source_hash": 2925529104,
+  "slot15_same_first_pose_binding": 7340,
+  "slot15_alpha_iou": 0.9047619047619048,
+  "slot15_colour_bad": 0.105,
+  "other17_preserved_after_tiny15": true,
+  "prior_slot15_raw_crop_equal": true,
+  "slot15_raw_crop_equals_final_candidate": false,
+  "installed_atlas_sha256": "3f4cd2c52d4a224adbfa57334238e9e3b1e59f5bc526c44a97fb17fe197258e2"
+}

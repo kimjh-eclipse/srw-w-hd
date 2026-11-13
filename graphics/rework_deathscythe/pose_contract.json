@@ -1,0 +1,89 @@
+{
+  "reference_frame": 60,
+  "screen_bbox": [
+    0,
+    0,
+    1024,
+    516
+  ],
+  "parts": [
+    {
+      "slot": 2,
+      "binding": 64213,
+      "x": 160,
+      "y": -1,
+      "w": 64,
+      "h": 64,
+      "source_x": 176,
+      "matrix": [
+        [
+          0.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "slot": 3,
+      "binding": 64207,
+      "x": 96,
+      "y": 15,
+      "w": 32,
+      "h": 64,
+      "source_x": 144,
+      "matrix": [
+        [
+          0.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "slot": 4,
+      "binding": 64200,
+      "x": -32,
+      "y": -1,
+      "w": 64,
+      "h": 64,
+      "source_x": 80,
+      "matrix": [
+        [
+          0.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "offset": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "scope": "One stance authored continuously, inverse-baked to the original three OAM pieces; normal animation still uses those pieces.",
+  "canvas_origin": [
+    -32,
+    -1
+  ],
+  "canvas_size": [
+    1280,
+    576
+  ]
+}

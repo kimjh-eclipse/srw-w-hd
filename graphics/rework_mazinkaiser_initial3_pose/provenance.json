@@ -1,0 +1,27 @@
+{
+  "status": "ARTWORK_CANDIDATE_UNVERIFIED_NOT_APPLIED",
+  "tool": "built-in imagegen skill",
+  "scene": "unit297 weapon1213 frame300.state +3; run4 core frames for extraction",
+  "sources": {
+    "parts_generated.png": "exec-721448c7-66ba-43be-a456-26fe2dd3145d.png",
+    "wing_joint_generated.png": "exec-a3d57ab3-8c07-4bec-8689-aa1e2e24b393.png",
+    "head_joint_generated.png": "exec-564c9b6a-3740-4ce7-b998-d2873fb57a09.png"
+  },
+  "processing": "Native whole pose with actual OAM rectangles + original fragments supplied as context. Own generated alpha component cleaning and fit to native visible bounding box. No nativeRGB/alpha pasted. Head1/2/3 and wing15/16/17 adjacent original rectangles have zero area overlap; generate each union then split at original rectangles. Duplicate wing16/17 use canonical first OAM crop and share generated paint under original mirror transforms. Other 12 unique cells generated independently. No live/library/DB writes.",
+  "counts": {
+    "oam": 20,
+    "unique": 18,
+    "existing_exact": 12,
+    "new_actual_rgb": 6
+  },
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "known_risks": [
+    "Final joint head1/2/3 shape and color layout not independently reviewed",
+    "Continuous wing15/16/17 silhouette and all adjacent fragment cuts need Claude review",
+    "Other independently drawn fragments may have cut-edge outline/color mismatch",
+    "Existing exact12 replacement may affect other attacks using same exact nativeRGB",
+    "Prior running179 slot51 alpha support warning remains separate"
+  ],
+  "atlas_sha256": "79f3bb56eeb2268d39de23633c293ea2062435789a6c4ba78c5bf0b8e58108aa"
+}

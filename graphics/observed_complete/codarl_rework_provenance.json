@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen",
+  "candidates": {
+    "91684": "91684_candidate.png",
+    "91685": "91685_candidate.png"
+  },
+  "native_source": "index_pixels and original_palette_rgb stored in binding, not guessed source palette",
+  "source_paths": [
+    "C:/Users/OXP2/.codex/generated_images/01a1d455-3f28-7b03-a866-a373afc6b033/exec-ab137f7f-b834-4d0b-bebb-a2871ef36e96.png",
+    "C:/Users/OXP2/.codex/generated_images/01a1d455-3f28-7b03-a866-a373afc6b033/exec-43f0c1f7-18a0-45e8-aec5-87f9abd91dc9.png"
+  ],
+  "prompt_summary": "Exact native 64x64 Codarlc attack pose, muted dark grey-green armor, pale desaturated highlights, lavender-neutral grey shell, tiny red sensors, no neon green/magenta outlines, matching original silhouette and color regions, transparent background. Second pose uses first only as style reference.",
+  "processing": "Crop generated visible alpha >=128 bbox, resize to native visible bbox at 4x and paste into transparent 256x256. Generated alpha preserved; no native alpha stamping and no source pixel fill.",
+  "installed": false
+}

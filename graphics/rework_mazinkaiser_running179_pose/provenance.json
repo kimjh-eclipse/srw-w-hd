@@ -1,0 +1,60 @@
+{
+  "status": "FINAL_ARTWORK_CANDIDATE_UNVERIFIED: Claude owns visual/audit/gameplay verification; root owns serialized install",
+  "observed_source": "unit297 weapon1213 frame300.state +179",
+  "selected_oam": [
+    33,
+    54
+  ],
+  "observed_parts": 22,
+  "unique_actual_rgb": 20,
+  "new_actual_rgb": 15,
+  "existing_exact_rgb": 5,
+  "duplicate_check": [
+    {
+      "first_slot": 40,
+      "duplicate_slot": 43,
+      "hash": 224547631,
+      "same_index_bytes": true,
+      "same_actual_palette": true,
+      "same_atlas_box": true
+    },
+    {
+      "first_slot": 41,
+      "duplicate_slot": 44,
+      "hash": 3150047975,
+      "same_index_bytes": true,
+      "same_actual_palette": true,
+      "same_atlas_box": true
+    }
+  ],
+  "tool": "built-in image_gen",
+  "sources": {
+    "initial20": "exec-c4d3284c-2104-4773-8fda-94bcac043ff6.png",
+    "repair4": "exec-841c5334-4079-45af-9989-1c419d58ea2b.png",
+    "hook_wings": "exec-c69eb4f2-1b1b-4648-9bb8-3ea26db3901b.png",
+    "hook_final": "exec-131e4e9b-ad24-40fb-a67c-97895fdd6a8e.png",
+    "fragments3and11": "exec-727bec62-64eb-4dc4-81e7-e41dc7338fe6.png",
+    "continuous4and5": "exec-c6190345-583a-4618-9a0a-1734169574ad.png"
+  },
+  "processing": "3/4/5 consecutive nonoverlapping actual rectangles reconstructed from one native-context drawing and split at original OAM rectangles.16/17/18/19 all six pairs have zero both-opaque native overlaps; redraw continuous right wing and separate native-disconnected low strip, split OAM rectangles. Generated alpha only constrained by earlier generated fragment alpha, never nativeRGB/alpha. Final formal audits/replay not run after ownership change.",
+  "role_warning": "Early part-role names were premature; only actual OAM rectangles and whole native context are authoritative. Cells3/4/5 were jointly redrawn and split at their actual nonoverlapping rectangles. Cell11 semantics and final art remain unverified; Claude owns review.",
+  "atlas_sha256": "0e423a8b10e46b598e219ffeefcbb85a4729848ed9c1e90701504deed56d628b",
+  "live_installed": false,
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "final_size": [
+    1280,
+    1152
+  ],
+  "known_risks": [
+    "3/4/5 lower/side head attachment not independently verified",
+    "11 interpretation needs independent context review",
+    "16..19 generated-alpha edge gaps/other poses unverified",
+    "2 stair-step edge may remain"
+  ],
+  "final_sources": {
+    "head3_4_5": "exec-43a83ba4-64f9-48db-9800-ddf4f7fc894d.png",
+    "right_wing16_19": "exec-b2d73b70-0e5e-459f-8a73-21ccaa51c0be.png"
+  },
+  "final_processing": "3/4/5 consecutive nonoverlapping actual rectangles reconstructed from one native-context drawing and split at original OAM rectangles.16/17/18/19 all six pairs have zero both-opaque native overlaps; redraw continuous right wing and separate native-disconnected low strip, split OAM rectangles. Generated alpha only constrained by earlier generated fragment alpha, never nativeRGB/alpha. Final formal audits/replay not run after ownership change."
+}

@@ -1,0 +1,16 @@
+{
+  "resource": 22378,
+  "palette": 22377,
+  "pattern": 22379,
+  "method": "Generated separately for both native palettes. Ten source rectangles laid out individually; repaired parts 1,5,6,9 from enlarged native reference. Native alpha was not stamped onto generated art. Final 4x atlas preserves native rectangle coordinates.",
+  "source_folder": "test_current/parts/effect_22378",
+  "generated_sources": [
+    "generated_bank0.png",
+    "generated_bank1.png",
+    "repair_zoom_bank0.png",
+    "repair_zoom_bank1.png"
+  ],
+  "part_contract": "grid_contract.json",
+  "install_report": "install_report.json",
+  "quality_limitation": "Soft effect shapes differ from sparse native texels; alpha IoU .709 to 1.0 is a filter, not proof of matching animation."
+}

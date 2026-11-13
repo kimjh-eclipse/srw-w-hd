@@ -1,0 +1,38 @@
+{
+  "tool": "built-in image_gen",
+  "bindings": [
+    91861,
+    91862,
+    91863,
+    91864,
+    91865,
+    91866,
+    91867,
+    91868,
+    91869,
+    91870,
+    91871,
+    91872,
+    91873,
+    91874,
+    91875,
+    91876
+  ],
+  "source_generated": [
+    "generated_palette0.png",
+    "generated_palette1.png"
+  ],
+  "processing": "Each actual palette painted as a continuous effect, then split into its exact observed RGB rectangles. No native RGB or alpha copied.",
+  "resource": null,
+  "dynamic_palette": false,
+  "effect_part": true,
+  "fixture": "test_current/combat/named_attacks/unit_299/mechanical_cutin_141.state",
+  "frames": [
+    54,
+    55,
+    56
+  ],
+  "scope": "Sixteen observed RGB variants only, not all IMG22163",
+  "installed": true,
+  "gameplay_verification_pending": true
+}

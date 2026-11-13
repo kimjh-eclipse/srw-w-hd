@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "source": "native_full_pose_contract.png reconstructed from three actual OAM transforms, including offscreen origin [-32,-1]",
+  "generated_source": "exec-b6349142-8ebf-467c-b545-a63b9c08636e.png",
+  "prompt": "Faithful full Deathscythe sprite in actual native colors/proportions. Continuous shoulders, hands and shaft. No artificial seams. Transparent background. Shorten helmet tower into actual OAM window; wingtip red, V gold, sensors green.",
+  "registration": "inverse affine to original three rectangles, no native alpha stamping/no native pixel fill",
+  "canvas_origin": [
+    -32,
+    -1
+  ],
+  "reconstruction_lost_opaque_pixels": 0,
+  "all_weapons_complete": false,
+  "eye_correction": {
+    "source": "eye_corrected_generated.png",
+    "processing": "Fresh generated green-eye correction; inverse affine registration into the same three OAM rectangles. No native RGB or native alpha pasted.",
+    "installed": true,
+    "bake_errors": 0
+  }
+}

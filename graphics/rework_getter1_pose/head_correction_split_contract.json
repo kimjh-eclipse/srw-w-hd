@@ -1,0 +1,58 @@
+{
+  "method": "Generated continuous head cropped to each original OAM rectangle; no native pixel/alpha stamping",
+  "bindings": [
+    {
+      "binding": 7257,
+      "source_crop": [
+        192,
+        0,
+        224,
+        64
+      ],
+      "atlas_box": [
+        0,
+        0,
+        8,
+        16
+      ],
+      "slot": 17
+    },
+    {
+      "binding": 7256,
+      "source_crop": [
+        64,
+        12,
+        192,
+        140
+      ],
+      "atlas_box": [
+        40,
+        0,
+        32,
+        32
+      ],
+      "slot": 18
+    },
+    {
+      "binding": 7255,
+      "source_crop": [
+        0,
+        0,
+        64,
+        128
+      ],
+      "atlas_box": [
+        80,
+        0,
+        16,
+        32
+      ],
+      "slot": 19
+    }
+  ],
+  "unchanged_other_parts": 16,
+  "source_atlas_sha256": "a745ffcb53594bf4f11fe774e7a16bb6793c15b33c444594e3e86d8b480d8ae7",
+  "source_generated": "exec-d7b07b10-28f1-4400-b400-254c266b6eb0.png",
+  "base_generation": "exec-dce9d3cc-f573-49f2-8467-0ad14dbe0c81.png",
+  "status": "candidate ready for parent installation/replay decision; all three official audits pass; not gameplay verified"
+}

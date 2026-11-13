@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen",
+  "sources": {
+    "7340": "C:/Users/OXP2/.codex/generated_images/01a1d464-2a22-70a2-83ea-95fc4d321843/exec-7617fac6-61fe-45e5-94fe-d0d583b9f084.png",
+    "7353": "C:/Users/OXP2/.codex/generated_images/01a1d464-2a22-70a2-83ea-95fc4d321843/exec-3292f172-83e8-4a1f-817d-21c8be78ebc5.png"
+  },
+  "native_reference": "three_piece_reference.png actual palette+index decoded, grey viewing matte only",
+  "rejected": [
+    "exec-b5bc697b-6a16-4a85-83e5-081f8017276e.png (pixel block enlargement)",
+    "first7340 from exec-3292f172 (crescent too thin / silhouette .30)"
+  ],
+  "prompts_summary": "7340 retain almost-solid black tapered tab with tiny red top inset and broad dark diagonal strip with narrow muted ochre center; smooth rounded contours, no expanded red triangle.7353 retain black upper-left/deepbluepurple base/muted lavender right and small pale lavender highlight, no large white dome.",
+  "processing": "Generated component alpha bbox fitted independently into native component bounding rectangles:7340 (0,0,3,4),(17,0,22,4);7353 (1,0,15,7).Native alpha was not stamped and no native texels filled. Only2nativeatlas rectangles pasted into unchanged installed17-part atlas copy.",
+  "installed": true,
+  "bindings": [
+    7340,
+    7353
+  ],
+  "bake_errors": 0
+}
