@@ -27,6 +27,7 @@ extern uint8_t SRWWSubUnknownPixels[128*4096];
 extern uint16_t SRWWSubUnknownPalettes[128*16];
 void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding);
 void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
+void SRWWRegisterEffectParts(const uint32_t *ids,unsigned count);
 void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
 void SRWWRegisterCutins(const uint32_t *rows,unsigned count);
 void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count);
@@ -39,3 +40,5 @@ bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tile
 #endif
 
 extern uint32_t SRWWTextureCacheStats[6];
+unsigned SRWWCopyCachedOBJ(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,
+                         void *indices,unsigned indexCount,void *palette,unsigned paletteCount);

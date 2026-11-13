@@ -60,6 +60,23 @@ class Core:
         self.menu_bindings={i for i,b in enumerate(library['bindings'],1) if b.get('atlas_id')=='favorite_menu'}
         hashes=(C.c_uint*len(library['bindings']))(*[b['hash'] if b.get('rgb_enabled',True) and not b.get('disabled') else 0 for b in library['bindings']])
         self.api.retro_srw_register_parts.argtypes=[C.POINTER(C.c_uint),C.c_uint];self.api.retro_srw_register_parts(hashes,len(hashes))
+        self.effect_bridge=hasattr(self.api,'retro_srw_register_effect_parts')
+        # A source alias may have its own binding ID in the core. Inherit
+        # explicit source classification, while permitting an explicit false
+        # on an alias and rejecting malformed/cyclic references.
+        def is_effect_part(identifier):
+            seen=set()
+            while isinstance(identifier,int) and 0<identifier<=len(library['bindings']) and identifier not in seen:
+                seen.add(identifier);spec=library['bindings'][identifier-1]
+                if spec.get('disabled'):return False
+                if 'effect_part' in spec:return spec['effect_part'] is True
+                identifier=spec.get('source_binding')
+            return False
+        self.effect_part_ids=[i for i in range(1,len(library['bindings'])+1) if is_effect_part(i)]
+        if self.effect_bridge:
+            self.api.retro_srw_register_effect_parts.argtypes=[C.POINTER(C.c_uint),C.c_uint]
+            effect_ids=(C.c_uint*len(self.effect_part_ids))(*self.effect_part_ids)
+            self.api.retro_srw_register_effect_parts(effect_ids,len(effect_ids))
         self.part_palettes=np.zeros((128,16),dtype='uint16')
         blocked_index_keys=set(library.get('indexed_collision_keys',[]))
         indexed=[(b['index_hash'],i) for i,b in enumerate(library['bindings'],1) if b.get('dynamic_palette') and b.get('indexed_safe',True) and not b.get('disabled') and b['index_hash'] not in blocked_index_keys]

@@ -28,6 +28,14 @@ static bool SRWWAsyncParts=false;
 #define SRWW_UNIT_FALLBACK_DEFAULT 10
 #endif
 static uint8_t SRWWReadyParts[200000]={0};
+// Explicitly annotated independent VFX do not belong to a palette-slot unit.
+// This is classification only; it never makes a texture ready.
+static uint8_t SRWWEffectParts[200000]={0};
+void SRWWRegisterEffectParts(const uint32_t *ids,unsigned count) {
+    memset(SRWWEffectParts,0,sizeof(SRWWEffectParts));
+    if(!ids)return;
+    for(unsigned i=0;i<count;i++)if(ids[i]>0 && ids[i]<200000)SRWWEffectParts[ids[i]]=1;
+}
 void SRWWSetReadyParts(const uint32_t *ids,unsigned count) {
     SRWWAsyncParts=true;memset(SRWWReadyParts,0,sizeof(SRWWReadyParts));
     for(unsigned i=0;i<count;i++)if(ids[i]<200000)SRWWReadyParts[ids[i]]=1;
@@ -42,6 +50,7 @@ void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,un
 uint32_t SRWWTargetEngine() { return GPU->GetEngineMain()->GetTargetDisplayByID()==NDSDisplayID_Main?0:1; }
 void SRWWRegisterParts(const uint32_t *hashes,unsigned count) {
     SRWWAsyncParts=false;SRWWResetTextureCache();
+    memset(SRWWEffectParts,0,sizeof(SRWWEffectParts));
     SRWWDynamicBindings.clear();
     SRWWPartBindings.clear();
     for(unsigned i=0;i<256;i++) {uint32_t c=i;for(unsigned j=0;j<8;j++)c=(c>>1)^((c&1)?0xedb88320u:0);SRWWCrcTable[i]=c;}
@@ -65,7 +74,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
         static const int widths[3][4]={{8,16,32,64},{16,32,32,64},{8,8,16,32}};
         static const int heights[3][4]={{8,16,32,64},{8,8,16,32},{16,32,32,64}};
         // Per palette group: 0 absent, 1 native only, 2 has an HD binding.
-        uint8_t unitState[128]={0},unitGroup[128]={0};uint16_t unitOpaque[128]={0};
+        uint8_t unitState[128]={0},unitGroup[128]={0},unitEffect[128]={0};uint16_t unitOpaque[128]={0};
         for(unsigned i=0;i<128;i++) {
             const unsigned a=LE_TO_LOCAL_16(raw[i*4]),b=LE_TO_LOCAL_16(raw[i*4+1]),c=LE_TO_LOCAL_16(raw[i*4+2]);
             if((!(a&256)&&(a&512)) || (a>>14)==3 || ((a>>10)&3)>=2)continue;
@@ -105,6 +114,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
                 continue;
             }
             unitState[i]=2;
+            unitEffect[i]=(binding<200000 && SRWWEffectParts[binding])?1:0;
             uint32_t *part=parts+i*8;
             part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
             for(unsigned k=0;k<16;k++)palettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
@@ -122,13 +132,13 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
         if(limit && GPU && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG3).tileEntryAddress==0x06018000u && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG2).tileEntryAddress==0x06010000u) {
             unsigned painted[17]={0},kept[17]={0};
             for(unsigned i=0;i<128;i++) {
-                if(!unitState[i])continue;
+                if(!unitState[i] || unitEffect[i])continue;
                 if(unitState[i]==2 && !(parts[i*8+7]&0x80000000u))painted[unitGroup[i]]+=unitOpaque[i];
                 else kept[unitGroup[i]]+=unitOpaque[i];
             }
             for(unsigned i=0;i<128;i++) {
                 const unsigned group=unitGroup[i];
-                if(unitState[i]==2 && kept[group]*100u>=(unsigned)limit*(painted[group]+kept[group]))parts[i*8+7]|=0x80000000u;
+                if(unitState[i]==2 && !unitEffect[i] && kept[group]*100u>=(unsigned)limit*(painted[group]+kept[group]))parts[i*8+7]|=0x80000000u;
             }
         }
     }

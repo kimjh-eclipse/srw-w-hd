@@ -121,12 +121,16 @@ extern "C" RETRO_API void retro_srw_register_cutin_map_windows(const unsigned *r
 extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
+extern "C" RETRO_API void retro_srw_register_effect_parts(const unsigned *ids,unsigned count) { if(count<200000) SRWWRegisterEffectParts(ids,count); }
 extern "C" RETRO_API void retro_srw_register_indexed_parts(const unsigned *hashes,const unsigned *bindings,unsigned count) { if(hashes && bindings && count<200000) SRWWRegisterIndexedParts(hashes,bindings,count); }
 extern "C" RETRO_API void retro_srw_register_cutins(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutins(rows,count); }
 extern void SRWWRegisterCutinMaps(const unsigned *rows,unsigned count);
 extern "C" RETRO_API void retro_srw_register_cutin_maps(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutinMaps(rows,count); }
 extern "C" RETRO_API unsigned retro_srw_native_hd_fallback() { return 1; }
 extern "C" RETRO_API void retro_srw_texture_cache_stats(unsigned *out) { if(out)memcpy(out,SRWWTextureCacheStats,sizeof(SRWWTextureCacheStats)); }
+extern "C" RETRO_API unsigned retro_srw_copy_cached_obj(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,void *indices,unsigned indexCount,void *palette,unsigned paletteCount) {
+   return SRWWCopyCachedOBJ(engine,sprite,row,rowCount,indices,indexCount,palette,paletteCount);
+}
 extern "C" RETRO_API unsigned retro_srw_dynamic_parts() { return 200000; }
 extern "C" RETRO_API void retro_srw_add_dynamic_part(unsigned hash,unsigned material,unsigned binding) { SRWWAddDynamicPart(hash,material,binding); }
 extern "C" RETRO_API void retro_srw_copy_unknown_parts(void *rows,void *pixels,void *palettes) {

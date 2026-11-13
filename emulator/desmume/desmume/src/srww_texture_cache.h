@@ -15,6 +15,23 @@ struct SRWWBGTextureIdentity {
 static SRWWTextureIdentity SRWWObjTextures[2][128];
 static SRWWBGTextureIdentity SRWWBGTextures[2][4][1024];
 uint32_t SRWWTextureCacheStats[6]={0};
+// Read-only diagnostic snapshot. Counts are elements, not bytes; no cache
+// lookup or refresh occurs here. Callers must use this frame's rendered OAM.
+unsigned SRWWCopyCachedOBJ(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,
+                         void *indices,unsigned indexCount,void *palette,unsigned paletteCount) {
+    if(engine>=2 || sprite>=128)return 0;
+    const auto &cache=SRWWObjTextures[engine][sprite];
+    if(!cache.valid || !cache.w || !cache.h || cache.w>64 || cache.h>64)return 0;
+    const unsigned pixels=cache.w*cache.h,palettes=cache.eight?256:16;
+    if((row && rowCount<8) || (indices && indexCount<pixels) || (palette && paletteCount<palettes))return 0;
+    if(row) {
+        row[0]=cache.w;row[1]=cache.h;row[2]=cache.hash;row[3]=cache.indexHash;
+        row[4]=cache.material;row[5]=cache.usedMask;row[6]=cache.opaque;row[7]=cache.eight?1:0;
+    }
+    if(indices)memcpy(indices,cache.indices,pixels);
+    if(palette)memcpy(palette,cache.palette,palettes*sizeof(uint16_t));
+    return 1;
+}
 static void SRWWResetTextureCache() {
     for(unsigned e=0;e<2;e++) {
         for(unsigned i=0;i<128;i++)SRWWObjTextures[e][i].valid=false;
