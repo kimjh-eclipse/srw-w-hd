@@ -1,0 +1,298 @@
+[
+  {
+    "cell": 0,
+    "slot": 11,
+    "binding": 0,
+    "hash": 1088626737,
+    "index_hash": 1298414654,
+    "index_pixels": "eJxjZIQBJiYmRgYGBnQ+AxoXJoCbz4DGxcoHioD5AB1nAGk=",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      13580,
+      19955,
+      25337,
+      30653,
+      28413,
+      23098,
+      16759,
+      17826,
+      25250,
+      30601,
+      10779,
+      4249,
+      2129,
+      9149
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        98,
+        65,
+        106
+      ],
+      [
+        156,
+        123,
+        156
+      ],
+      [
+        205,
+        189,
+        197
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        238,
+        189,
+        222
+      ],
+      [
+        213,
+        139,
+        180
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        16,
+        106,
+        139
+      ],
+      [
+        16,
+        172,
+        197
+      ],
+      [
+        74,
+        230,
+        238
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        65
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      8
+    ],
+    "atlas_box": [
+      0,
+      0,
+      16,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 16,
+      "h": 8
+    },
+    "output_size": [
+      16,
+      8
+    ],
+    "fixture": "test_current/parts/native_weapon_source_341_1382/unit341_weapon1382_source.state",
+    "frame": 272,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_341_1382\\unit341_weapon1382_source.state",
+      "frame": 272,
+      "video_epoch": 273,
+      "engine": 0,
+      "oam": 11,
+      "attributes": [
+        16465,
+        189,
+        2251
+      ],
+      "screen_x": 189,
+      "screen_y": 81,
+      "w": 16,
+      "h": 8,
+      "display_w": 16,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 203,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1088626737,
+      "index_hash": 1298414654,
+      "material": 361576291,
+      "used_mask": 6,
+      "opaque": 82,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJxjZIQBJiYmRgYGBnQ+AxoXJoCbz4DGxcoHioD5AB1nAGk=",
+      "indices_sha256": "46264ca4309a6532b12cccb8c9b9b3702fcf38d20f22f7f0eece5923a6b4777d",
+      "palette_15bit": [
+        32608,
+        2114,
+        13580,
+        19955,
+        25337,
+        30653,
+        28413,
+        23098,
+        16759,
+        17826,
+        25250,
+        30601,
+        10779,
+        4249,
+        2129,
+        9149
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          98,
+          65,
+          106
+        ],
+        [
+          156,
+          123,
+          156
+        ],
+        [
+          205,
+          189,
+          197
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          238,
+          189,
+          222
+        ],
+        [
+          213,
+          139,
+          180
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          16,
+          106,
+          139
+        ],
+        [
+          16,
+          172,
+          197
+        ],
+        [
+          74,
+          230,
+          238
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          65
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 1,
+      "base_oam170": 8
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 341, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "production_source_folder": "test_current\\parts\\ei13_tiny_candidate_native1382\\341_272",
+    "source_visible_native_obj_pixels": 1
+  }
+]
