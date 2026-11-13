@@ -17,6 +17,7 @@ def save_texture(image,path):
 
 def main():
     start=time.perf_counter();folder=ROOT/'graphics/menu_units';images={};groups=[]
+    previous=json.loads((folder/'scene_runtime.json').read_text()) if (folder/'scene_runtime.json').exists() else {}
     source=Image.open(folder/'name_card_generated.png').convert('RGBA').resize((MAX_WIDTH*2,MAX_HEIGHT),Image.Resampling.LANCZOS)
     for i,name in enumerate(('kazuma','aircraft')):
         art=source.crop((i*MAX_WIDTH,0,(i+1)*MAX_WIDTH,MAX_HEIGHT));save_texture(art,folder/(name+'_display.png'));images[name]=name+'_display.png'
@@ -42,6 +43,9 @@ def main():
         bounds=group['bounds']
         groups.append(dict(name=name,bank=bank,offsets=offsets,bounds=[bounds[0]-cx,bounds[1]-cy,bounds[2],bounds[3]]))
     spec=dict(images=images,groups=groups,favorite_bindings=bindingids,display_scale=SCALE,source_width=MAX_WIDTH,preparation_seconds=time.perf_counter()-start)
+    if previous.get('configuration_pictures'):
+        spec['configuration_pictures']=previous['configuration_pictures']
+        spec['images'].update({k:v for k,v in previous['images'].items() if k.startswith('configuration_')})
     (folder/'scene_runtime.json').write_text(json.dumps(spec,indent=2));print('Prepared display-sized menu textures in',round(time.perf_counter()-start,2),'seconds')
 
 if __name__=='__main__':main()

@@ -14,6 +14,8 @@ if __name__=='__main__':
     try:
         if '--self-test' in sys.argv:
             from portable_selftest import main
+        elif Path(sys.executable).stem.casefold()=='srw_w_test':
+            from unit_review import main
         else:
             from hd_emulator import main
         main()

@@ -44,7 +44,7 @@ def main():
         prior=existing.get(resource);ident=prior['id'] if prior else next_id
         assert signature not in signatures or signatures[signature]==ident,('ambiguous_signature',resource)
         rel=f'compact_pilot_cutins/cutin_{resource}_hd.png'
-        row=dict(id=ident,name=f'compact_pilot_bg_{resource}',resource=resource,source_map=item['map'],
+        row=dict(id=ident,name=f'compact_pilot_bg_{resource}',presentation_role='pilot_foreground',resource=resource,source_map=item['map'],
             source_palettes=item['palettes'],layer=1,layers=[0,1,2,3],native_size=[256,128],
             restore_rect=[0,0,256,128],image=rel,paint_image=rel,signatures=[signature],
             map_signature=map_signature,signature_mode='image_origin',alpha_iou=iou,

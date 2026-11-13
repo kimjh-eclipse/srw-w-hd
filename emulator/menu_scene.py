@@ -26,7 +26,8 @@ class MenuScene:
 
     def identify(self,rows,parts):
         if not self.spec:return None
-        if {7,8}<={int(row[0]) for row in rows or []}:return 'introduction'
+        pictures=self.spec.get('configuration_pictures',{'7':'kazuma','8':'aircraft'})
+        if any(str(int(row[0])) in pictures for row in rows or []):return 'introduction'
         if parts is not None and sum(int(row[0]) in self.spec['favorite_bindings'] for row in parts)>=20:return 'favorite'
         return None
 
@@ -49,12 +50,14 @@ class MenuScene:
         if not self.spec:return parts
         scene=self.identify(rows,parts);introduction=scene=='introduction'
         if scene is None:return parts
-        names=['grid_back','grid_front']+(['aircraft','kazuma'] if introduction else [g['name'] for g in self.spec['groups']])
+        pictures=self.spec.get('configuration_pictures',{'7':'kazuma','8':'aircraft'})
+        planes=[(int(layer),pictures[str(int(bid))],int(x),int(y)) for bid,x,y,layer in rows or [] if str(int(bid)) in pictures]
+        names=['grid_back','grid_front']+([name for _,name,_,_ in planes] if introduction else [g['name'] for g in self.spec['groups']])
         panel_y=top.height*5//6
         self.load(names);panel=top.crop((0,panel_y,top.width,top.height)) if not introduction else None;self.grid(top,rows)
         if introduction:
-            for name in ('aircraft','kazuma'):
-                art=self.art[name];top.paste(art,(0,0),art)
+            for layer,name,x,y in sorted(planes,reverse=True):
+                art=self.art[name];top.paste(art,(-round(x*SCALE),-round(y*SCALE)),art)
             self.last_scene='introduction';return parts
         attrs=np.frombuffer(oam,dtype='<u2').reshape(128,4)
         menu_rows=[]

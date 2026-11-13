@@ -15,6 +15,8 @@ def main():
         frozen_dist=ROOT/'build/frozen_update' if args.program_only else ROOT/'dist'
         subprocess.run([sys.executable,'-m','PyInstaller','--noconfirm','--clean','--distpath',str(frozen_dist),'--workpath',str(ROOT/'build/portable'),str(ROOT/'distribution/SRW_W_HD.spec')],cwd=ROOT,check=True)
         if args.program_only:shutil.copytree(frozen_dist/'SRW_W_HD',TARGET,dirs_exist_ok=True)
+        # Same bundled interpreter and dependencies, with an explicit test entry.
+        shutil.copy2(TARGET/'SRW_W_HD.exe',TARGET/'SRW_W_Test.exe')
     if not args.program_only:subprocess.run([sys.executable,str(ROOT/'distribution/prepare_images.py')],cwd=ROOT,check=True)
     optimization=json.loads((ROOT/'test_current/image_optimization/package_images.json').read_text())
     optimized={r['path']:r for r in optimization['entries'] if r.get('encoded')}

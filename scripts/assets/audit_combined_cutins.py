@@ -1,5 +1,5 @@
 """Find exact ROM source tiles for simultaneous pilot cut-ins in captured BGs."""
-import json,sys,zlib
+import argparse,json,sys,zlib
 from pathlib import Path
 from collections import defaultdict,Counter
 import numpy as np
@@ -8,10 +8,13 @@ from scripts._bootstrap import ROOT
 from scripts.assets import srw_graphics as g
 
 def main():
-    folder=ROOT/'test_current/combat/named_attacks/unit_297/diagnostic_preview/weapon_1213_capture'
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--folder',default='test_current/combat/named_attacks/unit_297/diagnostic_preview/weapon_1213_capture')
+    parser.add_argument('--frame',default='360');parser.add_argument('--layers',default='1,2')
+    args=parser.parse_args();folder=ROOT/args.folder;selected_layers=tuple(map(int,args.layers.split(',')))
     targets=defaultdict(list);details={}
-    for layer in (1,2):
-        with np.load(folder/f'bg_360_{layer}.npz') as data:
+    for layer in selected_layers:
+        with np.load(folder/f'bg_{args.frame}_{layer}.npz') as data:
             cnt,_,_,_,_,w,h,_,_=map(int,data['info']);assert not cnt&128
             entries=np.frombuffer(data['map'].tobytes(),dtype='<u2');raw=data['tiles'];used=set()
             for y in range(16):
@@ -38,7 +41,7 @@ def main():
     for row in json.loads((ROOT/'graphics/cutins_library.json').read_text())['cutins']:
         if row.get('resource') is not None:known[row['resource']].append(row['id'])
     result=[]
-    for layer in (1,2):
+    for layer in selected_layers:
         candidates=[]
         for (which,resource),tiles in matches.items():
             if which!=layer:continue
