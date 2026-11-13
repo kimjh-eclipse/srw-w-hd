@@ -12864,6 +12864,43 @@
       "shape_review_slots": [],
       "shape_review_deferred": true,
       "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\claude_art_correction_20261114\\altron_crescent93582",
+      "atlas": "altron_crescent93582_corrected",
+      "bindings": [
+        93582
+      ],
+      "atlas_sha256": "3e5140261fd4b3069070c0881f16071516a51ea7a53211b2f3f1491b54d294a7",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [],
+      "shape_review_deferred": true,
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\claude_art_correction_20261114\\ginn_blade_four",
+      "atlas": "ginn_himobility_blades_four_corrected",
+      "bindings": [
+        93584,
+        93593,
+        93597,
+        93599
+      ],
+      "atlas_sha256": "5972c8064f2f1ed5f3a083d883f605f3225716c9f4398b4e5b74e52f7fa5746c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [
+        14
+      ],
+      "shape_review_deferred": true,
+      "warnings": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
