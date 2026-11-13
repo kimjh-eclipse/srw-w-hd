@@ -1,0 +1,20 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "tool": "built-in imagegen skill",
+  "sources": {
+    "parts_generated.png": "exec-feb33180-23b7-4618-a6a5-411fe7be885c.png",
+    "lower4_small6_generated.png": "exec-d4b335f9-3728-47cd-adfe-94898320fbd1.png"
+  },
+  "processing": "All9 freshly generated from actual cached crops plus whole OAM bbox context. Actual palette preserved by prompt, no procedural recolour/nativeRGB or alpha stamping.4 waist/legs and6 tiny patch separately redrawn to avoid invented gun bores/cylinder. Own generated alpha opening/component cleaning and native bbox fitting only. No external art dependencies. Negative-screen parts preserved full in atlas, extended diagnostic pose adds128px canvas only and does not alter contract positions. Existing raw general16 hashes disjoint.",
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "live_installed": false,
+  "atlas_sha256": "139fec8af7ea68b899f2039d7dec695e43d284c68e508dc2f52c1de5096548bb",
+  "known_risks": [
+    "white flash covers object during source frame; not claimed visible HD",
+    "Some OBJ initially partly above screen, alpha support must be reviewed in adjoining frames",
+    "Native9 union has disconnected gaps; missing BG torso not inferred or filled",
+    "Vfin colors/curved blades and tiny part6 require Claude review",
+    "Existing8 exact replacements may affect other poses"
+  ]
+}

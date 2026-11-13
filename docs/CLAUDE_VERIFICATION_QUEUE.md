@@ -84,3 +84,27 @@ Codex의코어작업은종료했고046a9701에읽기API를남겼습니다. 전�
 - 샌드록16 기존그림교체: `quatre_cutin_full.state +0`.17OAM16unique. 컷인이몸체를가리는state이므로 body판정에 별도관측도 필요. 금색13/노랑14/초록15 배치·두얇은셀5/9·스카프/장갑 이음매.
 
 첫67+샌드록16 굽기 오류0. **독립 검증 미실행**이며 감사/재생 검증은 Claude 담당. 검증 전 EXE재묶기/배포팩 갱신은 대기.
+
+
+## 후속23종
+
+- 데스사이즈 forecast14: `duo_map_forecast.state +0`, atlas deathscythe_forecast_closed_pose.17OAM/14unique, 기존normal/접힌날개그림과별도팔레트. 닫힌날개/낫·눈·V-fin/손잡이/발 접합. 설치/굽기완료,오류0.
+- 효과20498 white7: unit413 weapon1610 frame360/600의39문맥중신규7만. 기존32exact보존. atlas observed_effect_20498_white7. 흰core·민트띠/미세키프린지·기존그림과접합. 설치/굽기완료,오류0.
+- 데스사이즈 scythe150 두조각: duo_cutin+150,92083/92084. 연속64×16그림에서좌우분할. body13의존 pose_dependencies.json. 입력IoU .7185/.7055로기준바로위이므로특히얇은날실루엣확인. 독립시각검증대기.
+
+
+## 추가 샌드록9 / jade6
+
+- sandrock_weapon_closeup_cached_pose:9종(38668/38635/38649/38647/38622/38652/92091/38633/38628),기존8교체+1신규. sandrock_closeup_cutin_full.state+0 body캐시계약. sourceframe은플래시라그대로가시성판정금지. Claude전후프레임순수원본쌍확인. 원본빈틈/허리직사각조각/얇은cell6/전체접합·색. 설치/굽기오류0.
+- observed_effect_20498_jade6:92094~92099,기존exact4보존. unit413 weapon1610 frame360+112/+114문맥. **단색3751420720의생성그림에옅은gradient남음**. root는도트색채움으로숨기지않고미완료품질이슈로인계. 두연속plume접합/색/alpha확인. 설치/굽기오류0은화질합격아님.
+
+
+## 최신 추가·교정 (전체누락수와분리)
+
+- green7084/7085:92100~92109. actual팔레트별새그림. 가는2(92100/92101)는새생성후PCA기하등록만수행(원본RGB/alpha stamp없음),다른8불변. IoU .164/.179→.682/.683,기준.70미만경고유지. thin2단계그림이아닌좌표/선폭정리,실제재생판정필요. duo_map_attack+30/+60. 10전부재굽기완료.
+- 19600새2:92110/92111,unit413 weapon1610 frame360+112/+114. 기존73exact보존. jade/white곡률·명암·기존그림접합.
+- 그레이트thunder168새10:82822/92113~92121. unit299 mechanical_cutin168+0 body20OAM19unique중old9보존. 실제미연결추가1/indexed교정8/exact교체1. 원본·후보 전체문맥과의존계약은graphics/rework_great_thunder168_cached. source프레임버퍼는HD-enabled라pure-native증거로쓰지말것.
+- 19645새3:92122~92124. unit333 mechanical168+34/+46. 두가는2색slash는입력IoU.558/.640경고. 선폭/라벤더끝·팔레트·알파/기존7접합.
+- 22378late:67unbound RGB가형태2의연속fade변형. test_current/parts/effect_22378_late/{observed_contract.json,new_22378.json}. 67새그림/재색칠바인딩으로메우지않음. Claude가팔레트fade를원본색번호/블렌드로보존할경로를검토필요. 기본두형태그림은제작담당별도진행.
+
+이번작업타깃146모두대상굽기완료. **이는전체11,358누락의감소146이아니며전체잔여재집계아님**. production선정큐는구형누락계약과현재등록의대조일뿐QA가아닙니다.

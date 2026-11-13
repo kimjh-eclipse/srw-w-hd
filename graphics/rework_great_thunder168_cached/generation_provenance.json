@@ -1,0 +1,22 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "tool": "built-in imagegen skill",
+  "sources": {
+    "parts_generated.png": "exec-afe3db3a-35a2-455d-9203-f58db2bd1e40.png",
+    "head_joint_generated.png": "exec-b4e6841d-65cc-464e-96cb-4bc392916c1e.png",
+    "initial_pixelated_not_selected": "exec-b95fa5a5-8d59-4536-91c2-6b81a2f39819.png",
+    "head_before_alpha_edit": "exec-cbebf7ed-1a60-456d-bd57-86a29e4d6ccf.png"
+  },
+  "processing": "New10 actualRGB only, all freshly generated, old9 kept by identical actualRGB+indexbytes+usedpalette proof. Generated own alpha opening/components and nativebbox fit only; no nativeRGB/alpha stamp or procedural recolour. Adjacent head4/5 rectangles do not overlap; generate one48x32 continuous native-context union then split exactly at original OAM rectangles, no fullface into isolated sidepiece. Other8 generated independently. Native10 retained pixels used only in diagnostic context image, not candidate artwork.",
+  "atlas_sha256": "eb9124eae2f6ece5d3c4b8cbacbeb6bca4a6eb24d636eeae82e8fc150237e8e3",
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "live_installed": false,
+  "known_risks": [
+    "Head4/5 and old/new body seams not independently reviewed",
+    "Blue fist0/6 anatomy/support and tinyred7 require review",
+    "Old9 dependencies are preserved but mixed painting style may differ",
+    "HD enabled source framebuffer is not pure native evidence",
+    "Other overlapping effects/cutin layers outside artwork scope"
+  ]
+}

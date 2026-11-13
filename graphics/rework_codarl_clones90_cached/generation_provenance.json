@@ -1,0 +1,18 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "capture": "retro_srw_copy_cached_obj(engine0,slot) + core.obj rendered OAM after Core.run91 on unit280 mechanical_cutin_168.state",
+  "original_source": "exec-e5eb3fbf-916d-4043-b0dd-e7fc444de17c.png",
+  "paint_source": "paint_source_atlas.png + paint_source_contract.json",
+  "reuse_proof": "paint_reuse_contract.json: same actual nativeRGB hash AND exact decompressed index bytes AND actual palette AND dimensions. Earlier generated art for14 remains valid identity; not recoloured.3 end-frame-only blade pieces removed. Source had17 cells, final14 remapped by hash.",
+  "native_pixels": "Native pixels appear only in reference/context diagnostic images, never inside candidate atlas.",
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "live_installed": false,
+  "atlas_sha256": "4e402047ce60011ad2ff6eb444010ee6cc5a7683c46b0cfbc1e4ddf1191aa27e",
+  "known_risks": [
+    "Claude shape/color/alpha review pending",
+    "Thin fragments and retained central14 joins unverified",
+    "Existing exact3 replacement can affect other poses",
+    "End-frame MMU method used for earlier Mazinkaiser contracts: timing risk separately handed to Claude"
+  ]
+}

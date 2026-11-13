@@ -6,6 +6,17 @@ from PIL import Image
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from scripts._bootstrap import ROOT
 
+def observed_contract(row):
+    """Accept the rendered-cache producer schema without altering its pixels."""
+    if 'atlas_box' in row:return row
+    r=dict(row)
+    r['atlas_box']=[r[k] for k in ('x','y','w','h')]
+    r['slot']=r.get('slot',r.get('oam',0))
+    r['actual_palette_bgr555']=r['palette_15bit']
+    r['actual_palette_rgb']=r['original_palette_rgb']
+    r['spec']=dict(resource=r.get('resource'),source_x=r.get('source_x',r['x']),source_y=r.get('source_y',r['y']))
+    return r
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true')
     parser.add_argument('--source-dir',type=Path,default=ROOT/'test_current/parts/borrowed_shape_rework')
@@ -16,7 +27,7 @@ def main():
     parser.add_argument('--static-palette',action='store_true',help='exact-RGB artwork only; never recolour this observed variant')
     parser.add_argument('--defer-shape-review',action='store_true',help='record silhouette warnings for the independent reviewer instead of blocking draft installation')
     args=parser.parse_args();source=args.source_dir
-    contract=json.loads((source/args.contract).read_text())
+    contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text())]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
     path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text())
     prefix=hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
@@ -44,7 +55,8 @@ def main():
         spec=dict(hash=rgb,index_hash=ih,rgb_enabled=True,indexed_safe=False,dynamic_palette=not args.static_palette,
                   original_palette_rgb=r['actual_palette_rgb'],index_pixels=r['index_pixels'],x=x,y=y,w=w,h=h,atlas_id=name,
                   resource=old.get('resource'),source_x=old.get('source_x',old.get('x',x)),source_y=old.get('source_y',old.get('y',y)),
-                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=True)
+                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=True,
+                  independent_visual_verification=False,review_status='pending_claude')
         if args.effect:spec['effect_part']=True
         if existing is None:meta['bindings'].append(spec);binding=len(meta['bindings'])
         else:meta['bindings'][existing]=spec;binding=existing+1
@@ -54,8 +66,10 @@ def main():
     if args.apply:
         folder=ROOT/'graphics'/args.graphics_dir;folder.mkdir(exist_ok=True)
         for old,new in ((args.drawing,'pose_hd.png'),(args.native,'pose_native.png'),(args.generated,'pose_generated.png')):shutil.copy2(source/old,folder/new)
+        shutil.copy2(source/args.contract,folder/'pose_contract.json')
         meta['atlases'][name]=dict(image=f'{args.graphics_dir}/pose_hd.png',reference=f'{args.graphics_dir}/pose_native.png',native_size=list(native.size),lazy=True)
         temp=path.with_suffix('.tmp.json');temp.write_text(json.dumps(meta,indent=2),encoding='utf-8');temp.replace(path)
     (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
+    if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
 if __name__=='__main__':main()

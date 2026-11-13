@@ -1,0 +1,20 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "tool": "built-in imagegen skill",
+  "sources": {
+    "parts_generated.png": "exec-a7f5350e-9e3c-417b-ab90-125980cd9776.png",
+    "scarf5_9_generated.png": "exec-ab81c02f-5f27-4484-9ce9-e18310a7db18.png"
+  },
+  "processing": "Actual cached OBJ/helper contract + whole native OAM bbox + cell crops used as references. Fresh16 drawings, no recolour or nativeRGB/alpha stamping. Own generated alpha opening+component filtering and fit to native visible bbox. Components threshold0.5percent to retain tiny disconnected cell7 sliver dot. Cells5/9 separately redrawn from native rather than one joint painting because their actual OAM rectangles overlap and hidden original colors may differ and must not be flattened. Cell13 shared nativebytes/palette reused with actual mirror OAM. Transparent native reference RGB0 normalized to0 only behind alpha0; native visible colors unchanged.",
+  "atlas_sha256": "37ef225edd152d38093806ed150da556e93c9a84c31b7ed297b5f477fd148af8",
+  "final_audit_executed": false,
+  "final_replay_executed": false,
+  "live_installed": false,
+  "known_risks": [
+    "Actual golden/yellow Vfin and redpanel separation not independently reviewed",
+    "Tiny2component cell7 may lose or add supported pixels",
+    "Separate overlapping cloth5/9/13 may have seam/shape/material differences; no joint flattening performed",
+    "Existing16 exact replacements affect other poses using same hash",
+    "Cutin/window/effect layer order outside artwork scope"
+  ]
+}
