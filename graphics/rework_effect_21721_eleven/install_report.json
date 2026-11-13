@@ -1,0 +1,121 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 21,
+      "binding": 93555,
+      "hash": 4292889325,
+      "alpha_iou": 0.06779661016949153,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 23,
+      "binding": 93556,
+      "hash": 3937480048,
+      "alpha_iou": 0.8572507552870091,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 25,
+      "binding": 93557,
+      "hash": 3598431168,
+      "alpha_iou": 0.918918918918919,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 29,
+      "binding": 93558,
+      "hash": 1530349932,
+      "alpha_iou": 0.8893072289156626,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 31,
+      "binding": 93559,
+      "hash": 4226815324,
+      "alpha_iou": 0.9322157434402333,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 21,
+      "binding": 93560,
+      "hash": 1741968849,
+      "alpha_iou": 0.8237410071942446,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 22,
+      "binding": 93561,
+      "hash": 1552812217,
+      "alpha_iou": 0.7208480565371025,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 25,
+      "binding": 93562,
+      "hash": 732824810,
+      "alpha_iou": 0.8603603603603603,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 29,
+      "binding": 93563,
+      "hash": 1830641930,
+      "alpha_iou": 0.8730512249443207,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 23,
+      "binding": 93564,
+      "hash": 3505561841,
+      "alpha_iou": 0.956315289648623,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 24,
+      "binding": 93565,
+      "hash": 4115926256,
+      "alpha_iou": 0.9298969072164949,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "small_slot": 25,
+      "large_slot": 25,
+      "source_offset": [
+        0,
+        0
+      ],
+      "generated_rgba_equal": true
+    },
+    {
+      "small_slot": 29,
+      "large_slot": 31,
+      "source_offset": [
+        0,
+        0
+      ],
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw inclusion; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [
+    21
+  ],
+  "independent_visual_verification": false
+}

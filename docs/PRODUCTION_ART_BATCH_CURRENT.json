@@ -3306,11 +3306,24 @@
         93425,
         93426
       ],
-      "atlas_sha256": "1e2ad4f0acb841bd426869559d51447a8708a3840502ea8951d660448716a573",
+      "atlas_sha256": "cc9f1639e10f531c66aff261895edba53d2bb2266f7c74c705ce8c5c3a224f42",
       "production_status": "installed_and_baked; independent Claude review pending",
       "warnings": [],
       "actual_observed_targets": 2,
-      "source_confirmed_unobserved_targets": 0
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "small_slot": 0,
+          "large_slot": 1,
+          "source_offset": [
+            0,
+            0
+          ],
+          "generated_rgba_equal": true
+        }
+      ],
+      "previous_atlas_sha256": "1e2ad4f0acb841bd426869559d51447a8708a3840502ea8951d660448716a573",
+      "same_binding_art_repair": "v2 shares generated HD pixels for the same confirmed contained source region"
     },
     {
       "source": "test_current\\parts\\tekkaman_tenryujin_native\\390_130",
@@ -3395,12 +3408,339 @@
       "warnings": [],
       "actual_observed_targets": 14,
       "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_19678_yellow58",
+      "atlas": "observed_effect_19678_yellow58",
+      "bindings": [
+        93453,
+        93454,
+        93455,
+        93456,
+        93457,
+        93458,
+        93459,
+        93460,
+        93461,
+        93462,
+        93463,
+        93464,
+        93465,
+        93466,
+        93467,
+        93468,
+        93469,
+        93470,
+        93471,
+        93472,
+        93473,
+        93474,
+        93475,
+        93476,
+        93477,
+        93478,
+        93479,
+        93480,
+        93481,
+        93482,
+        93483,
+        93484,
+        93485,
+        93486,
+        93487,
+        93488,
+        93489,
+        93490,
+        93491,
+        93492,
+        93493,
+        93494,
+        93495,
+        93496,
+        93497,
+        93498,
+        93499,
+        93500,
+        93501,
+        93502,
+        93503,
+        93504,
+        93505,
+        93506,
+        93507,
+        93508,
+        93509,
+        93510
+      ],
+      "atlas_sha256": "d8709af45d3b7970937fa6de4589cf59b647f01160ae22a1c54a607946cfed30",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        3,
+        1,
+        2
+      ],
+      "actual_observed_targets": 58,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\gekiryujin_actual_warm_phase\\374_90",
+      "atlas": "gekiryujin_actual_warm_374_90",
+      "bindings": [
+        93511,
+        93512
+      ],
+      "atlas_sha256": "21fa5acad4789b681e6ac702b746fb34371393ee7be4dd2db56afc6820bdc8d7",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "actual_warm_phase_only": true
+    },
+    {
+      "source": "test_current\\parts\\gekiryujin_actual_warm_phase\\374_145",
+      "atlas": "gekiryujin_actual_warm_374_145",
+      "bindings": [
+        93513,
+        93514
+      ],
+      "atlas_sha256": "2b7c6f674a59b0ce6a08feaf40cf61b696ed84820465ef49161ebbd823687716",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "actual_warm_phase_only": true
+    },
+    {
+      "source": "test_current\\parts\\gekiryujin_actual_warm_phase\\374_150",
+      "atlas": "gekiryujin_actual_warm_374_150",
+      "bindings": [
+        93515,
+        93516
+      ],
+      "atlas_sha256": "47f6b325a02392ad7981db07f83504e0a4096d92e53a422367833bebeebcd355",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "actual_warm_phase_only": true
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_19678_remaining18",
+      "atlas": "observed_effect_19678_remaining18",
+      "bindings": [
+        93517,
+        93518,
+        93519,
+        93520,
+        93521,
+        93522,
+        93523,
+        93524,
+        93525,
+        93526,
+        93527,
+        93528,
+        93529,
+        93530,
+        93531,
+        93532,
+        93533,
+        93534
+      ],
+      "atlas_sha256": "c89196249ab43dc283c71be2b619c614f76c957d5847d4717a2fad6893df825a",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        0,
+        2,
+        31
+      ],
+      "actual_observed_targets": 18,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\wing_heavyarms_native\\0_160",
+      "atlas": "wing_heavyarms_0_160",
+      "bindings": [
+        93535,
+        93536
+      ],
+      "atlas_sha256": "aafe4089bd9da1c239d0af765c2c5b71aeabb9196f5b8845a29ad49b26af2c33",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\wing_heavyarms_native\\0_190",
+      "atlas": "wing_heavyarms_0_190",
+      "bindings": [
+        93537
+      ],
+      "atlas_sha256": "c2a99f0ccacd6f820c8fde4478ec164250a2d1af12ff829d7c4ba0bbae4ca562",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\wing_heavyarms_native\\2_130",
+      "atlas": "wing_heavyarms_2_130",
+      "bindings": [
+        93538,
+        93539
+      ],
+      "atlas_sha256": "647678da85877b4034ae01ea9c1d1560f4161c3d0da2b5ad62634c9ebfaf791e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\wing_heavyarms_native\\2_150",
+      "atlas": "wing_heavyarms_2_150",
+      "bindings": [
+        93540,
+        93541,
+        93542,
+        93543
+      ],
+      "atlas_sha256": "195ca95230d7fd9dd725115a49ba1a1a71719422f00677fb56d025e21d336a18",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/mazinkaiser_turbo_punch_missing",
+      "atlas": "mazinkaiser_turbo_punch_eleven",
+      "bindings": [
+        93544,
+        93545,
+        93546,
+        93547,
+        93548,
+        93549,
+        93550,
+        93551,
+        93552,
+        93553,
+        93554
+      ],
+      "atlas_sha256": "eb21d7e17918b06cc713c55388b6b7964c92b08a31524fde9a6d3dcdb3744ac6",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        0,
+        1
+      ],
+      "actual_observed_targets": 11,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "small_slot": 0,
+          "large_slot": 1,
+          "source_offset": [
+            0,
+            0
+          ],
+          "generated_rgba_equal": true
+        },
+        {
+          "small_slot": 3,
+          "large_slot": 4,
+          "source_offset": [
+            0,
+            0
+          ],
+          "generated_rgba_equal": true
+        }
+      ]
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_21721",
+      "atlas": "observed_effect_21721_eleven",
+      "bindings": [
+        93555,
+        93556,
+        93557,
+        93558,
+        93559,
+        93560,
+        93561,
+        93562,
+        93563,
+        93564,
+        93565
+      ],
+      "atlas_sha256": "bbb448c82174369402fc4fe30db0b662a62b7f0507eead208f08b7501c51c06c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        21
+      ],
+      "actual_observed_targets": 11,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "small_slot": 25,
+          "large_slot": 25,
+          "source_offset": [
+            0,
+            0
+          ],
+          "generated_rgba_equal": true
+        },
+        {
+          "small_slot": 29,
+          "large_slot": 31,
+          "source_offset": [
+            0,
+            0
+          ],
+          "generated_rgba_equal": true
+        }
+      ]
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_22048",
+      "atlas": "observed_effect_22048_eight",
+      "bindings": [
+        93566,
+        93567,
+        93568,
+        93569,
+        93570,
+        93571,
+        93572,
+        93573
+      ],
+      "atlas_sha256": "4a1b22e67c57e92fac6378581205f0de22c564a0414aaffeb61abbb5c97acaad",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": []
+    },
+    {
+      "source": "test_current/parts/actual_mechanical_pose_0_160/fx_two",
+      "atlas": "wing_zero_cannon_speed_two",
+      "bindings": [
+        93574,
+        93575
+      ],
+      "atlas_sha256": "febad190c1744488bb74e196f46eaad2798b24896228e0866716e90c530ea620",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        7,
+        8
+      ],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1474,
+  "baked_target_count": 1597,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }

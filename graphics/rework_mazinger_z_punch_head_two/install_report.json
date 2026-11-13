@@ -6,7 +6,7 @@
       "binding": 93425,
       "hash": 1382686487,
       "alpha_iou": 0.8869047619047619,
-      "new_rgb": true,
+      "new_rgb": false,
       "shape_review_required": false
     },
     {
@@ -14,10 +14,22 @@
       "binding": 93426,
       "hash": 3310212541,
       "alpha_iou": 0.9296028880866426,
-      "new_rgb": true,
+      "new_rgb": false,
       "shape_review_required": false
     }
   ],
+  "source_containment_checks": [
+    {
+      "small_slot": 0,
+      "large_slot": 1,
+      "source_offset": [
+        0,
+        0
+      ],
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw inclusion; not global visual QA",
   "original_prefix_preserved": true,
   "shape_review_deferred": true,
   "reference_iou_threshold": 0.7,

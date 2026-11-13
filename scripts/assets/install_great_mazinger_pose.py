@@ -19,6 +19,32 @@ def observed_contract(row):
     r['spec']=dict(resource=resource,source_x=r.get('source_x',r['x']),source_y=r.get('source_y',r['y']))
     return r
 
+
+def validate_source_containment(contract, art, excluded_hashes):
+    """One confirmed source region must reuse the same generated pixels."""
+    checks=[]
+    for small in contract:
+        if small['hash'] in excluded_hashes:continue
+        ss=small.get('spec',{});sx,sy=ss.get('source_x'),ss.get('source_y')
+        if ss.get('resource') is None or sx is None or sy is None:continue
+        x,y,w,h=small['atlas_box']
+        for large in contract:
+            if large['hash'] in excluded_hashes:continue
+            ls=large.get('spec',{});lx,ly=ls.get('source_x'),ls.get('source_y');ax,ay,aw,ah=large['atlas_box']
+            if aw*ah<=w*h or ls.get('resource')!=ss['resource'] or lx is None or ly is None:continue
+            if small['actual_palette_bgr555']!=large['actual_palette_bgr555']:continue
+            if not (lx<=sx and ly<=sy and sx+w<=lx+aw and sy+h<=ly+ah):continue
+            a=np.frombuffer(zlib.decompress(base64.b64decode(small['index_pixels'])),dtype=np.uint8).reshape(h,w)
+            b=np.frombuffer(zlib.decompress(base64.b64decode(large['index_pixels'])),dtype=np.uint8).reshape(ah,aw)
+            dx,dy=sx-lx,sy-ly
+            assert np.array_equal(a,b[dy:dy+h,dx:dx+w]),('source containment raw mismatch',small['slot'],large['slot'])
+            own=np.asarray(art.crop((x*4,y*4,(x+w)*4,(y+h)*4)))
+            shared=np.asarray(art.crop(((ax+dx)*4,(ay+dy)*4,(ax+dx+w)*4,(ay+dy+h)*4)))
+            equal=bool(np.array_equal(own,shared))
+            checks.append(dict(small_slot=small['slot'],large_slot=large['slot'],source_offset=[dx,dy],generated_rgba_equal=equal))
+            assert equal,('same confirmed source region has different generated artwork',small['slot'],large['slot'])
+    return checks
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true')
     parser.add_argument('--source-dir',type=Path,default=ROOT/'test_current/parts/borrowed_shape_rework')
@@ -38,6 +64,7 @@ def main():
     rgb_bindings={}
     for i,b in enumerate(meta['bindings']):
         if b.get('rgb_enabled',True) and not b.get('disabled'):rgb_bindings.setdefault(b['hash'],i)
+    overlap_checks=validate_source_containment(contract,art,set(rgb_bindings) if args.new_only else set())
     name=args.atlas_id;rows=[]
     for r in contract:
         x,y,w,h=r['atlas_box'];a=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype=np.uint8).reshape(h,w)
@@ -100,7 +127,7 @@ def main():
             except PermissionError:
                 if attempt == 19:raise
                 time.sleep(.15)
-    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
+    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw inclusion; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
     if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
 if __name__=='__main__':main()

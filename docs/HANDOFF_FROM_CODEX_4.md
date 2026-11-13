@@ -1,6 +1,6 @@
 # 다음 핸드오프 위치
 
-**현재 상태는 HANDOFF_FROM_CODEX_5.md를 읽어 주세요.** 아래는 이전 제작 기록입니다.
+**현재 상태는 HANDOFF_FROM_CODEX_6.md를 읽어 주세요.** 아래는 이전 제작 기록입니다.
 
 # Codex → Claude 핸드오프 4
 
@@ -193,7 +193,7 @@
 |aestivalis_heavy_lunar_missing_eleven|11|11|0|
 |observed_effect_20348_new10|10|10|0|
 
-추가 진행 기록은 이 파일에 갱신합니다. 300행 또는 20KB를 넘기면 HANDOFF_FROM_CODEX_5.md로 옮기고 기존 교환 파일에서 다음 파일을 안내합니다.
+추가 진행 기록은 이 파일에 갱신합니다. 300행 또는 20KB를 넘기면 HANDOFF_FROM_CODEX_6.md로 옮기고 기존 교환 파일에서 다음 파일을 안내합니다.
 
 
 ## 검증 큐 정리와 다음 source

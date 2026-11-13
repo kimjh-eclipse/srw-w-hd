@@ -1,12 +1,14 @@
+# 현재 상태는 HANDOFF_FROM_CODEX_6.md
+
 # Codex → Claude 핸드오프 5
 
-**현재 교환 파일입니다.** 이전 제작 기록은 HANDOFF_FROM_CODEX_4.md, 정확한 바인딩·그림 SHA·원본 계약 위치는 PRODUCTION_ART_BATCH_CURRENT.json을 참고하세요. 현재 상태는 이 파일을 우선합니다.
+**이 파일은 이전 제작 기록입니다. 현재 상태와 답은 HANDOFF_FROM_CODEX_6.md로 이동했습니다.** 이전 제작 기록은 HANDOFF_FROM_CODEX_4.md, 정확한 바인딩·그림 SHA·원본 계약 위치는 PRODUCTION_ART_BATCH_CURRENT.json을 참고하세요. 현재 상태는 이 파일을 우선합니다.
 
 ## 현재 상태
 
-- **1,474개 고유 작업 대상의 연결·대상 굽기 완료**. 기존 그림 교체와 실제 팔레트 변형을 포함합니다. 기체 수나 전체 누락 감소 수, 독립 검증 완료 수가 아닙니다.
+- **1,538개 고유 작업 대상의 연결·대상 굽기 완료**. 기존 그림 교체와 실제 팔레트 변형을 포함합니다. 기체 수나 전체 누락 감소 수, 독립 검증 완료 수가 아닙니다.
 - 전체 누락은 이전 ROM 감사 **11,358종**이 마지막 집계이며 재집계하지 않았습니다. 다중 IMG 21% 미판정·BG는 기존 감사 밖입니다. 작업 대상 수를 그대로 빼지 마세요.
-- **1,448개까지 2763b3c7로 GitHub 푸시 완료**. 이후천룡신/테카맨12·368/1462FX14 총26연결·굽기오류0완료/캐시갱신후푸시예정.
+- **1,474개까지 86ff33c5로 GitHub 푸시 완료**. 이후19678 노랑빔/잔광58연결·굽기오류0완료.현재미커밋.
 - 현재 생산 굽기 차단 항목은 없습니다. 12077의 빈 출력17개는 아래와 같이 교정·95개 전체 재굽기 뒤 복구했습니다.
 - Codex는 제작·원본 계약·연결·굽기·커밋, Claude는 독립 그림/색/HD 실제 재생 검증을 맡습니다. 입력 검사와 굽기 오류0을 품질 합격으로 기록하지 않습니다.
 - **지금 열린 사용자 게임 창은 유지했습니다. 최신 EXE 번들은 아직 갱신하지 않았습니다.** 현재 반영은 C: 소스·에셋·구운 저장소 기준입니다. 실행 중인 예전 창/EXE에 새 연결이 반영됐다고 주장하지 않습니다.
@@ -113,7 +115,7 @@ unit4/w18 +275(2)/365(3)/450(3) actual원래녹색·은색을유지한드래곤�
 
 ## 진행방향 갱신
 
-마징가Z 머리2는actual exact/indexed0,ROM14723 rawbytes·팔레트2636 bank0을확인하고연속48×32 새머리의원래OAM분할/오른쪽역반전으로연결·굽기완료. 이후오공비눈6actual컷인으로전환. 368/1462 FX14의첫생성이단색효과를금속판처럼입체화해폐기했고평면효과로다시제작중이며완료수에미포함.
+마징가Z 머리2는actual exact/indexed0,ROM14723 rawbytes·팔레트2636 bank0을확인하고연속48×32 새머리의원래OAM분할/오른쪽역반전으로연결·굽기완료. 이후오공비눈6은기존얼굴정합교정실패로최종보류,새actual컷인source선정으로전환. 368/1462 FX14의첫생성이단색효과를금속판처럼입체화해폐기했고평면효과로다시제작중이며완료수에미포함.
 
 ## 마징가Z 머리2 완료
 
@@ -121,8 +123,16 @@ unit4/w18 +275(2)/365(3)/450(3) actual원래녹색·은색을유지한드래곤�
 
 ## 오공비눈6 설치보류 / 기존fullcutin17 정합교정
 
-눈6 actual source는확정됐으나기존 cutin_22825_hd의왼쪽닫힌눈이native OBJ x120..136보다왼쪽에있어새눈을정확히올려도별도닫힌눈이남음. 제작조립 candidate_face_sequence_production.png로발견. wufei_eye_animation_missing/installation_map은install_allowed=false이며6개를완료수에넣지않았습니다. shape담당이native pilot_pair_04 첫256×256과기존HD/새눈문맥으로fullcutin17눈자리그림교정후보를제작중. 공유runtime·라이브fullcutin파일미수정. root는교정fullcutin과눈6을함께인수할예정이며Claude는피부경계·두겹눈·얼굴정합의실제재생판정필요.
+눈6 actual source는확정됐으나기존 cutin_22825_hd의왼쪽닫힌눈이native OBJ x120..136보다왼쪽에있어새눈을정확히올려도별도닫힌눈이남음. 제작조립 candidate_face_sequence_production.png로발견. wufei_eye_animation_missing/installation_map은install_allowed=false이며6개를완료수에넣지않았습니다. shape담당이native pilot_pair_04 첫256×256과기존HD/새눈문맥으로fullcutin17눈자리그림교정후보를제작중. 공유runtime·라이브fullcutin파일미수정. 얼굴2회교정/생성얼굴영역만조립한시도에도눈정합·피부사각경계가남아최종보류했으며Claude는피부경계·두겹눈·얼굴정합의실제재생판정필요.
 
 ## 최신26 제작 완료
 
 천룡신/테카맨4묶음12고유(원본14OAM 중동일raw/사용색2공유),368/1462FX14 총26굽기오류0/5.4초.247/1009+150 OAM10은실제cachedsource확정이나native가시면적0: source_native_visible_area=0/source_native_visible=false/source_rendered_cache_observed=true로라이브메타와계약에보존하고manifest.cached_only_source_bindings에별도표시. 그림이보였다고주장하지않음. 설치도구가이출처필드를보존하도록확장,공유runtime변경없음. FX14는금속판처럼그린첫출력폐기후교정했으나흰단색6의계단선/희미한gray외곽이남아Claude판정필요. 실제초록2는키색잔여아님.
+
+## 19678 노랑빔/잔광58 완료
+
+실제unit8/w29의가장큰노랑팔레트한벌58shape를새그림연결·굽기오류0/5.6초. 원래76계약/64shape/6palette전체를완료한것이아니며나머지18/5palette제작중. 빔추가명암rim·직각절단경계·잔광정렬·11crop작은성분1~2제거는Claude실제판정대기. 다음격룡신374 actual주황상태3자세6계약인수,일반녹청기체완료로세지않음. 기존source5외+145의실제가시84픽셀조각1추가.
+
+## 격룡신 actual 주황6 완료
+
+374/1488+90/145/150 각2고유 actual주황기계6 연결·굽기오류0/5.6초. index형태기존매칭0이며일반녹청기본색완료아님. source외+145 OAM13의실제가시84픽셀조각도포함,동일+150중복2보존. 헤이즈는imagegen배경제거로정리/원본alpha복사없음,구멍/절단면/색상정확성은Claude판정대기. 오공비눈6은얼굴위치·피부경계실패로여전히미설치/완료수제외.
