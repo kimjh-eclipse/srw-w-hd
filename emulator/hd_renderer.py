@@ -199,7 +199,15 @@ class HDRenderer:
                 # Keep native visibility in its 256x192 texture. The GPU
                 # combines it with the cached painted alpha, avoiding a
                 # full-screen RGBA canvas and several large array copies.
-                top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True,foreground=foreground,foreground_rect=(0,0,*self.size))
+                mode=1
+                if foreground is None and effect_foreground is not None:
+                    # The cut-in's own BG may be the blended layer (it fades in
+                    # or out): mix the HD picture with what is behind it by the
+                    # coefficients the DS used on each scanline.
+                    from foreground_blend import self_plane
+                    foreground=self_plane(effect_foreground,layer_ids,int(cutin[5]))
+                    if foreground is not None:mode=2
+                top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True,foreground=foreground,foreground_rect=(0,0,*self.size),foreground_mode=mode)
             else:
                 if foreground_mask is not None and foreground_mask.any():
                     from foreground_blend import blend_part

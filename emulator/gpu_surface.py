@@ -38,7 +38,8 @@ class Backend:
         if(nearest_picture==1){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(rectangle.xy);ivec2 index=ivec2(texelFetch(source_coordinates,ivec2(d.x,0),0).r,texelFetch(source_coordinates,ivec2(d.y,1),0).r);p=texelFetch(picture,index,0);}
         else p=texture(picture,uv); float a=source_alpha==1?p.a:1.0;
         if(mask_mode>0){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(mask_rectangle.xy);d=clamp(d,ivec2(0),ivec2(mask_rectangle.zw)-ivec2(1));ivec2 index=ivec2(texelFetch(mask_coordinates,ivec2(d.x,0),0).r,texelFetch(mask_coordinates,ivec2(d.y,1),0).r);vec4 v=texelFetch(opacity,index,0);a*=mask_mode==2?v.a:v.r;}
-        if(foreground_enabled==1){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);p.rgb=clamp(p.rgb*(e.a*255.0/16.0)+e.rgb,0.0,1.0);} color=vec4(p.rgb,a); }
+        if(foreground_enabled==1){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);p.rgb=clamp(p.rgb*(e.a*255.0/16.0)+e.rgb,0.0,1.0);}
+        if(foreground_enabled==2){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);float eva=e.r*255.0/16.0;float evb=e.g*255.0/16.0;color=vec4(p.rgb*eva*a,a*(1.0-evb));return;} color=vec4(p.rgb,a); }
         ''')
         self.vao=self.ctx.vertex_array(self.program,[]);self.program['foreground']=4;self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
         self.ctx.enable(gl.BLEND);self.ctx.blend_func=(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA)
@@ -193,13 +194,18 @@ class Backend:
                 fl,ft,fr,fb=op['foreground_rect'];uniform('foreground_rectangle',(fl,ft,fr-fl,fb-ft))
             picture.use(0)
             if effect_texture is not None:effect_texture.use(4)
-            uniform('foreground_enabled',int(effect is not None))
+            mode_self=effect is not None and op.get('foreground_mode')==2
+            uniform('foreground_enabled',(2 if mode_self else 1) if effect is not None else 0)
+            # picture*EVA + behind*EVB needs premultiplied blending: out = src + dst*(1-alpha)
+            if mode_self!=getattr(self,'premultiplied',False):
+                self.premultiplied=mode_self;self.ctx.blend_func=(self.gl.ONE,self.gl.ONE_MINUS_SRC_ALPHA,self.gl.ONE,self.gl.ONE_MINUS_SRC_ALPHA) if mode_self else (self.gl.SRC_ALPHA,self.gl.ONE_MINUS_SRC_ALPHA,self.gl.ONE,self.gl.ONE_MINUS_SRC_ALPHA)
             if opacity is not None:opacity.use(1)
             if picture_coordinates is not None:picture_coordinates.use(2)
             if mask_coordinates is not None:mask_coordinates.use(3)
             uniform('mask_mode',mode);uniform('source_alpha',int(op['alpha']))
             self.vao.render(self.gl.TRIANGLE_STRIP,vertices=4)
         self.ctx.scissor=None
+        if getattr(self,'premultiplied',False):self.premultiplied=False;self.ctx.blend_func=(self.gl.SRC_ALPHA,self.gl.ONE_MINUS_SRC_ALPHA,self.gl.ONE,self.gl.ONE_MINUS_SRC_ALPHA)
         if draw_only:return frame
         if pipeline_tag is not None:
             slot=self.read_slot;self.read_slot=1-slot
@@ -227,9 +233,9 @@ class Surface:
     def from_native(cls,native,size):
         result=cls(size);result.draw(Image.fromarray(np.asarray(native)),(0,0,*size),nearest=True);return result
 
-    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False,foreground=None,foreground_rect=None):
+    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False,foreground=None,foreground_rect=None,foreground_mode=1):
         self.pixels=None
-        self.ops.append(dict(image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha,foreground=foreground,foreground_rect=foreground_rect or rect))
+        self.ops.append(dict(image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha,foreground=foreground,foreground_rect=foreground_rect or rect,foreground_mode=foreground_mode))
 
     def paste(self,image,box=(0,0),mask=None):
         self.pixels=None

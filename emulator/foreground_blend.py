@@ -140,3 +140,31 @@ def blend_part(art,packed,eligible,coeff):
     blended=np.minimum(255,(pixels[:,:,:3].astype('uint16')*evb[:,:,None]+colors*eva[:,:,None])//16)
     pixels[active,:3]=blended[active].astype('uint8')
     return Image.fromarray(pixels)
+
+
+SELF_BLEND=os.environ.get('SRWW_SELF_BLEND','1')!='0'
+
+def self_plane(packed,layers,layer):
+    """Blend coefficients of a BG that is itself the first target (a fading cut-in).
+
+    The records hold, for each pixel the DS blended, the first-target BG and
+    the EVA/EVB in force on that scanline. When that BG is the picture being
+    replaced, the HD picture has to be mixed with what lies behind it by the
+    same coefficients: picture*EVA/16 + behind*EVB/16. They are scanline
+    values, so each row takes the coefficients of the layer's own pixels on
+    that row and rows where it has none take the nearest row's, which keeps
+    the smooth HD outline outside the native silhouette on the same fade.
+    Returns an RGBA picture (R=EVA, G=EVB, 0..16) or None when the layer is
+    opaque everywhere (EVA 16, EVB 0) or not a blended first target at all.
+    """
+    if not SELF_BLEND or packed is None:return None
+    own=((((packed>>15)&7).astype('int16')-1)==layer)&(np.asarray(layers)==layer)
+    rows=np.flatnonzero(own.any(1))
+    if not len(rows):return None
+    eva=np.minimum((packed>>18)&31,16).astype('uint8');evb=np.minimum((packed>>23)&31,16).astype('uint8')
+    first=own.argmax(1);row_eva=eva[np.arange(len(eva)),first];row_evb=evb[np.arange(len(evb)),first]
+    if np.all(row_eva[rows]==16) and np.all(row_evb[rows]==0):return None
+    nearest=rows[np.abs(np.arange(packed.shape[0])[:,None]-rows[None,:]).argmin(1)]
+    plane=np.zeros((*packed.shape,4),dtype='uint8');plane[:,:,0]=row_eva[nearest][:,None];plane[:,:,1]=row_evb[nearest][:,None];plane[:,:,3]=255
+    return Image.fromarray(plane)
+
