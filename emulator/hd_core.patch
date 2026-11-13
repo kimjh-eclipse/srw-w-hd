@@ -1,5 +1,5 @@
 diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
-index 026bf14..0e3a4c7 100644
+index 026bf14..8a5875f 100644
 --- a/desmume/src/GPU.cpp
 +++ b/desmume/src/GPU.cpp
 @@ -24,6 +24,7 @@
@@ -10,7 +10,7 @@ index 026bf14..0e3a4c7 100644
  #include <iostream>
  
  #include "common.h"
-@@ -38,6 +39,156 @@
+@@ -38,6 +39,164 @@
  #include "matrix.h"
  #include "emufile.h"
  #include "utils/task.h"
@@ -22,6 +22,14 @@ index 026bf14..0e3a4c7 100644
 +uint32_t SRWWHD_Layers[4][12]={0};
 +uint64_t SRWWForeground[256*192]={0};
 +uint32_t SRWWForegroundActive=0;
++// Per pixel, which of BG0-3/OBJ (bits 0-4) the window test let through when
++// the scanline was drawn. A layer the game has switched off inside a window
++// (a full-screen flash) must not be painted back by the HD compositor.
++uint8_t SRWWWindow[256*192]={0};
++uint32_t SRWWWindowActive=0;
++// When set, single- and two-colour OBJ are also reported as unknown parts
++// (for coverage checks; the player leaves it off).
++uint32_t SRWWUnknownFlat=0;
 +struct SRWWCutin { uint32_t id,width,height; };
 +static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 +static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -167,7 +175,7 @@ index 026bf14..0e3a4c7 100644
  
  
  #ifdef FASTBUILD
-@@ -4138,6 +4289,17 @@ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo
+@@ -4138,6 +4297,17 @@ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo
  	compInfo.target.lineColor32 = (FragmentColor *)compInfo.target.lineColorHeadNative + srcX;
  	
  	const bool enableColorEffect = (WILLPERFORMWINDOWTEST) ? (this->_enableColorEffectNative[compInfo.renderState.selectedLayerID][compInfo.target.xNative] != 0) : true;
@@ -185,7 +193,7 @@ index 026bf14..0e3a4c7 100644
  	this->_PixelComposite<COMPOSITORMODE, OUTPUTFORMAT, GPULayerType_BG>(compInfo, srcColor16, enableColorEffect, 0, 0);
  }
  
-@@ -5217,6 +5379,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+@@ -5217,6 +5387,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
  	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
  	{
  		OAMAttributes spriteInfo = this->_oamList[spriteNum];
@@ -194,7 +202,7 @@ index 026bf14..0e3a4c7 100644
  		
  		//for each sprite:
  		if (cost >= 2130)
-@@ -5633,6 +5797,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+@@ -5633,6 +5805,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
  	//how it interacts with this. I wish we knew why we needed this
  	
  	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
@@ -202,7 +210,23 @@ index 026bf14..0e3a4c7 100644
  	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
  	
  	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
-@@ -6395,6 +6560,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+@@ -6328,6 +6501,15 @@ void GPUEngineBase::_PerformWindowTesting(GPUEngineCompositorInfo &compInfo)
+ 			CopyLineExpand<-1, false, false, 1>(this->_enableColorEffectCustom[layerID], this->_enableColorEffectNative[layerID], compInfo.line.widthCustom, 1);
+ 		}
+ 	}
++	if(SRWWHD_Enabled && this->_engineID==SRWWTargetEngine() && compInfo.line.indexNative<192) {
++		uint8_t *row=SRWWWindow+compInfo.line.indexNative*256;
++		for(size_t x=0;x<256;x++) {
++			uint8_t bits=0;
++			for(size_t l=0;l<5;l++)if(!this->_isBGLayerShown[l] || this->_didPassWindowTestNative[l][x])bits|=(uint8_t)(1u<<l);
++			row[x]=bits;
++		}
++		SRWWWindowActive=1;
++	}
+ }
+ 
+ template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST, bool WILLDEFERCOMPOSITING>
+@@ -6395,6 +6577,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
  {
@@ -227,7 +251,7 @@ index 5807cef..402b70b 100644
  	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
  	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
 diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
-index 2314af9..9f5755e 100644
+index 2314af9..180a0ad 100644
 --- a/desmume/src/frontend/libretro/libretro.cpp
 +++ b/desmume/src/frontend/libretro/libretro.cpp
 @@ -14,6 +14,10 @@
@@ -241,7 +265,7 @@ index 2314af9..9f5755e 100644
  #include "SPU.h"
  #include "emufile.h"
  #include "common.h"
-@@ -70,6 +74,96 @@ enum {
+@@ -70,6 +74,103 @@ enum {
  
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
@@ -292,12 +316,16 @@ index 2314af9..9f5755e 100644
 +extern "C" RETRO_API void retro_srw_get_robot_state(int *out) { if(out) memcpy(out,SRWWRobot_Info,sizeof(SRWWRobot_Info)); }
 +extern "C" RETRO_API void retro_srw_copy_rendered_obj(void *out) { if(out) memcpy(out,SRWWRobot_OAM,sizeof(SRWWRobot_OAM)); }
 +extern "C" RETRO_API void retro_srw_register_parts(const unsigned *hashes,unsigned count) { if(hashes && count<200000) SRWWRegisterParts(hashes,count); }
++extern "C" RETRO_API void retro_srw_register_effect_parts(const unsigned *ids,unsigned count) { if(count<200000) SRWWRegisterEffectParts(ids,count); }
 +extern "C" RETRO_API void retro_srw_register_indexed_parts(const unsigned *hashes,const unsigned *bindings,unsigned count) { if(hashes && bindings && count<200000) SRWWRegisterIndexedParts(hashes,bindings,count); }
 +extern "C" RETRO_API void retro_srw_register_cutins(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutins(rows,count); }
 +extern void SRWWRegisterCutinMaps(const unsigned *rows,unsigned count);
 +extern "C" RETRO_API void retro_srw_register_cutin_maps(const unsigned *rows,unsigned count) { if(rows && count<4096)SRWWRegisterCutinMaps(rows,count); }
 +extern "C" RETRO_API unsigned retro_srw_native_hd_fallback() { return 1; }
 +extern "C" RETRO_API void retro_srw_texture_cache_stats(unsigned *out) { if(out)memcpy(out,SRWWTextureCacheStats,sizeof(SRWWTextureCacheStats)); }
++extern "C" RETRO_API unsigned retro_srw_copy_cached_obj(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,void *indices,unsigned indexCount,void *palette,unsigned paletteCount) {
++   return SRWWCopyCachedOBJ(engine,sprite,row,rowCount,indices,indexCount,palette,paletteCount);
++}
 +extern "C" RETRO_API unsigned retro_srw_dynamic_parts() { return 200000; }
 +extern "C" RETRO_API void retro_srw_add_dynamic_part(unsigned hash,unsigned material,unsigned binding) { SRWWAddDynamicPart(hash,material,binding); }
 +extern "C" RETRO_API void retro_srw_copy_unknown_parts(void *rows,void *pixels,void *palettes) {
@@ -319,6 +347,9 @@ index 2314af9..9f5755e 100644
 +extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
 +extern "C" RETRO_API int retro_srw_copy_foreground(void *out) { if(out && SRWWForegroundActive)memcpy(out,SRWWForeground,sizeof(SRWWForeground));return SRWWForegroundActive?1:0; }
 +extern "C" RETRO_API unsigned retro_srw_foreground_format(void) { return 3; }
++// 256x192 bytes, bits 0-4 = BG0-3/OBJ passed the window test on that pixel. Returns 0 when no scanline used windows.
++extern "C" RETRO_API int retro_srw_copy_window(void *out) { if(out && SRWWWindowActive)memcpy(out,SRWWWindow,sizeof(SRWWWindow));return SRWWWindowActive?1:0; }
++extern "C" RETRO_API void retro_srw_set_unknown_flat(unsigned enabled) { SRWWUnknownFlat=enabled?1:0; }
 +extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
 +   if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
 +   if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));
@@ -338,7 +369,7 @@ index 2314af9..9f5755e 100644
  static retro_input_poll_t poll_cb = NULL;
  static retro_input_state_t input_cb = NULL;
  retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -2075,10 +2169,13 @@ void retro_run (void)
+@@ -2075,10 +2176,13 @@ void retro_run (void)
     // RUN
     frameIndex ++;
     bool skipped = frameIndex <= frameSkip;
@@ -356,7 +387,7 @@ diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd.h
-@@ -0,0 +1,41 @@
+@@ -0,0 +1,47 @@
 +// Project-local GPL-2.0-or-later HD cut-in bridge.
 +#ifndef SRWW_HD_H
 +#define SRWW_HD_H
@@ -367,6 +398,9 @@ new file mode 100644
 +extern uint32_t SRWWHD_Layers[4][12];
 +extern uint64_t SRWWForeground[256*192];
 +extern uint32_t SRWWForegroundActive;
++extern uint8_t SRWWWindow[256*192];
++extern uint32_t SRWWWindowActive;
++extern uint32_t SRWWUnknownFlat;
 +extern int32_t SRWWRobot_Info[8];
 +extern uint8_t SRWWRobot_OAM[1024];
 +extern uint8_t SRWWNativeOwner[256*192];
@@ -386,6 +420,7 @@ new file mode 100644
 +extern uint16_t SRWWSubUnknownPalettes[128*16];
 +void SRWWAddDynamicPart(uint32_t hash,uint32_t material,uint32_t binding);
 +void SRWWRegisterParts(const uint32_t *hashes,unsigned count);
++void SRWWRegisterEffectParts(const uint32_t *ids,unsigned count);
 +void SRWWRegisterIndexedParts(const uint32_t *hashes,const uint32_t *bindings,unsigned count);
 +void SRWWRegisterCutins(const uint32_t *rows,unsigned count);
 +void SRWWRegisterCutinMapWindows(const uint32_t *rows,unsigned count);
@@ -398,6 +433,8 @@ new file mode 100644
 +#endif
 +
 +extern uint32_t SRWWTextureCacheStats[6];
++unsigned SRWWCopyCachedOBJ(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,
++                         void *indices,unsigned indexCount,void *palette,unsigned paletteCount);
 diff --git a/desmume/src/srww_hd_signatures.h b/desmume/src/srww_hd_signatures.h
 new file mode 100644
 --- /dev/null
@@ -408,7 +445,7 @@ diff --git a/desmume/src/srww_parts_impl.h b/desmume/src/srww_parts_impl.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_parts_impl.h
-@@ -0,0 +1,173 @@
+@@ -0,0 +1,184 @@
 +// Project-local GPL-2.0-or-later content-addressed HD OBJ renderer bridge.
 +#include <unordered_map>
 +#include <vector>
@@ -439,6 +476,14 @@ new file mode 100644
 +#define SRWW_UNIT_FALLBACK_DEFAULT 10
 +#endif
 +static uint8_t SRWWReadyParts[200000]={0};
++// Explicitly annotated independent VFX do not belong to a palette-slot unit.
++// This is classification only; it never makes a texture ready.
++static uint8_t SRWWEffectParts[200000]={0};
++void SRWWRegisterEffectParts(const uint32_t *ids,unsigned count) {
++    memset(SRWWEffectParts,0,sizeof(SRWWEffectParts));
++    if(!ids)return;
++    for(unsigned i=0;i<count;i++)if(ids[i]>0 && ids[i]<200000)SRWWEffectParts[ids[i]]=1;
++}
 +void SRWWSetReadyParts(const uint32_t *ids,unsigned count) {
 +    SRWWAsyncParts=true;memset(SRWWReadyParts,0,sizeof(SRWWReadyParts));
 +    for(unsigned i=0;i<count;i++)if(ids[i]<200000)SRWWReadyParts[ids[i]]=1;
@@ -453,6 +498,7 @@ new file mode 100644
 +uint32_t SRWWTargetEngine() { return GPU->GetEngineMain()->GetTargetDisplayByID()==NDSDisplayID_Main?0:1; }
 +void SRWWRegisterParts(const uint32_t *hashes,unsigned count) {
 +    SRWWAsyncParts=false;SRWWResetTextureCache();
++    memset(SRWWEffectParts,0,sizeof(SRWWEffectParts));
 +    SRWWDynamicBindings.clear();
 +    SRWWPartBindings.clear();
 +    for(unsigned i=0;i<256;i++) {uint32_t c=i;for(unsigned j=0;j<8;j++)c=(c>>1)^((c&1)?0xedb88320u:0);SRWWCrcTable[i]=c;}
@@ -476,7 +522,7 @@ new file mode 100644
 +        static const int widths[3][4]={{8,16,32,64},{16,32,32,64},{8,8,16,32}};
 +        static const int heights[3][4]={{8,16,32,64},{8,8,16,32},{16,32,32,64}};
 +        // Per palette group: 0 absent, 1 native only, 2 has an HD binding.
-+        uint8_t unitState[128]={0},unitGroup[128]={0};uint16_t unitOpaque[128]={0};
++        uint8_t unitState[128]={0},unitGroup[128]={0},unitEffect[128]={0};uint16_t unitOpaque[128]={0};
 +        for(unsigned i=0;i<128;i++) {
 +            const unsigned a=LE_TO_LOCAL_16(raw[i*4]),b=LE_TO_LOCAL_16(raw[i*4+1]),c=LE_TO_LOCAL_16(raw[i*4+2]);
 +            if((!(a&256)&&(a&512)) || (a>>14)==3 || ((a>>10)&3)>=2)continue;
@@ -507,7 +553,7 @@ new file mode 100644
 +            }
 +            if(!binding) {
 +                unsigned colors=0;for(uint32_t mask=usedMask;mask;mask&=mask-1)colors++;
-+                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<(secondary?192:120)) {
++                if(!eight && w*h>=64 && opaque>=24 && (colors>=3 || (SRWWUnknownFlat && colors>=1)) && screenY<(secondary?192:120)) {
 +                    uint32_t *unknown=(secondary?SRWWSubUnknownParts:SRWWUnknownParts)+i*8;
 +                    unknown[0]=indexHash;unknown[1]=w;unknown[2]=h;unknown[3]=a;unknown[4]=b;unknown[5]=c;unknown[6]=hash;unknown[7]=material;
 +                    memcpy((secondary?SRWWSubUnknownPixels:SRWWUnknownPixels)+i*4096,nativeIndices,w*h);
@@ -516,6 +562,7 @@ new file mode 100644
 +                continue;
 +            }
 +            unitState[i]=2;
++            unitEffect[i]=(binding<200000 && SRWWEffectParts[binding])?1:0;
 +            uint32_t *part=parts+i*8;
 +            part[0]=binding;part[1]=a;part[2]=b;part[3]=c;part[4]=hash;
 +            for(unsigned k=0;k<16;k++)palettes[i*16+k]=LE_TO_LOCAL_16(palette[k]);
@@ -533,13 +580,13 @@ new file mode 100644
 +        if(limit && GPU && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG3).tileEntryAddress==0x06018000u && GPU->GetEngineMain()->GetBGLayerInfoByID(GPULayerID_BG2).tileEntryAddress==0x06010000u) {
 +            unsigned painted[17]={0},kept[17]={0};
 +            for(unsigned i=0;i<128;i++) {
-+                if(!unitState[i])continue;
++                if(!unitState[i] || unitEffect[i])continue;
 +                if(unitState[i]==2 && !(parts[i*8+7]&0x80000000u))painted[unitGroup[i]]+=unitOpaque[i];
 +                else kept[unitGroup[i]]+=unitOpaque[i];
 +            }
 +            for(unsigned i=0;i<128;i++) {
 +                const unsigned group=unitGroup[i];
-+                if(unitState[i]==2 && kept[group]*100u>=(unsigned)limit*(painted[group]+kept[group]))parts[i*8+7]|=0x80000000u;
++                if(unitState[i]==2 && !unitEffect[i] && kept[group]*100u>=(unsigned)limit*(painted[group]+kept[group]))parts[i*8+7]|=0x80000000u;
 +            }
 +        }
 +    }
@@ -551,6 +598,7 @@ new file mode 100644
 +
 +void SRWWBeginPartsFrame() {
 +    memset(SRWWForeground,0,sizeof(SRWWForeground));SRWWForegroundActive=0;
++    memset(SRWWWindow,0x1f,sizeof(SRWWWindow));SRWWWindowActive=0;
 +    memset(SRWWSubParts,0,sizeof(SRWWSubParts));
 +    memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
 +    memset(SRWWSubUnknownParts,0,sizeof(SRWWSubUnknownParts));
@@ -975,7 +1023,7 @@ diff --git a/desmume/src/srww_texture_cache.h b/desmume/src/srww_texture_cache.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_texture_cache.h
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,82 @@
 +// GPL-2.0-or-later. Content-validated cache; VRAM and palettes are compared
 +// every frame, so animation uploads, recolors, bank remaps and state reloads
 +// invalidate naturally. Never key a texture by its address alone.
@@ -993,6 +1041,23 @@ new file mode 100644
 +static SRWWTextureIdentity SRWWObjTextures[2][128];
 +static SRWWBGTextureIdentity SRWWBGTextures[2][4][1024];
 +uint32_t SRWWTextureCacheStats[6]={0};
++// Read-only diagnostic snapshot. Counts are elements, not bytes; no cache
++// lookup or refresh occurs here. Callers must use this frame's rendered OAM.
++unsigned SRWWCopyCachedOBJ(unsigned engine,unsigned sprite,unsigned *row,unsigned rowCount,
++                         void *indices,unsigned indexCount,void *palette,unsigned paletteCount) {
++    if(engine>=2 || sprite>=128)return 0;
++    const auto &cache=SRWWObjTextures[engine][sprite];
++    if(!cache.valid || !cache.w || !cache.h || cache.w>64 || cache.h>64)return 0;
++    const unsigned pixels=cache.w*cache.h,palettes=cache.eight?256:16;
++    if((row && rowCount<8) || (indices && indexCount<pixels) || (palette && paletteCount<palettes))return 0;
++    if(row) {
++        row[0]=cache.w;row[1]=cache.h;row[2]=cache.hash;row[3]=cache.indexHash;
++        row[4]=cache.material;row[5]=cache.usedMask;row[6]=cache.opaque;row[7]=cache.eight?1:0;
++    }
++    if(indices)memcpy(indices,cache.indices,pixels);
++    if(palette)memcpy(palette,cache.palette,palettes*sizeof(uint16_t));
++    return 1;
++}
 +static void SRWWResetTextureCache() {
 +    for(unsigned e=0;e<2;e++) {
 +        for(unsigned i=0;i<128;i++)SRWWObjTextures[e][i].valid=false;

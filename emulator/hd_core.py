@@ -49,6 +49,9 @@ class Core:
         self.foreground_buffer=np.zeros((192,256),dtype='uint64');self.effect_foreground=None
         self.foreground_bridge=hasattr(self.api,'retro_srw_foreground_format') and self.api.retro_srw_foreground_format()==3
         if self.foreground_bridge:self.api.retro_srw_copy_foreground.argtypes=[C.c_void_p]
+        # Which layers the DS window test let through on each pixel of the frame just drawn.
+        self.window_buffer=np.zeros((192,256),dtype='uint8');self.window=None;self.window_bridge=hasattr(self.api,'retro_srw_copy_window')
+        if self.window_bridge:self.api.retro_srw_copy_window.argtypes=[C.c_void_p]
         self.layer_cutin_bridge=hasattr(self.api,'retro_srw_get_hd_layers')
         if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers.argtypes=[C.c_void_p]
         self.robot=(C.c_int*8)()
@@ -210,6 +213,8 @@ class Core:
         if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers(self.cutin_layers.ctypes.data)
         self.api.retro_srw_copy_layer_ids(self.ids.ctypes.data);self.hd[10]=int(self.enabled)
         self.effect_foreground=self.foreground_buffer if self.foreground_bridge and self.api.retro_srw_copy_foreground(self.foreground_buffer.ctypes.data) else None
+        # None unless some layer is actually shut out somewhere this frame.
+        self.window=self.window_buffer if self.window_bridge and self.api.retro_srw_copy_window(self.window_buffer.ctypes.data) and bool((self.window_buffer!=0x1f).any()) else None
         self.api.retro_srw_get_robot_state(self.robot)
         self.api.retro_srw_copy_rendered_obj(self.obj)
         self.api.retro_srw_copy_parts(self.parts.ctypes.data,self.owners.ctypes.data)

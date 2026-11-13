@@ -47,6 +47,14 @@ uint32_t SRWWHD_Enabled=0,SRWWHD_Frame=0,SRWWHD_Info[12]={0};
 uint32_t SRWWHD_Layers[4][12]={0};
 uint64_t SRWWForeground[256*192]={0};
 uint32_t SRWWForegroundActive=0;
+// Per pixel, which of BG0-3/OBJ (bits 0-4) the window test let through when
+// the scanline was drawn. A layer the game has switched off inside a window
+// (a full-screen flash) must not be painted back by the HD compositor.
+uint8_t SRWWWindow[256*192]={0};
+uint32_t SRWWWindowActive=0;
+// When set, single- and two-colour OBJ are also reported as unknown parts
+// (for coverage checks; the player leaves it off).
+uint32_t SRWWUnknownFlat=0;
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -6492,6 +6500,15 @@ void GPUEngineBase::_PerformWindowTesting(GPUEngineCompositorInfo &compInfo)
 			CopyLineExpand<-1, false, false, 1>(this->_didPassWindowTestCustom[layerID], this->_didPassWindowTestNative[layerID], compInfo.line.widthCustom, 1);
 			CopyLineExpand<-1, false, false, 1>(this->_enableColorEffectCustom[layerID], this->_enableColorEffectNative[layerID], compInfo.line.widthCustom, 1);
 		}
+	}
+	if(SRWWHD_Enabled && this->_engineID==SRWWTargetEngine() && compInfo.line.indexNative<192) {
+		uint8_t *row=SRWWWindow+compInfo.line.indexNative*256;
+		for(size_t x=0;x<256;x++) {
+			uint8_t bits=0;
+			for(size_t l=0;l<5;l++)if(!this->_isBGLayerShown[l] || this->_didPassWindowTestNative[l][x])bits|=(uint8_t)(1u<<l);
+			row[x]=bits;
+		}
+		SRWWWindowActive=1;
 	}
 }
 

@@ -1,6 +1,7 @@
 """FHD presentation for the custom DeSmuME cut-in bridge."""
 from pathlib import Path
 from collections import OrderedDict
+import os
 import zlib
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont,ImageFilter,ImageChops
@@ -78,7 +79,7 @@ class HDRenderer:
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
-    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None):
+    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None):
         self.frame_number=getattr(self,'frame_number',0)+1;self.text_renderer.frame_token=self.frame_number
         if effect_foreground is not None:
             # No blending BG anywhere on this frame: skip every per-layer test.
@@ -111,6 +112,8 @@ class HDRenderer:
         if hd[10]:self.text_renderer.recognize(native)
         hud_mask=getattr(self.text_renderer,'hud_mask',None) if hd[10] else None
         self.backgrounds.hud_mask=hud_mask;self.battle_backgrounds.hud_mask=hud_mask
+        if os.environ.get('SRWW_WINDOW_MASK','1')=='0':window=None
+        self.backgrounds.window=window;self.battle_backgrounds.window=window
         menu_kind=self.menu_scene.identify(backgrounds,parts) if hd[10] and not hd[0] else None
         if self.gpu_composition:
             from gpu_surface import Surface
@@ -184,6 +187,10 @@ class HDRenderer:
                 if foreground_mask.any():
                     visible[foreground_mask]=255
                     if self.gpu_composition:foreground=gpu_plane(effect_foreground,layer_ids,bgpriors,int(cutin[6]),int(cutin[5]))
+            if window is not None:
+                # The game has shut this BG out inside a window (a full-screen
+                # flash): the HD picture must stay out of it as well.
+                visible[((window>>int(cutin[5]))&1)==0]=0
             # Native dialogue cells are opaque DS tiles. They must not
             # punch rectangular holes through a painted foreground cut-in;
             # transparent HD lettering is drawn after the complete scene.
@@ -220,7 +227,7 @@ class HDRenderer:
         if parts is not None:
             # BG effects/cut-ins and OBJ parts share one native priority order.
             # A cloudy BG must not be drawn over an already painted front OBJ.
-            self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused,effect_foreground=effect_foreground,background_planes=planes)
+            self.parts_renderer.compose(top,parts,obj,parts_layer_ids,owners,bgpriors,bgparts,part_palettes,allow_native_fallback=paused,effect_foreground=effect_foreground,background_planes=planes,window=window)
         else:
             for _,_,paint in sorted(planes,key=lambda row:row[:2],reverse=True):paint(top)
         # Character presentation is above units/weapons, below final dialogue.
@@ -275,8 +282,8 @@ class HDRenderer:
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
 
-    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None):
-        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers,effect_foreground)
+    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None):
+        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers,effect_foreground,window)
         if hasattr(top,'to_pil'):top=top.to_pil()
         if top.size!=(1440,1080):top=top.resize((1440,1080),Image.Resampling.LANCZOS)
         canvas=Image.new('RGB',(1920,1080));canvas.paste(top,(0,0))

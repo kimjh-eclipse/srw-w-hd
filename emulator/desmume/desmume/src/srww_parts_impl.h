@@ -105,7 +105,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
             }
             if(!binding) {
                 unsigned colors=0;for(uint32_t mask=usedMask;mask;mask&=mask-1)colors++;
-                if(!eight && w*h>=64 && opaque>=24 && colors>=3 && screenY<(secondary?192:120)) {
+                if(!eight && w*h>=64 && opaque>=24 && (colors>=3 || (SRWWUnknownFlat && colors>=1)) && screenY<(secondary?192:120)) {
                     uint32_t *unknown=(secondary?SRWWSubUnknownParts:SRWWUnknownParts)+i*8;
                     unknown[0]=indexHash;unknown[1]=w;unknown[2]=h;unknown[3]=a;unknown[4]=b;unknown[5]=c;unknown[6]=hash;unknown[7]=material;
                     memcpy((secondary?SRWWSubUnknownPixels:SRWWUnknownPixels)+i*4096,nativeIndices,w*h);
@@ -150,6 +150,7 @@ bool SRWWHD_ShouldSkipRobot(uint32_t engine,uint32_t sprite,const void *oam) {
 
 void SRWWBeginPartsFrame() {
     memset(SRWWForeground,0,sizeof(SRWWForeground));SRWWForegroundActive=0;
+    memset(SRWWWindow,0x1f,sizeof(SRWWWindow));SRWWWindowActive=0;
     memset(SRWWSubParts,0,sizeof(SRWWSubParts));
     memset(SRWWUnknownParts,0,sizeof(SRWWUnknownParts));
     memset(SRWWSubUnknownParts,0,sizeof(SRWWSubUnknownParts));

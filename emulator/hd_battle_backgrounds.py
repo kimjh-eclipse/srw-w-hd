@@ -202,10 +202,13 @@ class BattleBackgroundRenderer:
                 extra=getattr(self,'hud_mask',None) if layer==3 else None
                 restoration=getattr(self,'restoration_mask',None) if layer==getattr(self,'restoration_layer',None) else None
                 if restoration is not None:extra=restoration if extra is None else (extra|restoration)
-                mask_key=(self.current_ids_signature,layer,image.size,None if extra is None else extra.tobytes())
+                window=getattr(self,'window',None)
+                mask_key=(self.current_ids_signature,layer,image.size,None if extra is None else extra.tobytes(),None if window is None else window.tobytes())
                 mask=self.gpu_masks.pop(mask_key,None)
                 if mask is None:
-                    mask=Image.fromarray(((layer_ids==layer) if extra is None else ((layer_ids==layer)|extra)).astype('uint8')*255)
+                    shown=(layer_ids==layer) if extra is None else ((layer_ids==layer)|extra)
+                    if window is not None:shown=shown&(((window>>layer)&1)!=0)   # shut out by a window (flash): keep the HD backdrop out too
+                    mask=Image.fromarray(shown.astype('uint8')*255)
                     if not SHORTCUTS:mask=mask.resize(image.size,Image.Resampling.NEAREST)
                 self.gpu_masks[mask_key]=mask
                 while len(self.gpu_masks)>2:self.gpu_masks.popitem(last=False)

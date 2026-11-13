@@ -155,6 +155,10 @@ class PartsRenderer:
             w,h=int(row[1]),int(row[2])
             if is_menu_gradient(pixels[i,:w*h],w,h):
                 self.unmapped_seen.add(identity);continue
+            # Flat fills (fewer than three colours) are only reported when a
+            # coverage check asks the core for them; there is nothing to assemble.
+            if np.count_nonzero(np.bincount(pixels[i,:w*h],minlength=16)[1:])<3:
+                self.unmapped_seen.add(identity);continue
             encoded=base64.b64encode(zlib.compress(pixels[i,:w*h].tobytes())).decode('ascii');palette=palettes[i].tolist()
             request=(encoded,w,h,palette);colors=np.asarray(palette,dtype='uint32');rgb=np.stack([(colors&31)*255//31,((colors>>5)&31)*255//31,((colors>>10)&31)*255//31],-1).tolist()
             descriptor=dict(hash=int(row[6]),index_hash=int(row[0]),w=w,h=h,x=0,y=0,runtime_texture=True,dynamic_palette=True,original_palette_rgb=rgb,index_pixels=encoded)
@@ -647,7 +651,7 @@ class PartsRenderer:
         while len(masks)>256:masks.popitem(last=False)
         return image
 
-    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False,effect_foreground=None,background_planes=()):
+    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False,effect_foreground=None,background_planes=(),window=None):
         if self.async_prepare:self.collect_prepared()
         active=[i for i in range(128) if parts[i,0]]
         native_attrs=np.frombuffer(oam,dtype='<u2').reshape(128,4)
@@ -718,6 +722,11 @@ class PartsRenderer:
                     visibility_state=1;foreground=(packed,eligible)
             # Alpha-blended BG effects retain a BG layer ID even when the
             # underlying OBJ is visible through them (e.g. the battle flash).
+            if window is not None:
+                # A layer the game shut out inside a window is not drawn there.
+                shut=((window[upper:lower,left:right]>>(i if kind else 4))&1)==0
+                if shut.any():
+                    visible=np.where(shut,0,visible).astype('uint8');visibility_state=1 if visible.any() else 0
             if visibility_state==0:stats['occluded']+=1;continue
             stats['drawn']+=1;stats['drawn_area']+=area
             if visibility_state==2 and (kind or (a>>10)&3!=1):

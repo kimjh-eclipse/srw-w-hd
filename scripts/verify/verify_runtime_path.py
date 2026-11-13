@@ -18,7 +18,7 @@ A scene is never reported as verified. FAIL and INCOMPLETE are objective;
 REVIEW means only that no defect this tool can measure was found, so the saved
 native/HD pair still has to be looked at.
 """
-import argparse,json,shutil,sys,time,queue
+import argparse,json,shutil,sys,time,queue,subprocess
 from collections import deque
 from pathlib import Path
 import numpy as np
@@ -53,8 +53,14 @@ def main():
     parser.add_argument('--no-rescue',action='store_true',help='measure the unguarded behaviour')
     parser.add_argument('--name',default='regression')
     parser.add_argument('--save-frames',type=int,nargs='*',default=[],help='also retain these running frame offsets for visual review')
+    parser.add_argument('--track-resource',type=int,help='record actual binding appearances for one repaired IMG resource')
+    parser.add_argument('--track-atlas',help='record actual binding appearances for one observed-palette atlas')
+    parser.add_argument('--no-effect-tags',action='store_true',help='test-only A/B: clear effect classification in this core instance')
+    parser.add_argument('--pure-native',action='store_true',help='compare against a separate HD-disabled core at identical frame offsets')
     args=parser.parse_args()
-    out=ROOT/'test_current/combat/runtime_path'/args.name
+    output_root=(ROOT/'test_current/combat/runtime_path').resolve()
+    out=(output_root/args.name).resolve()
+    if out==output_root or not out.is_relative_to(output_root):parser.error('--name must identify a folder inside test_current/combat/runtime_path')
     if out.exists():shutil.rmtree(out)
     out.mkdir(parents=True)
     fixtures=[(-1,path.resolve()) for path in args.state]
@@ -66,6 +72,9 @@ def main():
             fixtures.extend((uid,p) for p in states[::step][:args.per_unit])
         fixtures.extend((-1,ROOT/'test_current/combat'/name) for name in ('getter_cutin.state','golion_cutin.state'))
     core=Core(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds',demo=True,user_dir=out/'isolated_saves')
+    # Coverage also counts single- and two-colour OBJ (flat fills inside effects), which the player does not try to assemble.
+    if hasattr(core.api,'retro_srw_set_unknown_flat'):core.api.retro_srw_set_unknown_flat(1)
+    if args.no_effect_tags and core.effect_bridge:core.api.retro_srw_register_effect_parts(None,0)
     renderer=HDRenderer(async_parts=True,dynamic_parts=core.dynamic_bridge,gpu_composition=True);renderer.set_resolution(768)
     parts=renderer.parts_renderer
     if args.no_rescue:parts.rescue=lambda *_:None
@@ -79,8 +88,9 @@ def main():
     try:
         for uid,state in fixtures:
             if not state.exists():continue
+            label=(f'{state.parent.name}_{state.stem}' if sum(other.stem==state.stem for _,other in fixtures)>1 else state.stem)
             core.load(state);ready=Ready();history=deque();sent=-1;advertised=set()
-            frames=[];worst=None;vanish_shot=None;started=time.perf_counter();deadline=started;cutins=set()
+            frames=[];worst=None;vanish_shot=None;started=time.perf_counter();deadline=started;cutins=set();tracked={}
             for frame in range(args.frames):
                 if len(history)>args.lag:
                     generation,values,dynamic=history.popleft()
@@ -93,9 +103,9 @@ def main():
                 unknown=core.unknown_snapshot()
                 sub=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities) if core.sub_bridge else None
                 image=renderer.render_top(core.native,core.ids,tuple(core.hd),paused=False,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,
-                    part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=unknown,bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground)
+                    part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=unknown,bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground,window=getattr(core,'window',None))
                 if frame in args.save_frames:
-                    picture(image).save(out/f'{state.stem}_running_{frame}.png')
+                    picture(image).save(out/f'{label}_running_{frame}.png')
                 top=parts.last_stats
                 renderer.render_bottom(core.native,tuple(core.hd))
                 bottom=parts.last_stats if parts.last_stats is not top else {}
@@ -119,6 +129,13 @@ def main():
                 # held back because its unit is only partly painted.
                 held=loading=0
                 for entry in core.parts[core.parts[:,0]>0]:
+                    if args.track_resource is not None or args.track_atlas:
+                        binding=int(entry[0]);spec=parts.bindings[binding-1]
+                        if ((args.track_resource is not None and spec.get('resource')==args.track_resource) or
+                                (args.track_atlas and spec.get('atlas_id')==args.track_atlas)):
+                            count=tracked.setdefault(binding,dict(appearances=0,hd_appearances=0,first_frame=frame))
+                            count['appearances']+=1
+                            if not int(entry[7])&0x80000000:count['hd_appearances']+=1
                     if int(entry[7])&0x80000000:
                         spec=parts.bindings[int(entry[0])-1];size=spec['w']*spec['h']
                         if int(entry[0]) in advertised:held+=size
@@ -137,14 +154,30 @@ def main():
                 deadline+=1/59.8261;delay=deadline-time.perf_counter()
                 if delay>0:time.sleep(delay)
                 else:deadline=time.perf_counter()
-            name=f'{uid}_{state.stem}' if uid>=0 else state.stem
+            name=f'{uid}_{label}' if uid>=0 else label
+            native_references=out/f'{name}_native_reference'
+            if args.pure_native:
+                offsets={args.frames-1,*args.save_frames}
+                if vanish_shot:offsets.add(vanish_shot[0])
+                if worst:offsets.add(worst[1])
+                offsets={offset for offset in offsets if 0<=offset<args.frames}
+                subprocess.run([sys.executable,'-X','utf8',str(ROOT/'scripts/verify/capture_native_reference.py'),
+                    '--state',str(state),'--frames',*[str(offset) for offset in sorted(offsets)],
+                    '--output',str(native_references)],check=True,stdout=subprocess.DEVNULL)
             def save(tag,frame,native,hd):
+                if args.pure_native:
+                    with Image.open(native_references/f'native_{frame}.png') as reference:native=np.asarray(reference.convert('RGB'))
                 sheet=Image.new('RGB',(768*2,576));sheet.paste(Image.fromarray(native).resize((768,576),Image.Resampling.NEAREST),(0,0));sheet.paste(hd.resize((768,576)),(768,0))
                 path=out/f'{name}_{tag}_{frame}.png';sheet.save(path);return path.relative_to(ROOT).as_posix()
             pictures={}
             if vanish_shot:pictures['vanished']=save('vanished',*vanish_shot)
             if worst:pictures['mixed']=save('mixed',*worst[1:])
             pictures['last']=save('last',args.frames-1,last[0],picture(last[1]))
+            if args.pure_native:
+                for frame in args.save_frames:
+                    running=out/f'{label}_running_{frame}.png'
+                    if running.exists():
+                        with Image.open(running) as hd: pictures[f'frame_{frame}']=save('pure_pair',frame,None,hd.convert('RGB'))
             vanished=[f for f in frames if f['vanished'] or f['sub_vanished']]
             waiting=[f for f in frames if f['waiting'] or f['sub_waiting']]
             # After loading settles, whatever is still native has no HD art.
@@ -160,6 +193,10 @@ def main():
                 mixed_frames=sum(1 for f in frames if f['drawn'] and (f['waiting'] or f['unbound'])),hd_area_share_settled=None if share is None else round(share,3),
                 unbound_parts_max=max(f['unbound_parts'] for f in frames),hd_flips=sum(1 for x,y in zip(frames,frames[1:]) if bool(x['drawn'])!=bool(y['drawn'])),timeline=[[f['frame'],f['drawn'],f['waiting'],f['vanished'],f['unbound'],f['pending']] for f in frames[::max(1,len(frames)//30)]],render_fps=round(len(frames)/(time.perf_counter()-started),1),pictures=pictures))
             print(verdict,name,{k:rows[-1][k] for k in ('vanished_frames','rescued','loading_frames','loading_ms','held_frames','mixed_frames','hd_area_share_settled','hd_flips')},flush=True)
+            if args.track_resource is not None or args.track_atlas:
+                rows[-1]['tracked_resource']=args.track_resource
+                rows[-1]['tracked_atlas']=args.track_atlas
+                rows[-1]['tracked_bindings']=tracked
         ordered=sorted(gaps.items(),key=lambda item:-item[1]['frames']*item[0][2]*item[0][3]);listing=[]
         sheet=Image.new('RGB',(16*72,max(1,(min(len(ordered),640)+15)//16)*72),(40,44,52))
         for number,((index_hash,material,w,h),gap) in enumerate(ordered):
@@ -172,7 +209,7 @@ def main():
         (out/'gaps.json').write_text(json.dumps(dict(note='Native OBJ seen with no HD art, largest on-screen share first. gaps.png shows the first 640 in rank order, 16 per row, at native size. BG pictures and effects drawn on BG layers are not listed here.',dynamic_assembly_failures=len(parts.unmapped_misses),prepare_errors={str(k):v for k,v in parts.prepare_errors.items()},parts=listing),indent=1,ensure_ascii=False),encoding='utf-8')
         counts={}
         for row in rows:counts[row['verdict']]=counts.get(row['verdict'],0)+1
-        report=dict(scope=__doc__,texture_worker_start_seconds=worker_start,timeline_columns=['frame','hd_area','waiting_area','vanished_area','unbound_area','pending_jobs'],core=core.core_path,unit_fallback_percent=__import__('os').environ.get('SRWW_UNIT_FALLBACK_PERCENT'),options=dict(frames=args.frames,lag=args.lag,evict=args.evict,rescue=not args.no_rescue),verdicts=counts,all_campaign_scenes_verified=False,rows=rows)
+        report=dict(scope=__doc__,picture_left='pure native: independent HD-disabled core' if args.pure_native else 'core framebuffer after HD suppression; NOT a pure native baseline',texture_worker_start_seconds=worker_start,timeline_columns=['frame','hd_area','waiting_area','vanished_area','unbound_area','pending_jobs'],core=core.core_path,unit_fallback_percent=__import__('os').environ.get('SRWW_UNIT_FALLBACK_PERCENT'),options=dict(frames=args.frames,lag=args.lag,evict=args.evict,rescue=not args.no_rescue,effect_tags=not args.no_effect_tags,pure_native=args.pure_native),verdicts=counts,all_campaign_scenes_verified=False,rows=rows)
         (out/'report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
         print('Outcome',counts,'- REVIEW scenes still need a person to look at the saved pairs')
     finally:core.close();parts.close()

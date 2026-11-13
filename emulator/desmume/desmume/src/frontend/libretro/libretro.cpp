@@ -152,6 +152,9 @@ extern "C" RETRO_API void retro_srw_copy_parts(void *parts,void *owners) {
 extern "C" RETRO_API void retro_srw_copy_bg_parts(void *out) { if(out)memcpy(out,SRWWBGParts,sizeof(SRWWBGParts)); }
 extern "C" RETRO_API int retro_srw_copy_foreground(void *out) { if(out && SRWWForegroundActive)memcpy(out,SRWWForeground,sizeof(SRWWForeground));return SRWWForegroundActive?1:0; }
 extern "C" RETRO_API unsigned retro_srw_foreground_format(void) { return 3; }
+// 256x192 bytes, bits 0-4 = BG0-3/OBJ passed the window test on that pixel. Returns 0 when no scanline used windows.
+extern "C" RETRO_API int retro_srw_copy_window(void *out) { if(out && SRWWWindowActive)memcpy(out,SRWWWindow,sizeof(SRWWWindow));return SRWWWindowActive?1:0; }
+extern "C" RETRO_API void retro_srw_set_unknown_flat(unsigned enabled) { SRWWUnknownFlat=enabled?1:0; }
 extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
    if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
    if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));

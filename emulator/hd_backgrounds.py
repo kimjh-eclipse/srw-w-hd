@@ -106,6 +106,7 @@ class BackgroundRenderer:
             if error>5:continue
             if layer==getattr(self,'restoration_layer',None) and getattr(self,'restoration_mask',None) is not None:visible=visible|self.restoration_mask
             if layer==3 and getattr(self,'hud_mask',None) is not None:visible=visible|self.hud_mask
+            if getattr(self,'window',None) is not None:visible=visible&(((self.window>>layer)&1)!=0)
             if hasattr(top,'draw'):
                 if SHORTCUTS:
                     masks=self.__dict__.setdefault('native_masks',{});mask_key=(layer,visible.tobytes());mask=masks.get(mask_key)

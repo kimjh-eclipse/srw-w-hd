@@ -61,7 +61,7 @@ def main():
     def compose():
         sub=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities) if core.sub_bridge else None
         top=renderer.render_top(core.native,core.ids,tuple(core.hd),paused=False,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,
-            part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=core.unknown_snapshot(),bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground)
+            part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=core.unknown_snapshot(),bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground,window=getattr(core,'window',None))
         bottom=renderer.render_bottom(core.native,tuple(core.hd))
         gpu.render(top,components=4,draw_only=True)
         if bottom is not compose.last_bottom:gpu.render(bottom,components=4,draw_only=True);compose.last_bottom=bottom
