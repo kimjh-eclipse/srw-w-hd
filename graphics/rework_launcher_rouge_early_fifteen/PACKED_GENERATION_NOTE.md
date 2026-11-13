@@ -1,0 +1,1 @@
+pose_generated는같은기체별무손실묶음입니다. 원래생성출처와cropSHA/provenance를확인하세요. 실제게임QA는Claude대기.

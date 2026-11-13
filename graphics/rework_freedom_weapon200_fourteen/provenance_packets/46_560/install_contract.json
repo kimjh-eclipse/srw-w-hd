@@ -1,0 +1,1718 @@
+[
+  {
+    "cell": 0,
+    "slot": 0,
+    "binding": 0,
+    "hash": 2840438690,
+    "index_hash": 2435354134,
+    "index_pixels": "eJztkzkOwDAIBMF2wfH//4ZIcRcWyekiph2QMVqIMIOxX4WfhS906ZvfwzADzIK8qMJ2VdhOIo40ueOEMo/Na+HaJIcyN8kz8pBNYRY/lHyFofrEANV67vygEneDAYx86tlkTfOdC4ujAc4=",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      64
+    ],
+    "atlas_box": [
+      0,
+      0,
+      32,
+      64
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 64
+    },
+    "output_size": [
+      32,
+      64
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 0,
+      "attributes": [
+        32808,
+        49327,
+        3608
+      ],
+      "screen_x": 175,
+      "screen_y": 40,
+      "w": 32,
+      "h": 64,
+      "display_w": 32,
+      "display_h": 64,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 536,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 2840438690,
+      "index_hash": 2435354134,
+      "material": 3295600094,
+      "used_mask": 3870,
+      "opaque": 100,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJztkzkOwDAIBMF2wfH//4ZIcRcWyekiph2QMVqIMIOxX4WfhS906ZvfwzADzIK8qMJ2VdhOIo40ueOEMo/Na+HaJIcyN8kz8pBNYRY/lHyFofrEANV67vygEneDAYx86tlkTfOdC4ujAc4=",
+      "indices_sha256": "7df7d8d9188f21de6452befb8630a9c859e70d10bfe21fec4daae942f0117081",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 100
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 1,
+    "slot": 2,
+    "binding": 0,
+    "hash": 4142201474,
+    "index_hash": 1192683715,
+    "index_pixels": "eJyNkFEKwCAMQ5PqRvD+B54K25iD1PfZF9JSAGAlYeBxWj8C1vcN3sP3p57F65bcr8aOpDdHlojgHZh83jQCz4CTpfU/WtdKyV3ew/fvcAHfGQDn",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      72,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 72,
+      "y": 0,
+      "w": 32,
+      "h": 16
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 2,
+      "attributes": [
+        16480,
+        32872,
+        3668
+      ],
+      "screen_x": 104,
+      "screen_y": 96,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 596,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 4142201474,
+      "index_hash": 1192683715,
+      "material": 4195384905,
+      "used_mask": 1406,
+      "opaque": 73,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyNkFEKwCAMQ5PqRvD+B54K25iD1PfZF9JSAGAlYeBxWj8C1vcN3sP3p57F65bcr8aOpDdHlojgHZh83jQCz4CTpfU/WtdKyV3ew/fvcAHfGQDn",
+      "indices_sha256": "d362900e0f7ab3406f87fe5b163abef6065326903c49261f57380014d59ed059",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 73
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 2,
+    "slot": 3,
+    "binding": 0,
+    "hash": 1728215374,
+    "index_hash": 1473056329,
+    "index_pixels": "eJy1kDEWwzAIQy0ETCS9/20L5iXPHeytf/EgIWTGGBDK2IMJuZXjc0PM3N1Y/MoC3BcopJLT1C4pUmcGXFH6g5bLUU+GdUBWpK5wTpjPgF6gtqKQLpPzEfKgnZ41tHTNBhFYea2ojduDFLnxdLf+4fmyJ/3v5P4vWbEDUg==",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      144,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 144,
+      "y": 0,
+      "w": 32,
+      "h": 16
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 3,
+      "attributes": [
+        16464,
+        32848,
+        3604
+      ],
+      "screen_x": 80,
+      "screen_y": 80,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 532,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1728215374,
+      "index_hash": 1473056329,
+      "material": 266267664,
+      "used_mask": 61566,
+      "opaque": 240,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJy1kDEWwzAIQy0ETCS9/20L5iXPHeytf/EgIWTGGBDK2IMJuZXjc0PM3N1Y/MoC3BcopJLT1C4pUmcGXFH6g5bLUU+GdUBWpK5wTpjPgF6gtqKQLpPzEfKgnZ41tHTNBhFYea2ojduDFLnxdLf+4fmyJ/3v5P4vWbEDUg==",
+      "indices_sha256": "c07161788a46b9e8c6467151e630928e22e7a0378a5cca02f66ac80c68d01c28",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 240
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 3,
+    "slot": 4,
+    "binding": 0,
+    "hash": 4284975326,
+    "index_hash": 296067242,
+    "index_pixels": "eJzVl1mS4zgMRA0CJLVQ0v1vO5kAJVtb1/coorvsKj8gsZL+fP7Xj7z+JaVkf9KvHxHNORf9A1d7+4RklVz/KUAS8OH5b02yJa3/ECBwDvwl/kWKJinvAhA58fmFr1IsIYAXAZRuKsM0v8ivCv8I4FGASw/8cH/WsWxaLTGABwEhXYbxB/+0s3zw8I8AbgK+zqfxx+nyK6CRT1IL+Hx17pHLOE2n3K+7AMGzbCtCZwZqqXql787Jh4Dkz7atgvLhKa3aN0dd+s059UOAiOVSa4L8tQnjl7YsRwCet3B+wz+NPPrFrJa2kTdV0LL0ALpzpfPx3jXOZxlHZG1p29JMWgMDBXpy/qD9h59n8Ct5BM8M6LzYkbd3/MtPUtdl4/g6LzJXdenufLxph+nEHys9Njyi6woa9QsB0xJ04HfnospaIVWtoQpNsypoeO0CFqe79wfp0GrIFlK9BE+6YIFoCEAFggb/PK60IK3zpOE8Y3vk6KHCOTSl+hsZBpOWzBCWrbVwXgrDoICG1KKXkYRxHq70sAcEL9LW1XlFI8FIzkh50nVpnAWEMJ14iZCOd5aZ/lWKCDZvoQGmrTbHkWUUd7jAwzDtv8C6SDTgKedrutdizEZBBRDJOMZ4HTAW0LHAerHwrNu2sXVNtFSvheG3/g/PF0YrzvIznBgb8b5FHqjBgBduMMPIDWgHhHDQY9CqB57YgiktHgJlsouQCOAyySDj8OMa9IS3eDqfUqH1KHrGO0wMpFsGnp1n/B0Omv9PPX/4DHhEzLSDxzv1RiBeZCbfdZ/ovaOAgs9WDz4VTxx+Warz3XWnQ8qRPrYpPio884I39iyDhx3nHfYZkBO6V895JA6jwL7D4QvPzhdP59QflvhhhFhgwwChkWBAUrHs+YP+nDALh4GXEcSuXHwAEnsE1Ufp4D/ztaobGLv7J37hhoOF6FBakJCPLCY2svo+ZwMNDxFwQeZiuqBgOSsTKI4bPXP/lJKyRAUifT82kD3yGJjko8MCZPQhcOMi5VmQmRfUe+hl/LHBJkl+LnIRwpAWbg0MEV7myt1C9b9FCCO0EcUnr0eIEI+tIRvnA1GwJTBJeHyhxejtT/hHwZNb8RmB2QXvNk6cRkv7HsAjR78xGZj/2N58aMU7E2eG82tLRYx+DcMkEUG6JN5lweng97GEFMk4K7OHPZAqK8BFBL6GpUvpGDa7ZOQJGfw0I4EuAHs59gZ5X+ywcDZg/gA/PeTRkbjDqAeLPsZCrPHHK4+bbvarAne/eTay0+ngfbTQYByNswDekktMWEvOY96wOb2i4NM+Xgreb8VnAfCBFCemOTnPWy8D8JZBJ/Y8Z58JZMrOBjhqhc2OU5ILGuX2DjbvKNjZeeHRT+/oxnMFUTjnjUd55SSwjXmFsO+CQvOPA1PBm9ClA1Q7D/3JE4rG4QHwIzQ6q7886TfqFz9iyPvezm7wVCiu3IdvCxw9lsVPOCbRLx+YFLw8fxKn0MPFLXvx2GQwwHFPcf/Aj9uSeRKwD09vPK3wnGtDHHrdUo8CcMrHbUNcLloABioWIQ+fq4EHAayRxVXDdwkGxFJplFVvw8YxuwYl8U2K57+/z8ZqZN6k7wY+t827b+vU+Q9T4TDLaJca3L+wxq2C1Rv27uB5EdsOrfT+BTce2zO/KxNftTl+lf7k/wOuvS8K",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      64,
+      64
+    ],
+    "atlas_box": [
+      216,
+      0,
+      64,
+      64
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 216,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "output_size": [
+      64,
+      64
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 4,
+      "attributes": [
+        40,
+        49264,
+        3596
+      ],
+      "screen_x": 112,
+      "screen_y": 40,
+      "w": 64,
+      "h": 64,
+      "display_w": 64,
+      "display_h": 64,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 524,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 4284975326,
+      "index_hash": 296067242,
+      "material": 1683678306,
+      "used_mask": 65534,
+      "opaque": 2485,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJzVl1mS4zgMRA0CJLVQ0v1vO5kAJVtb1/coorvsKj8gsZL+fP7Xj7z+JaVkf9KvHxHNORf9A1d7+4RklVz/KUAS8OH5b02yJa3/ECBwDvwl/kWKJinvAhA58fmFr1IsIYAXAZRuKsM0v8ivCv8I4FGASw/8cH/WsWxaLTGABwEhXYbxB/+0s3zw8I8AbgK+zqfxx+nyK6CRT1IL+Hx17pHLOE2n3K+7AMGzbCtCZwZqqXql787Jh4Dkz7atgvLhKa3aN0dd+s059UOAiOVSa4L8tQnjl7YsRwCet3B+wz+NPPrFrJa2kTdV0LL0ALpzpfPx3jXOZxlHZG1p29JMWgMDBXpy/qD9h59n8Ct5BM8M6LzYkbd3/MtPUtdl4/g6LzJXdenufLxph+nEHys9Njyi6woa9QsB0xJ04HfnospaIVWtoQpNsypoeO0CFqe79wfp0GrIFlK9BE+6YIFoCEAFggb/PK60IK3zpOE8Y3vk6KHCOTSl+hsZBpOWzBCWrbVwXgrDoICG1KKXkYRxHq70sAcEL9LW1XlFI8FIzkh50nVpnAWEMJ14iZCOd5aZ/lWKCDZvoQGmrTbHkWUUd7jAwzDtv8C6SDTgKedrutdizEZBBRDJOMZ4HTAW0LHAerHwrNu2sXVNtFSvheG3/g/PF0YrzvIznBgb8b5FHqjBgBduMMPIDWgHhHDQY9CqB57YgiktHgJlsouQCOAyySDj8OMa9IS3eDqfUqH1KHrGO0wMpFsGnp1n/B0Omv9PPX/4DHhEzLSDxzv1RiBeZCbfdZ/ovaOAgs9WDz4VTxx+Warz3XWnQ8qRPrYpPio884I39iyDhx3nHfYZkBO6V895JA6jwL7D4QvPzhdP59QflvhhhFhgwwChkWBAUrHs+YP+nDALh4GXEcSuXHwAEnsE1Ufp4D/ztaobGLv7J37hhoOF6FBakJCPLCY2svo+ZwMNDxFwQeZiuqBgOSsTKI4bPXP/lJKyRAUifT82kD3yGJjko8MCZPQhcOMi5VmQmRfUe+hl/LHBJkl+LnIRwpAWbg0MEV7myt1C9b9FCCO0EcUnr0eIEI+tIRvnA1GwJTBJeHyhxejtT/hHwZNb8RmB2QXvNk6cRkv7HsAjR78xGZj/2N58aMU7E2eG82tLRYx+DcMkEUG6JN5lweng97GEFMk4K7OHPZAqK8BFBL6GpUvpGDa7ZOQJGfw0I4EuAHs59gZ5X+ywcDZg/gA/PeTRkbjDqAeLPsZCrPHHK4+bbvarAne/eTay0+ngfbTQYByNswDekktMWEvOY96wOb2i4NM+Xgreb8VnAfCBFCemOTnPWy8D8JZBJ/Y8Z58JZMrOBjhqhc2OU5ILGuX2DjbvKNjZeeHRT+/oxnMFUTjnjUd55SSwjXmFsO+CQvOPA1PBm9ClA1Q7D/3JE4rG4QHwIzQ6q7886TfqFz9iyPvezm7wVCiu3IdvCxw9lsVPOCbRLx+YFLw8fxKn0MPFLXvx2GQwwHFPcf/Aj9uSeRKwD09vPK3wnGtDHHrdUo8CcMrHbUNcLloABioWIQ+fq4EHAayRxVXDdwkGxFJplFVvw8YxuwYl8U2K57+/z8ZqZN6k7wY+t827b+vU+Q9T4TDLaJca3L+wxq2C1Rv27uB5EdsOrfT+BTce2zO/KxNftTl+lf7k/wOuvS8K",
+      "indices_sha256": "a402565e7ef400fabfba1e2ead6d5927718858c25399b7a656a54532749164b1",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 2467
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 4,
+    "slot": 5,
+    "binding": 0,
+    "hash": 3872194866,
+    "index_hash": 1977596272,
+    "index_pixels": "eJzllM0OAjEIhB1+Gvf9X9gBNCa7UA/Gkxz3KzAM7d5uvwtgi0W/4lDZctlzROy4bDlUtwUyfccj7hMHhPn3Y+RmSixTdcl0mzjUTHCM/tJa5h+6Fz+3h4S8sX1wIb+0L88Y2sqDuUTQe+vk8XtVELNGHtTjRnAzmu3PXCw4krP8WV6kR3mBVPszT3WRS3d7eRYHxNDKqwOsrxjce7mDcOfqHsoc9PI534pgfenlmbsvVw7YysvyS2de0vgs+vLO5h4Xo5s+c9fiYP30sRTAyaWbPl5bNLZh+lwa8zldu5woH3zV8s7ykFsLgd7Kf3JbDu/eFHLlLE8FLX96t/r094HrUl8HtO7+gD/zelfjH7OelU5/DOpOeSM3Tu4+c43bN+fnAeL5j46acMKf//d/Gg9b7AZL",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      64
+    ],
+    "atlas_box": [
+      288,
+      0,
+      32,
+      64
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 288,
+      "y": 0,
+      "w": 32,
+      "h": 64
+    },
+    "output_size": [
+      32,
+      64
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 5,
+      "attributes": [
+        32792,
+        49255,
+        3584
+      ],
+      "screen_x": 103,
+      "screen_y": 24,
+      "w": 32,
+      "h": 64,
+      "display_w": 32,
+      "display_h": 64,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 512,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3872194866,
+      "index_hash": 1977596272,
+      "material": 27255373,
+      "used_mask": 894,
+      "opaque": 610,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJzllM0OAjEIhB1+Gvf9X9gBNCa7UA/Gkxz3KzAM7d5uvwtgi0W/4lDZctlzROy4bDlUtwUyfccj7hMHhPn3Y+RmSixTdcl0mzjUTHCM/tJa5h+6Fz+3h4S8sX1wIb+0L88Y2sqDuUTQe+vk8XtVELNGHtTjRnAzmu3PXCw4krP8WV6kR3mBVPszT3WRS3d7eRYHxNDKqwOsrxjce7mDcOfqHsoc9PI534pgfenlmbsvVw7YysvyS2de0vgs+vLO5h4Xo5s+c9fiYP30sRTAyaWbPl5bNLZh+lwa8zldu5woH3zV8s7ykFsLgd7Kf3JbDu/eFHLlLE8FLX96t/r094HrUl8HtO7+gD/zelfjH7OelU5/DOpOeSM3Tu4+c43bN+fnAeL5j46acMKf//d/Gg9b7AZL",
+      "indices_sha256": "ac4cc260b0a44adb1f3efb574bbf8db7a13a232aedb299c4ef64b831d9960175",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 473
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 5,
+    "slot": 7,
+    "binding": 0,
+    "hash": 3359673794,
+    "index_hash": 3128168660,
+    "index_pixels": "eJztlNuagyAMhB3wAFjf/3V3kgDarlVcb/bCuepXnT+TGOi6R/9FcDf9Pe75fe9uEQjwdwAIBNyJIABGuEgA4JzOHrMArk0B8B7TNDJ5180pQCJcIEACj0Pfj4LIgCtN8LMTQE8/KCIaoTnC6heNo3em5gjQBkyGoHsQThtAA3CCVGVoN30bAU7fn6hlWV7DULNIiCYCnIxsWqTvLcMQbQT3ejkvC6yMd0QDIa+hfDmO/g0xDC3+nEIRmGf+XhHt+1gRJDBE/iaXDpUSBOHVLzrfx3d+RrjF1mLUI3F4tyDsEZbJ5FWHPSDG3wia1B/Ezh05ACDE3wRIbCL4hJt46O/mIIQPRDBESrwXcBJg5uXxiQiyCH1Pf/zihyuCEQrC/owxJRTtA3y5O3iOZxZaEfZfFKtNZ7cB+FVGiJUgl2t2i7C7AwgbAckIBVG8UXPsDpAvBWlUFTOhIOjJj+S17+OXpx8E6wOFcOivQXLRSgibCLHtNhMTCbltm0pWg7+0g1QnYu0Lp9UviOKHmdM1fw5gayD9X7DrztSmZQCp2Z8ddXQhcgBa/nz6G2/IVXUdWsqv3mJMephq90fl7YyktPGF9XsHtR+WZ4mZKgU/n513r4dt/xEneFb+SLyZkxyCP9ofPXr0RT+VQRgH",
+    "actual_palette_bgr555": [
+      15808,
+      2114,
+      7364,
+      10535,
+      15820,
+      22129,
+      27448,
+      30653,
+      18594,
+      22850,
+      29154,
+      30539,
+      2195,
+      2237,
+      2621,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        49,
+        57
+      ],
+      [
+        57,
+        74,
+        82
+      ],
+      [
+        98,
+        115,
+        123
+      ],
+      [
+        139,
+        156,
+        172
+      ],
+      [
+        197,
+        205,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        16,
+        41,
+        148
+      ],
+      [
+        16,
+        82,
+        180
+      ],
+      [
+        16,
+        123,
+        230
+      ],
+      [
+        90,
+        213,
+        238
+      ],
+      [
+        156,
+        32,
+        16
+      ],
+      [
+        238,
+        41,
+        16
+      ],
+      [
+        238,
+        139,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      64,
+      64
+    ],
+    "atlas_box": [
+      360,
+      0,
+      64,
+      64
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 360,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "output_size": [
+      64,
+      64
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+    "frame": 560,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_46_200\\unit46_weapon200_source.state",
+      "frame": 560,
+      "video_epoch": 2425,
+      "engine": 0,
+      "oam": 7,
+      "attributes": [
+        39,
+        49237,
+        3588
+      ],
+      "screen_x": 85,
+      "screen_y": 39,
+      "w": 64,
+      "h": 64,
+      "display_w": 64,
+      "display_h": 64,
+      "priority": 3,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 516,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3359673794,
+      "index_hash": 3128168660,
+      "material": 154347535,
+      "used_mask": 16382,
+      "opaque": 1151,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJztlNuagyAMhB3wAFjf/3V3kgDarlVcb/bCuepXnT+TGOi6R/9FcDf9Pe75fe9uEQjwdwAIBNyJIABGuEgA4JzOHrMArk0B8B7TNDJ5180pQCJcIEACj0Pfj4LIgCtN8LMTQE8/KCIaoTnC6heNo3em5gjQBkyGoHsQThtAA3CCVGVoN30bAU7fn6hlWV7DULNIiCYCnIxsWqTvLcMQbQT3ejkvC6yMd0QDIa+hfDmO/g0xDC3+nEIRmGf+XhHt+1gRJDBE/iaXDpUSBOHVLzrfx3d+RrjF1mLUI3F4tyDsEZbJ5FWHPSDG3wia1B/Ezh05ACDE3wRIbCL4hJt46O/mIIQPRDBESrwXcBJg5uXxiQiyCH1Pf/zihyuCEQrC/owxJRTtA3y5O3iOZxZaEfZfFKtNZ7cB+FVGiJUgl2t2i7C7AwgbAckIBVG8UXPsDpAvBWlUFTOhIOjJj+S17+OXpx8E6wOFcOivQXLRSgibCLHtNhMTCbltm0pWg7+0g1QnYu0Lp9UviOKHmdM1fw5gayD9X7DrztSmZQCp2Z8ddXQhcgBa/nz6G2/IVXUdWsqv3mJMephq90fl7YyktPGF9XsHtR+WZ4mZKgU/n513r4dt/xEneFb+SLyZkxyCP9ofPXr0RT+VQRgH",
+      "indices_sha256": "e680c5eede746c8d9ce0dc913d08342d19792995df11b4745cf15bad777ace4b",
+      "palette_15bit": [
+        15808,
+        2114,
+        7364,
+        10535,
+        15820,
+        22129,
+        27448,
+        30653,
+        18594,
+        22850,
+        29154,
+        30539,
+        2195,
+        2237,
+        2621,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          49,
+          57
+        ],
+        [
+          57,
+          74,
+          82
+        ],
+        [
+          98,
+          115,
+          123
+        ],
+        [
+          139,
+          156,
+          172
+        ],
+        [
+          197,
+          205,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          16,
+          41,
+          148
+        ],
+        [
+          16,
+          82,
+          180
+        ],
+        [
+          16,
+          123,
+          230
+        ],
+        [
+          90,
+          213,
+          238
+        ],
+        [
+          156,
+          32,
+          16
+        ],
+        [
+          238,
+          41,
+          16
+        ],
+        [
+          238,
+          139,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 453
+    },
+    "render_mode": "static",
+    "category": "unit"
+  }
+]

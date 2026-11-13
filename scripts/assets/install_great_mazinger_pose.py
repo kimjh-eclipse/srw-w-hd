@@ -58,10 +58,10 @@ def main():
     args=parser.parse_args();source=args.source_dir
     for required in (args.contract,args.drawing,args.native,args.generated):
         if not (source/required).is_file():raise FileNotFoundError(f'production packet file missing: {source/required}')
-    contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text())]
+    contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text(encoding='utf-8'))]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
     assert art.size==(native.width*4,native.height*4),('HD/native canvas ratio must be 4x',art.size,native.size)
-    path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text())
+    path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text(encoding='utf-8'))
     prefix=hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
     rgb_bindings={}
     for i,b in enumerate(meta['bindings']):

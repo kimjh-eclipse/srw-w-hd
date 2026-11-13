@@ -1,0 +1,1 @@
+pose_generated.png는새그림이아니라픽셀불변설치용묶음입니다. 원래생성출처/개별HD·nativecrop SHA는lossless_packing_proof와source별provenance_packets를확인합니다. 기존그림재색칠/원본RGB·alpha스탬프없음. 공식HD QA는Claude대기.

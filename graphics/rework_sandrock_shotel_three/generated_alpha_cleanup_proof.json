@@ -1,0 +1,32 @@
+{
+  "status": "production_generated_alpha_cleanup_only",
+  "threshold": 64,
+  "removed_nonzero_alpha_pixels": 8667,
+  "zeroed_RGBA_pixels": 1413209,
+  "high_alpha_RGBA_equal": true,
+  "high_alpha_RGBA_sha256": "16d4363f3641b68824f386d8f4522461f337837330b347e08fd304fdc6e6114c",
+  "remaining_mid_alpha_more_than10px_from_alpha160": 0,
+  "connections": [
+    {
+      "cell": 0,
+      "alpha64_components": [
+        87673
+      ]
+    },
+    {
+      "cell": 1,
+      "alpha64_components": [
+        36050
+      ]
+    },
+    {
+      "cell": 2,
+      "alpha64_components": [
+        35932
+      ]
+    }
+  ],
+  "native_image_or_mask_used": false,
+  "original_file": "parts_generated_connected_with_glow.png",
+  "cleaned_file": "parts_generated_alpha64.png"
+}

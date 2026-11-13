@@ -1,0 +1,1150 @@
+[
+  {
+    "cell": 0,
+    "slot": 16,
+    "binding": 0,
+    "hash": 3317454435,
+    "index_hash": 495833113,
+    "index_pixels": "eJzNitsJACAMxPqwPRX3n9cWBEUXMB8HIUf0EfxyxVIYskDa7gOqrGZAS2LTzi7C8YFXT6r3sAk1SwFQ",
+    "actual_palette_bgr555": [
+      15808,
+      3138,
+      16810,
+      21071,
+      25301,
+      29562,
+      32767,
+      13544,
+      19984,
+      23188,
+      26392,
+      2978,
+      2141,
+      2131,
+      2493,
+      2845
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        24
+      ],
+      [
+        82,
+        106,
+        131
+      ],
+      [
+        123,
+        148,
+        164
+      ],
+      [
+        172,
+        180,
+        197
+      ],
+      [
+        213,
+        222,
+        230
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        65,
+        57,
+        106
+      ],
+      [
+        131,
+        131,
+        156
+      ],
+      [
+        164,
+        164,
+        180
+      ],
+      [
+        197,
+        197,
+        205
+      ],
+      [
+        16,
+        238,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        156,
+        16,
+        16
+      ],
+      [
+        238,
+        106,
+        16
+      ],
+      [
+        238,
+        197,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      8
+    ],
+    "atlas_box": [
+      0,
+      0,
+      32,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "actual black/silver/gold machine and weapon source; no palette recoloring",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 8
+    },
+    "output_size": [
+      32,
+      8
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+    "frame": 200,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+      "frame": 200,
+      "video_epoch": 1519,
+      "engine": 0,
+      "oam": 16,
+      "attributes": [
+        16460,
+        16509,
+        6608
+      ],
+      "screen_x": 125,
+      "screen_y": 76,
+      "w": 32,
+      "h": 8,
+      "display_w": 32,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 1,
+      "tile_number": 464,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3317454435,
+      "index_hash": 495833113,
+      "material": 3062626422,
+      "used_mask": 6142,
+      "opaque": 85,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJzNitsJACAMxPqwPRX3n9cWBEUXMB8HIUf0EfxyxVIYskDa7gOqrGZAS2LTzi7C8YFXT6r3sAk1SwFQ",
+      "indices_sha256": "69f06c91655374c114742b34f0acebc552ec8792465adf35e8d12a0cef65358b",
+      "palette_15bit": [
+        15808,
+        3138,
+        16810,
+        21071,
+        25301,
+        29562,
+        32767,
+        13544,
+        19984,
+        23188,
+        26392,
+        2978,
+        2141,
+        2131,
+        2493,
+        2845
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          24
+        ],
+        [
+          82,
+          106,
+          131
+        ],
+        [
+          123,
+          148,
+          164
+        ],
+        [
+          172,
+          180,
+          197
+        ],
+        [
+          213,
+          222,
+          230
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          65,
+          57,
+          106
+        ],
+        [
+          131,
+          131,
+          156
+        ],
+        [
+          164,
+          164,
+          180
+        ],
+        [
+          197,
+          197,
+          205
+        ],
+        [
+          16,
+          238,
+          16
+        ],
+        [
+          238,
+          16,
+          16
+        ],
+        [
+          156,
+          16,
+          16
+        ],
+        [
+          238,
+          106,
+          16
+        ],
+        [
+          238,
+          197,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 29
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 1,
+    "slot": 18,
+    "binding": 0,
+    "hash": 3169100065,
+    "index_hash": 2128393075,
+    "index_pixels": "eJyFjgsOhSAMBOmHrHD/A7utwJPkRSZGoMOulvIg1WQCCMzQr967/KYOJXAxS9/QWqsDZ6o64RI+uIgNlGfNaSzCqmxTyxEvpIl+iGo+mfNwyl4OYmtIudCFzHqJEohnHgt+E8448ufEXiWvtrmjLjtD8l3+6e0q+dCfnJJ2ataDt+10Aw4DBCw=",
+    "actual_palette_bgr555": [
+      15808,
+      3138,
+      16810,
+      21071,
+      25301,
+      29562,
+      32767,
+      13544,
+      19984,
+      23188,
+      26392,
+      2978,
+      2141,
+      2131,
+      2493,
+      2845
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        24
+      ],
+      [
+        82,
+        106,
+        131
+      ],
+      [
+        123,
+        148,
+        164
+      ],
+      [
+        172,
+        180,
+        197
+      ],
+      [
+        213,
+        222,
+        230
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        65,
+        57,
+        106
+      ],
+      [
+        131,
+        131,
+        156
+      ],
+      [
+        164,
+        164,
+        180
+      ],
+      [
+        197,
+        197,
+        205
+      ],
+      [
+        16,
+        238,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        156,
+        16,
+        16
+      ],
+      [
+        238,
+        106,
+        16
+      ],
+      [
+        238,
+        197,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      72,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "actual black/silver/gold machine and weapon source; no palette recoloring",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 72,
+      "y": 0,
+      "w": 32,
+      "h": 16
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+    "frame": 200,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+      "frame": 200,
+      "video_epoch": 1519,
+      "engine": 0,
+      "oam": 18,
+      "attributes": [
+        16468,
+        32885,
+        6420
+      ],
+      "screen_x": 117,
+      "screen_y": 84,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 1,
+      "tile_number": 276,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3169100065,
+      "index_hash": 2128393075,
+      "material": 579947446,
+      "used_mask": 1982,
+      "opaque": 300,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyFjgsOhSAMBOmHrHD/A7utwJPkRSZGoMOulvIg1WQCCMzQr967/KYOJXAxS9/QWqsDZ6o64RI+uIgNlGfNaSzCqmxTyxEvpIl+iGo+mfNwyl4OYmtIudCFzHqJEohnHgt+E8448ufEXiWvtrmjLjtD8l3+6e0q+dCfnJJ2ataDt+10Aw4DBCw=",
+      "indices_sha256": "7bae923fe00bd9edca09a7e0058cded95465ac4798aa846edaccbc2273b0f203",
+      "palette_15bit": [
+        15808,
+        3138,
+        16810,
+        21071,
+        25301,
+        29562,
+        32767,
+        13544,
+        19984,
+        23188,
+        26392,
+        2978,
+        2141,
+        2131,
+        2493,
+        2845
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          24
+        ],
+        [
+          82,
+          106,
+          131
+        ],
+        [
+          123,
+          148,
+          164
+        ],
+        [
+          172,
+          180,
+          197
+        ],
+        [
+          213,
+          222,
+          230
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          65,
+          57,
+          106
+        ],
+        [
+          131,
+          131,
+          156
+        ],
+        [
+          164,
+          164,
+          180
+        ],
+        [
+          197,
+          197,
+          205
+        ],
+        [
+          16,
+          238,
+          16
+        ],
+        [
+          238,
+          16,
+          16
+        ],
+        [
+          156,
+          16,
+          16
+        ],
+        [
+          238,
+          106,
+          16
+        ],
+        [
+          238,
+          197,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 257
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 2,
+    "slot": 19,
+    "binding": 0,
+    "hash": 2391031062,
+    "index_hash": 2967308260,
+    "index_pixels": "eJy9zcEOADAEA1DF0v//42l2INnOexcahNkFk/IalD2axqxKOTmQmeq9qtbhre4Jtse/rzbryQFc",
+    "actual_palette_bgr555": [
+      15808,
+      3138,
+      16810,
+      21071,
+      25301,
+      29562,
+      32767,
+      13544,
+      19984,
+      23188,
+      26392,
+      2978,
+      2141,
+      2131,
+      2493,
+      2845
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        115,
+        123
+      ],
+      [
+        16,
+        16,
+        24
+      ],
+      [
+        82,
+        106,
+        131
+      ],
+      [
+        123,
+        148,
+        164
+      ],
+      [
+        172,
+        180,
+        197
+      ],
+      [
+        213,
+        222,
+        230
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        65,
+        57,
+        106
+      ],
+      [
+        131,
+        131,
+        156
+      ],
+      [
+        164,
+        164,
+        180
+      ],
+      [
+        197,
+        197,
+        205
+      ],
+      [
+        16,
+        238,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        156,
+        16,
+        16
+      ],
+      [
+        238,
+        106,
+        16
+      ],
+      [
+        238,
+        197,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "atlas_box": [
+      144,
+      0,
+      16,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "actual black/silver/gold machine and weapon source; no palette recoloring",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 144,
+      "y": 0,
+      "w": 16,
+      "h": 16
+    },
+    "output_size": [
+      16,
+      16
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+    "frame": 200,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+      "frame": 200,
+      "video_epoch": 1519,
+      "engine": 0,
+      "oam": 19,
+      "attributes": [
+        84,
+        16485,
+        6402
+      ],
+      "screen_x": 101,
+      "screen_y": 84,
+      "w": 16,
+      "h": 16,
+      "display_w": 16,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 1,
+      "tile_number": 258,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 2391031062,
+      "index_hash": 2967308260,
+      "material": 937299194,
+      "used_mask": 190,
+      "opaque": 107,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJy9zcEOADAEA1DF0v//42l2INnOexcahNkFk/IalD2axqxKOTmQmeq9qtbhre4Jtse/rzbryQFc",
+      "indices_sha256": "1571da6dabd10d424ed862ddbb13b82d3d541f72400b49800e9c8fa60481e932",
+      "palette_15bit": [
+        15808,
+        3138,
+        16810,
+        21071,
+        25301,
+        29562,
+        32767,
+        13544,
+        19984,
+        23188,
+        26392,
+        2978,
+        2141,
+        2131,
+        2493,
+        2845
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          115,
+          123
+        ],
+        [
+          16,
+          16,
+          24
+        ],
+        [
+          82,
+          106,
+          131
+        ],
+        [
+          123,
+          148,
+          164
+        ],
+        [
+          172,
+          180,
+          197
+        ],
+        [
+          213,
+          222,
+          230
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          65,
+          57,
+          106
+        ],
+        [
+          131,
+          131,
+          156
+        ],
+        [
+          164,
+          164,
+          180
+        ],
+        [
+          197,
+          197,
+          205
+        ],
+        [
+          16,
+          238,
+          16
+        ],
+        [
+          238,
+          16,
+          16
+        ],
+        [
+          156,
+          16,
+          16
+        ],
+        [
+          238,
+          106,
+          16
+        ],
+        [
+          238,
+          197,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 107
+    },
+    "render_mode": "static",
+    "category": "unit"
+  },
+  {
+    "cell": 3,
+    "slot": 20,
+    "binding": 0,
+    "hash": 120964873,
+    "index_hash": 3249178640,
+    "index_pixels": "eJxljkkSxCAMA5GXkvj/h0dAEg7jE91WGY3xPxFxAUCk8KIqUFW460Am9mxWHZpzC+8DFKa0hfcOyAE+YgX8EjhpsQKgUaRvnAZrJJvzBzqzaSKfEt1R2Q2MT1h135rVGf3VXkdz4Q/34AIs",
+    "actual_palette_bgr555": [
+      18016,
+      2114,
+      6309,
+      10537,
+      14765,
+      19984,
+      24212,
+      2444,
+      2613,
+      2781,
+      17341,
+      30500,
+      2141,
+      2131,
+      2653,
+      30491
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        156,
+        139
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        41,
+        41,
+        49
+      ],
+      [
+        74,
+        74,
+        82
+      ],
+      [
+        106,
+        106,
+        115
+      ],
+      [
+        131,
+        131,
+        156
+      ],
+      [
+        164,
+        164,
+        189
+      ],
+      [
+        98,
+        98,
+        16
+      ],
+      [
+        172,
+        139,
+        16
+      ],
+      [
+        238,
+        180,
+        16
+      ],
+      [
+        238,
+        238,
+        131
+      ],
+      [
+        32,
+        205,
+        238
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        156,
+        16,
+        16
+      ],
+      [
+        238,
+        148,
+        16
+      ],
+      [
+        222,
+        197,
+        238
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "atlas_box": [
+      216,
+      0,
+      16,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "actual black/silver/gold machine and weapon source; no palette recoloring",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 216,
+      "y": 0,
+      "w": 16,
+      "h": 16
+    },
+    "output_size": [
+      16,
+      16
+    ],
+    "fixture": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+    "frame": 200,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_108_457\\unit108_weapon457_source.state",
+      "frame": 200,
+      "video_epoch": 1519,
+      "engine": 0,
+      "oam": 20,
+      "attributes": [
+        91,
+        16513,
+        2394
+      ],
+      "screen_x": 129,
+      "screen_y": 91,
+      "w": 16,
+      "h": 16,
+      "display_w": 16,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 346,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 120964873,
+      "index_hash": 3249178640,
+      "material": 318472714,
+      "used_mask": 958,
+      "opaque": 161,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJxljkkSxCAMA5GXkvj/h0dAEg7jE91WGY3xPxFxAUCk8KIqUFW460Am9mxWHZpzC+8DFKa0hfcOyAE+YgX8EjhpsQKgUaRvnAZrJJvzBzqzaSKfEt1R2Q2MT1h135rVGf3VXkdz4Q/34AIs",
+      "indices_sha256": "60295a62ab1720f77cc1f3284c91f8c8323e447fbd7a5d8093ef4e78fe30fa48",
+      "palette_15bit": [
+        18016,
+        2114,
+        6309,
+        10537,
+        14765,
+        19984,
+        24212,
+        2444,
+        2613,
+        2781,
+        17341,
+        30500,
+        2141,
+        2131,
+        2653,
+        30491
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          156,
+          139
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          41,
+          41,
+          49
+        ],
+        [
+          74,
+          74,
+          82
+        ],
+        [
+          106,
+          106,
+          115
+        ],
+        [
+          131,
+          131,
+          156
+        ],
+        [
+          164,
+          164,
+          189
+        ],
+        [
+          98,
+          98,
+          16
+        ],
+        [
+          172,
+          139,
+          16
+        ],
+        [
+          238,
+          180,
+          16
+        ],
+        [
+          238,
+          238,
+          131
+        ],
+        [
+          32,
+          205,
+          238
+        ],
+        [
+          238,
+          16,
+          16
+        ],
+        [
+          156,
+          16,
+          16
+        ],
+        [
+          238,
+          148,
+          16
+        ],
+        [
+          222,
+          197,
+          238
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 144
+    },
+    "render_mode": "static",
+    "category": "unit"
+  }
+]
