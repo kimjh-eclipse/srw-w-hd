@@ -1,0 +1,541 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "fmp_cutter_missing",
+  "atlas": {
+    "image": "rework_fmp_cutter_missing/pose_hd.png",
+    "reference": "rework_fmp_cutter_missing/pose_native.png",
+    "native_size": [
+      128,
+      144
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 763104819,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 0,
+      "observed_oam_slots": [
+        0
+      ],
+      "contexts": [
+        {
+          "unit": 262,
+          "oam": 0,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_262_1075\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            140,
+            86
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 763104819,
+        "index_hash": 1393400423,
+        "index_pixels": "eJxlj1sOwzAIBD0fu2By//vGqVuaKAghWDE8xgDGzfCcPOqXkFV/AcFx9Ayi5MxGiJhyVSMK2dBbUZiqzDRfYjFRNX8zttAIsTYGsvgQK7+C5djp7kouv93JeD667QRAMQJl",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            180
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            49,
+            57
+          ],
+          [
+            65,
+            90,
+            106
+          ],
+          [
+            90,
+            131,
+            156
+          ],
+          [
+            41,
+            57,
+            65
+          ],
+          [
+            74,
+            90,
+            98
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            139,
+            156,
+            164
+          ],
+          [
+            180,
+            197,
+            205
+          ],
+          [
+            213,
+            238,
+            238
+          ],
+          [
+            148,
+            131,
+            24
+          ],
+          [
+            197,
+            189,
+            24
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            16,
+            164,
+            106
+          ],
+          [
+            24,
+            255,
+            189
+          ]
+        ],
+        "x": 24,
+        "y": 24,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "fmp_cutter_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 13696,
+        "source_x": 32,
+        "source_y": 80
+      },
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 763104819,
+        "indices_sha256": "6e2e9aa80fcbc180cb04a338970e585b19b2f651a8eca84ded4345af9193f7f9",
+        "resource": 13696,
+        "source_x": 32,
+        "source_y": 80,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 352065610,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 1,
+      "observed_oam_slots": [
+        12
+      ],
+      "contexts": [
+        {
+          "unit": 262,
+          "oam": 12,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_262_1075\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            108,
+            76
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 352065610,
+        "index_hash": 973241641,
+        "index_pixels": "eJytkMEOwCAIQ+2hpf//xYN5Wpx4sYmY+GoVxjgL6HGgd0AQOwfJmbAJomyjJPEniSGhCkFpeSvjIzlr1RZfDrs6SJx3heUP8yQ5PfmuTcDR8NcS/SzHAV/XA+inAbU=",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            180
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            49,
+            57
+          ],
+          [
+            65,
+            90,
+            106
+          ],
+          [
+            90,
+            131,
+            156
+          ],
+          [
+            41,
+            57,
+            65
+          ],
+          [
+            74,
+            90,
+            98
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            139,
+            156,
+            164
+          ],
+          [
+            180,
+            197,
+            205
+          ],
+          [
+            213,
+            238,
+            238
+          ],
+          [
+            148,
+            131,
+            24
+          ],
+          [
+            197,
+            189,
+            24
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            16,
+            164,
+            106
+          ],
+          [
+            24,
+            255,
+            189
+          ]
+        ],
+        "x": 80,
+        "y": 24,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "fmp_cutter_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 13696,
+        "source_x": 144,
+        "source_y": 16
+      },
+      "source_byte_identity": {
+        "cell": 1,
+        "actual_rgb_hash": 352065610,
+        "indices_sha256": "3d271257598b700456ddd18ade19d6f9297f402f59843ee93eab003808d4baf5",
+        "resource": 13696,
+        "source_x": 144,
+        "source_y": 16,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 2057858527,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 2,
+      "observed_oam_slots": [
+        17
+      ],
+      "contexts": [
+        {
+          "unit": 262,
+          "oam": 17,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_262_1075\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            106,
+            77
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 2057858527,
+        "index_hash": 1145326740,
+        "index_pixels": "eJyFz0EOwCAIRFFmAdz/xnVimyIFysJE/9NEEQ4AGQbmNpCVOS1Z51Aj0prweCK7U3B1TwJP38NnUF0P5Kcrjuc/4Oxrn4imLySScyZVj6TpL+nyTUK/ADSlAgE=",
+        "original_palette_rgb": [
+          [
+            0,
+            172,
+            180
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            49,
+            57
+          ],
+          [
+            65,
+            90,
+            106
+          ],
+          [
+            90,
+            131,
+            156
+          ],
+          [
+            41,
+            57,
+            65
+          ],
+          [
+            74,
+            90,
+            98
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            139,
+            156,
+            164
+          ],
+          [
+            180,
+            197,
+            205
+          ],
+          [
+            213,
+            238,
+            238
+          ],
+          [
+            148,
+            131,
+            24
+          ],
+          [
+            197,
+            189,
+            24
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            16,
+            164,
+            106
+          ],
+          [
+            24,
+            255,
+            189
+          ]
+        ],
+        "x": 16,
+        "y": 96,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "fmp_cutter_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 13696,
+        "source_x": 0,
+        "source_y": 32
+      },
+      "source_byte_identity": {
+        "cell": 2,
+        "actual_rgb_hash": 2057858527,
+        "indices_sha256": "566905119cc11b5705702a93f5c686e2c6e585615f5ad61c2f62c6d5e5ba63d1",
+        "resource": 13696,
+        "source_x": 0,
+        "source_y": 32,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 3929888490,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 3,
+      "observed_oam_slots": [
+        12
+      ],
+      "contexts": [
+        {
+          "unit": 263,
+          "oam": 12,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_263_1087\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            105,
+            81
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3929888490,
+        "index_hash": 894712190,
+        "index_pixels": "eJyV0FEOwCAMAlAp6Lz/iVd1+5m1yfh9hRhL+RVIyLT1fuFwsVRk7KjOomShO3tVEiOHr3osZqA3ULXCzLbnuaLBF6ixsbF3Fx8cjfMCRwfHyJuvz9aYZ8SPZ7+ec54b6owBwQ==",
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "x": 80,
+        "y": 96,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "fmp_cutter_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 13785,
+        "source_x": 0,
+        "source_y": 48
+      },
+      "source_byte_identity": {
+        "cell": 3,
+        "actual_rgb_hash": 3929888490,
+        "indices_sha256": "42bcd8c828496fcbd5530d9157e7c24032950eb22ccf2dec5a69297005fb2a4a",
+        "resource": 13785,
+        "source_x": 0,
+        "source_y": 48,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}

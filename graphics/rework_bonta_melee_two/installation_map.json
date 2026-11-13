@@ -1,0 +1,286 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "bonta_melee_missing",
+  "atlas": {
+    "image": "rework_bonta_melee_missing/pose_hd.png",
+    "reference": "rework_bonta_melee_missing/pose_native.png",
+    "native_size": [
+      192,
+      72
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3332914674,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 0,
+      "observed_oam_slots": [
+        1
+      ],
+      "contexts": [
+        {
+          "unit": 266,
+          "oam": 1,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_266_1101\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            213,
+            87
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3332914674,
+        "index_hash": 2580635908,
+        "index_pixels": "eJxjYMAOGAnQMAAAALAABQ==",
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            172
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            106,
+            24,
+            16
+          ],
+          [
+            139,
+            65,
+            8
+          ],
+          [
+            172,
+            106,
+            0
+          ],
+          [
+            205,
+            139,
+            0
+          ],
+          [
+            238,
+            164,
+            0
+          ],
+          [
+            238,
+            197,
+            74
+          ],
+          [
+            238,
+            222,
+            148
+          ],
+          [
+            164,
+            82,
+            8
+          ],
+          [
+            238,
+            222,
+            148
+          ],
+          [
+            57,
+            65,
+            74
+          ],
+          [
+            90,
+            98,
+            82
+          ],
+          [
+            115,
+            131,
+            98
+          ],
+          [
+            148,
+            156,
+            115
+          ],
+          [
+            189,
+            197,
+            172
+          ]
+        ],
+        "x": 28,
+        "y": 28,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "bonta_melee_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": null
+      },
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 3332914674,
+        "indices_sha256": "cfaa395747f893581b8ddcb31eff08043038fc2e9b9fcfd1149dda1582797671",
+        "resource": 8936,
+        "source_x": 40,
+        "source_y": 80,
+        "raw_bytes_equal": true,
+        "owner_confirmed": false
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0",
+      "source_candidate_matches": [
+        {
+          "resource": 8936,
+          "source_x": 40,
+          "source_y": 80
+        }
+      ],
+      "source_owner_confirmed": false
+    },
+    {
+      "actual_rgb_hash": 2742864663,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 1,
+      "observed_oam_slots": [
+        3
+      ],
+      "contexts": [
+        {
+          "unit": 266,
+          "oam": 3,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_266_1101\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            180,
+            87
+          ]
+        }
+      ],
+      "proposed_binding": {
+        "hash": 2742864663,
+        "index_hash": 839552982,
+        "index_pixels": "eJztkksOwzAIBcvPWQD2/W/bh91FXTk5QZESKZkBnqO8Xv+qolnP9FahoCeDkro/CB40xseIMdLpt919wKDouGf4LqA9swxP4CN3vHZf7cVzH4/ynpS92ovH8XDFgcPDvzByf6Jnr+1Rz9/jcTL3ybNiUN+/AHQkgBEQoHUS3jhD6DOje4enKjuXZeDCKjFh5R2byowAqs0waeMq3BoUYWZrxhVpm2/tumAwi13Xlm0JCqGZiB7xEkyLHvESaoee8Qxppnz7f5bxRO/rDUYdCW0=",
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            172
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            106,
+            24,
+            16
+          ],
+          [
+            139,
+            65,
+            8
+          ],
+          [
+            172,
+            106,
+            0
+          ],
+          [
+            205,
+            139,
+            0
+          ],
+          [
+            238,
+            164,
+            0
+          ],
+          [
+            238,
+            197,
+            74
+          ],
+          [
+            238,
+            222,
+            148
+          ],
+          [
+            164,
+            82,
+            8
+          ],
+          [
+            238,
+            222,
+            148
+          ],
+          [
+            57,
+            65,
+            74
+          ],
+          [
+            90,
+            98,
+            82
+          ],
+          [
+            115,
+            131,
+            98
+          ],
+          [
+            148,
+            156,
+            115
+          ],
+          [
+            189,
+            197,
+            172
+          ]
+        ],
+        "x": 80,
+        "y": 16,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "bonta_melee_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 13893,
+        "source_x": 200,
+        "source_y": 0
+      },
+      "source_byte_identity": {
+        "cell": 1,
+        "actual_rgb_hash": 2742864663,
+        "indices_sha256": "e7ad0e1f4bb632695f7212334bc57a035738c16a961b7e0ad4965375d4be357e",
+        "resource": 13893,
+        "source_x": 200,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}

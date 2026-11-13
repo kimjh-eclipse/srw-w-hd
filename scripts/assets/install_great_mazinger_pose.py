@@ -47,6 +47,7 @@ def main():
         assert (ih,rgb)==(r['index_hash'],r['hash'])
         reference=np.asarray(native.crop((x,y,x+w,y+h)))
         expected=a>0
+        assert expected.any(),('empty original has no artwork to replace',r['slot'])
         assert np.array_equal(reference[:,:,3]>0,expected),('native reference alpha differs from source contract',r['slot'])
         if expected.any():
             source_rgb=np.asarray(r['actual_palette_rgb'],dtype=int)[a]
@@ -75,6 +76,8 @@ def main():
                   registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,
                   actual_observed=bool(r.get('actual_observed',r.get('observed_shape',True))),
                   independent_visual_verification=False,review_status='pending_claude')
+        for field in ('source_candidate_matches','source_owner_confirmed','source_owner_note'):
+            if field in r:spec[field]=r[field]
         if args.effect:spec['effect_part']=True
         if existing is None:
             meta['bindings'].append(spec);binding=len(meta['bindings']);rgb_bindings[rgb]=binding-1

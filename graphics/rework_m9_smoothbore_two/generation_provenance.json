@@ -1,0 +1,56 @@
+{
+  "tool": "image_gen",
+  "generated_source": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1ae5f-b72a-7381-9484-facc1f5556b3\\exec-94e19066-b0e9-4e38-9306-dc4815f074bf.png",
+  "sha256": "8386e8ce05b3a246002d595f30a7ccbb976905cf4ba755ec0a9afa4b3ed02a8e",
+  "fitting": [
+    {
+      "cell": 0,
+      "generated_segment": [
+        0,
+        0,
+        682,
+        768
+      ],
+      "generated_own_alpha_bbox": [
+        262,
+        288,
+        419,
+        420
+      ],
+      "target_box": [
+        96,
+        108,
+        160,
+        156
+      ]
+    },
+    {
+      "cell": 1,
+      "generated_segment": [
+        682,
+        0,
+        1365,
+        768
+      ],
+      "generated_own_alpha_bbox": [
+        261,
+        265,
+        432,
+        379
+      ],
+      "target_box": [
+        352,
+        100,
+        416,
+        140
+      ]
+    }
+  ],
+  "generated_alpha_cleanup": "Use own generated alpha>=220 to remove unrequested soft halo, then resample. No native alpha/RGB stamped.",
+  "candidate_canvas": [
+    768,
+    288
+  ],
+  "prompt_summary": "Only two M9 hands/forearms; exact original matte slate/blue-gray palette, original pose and cut faces, no gun/head/full mecha.",
+  "independent_visual_verification": false
+}
