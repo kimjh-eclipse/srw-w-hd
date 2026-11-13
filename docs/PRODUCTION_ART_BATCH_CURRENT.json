@@ -2127,12 +2127,38 @@
       "warnings": [],
       "actual_observed_targets": 1,
       "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/aestivalis_zero_g60_missing",
+      "atlas": "aestivalis_zero_g60_missing_fifteen",
+      "bindings": [
+        92971,
+        92972,
+        92973,
+        92974,
+        92975,
+        92976,
+        92977,
+        92978,
+        92979,
+        92980,
+        92981,
+        92982,
+        92983,
+        92984,
+        92985
+      ],
+      "atlas_sha256": "bc1048e18e1c9c8f0802cb3b7ab34607748e4b9718e313f67ba7df9fb920e287",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 15,
+      "source_confirmed_unobserved_targets": 0
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 992,
+  "baked_target_count": 1007,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
