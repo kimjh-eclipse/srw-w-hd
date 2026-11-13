@@ -45,6 +45,27 @@ def validate_source_containment(contract, art, excluded_hashes):
     return checks
 
 
+def opaque_bright_center_check(native_part, art_part):
+    """Detect background extraction deleting a filled bright effect core."""
+    bounds=native_part.getchannel('A').getbbox()
+    if bounds is None:return None
+    left,top,right,bottom=bounds;width,height=right-left,bottom-top
+    if min(width,height)<4:return None
+    center_width=max(2,width//8);center_height=max(2,height//8)
+    x0=left+(width-center_width)//2;y0=top+(height-center_height)//2
+    x1=x0+center_width;y1=y0+center_height
+    source=np.asarray(native_part.crop((x0,y0,x1,y1)))
+    solid=float((source[:,:,3]>=240).mean())
+    bright=float((np.min(source[:,:,:3],axis=2)>=220).mean())
+    if solid<.95 or bright<.85:return None
+    sx=art_part.width/native_part.width;sy=art_part.height/native_part.height
+    alpha=np.asarray(art_part.getchannel('A').crop((round(x0*sx),round(y0*sy),round(x1*sx),round(y1*sy))))
+    coverage=float((alpha>=16).mean());mean=float(alpha.mean()/255)
+    return dict(native_solid_fraction=solid,native_bright_fraction=bright,
+                generated_center_coverage=coverage,generated_center_mean_alpha=mean,
+                missing_opaque_bright_center=coverage<.10 and mean<.05)
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true')
     parser.add_argument('--source-dir',type=Path,default=ROOT/'test_current/parts/borrowed_shape_rework')
@@ -67,7 +88,7 @@ def main():
     for i,b in enumerate(meta['bindings']):
         if b.get('rgb_enabled',True) and not b.get('disabled'):rgb_bindings.setdefault(b['hash'],i)
     overlap_checks=validate_source_containment(contract,art,set(rgb_bindings) if args.new_only else set())
-    name=args.atlas_id;rows=[]
+    name=args.atlas_id;rows=[];bright_center_checks=[]
     for r in contract:
         x,y,w,h=r['atlas_box'];a=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype=np.uint8).reshape(h,w)
         ih=zlib.crc32(np.where(a,a.astype(np.uint16)|32768,0).astype('<u2').tobytes())^(w<<16)^h
@@ -83,6 +104,11 @@ def main():
             assert np.max(abs(reference[:,:,:3].astype(int)-source_rgb)[expected])<=1,('native reference palette differs from source contract',r['slot'])
         if expected.any():
             assert art.crop((x*4,y*4,(x+w)*4,(y+h)*4)).getchannel('A').getextrema()[1]>=16,('empty or near-transparent artwork',r['slot'])
+        if not args.new_only or rgb not in rgb_bindings:
+            center_check=opaque_bright_center_check(native.crop((x,y,x+w,y+h)),art.crop((x*4,y*4,(x+w)*4,(y+h)*4)))
+            if center_check is not None:
+                bright_center_checks.append(dict(slot=r['slot'],hash=rgb,**center_check))
+                assert not center_check['missing_opaque_bright_center'],('opaque bright center removed by alpha extraction',r['slot'],center_check)
         got=np.asarray(art.crop((x*4,y*4,(x+w)*4,(y+h)*4)).getchannel('A').resize((w,h),Image.Resampling.BOX))>64
         iou=float((expected&got).sum()/max(1,(expected|got).sum()))
         if not args.defer_shape_review:assert iou>=.70,(r['slot'],iou)
@@ -129,7 +155,7 @@ def main():
             except PermissionError:
                 if attempt == 19:raise
                 time.sleep(.15)
-    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
+    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,opaque_bright_center_checks=bright_center_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
     if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
 if __name__=='__main__':main()

@@ -1,0 +1,1 @@
+동일기체무손실설치묶음.원래개별생성/계약/packing cropRGBA동일근거보존.실제HD QA는Claude대기.
