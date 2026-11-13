@@ -1,0 +1,149 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "aegis_sculla140_missing",
+  "atlas": {
+    "image": "rework_aegis_sculla140_missing/pose_hd.png",
+    "reference": "rework_aegis_sculla140_missing/pose_native.png",
+    "native_size": [
+      192,
+      72
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 793983255,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 0,
+      "contexts": [
+        {
+          "unit": 52,
+          "oam": 13,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_52_236\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            106,
+            85
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        13
+      ],
+      "proposed_binding": {
+        "hash": 793983255,
+        "index_hash": 2966402073,
+        "index_pixels": "eJy1kEESxSAIQyVsjNz/vg1Y6/9ddNVmRseXUYi09r2stIk9tZzCCHaiLNOxB8MMjmkkE56qFzeObiOkYnVS7RjDhpZb9WIGWKybpGkXQ91FzAtyDBmnEEqjrU1DLdyB5Lby7zysChfPD+98pwX8cFmz3t+g3p/+sw7+DASD",
+        "original_palette_rgb": [
+          [
+            0,
+            115,
+            123
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            24,
+            65
+          ],
+          [
+            180,
+            49,
+            106
+          ],
+          [
+            238,
+            74,
+            156
+          ],
+          [
+            238,
+            148,
+            24
+          ],
+          [
+            238,
+            238,
+            16
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            172,
+            180,
+            189
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            57,
+            90,
+            106
+          ],
+          [
+            16,
+            57,
+            90
+          ],
+          [
+            16,
+            238,
+            41
+          ],
+          [
+            90,
+            213,
+            238
+          ],
+          [
+            0,
+            115,
+            123
+          ],
+          [
+            0,
+            115,
+            123
+          ]
+        ],
+        "x": 24,
+        "y": 16,
+        "w": 16,
+        "h": 32,
+        "atlas_id": "aegis_sculla140_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8352,
+        "source_x": 240,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 793983255,
+        "indices_sha256": "2678ffabd4060679ee1437d784e8e2b89b6adb9bc1fde067b26fcfaffd2ef197",
+        "resource": 8352,
+        "source_x": 240,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "buster_scatter460_missing",
+  "atlas": {
+    "image": "rework_buster_scatter460_missing/pose_hd.png",
+    "reference": "rework_buster_scatter460_missing/pose_native.png",
+    "native_size": [
+      192,
+      72
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 1978069416,
+      "existing_exact_rgb_binding": null,
+      "source_cell": 0,
+      "contexts": [
+        {
+          "unit": 58,
+          "oam": 5,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_58_263\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            149,
+            55
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        5
+      ],
+      "proposed_binding": {
+        "hash": 1978069416,
+        "index_hash": 3271896593,
+        "index_pixels": "eJzt0FkOwyAMBNCMwSwO3P+6HUwaQdoTVPUPKM9LzHH8XtRmz08igF9UUUt5JEiIsQaB5py7opSqD41iIQzOvTGhYnEMDpeT3bF5CLG5O1OtbC5xelcyy5utCaPcPbnS6HVxlluLdOBktY0Flw2pItyCXmy0R9kGQGYg4WwYMRosA2j8sZQVdgI6fRkAYuJyvTT3wxOWDdQVsz39wO5wPNson0/3Pi+n2qXr099OnfhNP9r9444XRsgHBg==",
+        "original_palette_rgb": [
+          [
+            0,
+            115,
+            123
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            90,
+            24,
+            16
+          ],
+          [
+            164,
+            32,
+            16
+          ],
+          [
+            238,
+            41,
+            16
+          ],
+          [
+            16,
+            74,
+            32
+          ],
+          [
+            16,
+            115,
+            74
+          ],
+          [
+            16,
+            156,
+            115
+          ],
+          [
+            98,
+            98,
+            16
+          ],
+          [
+            156,
+            156,
+            74
+          ],
+          [
+            222,
+            222,
+            131
+          ],
+          [
+            123,
+            139,
+            156
+          ],
+          [
+            222,
+            230,
+            238
+          ],
+          [
+            98,
+            238,
+            156
+          ],
+          [
+            0,
+            115,
+            123
+          ],
+          [
+            0,
+            115,
+            123
+          ]
+        ],
+        "x": 16,
+        "y": 16,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "buster_scatter460_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8600,
+        "source_x": 184,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 1978069416,
+        "indices_sha256": "49eb1561b2eb2c8eec27048771069acc1a9c676f9314eb9dc3b515dbc4b7fc50",
+        "resource": 8600,
+        "source_x": 184,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}

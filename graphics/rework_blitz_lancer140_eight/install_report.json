@@ -1,0 +1,89 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 0,
+      "binding": 94420,
+      "hash": 2531121723,
+      "alpha_iou": 0.9488054607508533,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 1,
+      "binding": 94421,
+      "hash": 2895867847,
+      "alpha_iou": 0.8125,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 2,
+      "binding": 94422,
+      "hash": 2620664067,
+      "alpha_iou": 0.9747899159663865,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 3,
+      "binding": 94423,
+      "hash": 64297640,
+      "alpha_iou": 0.9163568773234201,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 5,
+      "binding": 94424,
+      "hash": 1136838993,
+      "alpha_iou": 0.9516129032258065,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 6,
+      "binding": 94425,
+      "hash": 2534827114,
+      "alpha_iou": 0.9421052631578948,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 7,
+      "binding": 94426,
+      "hash": 425829824,
+      "alpha_iou": 0.9681372549019608,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 10,
+      "binding": 94427,
+      "hash": 28164777,
+      "alpha_iou": 0.9402985074626866,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 2,
+      "slot_b": 7,
+      "source_overlap": [
+        64,
+        0,
+        8,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}

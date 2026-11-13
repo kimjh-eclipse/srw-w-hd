@@ -105,7 +105,7 @@ def main():
                   registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,source_engine=r.get('engine'),
                   actual_observed=bool(r.get('actual_observed',r.get('observed_shape',True))),
                   independent_visual_verification=False,review_status='pending_claude')
-        for field in ('source_candidate_matches','source_owner_confirmed','source_owner_note','source_native_visible_area','source_native_visible','source_visibility_note','source_rendered_cache_observed'):
+        for field in ('source_candidate_matches','source_owner','source_owner_confirmed','source_owner_note','source_native_visible_area','source_native_visible','source_visibility_note','source_rendered_cache_observed'):
             if field in r:spec[field]=r[field]
         if args.effect:spec['effect_part']=True
         if existing is None:

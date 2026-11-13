@@ -1,0 +1,1 @@
+실제 팔레트 변형 hash2730118576 1계약은 신규 그림/완료수 제외. actual index6 이후 RGB가 초록으로 collapse되는 원본 상태. group1_spark_reference.png/native_1.png/source_contract_with_palette_hold.json에 raw/state/frame 보존. 같은 IMG21855 정상 base는 native_0.png 및 제작중 generated_0.png. 다른팔레트 재색칠로 채우거나 초록을 삭제하지 않음. Claude 팔레트/런타임 확인 대기.

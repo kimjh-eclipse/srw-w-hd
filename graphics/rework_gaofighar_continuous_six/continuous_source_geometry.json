@@ -1,0 +1,187 @@
+{
+  "master_size": [
+    88,
+    80
+  ],
+  "pieces": [
+    {
+      "frame": 575,
+      "oam": 0,
+      "master_xy": [
+        0,
+        8
+      ],
+      "attributes": [
+        33549,
+        49302,
+        2528
+      ],
+      "source_size": [
+        32,
+        64
+      ],
+      "screen_xy": [
+        150,
+        13
+      ],
+      "matrix": [
+        160,
+        0,
+        0,
+        160
+      ],
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 575,
+      "oam": 1,
+      "master_xy": [
+        24,
+        48
+      ],
+      "attributes": [
+        17236,
+        49846,
+        2691
+      ],
+      "source_size": [
+        64,
+        32
+      ],
+      "screen_xy": [
+        182,
+        84
+      ],
+      "matrix": [
+        160,
+        0,
+        0,
+        160
+      ],
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 575,
+      "oam": 4,
+      "master_xy": [
+        24,
+        0
+      ],
+      "attributes": [
+        768,
+        51382,
+        2499
+      ],
+      "source_size": [
+        64,
+        64
+      ],
+      "screen_xy": [
+        182,
+        0
+      ],
+      "matrix": [
+        160,
+        0,
+        0,
+        160
+      ],
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 610,
+      "oam": 9,
+      "master_xy": [
+        24,
+        16
+      ],
+      "attributes": [
+        33,
+        49304,
+        2563
+      ],
+      "source_size": [
+        64,
+        64
+      ],
+      "screen_xy": [
+        152,
+        33
+      ],
+      "matrix": null,
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 610,
+      "oam": 10,
+      "master_xy": [
+        0,
+        16
+      ],
+      "attributes": [
+        33,
+        49280,
+        2560
+      ],
+      "source_size": [
+        64,
+        64
+      ],
+      "screen_xy": [
+        128,
+        33
+      ],
+      "matrix": null,
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 610,
+      "oam": 12,
+      "master_xy": [
+        0,
+        0
+      ],
+      "attributes": [
+        17,
+        49280,
+        2496
+      ],
+      "source_size": [
+        64,
+        64
+      ],
+      "screen_xy": [
+        128,
+        17
+      ],
+      "matrix": null,
+      "priority": 2,
+      "flip": [
+        false,
+        false
+      ]
+    }
+  ],
+  "runtime_attributes_and_positions_unchanged": true,
+  "rounding_note": "575의affine160 배치에는원본좌표환산에서y0.125/0.5픽셀의반올림차이가있으나원래실행속성과좌표를변경하지않음"
+}

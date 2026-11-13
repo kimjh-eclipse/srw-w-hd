@@ -1,0 +1,369 @@
+{
+  "candidate_sha256": "81acfb205d38110338b84e4d6ef72ee5c68bae2d571c81476765bd8cce548e59",
+  "changed_contract_indices": [
+    10,
+    12,
+    14
+  ],
+  "changed_hashes": [
+    3446316649,
+    1439743527,
+    3402466599
+  ],
+  "source_patch_native_rect": [
+    72,
+    0,
+    56,
+    64
+  ],
+  "own_generated_bbox": [
+    4,
+    58,
+    1173,
+    1300
+  ],
+  "native_bbox_position_only": [
+    0,
+    3,
+    56,
+    62
+  ],
+  "alpha_policy": "preserve own generated; alpha8 used only position mapping",
+  "unaffected_13_crops_exact_RGBA_equal": true,
+  "crop_identity": [
+    {
+      "index": 0,
+      "hash": 2110369958,
+      "unchanged": true
+    },
+    {
+      "index": 1,
+      "hash": 1388301439,
+      "unchanged": true
+    },
+    {
+      "index": 2,
+      "hash": 440261807,
+      "unchanged": true
+    },
+    {
+      "index": 3,
+      "hash": 361912794,
+      "unchanged": true
+    },
+    {
+      "index": 4,
+      "hash": 3201803958,
+      "unchanged": true
+    },
+    {
+      "index": 5,
+      "hash": 2447916243,
+      "unchanged": true
+    },
+    {
+      "index": 6,
+      "hash": 3703087534,
+      "unchanged": true
+    },
+    {
+      "index": 7,
+      "hash": 1204848296,
+      "unchanged": true
+    },
+    {
+      "index": 8,
+      "hash": 1154063045,
+      "unchanged": true
+    },
+    {
+      "index": 9,
+      "hash": 644908165,
+      "unchanged": true
+    },
+    {
+      "index": 10,
+      "hash": 3446316649,
+      "unchanged": false
+    },
+    {
+      "index": 11,
+      "hash": 1416489550,
+      "unchanged": true
+    },
+    {
+      "index": 12,
+      "hash": 1439743527,
+      "unchanged": false
+    },
+    {
+      "index": 13,
+      "hash": 3863538813,
+      "unchanged": true
+    },
+    {
+      "index": 14,
+      "hash": 3402466599,
+      "unchanged": false
+    },
+    {
+      "index": 15,
+      "hash": 398890498,
+      "unchanged": true
+    }
+  ],
+  "hole_presence": [
+    {
+      "label": "before",
+      "alpha_lt16_native_area": 1378.9375
+    },
+    {
+      "label": "after",
+      "alpha_lt16_native_area": 2745.25
+    }
+  ],
+  "native_RGBA_stamp": false,
+  "QA": false,
+  "production_prepare": [
+    {
+      "index": 0,
+      "hash": 2110369958,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 2,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 1,
+      "hash": 1388301439,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 0,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 2,
+      "hash": 440261807,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 3,
+      "hash": 361912794,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 4,
+      "hash": 3201803958,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 5,
+      "hash": 2447916243,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 6,
+      "hash": 3703087534,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 7,
+      "hash": 1204848296,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 8,
+      "hash": 1154063045,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 0,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 9,
+      "hash": 644908165,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 10,
+      "hash": 3446316649,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 2,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 11,
+      "hash": 1416489550,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 2,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 12,
+      "hash": 1439743527,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 0,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 13,
+      "hash": 3863538813,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 1,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 14,
+      "hash": 3402466599,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 0,
+        "artificial_cut_ink_pixels": 0
+      }
+    },
+    {
+      "index": 15,
+      "hash": 398890498,
+      "max_alpha": 255,
+      "stats": {
+        "dx": 0,
+        "dy": 0,
+        "zoom": 1,
+        "offline_registered": true,
+        "reference_fill_pixels": 0,
+        "filled_edge_pixels": 0,
+        "unattached_paint_components_removed": 0,
+        "artificial_cut_ink_pixels": 0
+      }
+    }
+  ]
+}

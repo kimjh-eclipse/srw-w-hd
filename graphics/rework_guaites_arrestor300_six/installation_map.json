@@ -1,0 +1,815 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "guaites_arrestor300_missing",
+  "atlas": {
+    "image": "rework_guaites_arrestor300_missing/pose_hd.png",
+    "reference": "rework_guaites_arrestor300_missing/pose_native.png",
+    "native_size": [
+      192,
+      144
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3415739581,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 0,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 0,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            199,
+            90
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        0
+      ],
+      "proposed_binding": {
+        "hash": 3415739581,
+        "index_hash": 4181538434,
+        "index_pixels": "eJxjYMAOmICAmZmFDZc4GzMbCLDgEmcB8piZmZhwizOCAS5xmLm4xBH2YhcnFgAA8CQBjQ==",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 16,
+        "y": 28,
+        "w": 32,
+        "h": 8,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 200,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 3415739581,
+        "indices_sha256": "6bc4ab9e6a37864c90429d531bd9a8c0f6f3a50e4545519b9e5b2c01eefaf4e9",
+        "resource": 8872,
+        "source_x": 200,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 2374703497,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 1,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 1,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            162,
+            65
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        1
+      ],
+      "proposed_binding": {
+        "hash": 2374703497,
+        "index_hash": 721586548,
+        "index_pixels": "eJydjLENADAMwggg/j+5VMrQuR5ssQB8MRttvTPXjadmTMkJiSQWAZb36AAP2gB1",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 92,
+        "y": 24,
+        "w": 8,
+        "h": 16,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 160,
+        "source_y": 16
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 1,
+        "actual_rgb_hash": 2374703497,
+        "indices_sha256": "25ed9f7f90ff6f1ab88de7904207b91f12a022bc2781d0744044ec5e4b9c56ef",
+        "resource": 8872,
+        "source_x": 160,
+        "source_y": 16,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 1684750652,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 2,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 2,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            170,
+            65
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        2
+      ],
+      "proposed_binding": {
+        "hash": 1684750652,
+        "index_hash": 4160364582,
+        "index_pixels": "eJzN0jEWwCAIA1BIrPc/ckFXCEOXsv6XiD7NxLi7QIBkm0zce5fIQAQCqHrJ1eHRiLLErM4sa8yw0Axjr1ancGgf9g8nn+6nDV9udWKDZo/nVsyF7hdcFxcb2WJ31W5D3KB2j9HtZro9+jX/fl5y2wIX",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 144,
+        "y": 16,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 168,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 2,
+        "actual_rgb_hash": 1684750652,
+        "indices_sha256": "c54486a9a1cde77a956f27772d3bb751dd7afa6c5695ea4217e11120df23f381",
+        "resource": 8872,
+        "source_x": 168,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 864110818,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 3,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 3,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            125,
+            86
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        3
+      ],
+      "proposed_binding": {
+        "hash": 864110818,
+        "index_hash": 1288781747,
+        "index_pixels": "eJy9kEESwCAIA00DXvj/fxvtOG1VemyOZCcESvlV6MrtGuZ2ZMBBhAD/BKqZpRsEVAHMmqEBJNcAuHKNALE9QtUbwW5zjdDe6MTQBMCrCD41AfTLHwG+VGDcrt60OeItTU6WUwJV",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 16,
+        "y": 96,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 56,
+        "source_y": 48
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 3,
+        "actual_rgb_hash": 864110818,
+        "indices_sha256": "7be692cac9451bebfdd1aee5ca1f940350b7dec0cd78b76e7ac97b2999f50ea7",
+        "resource": 8872,
+        "source_x": 56,
+        "source_y": 48,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 4173263909,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 4,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 5,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            146,
+            65
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        5
+      ],
+      "proposed_binding": {
+        "hash": 4173263909,
+        "index_hash": 2741191328,
+        "index_pixels": "eJyVj0EOwEAIAhXQ/z+5e0WbbepN4gBG3CfTd5RMQXel3dOFeBPonq1xQE89QF4BFf8Bax8VixgVPUAjgB+GUQuAA7Mi2yOxIgSZZ2ogSbWVCPhXZx5spQF/",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 88,
+        "y": 88,
+        "w": 16,
+        "h": 32,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 144,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 4,
+        "actual_rgb_hash": 4173263909,
+        "indices_sha256": "4593e934b422c819025e4179057c1774999533047c3d3f8e948de81518d6c0e1",
+        "resource": 8872,
+        "source_x": 144,
+        "source_y": 0,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    },
+    {
+      "actual_rgb_hash": 2636458640,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 5,
+      "contexts": [
+        {
+          "unit": 74,
+          "oam": 6,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            229,
+            87
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        6
+      ],
+      "proposed_binding": {
+        "hash": 2636458640,
+        "index_hash": 3612592008,
+        "index_pixels": "eJxjYKAMMBIAbMxsEICDZmZihgAcNCHzKXQ+AwCvAAFR",
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "x": 144,
+        "y": 100,
+        "w": 32,
+        "h": 8,
+        "atlas_id": "guaites_arrestor300_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 8872,
+        "source_x": 168,
+        "source_y": 48
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 5,
+        "actual_rgb_hash": 2636458640,
+        "indices_sha256": "d913a655b4503be423b3988886e61131095abda5c66d1703b956c8cd1046f221",
+        "resource": 8872,
+        "source_x": 168,
+        "source_y": 48,
+        "raw_bytes_equal": true
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+    }
+  ]
+}

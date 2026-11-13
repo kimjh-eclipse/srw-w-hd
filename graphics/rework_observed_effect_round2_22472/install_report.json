@@ -1,0 +1,242 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 9,
+      "binding": 94342,
+      "hash": 2110369958,
+      "alpha_iou": 0.8518518518518519,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 10,
+      "binding": 94343,
+      "hash": 1388301439,
+      "alpha_iou": 0.8611111111111112,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 11,
+      "binding": 94344,
+      "hash": 440261807,
+      "alpha_iou": 0.8048780487804879,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 16,
+      "binding": 94345,
+      "hash": 361912794,
+      "alpha_iou": 0.9586983729662077,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 21,
+      "binding": 94346,
+      "hash": 3201803958,
+      "alpha_iou": 0.703125,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 22,
+      "binding": 94347,
+      "hash": 2447916243,
+      "alpha_iou": 0.7972972972972973,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 23,
+      "binding": 94348,
+      "hash": 3703087534,
+      "alpha_iou": 0.9504830917874396,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 25,
+      "binding": 94349,
+      "hash": 1204848296,
+      "alpha_iou": 0.9101479915433404,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 27,
+      "binding": 94350,
+      "hash": 1154063045,
+      "alpha_iou": 0.9625151148730351,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 29,
+      "binding": 94351,
+      "hash": 644908165,
+      "alpha_iou": 0.9301152737752162,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 30,
+      "binding": 94352,
+      "hash": 3446316649,
+      "alpha_iou": 0.5339805825242718,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 34,
+      "binding": 94353,
+      "hash": 1416489550,
+      "alpha_iou": 0.677734375,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 31,
+      "binding": 94354,
+      "hash": 1439743527,
+      "alpha_iou": 0.5227817745803357,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 32,
+      "binding": 94355,
+      "hash": 3863538813,
+      "alpha_iou": 0.7246891651865008,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 26,
+      "binding": 94356,
+      "hash": 3402466599,
+      "alpha_iou": 0.6012396694214877,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 29,
+      "binding": 94357,
+      "hash": 398890498,
+      "alpha_iou": 0.7110817941952506,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 25,
+      "slot_b": 34,
+      "source_overlap": [
+        128,
+        0,
+        8,
+        64
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 29,
+      "slot_b": 30,
+      "source_overlap": [
+        128,
+        0,
+        8,
+        64
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 30,
+      "slot_b": 31,
+      "source_overlap": [
+        72,
+        0,
+        32,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 30,
+      "slot_b": 26,
+      "source_overlap": [
+        96,
+        24,
+        32,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 34,
+      "slot_b": 32,
+      "source_overlap": [
+        72,
+        0,
+        32,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 34,
+      "slot_b": 29,
+      "source_overlap": [
+        96,
+        24,
+        32,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 31,
+      "slot_b": 26,
+      "source_overlap": [
+        96,
+        24,
+        8,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 32,
+      "slot_b": 29,
+      "source_overlap": [
+        96,
+        24,
+        8,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [
+    30,
+    34,
+    31,
+    26
+  ],
+  "independent_visual_verification": false
+}

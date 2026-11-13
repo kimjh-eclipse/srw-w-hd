@@ -1,0 +1,348 @@
+[
+  {
+    "cell": 0,
+    "slot": 7,
+    "binding": 0,
+    "hash": 918810757,
+    "index_hash": 1575835467,
+    "index_pixels": "eJzt0jECwCAIQ1EQN/H+1y21uhHSoWP/+siGyIfpCsuIZu7jBNxLV3cyPwfYn5OCW9Rzb7ucmauR+UuHTN0KZn6zkTl1q7lHyJeBt5P9ecD+5AJHGQP+",
+    "actual_palette_bgr555": [
+      872,
+      3171,
+      5285,
+      8456,
+      15855,
+      21140,
+      30653,
+      2127,
+      2324,
+      2554,
+      2717,
+      13474,
+      21826,
+      28194,
+      4612,
+      12066
+    ],
+    "actual_palette_rgb": [
+      [
+        65,
+        222,
+        0
+      ],
+      [
+        24,
+        24,
+        24
+      ],
+      [
+        41,
+        41,
+        41
+      ],
+      [
+        65,
+        65,
+        65
+      ],
+      [
+        123,
+        123,
+        123
+      ],
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        123,
+        16,
+        16
+      ],
+      [
+        164,
+        65,
+        16
+      ],
+      [
+        213,
+        123,
+        16
+      ],
+      [
+        238,
+        164,
+        16
+      ],
+      [
+        16,
+        41,
+        106
+      ],
+      [
+        16,
+        82,
+        172
+      ],
+      [
+        16,
+        139,
+        222
+      ],
+      [
+        32,
+        131,
+        32
+      ],
+      [
+        16,
+        205,
+        90
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "atlas_box": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "output_size": [
+      32,
+      32
+    ],
+    "fixture": "test_current/parts/native_weapon_source_420_1640/unit420_weapon1640_source.state",
+    "frame": 640,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_420_1640\\unit420_weapon1640_source.state",
+      "frame": 640,
+      "video_epoch": 904,
+      "engine": 0,
+      "oam": 7,
+      "attributes": [
+        49,
+        32884,
+        2568
+      ],
+      "screen_x": 116,
+      "screen_y": 49,
+      "w": 32,
+      "h": 32,
+      "display_w": 32,
+      "display_h": 32,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 520,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 918810757,
+      "index_hash": 1575835467,
+      "material": 1385560676,
+      "used_mask": 14366,
+      "opaque": 227,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJzt0jECwCAIQ1EQN/H+1y21uhHSoWP/+siGyIfpCsuIZu7jBNxLV3cyPwfYn5OCW9Rzb7ucmauR+UuHTN0KZn6zkTl1q7lHyJeBt5P9ecD+5AJHGQP+",
+      "indices_sha256": "1c57e2b1177a4b38e4394f519acac5723e3d39c2fd484d08ad7df24e1d8b6594",
+      "palette_15bit": [
+        872,
+        3171,
+        5285,
+        8456,
+        15855,
+        21140,
+        30653,
+        2127,
+        2324,
+        2554,
+        2717,
+        13474,
+        21826,
+        28194,
+        4612,
+        12066
+      ],
+      "original_palette_rgb": [
+        [
+          65,
+          222,
+          0
+        ],
+        [
+          24,
+          24,
+          24
+        ],
+        [
+          41,
+          41,
+          41
+        ],
+        [
+          65,
+          65,
+          65
+        ],
+        [
+          123,
+          123,
+          123
+        ],
+        [
+          164,
+          164,
+          164
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          123,
+          16,
+          16
+        ],
+        [
+          164,
+          65,
+          16
+        ],
+        [
+          213,
+          123,
+          16
+        ],
+        [
+          238,
+          164,
+          16
+        ],
+        [
+          16,
+          41,
+          106
+        ],
+        [
+          16,
+          82,
+          172
+        ],
+        [
+          16,
+          139,
+          222
+        ],
+        [
+          32,
+          131,
+          32
+        ],
+        [
+          16,
+          205,
+          90
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "observations": [
+        {
+          "frame": 640,
+          "oam": 7
+        },
+        {
+          "frame": 645,
+          "oam": 7
+        },
+        {
+          "frame": 650,
+          "oam": 7
+        },
+        {
+          "frame": 655,
+          "oam": 5
+        },
+        {
+          "frame": 660,
+          "oam": 5
+        },
+        {
+          "frame": 665,
+          "oam": 6
+        },
+        {
+          "frame": 670,
+          "oam": 6
+        },
+        {
+          "frame": 675,
+          "oam": 6
+        },
+        {
+          "frame": 680,
+          "oam": 6
+        },
+        {
+          "frame": 685,
+          "oam": 6
+        },
+        {
+          "frame": 690,
+          "oam": 5
+        },
+        {
+          "frame": 695,
+          "oam": 5
+        },
+        {
+          "frame": 700,
+          "oam": 5
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체는 420이나 부품의 소유자는 ROM 리소스로 독립 확정하지 않음. 실제 원본 조각만 제작."
+  }
+]

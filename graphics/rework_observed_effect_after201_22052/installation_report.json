@@ -1,0 +1,201 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 23,
+      "binding": 94684,
+      "hash": 3183623082,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 26,
+      "binding": 94685,
+      "hash": 525773335,
+      "alpha_iou": 0.9953488372093023,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 23,
+      "binding": 94686,
+      "hash": 3885242662,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 26,
+      "binding": 94687,
+      "hash": 4172639658,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 27,
+      "binding": 94688,
+      "hash": 3069737316,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 28,
+      "binding": 94689,
+      "hash": 2240030746,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 30,
+      "binding": 94690,
+      "hash": 1818404948,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 23,
+      "slot_b": 23,
+      "source_overlap": [
+        80,
+        8,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 26,
+      "source_overlap": [
+        80,
+        16,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 27,
+      "source_overlap": [
+        72,
+        0,
+        16,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 28,
+      "source_overlap": [
+        72,
+        0,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 30,
+      "source_overlap": [
+        64,
+        16,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 26,
+      "source_overlap": [
+        80,
+        16,
+        16,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 27,
+      "source_overlap": [
+        80,
+        8,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 23,
+      "slot_b": 28,
+      "source_overlap": [
+        80,
+        8,
+        8,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 26,
+      "slot_b": 27,
+      "source_overlap": [
+        80,
+        16,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 27,
+      "slot_b": 28,
+      "source_overlap": [
+        72,
+        0,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 27,
+      "slot_b": 30,
+      "source_overlap": [
+        72,
+        16,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}

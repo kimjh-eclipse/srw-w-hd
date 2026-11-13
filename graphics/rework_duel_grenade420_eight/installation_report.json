@@ -1,0 +1,91 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 0,
+      "binding": 94530,
+      "hash": 105327336,
+      "alpha_iou": 0.9087947882736156,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 4,
+      "binding": 94531,
+      "hash": 1365285258,
+      "alpha_iou": 0.9002217294900222,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 5,
+      "binding": 94532,
+      "hash": 897056363,
+      "alpha_iou": 0.9523809523809523,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 6,
+      "binding": 94533,
+      "hash": 458058807,
+      "alpha_iou": 0.9237536656891495,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 7,
+      "binding": 94534,
+      "hash": 1571128644,
+      "alpha_iou": 0.39473684210526316,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 8,
+      "binding": 94535,
+      "hash": 1677208175,
+      "alpha_iou": 0.9833333333333333,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 9,
+      "binding": 94536,
+      "hash": 1287187607,
+      "alpha_iou": 0.8734693877551021,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 11,
+      "binding": 94537,
+      "hash": 4243612182,
+      "alpha_iou": 0.9363057324840764,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 0,
+      "slot_b": 9,
+      "source_overlap": [
+        128,
+        0,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [
+    7
+  ],
+  "independent_visual_verification": false
+}

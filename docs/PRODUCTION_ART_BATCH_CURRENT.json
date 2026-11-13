@@ -7117,12 +7117,2625 @@
       "warnings": [
         3
       ]
+    },
+    {
+      "source": "test_current\\parts\\blaster_blade_native912\\packed",
+      "atlas": "blaster_blade_three",
+      "bindings": [
+        94292,
+        94293,
+        94294
+      ],
+      "atlas_sha256": "e0c487a62c60d7917631ffbd7186b49ac96bb4574f89b48e221518f09da02dd7",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\pegas_core_native921\\packed",
+      "atlas": "pegas_core_one",
+      "bindings": [
+        94295
+      ],
+      "atlas_sha256": "da852c66af8728aa3879de5bb7a3d94d8059eeec5cf8ee793608b2b0e3bb9d2e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_19584",
+      "atlas": "observed_effect_round2_19584",
+      "bindings": [
+        94296,
+        94297,
+        94298,
+        94299,
+        94300,
+        94301,
+        94302,
+        94303,
+        94304,
+        94305,
+        94306,
+        94307,
+        94308,
+        94309,
+        94310,
+        94311,
+        94312,
+        94313,
+        94314,
+        94315,
+        94316,
+        94317,
+        94318,
+        94319,
+        94320,
+        94321
+      ],
+      "atlas_sha256": "36696e865a258d4d1af0a1f6c6d134dcd9751ecd9e9187ee6f14987b2fd71f22",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 26,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 0,
+          "slot_b": 3,
+          "source_overlap": [
+            32,
+            0,
+            64,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 1,
+          "source_overlap": [
+            32,
+            8,
+            64,
+            24
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            8,
+            64,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 2,
+          "source_overlap": [
+            32,
+            8,
+            8,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 7,
+          "source_overlap": [
+            32,
+            32,
+            32,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            7
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            26,
+            16,
+            14
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            7
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 1,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            0,
+            64,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 1,
+          "slot_b": 2,
+          "source_overlap": [
+            32,
+            8,
+            8,
+            24
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 1,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            26,
+            16,
+            6
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 2,
+          "source_overlap": [
+            32,
+            8,
+            8,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 7,
+          "source_overlap": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 11,
+          "source_overlap": [
+            64,
+            56,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            26,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 7,
+          "source_overlap": [
+            32,
+            32,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            8,
+            7
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            26,
+            8,
+            14
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            8,
+            7
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            32,
+            16,
+            26
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 10,
+          "source_overlap": [
+            96,
+            24,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 0,
+          "source_overlap": [
+            32,
+            33,
+            16,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 6,
+          "source_overlap": [
+            32,
+            33,
+            16,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        6,
+        2,
+        0,
+        17
+      ],
+      "production_alpha_policy": "preserve generated alpha; own alpha bbox registration"
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_21683",
+      "atlas": "observed_effect_round2_21683",
+      "bindings": [
+        94322,
+        94323,
+        94324,
+        94325,
+        94326,
+        94327,
+        94328,
+        94329,
+        94330,
+        94331,
+        94332,
+        94333,
+        94334,
+        94335,
+        94336,
+        94337,
+        94338,
+        94339,
+        94340,
+        94341
+      ],
+      "atlas_sha256": "7722711f41f3a5dae2dd124fce23ffe7c3d3cb8e1f0b17699ccbe8b437c139b3",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 20,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 15,
+          "slot_b": 9,
+          "source_overlap": [
+            64,
+            48,
+            24,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 7,
+          "source_overlap": [
+            0,
+            24,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 30,
+          "source_overlap": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 7,
+          "slot_b": 30,
+          "source_overlap": [
+            0,
+            24,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 13,
+          "slot_b": 17,
+          "source_overlap": [
+            128,
+            48,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 9,
+          "slot_b": 13,
+          "source_overlap": [
+            56,
+            48,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        5,
+        15,
+        7,
+        9,
+        11
+      ],
+      "production_alpha_policy": "preserve generated alpha; own alpha bbox registration"
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_22472",
+      "atlas": "observed_effect_round2_22472",
+      "bindings": [
+        94342,
+        94343,
+        94344,
+        94345,
+        94346,
+        94347,
+        94348,
+        94349,
+        94350,
+        94351,
+        94352,
+        94353,
+        94354,
+        94355,
+        94356,
+        94357
+      ],
+      "atlas_sha256": "81acfb205d38110338b84e4d6ef72ee5c68bae2d571c81476765bd8cce548e59",
+      "production_status": "installed and rebaked all16 after ring repair; independent Claude review pending",
+      "actual_observed_targets": 16,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 25,
+          "slot_b": 34,
+          "source_overlap": [
+            128,
+            0,
+            8,
+            64
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 29,
+          "slot_b": 30,
+          "source_overlap": [
+            128,
+            0,
+            8,
+            64
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 30,
+          "slot_b": 31,
+          "source_overlap": [
+            72,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 30,
+          "slot_b": 26,
+          "source_overlap": [
+            96,
+            24,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 34,
+          "slot_b": 32,
+          "source_overlap": [
+            72,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 34,
+          "slot_b": 29,
+          "source_overlap": [
+            96,
+            24,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 31,
+          "slot_b": 26,
+          "source_overlap": [
+            96,
+            24,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 32,
+          "slot_b": 29,
+          "source_overlap": [
+            96,
+            24,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        30,
+        34,
+        31,
+        26
+      ]
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_21123",
+      "atlas": "observed_effect_round2_21123",
+      "bindings": [
+        94358,
+        94359,
+        94360,
+        94361,
+        94362,
+        94363,
+        94364,
+        94365,
+        94366,
+        94367,
+        94368,
+        94369,
+        94370,
+        94371,
+        94372,
+        94373,
+        94374,
+        94375,
+        94376,
+        94377,
+        94378,
+        94379,
+        94380,
+        94381
+      ],
+      "atlas_sha256": "b4e7235292968f95a452a71a8f60acf01a3a0dc41de0acf12abeb51b2dc8b1d7",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 24,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 2,
+          "slot_b": 14,
+          "source_overlap": [
+            128,
+            32,
+            64,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        13
+      ]
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_22093",
+      "atlas": "observed_effect_round2_22093",
+      "bindings": [
+        94382,
+        94383,
+        94384,
+        94385,
+        94386,
+        94387,
+        94388,
+        94389,
+        94390,
+        94391,
+        94392,
+        94393,
+        94394,
+        94395,
+        94396,
+        94397,
+        94398,
+        94399,
+        94400,
+        94401,
+        94402,
+        94403,
+        94404
+      ],
+      "atlas_sha256": "1c50dfcc92f3c8b4667d2aefa5f7f9741b3af363f088dd18f0b0326984dec7f4",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 23,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 2,
+          "slot_b": 2,
+          "source_overlap": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 3,
+          "source_overlap": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 5,
+          "source_overlap": [
+            88,
+            0,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 2,
+          "slot_b": 6,
+          "source_overlap": [
+            88,
+            16,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 5,
+          "slot_b": 7,
+          "source_overlap": [
+            64,
+            16,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 5,
+          "slot_b": 8,
+          "source_overlap": [
+            64,
+            0,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 5,
+          "source_overlap": [
+            80,
+            8,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 6,
+          "source_overlap": [
+            80,
+            16,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 7,
+          "source_overlap": [
+            72,
+            16,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 8,
+          "source_overlap": [
+            72,
+            8,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 16,
+          "slot_b": 21,
+          "source_overlap": [
+            160,
+            32,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/king_jder_native1374/packed",
+      "atlas": "king_jder_fifteen",
+      "bindings": [
+        94405,
+        94406,
+        94407,
+        94408,
+        94409,
+        94410,
+        94411,
+        94412,
+        94413,
+        94414,
+        94415,
+        94416,
+        94417,
+        94418,
+        94419
+      ],
+      "atlas_sha256": "f100287b4a5f2e8781d6d2a758d67e10cb9313f48ad315da1d34078c800c5790",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 15,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/blitz_lancer140_missing",
+      "atlas": "blitz_lancer140_eight",
+      "bindings": [
+        94420,
+        94421,
+        94422,
+        94423,
+        94424,
+        94425,
+        94426,
+        94427
+      ],
+      "atlas_sha256": "4b19ac82784f4e2d13385975702d60027a9651053debad2c1151ee017c19bf2c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 2,
+          "slot_b": 7,
+          "source_overlap": [
+            64,
+            0,
+            8,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/blitz_wire400_missing",
+      "atlas": "blitz_wire400_one",
+      "bindings": [
+        94428
+      ],
+      "atlas_sha256": "82b9cdc6ea7636ddf9d59a4d6f78439b4a9911e0c7a66de89b46695e19b24c10",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/root_fx_21934_pink",
+      "atlas": "observed_effect_21934_pink_seven",
+      "bindings": [
+        94429,
+        94430,
+        94431,
+        94432,
+        94433,
+        94434,
+        94435
+      ],
+      "atlas_sha256": "b33d388d050c9fe2edc95a26232e978c8f2400eec988ee8b49432d813d91b3c0",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 7,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": [
+        11
+      ]
+    },
+    {
+      "source": "test_current/parts/mic_rock_disc_native1365",
+      "atlas": "mic_rock_disc_four",
+      "bindings": [
+        94436,
+        94437,
+        94438,
+        94439
+      ],
+      "atlas_sha256": "8766a60e71b3b847ac85afcce36ad1b911800e7118882f431491551754188928",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/mic_head_native1365",
+      "atlas": "mic_head_one",
+      "bindings": [
+        94440
+      ],
+      "atlas_sha256": "d27ca27afd02a31ea6caac559ebd23d0a431d35cd1078c671c011e5aab23b25c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_21967",
+      "atlas": "observed_effect_round2_21967",
+      "bindings": [
+        94441,
+        94442,
+        94443,
+        94444,
+        94445,
+        94446,
+        94447,
+        94448,
+        94449,
+        94450,
+        94451,
+        94452,
+        94453,
+        94454,
+        94455,
+        94456,
+        94457,
+        94458,
+        94459,
+        94460,
+        94461,
+        94462,
+        94463,
+        94464,
+        94465,
+        94466,
+        94467,
+        94468,
+        94469,
+        94470,
+        94471,
+        94472,
+        94473,
+        94474,
+        94475,
+        94476,
+        94477
+      ],
+      "atlas_sha256": "eafef813bdef9fb110ff15a67b52f5887cf3e267f85cdf94a10f693b70c6192d",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 37,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 19,
+          "slot_b": 32,
+          "source_overlap": [
+            112,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 19,
+          "slot_b": 34,
+          "source_overlap": [
+            112,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 20,
+          "slot_b": 34,
+          "source_overlap": [
+            112,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 33,
+          "source_overlap": [
+            96,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 34,
+          "source_overlap": [
+            96,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 32,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 33,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 34,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 25,
+          "slot_b": 41,
+          "source_overlap": [
+            112,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 26,
+          "slot_b": 40,
+          "source_overlap": [
+            96,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 26,
+          "slot_b": 41,
+          "source_overlap": [
+            96,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 27,
+          "source_overlap": [
+            112,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 43,
+          "source_overlap": [
+            112,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 21,
+          "slot_b": 43,
+          "source_overlap": [
+            64,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 27,
+          "slot_b": 28,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 27,
+          "slot_b": 43,
+          "source_overlap": [
+            96,
+            0,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 28,
+          "slot_b": 43,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 39,
+          "slot_b": 40,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 39,
+          "slot_b": 41,
+          "source_overlap": [
+            96,
+            0,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 40,
+          "slot_b": 41,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 47,
+          "slot_b": 50,
+          "source_overlap": [
+            128,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 32,
+          "slot_b": 33,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 32,
+          "slot_b": 34,
+          "source_overlap": [
+            96,
+            0,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 33,
+          "slot_b": 34,
+          "source_overlap": [
+            96,
+            0,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 42,
+          "slot_b": 44,
+          "source_overlap": [
+            128,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 6,
+          "source_overlap": [
+            128,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        19,
+        22,
+        26,
+        47,
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_21640",
+      "atlas": "observed_effect_round2_21640",
+      "bindings": [
+        94478,
+        94479,
+        94480,
+        94481,
+        94482,
+        94483,
+        94484,
+        94485,
+        94486,
+        94487,
+        94488,
+        94489,
+        94490
+      ],
+      "atlas_sha256": "c19aaafcc0d2089b6274b0cec665903c31b48a4560ce3a704ff61fc1f538e3c6",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 13,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/buster_sniper560_missing",
+      "atlas": "buster_sniper560_two",
+      "bindings": [
+        94491,
+        94492
+      ],
+      "atlas_sha256": "92f9e16b5db7e2a14b52d4b87c997aa55192229cc813996e6dab95b0e5307155",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/gaogaigar_warm_foot_native1455/packed",
+      "atlas": "gaogaigar_warm_foot_one",
+      "bindings": [
+        94493
+      ],
+      "atlas_sha256": "53818fd97941123510eebaf2e09bedd17480d5a064fa14891d34fb83b822c3b2",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/big_volfog_warm_native1505/packed",
+      "atlas": "big_volfog_warm_eight",
+      "bindings": [
+        94494,
+        94495,
+        94496,
+        94497,
+        94498,
+        94499,
+        94500,
+        94501
+      ],
+      "atlas_sha256": "737672120de4469ba61193e753049c6dc6028e521212b0683f8ad05e816e3047",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/buster_scatter460_missing",
+      "atlas": "buster_scatter460_one",
+      "bindings": [
+        94502
+      ],
+      "atlas_sha256": "1790dc4586a20613a2606cd056c29ff8839392f113083d4c73f916e8249e0198",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/root_fx_21934_base_six",
+      "atlas": "observed_effect_21934_base_six",
+      "bindings": [
+        94503,
+        94504,
+        94505,
+        94506,
+        94507,
+        94508
+      ],
+      "atlas_sha256": "8df920751aff58be84909c58d9d2b899dab4537a09cd8c1cf0a6e0d788227005",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/genesic_native1533/packed",
+      "atlas": "genesic_six",
+      "bindings": [
+        94509,
+        94510,
+        94511,
+        94512,
+        94513,
+        94514
+      ],
+      "atlas_sha256": "902bc103587f0136b8c668115de57e821ea48ffc07642ad5626b7bc35cdd5ede",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/golion_native1591/packed",
+      "atlas": "golion_four",
+      "bindings": [
+        94515,
+        94516,
+        94517,
+        94518
+      ],
+      "atlas_sha256": "886d39ebba18e51ab16d302eae5cc9fbd3b05a08f6c5233580e4e6057c194c05",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/aegis_sculla140_missing",
+      "atlas": "aegis_sculla140_one",
+      "bindings": [
+        94519
+      ],
+      "atlas_sha256": "cd55d60a0916cb1a8116c56ea1ba87bc08a3eece4537a5f22cee8c991a21daf8",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/aegis_sculla350_missing",
+      "atlas": "aegis_sculla350_ten",
+      "bindings": [
+        94520,
+        94521,
+        94522,
+        94523,
+        94524,
+        94525,
+        94526,
+        94527,
+        94528,
+        94529
+      ],
+      "atlas_sha256": "b070e3aeb62ca8b0121b1d81f1e7ecb23734d0331a8b08624f38001b7be5ef2e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 10,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/duel_grenade420_missing",
+      "atlas": "duel_grenade420_eight",
+      "bindings": [
+        94530,
+        94531,
+        94532,
+        94533,
+        94534,
+        94535,
+        94536,
+        94537
+      ],
+      "atlas_sha256": "510303d2fc0be67f3d24af0c252cfeaf2b10afbfc00a86700fc9b14792410dc3",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 0,
+          "slot_b": 9,
+          "source_overlap": [
+            128,
+            0,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        7
+      ]
+    },
+    {
+      "source": "test_current/parts/gaofighar_continuous_native1529",
+      "atlas": "gaofighar_continuous_six",
+      "bindings": [
+        94538,
+        94539,
+        94540,
+        94541,
+        94542,
+        70649
+      ],
+      "atlas_sha256": "52f55e7fd83438d6e478ceeb1d434257a7ac6efa9c84f06baf1a8bab4c7bbe7f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/golion_missile_native1589/packed",
+      "atlas": "golion_missile_four",
+      "bindings": [
+        94544,
+        94545,
+        94546,
+        94547
+      ],
+      "atlas_sha256": "ed8ec16226e5ba2e4032b9d67f2b07bd8b26231d7721beddff43f3672e532f2f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/duel_as_shiva220_missing",
+      "atlas": "duel_as_shiva220_three",
+      "bindings": [
+        94548,
+        94549,
+        94550
+      ],
+      "atlas_sha256": "bf552948f6f3fa7eab9054fa38875861682e99d2d5c1b6ca8591732a63e8ef0c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/duel_as_shiva450_missing",
+      "atlas": "duel_as_shiva450_four",
+      "bindings": [
+        94551,
+        94552,
+        94553,
+        94554
+      ],
+      "atlas_sha256": "83231e7da4b6f56be9b8f3686fb8a0b1c878c4e15ecbdf461ce3a6b272ca19d9",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_20348",
+      "atlas": "observed_effect_round2_20348",
+      "bindings": [
+        94555,
+        94556,
+        94557,
+        94558,
+        94559,
+        94560,
+        94561,
+        94562,
+        94563,
+        94564,
+        94565,
+        94566,
+        94567,
+        94568,
+        94569,
+        94570,
+        94571,
+        94572,
+        94573,
+        94574,
+        94575,
+        94576,
+        94577,
+        94578,
+        94579,
+        94580,
+        94581,
+        94582,
+        94583,
+        94584,
+        94585,
+        94586,
+        94587,
+        94588,
+        94589,
+        94590,
+        94591,
+        94592,
+        94593
+      ],
+      "atlas_sha256": "98e90333f109ebb97fd216db93885b8686feda5b9c73cf37f002c44400bd8ee3",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 39,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 0,
+          "slot_b": 1,
+          "source_overlap": [
+            224,
+            48,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 1,
+          "source_overlap": [
+            224,
+            48,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 0,
+          "slot_b": 3,
+          "source_overlap": [
+            232,
+            32,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 1,
+          "slot_b": 1,
+          "source_overlap": [
+            224,
+            48,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 5,
+          "slot_b": 8,
+          "source_overlap": [
+            224,
+            48,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 10,
+          "slot_b": 11,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 10,
+          "slot_b": 12,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 10,
+          "slot_b": 6,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 11,
+          "slot_b": 12,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 11,
+          "slot_b": 6,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            8
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 12,
+          "slot_b": 6,
+          "source_overlap": [
+            0,
+            32,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 10,
+          "slot_b": 10,
+          "source_overlap": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 13,
+          "slot_b": 10,
+          "source_overlap": [
+            64,
+            0,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 21,
+          "slot_b": 22,
+          "source_overlap": [
+            224,
+            32,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 26,
+          "source_overlap": [
+            224,
+            48,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 21,
+          "slot_b": 22,
+          "source_overlap": [
+            224,
+            48,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 22,
+          "slot_b": 17,
+          "source_overlap": [
+            224,
+            32,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [
+        0,
+        3,
+        1,
+        12,
+        14,
+        0,
+        0,
+        21,
+        22,
+        26,
+        0,
+        9,
+        2
+      ]
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_unit48_whiteflat660",
+      "atlas": "observed_effect_unknown_whiteflat660_one",
+      "bindings": [
+        94594
+      ],
+      "atlas_sha256": "8d349688908058ccc7166eafeb5053d149c88648057947b7ece38d15165ebe6c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/big_volfog_continuous_native1506",
+      "atlas": "big_volfog_continuous_six",
+      "bindings": [
+        94595,
+        54395,
+        54399,
+        94598,
+        94599,
+        94600
+      ],
+      "atlas_sha256": "5cde5045ac92ea776938e213cdef98a5e665199bed6173952a226c02fa4fb3e0",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\lagowe_saber250_missing",
+      "atlas": "lagowe_saber250_six",
+      "bindings": [
+        94601,
+        94602,
+        94603,
+        94604,
+        94605,
+        94606
+      ],
+      "atlas_sha256": "804ae3495fa55b804b75999b7407fad06ce6551761199364fc8cfeddac9ebb20",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\guaites_arrestor300_missing",
+      "atlas": "guaites_arrestor300_six",
+      "bindings": [
+        94607,
+        94608,
+        94609,
+        94610,
+        94611,
+        94612
+      ],
+      "atlas_sha256": "7cc5d5d1dc27ed046fa2c2a6aaa3adcdf82f546e44da5c6ed8b929244f9eeae9",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\lesseps_cannon250_missing",
+      "atlas": "lesseps_cannon250_two",
+      "bindings": [
+        94613,
+        94614
+      ],
+      "atlas_sha256": "a3907bc3ca2ebdc539f46250b6e049601c8aeee7e8a6553ebbcfd481ba5b9c52",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\raider_mjolnir300_missing",
+      "atlas": "raider_mjolnir300_two",
+      "bindings": [
+        94615,
+        94616
+      ],
+      "atlas_sha256": "e2f910cb29c6099097e5c7bf9ce396bd388d901a0d6c872a5d58f40aa9a864af",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\dominion_lohengrin420_missing",
+      "atlas": "dominion_lohengrin420_fifteen",
+      "bindings": [
+        94617,
+        94618,
+        94619,
+        94620,
+        94621,
+        94622,
+        94623,
+        94624,
+        94625,
+        94626,
+        94627,
+        94628,
+        94629,
+        94630,
+        94631
+      ],
+      "atlas_sha256": "c13baeb4eeeec14c4347506fe05d9f05e99131b6ead2a08c14552f65d4fcfed1",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 15,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\providence_saber450_missing",
+      "atlas": "providence_saber450_four",
+      "bindings": [
+        94632,
+        94633,
+        94634,
+        94635
+      ],
+      "atlas_sha256": "2d3b776b045735ef5b12b812f26868cc8dce356c99297349ebe77928cee734f8",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/valarm_mechanical_native1640/packed",
+      "atlas": "valarm_observed_mechanical_eleven",
+      "bindings": [
+        94636,
+        94637,
+        94638,
+        94639,
+        94640,
+        94641,
+        94642,
+        94643,
+        94644,
+        94645,
+        94646
+      ],
+      "atlas_sha256": "633053284f6eb96aa1831f080203ffaab8b178e6c1a1ae92b2fe67c3157bbf69",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 11,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/gimlet_mechanical_native1555/packed",
+      "atlas": "gimlet_mechanical_seven",
+      "bindings": [
+        94647,
+        94648,
+        94649,
+        94650,
+        94651,
+        94652,
+        94653
+      ],
+      "atlas_sha256": "28ff083aa8b791cbf21676d6a469320e8dc5b22e411d0b156504254efb7c90c8",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 7,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/peichlon_mechanical_native1559/packed",
+      "atlas": "peichlon_mechanical_sixteen",
+      "bindings": [
+        94654,
+        94655,
+        94656,
+        94657,
+        94658,
+        94659,
+        94660,
+        94661,
+        94662,
+        94663,
+        94664,
+        94665,
+        94666,
+        94667,
+        94668,
+        94669
+      ],
+      "atlas_sha256": "b85dd1b56954cf5a381b1177d33345a29c1e62c3b84197be35e844fb2daec37e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 16,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/polton_mechanical_native1565/packed",
+      "atlas": "polton_mechanical_fourteen",
+      "bindings": [
+        94670,
+        94671,
+        94672,
+        94673,
+        94674,
+        94675,
+        94676,
+        94677,
+        94678,
+        94679,
+        94680,
+        94681,
+        94682,
+        94683
+      ],
+      "atlas_sha256": "e0dbf6210708c280584361234a8a39eeddfb11fb9062f37f547b3385ceacbbd0",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 14,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_22052",
+      "atlas": "observed_effect_after201_22052",
+      "bindings": [
+        94684,
+        94685,
+        94686,
+        94687,
+        94688,
+        94689,
+        94690
+      ],
+      "atlas_sha256": "0228de2ea726c10db1bef2f6c437b103a2961c3e13d8d7cbe19ce10d369e3bc8",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 7,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 23,
+          "slot_b": 23,
+          "source_overlap": [
+            80,
+            8,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 26,
+          "source_overlap": [
+            80,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 27,
+          "source_overlap": [
+            72,
+            0,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 28,
+          "source_overlap": [
+            72,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 30,
+          "source_overlap": [
+            64,
+            16,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 26,
+          "source_overlap": [
+            80,
+            16,
+            16,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 27,
+          "source_overlap": [
+            80,
+            8,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 23,
+          "slot_b": 28,
+          "source_overlap": [
+            80,
+            8,
+            8,
+            8
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 26,
+          "slot_b": 27,
+          "source_overlap": [
+            80,
+            16,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 27,
+          "slot_b": 28,
+          "source_overlap": [
+            72,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 27,
+          "slot_b": 30,
+          "source_overlap": [
+            72,
+            16,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_22522",
+      "atlas": "observed_effect_after201_22522",
+      "bindings": [
+        94691,
+        94692,
+        94693,
+        94694,
+        94695,
+        94696
+      ],
+      "atlas_sha256": "fdf8ed86c891c9106dc9bc41651199eba5b33f065844379eb37e5cae3332d494",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_21877",
+      "atlas": "observed_effect_after201_21877",
+      "bindings": [
+        94697,
+        94698,
+        94699,
+        94700,
+        94701,
+        94702,
+        94703
+      ],
+      "atlas_sha256": "47db9e86c3e1f27886f3879d34314cfcf869c5d435dbf13a1689b5612e276fb2",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 7,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 0,
+          "slot_b": 1,
+          "source_overlap": [
+            96,
+            32,
+            32,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_21706",
+      "atlas": "observed_effect_after201_21706",
+      "bindings": [
+        94704,
+        94705,
+        94706,
+        94707,
+        94708,
+        94709
+      ],
+      "atlas_sha256": "da0571bed8691a74f27c6aaf36b8925a4640645693012870b8022d9036972769",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/retained_fx_round2/art_20050",
+      "atlas": "observed_effect_after201_20050",
+      "bindings": [
+        94710,
+        94711,
+        94712,
+        94713,
+        94714,
+        94715,
+        94716,
+        94717,
+        94718,
+        94719,
+        94720,
+        94721,
+        94722,
+        94723,
+        94724,
+        94725
+      ],
+      "atlas_sha256": "5c8277a874b1d3f128c1a525de9c1c45629ad3e54326b10d872158c20decc41e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 16,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\calamity_todes300_missing",
+      "atlas": "calamity_todes300_seven",
+      "bindings": [
+        94726,
+        94727,
+        94728,
+        94729,
+        94730,
+        94731,
+        94732
+      ],
+      "atlas_sha256": "36cf24fd159e728d6159c77c07e9e3155997340071740bb4e371d645625310eb",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 7,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\calamity_schlag300_missing",
+      "atlas": "calamity_schlag300_four",
+      "bindings": [
+        94733,
+        94734,
+        94735,
+        94736
+      ],
+      "atlas_sha256": "27fbf16cb81c10f14d31faaaa7c83ff5b94b81d86f0cd636cec4bf9af828ad7f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 33,
+          "slot_b": 49,
+          "source_overlap": [
+            184,
+            0,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/pranus_mechanical_native1563/packed",
+      "atlas": "pranus_mechanical_six",
+      "bindings": [
+        94737,
+        94738,
+        94739,
+        94740,
+        94741,
+        94742
+      ],
+      "atlas_sha256": "bf707c90557ee424fcc35c25a40b5f8fa17c7612fef980c5292adf224cac43ed",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/pivater_mechanical_native1567/packed",
+      "atlas": "pivater_mechanical_four",
+      "bindings": [
+        94743,
+        94744,
+        94745,
+        94746
+      ],
+      "atlas_sha256": "f4881c28e48e62ece5c371cdf895889c6b4533b76f966609ddd009a97fa5d25c",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_19915",
+      "atlas": "observed_effect_after243_19915",
+      "bindings": [
+        94747,
+        94748,
+        94749,
+        94750,
+        94751,
+        94752,
+        94753,
+        94754,
+        94755,
+        94756,
+        94757,
+        94758,
+        94759,
+        94760,
+        94761,
+        94762,
+        94763,
+        94764,
+        94765,
+        94766,
+        94767,
+        94768,
+        94769,
+        94770,
+        94771,
+        94772,
+        94773,
+        94774,
+        94775
+      ],
+      "atlas_sha256": "dc236e8e3bd842c12ee03710a539fa0988612d0503a35a7057c2fe834a3d139b",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 29,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_21921",
+      "atlas": "observed_effect_after243_21921",
+      "bindings": [
+        94776,
+        94777,
+        94778,
+        94779,
+        94780,
+        94781,
+        94782,
+        94783,
+        94784,
+        94785,
+        94786,
+        94787,
+        94788,
+        94789,
+        94790
+      ],
+      "atlas_sha256": "11fce0c04e55cce460fa8a5d47b3c32e0da141810e54562de2971d1ad6110c58",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 15,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_21855",
+      "atlas": "observed_effect_after243_21855",
+      "bindings": [
+        94791,
+        94792,
+        94793,
+        94794
+      ],
+      "atlas_sha256": "68d8238b316d63c3e3b95c00baa8f8de318219d34b0d834b5c9498f522d52b2a",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_20183",
+      "atlas": "observed_effect_after243_20183",
+      "bindings": [
+        94795,
+        94796,
+        94797,
+        94798,
+        94799,
+        94800
+      ],
+      "atlas_sha256": "f85146efe771c566a86b8d2d2dc0e329f98777ccc16d10dc2513165112b6ba3e",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 1,
+          "slot_b": 5,
+          "source_overlap": [
+            48,
+            0,
+            16,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\sword_calamity_gewehr300_missing",
+      "atlas": "sword_calamity_gewehr300_five",
+      "bindings": [
+        94801,
+        94802,
+        94803,
+        94804,
+        94805
+      ],
+      "atlas_sha256": "6bc67b194b81416c436152dea2f8c143f3b7224da3e69f389c129e463a18e0ee",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 2313,
+  "baked_target_count": 2827,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction.",
   "held_artwork_not_counted": [
@@ -7136,7 +9749,19 @@
       "source": "graphics/review_pending/sandrock_heated270",
       "contracts": 6,
       "install_allowed": false,
-      "reason": "좁은 연결편 형상 부풀림·후광으로 재제작 필요"
+      "reason": "좁은 연결편 형상 부풀림/절단면 정합으로 재제작 필요"
+    },
+    {
+      "source": "graphics/review_pending/effect21934_white_core",
+      "contracts": 7,
+      "install_allowed": false,
+      "reason": "opaque generated energy core valid; imagegen background extraction erases white core; technical matting review pending"
+    },
+    {
+      "source": "graphics/review_pending/ginn_bazooka_dark_four",
+      "contracts": 4,
+      "install_allowed": false,
+      "reason": "dark connector draft pixelated; redraw pending"
     }
   ]
 }

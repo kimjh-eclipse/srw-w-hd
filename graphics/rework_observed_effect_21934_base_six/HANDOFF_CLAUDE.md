@@ -1,0 +1,1 @@
+IMG21934 actual황백6:같은자기생성전체시트RGBA를4배resize후원본source사각6으로atlaspacking. source_x<64인대광원7계약은생성배경추출이흰중심을지워보류/이atlas연결제외. 원본RGB/alpha복사/다른palettealpha공유없음,생성alpha보존. 6효과의곡선/가시·단색면/연기형태·잘린단면품질은Claude실제게임판정대기. 밝은중심7은올바른opaque RGB그림은확보했으나투명추출미해결이므로별도handoff기술검토필요.

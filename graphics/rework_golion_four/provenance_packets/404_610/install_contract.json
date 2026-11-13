@@ -1,0 +1,291 @@
+[
+  {
+    "cell": 0,
+    "slot": 1,
+    "binding": 0,
+    "hash": 1498162686,
+    "index_hash": 2594634152,
+    "index_pixels": "eJx1ztEOgCAIhWGOQxsuff/HjWAdc63v7pfBFNkhqJUyJ9iohnMMrFa74WnU7t6tzh/YQdma2N3y4G8fYY1bYGc22bb5n5IgHxeL1AMe",
+    "actual_palette_bgr555": [
+      704,
+      2114,
+      12420,
+      18828,
+      26324,
+      31676,
+      19586,
+      23846,
+      29194,
+      2466,
+      2722,
+      19134,
+      14747,
+      6327,
+      2128,
+      3038
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        180,
+        0
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        32,
+        32,
+        98
+      ],
+      [
+        98,
+        98,
+        148
+      ],
+      [
+        164,
+        180,
+        205
+      ],
+      [
+        230,
+        238,
+        246
+      ],
+      [
+        16,
+        32,
+        156
+      ],
+      [
+        49,
+        74,
+        189
+      ],
+      [
+        82,
+        131,
+        230
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        246,
+        172,
+        148
+      ],
+      [
+        222,
+        98,
+        115
+      ],
+      [
+        189,
+        41,
+        49
+      ],
+      [
+        131,
+        16,
+        16
+      ],
+      [
+        246,
+        246,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "atlas_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 렌더 보관 원본색 유지, 다른 조명 단계 미완료",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 16,
+      "h": 16
+    },
+    "output_size": [
+      16,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_404_1591/unit404_weapon1591_source.state",
+    "frame": 610,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_404_1591\\unit404_weapon1591_source.state",
+      "frame": 610,
+      "video_epoch": 2245,
+      "engine": 0,
+      "oam": 1,
+      "attributes": [
+        72,
+        16520,
+        2383
+      ],
+      "screen_x": 136,
+      "screen_y": 72,
+      "w": 16,
+      "h": 16,
+      "display_w": 16,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 335,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1498162686,
+      "index_hash": 2594634152,
+      "material": 1916361024,
+      "used_mask": 30454,
+      "opaque": 213,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJx1ztEOgCAIhWGOQxsuff/HjWAdc63v7pfBFNkhqJUyJ9iohnMMrFa74WnU7t6tzh/YQdma2N3y4G8fYY1bYGc22bb5n5IgHxeL1AMe",
+      "indices_sha256": "7f383ff753f8c4a516dd3479c4809288701636c201a63fcb1bf38302183a4abd",
+      "palette_15bit": [
+        704,
+        2114,
+        12420,
+        18828,
+        26324,
+        31676,
+        19586,
+        23846,
+        29194,
+        2466,
+        2722,
+        19134,
+        14747,
+        6327,
+        2128,
+        3038
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          180,
+          0
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          32,
+          32,
+          98
+        ],
+        [
+          98,
+          98,
+          148
+        ],
+        [
+          164,
+          180,
+          205
+        ],
+        [
+          230,
+          238,
+          246
+        ],
+        [
+          16,
+          32,
+          156
+        ],
+        [
+          49,
+          74,
+          189
+        ],
+        [
+          82,
+          131,
+          230
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          246,
+          172,
+          148
+        ],
+        [
+          222,
+          98,
+          115
+        ],
+        [
+          189,
+          41,
+          49
+        ],
+        [
+          131,
+          16,
+          16
+        ],
+        [
+          246,
+          246,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "visible_native_obj_pixels": 213
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+  }
+]
