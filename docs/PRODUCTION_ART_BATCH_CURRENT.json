@@ -9849,12 +9849,81 @@
       "source_confirmed_unobserved_targets": 0,
       "source_containment_checks": [],
       "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_21748",
+      "atlas": "observed_pink_base_21748",
+      "bindings": [
+        94829,
+        94830,
+        94831,
+        94832,
+        94833,
+        94834,
+        94835,
+        94836,
+        94837,
+        94838,
+        94839,
+        94840,
+        94841,
+        94842,
+        94843,
+        94844
+      ],
+      "atlas_sha256": "6974732b432063755aa6dbb01e2cdffb2fd30c4b4534cba7a209a8878564e377",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 16,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 23,
+          "slot_b": 27,
+          "source_overlap": [
+            64,
+            32,
+            16,
+            32
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 4,
+          "slot_b": 7,
+          "source_overlap": [
+            32,
+            0,
+            8,
+            16
+          ],
+          "relation": "partial_overlap",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_22409",
+      "atlas": "observed_pink_base_22409",
+      "bindings": [
+        94845,
+        94846,
+        94847,
+        94848
+      ],
+      "atlas_sha256": "a0c8960d2617233e963e370fae3833e80b04b57d6c0c68488f122844f3f7545f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 2850,
+  "baked_target_count": 2870,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction.",
   "held_artwork_not_counted": [
