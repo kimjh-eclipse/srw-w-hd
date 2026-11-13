@@ -9730,12 +9730,131 @@
       "source_confirmed_unobserved_targets": 0,
       "source_containment_checks": [],
       "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g0",
+      "atlas": "observed_effect_unit400_g0",
+      "bindings": [
+        94806,
+        94807
+      ],
+      "atlas_sha256": "9c232702adafa0bf2e0778f0202b6077d2cbbfdf175b19c156ae53edddeac2e2",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g1",
+      "atlas": "observed_effect_unit400_g1",
+      "bindings": [
+        94808,
+        94809
+      ],
+      "atlas_sha256": "86cfeca59e4f25f85680ff1cb354d72b5ba926cc614465f1239bcd59e92f59f8",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g2",
+      "atlas": "observed_effect_unit400_g2",
+      "bindings": [
+        94810,
+        94811
+      ],
+      "atlas_sha256": "39186464b2e9f514934be1c93fdd342450cfba90e012b3e00f5b5ecf7fe73f51",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g3",
+      "atlas": "observed_effect_unit400_g3",
+      "bindings": [
+        94812,
+        94813,
+        94814,
+        94815,
+        94816,
+        94817
+      ],
+      "atlas_sha256": "92bf57d321529124717e00058439eb22753e00c782b4dcc50c0c75d58895eff9",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g4",
+      "atlas": "observed_effect_unit400_g4",
+      "bindings": [
+        94818
+      ],
+      "atlas_sha256": "7ce62fdea9e3bfc01bfce28e485efd74b2035854732350989a1417dbc82eb820",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\retained_fx_round2\\art_unit400_g5",
+      "atlas": "observed_effect_unit400_g5",
+      "bindings": [
+        94819
+      ],
+      "atlas_sha256": "e892880bc2eb84f8fae394be89ca67070054d933066afeeef56b6ad7faf204c5",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 1,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\sword_calamity_gewehr550_missing",
+      "atlas": "sword_calamity_gewehr550_five",
+      "bindings": [
+        94820,
+        94821,
+        94822,
+        94823,
+        94824
+      ],
+      "atlas_sha256": "201440917be7cf12b4aaf71b423f4af6b0ab4f560b04b442c7dbd823caa0f9ba",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current/parts/machine_prime_cube_native1400",
+      "atlas": "observed_machine_prime_cube_four",
+      "bindings": [
+        94825,
+        94826,
+        94827,
+        94828
+      ],
+      "atlas_sha256": "8863be254b9d8d79123fdd0597cecce61c8f1562850d1f28f845dcab7571ebd1",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 2827,
+  "baked_target_count": 2850,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction.",
   "held_artwork_not_counted": [

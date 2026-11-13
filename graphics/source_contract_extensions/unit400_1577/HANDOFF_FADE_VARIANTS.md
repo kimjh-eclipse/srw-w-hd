@@ -1,0 +1,1 @@
+실제42=고유raw14. 기본14새그림 폴더는 art_groups14.json. 다른28 actual 팔레트는 fade28_source_base_pairs.json의 base hash/그림/state/frame과 원본 variant contract를 따라 Claude 런타임/색변형 검증. 28그림을 그렸다고 세지 않음. 원래 IMG소유는 미확정, 실제 cached RGBA만 확정. 녹색/회색 단색plane은 실제실색이며 임의 삭제/정상색 치환하지 않았음.
