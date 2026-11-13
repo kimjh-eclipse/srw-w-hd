@@ -10,17 +10,17 @@ Codex가 새로 공식 전수 검사나 실제 재생 검증을 반복하지 않
 
 |대상|현재 상태|자료와 확인점|
 |---|---|---|
-|컷인 자기 페이드|미수정,Claude 담당|`docs/REVIEW_CUTIN_FADE_FLASH.md`. getter_cutin+30/32, golion_cutin+0~5. source의첫대상EVA/EVB·뒤대상·윈도우색효과허용을래스터시점으로적용. 앞BG효과용foreground와구분|
-|윈도우 플래시|미수정,Claude 담당|unit333 mechanical_cutin_168+28/+32. 상단주황/하늘색단색과하단UI보존. MASTER/BLDY는이번측정0. frame끝레지스터만사용하거나ID5일괄차단금지|
-|단색 효과 수집/접합|일부원인확보,그림제작중|22163색3개미만unknown수집누락. 같은frame의현재VRAM은이미다음상태이므로폐기. 아래cachedOBJ읽기API로실제rendered 계약확보. known등록은단색에도가능|
+|컷인 자기 페이드|Claude95ba46f0 GPU경로수정,남은한계검증|`docs/REVIEW_CUTIN_FADE_FLASH.md`. getter_cutin+30/32, golion_cutin+0~5. source의첫대상EVA/EVB·뒤대상·윈도우색효과허용을래스터시점으로적용. 앞BG효과용foreground와구분|
+|윈도우 플래시|Claude d98c4226 반영,확인범위·미적용범위추가검증|기본DLL a6d80b29…,상단window적용. sub/UI/맵/시나리오·색효과허용비트·BLDY/MASTER는별도한계. unit333+28/+30,대사창주변순수원본쌍|
+|단색 효과 수집/접합|Claude d98c4226 진단수집옵션반영,그림24개초안연결|verify_runtime_path가unknown_flat을켜며플레이어는끄고있음. flat은known연결로표시. 기본DLLcachedOBJ API포함. 아래24개그림의접합검증필요|
 
 ## 신규 제작/반영 대기 묶음
 
 |ID|작업 상태|변경범위·파일|Claude가 볼 장면·알려진 문제|
 |---|---|---|---|
-|P-22163-24|미검증후보,추가그림수정중|`test_current/parts/effect_22163/fill_completion/complete24_contract.json`,candidate_complete24.png. 앞16기존RGB+중앙fill8새RGB,두실제팔레트. 원본indices두벌동일assert.아직라이브미설치|unit299 mechanical_cutin_141+54/55/56. cyan gradient반복으로아주옅은사각접합남아균일cyan그림출력재제작중. whitefill4개flatflag는원래단색이므로잡음추가해속이지않음.24개전부재굽기필요|
-|P-MAZINKAISER-179|미검증후보,그림접합수정중|`test_current/parts/borrowed_shape_rework/mazinkaiser_running179_pose/`. 실제22OAM/20고유RGB. 최초정확RGB5/다른팔레트indexed proxy15고유. metadata만늘리지않고한벌새그림제작|unit297 weapon1213 frame300+179/190/220. 머리아래수평띠·날개중간색면접합. SD부분을얼굴/허리로성급히명명한오해수정중. 실제bbox문맥+nativecrop을기준으로작업|
-|P-GETTER-AXE|미검증후보,계약인계중|`test_current/parts/getter_remaining_effects/` 하위도끼머리.64×64 실제indices가IMG14461/14485 x192,y64와같고actualpalette16이PLT14460/14484 bank2와일치|getter_cutin+207~299,실제관측93회. 양날도끼머리+짧은중심연결부. 기체/갑옷/빔으로오인하면안됨. effect_part태그대상아님|
+|P-22163-24|24개초안연결·굽기완료·Claude미검증|atlas observed_effect_22163_complete24.91861–91876갱신+91917–91924새fill.기본그림candidate_complete24.png, retry는미설치비교선택지|unit299 mechanical_cutin_141+54/55/56.균일cyan미세gradient사각선/white구멍·UI가림.기존16검증은새그림에승계불가.24개전부다시굽기|
+|P-MAZINKAISER-179|20종초안연결·굽기완료·Claude미검증|atlas mazinkaiser_running179_pose.새RGB15+기존5갱신,indexed fallback5보존.정확목록은동폴더install_report.json|unit297 weapon1213/frame300+179/190/220.특히slot51→91913 형태IoU.564748 경고. 설치기는기준.70유지하고defer-shape-review로미검증표시.접합/역할/색을통과로보고하지않음|
+|P-GETTER-AXE|91896연결·1개굽기오류0·Claude미검증|atlas observed_getter_tomahawk_head,graphics/rework_getter_tomahawk_head.실제source바이트/16팔레트일치.기계무장이므로effect_part태그없음|getter_cutin+207/210/234/258/259/299.도끼중앙홈/날곡률/절단축·오른쪽스파이크/잔상앞뒤.별도독립검사실행안함|
 
 ## 반영 완료, Claude 확인 대상
 
@@ -41,8 +41,8 @@ python -X utf8 scripts/verify/verify_runtime_path.py --state <실제state> --fra
 ## 코드/바이너리 검증 대상
 
 1. 효과의기체폴백제외: hd_core.py/srww_parts_impl.h/srww_hd.h/libretro.cpp. 기본10%기체보호유지,명시effect_part만제외. 기존162상태×90raw판정A/B와unready1249자료는effect_guard_review/. 정상기체보호와미준비원본보존을Claude가확인.
-2. cachedOBJ읽기API: srww_texture_cache.h/srww_hd.h/libretro.cpp. **기본DLL미반영**,별도fill_completion/desmume_cached_obj_debug.dll만. 읽기전용capacity/엔진/OAM검사,known8snapshot/invalid5/240frame일치자료는HANDOFF_COMPLETE24_AND_API.md. Codex는이3파일수정종료,Claude수정과충돌안하게공유코드추가수정중단.
-3. build/frozen_update EXE는효과가드코어까지빌드됨. cachedOBJAPI는없음. dist팩미갱신,PNG→WebP내용해시·baked키호환과실제배포팩검증별도필요.
+2. cachedOBJ읽기API: srww_texture_cache.h/srww_hd.h/libretro.cpp. **Claude가d98c4226기본DLL에포함**,별도진단DLL도보존. 읽기전용capacity/엔진/OAM검사,known8snapshot/invalid5/240frame일치자료는HANDOFF_COMPLETE24_AND_API.md. Codex는이3파일수정종료,Claude수정과충돌안하게공유코드추가수정중단.
+3. build/frozen_update EXE는새window/cachedAPI코어와fade코드로재묶기예정. 기존번들은구버전. dist팩미갱신,PNG→WebP내용해시·baked키호환과실제배포팩검증별도필요.
 4. 구운DB정리후보: baked_store_compaction/candidate.sqlite 1.28GB. live2.58GB는그대로. 현재87348유효키만복사·재인코딩없음. 이후새그림추가되어후속키를포함해다시생성해야함. 후보를현재live로바로덮지말것.
 
 ## 배포/커밋 처리
@@ -50,3 +50,37 @@ python -X utf8 scripts/verify/verify_runtime_path.py --state <실제state> --fra
 전체완료율160/11358같은비율은사용하지않습니다. 바인딩·원본고유파츠·팔레트변형·OAM중복은서로다름.
 전체기체목표를유지하되83개테스트기체/보유장면을우선배포검증목록으로구분. 검증완료범위와미포함범위를배포설명에명시.
 Codex가검증된변경부터기능별선택커밋을진행합니다. ROM/세이브/사용자설정/오류로그/거대미추적DB를일괄추가하지않습니다. 푸시·EXE팩갱신은별도상태기록.
+
+## 코어 소스 해제
+Codex의코어작업은종료했고046a9701에읽기API를남겼습니다. 전체해제범위/진단DLL과기본DLL차이/정확fill8계약은HANDOFF_FROM_CODEX_3.md상단의같은제목을확인하세요. Claude가윈도우마스크·단색수집조건과기본DLL빌드를진행할수있습니다. Codex는공유코어파일을추가수정하지않고그림작업을계속합니다.
+
+## 제작 도구 변경 확인 대상
+- bake_parts.py가매번773색표를재계산하지않고기존정확palette해시색표를재사용,새색표만계산하고npz는임시파일후atomic교체.91896필요굽기에서772재사용/1추가,오류0,9.8초. 실게임FPS개선주장이아님. Claude는누락/신규팔레트·기존table동일성을확인할수있음.
+- 일반설치기--defer-shape-review는시각경고를독립검증대기열로넘기며.70기준/측정값은그대로기록. actualhash/index/palette/크기/prefix검산은해제하지않음. 낮은형태를통과로표시하지않음.
+
+## 반영 묶음 고정 기록
+마징카이저20+원형효과24=44개굽기완료/오류0,773색표전부기존해시로재사용. `test_current/parts/current_production_batch/handoff_manifest.json`에대상binding별spec SHA256과atlas이미지/참조SHA256을저장했습니다. 후속무관그림추가로전체library SHA가달라져도대상spec/atlas가같은지대조해검증결과범위를판단하세요. 새그림의독립검증은미실행입니다.
+
+## 새 반영 묶음55 — 검증 대기
+|묶음|반영|Claude 확인점|
+|---|---|---|
+|21798 광선/폭발29|91925–91953, observed_effect_21798_29.2실제팔레트/exactRGB/static/effect|unit19 mechanical_cutin_168 +12/14/16/20/22/24/26/28/32/34/38/66/70/72.형태참고경고91929/91933/91936/91939(0.70기준미달),가는직선/불꽃꼬리/파편위치·alpha프린지|
+|겟타22053 충격광/파편8|91954–91961, observed_getter_effect_22053.중첩crop은연속그림공유|getter_cutin+76/78/137/139/147/151/155.형태참고경고91956–91961,연속부분의색/면적/절단선검증필요. 새그림모두미검증|
+|마징카이저초기18|mazinkaiser_initial3_pose,12기존RGB교체+6새RGB. 정확binding은전용install_report.json|unit297weapon1213/frame300+3및초기컷인소실후노출.20OAM/18고유,기존17920개와rawhash교집합0.머리/날개연속생성후분할했으나접합·색/역할은Claude판정|
+
+55개대상굽기완료/오류0(8.9초,기존palette773재사용/2개추가). `test_current/parts/production_batch_55/handoff_manifest.json`에대상spec/atlas SHA256과binding목록기록. 검증완료를의미하지않습니다.
+
+
+## 최신 추가 제작 — 고유83종 (Codex, 11월13일)
+
+현재 상세/번호는 `HANDOFF_FROM_CODEX_4.md` 및 `PRODUCTION_ART_BATCH_CURRENT.json`이 기준입니다. 이전 _3.md의 작업예약·옛 DLL상태는 종료됐습니다.
+
+- 데스사이즈7086 일반20: `duo_map_attack.state +120`. continuous그림 사용. 뿔 금색/눈 초록/팔·몸체·날개·낫 접합.
+- 데스사이즈 접힌날개14+기존1 의존: `duo_cutin.state +180`. 얼굴 가림은 원본문맥, 작은 연결부/키색/컷인·UI순서.
+- 코다르 분신14: `unit280/mechanical_cutin_168.state +90`. cached26OAM14unique. 옛17입력 phantom3은 미설치. 좌우단검/본체·기존중앙기체 스타일.
+- 겟타pole2: `getter_cutin.state +56/57/59/90/110/126/207/234`. 도끼축·잔상 역할/접합. effect태그없음.
+- 21948새17: unit413 weapon1610 frame360+112~128,frame600+31/63~94. 기존exact14보존. 흰중심·민트선 이음매. gray2는20498과exact공유 binding91986/91987.
+- 20498회색2: unit413 weapon1610 frame600+31 OAM3/4. 상하곡선접합/희미한alpha.
+- 샌드록16 기존그림교체: `quatre_cutin_full.state +0`.17OAM16unique. 컷인이몸체를가리는state이므로 body판정에 별도관측도 필요. 금색13/노랑14/초록15 배치·두얇은셀5/9·스카프/장갑 이음매.
+
+첫67+샌드록16 굽기 오류0. **독립 검증 미실행**이며 감사/재생 검증은 Claude 담당. 검증 전 EXE재묶기/배포팩 갱신은 대기.
