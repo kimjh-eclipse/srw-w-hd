@@ -2974,12 +2974,168 @@
       ],
       "actual_observed_targets": 20,
       "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\borrowed_shape_rework\\mazinkaiser_combo1560_pose",
+      "atlas": "mazinkaiser_combo1560_three",
+      "bindings": [
+        68881,
+        68906,
+        68876
+      ],
+      "atlas_sha256": "c10e8f21cb722e1dd10fbb79d19a814c7d4bbcaff81958a591e218cc97e89aa9",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        20
+      ],
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": true,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current\\parts\\sword_units_later\\19_260",
+      "atlas": "sword_later_19_260",
+      "bindings": [
+        93320,
+        93321,
+        93322,
+        93323,
+        93324
+      ],
+      "atlas_sha256": "067d10da253d3ced204cd7f461bf5b768207d079da8e6ad814bb5b66fae9dd09",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        3
+      ],
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": false,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current\\parts\\sword_units_later\\42_265",
+      "atlas": "sword_later_42_265",
+      "bindings": [
+        93325,
+        93326,
+        93327,
+        93323,
+        93328
+      ],
+      "atlas_sha256": "fffc45a47d86e66d2a979e129fdfbd5763d6dc05cf1517c66c62454c83f29b82",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": false,
+      "shared_existing_targets": [
+        93323
+      ]
+    },
+    {
+      "source": "test_current\\parts\\sword_units_later\\131_240",
+      "atlas": "sword_later_131_240",
+      "bindings": [
+        93329,
+        93330
+      ],
+      "atlas_sha256": "9ee352d606bbd8ec87e1baad3bf559703cf6b6a7d9a74072d784edb54c9f4c03",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": false,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current\\parts\\sword_units_later\\131_300",
+      "atlas": "sword_later_131_300",
+      "bindings": [
+        93331,
+        93332,
+        93333,
+        93334,
+        93335,
+        93336
+      ],
+      "atlas_sha256": "4b7b249b133be2a67533dfbd7cffa7bd1d24eea4117d44cb02b1c8a7b60ea16f",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 6,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": false,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_22069",
+      "atlas": "observed_effect_22069_twentyfour",
+      "bindings": [
+        93293,
+        93294,
+        93295,
+        93296,
+        93297,
+        93298,
+        93299,
+        93300,
+        93301,
+        93302,
+        93303,
+        93304,
+        93305,
+        93306,
+        93307,
+        93308,
+        93309,
+        93310,
+        93311,
+        93312,
+        93313,
+        93314,
+        93315,
+        93316
+      ],
+      "atlas_sha256": "28f9ac50c2c056d99e91f858e5a9062f0e4c3856914f1d432102e4171601ebad",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 24,
+      "source_confirmed_unobserved_targets": 0,
+      "existing_art_replacement": false,
+      "shared_existing_targets": []
+    },
+    {
+      "source": "test_current/parts/next_confirmed_fx_source/art_19716",
+      "atlas": "observed_effect_19716_fourteen",
+      "bindings": [
+        93337,
+        93338,
+        93339,
+        93340,
+        93341,
+        93342,
+        93343,
+        93344,
+        93345,
+        93346,
+        93347,
+        93348,
+        93349,
+        93350
+      ],
+      "atlas_sha256": "66bfee524edbb52a94c21e194875889dc67e90748396388ed3089dcd226c3fa3",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        5
+      ],
+      "actual_observed_targets": 14,
+      "source_confirmed_unobserved_targets": 0
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1314,
+  "baked_target_count": 1372,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
