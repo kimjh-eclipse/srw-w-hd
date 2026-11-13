@@ -108,3 +108,18 @@ Codex의코어작업은종료했고046a9701에읽기API를남겼습니다. 전�
 - 22378late:67unbound RGB가형태2의연속fade변형. test_current/parts/effect_22378_late/{observed_contract.json,new_22378.json}. 67새그림/재색칠바인딩으로메우지않음. Claude가팔레트fade를원본색번호/블렌드로보존할경로를검토필요. 기본두형태그림은제작담당별도진행.
 
 이번작업타깃146모두대상굽기완료. **이는전체11,358누락의감소146이아니며전체잔여재집계아님**. production선정큐는구형누락계약과현재등록의대조일뿐QA가아닙니다.
+
+
+## 최신373개 작업대상 — 전체누락감소수와분리
+
+
+- 현재정확목록/그림SHA는 PRODUCTION_ART_BATCH_CURRENT.json,현재요약은HANDOFF_FROM_CODEX_4.md.373은기존그림교체/팔레트별항목포함작업량이고11,358누락에서단순차감금지. 실제미관측10은actual_observed=false.
+- **root연결오류수정**:20498jade6 HD512×128/잘못참조256×128→정상참조128×32로교체.92094~92099다시굽기.캔버스잘못읽기로사라졌던위치가실제로표시되는지확인.
+- **21819 생성누락4복원**:반원1+alpha최대5점선3.동일효과자체생성pixels만복원/새그림.28종재굽기완료.원래검정2/나머지24불변,최신그림SHA참조. cropped끝윤곽·band/brightness/원형반원구멍유무·점선폭검토.
+- **21080 총51계약**:관측41+원본/팔레트확정미관측10(9새shape/1다른bank). unit325_weapon1321_source.state +250~270/+485~510가41의문맥.단색cell4누락은생성도구교정.추가10을실제본것으로판정하지않음.작은점/단색fill/두bank의shape/색/레이어확인.
+- **21657 노란29/붉은16**,19584회색32:입력source/palette개별확정,기존정확공유보존.19584는먼지가렌즈형으로변했을가능성·원호곡률/띠·작은crop끝선.구체state/offset은graphics제작폴더HANDOFF파일.
+- **21695 회색기류16**:unit1 attack_7108_connected+50~63. low-alpha주변흰/자홍RGB프린지·구름폭·갈고리위치/원본이음매검토.
+- **17168 패널4(root생성)**:unit348/weapon1400 source_pose+0.한80×80그림에16px겹침4crop을공유. 기체/효과역할분류미확정(effect태그보류).실제affine/앞뒤/가림·원본모양/무늬/밝기확인.
+- **아스테바리스+90 공전11/육전12,+195 육전19**:기체별actualpalette생성,기존OAM의존별도보존.손목/무장절단면cap·손가락자동완성/색영역/아주작은셀·pose전체선굵기검토.각계약에개별unit/state/OAM/offset.원본IMGindex와동일이지만ROM PLT번호까지전색상확정이라는주장은없음.
+- 전체373입력캔버스/원본계약/nearempty기계검사오류0(PRODUCTION_INPUT_BUILD_CHECK.json).입력품질/게임재생합격은아님.최신104타깃굽기도오류0.빈/nearempty그림하드거부가추가됐고errors>0이면빌드실패.
+- 22378late67계약은shape2의fade. 기본그림2만있고65를자동으로해결한것아님. fade_palette_characterization.json의최대근사잔차16.37/255로단순RGB배율의정확성도보장못함.공통팔레트fade처리검토요청.

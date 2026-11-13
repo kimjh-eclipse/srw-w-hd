@@ -29,6 +29,7 @@ def main():
     args=parser.parse_args();source=args.source_dir
     contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text())]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
+    assert art.size==(native.width*4,native.height*4),('HD/native canvas ratio must be 4x',art.size,native.size)
     path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text())
     prefix=hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
     name=args.atlas_id;rows=[]
@@ -38,7 +39,14 @@ def main():
         palette=np.asarray(r['actual_palette_bgr555'],dtype=np.uint16)
         rgb=zlib.crc32(np.where(a,palette[a]|32768,0).astype('<u2').tobytes())^(w<<16)^h
         assert (ih,rgb)==(r['index_hash'],r['hash'])
-        expected=np.asarray(native.crop((x,y,x+w,y+h)).getchannel('A'))>64
+        reference=np.asarray(native.crop((x,y,x+w,y+h)))
+        expected=a>0
+        assert np.array_equal(reference[:,:,3]>0,expected),('native reference alpha differs from source contract',r['slot'])
+        if expected.any():
+            source_rgb=np.asarray(r['actual_palette_rgb'],dtype=int)[a]
+            assert np.max(abs(reference[:,:,:3].astype(int)-source_rgb)[expected])<=1,('native reference palette differs from source contract',r['slot'])
+        if expected.any():
+            assert art.crop((x*4,y*4,(x+w)*4,(y+h)*4)).getchannel('A').getextrema()[1]>=16,('empty or near-transparent artwork',r['slot'])
         got=np.asarray(art.crop((x*4,y*4,(x+w)*4,(y+h)*4)).getchannel('A').resize((w,h),Image.Resampling.BOX))>64
         iou=float((expected&got).sum()/max(1,(expected|got).sum()))
         if not args.defer_shape_review:assert iou>=.70,(r['slot'],iou)
@@ -55,7 +63,8 @@ def main():
         spec=dict(hash=rgb,index_hash=ih,rgb_enabled=True,indexed_safe=False,dynamic_palette=not args.static_palette,
                   original_palette_rgb=r['actual_palette_rgb'],index_pixels=r['index_pixels'],x=x,y=y,w=w,h=h,atlas_id=name,
                   resource=old.get('resource'),source_x=old.get('source_x',old.get('x',x)),source_y=old.get('source_y',old.get('y',y)),
-                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=True,
+                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,
+                  actual_observed=bool(r.get('actual_observed',True)),
                   independent_visual_verification=False,review_status='pending_claude')
         if args.effect:spec['effect_part']=True
         if existing is None:meta['bindings'].append(spec);binding=len(meta['bindings'])

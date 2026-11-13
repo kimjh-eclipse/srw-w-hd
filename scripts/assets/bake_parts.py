@@ -29,9 +29,15 @@ def start():
 def bake(item):
     binding,key=item
     spec=_renderer.bindings[binding-1]
-    try:image,stats=_renderer.prepare_texture(binding,spec['w'],spec['h'])
+    try:
+        image,stats=_renderer.prepare_texture(binding,spec['w'],spec['h'])
+        if spec.get('index_pixels'):
+            import base64
+            opaque_source=any(zlib.decompress(base64.b64decode(spec['index_pixels'])))
+            if opaque_source and image.getchannel('A').getextrema()[1]<16:
+                raise ValueError('Nonempty source produced an empty or near-transparent baked texture')
+        return binding,key,(image.width,image.height,_renderer.disk_cache.encode(image),json.dumps(stats)),None
     except Exception as error:return binding,key,None,str(error)
-    return binding,key,(image.width,image.height,_renderer.disk_cache.encode(image),json.dumps(stats)),None
 
 
 def main():
@@ -85,6 +91,7 @@ def main():
     report=dict(palette_tables=len(palettes),palette_tables_reused=reused,source_parts=total,baked_now=done-len(errors),errors=len(errors),seconds=round(time.perf_counter()-started,1),store=str(cache.path),store_bytes=Path(cache.path).stat().st_size)
     (out/('resource_report.json' if args.resources else 'report.json')).write_text(json.dumps(dict(report,error_detail={str(k):v for k,v in list(errors.items())[:200]}),indent=2),encoding='utf-8')
     print(json.dumps(report))
+    if errors:raise SystemExit(1)
 
 
 if __name__=='__main__':main()
