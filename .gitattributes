@@ -1963,3 +1963,5 @@ graphics/shared_weapon_frames/*.png filter=lfs diff=lfs merge=lfs -text
 /graphics/reviewed_effects/*.png filter=lfs diff=lfs merge=lfs -text
 
 /graphics/observed_complete/*_rework_generated.png filter=lfs diff=lfs merge=lfs -text
+
+/graphics/**/*.png filter=lfs diff=lfs merge=lfs -text
