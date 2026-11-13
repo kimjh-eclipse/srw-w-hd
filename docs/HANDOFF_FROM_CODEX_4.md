@@ -1,125 +1,128 @@
 # Codex → Claude 핸드오프 4
 
-현재 교환 파일입니다. 이전 제작 이력은 Git 및 HANDOFF_FROM_CODEX_3.md에 보존합니다. 현재 상태는 이 파일을 우선합니다.
+현재 교환 파일입니다. 제작 이력의 정확한 바인딩·SHA는 `PRODUCTION_ART_BATCH_CURRENT.json`에 있습니다. 과거 기록은 Git과 `HANDOFF_FROM_CODEX_3.md`를 참고하세요. 오래된 진행 예정 문구와 중복 상태는 정리했습니다.
 
-## 현재 상태와 수량 기준
+## 현재 상태와 수량
 
-- 이번 작업묶음 **603개 연결 항목 설치·대상굽기 완료**. 92493도 자체 새 그림으로 교정해 같은19 전체 굽기 오류0 뒤 활성화했습니다. 기존 그림 교체·팔레트 변형을 포함하는 작업량이며, 전체 HD 누락에서 단순 차감할 수 없습니다.
-- **전체 누락은 이전 ROM 감사의11,358종이 마지막 집계**입니다. 전체 잔여는 재집계하지 않았고 완료율을 주장하지 않습니다. 감사 밖에서 발견된 실제 누락도 따로 기록합니다.
-- 최신 지시: Codex는 제작·연결·굽기·커밋을 진행, 독립 그림/색/재생검증은Claude담당. 실제로보지않은것을보았다고기록하지않습니다. 미관측계약10은actual_observed=false.
-- **코어 소스 해제**. Claude95ba46f0/d98c4226 반영. 기본 DLL SHA256 a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0,cachedOBJ API포함. Codex는공유runtime/core를수정하지않습니다.
-- 사용자 테스트 창은유지. 컴퓨터종료금지. ROM·세이브·사용자설정·로그·자격증명은Git추가금지. baked.sqlite은제작산출물로Git에추가하지않습니다.
+- **747개 작업 대상의 연결·대상 굽기 완료**. 기존 그림 교체와 실제 팔레트별 변형을 포함한 고유 바인딩 수입니다. 독립 시각·색·실제 재생 검증 완료 수가 아닙니다.
+- **전체 누락은 이전 ROM 감사의 11,358종이 마지막 수치**이며 재집계하지 않았습니다. 작업 대상 수를 그대로 빼거나 전체 완료율로 쓰지 마세요. 다중 IMG 21% 미판정과 BG 누락은 기존 감사 밖입니다.
+- **603개까지 `33989ce0`로 커밋·GitHub 푸시 완료**, 이후 제작분은 다음 커밋 대상입니다. ROM·세이브·사용자 설정·로그·자격증명·baked.sqlite은 추가하지 않습니다.
+- Codex는 그림 제작·원본 계약·연결·굽기·커밋, Claude는 독립 품질·색·실제 재생 검증을 담당합니다. 자동 입력 검사나 굽기 오류 0을 품질 합격으로 적지 않습니다.
+- 사용자 테스트 창은 유지합니다. 컴퓨터는 끄지 않습니다. EXE 번들은 아직 이전 코드이며 최신 작업이 적용됐다고 주장하지 않습니다.
 
-## 진행 중인 다음 제작
+## 코어와 공유 코드
 
-- next_shape_art: 아스테바리스 다음 실제미연결기계자세/무장. +90 공전11/육전12,+195육전19는이번묶음에반영됨.
-- next_key_art: 21667 29개는 연결·굽기 완료. 다음 IMG22111/22342/21071 등 실제 누락 원본을 확인해 연속 제작 중.
-- effect_live_palette: 신규 효과5묶음86 중85개 굽기 완료. 22410의92493 빈 출력부터 교정한 뒤 후속 효과 제작. 소유 불확실·미관측 팔레트 추정은 제외.
-- root: 새후보인수·하드입력검사·라이브연결·대상굽기·검증큐·커밋/푸시. 동일효과자체그림의정확crop은가능,다른기체그림재색칠로누락메우기금지.
+**코어 소스 해제**. Claude의 95ba46f0/d98c4226 반영 상태를 유지합니다. 기본 DLL SHA256은 `a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0`이며 cachedOBJ 읽기 API가 있습니다. Codex는 이번 그림 제작 중 공유 런타임·코어를 수정하지 않았습니다.
 
-## 현재 그림 묶음
+- 컷인 자기 페이드와 앞 BG 효과 동시 처리, sub/UI/폰트/맵/시나리오 마스크, BLDY/MASTER_BRIGHT 한계는 Claude의 기존 기록대로 남습니다.
+- 오래된 1.28GB compact 후보는 최신 그림이 없으므로 live 저장소로 바꾸면 안 됩니다. 배포 시 현재 키로 다시 정리해야 합니다.
 
-정확한 바인딩번호/그림SHA/입력경고는 PRODUCTION_ART_BATCH_CURRENT.json. 각graphics제작폴더의pose_contract.json,installation_report.json,제작인계문서를함께보세요. 아래수는개별그림·팔레트연결항목이며기체수/고유형태수/전체누락감소수가아닙니다.
+## 제작 원칙과 도구
 
-|아틀라스|이번 대상 수|현재 상태|
-|---|---:|---|
-|observed_getter_pole_forms|2|Claude검증대기;입력형태경고있음|
-|observed_effect_21948_new17|17|Claude검증대기;입력형태경고있음|
-|codarl_clones90_cached_pose|14|Claude검증대기|
-|deathscythe_normal_7086|20|Claude검증대기|
-|observed_effect_20498_gray2|2|Claude검증대기;입력형태경고있음|
-|deathscythe_folded_wings_pose|14|Claude검증대기|
-|sandrock_cached_pose|16|Claude검증대기|
-|deathscythe_forecast_closed_pose|14|Claude검증대기|
-|observed_effect_20498_white7|7|Claude검증대기|
-|deathscythe_scythe150_continuous|2|Claude검증대기|
-|sandrock_weapon_closeup_cached_pose|9|Claude검증대기|
-|observed_effect_20498_jade6|6|Claude검증대기|
-|deathscythe_green_arcs_7084_7085|10|Claude검증대기;입력형태경고있음|
-|observed_effect_19600_last_two|2|Claude검증대기|
-|great_thunder168_cached_pose|10|Claude검증대기|
-|observed_effect_19645_new_three|3|Claude검증대기;입력형태경고있음|
-|getter_true_missing_22054_22062|4|Claude검증대기;입력형태경고있음|
-|observed_effect_22378_late_base_two|2|Claude검증대기|
-|observed_effect_21657_yellow29|29|Claude검증대기|
-|observed_effect_22673_three|3|Claude검증대기|
-|observed_panel_17168_four|4|Claude검증대기|
-|observed_effect_21657_red16|16|Claude검증대기|
-|observed_effect_21695_sixteen|16|Claude검증대기|
-|observed_effect_19584_gray32|32|Claude검증대기;입력형태경고있음|
-|aestivalis_flight_missing90_arms11|11|Claude검증대기|
-|aestivalis_ground_missing90_arms12|12|Claude검증대기|
-|observed_effect_21819_four_levels28|28|Claude검증대기;입력형태경고있음|
-|observed_effect_21080_complete51|41|Claude검증대기|
-|observed_effect_21080_complete51|10|소스/팔레트확정·해당형태재생미관측|
-|aestivalis_ground195_missing19|19|Claude검증대기;입력형태경고있음|
+- 렌더된 cachedOBJ의 인덱스·실제 팔레트·OAM·변형·좌표를 원본 계약으로 씁니다. 프레임 끝 VRAM을 원본으로 대신 읽지 않습니다.
+- 한 자세의 연속 그림과 겹침을 보존합니다. 실제 절단면에 인공 외곽선이나 cap을 만들지 않습니다. 다른 기체 그림의 재색칠로 누락을 메우지 않습니다.
+- 원본/팔레트가 확정된 미관측 형태는 `actual_observed=false`로 보존하고 OAM·프레임을 발명하지 않습니다. 관측 팔레트와 ROM PLT가 다르면 미관측 형태를 추정 확장하지 않습니다.
+- `install_great_mazinger_pose.py`: 원본 index/RGB/alpha, HD/native 정확 4배, 빈 후보를 검사합니다. 형태 경고는 Claude에 넘기며 품질 통과를 뜻하지 않습니다.
+- `bake_parts.py`: 준비 후 빈/거의 투명한 출력은 저장하지 않고 오류 종료합니다. `--include-disabled`는 명시적 바인딩 복구에만 사용합니다. 아틀라스 그림을 바꾸면 그 아틀라스 전체 바인딩을 다시 굽습니다.
+- root만 라이브 메타데이터와 저장소에 씁니다. 3명의 제작 서브에이전트는 후보·계약·출처·Claude 인계만 작성합니다. 첫 5,263개 바인딩은 보존합니다.
 
-## 발견해 고친 제작 연결 결함
+## 고친 생산 결함
 
-- **jade6 참조캔버스크기 오류는root 연결실수**. HD512×128에참조256×128을등록해잘못된비율로빈영역을읽음. 올바른128×32 native_full_plume.png로교체,92094~92099 다시굽기완료. 그림자체재색칠은없음.
-- 설치기는HD/native 정확4배,참조alpha/사용RGB와원본index·actual팔레트동일,원본있는데생성crop maxalpha<16을하드오류로처리. 굽기도nonempty원본→near-transparent결과를실패로반환하고errors>0이면exit1.
-- **21819 생성누락4**: 실제half-disc를추가발명으로오해해뺀1개,alpha최대5였던점선3개. 같은효과자체생성반원회수+점선새생성으로교정. 다른24개와검정2는불변.28개설치·굽기완료.
-- **21080 단색fill누락**: 실제8×16흰면을생성도구로다시그려해당자체그림영역만교체.41개관측계약과10개원본계약모두설치·굽기.10개는실제로재생에서보았다고하지않음.
-- 이전373개입력캔버스/원본계약/최대alpha기계검사오류0(PRODUCTION_INPUT_BUILD_CHECK.json). 이것은그림품질/레이어/실제재생합격이아님. 최신104개대상굽기errors0,6.0초이며게임FPS수치가아님.
+- jade6: root가 HD512×128에 잘못된 native256×128 참조를 연결했던 실수를 정상128×32로 교정하고 92094~92099를 다시 구웠습니다. 실제 상하 접합은 Claude 확인이 필요합니다.
+- 21819: 잘못 제외했던 반원1과 alpha 최대5 점선3을 해당 효과 자체 생성 그림으로 복원했습니다. 28개 다시 굽기 완료. 검정2와 나머지24는 보존했습니다.
+- 21080: 누락 단색 fill을 생성 도구로 보완했습니다. 관측41+확정 미관측10을 구분해 연결했습니다.
+- 22410의92493: 전체 sheet 정렬에서 대각선이 밀려 준비 후 비었습니다. 임시 비활성화로 native 표시를 유지한 뒤 해당 crop을 새로 그렸고 다른18 crop은 RGBA 불변입니다. 19개 전체 굽기 오류0 뒤 같은 ID를 활성화했습니다.
+- 22030의hash238205272: v2에서 자체 생성 파편의 위치만 맞췄습니다. 다른8 crop은 불변이며 준비 중 성분 제거7→0. 9개 전체 다시 굽기 오류0. 작은 파편의 반복 형태·폭은 Claude가 확인해야 합니다.
 
-## Claude 우선 확인
+## Claude 우선 검증
 
-- 상세장면/offset/알파·형태경고는CLAUDE_VERIFICATION_QUEUE.md 및각제작인계. 새후보로바꾼묶음에이전검증승계금지.
-- jade6:수정된좌표비율에서실제표시와상하연속접합. 단색3751420720의옅은생성gradient는여전히품질검토사항.
-- 21819:half-disc/점선4복원,반원core/단색·점선폭/밝기4단계/잘린면얇은윤곽.19584:먼지를렌즈처럼해석했을가능성/원호band·crop끝선,일부입력겹침낮음.
-- 21080:관측41은unit325_weapon1321_source.state+250~270/+485~510.추가10은9미관측shape+1다른bank계약. 작은점/단색fill/두bank기하·색/가림을확인.
-- 아스테바리스:+90 공전145~150 11고유,육전151~156 12,+195 육전151~155 19. 전체pose의기존연결의존도함께확인. 손가락자동완성/손목cap/아주작은조각/색영역/전체기체선굵기.
-- root17168패널4:하나의80×80새그림에서16px겹침을공유. source_pose.state+0.기체본체/효과의미분류미확정이므로effect태그를강제로넣지않았음. 실제역할/affine·가림/선·색을확인.
-- 22378late:고유shape2의67fade RGB계약.기본2그림만제작,나머지65변형은자동해결주장안함. fade_palette_characterization.json은원본팔레트색의근사계수자료이며최대잔차16.37/255라단순RGB배율만으로정확하다는보장없음.공통fade런타임처리검토필요.
-- Core mask의sub/UI/폰트/맵/시나리오미적용·동시foreground와cutin self-blend한계는Claude이전기록대로남아있음.
+상세 상태/프레임과 계약은 각 graphics 폴더의 `pose_contract.json`, `installation_report.json`, 제작 HANDOFF를 참고하세요. 이전 그림의 검증 결과를 새 그림에 승계하지 마세요.
 
-## 배포·Git
+- 22410: 교정한92493 표시와 다른 crop, 특히 입력 겹침이 낮았던92489/92490의 형태·위치를 확인해 주세요.
+- FMP 총2: unit261 mechanical_cutin_168+15, ROM13662의 (144,48,32,16)/(120,24,16,8). 실제 총/손목 모양·접합·단차·절단면 선. 시작 +0 어두운 페이드18종은 새 기체 그림으로 중복 제작하지 않았습니다.
+- 아스테바리스: 공전+90 11종, 육전+90 12종/+150 6종/+195 19종. 기체별 실제 팔레트, 손가락 자동완성·손목 cap·기존 OAM과의 전체 선 굵기를 확인해 주세요.
+- 팔케: +165 6종/+285 7종/후속 16종. 실제 본체 문맥과 ROM14225/14249/14250 bytes를 맞췄습니다. 작은 얼굴·포구 발명·칼날·10픽셀 조각·절단면이 주요 위험입니다.
+- IMG19982 바위의 파랑/노랑/자홍은 실제 캐시 팔레트입니다. 임의로 회색을 칠하지 않았습니다. 원본 장면에서 의도된 색인지 확인해 주세요.
+- IMG22111 관측16+미관측8,22342 관측15+미관측18,19808 관측10+미관측2,20079 관측10+미관측3. 광점·얇은 선·질감·전체면과 알파·레이어를 확인해 주세요.
+- IMG21071 26종은 모두 실제 시안/파랑 팔레트 관측입니다. ROM PLT21070의 분홍과 달라 추가 미관측25종은 제작하지 않았습니다.
+- 22378 late는 고유형태2의67 fade RGB 계약입니다. 기본2 그림만 제작했으며 나머지65가 자동 해결된 것이 아닙니다. 단순 RGB 배율 근사 최대 오차16.37/255라 공통 fade 처리 검토가 남습니다.
+- 21774/21775는 실제45 섬광 팔레트/2형태만 관측돼 보류했습니다. 기본 분홍 그림을 재색칠해45개를 채운 것으로 세지 않습니다.
+- 전체 재생에서 기체 사라짐, 전경 빔·폭발 순서, 컷인과 대사창 순서, sub 기체, 얇은 알파 외곽선을 확인해야 합니다. 이 검증은 Codex가 수행한 것으로 기록하지 않습니다.
 
-- 373타깃과jade참조수정·생산하드검사는da3c306f로푸시완료. 이후72개추가작업은현재미커밋이며다음커밋/푸시예정입니다.
-- EXE는아직이전번들. Claude그림/재생검증뒤a6d80b29코어·최신Python·캐시를포함해다시묶어야함. 실행중창을임의로닫거나재시작하지않음.
-- 옛1.28GB compact후보는최신그림이없으므로live교체금지. 재생산/배포때현재키로다시compact해야함. 원본ROM과세이브는public repo에넣지않음.
-- 과거누락보고서와현재등록을대조하는plan_missing_art_batches.py는제작선정도구이며전체ROM재감사/품질완료판정이아님. 다중IMG/미관측팔레트/잘못된역할추정은원본계약추가확정후제작.
+## 현재 작업 분담
 
-20498原본확정미관측8은기존같은효과의자체그림crop에연결완료(새PNG중복0). 새로제작한원본확정미관측35와21667관측28+미관측1도연결예정. 합쳐72타깃만대상굽기. 미관측항목에실제OAM/프레임을가공해넣지않고actual_observed=false로보존.
+- effect_live_palette: 다음 IMG22530/22618/21706/21855/22496/20966/19887/19999/21758/21006 중 실제 누락을 확인해 제작.
+- next_key_art: 21324/22255 인계 후 22420/22421 등의 실제 팔레트 전용 계약과 후속 효과 제작.
+- next_shape_art: 본타·FMP 남은 실제 기계 파츠 제작. 본타 후반2는 총이 아니라 올리브 장비/몸통 조각이므로 총 누락 해결로 명명하지 않음.
+- root: 인수·연결·굽기·캐시 동기화·작업 기록·커밋/푸시. 효과30+본타2도 굽기 오류0으로 완료했으며 최신 캐시를 동기화하고 있습니다.
 
+## 최신 추가32
 
-## 후속72타깃 굽기 완료
+- IMG21324 신규17(실제16/확정 미관측1),22255 신규13(실제8/확정 미관측5),본타 후반2.32굽기오류0/7.1초. 전용graphics HANDOFF에원본장면/위험기록.
+- 22420/22421은실제붉은팔레트가이미연결되어새그림제작안함. 미연결은기본회색queue계약이므로실제누락으로부풀리지않음.
 
-- IMG21667:29(실제관측28+확정원본/실제팔레트기반미관측1). sourcePLT21666bank0의16값모두실제캐시와동일. unit224mechan143/unit249mechan131·143,각정확offset계약보존. 굽기오류0.
-- IMG20498:같은효과자체그림으로정확crop재사용8(새PNG중복0)+추가새그림35.43개모두해당shape재생미관측,actual_observed=false.단일IMG PAT20499+IMG20498+PLT20497bank0/1의16값실제동일. 미관측을실제확인한것처럼기록하지않음.
-- 35개HD1024×768에맞는native256×192는native_20498_full_bank0/1을세로로쌓아구성. native_continuation_pair128×64는일부patch참조이므로본묶음native로사용금지. 새4배검사가그잘못된선택을live변경전에막았고올바른native로설치완료.
-- 이번72개굽기오류0/6.2초. 최신라이브러리c46e42084acd708d2f1f5e4af0fa79fd279fc971027276b510c90fba7885d54e,material캐시동기화완료.445는기존수정포함작업타깃합이며전체누락감소445가아님.
-- 다음:next_key는21667뒤22111/22342/21071등, effect는신규19954/21279/22338/21921/22410/22497/20928, shape는아스테바리스/FMP실제기계누락을연속진행.
+## 제작 묶음 목록
 
-새실제효과5묶음86계약연결·대상굽기예정. 19954=16,21921=13,22338=24,22410=19,22497=14.20928의2는19954와원본bytes/사용색/크기동일하여중복등록제외. 신규전용연결(--new-only)으로이미연결된exact그림을덮어쓰지않음.19954의source소유미확정검정평면1보류유지.
+아래 합은 row 중복이 있을 수 있습니다. 정확한 누적은 manifest의 고유 바인딩 집합입니다. 모든 행은 독립 Claude 검증 대기입니다.
 
-새86중85굽기성공,92493하나prepare뒤near-transparent로저장거부. 해당RGB연결disabled/rgb_enabled=false로잠시차단해원본이숨겨지지않도록함. 그림수정후동일ID를직접굽고성공하면복구예정. 기존18/sourceimage는보존.
+|아틀라스|작업 대상|실제 관측|원본 확정 미관측|
+|---|---:|---:|---:|
+|observed_getter_pole_forms|2|2|0|
+|observed_effect_21948_new17|17|17|0|
+|codarl_clones90_cached_pose|14|14|0|
+|deathscythe_normal_7086|20|20|0|
+|observed_effect_20498_gray2|2|2|0|
+|deathscythe_folded_wings_pose|14|14|0|
+|sandrock_cached_pose|16|16|0|
+|deathscythe_forecast_closed_pose|14|14|0|
+|observed_effect_20498_white7|7|7|0|
+|deathscythe_scythe150_continuous|2|2|0|
+|sandrock_weapon_closeup_cached_pose|9|9|0|
+|observed_effect_20498_jade6|6|6|0|
+|deathscythe_green_arcs_7084_7085|10|10|0|
+|observed_effect_19600_last_two|2|2|0|
+|great_thunder168_cached_pose|10|10|0|
+|observed_effect_19645_new_three|3|3|0|
+|getter_true_missing_22054_22062|4|4|0|
+|observed_effect_22378_late_base_two|2|2|0|
+|observed_effect_21657_yellow29|29|29|0|
+|observed_effect_22673_three|3|3|0|
+|observed_panel_17168_four|4|4|0|
+|observed_effect_21657_red16|16|16|0|
+|observed_effect_21695_sixteen|16|16|0|
+|observed_effect_19584_gray32|32|32|0|
+|aestivalis_flight_missing90_arms11|11|11|0|
+|aestivalis_ground_missing90_arms12|12|12|0|
+|observed_effect_21819_four_levels28|28|28|0|
+|observed_effect_21080_complete51|41|41|0|
+|observed_effect_21080_complete51|10|0|10|
+|aestivalis_ground195_missing19|19|19|0|
+|observed_effect_20498_jade6|1|0|1|
+|observed_effect_20498_white7|7|0|7|
+|observed_effect_21667_twenty_nine|29|28|1|
+|observed_effect_20498_unobserved35|35|0|35|
+|observed_effect_19954_new16|16|16|0|
+|observed_effect_21921_new13|13|13|0|
+|observed_effect_22338_new24|24|24|0|
+|observed_effect_22410_new19|19|19|0|
+|observed_effect_22497_new14|14|14|0|
+|fmp_guns15_missing_two|2|2|0|
+|aestivalis_ground150_missing_six|6|6|0|
+|observed_effect_19954_new16|1|1|0|
+|observed_effect_22111_new24|24|16|8|
+|observed_effect_22342_new33|33|15|18|
+|falke165_missing_six|6|6|0|
+|falke285_missing_seven|7|7|0|
+|observed_effect_21071_new26|26|26|0|
+|observed_effect_22360_new4|4|4|0|
+|observed_effect_22030_new9|9|9|0|
+|observed_effect_19982_new14|14|14|0|
+|observed_effect_22591_new11|11|11|0|
+|observed_effect_19808_new12|12|10|2|
+|observed_effect_20079_new13|13|10|3|
+|falke_remaining_missing_sixteen|16|16|0|
+|observed_effect_21324_new17|17|16|1|
+|observed_effect_22255_new13|13|8|5|
+|bonta_late_missing_two|2|2|0|
 
-
-## 누락 제작 병렬 작업 재개
-
-- 사용자 지시에 따라 제작 서브에이전트 3명을 다시 가동했습니다. 효과 신규 묶음과 92493 빈 출력 교정, 후속 효과 원본 계약, 아스테바리스/FMP 실제 기계 파츠로 분담했습니다. 루트만 라이브 연결·저장소 쓰기를 담당합니다.
-- 최신 86개 중 85개가 구워졌고 92493은 원본 표시 유지 상태로 교정 중입니다. 종전 445개와 합쳐 현재 구워진 작업 대상은 530개이며, 신규 86 전체가 완료되었다고 기록하지 않습니다. 이는 누락 감소 수가 아닙니다.
-- 캐시는 disabled 적용 이후 23:36:23/23:36:28에 다시 생성된 파일이 있습니다. 92493 수정 후 같은 아틀라스 19개를 명시적으로 다시 굽고 성공한 뒤 활성화하겠습니다.
-- 실제 재생·색·레이어 검증은 사용자 지시대로 Claude에게 맡깁니다. 현재 창과 공유 런타임 코드는 건드리지 않습니다.
-
-
-## 추가9 제작 완료 / 92493 교정 완료
-
-- 92510~92511 FMP +15 총2종:같은생성출력,실제cachedOBJ팔레트. ROM13662 (144,48,32,16)/(120,24,16,8) bytes직접동일근거추가. 기존본체보존.
-- 92512 IMG19954 실제관측추가1:같은효과자체그림의정확crop연결,새PNG중복없음.
-- 92513~92518 아스테바리스육전+150 팔6종:ROM10778 (56,0,32,16) actual6팔레트별새그림. 원본기존72OAM보존.
-- 추가9굽기오류0/5.5초. 22410교정전체19굽기오류0/5.7초. 그림/실제재생품질합격수치아님. 다음22111/22342 총57후보인수·연결/굽기중.
-
-
-## IMG22111/22342 추가57 연결·굽기 완료
-
-- 92519~92542 IMG22111 신규24(관측16/원본·팔레트확정미관측8),92543~92575 IMG22342 신규33(관측15/확정미관측18). 관측여부는계약actual_observed대로보존,미관측OAM/프레임발명안함.
-- 정확4배/원본index·actual사용RGB/비어있지않음기계조건후연결.57굽기오류0/5.6초. 각graphics폴더에제작인계·source계약·생성출처보존. 시각품질/실재생미검증.
-- 다음팔케+165 신규6 설치후대상굽기중. 효과담당은추가22360/22030/19982/22591 총38새계약제작중.
-
-
-## 팔케6 추가 완료
-
-- 92576~92581 팔케 unit276+165, 실제미연결7OAM/6고유. ROM14225/14249원본bytes확정,actual팔레트색유지. 기존9OAM그림유지.6굽기오류0/4.9초. 작은연결편/주황점/손목접합·절단면품질은Claude대기.
-- 현재603작업타깃,종전445이후158개추가.전체누락잔여와단순차감금지. material캐시동기화후현재제작분커밋·푸시진행.
+추가 진행 기록은 이 파일에 갱신합니다. 300행 또는 20KB를 넘기면 HANDOFF_FROM_CODEX_5.md로 옮기고 기존 교환 파일에서 다음 파일을 안내합니다.

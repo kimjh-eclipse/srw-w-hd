@@ -1,0 +1,82 @@
+{
+  "resource": 22360,
+  "candidate_native_size": [
+    128,
+    64
+  ],
+  "candidate_image_size": [
+    512,
+    256
+  ],
+  "candidate_sha256": "6c96c4e5ac8f978b5480ebcfa8a6c8e17fbdd45e9e9269fbb62feef49b000202",
+  "ready": 4,
+  "pending": 0,
+  "checks": [
+    {
+      "hash": 3284755525,
+      "max_alpha": 255,
+      "support_area_ratio": 0.828125,
+      "production_ready": true
+    },
+    {
+      "hash": 2653383370,
+      "max_alpha": 255,
+      "support_area_ratio": 0.93203125,
+      "production_ready": true
+    },
+    {
+      "hash": 998296569,
+      "max_alpha": 255,
+      "support_area_ratio": 0.6450617283950617,
+      "production_ready": true
+    },
+    {
+      "hash": 1644009826,
+      "max_alpha": 255,
+      "support_area_ratio": 0.9120370370370371,
+      "production_ready": true
+    }
+  ],
+  "registration": [
+    {
+      "group": 0,
+      "generated_file": "exec-5aa20ee8-7e80-45d2-81e2-713ce6a3793d.png",
+      "generated_alpha_threshold": 220,
+      "generated_bbox": [
+        1143,
+        148,
+        2095,
+        523
+      ],
+      "source_reference_bbox_for_placement_only": [
+        67,
+        3,
+        124,
+        26
+      ],
+      "offset_y": 0,
+      "native_alpha_or_RGB_stamped": false
+    },
+    {
+      "group": 1,
+      "generated_file": "exec-4ba872cc-2dbc-4e62-bab8-089629aef3a4.png",
+      "generated_alpha_threshold": 220,
+      "generated_bbox": [
+        1659,
+        162,
+        2030,
+        560
+      ],
+      "source_reference_bbox_for_placement_only": [
+        86,
+        6,
+        105,
+        26
+      ],
+      "offset_y": 32,
+      "native_alpha_or_RGB_stamped": false
+    }
+  ],
+  "formal_QA": false,
+  "HD_playback_verification": false
+}
