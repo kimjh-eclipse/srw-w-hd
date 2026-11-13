@@ -55,6 +55,10 @@ uint32_t SRWWWindowActive=0;
 // When set, single- and two-colour OBJ are also reported as unknown parts
 // (for coverage checks; the player leaves it off).
 uint32_t SRWWUnknownFlat=0;
+// Tile map address of each BG that currently shows a registered cut-in, so
+// the frontend can ask which palette bank every tile of the picture uses
+// (some pictures are grey ramps that the game colours through the palette).
+uint32_t SRWWLayerMap[4]={0};
 struct SRWWCutin { uint32_t id,width,height; };
 static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -189,6 +193,7 @@ bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tile
         plane[0]=ids[layer];plane[1]=x;plane[2]=y;
         plane[3]=widths[layer];plane[4]=heights[layer];plane[5]=layer;
         plane[6]=priority;plane[7]=master;plane[8]=base;
+        SRWWLayerMap[layer]=map;
     }
     if(SRWWHD_Info[0] && SRWWHD_Info[0]!=ids[layer] && (priority>SRWWHD_Info[6] || (priority==SRWWHD_Info[6] && layer>SRWWHD_Info[5])))return false;
     if(ids[layer]>1 && SRWWHD_Info[0]==ids[layer]) return false; // Keep the first raster window.
@@ -198,6 +203,18 @@ bool SRWWHD_ShouldSkip(uint32_t engine,uint32_t layer,uint32_t map,uint32_t tile
     return ids[layer]==1; // Observed cut-ins retain native UI and raster windows.
 }
 
+
+unsigned SRWWCopyBGBanks(unsigned layer,uint8_t *out,unsigned capacity,unsigned *widthTiles) {
+    if(layer>3 || !GPU || !out || !SRWWHD_Layers[layer][0] || !SRWWLayerMap[layer])return 0;
+    GPUEngineBase *gpuEngine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();
+    const BGLayerInfo &bg=gpuEngine->GetBGLayerInfoByID((GPULayerID)layer);
+    const unsigned count=std::min(4096u,(unsigned)(bg.size.width*bg.size.height/64));
+    if(!count || capacity<count)return 0;
+    const u16 *entries=(const u16*)MMU_gpu_map(SRWWLayerMap[layer]);
+    for(unsigned i=0;i<count;i++)out[i]=(uint8_t)(LE_TO_LOCAL_16(entries[i])>>12);
+    if(widthTiles)*widthTiles=(unsigned)(bg.size.width/8);
+    return count;
+}
 
 #ifdef FASTBUILD
 	#undef FORCEINLINE

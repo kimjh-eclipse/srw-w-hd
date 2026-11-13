@@ -103,7 +103,7 @@ def main():
                 unknown=core.unknown_snapshot()
                 sub=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities) if core.sub_bridge else None
                 image=renderer.render_top(core.native,core.ids,tuple(core.hd),paused=False,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,
-                    part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=unknown,bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground,window=getattr(core,'window',None))
+                    part_palettes=core.part_palettes,backgrounds=core.backgrounds,unknown=unknown,bg_layout=core.bg_layout,sub_parts=sub,cutin_layers=core.cutin_layers,effect_foreground=core.effect_foreground,window=getattr(core,'window',None),cutin_palettes=getattr(core,'cutin_palettes',None))
                 if frame in args.save_frames:
                     picture(image).save(out/f'{label}_running_{frame}.png')
                 top=parts.last_stats

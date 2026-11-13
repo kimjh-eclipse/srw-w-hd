@@ -32,16 +32,17 @@ class Backend:
         void main(){ vec2 p=vec2((gl_VertexID==1||gl_VertexID==3)?1:0,(gl_VertexID>=2)?1:0);
         uv=p;pixel=rectangle.xy+p*rectangle.zw;gl_Position=vec4(pixel.x/viewport_size.x*2-1,1-pixel.y/viewport_size.y*2,0,1); }
         ''',fragment_shader='''#version 330
-        uniform sampler2D foreground; uniform int foreground_enabled; uniform vec4 foreground_rectangle; uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform usampler2D mask_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
+        uniform sampler2D gradient; uniform int gradient_enabled; uniform sampler2D foreground; uniform int foreground_enabled; uniform vec4 foreground_rectangle; uniform sampler2D picture; uniform sampler2D opacity; uniform usampler2D source_coordinates; uniform usampler2D mask_coordinates; uniform int mask_mode; uniform int source_alpha; uniform vec4 mask_rectangle; uniform int nearest_picture; uniform vec4 rectangle; uniform vec2 viewport_size;
         in vec2 uv; in vec2 pixel; out vec4 color;
         void main(){ vec4 p;
         if(nearest_picture==1){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(rectangle.xy);ivec2 index=ivec2(texelFetch(source_coordinates,ivec2(d.x,0),0).r,texelFetch(source_coordinates,ivec2(d.y,1),0).r);p=texelFetch(picture,index,0);}
         else p=texture(picture,uv); float a=source_alpha==1?p.a:1.0;
+        if(gradient_enabled==1){float level=dot(p.rgb,vec3(0.299,0.587,0.114));p.rgb=texture(gradient,vec2((level*255.0+0.5)/256.0,0.5)).rgb;}
         if(mask_mode>0){ivec2 d=ivec2(gl_FragCoord.x,viewport_size.y-gl_FragCoord.y)-ivec2(mask_rectangle.xy);d=clamp(d,ivec2(0),ivec2(mask_rectangle.zw)-ivec2(1));ivec2 index=ivec2(texelFetch(mask_coordinates,ivec2(d.x,0),0).r,texelFetch(mask_coordinates,ivec2(d.y,1),0).r);vec4 v=texelFetch(opacity,index,0);a*=mask_mode==2?v.a:v.r;}
         if(foreground_enabled==1){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);p.rgb=clamp(p.rgb*(e.a*255.0/16.0)+e.rgb,0.0,1.0);}
         if(foreground_enabled==2){vec2 f=(pixel-foreground_rectangle.xy)/foreground_rectangle.zw;vec4 e=texture(foreground,f);float eva=e.r*255.0/16.0;float evb=e.g*255.0/16.0;color=vec4(p.rgb*eva*a,a*(1.0-evb));return;} color=vec4(p.rgb,a); }
         ''')
-        self.vao=self.ctx.vertex_array(self.program,[]);self.program['foreground']=4;self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
+        self.vao=self.ctx.vertex_array(self.program,[]);self.program['foreground']=4;self.program['gradient']=5;self.program['picture']=0;self.program['opacity']=1;self.program['source_coordinates']=2;self.program['mask_coordinates']=3
         self.ctx.enable(gl.BLEND);self.ctx.blend_func=(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA)
 
     def texture(self,image,nearest=False):
@@ -192,7 +193,10 @@ class Backend:
             if effect is not None:
                 effect_texture=self.texture(effect,True)
                 fl,ft,fr,fb=op['foreground_rect'];uniform('foreground_rectangle',(fl,ft,fr-fl,fb-ft))
+            table=op.get('gradient');table_texture=self.texture(table,False) if table is not None else None
             picture.use(0)
+            if table_texture is not None:table_texture.use(5)
+            uniform('gradient_enabled',int(table is not None))
             if effect_texture is not None:effect_texture.use(4)
             mode_self=effect is not None and op.get('foreground_mode')==2
             uniform('foreground_enabled',(2 if mode_self else 1) if effect is not None else 0)
@@ -233,9 +237,9 @@ class Surface:
     def from_native(cls,native,size):
         result=cls(size);result.draw(Image.fromarray(np.asarray(native)),(0,0,*size),nearest=True);return result
 
-    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False,foreground=None,foreground_rect=None,foreground_mode=1):
+    def draw(self,image,rect,mask=None,nearest=False,clip=None,mask_rect=None,alpha=False,foreground=None,foreground_rect=None,foreground_mode=1,gradient=None):
         self.pixels=None
-        self.ops.append(dict(image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha,foreground=foreground,foreground_rect=foreground_rect or rect,foreground_mode=foreground_mode))
+        self.ops.append(dict(gradient=gradient,image=image,rect=rect,mask=mask,mask_rect=mask_rect or rect,nearest=nearest,clip=clip or (0,0,*self.size),alpha=alpha,foreground=foreground,foreground_rect=foreground_rect or rect,foreground_mode=foreground_mode))
 
     def paste(self,image,box=(0,0),mask=None):
         self.pixels=None

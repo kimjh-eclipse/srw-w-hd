@@ -79,7 +79,36 @@ class HDRenderer:
         self.menu_scene.width=width;self.menu_scene.art.clear();self.menu_scene.group_key=None;self.menu_scene.grid_key=None
         self.bottom_frame_key=None
 
-    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None):
+    def cutin_gradient(self,cutin,live):
+        """Brightness -> colour table for a grey cut-in the game colours through its palette.
+
+        The picture's ROM palette is a rising grey ramp over slots 1-15 and
+        the game puts a coloured, animated ramp in the bank it uses. A grey
+        level of the HD picture is placed between the ramp's slots and takes
+        the live colours of those slots. Returns a 256x1 picture or None.
+        """
+        if live is None or os.environ.get('SRWW_CUTIN_TINT','1')=='0':return None
+        tables=self.__dict__.get('runtime_palettes')
+        if tables is None:
+            import json
+            try:tables=json.loads((ROOT/'graphics/cutin_runtime_palettes.json').read_text(encoding='utf-8'))
+            except (OSError,ValueError):tables={}
+            self.runtime_palettes=tables;self.gradient_cache=OrderedDict()
+        entry=tables.get(str(cutin))
+        if entry is None:return None
+        bank,colours=live;key=(cutin,bank,colours.tobytes());found=self.gradient_cache.pop(key,None)
+        if found is None:
+            ramp=np.asarray(entry['ramp'],dtype='float64')*255/31;levels=np.unique(ramp)
+            slots=np.array([np.flatnonzero(ramp==level).mean()+1 for level in levels])          # slot (1-15) each grey level stands for
+            position=np.interp(np.arange(256,dtype='float64'),levels,slots)
+            values=np.asarray(colours,dtype='uint32');rgb=np.stack([(values&31)*255/31,((values>>5)&31)*255/31,((values>>10)&31)*255/31],-1)
+            table=np.stack([np.interp(position,np.arange(16),rgb[:,channel]) for channel in range(3)],-1)
+            found=Image.fromarray(np.clip(np.rint(table),0,255).astype('uint8')[None,:,:])
+        self.gradient_cache[key]=found
+        while len(self.gradient_cache)>64:self.gradient_cache.popitem(last=False)
+        return found
+
+    def render_top(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None,cutin_palettes=None):
         self.frame_number=getattr(self,'frame_number',0)+1;self.text_renderer.frame_token=self.frame_number
         if effect_foreground is not None:
             # No blending BG anywhere on this frame: skip every per-layer test.
@@ -206,7 +235,7 @@ class HDRenderer:
                 # Keep native visibility in its 256x192 texture. The GPU
                 # combines it with the cached painted alpha, avoiding a
                 # full-screen RGBA canvas and several large array copies.
-                mode=1
+                mode=1;gradient=self.cutin_gradient(int(cutin[0]),None if cutin_palettes is None else cutin_palettes.get(int(cutin[5])))
                 if foreground is None and effect_foreground is not None:
                     # The cut-in's own BG may be the blended layer (it fades in
                     # or out): mix the HD picture with what is behind it by the
@@ -214,7 +243,7 @@ class HDRenderer:
                     from foreground_blend import self_plane
                     foreground=self_plane(effect_foreground,layer_ids,int(cutin[5]))
                     if foreground is not None:mode=2
-                top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True,foreground=foreground,foreground_rect=(0,0,*self.size),foreground_mode=mode)
+                top.draw(region,rect,mask=visible,mask_rect=(0,0,*self.size),alpha=True,foreground=foreground,foreground_rect=(0,0,*self.size),foreground_mode=mode,gradient=gradient)
             else:
                 if foreground_mask is not None and foreground_mask.any():
                     from foreground_blend import blend_part
@@ -282,8 +311,8 @@ class HDRenderer:
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
 
-    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None):
-        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers,effect_foreground,window)
+    def render(self,native,layer_ids,hd,paused=False,robot=None,obj=None,parts=None,owners=None,bgpriors=None,bgparts=None,part_palettes=None,backgrounds=None,unknown=None,bg_layout=None,sub_parts=None,cutin_layers=None,effect_foreground=None,window=None,cutin_palettes=None):
+        top=self.render_top(native,layer_ids,hd,paused,robot,obj,parts,owners,bgpriors,bgparts,part_palettes,backgrounds,unknown,bg_layout,sub_parts,cutin_layers,effect_foreground,window,cutin_palettes)
         if hasattr(top,'to_pil'):top=top.to_pil()
         if top.size!=(1440,1080):top=top.resize((1440,1080),Image.Resampling.LANCZOS)
         canvas=Image.new('RGB',(1920,1080));canvas.paste(top,(0,0))

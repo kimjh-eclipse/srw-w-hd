@@ -31,6 +31,7 @@ class FrameCompositor:
         kwargs['cutin_layers']=core.cutin_layers.copy()
         kwargs['effect_foreground']=core.effect_foreground.copy() if core.effect_foreground is not None else None
         window=getattr(core,'window',None);kwargs['window']=window.copy() if window is not None else None
+        kwargs['cutin_palettes']=getattr(core,'cutin_palettes',None)
         kwargs['sub_parts']=(core.sub_parts.copy(),core.sub_owners.copy(),bytes(core.sub_oam.raw),core.sub_palettes.copy(),core.sub_ids.copy(),core.sub_priorities.copy()) if core.sub_bridge else None
         if self.dynamic_parts:kwargs['unknown']=core.unknown_snapshot()
         return core.native.copy(),core.ids.copy(),tuple(core.hd),paused,frame,kwargs

@@ -52,6 +52,11 @@ class Core:
         # Which layers the DS window test let through on each pixel of the frame just drawn.
         self.window_buffer=np.zeros((192,256),dtype='uint8');self.window=None;self.window_bridge=hasattr(self.api,'retro_srw_copy_window')
         if self.window_bridge:self.api.retro_srw_copy_window.argtypes=[C.c_void_p]
+        # Palette bank and its live colours for each BG that shows a cut-in (some are grey pictures coloured by the palette).
+        self.cutin_palettes=None;self.bank_bridge=hasattr(self.api,'retro_srw_copy_bg_banks') and hasattr(self.api,'retro_srw_copy_effect_debug')
+        if self.bank_bridge:
+            self.api.retro_srw_copy_bg_banks.argtypes=[C.c_uint,C.c_void_p,C.c_uint,C.c_void_p];self.api.retro_srw_copy_bg_banks.restype=C.c_uint
+            self.api.retro_srw_copy_effect_debug.argtypes=[C.c_void_p]*4;self.bank_buffer=np.zeros(4096,dtype='uint8');self.bg_palette=np.zeros(256,dtype='<u2')
         self.layer_cutin_bridge=hasattr(self.api,'retro_srw_get_hd_layers')
         if self.layer_cutin_bridge:self.api.retro_srw_get_hd_layers.argtypes=[C.c_void_p]
         self.robot=(C.c_int*8)()
@@ -215,6 +220,18 @@ class Core:
         self.effect_foreground=self.foreground_buffer if self.foreground_bridge and self.api.retro_srw_copy_foreground(self.foreground_buffer.ctypes.data) else None
         # None unless some layer is actually shut out somewhere this frame.
         self.window=self.window_buffer if self.window_bridge and self.api.retro_srw_copy_window(self.window_buffer.ctypes.data) and bool((self.window_buffer!=0x1f).any()) else None
+        self.cutin_palettes=None
+        if self.bank_bridge and self.layer_cutin_bridge and int(self.cutin_layers[:,0].max())>1:
+            found={};loaded=False
+            for row in self.cutin_layers:
+                if int(row[0])<=1:continue
+                layer=int(row[5]);count=self.api.retro_srw_copy_bg_banks(layer,self.bank_buffer.ctypes.data,4096,None)
+                if not count:continue
+                bank=int(self.bank_buffer[0])
+                if not bool((self.bank_buffer[:count]==bank).all()):continue   # only pictures drawn with a single bank
+                if not loaded:self.api.retro_srw_copy_effect_debug(None,None,self.bg_palette.ctypes.data,None);loaded=True
+                found[layer]=(bank,self.bg_palette[bank*16:bank*16+16].copy())
+            self.cutin_palettes=found or None
         self.api.retro_srw_get_robot_state(self.robot)
         self.api.retro_srw_copy_rendered_obj(self.obj)
         self.api.retro_srw_copy_parts(self.parts.ctypes.data,self.owners.ctypes.data)

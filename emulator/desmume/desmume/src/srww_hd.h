@@ -11,6 +11,7 @@ extern uint32_t SRWWForegroundActive;
 extern uint8_t SRWWWindow[256*192];
 extern uint32_t SRWWWindowActive;
 extern uint32_t SRWWUnknownFlat;
+unsigned SRWWCopyBGBanks(unsigned layer,uint8_t *out,unsigned capacity,unsigned *widthTiles);
 extern int32_t SRWWRobot_Info[8];
 extern uint8_t SRWWRobot_OAM[1024];
 extern uint8_t SRWWNativeOwner[256*192];

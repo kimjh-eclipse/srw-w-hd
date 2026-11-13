@@ -1,5 +1,5 @@
 diff --git a/desmume/src/GPU.cpp b/desmume/src/GPU.cpp
-index 026bf14..8a5875f 100644
+index 026bf14..0e6bffd 100644
 --- a/desmume/src/GPU.cpp
 +++ b/desmume/src/GPU.cpp
 @@ -24,6 +24,7 @@
@@ -10,10 +10,11 @@ index 026bf14..8a5875f 100644
  #include <iostream>
  
  #include "common.h"
-@@ -38,6 +39,164 @@
+@@ -38,7 +39,182 @@
  #include "matrix.h"
  #include "emufile.h"
  #include "utils/task.h"
+-
 +#include "srww_hd.h"
 +#include "srww_hd_signatures.h"
 +#include "srww_parts_impl.h" // Async fallbacks and exact runtime texture assembly.
@@ -30,6 +31,10 @@ index 026bf14..8a5875f 100644
 +// When set, single- and two-colour OBJ are also reported as unknown parts
 +// (for coverage checks; the player leaves it off).
 +uint32_t SRWWUnknownFlat=0;
++// Tile map address of each BG that currently shows a registered cut-in, so
++// the frontend can ask which palette bank every tile of the picture uses
++// (some pictures are grey ramps that the game colours through the palette).
++uint32_t SRWWLayerMap[4]={0};
 +struct SRWWCutin { uint32_t id,width,height; };
 +static std::unordered_map<uint64_t,SRWWCutin> SRWWCutins;
 +static std::unordered_map<uint32_t,uint32_t> SRWWCutinMaps;
@@ -164,6 +169,7 @@ index 026bf14..8a5875f 100644
 +        plane[0]=ids[layer];plane[1]=x;plane[2]=y;
 +        plane[3]=widths[layer];plane[4]=heights[layer];plane[5]=layer;
 +        plane[6]=priority;plane[7]=master;plane[8]=base;
++        SRWWLayerMap[layer]=map;
 +    }
 +    if(SRWWHD_Info[0] && SRWWHD_Info[0]!=ids[layer] && (priority>SRWWHD_Info[6] || (priority==SRWWHD_Info[6] && layer>SRWWHD_Info[5])))return false;
 +    if(ids[layer]>1 && SRWWHD_Info[0]==ids[layer]) return false; // Keep the first raster window.
@@ -172,10 +178,23 @@ index 026bf14..8a5875f 100644
 +    SRWWHD_Info[6]=priority;SRWWHD_Info[7]=master;SRWWHD_Info[8]=base;
 +    return ids[layer]==1; // Observed cut-ins retain native UI and raster windows.
 +}
- 
++
++
++unsigned SRWWCopyBGBanks(unsigned layer,uint8_t *out,unsigned capacity,unsigned *widthTiles) {
++    if(layer>3 || !GPU || !out || !SRWWHD_Layers[layer][0] || !SRWWLayerMap[layer])return 0;
++    GPUEngineBase *gpuEngine=SRWWTargetEngine()?(GPUEngineBase*)GPU->GetEngineSub():(GPUEngineBase*)GPU->GetEngineMain();
++    const BGLayerInfo &bg=gpuEngine->GetBGLayerInfoByID((GPULayerID)layer);
++    const unsigned count=std::min(4096u,(unsigned)(bg.size.width*bg.size.height/64));
++    if(!count || capacity<count)return 0;
++    const u16 *entries=(const u16*)MMU_gpu_map(SRWWLayerMap[layer]);
++    for(unsigned i=0;i<count;i++)out[i]=(uint8_t)(LE_TO_LOCAL_16(entries[i])>>12);
++    if(widthTiles)*widthTiles=(unsigned)(bg.size.width/8);
++    return count;
++}
  
  #ifdef FASTBUILD
-@@ -4138,6 +4297,17 @@ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo
+ 	#undef FORCEINLINE
+@@ -4138,6 +4314,17 @@ FORCEINLINE void GPUEngineBase::_CompositePixelImmediate(GPUEngineCompositorInfo
  	compInfo.target.lineColor32 = (FragmentColor *)compInfo.target.lineColorHeadNative + srcX;
  	
  	const bool enableColorEffect = (WILLPERFORMWINDOWTEST) ? (this->_enableColorEffectNative[compInfo.renderState.selectedLayerID][compInfo.target.xNative] != 0) : true;
@@ -193,7 +212,7 @@ index 026bf14..8a5875f 100644
  	this->_PixelComposite<COMPOSITORMODE, OUTPUTFORMAT, GPULayerType_BG>(compInfo, srcColor16, enableColorEffect, 0, 0);
  }
  
-@@ -5217,6 +5387,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
+@@ -5217,6 +5404,8 @@ void GPUEngineBase::_SpriteRenderPerform(GPUEngineCompositorInfo &compInfo, u16
  	for (size_t spriteNum = 0; spriteNum < 128; spriteNum++)
  	{
  		OAMAttributes spriteInfo = this->_oamList[spriteNum];
@@ -202,7 +221,7 @@ index 026bf14..8a5875f 100644
  		
  		//for each sprite:
  		if (cost >= 2130)
-@@ -5633,6 +5805,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
+@@ -5633,6 +5822,7 @@ void GPUEngineBase::_RenderLine_SetupSprites(GPUEngineCompositorInfo &compInfo)
  	//how it interacts with this. I wish we knew why we needed this
  	
  	this->_SpriteRender<false>(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
@@ -210,7 +229,7 @@ index 026bf14..8a5875f 100644
  	this->_MosaicSpriteLine(compInfo, this->_sprColor, this->_sprAlpha[compInfo.line.indexNative], this->_sprType[compInfo.line.indexNative], this->_sprPrio[compInfo.line.indexNative]);
  	
  	for (size_t i = 0; i < GPU_FRAMEBUFFER_NATIVE_WIDTH; i++)
-@@ -6328,6 +6501,15 @@ void GPUEngineBase::_PerformWindowTesting(GPUEngineCompositorInfo &compInfo)
+@@ -6328,6 +6518,15 @@ void GPUEngineBase::_PerformWindowTesting(GPUEngineCompositorInfo &compInfo)
  			CopyLineExpand<-1, false, false, 1>(this->_enableColorEffectCustom[layerID], this->_enableColorEffectNative[layerID], compInfo.line.widthCustom, 1);
  		}
  	}
@@ -226,7 +245,7 @@ index 026bf14..8a5875f 100644
  }
  
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool MOSAIC, bool WILLPERFORMWINDOWTEST, bool WILLDEFERCOMPOSITING>
-@@ -6395,6 +6577,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
+@@ -6395,6 +6594,11 @@ FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG_ApplyMosaic(GPUEngineComposi
  template <GPUCompositorMode COMPOSITORMODE, NDSColorFormat OUTPUTFORMAT, bool WILLPERFORMWINDOWTEST>
  FORCEINLINE void GPUEngineBase::_RenderLine_LayerBG(GPUEngineCompositorInfo &compInfo)
  {
@@ -251,7 +270,7 @@ index 5807cef..402b70b 100644
  	void SpriteRenderDebug(const u16 lineIndex, u16 *dst);
  	void RenderLayerBG(const GPULayerID layerID, u16 *dstLineColor);
 diff --git a/desmume/src/frontend/libretro/libretro.cpp b/desmume/src/frontend/libretro/libretro.cpp
-index 2314af9..180a0ad 100644
+index 2314af9..20b8545 100644
 --- a/desmume/src/frontend/libretro/libretro.cpp
 +++ b/desmume/src/frontend/libretro/libretro.cpp
 @@ -14,6 +14,10 @@
@@ -265,7 +284,7 @@ index 2314af9..180a0ad 100644
  #include "SPU.h"
  #include "emufile.h"
  #include "common.h"
-@@ -70,6 +74,103 @@ enum {
+@@ -70,6 +74,105 @@ enum {
  
  retro_log_printf_t log_cb = NULL;
  static retro_video_refresh_t video_cb = NULL;
@@ -350,6 +369,8 @@ index 2314af9..180a0ad 100644
 +// 256x192 bytes, bits 0-4 = BG0-3/OBJ passed the window test on that pixel. Returns 0 when no scanline used windows.
 +extern "C" RETRO_API int retro_srw_copy_window(void *out) { if(out && SRWWWindowActive)memcpy(out,SRWWWindow,sizeof(SRWWWindow));return SRWWWindowActive?1:0; }
 +extern "C" RETRO_API void retro_srw_set_unknown_flat(unsigned enabled) { SRWWUnknownFlat=enabled?1:0; }
++// Palette bank (0-15) of every tile of a BG that shows a registered cut-in, row-major. Returns the tile count, 0 if none.
++extern "C" RETRO_API unsigned retro_srw_copy_bg_banks(unsigned layer,void *out,unsigned capacity,unsigned *widthTiles) { return SRWWCopyBGBanks(layer,(uint8_t*)out,capacity,widthTiles); }
 +extern "C" RETRO_API void retro_srw_copy_sub_parts(void *parts,void *owners,void *oam,void *palettes,void *layers,void *priorities) {
 +   if(parts)memcpy(parts,SRWWSubParts,sizeof(SRWWSubParts));
 +   if(owners)memcpy(owners,SRWWSubOwner,sizeof(SRWWSubOwner));
@@ -369,7 +390,7 @@ index 2314af9..180a0ad 100644
  static retro_input_poll_t poll_cb = NULL;
  static retro_input_state_t input_cb = NULL;
  retro_audio_sample_batch_t audio_batch_cb = NULL;
-@@ -2075,10 +2176,13 @@ void retro_run (void)
+@@ -2075,10 +2178,13 @@ void retro_run (void)
     // RUN
     frameIndex ++;
     bool skipped = frameIndex <= frameSkip;
@@ -387,7 +408,7 @@ diff --git a/desmume/src/srww_hd.h b/desmume/src/srww_hd.h
 new file mode 100644
 --- /dev/null
 +++ b/desmume/src/srww_hd.h
-@@ -0,0 +1,47 @@
+@@ -0,0 +1,48 @@
 +// Project-local GPL-2.0-or-later HD cut-in bridge.
 +#ifndef SRWW_HD_H
 +#define SRWW_HD_H
@@ -401,6 +422,7 @@ new file mode 100644
 +extern uint8_t SRWWWindow[256*192];
 +extern uint32_t SRWWWindowActive;
 +extern uint32_t SRWWUnknownFlat;
++unsigned SRWWCopyBGBanks(unsigned layer,uint8_t *out,unsigned capacity,unsigned *widthTiles);
 +extern int32_t SRWWRobot_Info[8];
 +extern uint8_t SRWWRobot_OAM[1024];
 +extern uint8_t SRWWNativeOwner[256*192];
