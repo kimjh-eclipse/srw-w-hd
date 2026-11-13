@@ -6788,12 +6788,176 @@
       "source_confirmed_unobserved_targets": 0,
       "source_containment_checks": [],
       "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_evil_native964\\packed",
+      "atlas": "tekkaman_evil_sixteenbatch_four",
+      "bindings": [
+        94208,
+        94209,
+        94210,
+        94211
+      ],
+      "atlas_sha256": "0a55556bf84e7aa24bf3d48d7c384435a6da7a61964170bda68dcf858304d1ab",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_axe_native946\\packed",
+      "atlas": "tekkaman_axe_sixteenbatch_two",
+      "bindings": [
+        94212,
+        94213
+      ],
+      "atlas_sha256": "681351878f38f984c47abba460f838dd260a08d6abec5516409897e3f47cc0aa",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\tekkaman_omega_native974\\packed",
+      "atlas": "tekkaman_omega_sixteenbatch_ten",
+      "bindings": [
+        94214,
+        94215,
+        94216,
+        94217,
+        94218,
+        94219,
+        94220,
+        94221,
+        94222,
+        94223
+      ],
+      "atlas_sha256": "fb1ea2dc20217464f0d807f97a70cab04882a26b7c9bab73e894c91cd900e9d6",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 10,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": [
+        5
+      ]
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/launcher_fire270_missing",
+      "atlas": "launcher_fire270_two",
+      "bindings": [
+        94206,
+        94207
+      ],
+      "atlas_sha256": "b282e04d519c9fb3291e5cbbb5d1cb6262ab78e580884943c884f9194e1539e2",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": []
+    },
+    {
+      "source": "test_current\\parts\\next_confirmed_fx_source\\art_fresh_21911",
+      "atlas": "observed_effect_fresh_21911",
+      "bindings": [
+        94224,
+        94225,
+        94226,
+        94227
+      ],
+      "atlas_sha256": "74306c2765807365cbb54997bb304b422b4864ffcbc6d23dcb8231371b70a93d",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 4,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": [
+        2
+      ],
+      "production_alpha_policy": "preserve own generated RGBA; alpha8 bbox for registration only"
+    },
+    {
+      "source": "test_current\\parts\\next_confirmed_fx_source\\art_fresh_22433",
+      "atlas": "observed_effect_fresh_22433",
+      "bindings": [
+        94228,
+        94229,
+        94230
+      ],
+      "atlas_sha256": "788052100eed27504ff1ab7cf5088397d050ecfcd6f367f799a40d9ee46d797b",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": [],
+      "production_alpha_policy": "preserve own generated RGBA; alpha8 bbox for registration only"
+    },
+    {
+      "source": "test_current\\parts\\next_confirmed_fx_source\\art_fresh_22352",
+      "atlas": "observed_effect_fresh_22352",
+      "bindings": [
+        94231,
+        94232,
+        94233,
+        94234,
+        94235
+      ],
+      "atlas_sha256": "57d0f1ed284bf09feaccd17f26e5e1794d1e4cca324770ea6d35f515e13e5010",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "warnings": [],
+      "production_alpha_policy": "preserve own generated RGBA; alpha8 bbox for registration only"
+    },
+    {
+      "source": "test_current\\parts\\next_confirmed_fx_source\\art_fresh_22618",
+      "atlas": "observed_effect_fresh_22618",
+      "bindings": [
+        94236,
+        94237,
+        94238,
+        94239,
+        94240
+      ],
+      "atlas_sha256": "d126250e5991daa549189e73fe1a7a725c9b9b67f573e97072b90b6fa11e00a4",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 5,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [
+        {
+          "slot_a": 24,
+          "slot_b": 22,
+          "source_overlap": [
+            32,
+            48,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        },
+        {
+          "slot_a": 25,
+          "slot_b": 22,
+          "source_overlap": [
+            32,
+            32,
+            32,
+            16
+          ],
+          "relation": "contained",
+          "generated_rgba_equal": true
+        }
+      ],
+      "warnings": [],
+      "production_alpha_policy": "preserve own generated RGBA; alpha8 bbox for registration only"
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 2227,
+  "baked_target_count": 2262,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction.",
   "held_artwork_not_counted": [

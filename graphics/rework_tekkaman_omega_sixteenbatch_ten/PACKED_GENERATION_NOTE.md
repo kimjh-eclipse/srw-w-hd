@@ -1,0 +1,1 @@
+pose_generated는같은기체별무손실설치묶음입니다. 개별생성원본/provenance의cropRGBA SHA동일근거를확인하세요. 실제HD 품질QA는Claude대기.

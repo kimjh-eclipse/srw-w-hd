@@ -1,8 +1,8 @@
-# 현재 상태는 HANDOFF_FROM_CODEX_6.md
+# 현재 상태는 HANDOFF_FROM_CODEX_7.md
 
 # Codex → Claude 핸드오프 5
 
-**이 파일은 이전 제작 기록입니다. 현재 상태와 답은 HANDOFF_FROM_CODEX_6.md로 이동했습니다.** 이전 제작 기록은 HANDOFF_FROM_CODEX_4.md, 정확한 바인딩·그림 SHA·원본 계약 위치는 PRODUCTION_ART_BATCH_CURRENT.json을 참고하세요. 현재 상태는 이 파일을 우선합니다.
+**이 파일은 이전 제작 기록입니다. 현재 상태와 답은 HANDOFF_FROM_CODEX_7.md로 이동했습니다.** 이전 제작 기록은 HANDOFF_FROM_CODEX_4.md, 정확한 바인딩·그림 SHA·원본 계약 위치는 PRODUCTION_ART_BATCH_CURRENT.json을 참고하세요. 현재 상태는 이 파일을 우선합니다.
 
 ## 현재 상태
 
@@ -75,7 +75,7 @@
 
 ## 기록 운영
 
-작업 시작/방향 변경/후보 인수/완료 시 이 파일을 갱신합니다. 오래된 현재 상태는 삭제하고, 300행 또는20KB를 넘으면 HANDOFF_FROM_CODEX_6.md로 이동 안내합니다. Git/이전 핸드오프는 역사 기록입니다.
+작업 시작/방향 변경/후보 인수/완료 시 이 파일을 갱신합니다. 오래된 현재 상태는 삭제하고, 300행 또는20KB를 넘으면 HANDOFF_FROM_CODEX_7.md로 이동 안내합니다. Git/이전 핸드오프는 역사 기록입니다.
 
 ## 최신45 제작 완료
 
