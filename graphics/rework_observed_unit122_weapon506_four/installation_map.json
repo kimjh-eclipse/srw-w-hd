@@ -1,0 +1,553 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "unit122_weapon506_attack350_missing",
+  "atlas": {
+    "image": "rework_unit122_weapon506_attack350_missing/pose_hd.png",
+    "reference": "rework_unit122_weapon506_attack350_missing/pose_native.png",
+    "native_size": [
+      128,
+      144
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3431413203,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 0,
+      "contexts": [
+        {
+          "unit": 122,
+          "oam": 5,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_122_506_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            166,
+            100
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        5
+      ],
+      "proposed_binding": {
+        "hash": 3431413203,
+        "index_hash": 723888004,
+        "index_pixels": "eJwlyzECADAIwkCC9f9fLmoWb0AJUPKE3P0qcNWIQUKHTLH3aj8/DxgAcw==",
+        "original_palette_rgb": [
+          [
+            0,
+            139,
+            156
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            90,
+            49,
+            74
+          ],
+          [
+            164,
+            82,
+            139
+          ],
+          [
+            238,
+            115,
+            197
+          ],
+          [
+            238,
+            148,
+            213
+          ],
+          [
+            238,
+            189,
+            230
+          ],
+          [
+            238,
+            230,
+            238
+          ],
+          [
+            197,
+            205,
+            205
+          ],
+          [
+            156,
+            164,
+            172
+          ],
+          [
+            115,
+            123,
+            131
+          ],
+          [
+            74,
+            82,
+            98
+          ],
+          [
+            106,
+            123,
+            238
+          ],
+          [
+            131,
+            106,
+            16
+          ],
+          [
+            189,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "unit122_weapon506_attack350_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 10228,
+        "source_x": 0,
+        "source_y": 8
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 0,
+        "actual_rgb_hash": 3431413203,
+        "indices_sha256": "6617d826c38f33292638b513ccd84af3f1029ae04a0e50f5a95cc9195916872a",
+        "resource": 10228,
+        "source_x": 0,
+        "source_y": 8,
+        "raw_bytes_equal": true,
+        "original_source_cell": 1
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93"
+    },
+    {
+      "actual_rgb_hash": 527276361,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 1,
+      "contexts": [
+        {
+          "unit": 122,
+          "oam": 7,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_122_506_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            150,
+            96
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        7
+      ],
+      "proposed_binding": {
+        "hash": 527276361,
+        "index_hash": 2425628548,
+        "index_pixels": "eJxjYEAARkZGEMnEzMzMCKFYGEEUCwsTIyOQYmJiAoozgymYagAJtQBW",
+        "original_palette_rgb": [
+          [
+            0,
+            139,
+            156
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            90,
+            49,
+            74
+          ],
+          [
+            164,
+            82,
+            139
+          ],
+          [
+            238,
+            115,
+            197
+          ],
+          [
+            238,
+            148,
+            213
+          ],
+          [
+            238,
+            189,
+            230
+          ],
+          [
+            238,
+            230,
+            238
+          ],
+          [
+            197,
+            205,
+            205
+          ],
+          [
+            156,
+            164,
+            172
+          ],
+          [
+            115,
+            123,
+            131
+          ],
+          [
+            74,
+            82,
+            98
+          ],
+          [
+            106,
+            123,
+            238
+          ],
+          [
+            131,
+            106,
+            16
+          ],
+          [
+            189,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "x": 64,
+        "y": 0,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "unit122_weapon506_attack350_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 10228,
+        "source_x": 0,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 1,
+        "actual_rgb_hash": 527276361,
+        "indices_sha256": "ea5428fd8203aeb72e15ee675e589c2a8b872d0ebf76aaa0143b941653c46951",
+        "resource": 10228,
+        "source_x": 0,
+        "source_y": 0,
+        "raw_bytes_equal": true,
+        "original_source_cell": 2
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93"
+    },
+    {
+      "actual_rgb_hash": 3935209387,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 2,
+      "contexts": [
+        {
+          "unit": 122,
+          "oam": 8,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_122_506_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            142,
+            93
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        8
+      ],
+      "proposed_binding": {
+        "hash": 3935209387,
+        "index_hash": 826236847,
+        "index_pixels": "eJzd0cEOxCAIBFCBk0zM/v/fLqPJmla012YnPTR5VKGU8o7IyANvCkSAQ4X4VKwu/lNWnhn3Cya7k6HXAqmMdyTjXsDZMBJvuvocvzXl+VlBYzQSaomTtF8uln0/GggVM12YHXzYgRqfxAsNYZsd8dzDgoWz15psZwQe/3CrsYTQZKzJe+zNnfSv8wWIoAQv",
+        "original_palette_rgb": [
+          [
+            0,
+            139,
+            156
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            90,
+            49,
+            74
+          ],
+          [
+            164,
+            82,
+            139
+          ],
+          [
+            238,
+            115,
+            197
+          ],
+          [
+            238,
+            148,
+            213
+          ],
+          [
+            238,
+            189,
+            230
+          ],
+          [
+            238,
+            230,
+            238
+          ],
+          [
+            197,
+            205,
+            205
+          ],
+          [
+            156,
+            164,
+            172
+          ],
+          [
+            115,
+            123,
+            131
+          ],
+          [
+            74,
+            82,
+            98
+          ],
+          [
+            106,
+            123,
+            238
+          ],
+          [
+            131,
+            106,
+            16
+          ],
+          [
+            189,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "x": 0,
+        "y": 72,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "unit122_weapon506_attack350_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 10278,
+        "source_x": 32,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 2,
+        "actual_rgb_hash": 3935209387,
+        "indices_sha256": "0d0f936ea09baffc6eed290fdd7825c725aa40a53f189b72f983b99fe3fe41e0",
+        "resource": 10278,
+        "source_x": 32,
+        "source_y": 0,
+        "raw_bytes_equal": true,
+        "original_source_cell": 3
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93"
+    },
+    {
+      "actual_rgb_hash": 3070386038,
+      "existing_exact_rgb_binding": null,
+      "legacy_indexed_bindings": [],
+      "source_cell": 3,
+      "contexts": [
+        {
+          "unit": 122,
+          "oam": 21,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_122_506_300\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            172,
+            74
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        21
+      ],
+      "proposed_binding": {
+        "hash": 3070386038,
+        "index_hash": 1999514377,
+        "index_pixels": "eJyFk0ESxSAIQw24sMP97/vRiihaP9NVH0nEwZROBRx/Uy8w6CgzngMnyqw1uH4n7g2aEIIXA/7g5JwCXwy4tkwj4TOAzg0jIHLT08p1oniCN8CvdAtYOFM3CBPC5ZgNbMIRJ7uBB6hcZB3ROLqcRboBUIeZeZWzn7AtUG3rS/Fiht0BlhVTnitH8zKDeatS5RaWN64zZLIsD5gre1ht2PhwbFwk8ukwRPKU8/Po/CnlZqDy8ty4lP8GF94abjwB/r5/rU8Fzg==",
+        "original_palette_rgb": [
+          [
+            0,
+            139,
+            156
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            90,
+            49,
+            74
+          ],
+          [
+            164,
+            82,
+            139
+          ],
+          [
+            238,
+            115,
+            197
+          ],
+          [
+            238,
+            148,
+            213
+          ],
+          [
+            238,
+            189,
+            230
+          ],
+          [
+            238,
+            230,
+            238
+          ],
+          [
+            197,
+            205,
+            205
+          ],
+          [
+            156,
+            164,
+            172
+          ],
+          [
+            115,
+            123,
+            131
+          ],
+          [
+            74,
+            82,
+            98
+          ],
+          [
+            106,
+            123,
+            238
+          ],
+          [
+            131,
+            106,
+            16
+          ],
+          [
+            189,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "x": 64,
+        "y": 72,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "unit122_weapon506_attack350_missing",
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "resource": 10278,
+        "source_x": 88,
+        "source_y": 0
+      },
+      "classification": "actual_exact0_indexed0_missing",
+      "source_byte_identity": {
+        "cell": 3,
+        "actual_rgb_hash": 3070386038,
+        "indices_sha256": "83215ffdb98cd2d09ef799ec1a7408e6e811d4fa7ab899bdcf4ae3bcecdba54c",
+        "resource": 10278,
+        "source_x": 88,
+        "source_y": 0,
+        "raw_bytes_equal": true,
+        "original_source_cell": 7
+      },
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93"
+    }
+  ]
+}

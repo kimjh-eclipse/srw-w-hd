@@ -1,0 +1,382 @@
+[
+  {
+    "cell": 0,
+    "slot": 18,
+    "binding": 0,
+    "hash": 2589589744,
+    "index_hash": 2050463497,
+    "index_pixels": "eJxjYKAPYIQAnPJMjMzMzExMjAiAJs/EyMTMDFYDVgqimZDUADUgaUYYhGY/KgCKAwAmDACF",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      11562,
+      15823,
+      20116,
+      24377,
+      30653,
+      30555,
+      27318,
+      24081,
+      20844,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        82,
+        74,
+        90
+      ],
+      [
+        123,
+        115,
+        123
+      ],
+      [
+        164,
+        164,
+        156
+      ],
+      [
+        205,
+        205,
+        189
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        222,
+        213,
+        238
+      ],
+      [
+        180,
+        172,
+        213
+      ],
+      [
+        139,
+        131,
+        189
+      ],
+      [
+        98,
+        90,
+        164
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      8
+    ],
+    "atlas_box": [
+      0,
+      0,
+      32,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 8
+    },
+    "output_size": [
+      32,
+      8
+    ],
+    "fixture": "test_current/parts/native_weapon_source_346_1395/unit346_weapon1395_source.state",
+    "frame": 245,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_346_1395\\unit346_weapon1395_source.state",
+      "frame": 245,
+      "video_epoch": 246,
+      "engine": 0,
+      "oam": 18,
+      "attributes": [
+        16491,
+        16579,
+        2410
+      ],
+      "screen_x": 195,
+      "screen_y": 107,
+      "w": 32,
+      "h": 8,
+      "display_w": 32,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 362,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 2589589744,
+      "index_hash": 2050463497,
+      "material": 2029070661,
+      "used_mask": 14,
+      "opaque": 92,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJxjYKAPYIQAnPJMjMzMzExMjAiAJs/EyMTMDFYDVgqimZDUADUgaUYYhGY/KgCKAwAmDACF",
+      "indices_sha256": "cb63b170badc8c55f6bc734e5a08704fae6ee0eda172264fbcbe10c27034ee73",
+      "palette_15bit": [
+        32608,
+        2114,
+        11562,
+        15823,
+        20116,
+        24377,
+        30653,
+        30555,
+        27318,
+        24081,
+        20844,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          82,
+          74,
+          90
+        ],
+        [
+          123,
+          115,
+          123
+        ],
+        [
+          164,
+          164,
+          156
+        ],
+        [
+          205,
+          205,
+          189
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          222,
+          213,
+          238
+        ],
+        [
+          180,
+          172,
+          213
+        ],
+        [
+          139,
+          131,
+          189
+        ],
+        [
+          98,
+          90,
+          164
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 92,
+      "observations": [
+        {
+          "frame": 245,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 250,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 255,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 260,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 265,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 270,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 275,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 280,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 285,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 290,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 295,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 300,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 305,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 310,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 315,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 320,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 92
+        },
+        {
+          "frame": 325,
+          "oam": 14,
+          "source_visible_native_obj_pixels": 92
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 346, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+  }
+]

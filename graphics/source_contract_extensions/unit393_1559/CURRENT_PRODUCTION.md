@@ -1,0 +1,1 @@
+최종37후보 인계: ../ready_unit393_base37.json. g0/g1 모두navy평면선새생성→동일그림배경제거로교정. 실패출력미사용. owncell RGBA affine등록으로alpha유지. 신규QA/실재생없고Claude대기,소스그리드가상좌표주석필수. 최신후보SHA는각production_report 참조. root만live설치.

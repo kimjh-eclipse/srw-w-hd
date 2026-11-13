@@ -1,0 +1,3456 @@
+[
+  {
+    "cell": 0,
+    "slot": 0,
+    "binding": 0,
+    "hash": 3343348868,
+    "index_hash": 1328372918,
+    "index_pixels": "eJxjYCAKMEIpdgjFxg7hcbABAAGXAC4=",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "atlas_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0,
+      "w": 8,
+      "h": 8
+    },
+    "output_size": [
+      8,
+      8
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 0,
+      "attributes": [
+        82,
+        67,
+        2340
+      ],
+      "screen_x": 67,
+      "screen_y": 82,
+      "w": 8,
+      "h": 8,
+      "display_w": 8,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 292,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3343348868,
+      "index_hash": 1328372918,
+      "material": 3658729344,
+      "used_mask": 450,
+      "opaque": 10,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJxjYCAKMEIpdgjFxg7hcbABAAGXAC4=",
+      "indices_sha256": "42c2d26750640a86f89e3fd6b51c3f68835fb7305b2dac02fc20f52884109327",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 10,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 375,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 380,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 385,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 390,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 395,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 400,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 405,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 465,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 470,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 475,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 480,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 485,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 490,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 495,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 500,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 505,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 510,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 515,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 10
+        },
+        {
+          "frame": 520,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 0,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 7,
+    "continuous_master_box": [
+      0,
+      0,
+      8,
+      8
+    ]
+  },
+  {
+    "cell": 1,
+    "slot": 1,
+    "binding": 0,
+    "hash": 1870718787,
+    "index_hash": 2986289345,
+    "index_pixels": "eJx1ijEOACAIxOolAv9/sXhhVJaWAsCK2lwqy2wxM8Trnpo+u9L/Le6gYAIjfOYAOUkArA==",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      8,
+      16
+    ],
+    "atlas_box": [
+      72,
+      0,
+      8,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 72,
+      "y": 0,
+      "w": 8,
+      "h": 16
+    },
+    "output_size": [
+      8,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 1,
+      "attributes": [
+        32858,
+        67,
+        2372
+      ],
+      "screen_x": 67,
+      "screen_y": 90,
+      "w": 8,
+      "h": 16,
+      "display_w": 8,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 324,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1870718787,
+      "index_hash": 2986289345,
+      "material": 1784393430,
+      "used_mask": 486,
+      "opaque": 44,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJx1ijEOACAIxOolAv9/sXhhVJaWAsCK2lwqy2wxM8Trnpo+u9L/Le6gYAIjfOYAOUkArA==",
+      "indices_sha256": "5ac9b239d5b8c2f043372f7e270387e8891a550210ce4aa1a02ad67bb1fe7868",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 44,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 375,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 380,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 385,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 390,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 395,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 400,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 405,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 465,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 470,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 475,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 480,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 485,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 490,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 495,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 500,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 505,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 510,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 515,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 44
+        },
+        {
+          "frame": 520,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 8,
+    "continuous_master_box": [
+      0,
+      0,
+      8,
+      16
+    ]
+  },
+  {
+    "cell": 2,
+    "slot": 2,
+    "binding": 0,
+    "hash": 3667420761,
+    "index_hash": 1151185732,
+    "index_pixels": "eJzNkDkSwCAMA2P5wP9/cWQnHF3aaCjQopGB6/q9ROR0UVokRmSODdyDK3OCpB0xFog+kwJPvspeta8NWg1Y79BSE6nxqmb2ADAPNXeCDnC2q2/feVt5ycoffclA7napqwVeh3bzemXB906nkC2WYv7B+Z4v3Y1fAzQ=",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      16,
+      32
+    ],
+    "atlas_box": [
+      144,
+      0,
+      16,
+      32
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 144,
+      "y": 0,
+      "w": 16,
+      "h": 32
+    },
+    "output_size": [
+      16,
+      32
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 2,
+      "attributes": [
+        32842,
+        32843,
+        2309
+      ],
+      "screen_x": 75,
+      "screen_y": 74,
+      "w": 16,
+      "h": 32,
+      "display_w": 16,
+      "display_h": 32,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 261,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3667420761,
+      "index_hash": 1151185732,
+      "material": 2811776436,
+      "used_mask": 510,
+      "opaque": 257,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJzNkDkSwCAMA2P5wP9/cWQnHF3aaCjQopGB6/q9ROR0UVokRmSODdyDK3OCpB0xFog+kwJPvspeta8NWg1Y79BSE6nxqmb2ADAPNXeCDnC2q2/feVt5ycoffclA7napqwVeh3bzemXB906nkC2WYv7B+Z4v3Y1fAzQ=",
+      "indices_sha256": "a9560fc0180cec736e1ae1795dbd9f3495742e3ee3716faa4c3be9ab77e496b1",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 257,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 375,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 380,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 385,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 390,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 395,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 400,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 405,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 465,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 470,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 475,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 480,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 249
+        },
+        {
+          "frame": 485,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 490,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 495,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 500,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 505,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 510,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 249
+        },
+        {
+          "frame": 515,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 257
+        },
+        {
+          "frame": 520,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 20,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 21,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 9,
+    "continuous_master_box": [
+      0,
+      0,
+      16,
+      32
+    ]
+  },
+  {
+    "cell": 3,
+    "slot": 5,
+    "binding": 0,
+    "hash": 3720469787,
+    "index_hash": 2285979980,
+    "index_pixels": "eJyljDECgDAIA5sAEwX+/1ut7WLVyQxZ7pLWfgcAybM/sKgIL2dqmyegxMJvT0SGd2C8zP1dQHhVOWBmKg8B6WXW06gD7/wAcOUBiw==",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      8
+    ],
+    "atlas_box": [
+      216,
+      0,
+      32,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 216,
+      "y": 0,
+      "w": 32,
+      "h": 8
+    },
+    "output_size": [
+      32,
+      8
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 5,
+      "attributes": [
+        16459,
+        16460,
+        2231
+      ],
+      "screen_x": 76,
+      "screen_y": 75,
+      "w": 32,
+      "h": 8,
+      "display_w": 32,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 183,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 3720469787,
+      "index_hash": 2285979980,
+      "material": 1475387649,
+      "used_mask": 63550,
+      "opaque": 113,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyljDECgDAIA5sAEwX+/1ut7WLVyQxZ7pLWfgcAybM/sKgIL2dqmyegxMJvT0SGd2C8zP1dQHhVOWBmKg8B6WXW06gD7/wAcOUBiw==",
+      "indices_sha256": "778f7f5a13d1102253445d738bf7fe67345d006e707e6e7931858f2e009d2a90",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 113,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 375,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 380,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 385,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 390,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 395,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 400,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 405,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 465,
+          "oam": 4,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 470,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 475,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 480,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 41
+        },
+        {
+          "frame": 485,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 490,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 495,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 500,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 505,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 510,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 41
+        },
+        {
+          "frame": 515,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 113
+        },
+        {
+          "frame": 520,
+          "oam": 9,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 25,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 26,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 10,
+    "continuous_master_box": [
+      0,
+      0,
+      32,
+      8
+    ]
+  },
+  {
+    "cell": 4,
+    "slot": 6,
+    "binding": 0,
+    "hash": 4028781450,
+    "index_hash": 2676661531,
+    "index_pixels": "eJyN0UEWwyAIBNAMyErA+9+2gDUxSRedZb7OA3OYDhEDmLgxEVaOGWgXUQccFF5EkeXm1sdQcxGnJI5kzXJARxwYvSvzRNr6szksVK1sjXA5wkLNaBvv7lbxS8/5PD7q06/xD+SAk+272rZdFsSGGVV/LV8FrqXRHhIvdNM64HWVwNwaHpoHYGpoIMkHfvHsMI//Qz9unyX7q/yfD063Bsw=",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      288,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 288,
+      "y": 0,
+      "w": 32,
+      "h": 16
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 6,
+      "attributes": [
+        16467,
+        32844,
+        2263
+      ],
+      "screen_x": 76,
+      "screen_y": 83,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 215,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 4028781450,
+      "index_hash": 2676661531,
+      "material": 49638012,
+      "used_mask": 63550,
+      "opaque": 308,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyN0UEWwyAIBNAMyErA+9+2gDUxSRedZb7OA3OYDhEDmLgxEVaOGWgXUQccFF5EkeXm1sdQcxGnJI5kzXJARxwYvSvzRNr6szksVK1sjXA5wkLNaBvv7lbxS8/5PD7q06/xD+SAk+272rZdFsSGGVV/LV8FrqXRHhIvdNM64HWVwNwaHpoHYGpoIMkHfvHsMI//Qz9unyX7q/yfD063Bsw=",
+      "indices_sha256": "3382287b67b9fde826f36654f994b2c98bad1d84bdc2490d9b9271971d54f3a5",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 117,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 375,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 380,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 385,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 390,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 395,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 400,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 405,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 465,
+          "oam": 5,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 470,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 475,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 480,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 104
+        },
+        {
+          "frame": 485,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 490,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 495,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 500,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 505,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 510,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 104
+        },
+        {
+          "frame": 515,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 117
+        },
+        {
+          "frame": 520,
+          "oam": 10,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 26,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 27,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 25,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 25,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 24,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 28,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 25,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 25,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 11,
+    "continuous_master_box": [
+      0,
+      0,
+      32,
+      16
+    ]
+  },
+  {
+    "cell": 5,
+    "slot": 18,
+    "binding": 0,
+    "hash": 194847686,
+    "index_hash": 2734141956,
+    "index_pixels": "eJxjYGBkZmZiYmAA0kxMjGg0AwgwgrkgBpRGBgAH7wAs",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "atlas_box": [
+      360,
+      0,
+      8,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 360,
+      "y": 0,
+      "w": 8,
+      "h": 8
+    },
+    "output_size": [
+      8,
+      8
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 18,
+      "attributes": [
+        101,
+        162,
+        2239
+      ],
+      "screen_x": 162,
+      "screen_y": 101,
+      "w": 8,
+      "h": 8,
+      "display_w": 8,
+      "display_h": 8,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 191,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 194847686,
+      "index_hash": 2734141956,
+      "material": 3233174766,
+      "used_mask": 14,
+      "opaque": 24,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJxjYGBkZmZiYmAA0kxMjGg0AwgwgrkgBpRGBgAH7wAs",
+      "indices_sha256": "f70550c2c7fd9d0db52230c809e5ef19039692a80beb4daaff16aa91a27ca7f0",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 24,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 375,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 380,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 385,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 390,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 395,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 400,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 405,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 410,
+          "oam": 1,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 470,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 475,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 480,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 485,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 490,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 495,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 500,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 505,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 510,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 515,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 24
+        },
+        {
+          "frame": 520,
+          "oam": 22,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 36,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 38,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 39,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 36,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 36,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 36,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 36,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 40,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 615,
+          "oam": 17,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 16,
+    "continuous_master_box": [
+      0,
+      0,
+      8,
+      8
+    ]
+  },
+  {
+    "cell": 6,
+    "slot": 19,
+    "binding": 0,
+    "hash": 2815546131,
+    "index_hash": 2071541157,
+    "index_pixels": "eJx90EEOwCAIRFFn4P5nLtKaABX+lheMCNYYRUZBzgJ0wY4As4Dn4kpwaghCJlQLQW6LRPCrkvcDNxJfYUGbcKXKIkkbovmANoc/a+wa/dlt5PMHYeYBmA==",
+    "actual_palette_bgr555": [
+      32608,
+      2114,
+      16681,
+      21007,
+      27383,
+      30653,
+      9426,
+      16759,
+      23133,
+      2466,
+      2722,
+      15101,
+      10779,
+      4249,
+      2129,
+      3005
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        222,
+        255
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        74,
+        74,
+        131
+      ],
+      [
+        123,
+        131,
+        164
+      ],
+      [
+        189,
+        189,
+        213
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        148,
+        49,
+        74
+      ],
+      [
+        189,
+        90,
+        131
+      ],
+      [
+        238,
+        148,
+        180
+      ],
+      [
+        16,
+        106,
+        16
+      ],
+      [
+        16,
+        172,
+        16
+      ],
+      [
+        238,
+        189,
+        115
+      ],
+      [
+        222,
+        131,
+        82
+      ],
+      [
+        205,
+        32,
+        32
+      ],
+      [
+        139,
+        16,
+        16
+      ],
+      [
+        238,
+        238,
+        16
+      ]
+    ],
+    "source_owner": null,
+    "source_image": null,
+    "source_space": "cached_obj",
+    "source_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "atlas_box": [
+      432,
+      0,
+      32,
+      16
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "phase": "실제 원본 관측 색 유지",
+    "existing_actual_rgb_binding": 0,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 432,
+      "y": 0,
+      "w": 32,
+      "h": 16
+    },
+    "output_size": [
+      32,
+      16
+    ],
+    "fixture": "test_current/parts/native_weapon_source_342_1385/unit342_weapon1385_source.state",
+    "frame": 370,
+    "rendered_source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+      "frame": 370,
+      "video_epoch": 371,
+      "engine": 0,
+      "oam": 19,
+      "attributes": [
+        16469,
+        32906,
+        2311
+      ],
+      "screen_x": 138,
+      "screen_y": 85,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 263,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 2815546131,
+      "index_hash": 2071541157,
+      "material": 1319220306,
+      "used_mask": 30,
+      "opaque": 238,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJx90EEOwCAIRFFn4P5nLtKaABX+lheMCNYYRUZBzgJ0wY4As4Dn4kpwaghCJlQLQW6LRPCrkvcDNxJfYUGbcKXKIkkbovmANoc/a+wa/dlt5PMHYeYBmA==",
+      "indices_sha256": "5e66f815db46a49a08b50a05fe964039113c5d0e7573f17d120a62ee42900956",
+      "palette_15bit": [
+        32608,
+        2114,
+        16681,
+        21007,
+        27383,
+        30653,
+        9426,
+        16759,
+        23133,
+        2466,
+        2722,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          74,
+          74,
+          131
+        ],
+        [
+          123,
+          131,
+          164
+        ],
+        [
+          189,
+          189,
+          213
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          148,
+          49,
+          74
+        ],
+        [
+          189,
+          90,
+          131
+        ],
+        [
+          238,
+          148,
+          180
+        ],
+        [
+          16,
+          106,
+          16
+        ],
+        [
+          16,
+          172,
+          16
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 218,
+      "observations": [
+        {
+          "frame": 370,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 375,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 380,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 385,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 390,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 395,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 400,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 405,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 410,
+          "oam": 2,
+          "source_visible_native_obj_pixels": 180
+        },
+        {
+          "frame": 470,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 192
+        },
+        {
+          "frame": 475,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 480,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 485,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 490,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 495,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 500,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 505,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 510,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 515,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 218
+        },
+        {
+          "frame": 520,
+          "oam": 23,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 525,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 530,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 535,
+          "oam": 39,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 540,
+          "oam": 40,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 545,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 550,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 555,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 560,
+          "oam": 38,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 565,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 570,
+          "oam": 38,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 575,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 580,
+          "oam": 37,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 585,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 590,
+          "oam": 41,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 595,
+          "oam": 38,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 600,
+          "oam": 38,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 605,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 610,
+          "oam": 19,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 615,
+          "oam": 18,
+          "source_visible_native_obj_pixels": 0
+        }
+      ]
+    },
+    "render_mode": "static",
+    "category": "unit",
+    "replacement_of_existing_binding": null,
+    "role": "실제 미연결 기계 조각",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+    "source_owner_confirmed": false,
+    "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음",
+    "continuous_component": 17,
+    "continuous_master_box": [
+      0,
+      0,
+      32,
+      16
+    ]
+  }
+]

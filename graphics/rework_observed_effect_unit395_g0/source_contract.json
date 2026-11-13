@@ -1,0 +1,883 @@
+[
+  {
+    "state": "test_current\\parts\\native_weapon_source_395_1565\\unit395_weapon1565_source.state",
+    "frame": 560,
+    "video_epoch": 835,
+    "engine": 0,
+    "oam": 0,
+    "attributes": [
+      60,
+      20600,
+      9494
+    ],
+    "screen_x": 120,
+    "screen_y": 60,
+    "w": 16,
+    "h": 16,
+    "display_w": 16,
+    "display_h": 16,
+    "priority": 1,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 2,
+    "tile_number": 278,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": true,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 3410535354,
+    "index_hash": 3319292780,
+    "material": 1634149381,
+    "used_mask": 60,
+    "opaque": 34,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJyFTu0OACAEtMP7v3I0KrXm/nBfhqiBSuWiqALYU4jFYRPG+QpOo4dGKtucp1Yb2/wDx6kU3o8wADNvAGM=",
+    "indices_sha256": "608126fba173fa720d8c444f4cb0f065aa119775696ec97e7a75e87c73b3dce2",
+    "palette_15bit": [
+      0,
+      31,
+      223,
+      415,
+      639,
+      831,
+      1023,
+      8191,
+      16383,
+      24575,
+      32767,
+      32256,
+      9651,
+      11765,
+      13879,
+      15992
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 560,
+        "oam": 0
+      },
+      {
+        "frame": 560,
+        "oam": 1
+      },
+      {
+        "frame": 560,
+        "oam": 4
+      },
+      {
+        "frame": 560,
+        "oam": 7
+      },
+      {
+        "frame": 565,
+        "oam": 1
+      },
+      {
+        "frame": 565,
+        "oam": 4
+      },
+      {
+        "frame": 565,
+        "oam": 5
+      },
+      {
+        "frame": 565,
+        "oam": 7
+      },
+      {
+        "frame": 565,
+        "oam": 8
+      },
+      {
+        "frame": 565,
+        "oam": 9
+      },
+      {
+        "frame": 565,
+        "oam": 12
+      },
+      {
+        "frame": 565,
+        "oam": 15
+      },
+      {
+        "frame": 570,
+        "oam": 0
+      },
+      {
+        "frame": 570,
+        "oam": 1
+      },
+      {
+        "frame": 570,
+        "oam": 4
+      },
+      {
+        "frame": 570,
+        "oam": 7
+      }
+    ],
+    "source_contact_index": 40,
+    "resource": null,
+    "owner_confirmed": false,
+    "source_image": null,
+    "source_x": 4,
+    "source_y": 4,
+    "x": 4,
+    "y": 4,
+    "source_grid_scope": "virtual packed actual cached OBJ, not original IMG coordinates",
+    "resource_candidate": null,
+    "source_candidate_matches": [],
+    "all_source_matches": [],
+    "candidate_file": "test_current\\parts\\retained_fx_round2\\art_unit395_g0\\candidate.png",
+    "atlas": "observed_effect_unit395_g0_3",
+    "atlas_id": "observed_effect_unit395_g0_3",
+    "dynamic_palette": false,
+    "effect_part": true,
+    "palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "group": 0,
+    "cached_original_contract_file": "test_current/parts/native_weapon_source_395_1565/unbound_now.json",
+    "virtual_cell": [
+      0,
+      0,
+      32,
+      32
+    ]
+  },
+  {
+    "state": "test_current\\parts\\native_weapon_source_395_1565\\unit395_weapon1565_source.state",
+    "frame": 560,
+    "video_epoch": 835,
+    "engine": 0,
+    "oam": 2,
+    "attributes": [
+      60,
+      28800,
+      9558
+    ],
+    "screen_x": 128,
+    "screen_y": 60,
+    "w": 16,
+    "h": 16,
+    "display_w": 16,
+    "display_h": 16,
+    "priority": 1,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 2,
+    "tile_number": 342,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": true,
+    "flip_y": true,
+    "mosaic": false,
+    "hash": 2078802226,
+    "index_hash": 3309528392,
+    "material": 190069313,
+    "used_mask": 60,
+    "opaque": 39,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxjYMAELMxMqAKsYBFWdGHsAKqKlZmBgQmhmYE4zTAzUCyHmscEcx0OTXAVrCxMSA4B6sBjNQBCKACB",
+    "indices_sha256": "eafb90798955ba02720ec287128642bf676bea7df602fefb48687158990eae2b",
+    "palette_15bit": [
+      0,
+      31,
+      223,
+      415,
+      639,
+      831,
+      1023,
+      8191,
+      16383,
+      24575,
+      32767,
+      32256,
+      9651,
+      11765,
+      13879,
+      15992
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 560,
+        "oam": 2
+      },
+      {
+        "frame": 560,
+        "oam": 5
+      },
+      {
+        "frame": 565,
+        "oam": 2
+      },
+      {
+        "frame": 565,
+        "oam": 6
+      },
+      {
+        "frame": 565,
+        "oam": 10
+      },
+      {
+        "frame": 565,
+        "oam": 13
+      },
+      {
+        "frame": 570,
+        "oam": 2
+      },
+      {
+        "frame": 570,
+        "oam": 5
+      }
+    ],
+    "source_contact_index": 41,
+    "resource": null,
+    "owner_confirmed": false,
+    "source_image": null,
+    "source_x": 36,
+    "source_y": 4,
+    "x": 36,
+    "y": 4,
+    "source_grid_scope": "virtual packed actual cached OBJ, not original IMG coordinates",
+    "resource_candidate": null,
+    "source_candidate_matches": [],
+    "all_source_matches": [],
+    "candidate_file": "test_current\\parts\\retained_fx_round2\\art_unit395_g0\\candidate.png",
+    "atlas": "observed_effect_unit395_g0_3",
+    "atlas_id": "observed_effect_unit395_g0_3",
+    "dynamic_palette": false,
+    "effect_part": true,
+    "palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "group": 0,
+    "cached_original_contract_file": "test_current/parts/native_weapon_source_395_1565/unbound_now.json",
+    "virtual_cell": [
+      32,
+      0,
+      32,
+      32
+    ]
+  },
+  {
+    "state": "test_current\\parts\\native_weapon_source_395_1565\\unit395_weapon1565_source.state",
+    "frame": 560,
+    "video_epoch": 835,
+    "engine": 0,
+    "oam": 3,
+    "attributes": [
+      68,
+      28792,
+      9496
+    ],
+    "screen_x": 120,
+    "screen_y": 68,
+    "w": 16,
+    "h": 16,
+    "display_w": 16,
+    "display_h": 16,
+    "priority": 1,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 2,
+    "tile_number": 280,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": true,
+    "flip_y": true,
+    "mosaic": false,
+    "hash": 1603998990,
+    "index_hash": 3610207828,
+    "material": 1869249941,
+    "used_mask": 52,
+    "opaque": 42,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxtj0kKADAMAkWS/3+5hGy1NKepg2CBPIMcncPm6hnMFokrtlImmL864BPn2yruiPe2HbQky/2xz5ekNnwAUZUAiw==",
+    "indices_sha256": "c7b4389020710032f7091e0f761fcaf932285cdbcbbbfb4af579193715194e5b",
+    "palette_15bit": [
+      0,
+      31,
+      223,
+      415,
+      639,
+      831,
+      1023,
+      8191,
+      16383,
+      24575,
+      32767,
+      32256,
+      9651,
+      11765,
+      13879,
+      15992
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 560,
+        "oam": 3
+      },
+      {
+        "frame": 560,
+        "oam": 6
+      },
+      {
+        "frame": 565,
+        "oam": 0
+      },
+      {
+        "frame": 565,
+        "oam": 3
+      },
+      {
+        "frame": 565,
+        "oam": 11
+      },
+      {
+        "frame": 565,
+        "oam": 14
+      },
+      {
+        "frame": 570,
+        "oam": 3
+      },
+      {
+        "frame": 570,
+        "oam": 6
+      }
+    ],
+    "source_contact_index": 42,
+    "resource": null,
+    "owner_confirmed": false,
+    "source_image": null,
+    "source_x": 68,
+    "source_y": 4,
+    "x": 68,
+    "y": 4,
+    "source_grid_scope": "virtual packed actual cached OBJ, not original IMG coordinates",
+    "resource_candidate": null,
+    "source_candidate_matches": [],
+    "all_source_matches": [],
+    "candidate_file": "test_current\\parts\\retained_fx_round2\\art_unit395_g0\\candidate.png",
+    "atlas": "observed_effect_unit395_g0_3",
+    "atlas_id": "observed_effect_unit395_g0_3",
+    "dynamic_palette": false,
+    "effect_part": true,
+    "palette_rgb": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        255,
+        49,
+        0
+      ],
+      [
+        255,
+        98,
+        0
+      ],
+      [
+        255,
+        156,
+        0
+      ],
+      [
+        255,
+        205,
+        0
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        255,
+        57
+      ],
+      [
+        255,
+        255,
+        123
+      ],
+      [
+        255,
+        255,
+        189
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        156,
+        106,
+        74
+      ],
+      [
+        172,
+        123,
+        90
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        197,
+        156,
+        123
+      ]
+    ],
+    "group": 0,
+    "cached_original_contract_file": "test_current/parts/native_weapon_source_395_1565/unbound_now.json",
+    "virtual_cell": [
+      64,
+      0,
+      32,
+      32
+    ]
+  }
+]

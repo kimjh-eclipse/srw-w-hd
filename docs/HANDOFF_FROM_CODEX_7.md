@@ -4,8 +4,8 @@
 
 ## 현재 상태 — 2026-11-14
 
-- **2,943개 고유 작업 대상 연결·대상 굽기 완료**. 기존 그림 교체와 실제 팔레트 변형 포함. 기체 수·ROM 누락 감소량·독립 QA 완료 수가 아닙니다.
-- 마지막 공개 푸시는 main **d46d1a2e**, 당시 2,870개까지였습니다. 이후 작업은 커밋 준비 중이며 캐시를 다시 만들고 SHA를 확인한 뒤 푸시합니다.
+- **3,148개 고유 작업 대상 연결·대상 굽기 완료**. 기존 그림 교체와 실제 팔레트 변형 포함. 기체 수·ROM 누락 감소량·독립 QA 완료 수가 아닙니다.
+- 마지막 공개 푸시는 main **a0d24a12**, 당시 2,943개까지였습니다. 이후 작업은 커밋 준비 중이며 캐시를 다시 만들고 SHA를 확인한 뒤 푸시합니다.
 - 전체 ROM 누락은 독립 감사 11,358종 이후 재집계하지 않았습니다. 다중 IMG 21% 미판정·BG는 그 감사 밖입니다. 작업 수를 빼서 잔여를 계산하지 마세요.
 - Codex 담당: 새 그림·원본 계약·연결·굽기·커밋. Claude 담당: 독립 색상·형상·접합·레이어·실제 HD 재생 검증. 오류 0과 CRC/nonempty 통과는 시각 품질 판정이 아닙니다.
 - **코어 소스 해제**. 이번 작업에서 공유 런타임을 수정하지 않았습니다. 최신 EXE·배포 팩은 미갱신, 열린 사용자 게임 창은 유지했습니다.
@@ -22,6 +22,7 @@
 
 - 각 새 graphics/rework_* 폴더에 installation_report.json, 실제 팔레트·cached raw 계약, 생성 출처 및 batch_bake_report.json을 보존했습니다. 신규 대상과 기존 바인딩 교체를 혼동하지 마세요.
 - Big Volfogg 연속 6개는 **54395/54399도 같은 새 master로 교체**했습니다. 새 조각만 붙여 옛 조각과 혼합하지 않았습니다. 원본/생성 겹침 13건은 굽기 전 일치이며 실제 접합 판정은 아닙니다.
+- 최신 추가 묶음은 root_batch68/56/17/58 결과 및 각 graphics 폴더에 있습니다. fixture342의20개(작은 손 끝 포함), 실제 포르네우스 기계23+2+6, fixture357 머리3,343 녹색14,344 청록19,345 날개형6, unit121/122 기계5·unit129 기계9·unit138 기계8, 효과393 기본37/394 기본25/346 타격11/395 기본10을 포함합니다. 청록 후보20 중1개는 기존 exact 중복으로 새 완료 수에서 제외했습니다.
 - 카라미티 Todes의 raw 인접 조각은 화면 y가 16px 어긋납니다. 실제 64×48 계단 문맥으로 다시 그려 분할했습니다. 후속 Schlag는 실제 수평 64×32 문맥입니다. 두 경우를 같은 접합으로 취급하지 마세요. tiny hash365017408은 보류했습니다.
 - 프라누스 첫 후보의 원본 없는 초록 센서는 교정됐고, 피바타 첫 도트 확대 후보는 배제됐습니다. 작은 조각 가시 면적 한계와 팔·장갑 접합을 각 HANDOFF에서 확인해 주세요.
 - 새 registered_attack_bank 그림은 register_part 탐색을 건너뛰지만 remove_unattached_paint·repair_crop_ink·8→4배 축소는 남습니다. 생성 master RGBA 일치는 **굽기 후 이음매 정상 증거가 아닙니다**. 얇은 선/입자/경계 소실을 조립된 실제 HD로 확인해 주세요.
@@ -42,10 +43,12 @@
 - 21855 특수 초록 팔레트1은 실제 녹색이며 여러 번호가640으로 모이는 원본입니다. 키 색이라고 삭제하거나 기본색으로 바꾸지 않았습니다. HANDOFF_PALETTE_HOLD.md 검토 대기입니다.
 - 22378 late65 및 20966/19887 변형50 등 기존 런타임 큐는 CLAUDE_VERIFICATION_QUEUE.md에 유지합니다.
 - fixture400/w1577의 기본14개는 별도 새 그림입니다. 추가28개 fade 계약은 graphics/source_contract_extensions/unit400_1577/fade28_source_base_pairs.json과 HANDOFF_FADE_VARIANTS.md에 보존했습니다. IMG 소유는 미확정이며 source_x/y는 가상 셀 좌표입니다. mint/gray 단색면은 자체 새 생성 재료의 균일 내부를 썼고 준비 후 전면 alpha255입니다. 얇은 효과의 실루엣 변화·회색 rim은 Claude 독립 검증 대기입니다.
+- 393 기본37과 별도3개 phase는 graphics/source_contract_extensions/unit393_1559에, 394 기본25와 별도2개 phase는 graphics/source_contract_extensions/unit394_1563에 source/base 계약을 보존했습니다. 기본 그림 제작으로 다른 팔레트 적용까지 완료됐다고 세지 않았습니다.
 
 ## 보류 그림 — 연결/완료 수 제외
 
 - graphics/review_pending/wufei_eye_animation: 6개. 기존 fullcutin17 눈자리·피부 경계 정합 미해결.
+- 같은 폴더 face_sequence_scale375.png/coordinate_proof_scale375.json을 추가했습니다. 960px 그림의 실제 좌표배율3.75로 조립하면 기존 미리보기의 눈 위치 판단 일부가 달라집니다. 그래도 피부색·명암 사각형 경계가 남아 6개 설치 보류를 유지합니다. 실제 게임 검증이 아닌 제작 좌표 점검이며 활성 컷인17을 바꾸지 않았습니다.
 - graphics/review_pending/sandrock_heated270: 6개. 좁은 연결편을 큰 장갑/손으로 부풀린 형상 미해결. root_retry v4의 넓은 회색 후광은 실제 alpha0의 숨은 RGB였으나 형상 문제 때문에 여전히 보류입니다.
 - graphics/review_pending/effect21934_white_core: 7개. 자체 생성 불투명 RGB의 채운 흰 중심은 있으나 imagegen 투명화가 중심을 지웁니다. HANDOFF_TECHNICAL_MATTING.md 검토 요청. 원본 mask/RGB 스탬프나 다른 팔레트 alpha를 빌려 통과시키지 않았습니다.
 - 옛 graphics/review_pending/ginn_bazooka_dark_four는 거절 초안 증거로만 보존합니다. 새 기본색 암부4개는 graphics/rework_ginn_bazooka_dark_four_corrected에 연결·굽기를 마쳐 제작 보류 목록에서 해제했습니다. PLT1414 bank0 전체16색 일치로 fade가 아닌 실제 그림자/뒷면입니다. 색·절단면/곡선·가림은 Claude 실제QA 대기입니다.

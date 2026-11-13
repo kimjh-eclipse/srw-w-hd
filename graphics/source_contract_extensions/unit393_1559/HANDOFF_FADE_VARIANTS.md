@@ -1,0 +1,1 @@
+actualFX40=raw37+같은raw다른3색변형. fade3_source_base_pairs.json에 각base후보폴더/actualstate/frame/hash와변형원본보존. 3은 새그림/완료수제외, Claude 동적palette/렌더검증큐. 전격/원형원본IMG미확정,red만22419/22420 aliasraw확인. 다른기체/팔레트재사용으로3을채우지않음.
