@@ -12901,6 +12901,35 @@
       ],
       "shape_review_deferred": true,
       "warnings": []
+    },
+    {
+      "source": "test_current/parts/root_repair22591",
+      "atlas": "effect22591_components_repaired_ten",
+      "bindings": [
+        92642,
+        92643,
+        92645,
+        92646,
+        92647,
+        92648,
+        92649,
+        92650,
+        92651,
+        92652
+      ],
+      "atlas_sha256": "546e56f496b79074fb51b65df28bb39c6c38d03bd87b6c0297c0522bd6c90524",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "actual_observed_targets": 10,
+      "source_confirmed_unobserved_targets": 0,
+      "source_containment_checks": [],
+      "opaque_bright_center_checks": [],
+      "shape_review_slots": [
+        1,
+        4,
+        5
+      ],
+      "shape_review_deferred": true,
+      "warnings": []
     }
   ],
   "whole_rom_missing_last_audit": 11358,
