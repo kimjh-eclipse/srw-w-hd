@@ -3236,12 +3236,87 @@
       "actual_observed_targets": 33,
       "source_confirmed_unobserved_targets": 0,
       "existing_art_replacement": false
+    },
+    {
+      "source": "test_current\\parts\\altron_native_weapon18\\4_275",
+      "atlas": "altron_weapon18_4_275",
+      "bindings": [
+        93409,
+        93410
+      ],
+      "atlas_sha256": "236b09c54f0babaabe8bab5757eccc4b9e878c7545aa306774d9cf42e9194588",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\altron_native_weapon18\\4_365",
+      "atlas": "altron_weapon18_4_365",
+      "bindings": [
+        93411,
+        93412,
+        93413
+      ],
+      "atlas_sha256": "628e5016252f0cbb9b9dd46e60b8a01ecfb85ade02771f684b595bb6ab0f0734",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current\\parts\\altron_native_weapon18\\4_450",
+      "atlas": "altron_weapon18_4_450",
+      "bindings": [
+        93414,
+        93415,
+        93416
+      ],
+      "atlas_sha256": "61f32ab5341fb02c42cb2a1b82a351a7eef3290d8fbd11a134857916478676d5",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 3,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/native_weapon_source_373_1483/fx_actual",
+      "atlas": "observed_unit373_weapon1483_fx_eight",
+      "bindings": [
+        93417,
+        93418,
+        93419,
+        93420,
+        93421,
+        93422,
+        93423,
+        93424
+      ],
+      "atlas_sha256": "714849bba0a3efb254c7e9dcfab72cab6b79071922e5b2f36b1aa859b4c01dc5",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [
+        17
+      ],
+      "actual_observed_targets": 8,
+      "source_confirmed_unobserved_targets": 0
+    },
+    {
+      "source": "test_current/parts/borrowed_shape_rework/mazinger_z_punch_missing",
+      "atlas": "mazinger_z_punch_head_two",
+      "bindings": [
+        93425,
+        93426
+      ],
+      "atlas_sha256": "1e2ad4f0acb841bd426869559d51447a8708a3840502ea8951d660448716a573",
+      "production_status": "installed_and_baked; independent Claude review pending",
+      "warnings": [],
+      "actual_observed_targets": 2,
+      "source_confirmed_unobserved_targets": 0
     }
   ],
   "whole_rom_missing_last_audit": 11358,
   "whole_rom_missing_recounted": false,
   "counts_are_work_targets_not_missing_reduction": true,
-  "baked_target_count": 1430,
+  "baked_target_count": 1448,
   "production_blockers": [],
   "baked_target_count_note": "Unique installed/baked work targets, including replacements and palette variants; not ROM missing reduction."
 }
