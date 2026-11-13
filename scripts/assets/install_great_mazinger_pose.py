@@ -21,29 +21,29 @@ def observed_contract(row):
 
 
 def validate_source_containment(contract, art, excluded_hashes):
-    """One confirmed source region must reuse the same generated pixels."""
+    """Confirmed overlapping source pixels must share generated artwork."""
     checks=[]
-    for small in contract:
-        if small['hash'] in excluded_hashes:continue
-        ss=small.get('spec',{});sx,sy=ss.get('source_x'),ss.get('source_y')
-        if ss.get('resource') is None or sx is None or sy is None:continue
-        x,y,w,h=small['atlas_box']
-        for large in contract:
-            if large['hash'] in excluded_hashes:continue
-            ls=large.get('spec',{});lx,ly=ls.get('source_x'),ls.get('source_y');ax,ay,aw,ah=large['atlas_box']
-            if aw*ah<=w*h or ls.get('resource')!=ss['resource'] or lx is None or ly is None:continue
-            if small['actual_palette_bgr555']!=large['actual_palette_bgr555']:continue
-            if not (lx<=sx and ly<=sy and sx+w<=lx+aw and sy+h<=ly+ah):continue
-            a=np.frombuffer(zlib.decompress(base64.b64decode(small['index_pixels'])),dtype=np.uint8).reshape(h,w)
-            b=np.frombuffer(zlib.decompress(base64.b64decode(large['index_pixels'])),dtype=np.uint8).reshape(ah,aw)
-            dx,dy=sx-lx,sy-ly
-            assert np.array_equal(a,b[dy:dy+h,dx:dx+w]),('source containment raw mismatch',small['slot'],large['slot'])
-            own=np.asarray(art.crop((x*4,y*4,(x+w)*4,(y+h)*4)))
-            shared=np.asarray(art.crop(((ax+dx)*4,(ay+dy)*4,(ax+dx+w)*4,(ay+dy+h)*4)))
-            equal=bool(np.array_equal(own,shared))
-            checks.append(dict(small_slot=small['slot'],large_slot=large['slot'],source_offset=[dx,dy],generated_rgba_equal=equal))
-            assert equal,('same confirmed source region has different generated artwork',small['slot'],large['slot'])
+    for i,a in enumerate(contract):
+        sa=a.get('spec',{});sx,sy=sa.get('source_x'),sa.get('source_y')
+        if a['hash'] in excluded_hashes or sa.get('resource') is None or sx is None or sy is None:continue
+        x,y,w,h=a['atlas_box']
+        for b in contract[i+1:]:
+            sb=b.get('spec',{});lx,ly=sb.get('source_x'),sb.get('source_y');ax,ay,aw,ah=b['atlas_box']
+            if b['hash'] in excluded_hashes or sb.get('resource')!=sa['resource'] or lx is None or ly is None:continue
+            if a['actual_palette_bgr555']!=b['actual_palette_bgr555']:continue
+            left,top=max(sx,lx),max(sy,ly);right,bottom=min(sx+w,lx+aw),min(sy+h,ly+ah)
+            if right<=left or bottom<=top:continue
+            dx,dy=left-sx,top-sy;bx,by=left-lx,top-ly;ow,oh=right-left,bottom-top
+            ai=np.frombuffer(zlib.decompress(base64.b64decode(a['index_pixels'])),dtype=np.uint8).reshape(h,w)
+            bi=np.frombuffer(zlib.decompress(base64.b64decode(b['index_pixels'])),dtype=np.uint8).reshape(ah,aw)
+            assert np.array_equal(ai[dy:dy+oh,dx:dx+ow],bi[by:by+oh,bx:bx+ow]),('source overlap raw mismatch',a['slot'],b['slot'])
+            own=np.asarray(art.crop(((x+dx)*4,(y+dy)*4,(x+dx+ow)*4,(y+dy+oh)*4)))
+            shared=np.asarray(art.crop(((ax+bx)*4,(ay+by)*4,(ax+bx+ow)*4,(ay+by+oh)*4)))
+            equal=bool(np.array_equal(own,shared));contained=(ow*oh==min(w*h,aw*ah))
+            checks.append(dict(slot_a=a['slot'],slot_b=b['slot'],source_overlap=[left,top,ow,oh],relation='contained' if contained else 'partial_overlap',generated_rgba_equal=equal))
+            assert equal,('same confirmed source region has different generated artwork',a['slot'],b['slot'])
     return checks
+
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true')
@@ -56,6 +56,8 @@ def main():
     parser.add_argument('--defer-shape-review',action='store_true',help='record silhouette warnings for the independent reviewer instead of blocking draft installation')
     parser.add_argument('--new-only',action='store_true',help='preserve already-connected exact RGB artwork while filling missing contracts')
     args=parser.parse_args();source=args.source_dir
+    for required in (args.contract,args.drawing,args.native,args.generated):
+        if not (source/required).is_file():raise FileNotFoundError(f'production packet file missing: {source/required}')
     contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text())]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
     assert art.size==(native.width*4,native.height*4),('HD/native canvas ratio must be 4x',art.size,native.size)
@@ -127,7 +129,7 @@ def main():
             except PermissionError:
                 if attempt == 19:raise
                 time.sleep(.15)
-    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw inclusion; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
+    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
     if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
 if __name__=='__main__':main()

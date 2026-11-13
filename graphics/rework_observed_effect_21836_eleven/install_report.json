@@ -1,0 +1,116 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 0,
+      "binding": 93777,
+      "hash": 2476377070,
+      "alpha_iou": 0.7446808510638298,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 0,
+      "binding": 93778,
+      "hash": 2223397713,
+      "alpha_iou": 0.926829268292683,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 0,
+      "binding": 93779,
+      "hash": 1047044142,
+      "alpha_iou": 0.9731543624161074,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 0,
+      "binding": 93780,
+      "hash": 3745011906,
+      "alpha_iou": 0.8163265306122449,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 1,
+      "binding": 93781,
+      "hash": 323346634,
+      "alpha_iou": 0.5423728813559322,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 2,
+      "binding": 93782,
+      "hash": 1738504023,
+      "alpha_iou": 0.6848249027237354,
+      "new_rgb": true,
+      "shape_review_required": true
+    },
+    {
+      "slot": 5,
+      "binding": 93783,
+      "hash": 3321025624,
+      "alpha_iou": 0.9455782312925171,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 12,
+      "binding": 93784,
+      "hash": 2647306044,
+      "alpha_iou": 0.9826302729528535,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 6,
+      "binding": 93785,
+      "hash": 3011576189,
+      "alpha_iou": 0.7088607594936709,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 11,
+      "binding": 93786,
+      "hash": 2448982433,
+      "alpha_iou": 0.8011049723756906,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 16,
+      "binding": 93787,
+      "hash": 3842072537,
+      "alpha_iou": 0.8603351955307262,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 6,
+      "slot_b": 11,
+      "source_overlap": [
+        64,
+        48,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [
+    1,
+    2
+  ],
+  "independent_visual_verification": false
+}
