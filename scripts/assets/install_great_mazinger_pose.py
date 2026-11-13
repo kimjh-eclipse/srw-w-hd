@@ -100,7 +100,7 @@ def main():
         spec=dict(hash=rgb,index_hash=ih,rgb_enabled=True,indexed_safe=False,dynamic_palette=not args.static_palette,
                   original_palette_rgb=r['actual_palette_rgb'],index_pixels=r['index_pixels'],x=x,y=y,w=w,h=h,atlas_id=name,
                   resource=old.get('resource'),source_x=old.get('source_x',old.get('x',x)),source_y=old.get('source_y',old.get('y',y)),
-                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,
+                  registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,source_engine=r.get('engine'),
                   actual_observed=bool(r.get('actual_observed',r.get('observed_shape',True))),
                   independent_visual_verification=False,review_status='pending_claude')
         for field in ('source_candidate_matches','source_owner_confirmed','source_owner_note','source_native_visible_area','source_native_visible','source_visibility_note','source_rendered_cache_observed'):
