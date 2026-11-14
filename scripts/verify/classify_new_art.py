@@ -18,7 +18,9 @@ from verify_new_art import sheet
 
 
 def measure(binding):
-    row,pixels,reference=audit.analyse(binding,keep=True);native=reference[:,:,3]>0;h,w=native.shape
+    result=audit.analyse(binding,keep=True)
+    if isinstance(result,dict):return None
+    row,pixels,reference=result;native=reference[:,:,3]>0;h,w=native.shape
     cover=(pixels[:,:,3]>=128).reshape(h,4,w,4).swapaxes(1,2).reshape(h,w,16).mean(2);painted=cover>=.5
     ratio=float(painted.sum()/max(1,native.sum()));shift=None
     if native.any() and painted.any():
@@ -34,9 +36,13 @@ def main():
     if not out.is_relative_to((ROOT/'test_current/parts').resolve()) or out==(ROOT/'test_current/parts').resolve():
         parser.error('--out must be a subdirectory of test_current/parts')
     report=json.loads((out/'report.json').read_text(encoding='utf-8'));audit.start()
-    batches={b['batch']:b for b in report['batches']};rows=[]
+    batches={b['batch']:b for b in report['batches']};rows=[];moved=[]
     for row in report['parts']:
-        ratio,shift,extent=measure(row['binding']);flags=row['flags']
+        # A picture re-baked since verify_new_art.py ran is no longer the one that
+        # was measured: leave it out and say so instead of judging the new one.
+        measured=measure(row['binding'])
+        if measured is None:moved.append(row['binding']);continue
+        ratio,shift,extent=measured;flags=row['flags']
         if 'empty' in flags or ratio<.05:kind='empty'
         elif shift is not None and shift>max(2.,.25*max(extent,1)) :kind='misplaced'
         elif ratio<.6 or 'unpainted' in flags:kind='lost'
@@ -47,7 +53,7 @@ def main():
         rows.append(dict(row,area_ratio=round(ratio,3),centroid_shift=None if shift is None else round(shift,2),kind=kind,effect=effect,source=batches[row['batch']]['source']))
     counts=defaultdict(lambda:defaultdict(int));per_batch=defaultdict(lambda:defaultdict(int))
     for row in rows:counts['effect' if row['effect'] else 'machine'][row['kind']]+=1;per_batch[row['atlas']][row['kind']]+=1
-    summary=dict(flagged=len(rows),by_group={k:dict(v) for k,v in counts.items()},
+    summary=dict(flagged=len(rows),changed_since_measured=moved,by_group={k:dict(v) for k,v in counts.items()},
         batches=sorted(({'atlas':k,'total_flagged':sum(v.values()),'bindings_in_batch':next((b['bindings'] for b in report['batches'] if b['atlas']==k),None),**v} for k,v in per_batch.items()),key=lambda e:-e['total_flagged']),parts=rows)
     (out/'classified.json').write_text(json.dumps(summary,indent=1,ensure_ascii=False),encoding='utf-8')
     # Effect pictures that failed stay native until they are re-drawn: the list
