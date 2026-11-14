@@ -146,9 +146,13 @@ def install_new(c,library,stamp,run):
     taken=[r['hash'] for r in rows if r['hash'] in active]
     assert not taken,('already connected; a new part would duplicate it',taken)
     assert sorted(r['hash'] for r in rows)==sorted(k['hash'] for k in c.get('new_source_keys',[])),'contract rows differ from new_source_keys'
-    for r in rows:
+    for n,r in enumerate(rows):
         assert 'replace_binding' not in r and 'replacement_of_existing_binding' not in r
-        r.setdefault('spec',dict(resource=r.get('resource',r.get('source_owner')),source_x=r['source_x'],source_y=r['source_y']))
+        r.setdefault('slot',r.get('oam',n))
+        # The source position is a record only (lookup is by hash); an
+        # unconfirmed candidate position is used when no confirmed one exists.
+        box=r.get('source_box') or r.get('source_box_candidate') or [None,None]
+        r.setdefault('spec',dict(resource=r.get('resource',r.get('source_owner',r.get('source_image_candidate'))),source_x=r.get('source_x',box[0]),source_y=r.get('source_y',box[1])))
     contract=OUT/f'new_contract_{stamp}_{folder.name}.json';contract.write_text(json.dumps(rows,ensure_ascii=False),encoding='utf-8')
     name=atlas_name(c)+'_new'+str(len(rows));assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
     flags=['--defer-shape-review','--new-only','--apply']

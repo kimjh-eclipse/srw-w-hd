@@ -49,7 +49,10 @@ def main():
         elif ratio>1.6 or 'outside' in flags:kind='bloated'
         elif flags==['colour'] or ('colour' in flags and row['iou']>=.6):kind='colour'
         else:kind='shape'
-        atlas=str(row['atlas']);effect=atlas.startswith(('observed_effect','reviewed_effect','observed_energy')) or 'effect' in atlas or 'fx' in atlas.lower()
+        # The binding's own effect flag decides; the atlas name is only a fallback
+        # (installer-made atlas names need not contain "effect").
+        atlas=str(row['atlas']);spec=audit._renderer.bindings[row['binding']-1]
+        effect=bool(spec.get('effect_part')) or atlas.startswith(('observed_effect','reviewed_effect','observed_energy')) or 'effect' in atlas or 'fx' in atlas.lower()
         rows.append(dict(row,area_ratio=round(ratio,3),centroid_shift=None if shift is None else round(shift,2),kind=kind,effect=effect,source=batches[row['batch']]['source']))
     counts=defaultdict(lambda:defaultdict(int));per_batch=defaultdict(lambda:defaultdict(int))
     for row in rows:counts['effect' if row['effect'] else 'machine'][row['kind']]+=1;per_batch[row['atlas']][row['kind']]+=1
