@@ -1,0 +1,129 @@
+"""Install art candidates handed over in docs/PENDING_ART_INSTALL_QUEUE.json.
+
+One writer connects art: this tool. The drawer lists finished candidates in the
+queue (source folder, contract, drawing, native, generated, bindings, file
+SHA-256 and the SHA-256 of each binding's current spec); nothing else writes
+the part library, the baked store or the production manifest.
+
+Without --apply it only checks: every listed file must still have its
+recorded hash and every binding its recorded spec (so a candidate drawn
+against an older library is refused, not installed over newer art), and it
+draws native | candidate for each part on grey into
+test_current/parts/pending_install/precheck.png for a visual check.
+
+With --apply it installs the checked candidates through the same per-atlas
+installer and target bake the producer used (test_current/parts/
+root_pending_repair_factory.py), records them in the production manifest,
+measures them with verify_new_art.py and appends them to
+docs/ART_INSTALL_DONE.json, which later runs use to skip them.
+"""
+import argparse,hashlib,json,re,shutil,subprocess,sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
+from scripts._bootstrap import ROOT
+from PIL import Image,ImageDraw
+
+QUEUE=ROOT/'docs/PENDING_ART_INSTALL_QUEUE.json';DONE=ROOT/'docs/ART_INSTALL_DONE.json';LIBRARY=ROOT/'graphics/kazuma_parts_library.json'
+OUT=ROOT/'test_current/parts/pending_install'
+sha=lambda data:hashlib.sha256(data).hexdigest()
+
+
+def spec_hash(spec):
+    return {sha(json.dumps(spec,sort_keys=True,ensure_ascii=False).encode()),sha(json.dumps(spec,sort_keys=True).encode())}
+
+
+def atlas_name(candidate):
+    stem=re.sub(r'[^a-z0-9]+','_',Path(candidate['source']).name.lower()).strip('_')
+    stem=re.sub(r'^(claude_|root_|borrowed_shape_rework_)','',stem)
+    return f"{stem}_{'_'.join(map(str,sorted(candidate['bindings'])))[:40]}"
+
+
+def rows_of(folder,candidate):
+    rows=json.loads((folder/candidate['contract']).read_text(encoding='utf-8'))
+    for row in rows:
+        box=row.get('atlas_box')
+        binding=row.get('replace_binding',row.get('replacement_of_existing_binding',row.get('binding_id')))
+        yield binding,box
+
+
+def check(queue,done,library):
+    installed={(d['source'],d['drawing_sha256']) for d in done}
+    ready=[];refused=[]
+    for c in queue.get('ready_candidates',[]):
+        folder=ROOT/c['source'];problems=[]
+        if (c['source'],c.get('file_sha256',{}).get('drawing')) in installed:continue
+        for role,want in c.get('file_sha256',{}).items():
+            f=folder/c.get(role,'')
+            if not f.is_file():problems.append(f'{role} file missing')
+            elif sha(f.read_bytes())!=want:problems.append(f'{role} changed since handover')
+        for role in ('contract','drawing','native','generated'):
+            if role not in c.get('file_sha256',{}):problems.append(f'no recorded hash for {role}')
+        for b in c['bindings']:
+            want=c.get('prior_binding_spec_sha256',{}).get(str(b))
+            if want is None:problems.append(f'no recorded spec for {b}')
+            elif want not in spec_hash(library['bindings'][b-1]):problems.append(f'binding {b} changed since the candidate was drawn')
+        (refused if problems else ready).append((c,problems))
+    return ready,refused
+
+
+def precheck_sheet(ready,path):
+    cells=[]
+    for c,_ in ready:
+        folder=ROOT/c['source'];native=Image.open(folder/c['native']).convert('RGBA');art=Image.open(folder/c['drawing']).convert('RGBA')
+        scale=art.width//native.width
+        for binding,(x,y,w,h) in rows_of(folder,c):
+            cells.append((f'#{binding} {folder.name[:24]}',native.crop((x,y,x+w,y+h)),art.crop((x*scale,y*scale,(x+w)*scale,(y+h)*scale))))
+    cell=180;per=3
+    sheet=Image.new('RGB',(per*cell*2,max(1,(len(cells)+per-1)//per)*(cell+16)),(96,96,104));draw=ImageDraw.Draw(sheet)
+    for i,(label,a,b) in enumerate(cells):
+        x=(i%per)*cell*2;y=(i//per)*(cell+16);k=min((cell-6)/a.width,(cell-6)/a.height)
+        size=(max(1,round(a.width*k)),max(1,round(a.height*k)))
+        A=a.resize(size,Image.Resampling.NEAREST);B=b.resize(size,Image.Resampling.LANCZOS)
+        sheet.paste(A,(x+3,y+3),A);sheet.paste(B,(x+cell+3,y+3),B);draw.text((x+3,y+cell),label,fill=(255,255,255))
+    sheet.save(path)
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    parser.add_argument('--apply',action='store_true',help='connect, bake, record and measure the checked candidates')
+    parser.add_argument('--only',nargs='*',default=[],help='limit to these source folders (as written in the queue)')
+    parser.add_argument('--skip',nargs='*',default=[],help='leave these source folders out (refused at the visual check)')
+    args=parser.parse_args()
+    queue=json.loads(QUEUE.read_text(encoding='utf-8'));library=json.loads(LIBRARY.read_text(encoding='utf-8'))
+    done=json.loads(DONE.read_text(encoding='utf-8'))['installed'] if DONE.exists() else []
+    ready,refused=check(queue,done,library)
+    if args.only:ready=[r for r in ready if r[0]['source'] in args.only]
+    ready=[r for r in ready if r[0]['source'] not in args.skip]
+    OUT.mkdir(parents=True,exist_ok=True)
+    for c,problems in refused:print('REFUSED',c['source'],c['bindings'],problems)
+    for c,_ in ready:print('READY',c['source'],c['bindings'])
+    if not ready:print('nothing to install');return
+    precheck_sheet(ready,OUT/'precheck.png');print('visual check:',OUT/'precheck.png')
+    if not args.apply:return
+    jobs=[]
+    for c,_ in ready:
+        name=atlas_name(c);assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
+        job=dict(source=c['source'],bindings=c['bindings'],atlas=name,contract=c['contract'],drawing=c['drawing'],native=c['native'],generated=c['generated'],
+            effect=any(library['bindings'][b-1].get('effect_part') for b in c['bindings']))
+        if c.get('nested'):job['nested']=True
+        jobs.append(job)
+    stamp=__import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
+    config=OUT/f'config_{stamp}.json';results=f'test_current/parts/pending_install/results_{stamp}.json'
+    config.write_text(json.dumps(dict(results=results,jobs=jobs),ensure_ascii=False,indent=2),encoding='utf-8')
+    backup=OUT/f'backup_{stamp}';backup.mkdir()
+    for f in (LIBRARY,ROOT/'docs/PRODUCTION_ART_BATCH_CURRENT.json'):shutil.copy2(f,backup/f.name)
+    run=lambda *a:subprocess.run([sys.executable,'-X','utf8',*map(str,a)],cwd=ROOT,check=True)
+    run('test_current/parts/root_pending_repair_factory.py',config)
+    run('test_current/parts/record_completed_art_batch.py',results)
+    ids=[b for job in jobs for b in job['bindings']]
+    run('scripts/verify/verify_new_art.py','--bindings',*ids,'--out','test_current/parts/pending_install/check')
+    report=json.loads((OUT/'check/report.json').read_text(encoding='utf-8'))
+    installed=json.loads((ROOT/results).read_text(encoding='utf-8'))
+    for (c,_),row in zip(ready,installed):
+        done.append(dict(source=c['source'],bindings=row['bindings'],atlas=row['atlas'],drawing_sha256=c['file_sha256']['drawing'],installed=stamp,
+            flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
+    DONE.write_text(json.dumps(dict(note='Candidates from PENDING_ART_INSTALL_QUEUE.json that install_pending_art.py connected and baked. A listed drawing is not installed again; a new drawing for the same parts is.',installed=done),ensure_ascii=False,indent=1),encoding='utf-8')
+    print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+
+
+if __name__=='__main__':main()
