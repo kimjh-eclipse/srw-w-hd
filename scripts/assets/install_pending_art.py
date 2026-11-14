@@ -181,7 +181,12 @@ def rebuild_caches(run,args):
     if args.no_caches:print('caches NOT rebuilt (--no-caches)');return
     run('scripts/build/build_native_material_cache.py')
     run('scripts/assets/build_material_slot_cache.py')
-    run('scripts/assets/build_tile_library.py')
+    # A running player keeps the tile library open; the new one then waits as
+    # parts_tile_library.tmp.sqlite and is swapped in once the player is closed.
+    done=subprocess.run([sys.executable,'-X','utf8','scripts/assets/build_tile_library.py'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
+    if done.returncode:
+        waiting=(ROOT/'graphics/parts_tile_library.tmp.sqlite').exists()
+        print('tile library NOT swapped'+(' (player running; new file waits as parts_tile_library.tmp.sqlite)' if waiting else ''),done.stderr.strip().splitlines()[-1:] if done.stderr else '')
 
 
 def install_new(c,library,stamp,run):
