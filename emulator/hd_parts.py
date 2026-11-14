@@ -25,6 +25,7 @@ RECOLOUR_ANCHOR=os.environ.get('SRWW_RECOLOUR_ANCHOR','1')!='0'
 # SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 OBJ_BLEND=os.environ.get('SRWW_OBJ_BLEND','1')!='0'
+RECOLOUR_SMOOTH=os.environ.get('SRWW_RECOLOUR_SMOOTH','1')!='0'
 
 def is_menu_gradient(indices,w,h):
     """Button centers and beveled ends are horizontal palette ramps, not units.
@@ -624,6 +625,20 @@ class PartsRenderer:
                 # RGB blocks into the new palette. Keep bounded light detail.
                 shading=np.clip(shading.mean(axis=2,keepdims=True),-8,8)
             rgb=target[indices]+shading
+            if RECOLOUR_SMOOTH and len(used) and not collapsed[used].any():
+                # Picking one slot per pixel and re-adding clipped shading
+                # posterises the painted gradients and speckles pixels between
+                # two slots. Shift each pixel instead by the slots' own
+                # source->target change, blended by colour distance, with the
+                # anchored slot favoured so materials of equal colour keep
+                # their own target. Painted shading survives unchanged.
+                painted=np.asarray(art,dtype='float32')[:,:,:3]
+                src=source_palette[used];dst=target[used]
+                d2=((painted[:,:,None,:]-src[None,None,:,:])**2).sum(-1)
+                weight=1/(d2+24**2)
+                weight*=1+3*(indices[:,:,None]==used[None,None,:])
+                weight/=weight.sum(-1,keepdims=True)
+                rgb=painted+weight@(dst-src)
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
         elif spec.get('dynamic_palette') and source_binding>5263 and not (self.bindings[source_binding-1].get('wing_img_first') or spec.get('preserve_canonical_paint',spec.get('wing_live_palette',False))):
             source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
