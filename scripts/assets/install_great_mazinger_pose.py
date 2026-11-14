@@ -45,6 +45,21 @@ def validate_source_containment(contract, art, excluded_hashes):
     return checks
 
 
+def validate_existing_atlas_coordinates(contract, metadata):
+    """A producer declaring an unchanged layout must not substitute source aliases."""
+    checks=[]
+    for row in contract:
+        if row.get('candidate_coordinate_space')!='existing_live_atlas_coordinates':continue
+        requested=row.get('replace_binding',row.get('replacement_of_existing_binding'))
+        assert requested is not None,('unchanged candidate layout requires an explicit binding',row.get('slot'))
+        old=metadata['bindings'][int(requested)-1]
+        expected=[old[k] for k in ('x','y','w','h')]
+        assert row['hash']==old['hash'] and row['index_hash']==old['index_hash']
+        assert row['atlas_box']==expected,('source alias coordinates substituted for candidate atlas coordinates',requested,row['atlas_box'],expected)
+        checks.append(dict(binding=int(requested),candidate_atlas_box=expected))
+    return checks
+
+
 def opaque_bright_center_check(native_part, art_part):
     """Detect background extraction deleting a filled bright effect core."""
     bounds=native_part.getchannel('A').getbbox()
@@ -76,14 +91,18 @@ def main():
     parser.add_argument('--static-palette',action='store_true',help='exact-RGB artwork only; never recolour this observed variant')
     parser.add_argument('--defer-shape-review',action='store_true',help='record silhouette warnings for the independent reviewer instead of blocking draft installation')
     parser.add_argument('--new-only',action='store_true',help='preserve already-connected exact RGB artwork while filling missing contracts')
-    args=parser.parse_args();source=args.source_dir
+    parser.add_argument('--allow-original',type=int,nargs='*',default=[],help='original bindings (1..5263) this run may replace; every other original stays byte-identical')
+    args=parser.parse_args();source=args.source_dir;allowed=set(args.allow_original)
+    assert all(1<=i<=5263 for i in allowed),('--allow-original takes original binding IDs only',sorted(allowed))
+    originals=lambda m:json.dumps([b for i,b in enumerate(m['bindings'][:5263],1) if i not in allowed],sort_keys=True).encode()
     for required in (args.contract,args.drawing,args.native,args.generated):
         if not (source/required).is_file():raise FileNotFoundError(f'production packet file missing: {source/required}')
     contract=[observed_contract(r) for r in json.loads((source/args.contract).read_text(encoding='utf-8'))]
     art=Image.open(source/args.drawing).convert('RGBA');native=Image.open(source/args.native).convert('RGBA')
     assert art.size==(native.width*4,native.height*4),('HD/native canvas ratio must be 4x',art.size,native.size)
     path=ROOT/'graphics/kazuma_parts_library.json';meta=json.loads(path.read_text(encoding='utf-8'))
-    prefix=hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
+    layout_checks=validate_existing_atlas_coordinates(contract,meta)
+    prefix=hashlib.sha256(originals(meta)).hexdigest()
     rgb_bindings={}
     for i,b in enumerate(meta['bindings']):
         if b.get('rgb_enabled',True) and not b.get('disabled'):rgb_bindings.setdefault(b['hash'],i)
@@ -113,15 +132,30 @@ def main():
         iou=float((expected&got).sum()/max(1,(expected|got).sum()))
         if not args.defer_shape_review:assert iou>=.70,(r['slot'],iou)
         existing=rgb_bindings.get(rgb)
+        requested=r.get('replace_binding',r.get('replacement_of_existing_binding'))
+        if requested is not None:
+            requested=int(requested)
+            assert (5264<=requested<=len(meta['bindings'])) or requested in allowed,('invalid explicit replacement binding',requested)
+            prior=meta['bindings'][requested-1]
+            # Original bindings predate index hashes; the RGB hash and size still identify them.
+            assert (prior['hash'],prior.get('index_hash',ih),prior['w'],prior['h'])==(rgb,ih,w,h),('explicit replacement source identity mismatch',requested)
+            existing=requested-1
         if args.new_only and existing is not None:
             rows.append(dict(slot=r['slot'],binding=existing+1,hash=rgb,alpha_iou=iou,new_rgb=False,skipped_existing=True,shape_review_required=False))
             continue
+        preserve_lookup=bool(r.get('preserve_existing_lookup_flags'))
+        if preserve_lookup:
+            assert requested is not None and existing is not None,('lookup preservation requires explicit existing ID',r['slot'])
+            prior=meta['bindings'][existing]
+            assert prior.get('original_palette_rgb')==r['actual_palette_rgb'],('lookup preservation palette mismatch',requested)
+            assert zlib.decompress(base64.b64decode(prior['index_pixels']))==a.tobytes(),('lookup preservation raw mismatch',requested)
+        prior_lookup={k:meta['bindings'][existing][k] for k in ('rgb_enabled','indexed_safe','disabled') if k in meta['bindings'][existing]} if preserve_lookup else {}
         # Existing indexed contracts retain their fallback art, so unrelated
         # palette variants do not silently switch to this exact-RGB painting.
         if existing is not None:
-            assert existing>=5263
+            assert existing>=5263 or existing+1 in allowed
             old=meta['bindings'][existing]
-            if old.get('indexed_safe',True) and old.get('dynamic_palette'):
+            if not preserve_lookup and old.get('indexed_safe',True) and old.get('dynamic_palette'):
                 proxy=dict(old,rgb_enabled=False,indexed_fallback_for=existing+1)
                 meta['bindings'].append(proxy)
         old=r['spec']
@@ -131,15 +165,24 @@ def main():
                   registered_attack_bank=True,preserve_canonical_paint=True,reviewed_observed_pose=False,source_engine=r.get('engine'),
                   actual_observed=bool(r.get('actual_observed',r.get('observed_shape',True))),
                   independent_visual_verification=False,review_status='pending_claude')
+        if r.get('preserve_existing_palette_mode'):
+            assert requested is not None and existing is not None
+            if 'dynamic_palette' in meta['bindings'][existing]:spec['dynamic_palette']=meta['bindings'][existing]['dynamic_palette']
+            else:spec.pop('dynamic_palette',None)
+        spec.update(prior_lookup)
         for field in ('source_candidate_matches','source_owner','source_owner_confirmed','source_owner_note','source_native_visible_area','source_native_visible','source_visibility_note','source_rendered_cache_observed'):
             if field in r:spec[field]=r[field]
         if args.effect:spec['effect_part']=True
+        if r.get('preserve_existing_effect_mode'):
+            assert requested is not None and existing is not None
+            if 'effect_part' in meta['bindings'][existing]:spec['effect_part']=meta['bindings'][existing]['effect_part']
+            else:spec.pop('effect_part',None)
         if existing is None:
             meta['bindings'].append(spec);binding=len(meta['bindings']);rgb_bindings[rgb]=binding-1
         else:meta['bindings'][existing]=spec;binding=existing+1
         rows.append(dict(slot=r['slot'],binding=binding,hash=rgb,alpha_iou=iou,new_rgb=existing is None,shape_review_required=iou<.70))
     assert len(rows)==len(contract) and rows
-    assert prefix==hashlib.sha256(json.dumps(meta['bindings'][:5263],sort_keys=True).encode()).hexdigest()
+    assert prefix==hashlib.sha256(originals(meta)).hexdigest()
     if args.apply:
         folder=ROOT/'graphics'/args.graphics_dir;folder.mkdir(exist_ok=True)
         for old,new in ((args.drawing,'pose_hd.png'),(args.native,'pose_native.png'),(args.generated,'pose_generated.png')):shutil.copy2(source/old,folder/new)
@@ -155,7 +198,7 @@ def main():
             except PermissionError:
                 if attempt == 19:raise
                 time.sleep(.15)
-    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,opaque_bright_center_checks=bright_center_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
+    (source/'install_report.json').write_text(json.dumps(dict(applied=args.apply,parts=rows,source_containment_checks=overlap_checks,candidate_layout_checks=layout_checks,opaque_bright_center_checks=bright_center_checks,source_containment_scope='newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA',original_prefix_preserved=True,shape_review_deferred=args.defer_shape_review,reference_iou_threshold=.70,shape_review_slots=[r['slot'] for r in rows if r['shape_review_required']],independent_visual_verification=False),indent=2));print(json.dumps(rows))
     if args.apply:shutil.copy2(source/'install_report.json',folder/'installation_report.json')
 
 if __name__=='__main__':main()

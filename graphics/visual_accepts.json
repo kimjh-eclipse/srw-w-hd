@@ -224,6 +224,27 @@
    "reason": "경계 상자·칠한 텍셀 수(92/88)가 원본과 같음. 1텍셀 계단 호를 매끈한 곡선으로 그려 계단 사이를 지나며 IoU 가 낮아짐. 아래 끝 굵어짐 복원 확인",
    "reviewer": "Claude",
    "date": "2026-11-14 13:51"
+  },
+  "95396": {
+   "texture_key": "7efd0461ea253aec5a1c6f59c1feaec9f131c3fe91081fb70e38870d464b8051",
+   "atlas": "img22163__new9",
+   "reason": "형태 일치(IoU 0.92). 흰 코어+노랑 테두리 배치가 원본과 같고 빛번짐으로 노랑이 옅어 보이는 차이",
+   "reviewer": "Claude",
+   "date": "2026-11-14 14:58"
+  },
+  "95398": {
+   "texture_key": "b33e138c22e482fb403b5d2cda2a8d80a78199e3196e7c8f4ccffb94e71eaf43",
+   "atlas": "img22163__new9",
+   "reason": "번개 경로·굵기 일치(IoU 0.74). 흰 코어+노랑 테두리, 빛번짐 차이",
+   "reviewer": "Claude",
+   "date": "2026-11-14 14:58"
+  },
+  "95399": {
+   "texture_key": "fc30d2be949adf9274229ef0190f67ada5692a91123ac7ce17907e36f84b1423",
+   "atlas": "img22163__new9",
+   "reason": "번개 경로 일치(IoU 0.73). 흰 코어+노랑 테두리, 빛번짐 차이",
+   "reviewer": "Claude",
+   "date": "2026-11-14 14:58"
   }
  }
 }

@@ -90,6 +90,7 @@ def main():
     parser.add_argument('--only',nargs='*',default=[],help='limit to these source folders (as written in the queue)')
     parser.add_argument('--skip',nargs='*',default=[],help='leave these source folders out this run')
     parser.add_argument('--reject',nargs=2,action='append',default=[],metavar=('SOURCE','REASON'),help='record a visual rejection; the same drawing is not offered again')
+    parser.add_argument('--allow-original',type=int,nargs='*',default=[],help='original bindings (1..5263) a reviewed candidate may replace (user-reported fixes only)')
     args=parser.parse_args()
     queue=json.loads(QUEUE.read_text(encoding='utf-8'));library=json.loads(LIBRARY.read_text(encoding='utf-8'))
     record=json.loads(DONE.read_text(encoding='utf-8')) if DONE.exists() else {}
@@ -105,8 +106,19 @@ def main():
     for c,problems in refused:print('REFUSED',c['source'],c['bindings'],problems)
     for c,_ in ready:print('READY',c['source'],c['bindings'])
     if not ready:print('nothing to install');return
-    precheck_sheet(ready,OUT/'precheck.png');print('visual check:',OUT/'precheck.png')
-    if not args.apply:return
+    shown=OUT/'precheck.json'
+    if args.apply:
+        # Install only what the last visual check showed: a candidate listed
+        # after the sheet was drawn has not been looked at.
+        seen={(s,d) for s,d in json.loads(shown.read_text(encoding='utf-8'))} if shown.exists() else set()
+        late=[c['source'] for c,_ in ready if (c['source'],c['file_sha256']['drawing']) not in seen]
+        for source in late:print('NOT YET CHECKED (skipped this run)',source)
+        ready=[r for r in ready if r[0]['source'] not in late]
+        if not ready:print('nothing checked to install');return
+    else:
+        precheck_sheet(ready,OUT/'precheck.png');print('visual check:',OUT/'precheck.png')
+        shown.write_text(json.dumps([(c['source'],c['file_sha256']['drawing']) for c,_ in ready]),encoding='utf-8')
+        return
     stamp=__import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
     backup=OUT/f'backup_{stamp}';backup.mkdir()
     for f in (LIBRARY,ROOT/'docs/PRODUCTION_ART_BATCH_CURRENT.json'):shutil.copy2(f,backup/f.name)
@@ -125,7 +137,9 @@ def main():
         if c.get('nested'):job['nested']=True
         jobs.append(job)
     config=OUT/f'config_{stamp}.json';results=f'test_current/parts/pending_install/results_{stamp}.json'
-    config.write_text(json.dumps(dict(results=results,jobs=jobs),ensure_ascii=False,indent=2),encoding='utf-8')
+    originals=sorted({b for job in jobs for b in job['bindings'] if b<=5263})
+    assert set(originals)<=set(args.allow_original),('candidate replaces original bindings not named with --allow-original',originals)
+    config.write_text(json.dumps(dict(results=results,jobs=jobs,allow_original=originals),ensure_ascii=False,indent=2),encoding='utf-8')
     run('test_current/parts/root_pending_repair_factory.py',config)
     run('test_current/parts/record_completed_art_batch.py',results)
     ids=[b for job in jobs for b in job['bindings']]
@@ -141,11 +155,17 @@ def main():
 
 def install_new(c,library,stamp,run):
     """Connect parts that have no binding yet (new_source_keys) as new bindings."""
-    folder=ROOT/c['source'];rows=json.loads((folder/c['contract']).read_text(encoding='utf-8'))
+    folder=ROOT/Path(c['source'].replace('\\','/'));rows=json.loads((folder/c['contract']).read_text(encoding='utf-8'))
+    # Nested contracts carry the observed source row inside, the atlas box outside.
+    rows=[dict(r['source_contract'],atlas_box=r['atlas_box'],**{k:v for k,v in r.items() if k not in ('source_contract','atlas_box')}) if 'source_contract' in r else r for r in rows]
+    for r in rows:
+        if 'actual_palette_bgr555' not in r and 'palette_15bit' in r:r['actual_palette_bgr555']=r['palette_15bit']
+        if 'actual_palette_rgb' not in r:r['actual_palette_rgb']=[[(v&31)*255//31,((v>>5)&31)*255//31,((v>>10)&31)*255//31] for v in r['actual_palette_bgr555']]
     active={b['hash'] for b in library['bindings'] if b.get('rgb_enabled',True) and not b.get('disabled')}
     taken=[r['hash'] for r in rows if r['hash'] in active]
     assert not taken,('already connected; a new part would duplicate it',taken)
-    assert sorted(r['hash'] for r in rows)==sorted(k['hash'] for k in c.get('new_source_keys',[])),'contract rows differ from new_source_keys'
+    keys=[k['hash'] if isinstance(k,dict) else int(k) for k in c.get('new_source_keys',[])]
+    assert sorted(r['hash'] for r in rows)==sorted(keys),'contract rows differ from new_source_keys'
     for n,r in enumerate(rows):
         assert 'replace_binding' not in r and 'replacement_of_existing_binding' not in r
         r.setdefault('slot',r.get('oam',n))
