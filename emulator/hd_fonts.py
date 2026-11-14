@@ -18,6 +18,9 @@ _native_scanners=threading.local()
 # SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 _selected_runs={};_selected_spans={}
+BOLD_DIGITS=os.environ.get('SRWW_BOLD_DIGITS','1')!='0'
+# Menu and dialogue text in the bold face as well (the native font is a heavy pixel face).
+BOLD_TEXT=os.environ.get('SRWW_BOLD_TEXT','1')!='0'
 
 class FontRenderer:
     def __init__(self):
@@ -43,6 +46,7 @@ class FontRenderer:
             with np.load(forecast,allow_pickle=False) as source:
                 self.forecast_patterns=[(str(ch),a>1,a>0) for a,ch in zip(source['indices'],source['characters'])]
         self.font_path = 'C:/Windows/Fonts/malgun.ttf'
+        self.bold_path = 'C:/Windows/Fonts/malgunbd.ttf' if os.path.exists('C:/Windows/Fonts/malgunbd.ttf') else None
         self.fonts = {}
         if not hasattr(_native_scanners,'glyph_tables'):_native_scanners.glyph_tables={}
         if self.font_path not in _native_scanners.glyph_tables:_native_scanners.glyph_tables[self.font_path]=(OrderedDict(),{})
@@ -237,6 +241,9 @@ class FontRenderer:
                     for yy,xx in zip(ys,xs):
                         x,y=left+int(xx),76+int(yy)
                         candidates.insert(0,(x,y,char,16,16,ink));hud_erasers.append((x,y,opaque))
+        # A bitmap that matched a character the font has no glyph for (a small
+        # icon read as a dash) would be redrawn as an empty box: leave it native.
+        candidates=[row for row in candidates if self.drawable(row[2])]
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
         candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)
@@ -343,6 +350,14 @@ class FontRenderer:
         a,b=np.median(spans,axis=0).astype('int32')
         return int(a),int(b)
 
+    def drawable(self,char):
+        known=self.__dict__.setdefault('drawable_chars',{})
+        if char not in known:
+            if 24 not in self.fonts:self.fonts[24]=ImageFont.truetype(self.font_path,24)
+            font=self.fonts[24];missing=self.__dict__.setdefault('missing_glyph',bytes(font.getmask('\U0010ffff')))
+            known[char]=all(part.isspace() or (bytes(font.getmask(part)) not in (b'',missing)) for part in char)
+        return known[char]
+
     def _glyph(self, char, width, height, color, compact=False, button=False):
         key = char, width, height, color, compact,button
         if key not in self.glyph_images:
@@ -364,9 +379,13 @@ class FontRenderer:
 
     def _glyph_shape(self,char,width,height,compact,button):
         """Cache FreeType coverage independently of the changing native color."""
-        size = max(6, round(height * (.72 if compact else .80 if button else .94)))
-        if size not in self.fonts:self.fonts[size] = ImageFont.truetype(self.font_path, size)
-        font = self.fonts[size];stroke = 0 if button else max(1, height//45)
+        # The compact HUD and forecast digits are bold block figures that fill
+        # their cell; a regular face at 72% left them thin and hard to read.
+        heavy=self.bold_path is not None and ((compact and BOLD_DIGITS) or (BOLD_TEXT and not compact))
+        size = max(6, round(height * ((.92 if heavy else .72) if compact else .80 if button else .94)))
+        font_key=('bold',size) if heavy else size
+        if font_key not in self.fonts:self.fonts[font_key] = ImageFont.truetype(self.bold_path if heavy else self.font_path, size)
+        font = self.fonts[font_key];stroke = 0 if button else max(1, height//45)
         box = font.getbbox(char);render_width = max(width, box[2]-box[0]+2*stroke+2)
         x = (render_width - (box[2]-box[0])) // 2 - box[0]
         y = (height - (box[3]-box[1])) // 2 - box[1]
