@@ -281,6 +281,13 @@ class HDRenderer:
         if hd[10]:self.localized_screens.compose(top,native)
         return top
 
+    def _hud_bars(self,screen):
+        bars=self.__dict__.setdefault('hud_bars',{})
+        if screen not in bars:
+            from hd_hud_bars import HudBars
+            bars[screen]=HudBars()
+        return bars[screen]
+
     def render_bottom(self,native,hd):
         source=native[192:384];self.bottom_text_renderer.frame_token=getattr(self,'frame_number',0)
         pending=(hasattr(self,'bottom_portraits') and bool(self.bottom_portraits.pending)) or bool(self.scenario_backgrounds.pending) or bool(self.map_tiles.pending) or bool(self.parts_renderer.pending)
@@ -307,6 +314,7 @@ class HDRenderer:
             self.bottom_portraits.compose(bottom,source)
             self.bottom_text_renderer.compose(bottom,source)
             self.ui_labels.compose(bottom,source)
+            self._hud_bars('bottom').compose(bottom,source)
             self.localized_screens.compose(bottom,source)
         self.bottom_frame_key=key;self.bottom_frame=bottom;self.bottom_generation=getattr(self,'bottom_generation',0)+1
         return bottom
