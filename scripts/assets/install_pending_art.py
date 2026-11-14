@@ -21,6 +21,7 @@ import argparse,hashlib,json,re,shutil,subprocess,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from scripts._bootstrap import ROOT
+import numpy as np
 from PIL import Image,ImageDraw
 
 QUEUE=ROOT/'docs/PENDING_ART_INSTALL_QUEUE.json';DONE=ROOT/'docs/ART_INSTALL_DONE.json';LIBRARY=ROOT/'graphics/kazuma_parts_library.json'
@@ -67,6 +68,18 @@ def check(queue,done,library,rejected=()):
     return ready,refused
 
 
+def matte_residue(c):
+    """Parts whose drawing keeps alpha over most of the area that is empty (and
+    not next to ink) in the native image: a faint box would be drawn there."""
+    folder=ROOT/Path(c['source'].replace('\\','/'));native=np.asarray(Image.open(folder/c['native']).convert('RGBA'));art=np.asarray(Image.open(folder/c['drawing']).convert('RGBA'))
+    scale=art.shape[1]//native.shape[1];bad=[]
+    for binding,(x,y,w,h) in rows_of(folder,c):
+        ink=np.pad(native[y:y+h,x:x+w,3]>0,1);near=ink[1:-1,1:-1]|ink[:-2,1:-1]|ink[2:,1:-1]|ink[1:-1,:-2]|ink[1:-1,2:]
+        far=~np.kron(near,np.ones((scale,scale),bool));a=art[y*scale:(y+h)*scale,x*scale:(x+w)*scale,3]
+        if far.any() and (a[far]>8).mean()>.3:bad.append(binding if binding is not None else (x,y))
+    return bad
+
+
 def precheck_sheet(ready,path):
     cells=[]
     for c,_ in ready:
@@ -104,7 +117,9 @@ def main():
     ready=[r for r in ready if r[0]['source'] not in args.skip]
     OUT.mkdir(parents=True,exist_ok=True)
     for c,problems in refused:print('REFUSED',c['source'],c['bindings'],problems)
-    for c,_ in ready:print('READY',c['source'],c['bindings'])
+    for c,_ in ready:
+        residue=matte_residue(c)
+        print('READY',c['source'],c['bindings'],f'MATTE RESIDUE in {len(residue)} parts {residue[:6]}' if residue else '')
     if not ready:print('nothing to install');return
     shown=OUT/'precheck.json'
     if args.apply:

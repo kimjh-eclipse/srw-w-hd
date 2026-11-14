@@ -27,7 +27,8 @@ _renderer=None
 RULES=dict(shape='overlap (IoU) with the native silhouette below 0.60',outside='over 15% of the paint lies more than one texel outside the native shape',
     unpainted='over 20% of the native shape has no paint',colour='over 30% of texels differ from the native colour by 90/255 or more',
     flat='over 90% of textured texels are a single flat colour (enlarged dots)',key_green='8+ saturated green pixels with no green in the native palette',
-    key_magenta='8+ saturated magenta pixels with no magenta in the native palette',empty='fewer than 16 opaque pixels although the native part has 8+ texels')
+    key_magenta='8+ saturated magenta pixels with no magenta in the native palette',empty='fewer than 16 opaque pixels although the native part has 8+ texels',
+    haze='over 30% of the area more than one texel from the native shape keeps some alpha (a faint box around the part)')
 
 
 def start():
@@ -62,6 +63,8 @@ def analyse(binding,keep=False):
     for dy in range(3):
         for dx in range(3):near|=padded[dy:dy+h,dx:dx+w]
     total=int(opaque.sum());outside=float((cover*(~near)).sum()*16/total) if total else 0.
+    # Faint alpha (below the opaque threshold) left over empty space reads as a box.
+    far=np.kron(~near,np.ones((4,4),bool));haze=float((pixels[:,:,3][far]>8).mean()) if far.sum()>=256 else 0.
     unpainted=float((native&(cover<.25)).sum()/max(1,int(native.sum())))
     # Colour: mean of the opaque HD pixels in each texel against the native texel colour.
     weights=blocks(opaque).reshape(h,w,16).astype('float32');sums=(blocks(rgb).reshape(h,w,16,3)*weights[...,None]).sum(2);count=weights.sum(2)
@@ -84,9 +87,10 @@ def analyse(binding,keep=False):
         if flat>.90:flags.append('flat')
         if green.sum()>=8 and native_green<40:flags.append('key_green')
         if magenta.sum()>=8 and native_magenta<40:flags.append('key_magenta')
+        if haze>.30:flags.append('haze')
     row=dict(binding=binding,atlas=spec.get('atlas_id','base'),resource=spec.get('resource'),x=spec['x'],y=spec['y'],w=w,h=h,native_texels=int(native.sum()),
         iou=round(iou,3),outside=round(outside,3),unpainted=round(unpainted,3),colour_bad=round(colour_bad,3),colour_mean=round(colour_mean,1),flat=round(flat,3),
-        green_pixels=int(green.sum()),magenta_pixels=int(magenta.sum()),registered_iou=stats.get('registered_iou'),flags=flags)
+        green_pixels=int(green.sum()),magenta_pixels=int(magenta.sum()),haze=round(haze,3),registered_iou=stats.get('registered_iou'),flags=flags)
     if keep:
         reference=np.zeros((h,w,4),dtype='uint8');reference[native,:3]=native_rgb[native].astype('uint8');reference[native,3]=255
         return row,pixels,reference
