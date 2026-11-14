@@ -302,7 +302,7 @@ class HDRenderer:
             if terrain or self.map_tiles.phase(source) is not None:self.map_icons.compose(bottom,source,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
             if sub is not None:
                 parts,owners,oam,palettes,layers,priorities=sub
-                self.parts_renderer.compose(bottom,parts,oam,layers,owners,priorities,None,palettes,allow_native_fallback=getattr(self,'sub_paused',False))
+                self.parts_renderer.compose(bottom,parts,oam,layers,owners,priorities,None,palettes,allow_native_fallback=getattr(self,'sub_paused',False),obj_blend=True)
             if not hasattr(self,'bottom_portraits'):self.bottom_portraits=PortraitRenderer()
             self.bottom_portraits.compose(bottom,source)
             self.bottom_text_renderer.compose(bottom,source)

@@ -24,6 +24,7 @@ STORE_SCALE=4
 RECOLOUR_ANCHOR=os.environ.get('SRWW_RECOLOUR_ANCHOR','1')!='0'
 # SRWW_RENDER_SHORTCUTS=0 restores the earlier per-frame work for comparison.
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
+OBJ_BLEND=os.environ.get('SRWW_OBJ_BLEND','1')!='0'
 
 def is_menu_gradient(indices,w,h):
     """Button centers and beveled ends are horizontal palette ramps, not units.
@@ -675,7 +676,20 @@ class PartsRenderer:
         while len(masks)>256:masks.popitem(last=False)
         return image
 
-    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False,effect_foreground=None,background_planes=(),window=None):
+    @staticmethod
+    def obj_blend_plane(control,alpha,layer_ids,semi=False):
+        """Coefficients for an HD OBJ part the DS draws as the first blend
+        target (BLDCNT OBJ bit with alpha mode, or a semi-transparent sprite):
+        picture*EVA/16 + behind*EVB/16 wherever the pixel behind belongs to a
+        second-target layer, opaque elsewhere. RGBA, R=EVA, G=EVB (0..16)."""
+        if not (semi or ((control>>4)&1 and ((control>>6)&3)==1)):return None
+        eva=min(alpha&31,16);evb=min((alpha>>8)&31,16)
+        if eva==16 and evb==0:return None
+        second=((control>>(8+np.asarray(layer_ids,dtype='uint32')))&1).astype(bool)
+        plane=np.zeros((*second.shape,4),dtype='uint8');plane[:,:,0]=np.where(second,eva,16);plane[:,:,1]=np.where(second,evb,0);plane[:,:,3]=255
+        return Image.fromarray(plane)
+
+    def compose(self,top,parts,oam,layer_ids,owners,bgpriors,bgparts,part_palettes=None,allow_native_fallback=False,effect_foreground=None,background_planes=(),window=None,obj_blend=False):
         if self.async_prepare:self.collect_prepared()
         active=[i for i in range(128) if parts[i,0]]
         native_attrs=np.frombuffer(oam,dtype='<u2').reshape(128,4)
@@ -698,6 +712,7 @@ class PartsRenderer:
         # Outcome counters, in native pixels, for the runtime-path verifier.
         # "vanished" is a part the core hid that received no HD picture.
         stats=dict(beam_tie_pixels=0,drawn=0,waiting=0,vanished=0,occluded=0,drawn_area=0,waiting_area=0,vanished_area=0);rescued=getattr(self,'rescued',0)
+        obj_layer=[] if obj_blend and OBJ_BLEND and hasattr(top,'draw') else None
         self.last_stats=stats
         for priority,kind,i,original in sorted(tasks,key=lambda task:task[:3],reverse=True):
             if callable(original):
@@ -754,6 +769,12 @@ class PartsRenderer:
             if visibility_state==0:stats['occluded']+=1;continue
             stats['drawn']+=1;stats['drawn_area']+=area
             own_blend=None
+            if obj_blend and OBJ_BLEND and not kind and foreground is None and hasattr(top,'draw'):
+                # The core skips HD-replaced sprites, so their blend is applied here
+                # from the part's own BLDCNT/BLDALPHA (row 7 / row 6).
+                key=('obj',int(row[7])&0x3fff,int(row[6])&0x1f1f,(a>>10)&3==1)
+                if key not in layer_blends:layer_blends[key]=self.obj_blend_plane(int(row[7]),int(row[6]),layer_ids,semi=(a>>10)&3==1)
+                own_blend=layer_blends[key]
             if kind and effect_foreground is not None and foreground is None and hasattr(top,'draw'):
                 # A BG whose tiles are HD parts may itself be the blended layer
                 # (a flash plane waiting at EVA 0, a translucent overlay): mix
@@ -762,6 +783,16 @@ class PartsRenderer:
                     from foreground_blend import self_plane
                     layer_blends[i]=self_plane(effect_foreground,layer_ids,i,owned=False)
                 own_blend=layer_blends[i]
+            if obj_layer is not None and not kind:
+                # Sprites form one OBJ layer on the DS: only the front sprite's
+                # pixel is blended with what is behind, once. Keep every drawn
+                # sprite's silhouette and draw blended ones front to back later,
+                # each excluding pixels a sprite in front of it already covers.
+                nw,nh=max(1,round(art.width/SCALE)),max(1,round(art.height/SCALE))
+                silhouette=np.asarray(art.getchannel('A').resize((nw,nh),Image.Resampling.BOX))>=128
+                region=np.full(visible.shape if visibility_state!=2 else (lower-upper,right-left),255,dtype='uint8') if visibility_state==2 else visible
+                obj_layer.append((own_blend,art,(px,py),(left,upper,right,lower),region,(round(x),round(y)),silhouette))
+                if own_blend is not None:continue
             if own_blend is not None:
                 full=(0,0,*top.size)
                 top.draw(art,(px,py,px+art.width,py+art.height),mask=None if visibility_state==2 else self.native_mask(left,upper,visible),mask_rect=full,alpha=True,foreground=own_blend,foreground_rect=full,foreground_mode=2)
@@ -804,6 +835,14 @@ class PartsRenderer:
                 opacity=np.where(np.asarray(blend)>0,min(int(row[6])&31,16)/16,1.)
                 mask=Image.fromarray((np.asarray(mask)*opacity).astype('uint8'))
             top.paste(art,(px,py),mask)
+        if obj_layer and any(entry[0] is not None for entry in obj_layer):
+            cover=np.zeros((192,256),dtype=bool);full=(0,0,*top.size)
+            for blend,art,(px,py),(left,upper,right,lower),region,(sx,sy),silhouette in reversed(obj_layer):
+                if blend is not None:
+                    shown=np.where(cover[upper:lower,left:right],0,region).astype('uint8')
+                    if shown.any():top.draw(art,(px,py,px+art.width,py+art.height),mask=self.native_mask(left,upper,shown),mask_rect=full,alpha=True,foreground=blend,foreground_rect=full,foreground_mode=2)
+                h,w=silhouette.shape;y0,x0=max(0,sy),max(0,sx);y1,x1=min(192,sy+h),min(256,sx+w)
+                if y0<y1 and x0<x1:cover[y0:y1,x0:x1]|=silhouette[y0-sy:y1-sy,x0-sx:x1-sx]
         stats['rescued']=getattr(self,'rescued',0)-rescued
         self.prefetch_related(parts)
         return len(tasks)
