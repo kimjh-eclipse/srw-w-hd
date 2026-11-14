@@ -46,12 +46,13 @@ def rows_of(folder,candidate):
         yield binding,box
 
 
-def check(queue,done,library):
-    installed={(d['source'],d['drawing_sha256']) for d in done}
+def check(queue,done,library,rejected=()):
+    installed={(d['source'],d['drawing_sha256']) for d in done};seen={(d['source'],d['drawing_sha256']):d['reason'] for d in rejected}
     ready=[];refused=[]
     for c in queue.get('ready_candidates',[]):
-        folder=ROOT/c['source'];problems=[]
-        if (c['source'],c.get('file_sha256',{}).get('drawing')) in installed:continue
+        folder=ROOT/c['source'];problems=[];key=(c['source'],c.get('file_sha256',{}).get('drawing'))
+        if key in installed:continue
+        if key in seen:print('REJECTED EARLIER (same drawing)',c['source'],seen[key]);continue
         for role,want in c.get('file_sha256',{}).items():
             f=folder/c.get(role,'')
             if not f.is_file():problems.append(f'{role} file missing')
@@ -87,11 +88,17 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--apply',action='store_true',help='connect, bake, record and measure the checked candidates')
     parser.add_argument('--only',nargs='*',default=[],help='limit to these source folders (as written in the queue)')
-    parser.add_argument('--skip',nargs='*',default=[],help='leave these source folders out (refused at the visual check)')
+    parser.add_argument('--skip',nargs='*',default=[],help='leave these source folders out this run')
+    parser.add_argument('--reject',nargs=2,action='append',default=[],metavar=('SOURCE','REASON'),help='record a visual rejection; the same drawing is not offered again')
     args=parser.parse_args()
     queue=json.loads(QUEUE.read_text(encoding='utf-8'));library=json.loads(LIBRARY.read_text(encoding='utf-8'))
-    done=json.loads(DONE.read_text(encoding='utf-8'))['installed'] if DONE.exists() else []
-    ready,refused=check(queue,done,library)
+    record=json.loads(DONE.read_text(encoding='utf-8')) if DONE.exists() else {}
+    done=record.get('installed',[]);rejected=record.get('rejected',[])
+    for source,reason in args.reject:
+        c=next(c for c in queue['ready_candidates'] if c['source']==source)
+        rejected.append(dict(source=source,bindings=c['bindings'],drawing_sha256=c['file_sha256']['drawing'],reason=reason,date=__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M')))
+    if args.reject:save(done,rejected)
+    ready,refused=check(queue,done,library,rejected)
     if args.only:ready=[r for r in ready if r[0]['source'] in args.only]
     ready=[r for r in ready if r[0]['source'] not in args.skip]
     OUT.mkdir(parents=True,exist_ok=True)
@@ -122,8 +129,13 @@ def main():
     for (c,_),row in zip(ready,installed):
         done.append(dict(source=c['source'],bindings=row['bindings'],atlas=row['atlas'],drawing_sha256=c['file_sha256']['drawing'],installed=stamp,
             flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
-    DONE.write_text(json.dumps(dict(note='Candidates from PENDING_ART_INSTALL_QUEUE.json that install_pending_art.py connected and baked. A listed drawing is not installed again; a new drawing for the same parts is.',installed=done),ensure_ascii=False,indent=1),encoding='utf-8')
+    save(done,rejected)
     print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+
+
+def save(done,rejected):
+    DONE.write_text(json.dumps(dict(note='Candidates from PENDING_ART_INSTALL_QUEUE.json that install_pending_art.py connected and baked, and drawings rejected at the visual check. A listed drawing is not offered again; a new drawing for the same parts is.',
+        installed=done,rejected=rejected),ensure_ascii=False,indent=1),encoding='utf-8')
 
 
 if __name__=='__main__':main()

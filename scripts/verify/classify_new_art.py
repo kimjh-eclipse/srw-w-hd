@@ -58,13 +58,19 @@ def main():
     (out/'classified.json').write_text(json.dumps(summary,indent=1,ensure_ascii=False),encoding='utf-8')
     # Effect pictures that failed stay native until they are re-drawn: the list
     # is tied to the failed picture's texture key, so a re-bake releases it.
-    renderer=audit._renderer;held={}
+    # A failed effect that a reviewer looked at and accepted (graphics/
+    # visual_accepts.json, bound to the same texture key) is not held back;
+    # re-baking the part changes the key and voids the acceptance.
+    renderer=audit._renderer;held={};accept_path=ROOT/'graphics/visual_accepts.json'
+    accepts=json.loads(accept_path.read_text(encoding='utf-8')).get('parts',{}) if accept_path.exists() else {}
     for row in rows:
         if not row['effect']:continue
-        spec=renderer.bindings[row['binding']-1];held[str(row['binding'])]=renderer.texture_key(row['binding'],spec['w'],spec['h'])
+        spec=renderer.bindings[row['binding']-1];key=renderer.texture_key(row['binding'],spec['w'],spec['h'])
+        if accepts.get(str(row['binding']),{}).get('texture_key')==key:row['visually_accepted']=True;continue
+        held[str(row['binding'])]=key
     if not args.no_quarantine_write:
         (ROOT/'graphics/quarantined_parts.json').write_text(json.dumps(dict(note='Effect parts whose HD picture failed verify_new_art.py; native stays until the picture is re-baked.',
-            reasons={str(row['binding']):row['kind'] for row in rows if row['effect']},parts=held),indent=1),encoding='utf-8')
+            reasons={b:row['kind'] for row in rows if row['effect'] and (b:=str(row['binding'])) in held},parts=held),indent=1),encoding='utf-8')
     print('quarantine candidates' if args.no_quarantine_write else 'quarantined',len(held))
     label=lambda row:f"#{row['binding']} {str(row['atlas'])[:14]} {row['kind'][:5]} a{row['area_ratio']:.1f}"
     machines=sorted((row for row in rows if not row['effect']),key=lambda r:(r['atlas'],r['binding']))
