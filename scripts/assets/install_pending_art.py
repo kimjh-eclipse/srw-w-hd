@@ -107,6 +107,16 @@ def main():
     if not ready:print('nothing to install');return
     precheck_sheet(ready,OUT/'precheck.png');print('visual check:',OUT/'precheck.png')
     if not args.apply:return
+    stamp=__import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
+    backup=OUT/f'backup_{stamp}';backup.mkdir()
+    for f in (LIBRARY,ROOT/'docs/PRODUCTION_ART_BATCH_CURRENT.json'):shutil.copy2(f,backup/f.name)
+    run=lambda *a:subprocess.run([sys.executable,'-X','utf8',*map(str,a)],cwd=ROOT,check=True)
+    fresh=[r for r in ready if not r[0]['bindings']];ready=[r for r in ready if r[0]['bindings']]
+    for c,_ in fresh:
+        installed=install_new(c,library,stamp,run)
+        done.append(installed);save(done,rejected)
+        print('new parts',installed['bindings'],'flagged',installed['flagged'])
+    if not ready:print('backup',backup);return
     jobs=[]
     for c,_ in ready:
         name=atlas_name(c);assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
@@ -114,12 +124,8 @@ def main():
             effect=any(library['bindings'][b-1].get('effect_part') for b in c['bindings']))
         if c.get('nested'):job['nested']=True
         jobs.append(job)
-    stamp=__import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
     config=OUT/f'config_{stamp}.json';results=f'test_current/parts/pending_install/results_{stamp}.json'
     config.write_text(json.dumps(dict(results=results,jobs=jobs),ensure_ascii=False,indent=2),encoding='utf-8')
-    backup=OUT/f'backup_{stamp}';backup.mkdir()
-    for f in (LIBRARY,ROOT/'docs/PRODUCTION_ART_BATCH_CURRENT.json'):shutil.copy2(f,backup/f.name)
-    run=lambda *a:subprocess.run([sys.executable,'-X','utf8',*map(str,a)],cwd=ROOT,check=True)
     run('test_current/parts/root_pending_repair_factory.py',config)
     run('test_current/parts/record_completed_art_batch.py',results)
     ids=[b for job in jobs for b in job['bindings']]
@@ -131,6 +137,37 @@ def main():
             flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
     save(done,rejected)
     print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+
+
+def install_new(c,library,stamp,run):
+    """Connect parts that have no binding yet (new_source_keys) as new bindings."""
+    folder=ROOT/c['source'];rows=json.loads((folder/c['contract']).read_text(encoding='utf-8'))
+    active={b['hash'] for b in library['bindings'] if b.get('rgb_enabled',True) and not b.get('disabled')}
+    taken=[r['hash'] for r in rows if r['hash'] in active]
+    assert not taken,('already connected; a new part would duplicate it',taken)
+    assert sorted(r['hash'] for r in rows)==sorted(k['hash'] for k in c.get('new_source_keys',[])),'contract rows differ from new_source_keys'
+    for r in rows:
+        assert 'replace_binding' not in r and 'replacement_of_existing_binding' not in r
+        r.setdefault('spec',dict(resource=r.get('resource',r.get('source_owner')),source_x=r['source_x'],source_y=r['source_y']))
+    contract=OUT/f'new_contract_{stamp}_{folder.name}.json';contract.write_text(json.dumps(rows,ensure_ascii=False),encoding='utf-8')
+    name=atlas_name(c)+'_new'+str(len(rows));assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
+    flags=['--defer-shape-review','--new-only','--apply']
+    if all(r.get('render_mode')=='static' for r in rows):flags.append('--static-palette')
+    if any(r.get('effect_part') for r in rows):flags.append('--effect')
+    report=folder/'install_report.json';before=report.stat().st_mtime if report.exists() else None
+    run('scripts/assets/install_great_mazinger_pose.py','--source-dir',folder,'--contract',contract,'--drawing',c['drawing'],'--native',c['native'],'--generated',c['generated'],
+        '--atlas-id',name,'--graphics-dir','rework_'+name,*flags)
+    assert report.exists() and report.stat().st_mtime!=before,'installer wrote no report'
+    ids=[p['binding'] for p in json.loads(report.read_text(encoding='utf-8'))['parts'] if not p.get('skipped_existing')]
+    assert len(ids)==len(rows),ids
+    shutil.copy2(report,ROOT/'graphics'/('rework_'+name)/'install_report.json')
+    run('scripts/assets/bake_parts.py','--workers','4','--bindings',*ids)
+    results=OUT/f'results_{stamp}_{folder.name}.json'
+    results.write_text(json.dumps([dict(source=c['source'],atlas=name,folder='rework_'+name,bindings=ids)],indent=2),encoding='utf-8')
+    run('test_current/parts/record_completed_art_batch.py',results.relative_to(ROOT))
+    run('scripts/verify/verify_new_art.py','--bindings',*ids,'--out','test_current/parts/pending_install/check')
+    check=json.loads((OUT/'check/report.json').read_text(encoding='utf-8'))
+    return dict(source=c['source'],bindings=ids,atlas=name,drawing_sha256=c['file_sha256']['drawing'],installed=stamp,new_parts=True,flagged=[p['binding'] for p in check['parts']])
 
 
 def save(done,rejected):
