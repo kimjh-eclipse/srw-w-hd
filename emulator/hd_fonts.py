@@ -19,6 +19,9 @@ _native_scanners=threading.local()
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 _selected_runs={};_selected_spans={}
 BOLD_DIGITS=os.environ.get('SRWW_BOLD_DIGITS','1')!='0'
+DIM_TEXT=os.environ.get('SRWW_DIM_TEXT','1')!='0'
+DRAW_AS={'、':','}
+BASELINE_MARKS=set(',.。．，_')
 # Menu and dialogue text in the bold face as well (the native font is a heavy pixel face).
 BOLD_TEXT=os.environ.get('SRWW_BOLD_TEXT','1')!='0'
 
@@ -172,13 +175,23 @@ class FontRenderer:
         red5=native[:,:,0]>>3;green5=native[:,:,1]>>3;blue5=native[:,:,2]>>3
         neutral5=(red5==green5)&(green5==blue5)
         foregrounds=[neutral5&(red5==31),neutral5&(red5==20),(red5==31)&(green5==0)&(blue5==0)]
+        # A finished speaker's box dims its text to another single gray (21 in
+        # scenario dialogue). Each gray level actually used for enough pixels is
+        # its own exact-color mask, so background grays never join the glyph.
+        # They are read last and only fill places nothing else claimed.
+        dims=[]
+        if DIM_TEXT:
+            levels=np.bincount(red5[neutral5].ravel(),minlength=32)
+            # Darker grays (15: unavailable weapon names) sit on selection beds
+            # whose repair is tied to the white text; leave those for now.
+            dims=[neutral5&(red5==level) for level in range(16,31) if level!=20 and levels[level]>=24]
         if self.battle_scan:
-            for foreground in foregrounds:foreground&=self.scan_mask
+            for foreground in foregrounds+dims:foreground&=self.scan_mask
         strong_green=(red5<6)&(green5>=24)&(blue5<6)
         if SHORTCUTS:
             bits=lambda *planes:b''.join(np.packbits(plane).tobytes() for plane in planes)
-            primary_signal=bits(*foregrounds,hud_ink,hud_gold)
-        else:primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
+            primary_signal=bits(*foregrounds,*dims,hud_ink,hud_gold)
+        else:primary_signal=hashlib.blake2b(b''.join(m.tobytes() for m in foregrounds+dims)+hud_ink.tobytes()+hud_gold.tobytes(),digest_size=16).digest()
         primary_key=(primary_signal,tuple(self._selected_run(selected_green,*run[:3]) for run in getattr(self,'menu_runs',())))
         if getattr(self,'primary_mode',False) and primary_key==getattr(self,'primary_key',None):
             self.last_native_key=native_key;return self.last_matches
@@ -241,9 +254,18 @@ class FontRenderer:
                     for yy,xx in zip(ys,xs):
                         x,y=left+int(xx),76+int(yy)
                         candidates.insert(0,(x,y,char,16,16,ink));hud_erasers.append((x,y,opaque))
+        for dim in dims:
+            if any(np.array_equal(dim,previous) for previous in masks):continue
+            dim_full=self._scan_active(dim,12,12,self.keys,self.characters,5,100)
+            dim_rows={y for x,y,*_ in dim_full};dim_positions={(x,y) for x,y,*_ in self._scan_active(dim,12,8,self.narrow_keys,self.narrow_characters,1,80)}
+            dim_narrow=[row for row in self._scan_active(dim,12,8,self.narrow_keys,self.narrow_characters,1,80) if row[1] in dim_rows or any((row[0]+dx,row[1]) in dim_positions for dx in (-16,-8,8,16))]
+            candidates.extend(dim_full+dim_narrow)
         # A bitmap that matched a character the font has no glyph for (a small
         # icon read as a dash) would be redrawn as an empty box: leave it native.
         candidates=[row for row in candidates if self.drawable(row[2])]
+        # The Korean ROM draws a plain comma in the ideographic-comma slot; the
+        # HD font's 、 is a slanted mark high in the cell, so draw what is shown.
+        candidates=[(row[0],row[1],DRAW_AS.get(row[2],row[2]),*row[3:]) for row in candidates]
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
         candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)
@@ -388,7 +410,10 @@ class FontRenderer:
         font = self.fonts[font_key];stroke = 0 if button else max(1, height//45)
         box = font.getbbox(char);render_width = max(width, box[2]-box[0]+2*stroke+2)
         x = (render_width - (box[2]-box[0])) // 2 - box[0]
-        y = (height - (box[3]-box[1])) // 2 - box[1]
+        # Centering each glyph's own ink lifts low marks (comma, period) to
+        # mid-height; place them on the line a full-height character uses.
+        reference=font.getbbox('가') if char in BASELINE_MARKS else box
+        y = (height - (reference[3]-reference[1])) // 2 - reference[1]
         def mask(amount):
             coverage,offset=font.getmask2(char,'L',stroke_width=amount,stroke_filled=True)
             bitmap=Image.frombytes('L',coverage.size,bytes(coverage))
