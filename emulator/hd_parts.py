@@ -88,6 +88,7 @@ class PartsRenderer:
         # The same code must give the same texture keys whichever line endings a checkout produced.
         self.registration_content=hashlib.sha256(registration_source.replace(b'\r\n',b'\n')).hexdigest()
         self.baked=set();self.baked_ready=np.zeros(0,dtype='uint32');self.miss_stamp=None
+        self.quarantine=self.load_quarantine()
         if async_prepare and os.environ.get('SRWW_BAKED_PARTS','1')!='0':
             self.load_baked()
         self.ready_generation=0;self.ready_aliases={}
@@ -189,7 +190,7 @@ class PartsRenderer:
     def ready_bindings(self):
         sources=set(self.prepared)|set(self.prepared.retained)
         if self.registered_cache is not None:sources.update(int(k[5:]) for k in self.registered_cache)
-        sources.difference_update(self.baked)
+        sources.difference_update(self.baked);sources.difference_update(self.quarantine)
         # One contiguous array: the list is ~90k entries once parts are baked,
         # and it crosses a process boundary and a C call whenever it changes.
         extra=np.fromiter((alias for source in sources for alias in self.ready_aliases.get(source,())),dtype='uint32')
@@ -255,6 +256,27 @@ class PartsRenderer:
             identity.extend(stats[file])
         return hashlib.sha256(json.dumps(identity).encode()).hexdigest()
 
+    def load_quarantine(self):
+        """Parts whose current picture failed verification: the native part stays on screen.
+
+        graphics/quarantined_parts.json lists binding -> texture key at the
+        time it failed. An entry only holds while the part still has that
+        exact picture, so re-drawing and re-baking a part releases it without
+        editing the list. SRWW_QUARANTINE=0 ignores the list.
+        """
+        if os.environ.get('SRWW_QUARANTINE','1')=='0':return set()
+        try:entries=json.loads((ROOT/'graphics/quarantined_parts.json').read_text(encoding='utf-8'))['parts']
+        except (OSError,ValueError,KeyError):return set()
+        held=set()
+        for binding,key in entries.items():
+            binding=int(binding)
+            if not 0<binding<=len(self.bindings):continue
+            spec=self.bindings[binding-1]
+            try:
+                if self.texture_key(binding,spec['w'],spec['h'])==key:held.add(binding)
+            except (OSError,KeyError):pass
+        return held
+
     def load_baked(self):
         """Bindings whose finished texture is already on disk.
 
@@ -266,6 +288,7 @@ class PartsRenderer:
         except Exception:return
         for binding,spec in enumerate(self.bindings,1):
             if spec.get('source_binding') or spec.get('runtime_texture') or spec.get('disabled'):continue
+            if binding in self.quarantine:continue
             try:
                 if self.texture_key(binding,spec['w'],spec['h']) in keys:self.baked.add(binding)
             except (OSError,KeyError):pass
@@ -540,6 +563,7 @@ class PartsRenderer:
             index=(b>>9)&31;matrix=tuple(struct.unpack_from('<h',oam,(index*4+k)*8+6)[0] for k in range(4))
         key=(binding,a&0x700,b&0x3000,matrix,brightness,alpha if (a>>10)&3==1 else 0,int(row[4]) if spec.get('dynamic_palette') else 0)
         source_binding=spec.get('source_binding',binding)
+        if source_binding in self.quarantine:return None   # failed verification: leave the native part
         if source_binding not in self.prepared:
             source=self.bindings[source_binding-1];cache_key=f'part_{source_binding}'
             if self.registered_cache is not None and cache_key in self.registered_cache:
@@ -663,7 +687,7 @@ class PartsRenderer:
         tasks.extend((int(priority),1,int(layer),draw) for priority,layer,draw in background_planes)
         visibility=PartVisibility(layer_ids,owners,bgpriors,native_priority)
         background_blend=int(parts[active[0],6]) if active else None
-        foreground_images={}
+        foreground_images={};layer_blends={}
         # Most parts are nowhere near a blending BG. Decide that once per
         # frame instead of unpacking the 64-bit records for every part.
         foreground_active=None
@@ -729,6 +753,19 @@ class PartsRenderer:
                     visible=np.where(shut,0,visible).astype('uint8');visibility_state=1 if visible.any() else 0
             if visibility_state==0:stats['occluded']+=1;continue
             stats['drawn']+=1;stats['drawn_area']+=area
+            own_blend=None
+            if kind and effect_foreground is not None and foreground is None and hasattr(top,'draw'):
+                # A BG whose tiles are HD parts may itself be the blended layer
+                # (a flash plane waiting at EVA 0, a translucent overlay): mix
+                # its parts with what is behind them by the DS coefficients.
+                if i not in layer_blends:
+                    from foreground_blend import self_plane
+                    layer_blends[i]=self_plane(effect_foreground,layer_ids,i,owned=False)
+                own_blend=layer_blends[i]
+            if own_blend is not None:
+                full=(0,0,*top.size)
+                top.draw(art,(px,py,px+art.width,py+art.height),mask=None if visibility_state==2 else self.native_mask(left,upper,visible),mask_rect=full,alpha=True,foreground=own_blend,foreground_rect=full,foreground_mode=2)
+                continue
             if visibility_state==2 and (kind or (a>>10)&3!=1):
                 top.paste(art,(px,py),art)
                 continue

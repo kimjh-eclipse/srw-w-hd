@@ -6,7 +6,7 @@ part) and names the defect: empty, misplaced, lost (pieces missing or lines
 thinned away), bloated, colour, shape. Writes classified.json and one
 contact sheet per batch kind. Reads only.
 """
-import json,sys
+import argparse,json,sys
 from collections import defaultdict
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
@@ -27,7 +27,13 @@ def measure(binding):
 
 
 def main():
-    out=ROOT/'test_current/parts/new_art_review';report=json.loads((out/'report.json').read_text(encoding='utf-8'));audit.start()
+    parser=argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    parser.add_argument('--out',default='test_current/parts/new_art_review')
+    parser.add_argument('--no-quarantine-write',action='store_true',help='Leave the shared runtime quarantine list unchanged')
+    args=parser.parse_args();out=(ROOT/args.out).resolve()
+    if not out.is_relative_to((ROOT/'test_current/parts').resolve()) or out==(ROOT/'test_current/parts').resolve():
+        parser.error('--out must be a subdirectory of test_current/parts')
+    report=json.loads((out/'report.json').read_text(encoding='utf-8'));audit.start()
     batches={b['batch']:b for b in report['batches']};rows=[]
     for row in report['parts']:
         ratio,shift,extent=measure(row['binding']);flags=row['flags']
@@ -44,6 +50,16 @@ def main():
     summary=dict(flagged=len(rows),by_group={k:dict(v) for k,v in counts.items()},
         batches=sorted(({'atlas':k,'total_flagged':sum(v.values()),'bindings_in_batch':next((b['bindings'] for b in report['batches'] if b['atlas']==k),None),**v} for k,v in per_batch.items()),key=lambda e:-e['total_flagged']),parts=rows)
     (out/'classified.json').write_text(json.dumps(summary,indent=1,ensure_ascii=False),encoding='utf-8')
+    # Effect pictures that failed stay native until they are re-drawn: the list
+    # is tied to the failed picture's texture key, so a re-bake releases it.
+    renderer=audit._renderer;held={}
+    for row in rows:
+        if not row['effect']:continue
+        spec=renderer.bindings[row['binding']-1];held[str(row['binding'])]=renderer.texture_key(row['binding'],spec['w'],spec['h'])
+    if not args.no_quarantine_write:
+        (ROOT/'graphics/quarantined_parts.json').write_text(json.dumps(dict(note='Effect parts whose HD picture failed verify_new_art.py; native stays until the picture is re-baked.',
+            reasons={str(row['binding']):row['kind'] for row in rows if row['effect']},parts=held),indent=1),encoding='utf-8')
+    print('quarantine candidates' if args.no_quarantine_write else 'quarantined',len(held))
     label=lambda row:f"#{row['binding']} {str(row['atlas'])[:14]} {row['kind'][:5]} a{row['area_ratio']:.1f}"
     machines=sorted((row for row in rows if not row['effect']),key=lambda r:(r['atlas'],r['binding']))
     for page in range(0,len(machines),120):sheet(machines[page:page+120],out/f'machines_flagged_{page//120:02d}.png',label)

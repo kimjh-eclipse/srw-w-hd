@@ -144,7 +144,7 @@ def blend_part(art,packed,eligible,coeff):
 
 SELF_BLEND=os.environ.get('SRWW_SELF_BLEND','1')!='0'
 
-def self_plane(packed,layers,layer):
+def self_plane(packed,layers,layer,owned=True):
     """Blend coefficients of a BG that is itself the first target (a fading cut-in).
 
     The records hold, for each pixel the DS blended, the first-target BG and
@@ -158,7 +158,11 @@ def self_plane(packed,layers,layer):
     opaque everywhere (EVA 16, EVB 0) or not a blended first target at all.
     """
     if not SELF_BLEND or packed is None:return None
-    own=((((packed>>15)&7).astype('int16')-1)==layer)&(np.asarray(layers)==layer)
+    # owned=False: the layer's tiles are being replaced by HD parts, so the
+    # core no longer draws them and the final-pixel owner is whatever lies
+    # behind; the blend record of the layer is still there.
+    own=(((packed>>15)&7).astype('int16')-1)==layer
+    if owned:own&=np.asarray(layers)==layer
     rows=np.flatnonzero(own.any(1))
     if not len(rows):return None
     eva=np.minimum((packed>>18)&31,16).astype('uint8');evb=np.minimum((packed>>23)&31,16).astype('uint8')
