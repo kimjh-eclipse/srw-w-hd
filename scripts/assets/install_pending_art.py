@@ -137,6 +137,8 @@ def main():
     stamp=__import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
     backup=OUT/f'backup_{stamp}';backup.mkdir()
     for f in (LIBRARY,ROOT/'docs/PRODUCTION_ART_BATCH_CURRENT.json'):shutil.copy2(f,backup/f.name)
+    # Each backup holds a 150 MB library copy; the latest three are enough to roll back.
+    for old in sorted(OUT.glob('backup_*'))[:-3]:shutil.rmtree(old,ignore_errors=True)
     run=lambda *a:subprocess.run([sys.executable,'-X','utf8',*map(str,a)],cwd=ROOT,check=True)
     fresh=[r for r in ready if not r[0]['bindings']];ready=[r for r in ready if r[0]['bindings']]
     for c,_ in fresh:
