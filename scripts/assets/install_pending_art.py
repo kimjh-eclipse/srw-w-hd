@@ -141,6 +141,7 @@ def main():
     # Each backup holds a 150 MB library copy; the latest three are enough to roll back.
     for old in sorted(OUT.glob('backup_*'))[:-3]:shutil.rmtree(old,ignore_errors=True)
     run=lambda *a:subprocess.run([sys.executable,'-X','utf8',*map(str,a)],cwd=ROOT,check=True)
+    ready=split_mixed(ready,stamp)
     fresh=[r for r in ready if not r[0]['bindings']];ready=[r for r in ready if r[0]['bindings']]
     for c,_ in fresh:
         installed=install_new(c,library,stamp,run)
@@ -172,6 +173,29 @@ def main():
     save(done,rejected)
     rebuild_caches(run,args)
     print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+
+
+def split_mixed(ready,stamp):
+    """A package may hold both replacements (rows with replace_binding) and new
+    parts (rows listed in new_source_keys). Install them as two entries over
+    the same drawing, each with its own filtered contract."""
+    out=[]
+    for c,problems in ready:
+        if not (c['bindings'] and c.get('new_source_keys')):out.append((c,problems));continue
+        folder=ROOT/Path(c['source'].replace('\\','/'));rows=json.loads((folder/c['contract']).read_text(encoding='utf-8'))
+        keyof=lambda r:(r.get('source_contract') or r)['hash']
+        new_keys={k['hash'] if isinstance(k,dict) else int(k) for k in c['new_source_keys']}
+        replace=[r for r in rows if r.get('replace_binding') is not None];fresh=[r for r in rows if r.get('replace_binding') is None]
+        assert {keyof(r) for r in fresh}==new_keys,('new rows differ from new_source_keys',c['source'])
+        assert sorted(int(r['replace_binding']) for r in replace)==sorted(c['bindings']),('replacement rows differ from bindings',c['source'])
+        name=folder.name
+        for part,kind in ((replace,'replace'),(fresh,'new')):
+            path=OUT/f'split_{stamp}_{name}_{kind}.json';path.write_text(json.dumps(part,ensure_ascii=False),encoding='utf-8')
+            entry=dict(c,contract=str(path),bindings=c['bindings'] if kind=='replace' else [])
+            if kind=='replace':entry.pop('new_source_keys',None)
+            out.append((entry,problems))
+        print('split',c['source'],len(replace),'replacements',len(fresh),'new')
+    return out
 
 
 def rebuild_caches(run,args):

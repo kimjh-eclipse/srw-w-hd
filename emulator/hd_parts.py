@@ -27,6 +27,18 @@ SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 OBJ_BLEND=os.environ.get('SRWW_OBJ_BLEND','1')!='0'
 RECOLOUR_SMOOTH=os.environ.get('SRWW_RECOLOUR_SMOOTH','1')!='0'
 
+def blotch_share(rgb,painted,alpha):
+    """Share of opaque pixels that jump 40+ from their 3x3 median where the
+    painted art itself is smooth: speckles a recolour added."""
+    def jumps(img):
+        pad=np.pad(img,((1,1),(1,1),(0,0)),mode='edge');h,w=img.shape[:2]
+        med=np.median(np.stack([pad[dy:dy+h,dx:dx+w] for dy in range(3) for dx in range(3)]),axis=0)
+        return np.abs(img-med).max(2)>=40
+    inside=alpha>=200
+    if not inside.any():return 0.
+    return float((jumps(np.asarray(rgb,dtype='float32'))&~jumps(painted)&inside).sum()/inside.sum())
+
+
 def is_menu_gradient(indices,w,h):
     """Button centers and beveled ends are horizontal palette ramps, not units.
 
@@ -638,7 +650,12 @@ class PartsRenderer:
                 weight=1/(d2+24**2)
                 weight*=1+3*(indices[:,:,None]==used[None,None,:])
                 weight/=weight.sum(-1,keepdims=True)
-                rgb=painted+weight@(dst-src)
+                smooth=painted+weight@(dst-src)
+                # Neither method wins everywhere (the survey found each one
+                # worse on some parts): keep the one that adds fewer speckles
+                # over the painted art. Decided once per (part, palette).
+                alpha=np.asarray(art.getchannel('A'))
+                rgb=smooth if blotch_share(smooth,painted,alpha)<=blotch_share(rgb,painted,alpha) else rgb
             pixels[:,:,:3]=np.clip(np.rint(rgb),0,255).astype('uint8');art=Image.fromarray(pixels)
         elif spec.get('dynamic_palette') and source_binding>5263 and not (self.bindings[source_binding-1].get('wing_img_first') or spec.get('preserve_canonical_paint',spec.get('wing_live_palette',False))):
             source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
