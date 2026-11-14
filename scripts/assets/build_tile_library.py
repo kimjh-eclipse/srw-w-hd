@@ -49,6 +49,12 @@ def main():
     if closeup.exists():
         installed=json.loads(closeup.read_text());i=installed['resource']
         add('wing_closeup',i,'wing_parts/sandrock_closeup_hd.png',installed['native_size'],0,0,pixels(i),installed['palette_rgb'],5)
+    # Whole-image HD sheets handed over only as 8x8 tile material (runtime
+    # assembled parts). Lowest priority: accepted per-part art keeps winning.
+    whole=OUT/'tile_sources/sheets.json'
+    if whole.exists():
+        for s in json.loads(whole.read_text())['sheets']:
+            add('tile_source_'+str(s['resource']),s['resource'],'tile_sources/'+s['image'],s['native_size'],0,0,pixels(s['resource']),s['palette_rgb'],0)
     supplement=OUT/'img_first/sheets.json'
     if supplement.exists():
         for sheet in json.loads(supplement.read_text())['sheets']:
