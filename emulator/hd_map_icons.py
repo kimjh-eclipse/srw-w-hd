@@ -8,6 +8,9 @@ from PIL import Image
 
 from asset_paths import asset_root
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
+import os
+OVERLAY_KEEP=os.environ.get('SRWW_ICON_OVERLAY','1')!='0'
+ICON_LOG=os.environ.get('SRWW_ICON_LOG')=='1'
 
 class MapIconRenderer:
     def __init__(self):
@@ -140,6 +143,23 @@ class MapIconRenderer:
             fill=(~known)&(count>0);source[fill]=total[fill]/count[fill,None];known|=fill
         return Image.fromarray(np.clip(source,0,255).astype('uint8'))
 
+    def cell_overlay(self,original,mask,terrain,where=None):
+        """True when the native cell around the icon carries a tint the HD
+        terrain does not (attack / move range): its uncovered pixels then lean
+        to red or green far more than the HD terrain of that cell does. The
+        plain native matte differs from HD terrain mostly in brightness and
+        blue, so it is not taken for an overlay."""
+        if not OVERLAY_KEEP:return False
+        free=~np.asarray(mask,dtype=bool);free[0,:]=False;free[:,0]=False   # grid lines
+        free&=~np.isin(self.codes(original),[1057,32767,1016,992,768,640,512])   # selection cursor
+        if free.sum()<24:return False
+        n=original[free].astype('float32').mean(0)
+        h=np.asarray(terrain.convert('RGB').resize((16,16),Image.Resampling.BOX),dtype='float32')[free].mean(0)
+        lean=lambda c:(c[0]-c[2],c[1]-c[2])
+        shift=max(abs(lean(n)[0]-lean(h)[0]),abs(lean(n)[1]-lean(h)[1]))
+        if ICON_LOG:print('icon cell',where,'native',n.round(),'hd',h.round(),'shift',round(float(shift)))
+        return shift>60
+
     def compose(self,target,native,background=None):
         matches=self.recognize(native);self.last_matches=matches
         scale=target.width/256;size=round(16*scale)
@@ -148,7 +168,8 @@ class MapIconRenderer:
             try:art=self.texture(match['resource'],match['palette'],match['flip'],size)
             except Exception as error:self.prepare_errors[str(match['resource'])]=str(error);continue
             original=np.asarray(native)[y:y+16,x:x+16,:3]
-            if background is not None:
+            overlay=background is not None and self.cell_overlay(original,entry['mask'],background.crop(box),(x,y))
+            if background is not None and not overlay:
                 patch=background.crop(box)
             else:
                 heal_key=(zlib.crc32(original.tobytes()),match['resource'],match['flip'],size);patch=self.healed.pop(heal_key,None)
@@ -158,7 +179,7 @@ class MapIconRenderer:
             # Replace old opaque sprite pixels, retaining external selection
             # arrows and cell markers, then draw the smooth painted alpha.
             erase_pixels=entry['mask'].copy()
-            if background is not None:
+            if background is not None and not overlay:
                 # Terrain replacement can deliberately omit a whole occupied
                 # cell. Restore all of that cell, not only the old icon ink.
                 # Otherwise the native space-blue matte survives on HD terrain.

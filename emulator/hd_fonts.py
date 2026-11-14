@@ -21,6 +21,7 @@ _selected_runs={};_selected_spans={}
 BOLD_DIGITS=os.environ.get('SRWW_BOLD_DIGITS','1')!='0'
 DIM_TEXT=os.environ.get('SRWW_DIM_TEXT','1')!='0'
 DRAW_AS={'、':','}
+HEAL_SKIP_INK=os.environ.get('SRWW_HEAL_SKIP_INK','1')!='0'
 BASELINE_MARKS=set(',.。．，_')
 # Menu and dialogue text in the bold face as well (the native font is a heavy pixel face).
 BOLD_TEXT=os.environ.get('SRWW_BOLD_TEXT','1')!='0'
@@ -266,6 +267,11 @@ class FontRenderer:
         # The Korean ROM draws a plain comma in the ideographic-comma slot; the
         # HD font's 、 is a slanted mark high in the cell, so draw what is shown.
         candidates=[(row[0],row[1],DRAW_AS.get(row[2],row[2]),*row[3:]) for row in candidates]
+        # Kanji are only read beside other text on the same row (改 after a
+        # unit name): a lone simple kanji could match a UI line or icon.
+        kanji=lambda ch:'一'<=ch<='鿿'
+        text_anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum() and not kanji(ch)}
+        candidates=[row for row in candidates if not kanji(row[2]) or any((row[0]+dx,row[1]) in text_anchors for dx in (-12,-8,8,12,-16,16))]
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
         candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)
@@ -462,6 +468,13 @@ class FontRenderer:
         native=np.asarray(native)[:192]
         healed=native.copy();rows,xs,left,right,weights=self._heal_plan()
         a=native[rows,left].astype('float64');b=native[rows,right].astype('float64')
+        if HEAL_SKIP_INK:
+            # A native icon or unread glyph right next to the text would be
+            # smeared across the whole erased span as a white streak. When one
+            # side is bright neutral ink and the other is not, use the other.
+            ink=lambda c:(c.max(1)-c.min(1)<24)&(c.min(1)>=150)
+            apart=np.abs(a-b).max(1)>64;ink_a=ink(a);ink_b=ink(b)
+            a=np.where((apart&ink_a&~ink_b)[:,None],b,a);b=np.where((apart&ink_b&~ink_a)[:,None],a,b)
         healed[rows,xs]=(a+(b-a)*weights).astype('uint8')
         for left,top,right,bottom,sample_left,sample_right in getattr(self,'menu_repairs',()):
             samples=native[top:bottom,sample_left:sample_right].astype('int16')
