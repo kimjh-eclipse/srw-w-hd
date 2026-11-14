@@ -83,6 +83,9 @@ def main():
         for binding in meta['bindings']:
             if binding.get('registered_attack_bank'):
                 import base64
+                # Some reviewed bindings carry no ROM resource; their tiles are still usable.
+                if 'index_pixels' not in binding or 'original_palette_rgb' not in binding:continue
+                binding=dict(binding,resource=binding.get('resource',-1))
                 atlas=meta['atlases'][binding['atlas_id']]
                 native=np.frombuffer(zlib.decompress(base64.b64decode(binding['index_pixels'])),dtype='uint8').reshape(binding['h'],binding['w'])
                 add(binding['atlas_id'],binding['resource'],atlas['image'],atlas['native_size'],binding['x'],binding['y'],native,binding['original_palette_rgb'],6,preserve_contour=True)

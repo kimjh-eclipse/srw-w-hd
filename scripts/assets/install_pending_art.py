@@ -103,6 +103,7 @@ def main():
     parser.add_argument('--only',nargs='*',default=[],help='limit to these source folders (as written in the queue)')
     parser.add_argument('--skip',nargs='*',default=[],help='leave these source folders out this run')
     parser.add_argument('--reject',nargs=2,action='append',default=[],metavar=('SOURCE','REASON'),help='record a visual rejection; the same drawing is not offered again')
+    parser.add_argument('--no-caches',action='store_true',help='skip rebuilding the material caches and tile library after installing')
     parser.add_argument('--allow-original',type=int,nargs='*',default=[],help='original bindings (1..5263) a reviewed candidate may replace (user-reported fixes only)')
     args=parser.parse_args()
     queue=json.loads(QUEUE.read_text(encoding='utf-8'));library=json.loads(LIBRARY.read_text(encoding='utf-8'))
@@ -145,7 +146,9 @@ def main():
         installed=install_new(c,library,stamp,run)
         done.append(installed);save(done,rejected)
         print('new parts',installed['bindings'],'flagged',installed['flagged'])
-    if not ready:print('backup',backup);return
+    if not ready:
+        rebuild_caches(run,args)
+        print('backup',backup);return
     jobs=[]
     for c,_ in ready:
         name=atlas_name(c);assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
@@ -167,7 +170,18 @@ def main():
         done.append(dict(source=c['source'],bindings=row['bindings'],atlas=row['atlas'],drawing_sha256=c['file_sha256']['drawing'],installed=stamp,
             flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
     save(done,rejected)
+    rebuild_caches(run,args)
     print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+
+
+def rebuild_caches(run,args):
+    """Caches derived from the part library: material slots for runtime
+    recolouring and the 8x8 tile library for parts the game assembles from
+    tiles at run time. Without this, newly installed art is missing there."""
+    if args.no_caches:print('caches NOT rebuilt (--no-caches)');return
+    run('scripts/build/build_native_material_cache.py')
+    run('scripts/assets/build_material_slot_cache.py')
+    run('scripts/assets/build_tile_library.py')
 
 
 def install_new(c,library,stamp,run):

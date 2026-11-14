@@ -22,10 +22,15 @@ from scripts.assets import srw_graphics as g
 
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__.split('\n')[0]);parser.add_argument('--sheets',type=int,default=300);args=parser.parse_args()
-    out=ROOT/'test_current/parts/missing_export';out.mkdir(parents=True,exist_ok=True)
+    parser=argparse.ArgumentParser(description=__doc__.split('\n')[0]);parser.add_argument('--sheets',type=int,default=300)
+    parser.add_argument('--out',default='test_current/parts/missing_export',help='Output directory inside test_current/parts')
+    parser.add_argument('--first-image-only',dest='all_images',action='store_false',help='old behaviour: read only the first image of multi-image patterns')
+    args=parser.parse_args();out=(ROOT/args.out).resolve()
+    if not out.is_relative_to((ROOT/'test_current/parts').resolve()) or out==(ROOT/'test_current/parts').resolve():
+        parser.error('--out must be a subdirectory of test_current/parts')
+    out.mkdir(parents=True,exist_ok=True)
     for old in out.glob('*'):
-        if old.is_file():old.unlink()
+        if old.is_file() and (old.name=='report.json' or old.match('image_*.png')):old.unlink()
     rom=(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds').read_bytes();offsets=g.archive(rom)
     resource=lambda i:g.decompress(rom[g.BASE+offsets[i]:g.BASE+offsets[i+1]])
     patterns=json.loads((ROOT/'test_current/rom_catalog/animation_audit.json').read_text(encoding='utf-8'))['patterns']
@@ -45,9 +50,16 @@ def main():
         for row in json.loads(gaps.read_text(encoding='utf-8'))['parts']:seen_frames[row['index_hash']]=dict(frames=row['frames'],scenes=sorted(row['scenes'])[:6])
     images={};totals=dict(patterns=len(patterns),patterns_read=0,patterns_spanning_images=0,pattern_errors=0,rectangles=0,out_of_bounds=0,covered=0,missing=0,missing_tiny=0)
     distinct={}
+    # Animated patterns load a different IMG per pose into the same VRAM slot:
+    # the same rectangles apply to every image of the group (as in
+    # inventory_animation_parts.py). Each (pattern, image) pair is read.
+    jobs=[]
     for pattern in patterns:
-        if len(pattern.get('image_group',[]))>1:totals['patterns_spanning_images']+=1
-        image=pattern['image'];palette_id=pattern.get('palette')
+        group=pattern.get('image_group') or [pattern['image']]
+        if len(group)>1:totals['patterns_spanning_images']+=1
+        for image in (group if args.all_images else [pattern['image']]):jobs.append((pattern,image))
+    for pattern,image in jobs:
+        palette_id=pattern.get('palette')
         try:
             pixels=g.pixels(resource(image));pat=resource(pattern['pattern'])
             palette=np.frombuffer(resource(palette_id)[8:],dtype='<u2') if palette_id is not None else np.zeros(16,dtype='<u2')
