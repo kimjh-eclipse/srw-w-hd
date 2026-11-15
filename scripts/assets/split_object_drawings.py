@@ -49,13 +49,13 @@ def cut(folder,drawing):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('root',type=Path);p.add_argument('--only',type=Path);p.add_argument('--selftest',action='store_true');p.add_argument('--out',type=Path)
+    p=argparse.ArgumentParser();p.add_argument('root',type=Path);p.add_argument('--only',type=Path);p.add_argument('--selftest',action='store_true');p.add_argument('--out',type=Path);p.add_argument('--drawing',default='candidate.png')
     a=p.parse_args()
     names=json.loads(a.only.read_text()) if a.only else sorted(d.name for d in a.root.iterdir() if d.is_dir() and (d/'contract.json').exists())
     out=a.out or a.root/('split_selftest' if a.selftest else 'split');(out/'parts').mkdir(parents=True,exist_ok=True)
     merged={};used=0
     for name in names:
-        folder=a.root/name;src=folder/('native_4x.png' if a.selftest else 'candidate.png')
+        folder=a.root/name;src=folder/('native_4x.png' if a.selftest else a.drawing)
         if not src.exists():continue
         used+=1
         for r,piece,mine,opaque in cut(folder,Image.open(src)):

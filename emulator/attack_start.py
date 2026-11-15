@@ -29,7 +29,7 @@ def build(root,rom,uid,wid,target,morale=150,max_frames=900):
     from hd_core import Core
     root=Path(root);catalog=json.loads((root/'test_current/parts/named_unit_catalog.json').read_text(encoding='utf-8'))
     unit=next(u for u in catalog['units'] if u['unit_id']==uid);pilots={p['pilot_id']:p for p in catalog['pilots']};weapons={w['weapon_id']:w for w in catalog['weapons']}
-    target=Path(target);core=Core(Path(rom),enabled=False,demo=True,user_dir=target.parent/'attack_start_saves')
+    target=Path(target);core=Core(Path(rom),enabled=False,demo=True,user_dir=target.parent/'attack_start_saves'/target.stem)
     def step(keys,n):
         core.buttons=set(keys)
         for _ in range(n):core.run();core.audio.clear()
