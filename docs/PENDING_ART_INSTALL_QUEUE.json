@@ -9779,6 +9779,43 @@
     "5357": "0b908039af3cc894c2947f2aa818034f3a658b8a0b559293084c0bb1a7e2e2bc"
    },
    "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_47/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/trowa_mask_cutin/robot_set/install/trowa_mask_cutin_new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "796491c98663d5455c1e77c116c8877f61a80c2882089990416b6d63cdf1f883",
+    "drawing": "c8947e52756fe91186e3b4d75f8cbc6795bce75740b36ee81e59016c8390cf84",
+    "native": "02fdb0cfa60ab60f9a6d281cb5b74ad4563cebf658e878c851a665849706b449",
+    "generated": "c8947e52756fe91186e3b4d75f8cbc6795bce75740b36ee81e59016c8390cf84"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1307481109,
+     "index_hash": 3836455117
+    },
+    {
+     "hash": 1877094963,
+     "index_hash": 1945370836
+    },
+    {
+     "hash": 2465153129,
+     "index_hash": 2369748550
+    },
+    {
+     "hash": 3138001861,
+     "index_hash": 3058516566
+    },
+    {
+     "hash": 652027864,
+     "index_hash": 1791234044
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/trowa_mask_cutin/robot_set): own RGB key, no recolour"
   }
  ],
  "not_ready": [],

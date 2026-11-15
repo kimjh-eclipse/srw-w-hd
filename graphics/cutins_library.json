@@ -442,8 +442,8 @@
     256,
     256
    ],
-   "image": "pilot_cutins/cutin_22818_hd.png",
-   "paint_image": "pilot_cutins/cutin_22818_hd.png",
+   "image": "pilot_cutins/trowa_mask/trowa_mask_bg2_22818_hd.png",
+   "paint_image": "pilot_cutins/trowa_mask/trowa_mask_bg2_22818_hd.png",
    "signatures": [
     2860819202
    ],
@@ -454,11 +454,10 @@
    "signature_mode": "image_origin",
    "gameplay_verified": false,
    "map_signature": 187360325,
-   "map_window_signature": 3192827102,
+   "map_window_signature": 707496858,
    "map_window_entries": 384,
    "presentation_role": "pilot_foreground",
-   "map_window_live_measured": 707496858,
-   "held_reason": "HD drawing lacks the mask and hand of the native picture; connect with map_window_live_measured after redraw"
+   "note": "Trowa half-mask cut-in face (BG2); Codex one-piece drawing 11/15, map window measured live"
   },
   {
    "id": 16,
@@ -6414,6 +6413,26 @@
    "map_window_signature": 752023458,
    "map_window_entries": 512,
    "presentation_role": "battle_effect_bg"
+  },
+  {
+   "id": 206,
+   "name": "trowa_mask_hair_22817",
+   "resource": 22817,
+   "layer": 1,
+   "layers": [
+    1
+   ],
+   "native_size": [
+    256,
+    256
+   ],
+   "image": "pilot_cutins/trowa_mask/trowa_mask_bg2_22818_hd.png",
+   "paint_image": "pilot_cutins/trowa_mask/trowa_mask_bg2_22818_hd.png",
+   "signatures": [
+    1058631903
+   ],
+   "presentation_role": "pilot_foreground",
+   "note": "Trowa half-mask cut-in hair (BG1); base-relative probe measured at unit_2 weapon 12 frame 225"
   }
  ]
 }
