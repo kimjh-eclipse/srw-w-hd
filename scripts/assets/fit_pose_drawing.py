@@ -57,17 +57,17 @@ def main():
     native=Image.open(folder/'native.png').convert('RGBA');W,H=native.size;nat=np.asarray(native)[:,:,3]>0
     cand=Image.open(folder/name).convert('RGBA');size=(W*S,H*S)
     before=iou_of(cand,nat,W,H);best=(before,1.,1.,0,0)
-    for sx in np.arange(.96,1.0401,.01):
-        for sy in np.arange(.96,1.0401,.01):
-            for dx in range(-8,9,2):
-                for dy in range(-8,9,2):
+    for sx in np.arange(.88,1.1201,.02):
+        for sy in np.arange(.88,1.1201,.02):
+            for dx in range(-12,13,3):
+                for dy in range(-12,13,3):
                     v=iou_of(transform(cand,sx,sy,dx,dy,size),nat,W,H)
                     if v>best[0]:best=(v,sx,sy,dx,dy)
     _,sx,sy,dx,dy=best;b=best
-    for sx2 in np.arange(sx-.01,sx+.0101,.0025):
-        for sy2 in np.arange(sy-.01,sy+.0101,.0025):
-            for dx2 in range(dx-2,dx+3):
-                for dy2 in range(dy-2,dy+3):
+    for sx2 in np.arange(sx-.02,sx+.0201,.005):
+        for sy2 in np.arange(sy-.02,sy+.0201,.005):
+            for dx2 in range(dx-3,dx+4):
+                for dy2 in range(dy-3,dy+4):
                     v=iou_of(transform(cand,sx2,sy2,dx2,dy2,size),nat,W,H)
                     if v>b[0]:b=(v,sx2,sy2,dx2,dy2)
     v,sx,sy,dx,dy=b;moved=transform(cand,sx,sy,dx,dy,size)

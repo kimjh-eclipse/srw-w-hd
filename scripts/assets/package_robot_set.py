@@ -62,7 +62,14 @@ def main():
     rows={}
     for c in sorted(root.glob('pose_*/contract.json')):
         for r in json.loads(c.read_text(encoding='utf-8')):rows.setdefault(r['hash'],r)
-    items=[];new=[];replace=[]
+    items=[];new=[];replace=[];skipped=[]
+    # The library as it is now: a sprite key may have been connected by another
+    # unit's pose set since this set was captured (units share parts).
+    active={}
+    for i,b in enumerate(lib,1):
+        if b.get('rgb_enabled',True) and not b.get('disabled'):active.setdefault(b['hash'],i)
+    done=json.loads((ROOT/'docs/ART_INSTALL_DONE.json').read_text(encoding='utf-8')).get('installed',[])
+    redrawn={d.get('atlas') for d in done if 'pose_packets' in str(d.get('source',''))}
     for f in parts.glob('*.png'):
         h=int(f.stem);r=rows[h]
         idx=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype='uint8').reshape(r['h'],r['w'])
@@ -71,8 +78,9 @@ def main():
         if not (art[:,:,3]>127).any():continue
         filled=grow_fill(art,want);filled[~want,3]=0
         it=dict(row=r,w=r['w'],h=r['h'],idx=idx,art=Image.fromarray(filled),drawn=float((art[:,:,3]>127)[want].mean()))
-        b=r['binding_id']
-        if b and lib[b-1].get('hash')==h:replace.append(it)
+        b=active.get(h)
+        if b and lib[b-1].get('atlas_id') in redrawn:skipped.append(h);continue   # already redrawn by another unit's set: keep that one
+        if b:it['row']=dict(r,binding_id=b);replace.append(it)
         else:new.append(it)
     # Replacements whose library sources overlap in the same image (same palette)
     # must show identical pixels there. The better-drawn part wins; the other
@@ -102,7 +110,7 @@ def main():
             ids=[x['replace_binding'] for x in rows_]
             return dict(bindings=ids,nested=True,prior_binding_spec_sha256={str(i):sorted(spec_hash(lib[i-1]))[0] for i in ids},
                 note=f'whole-pose redraw split by Claude ({root.relative_to(ROOT).as_posix()}): replacement of existing RGB-keyed HD')
-        summary['replace']=write_packet(out/'replace',placed,H,rrow,rentry)
+        summary['replace']=write_packet(out/f'{root.parent.name}_replace',placed,H,rrow,rentry)
     if new:
         placed,H=pack(new)
         def nrow(it,box):
@@ -113,8 +121,8 @@ def main():
         def nentry(rows_):
             return dict(bindings=[],new_source_keys=[dict(hash=x['hash'],index_hash=x['index_hash']) for x in rows_],
                 note=f'whole-pose redraw split by Claude ({root.relative_to(ROOT).as_posix()}): own RGB key, no recolour')
-        summary['new']=write_packet(out/'new',placed,H,nrow,nentry)
-    print('replace',len(replace),'new',len(new),'mean drawn share',round(float(np.mean([i['drawn'] for i in replace+new])),3))
+        summary['new']=write_packet(out/f'{root.parent.name}_new',placed,H,nrow,nentry)
+    print('replace',len(replace),'new',len(new),'kept from other units',len(skipped),'mean drawn share',round(float(np.mean([i['drawn'] for i in replace+new])),3))
     (out/'SUMMARY.json').write_text(json.dumps({k:dict(source=v['source'],parts=len(v.get('bindings') or v.get('new_source_keys'))) for k,v in summary.items()},ensure_ascii=False,indent=1),encoding='utf-8')
 
 

@@ -30,6 +30,7 @@ def main():
         free=shutil.disk_usage(ROOT).free/2**30
         if free<a.min_free:print('STOP low disk',round(free,1),'GB before unit',u,flush=True);break
         rs=ROOT/f'test_current/parts/pose_packets/unit_{u}/robot_set'
+        if (rs/'HOLD_REDRAW').exists():print(u,'held for redraw, not installed',flush=True);continue
         status=json.loads((rs/'DRAWINGS_STATUS.json').read_text(encoding='utf-8'))
         accepted=[k for k,v in status.items() if v['state']=='accepted']
         if not accepted:print(u,'nothing accepted',flush=True);continue
@@ -38,18 +39,17 @@ def main():
         if split.exists():shutil.rmtree(split)
         try:
             run('scripts/assets/split_object_drawings.py',rs,'--drawing','candidate_fit.png','--out',split,'--only',only)
-            run('scripts/assets/package_robot_set.py',rs)
             q=ROOT/'docs/PENDING_ART_INSTALL_QUEUE.json';queue=json.loads(q.read_text(encoding='utf-8'));sources=[]
-            for kind in ('replace','new'):
-                f=rs/'install'/kind/'queue_entry.json'
-                if not f.exists():continue
+            inst=rs/'install'
+            if inst.exists():shutil.rmtree(inst)
+            run('scripts/assets/package_robot_set.py',rs)
+            for f in sorted(inst.glob('*/queue_entry.json')):
                 e=json.loads(f.read_text(encoding='utf-8'));sources.append(e['source'])
                 queue['ready_candidates']=[c for c in queue['ready_candidates'] if c.get('source')!=e['source']]+[e]
             q.write_text(json.dumps(queue,ensure_ascii=False,indent=1),encoding='utf-8')
             # Originals (1..5263) of this unit are replaced under the user's whole-robot redraw order.
             originals=[]
-            f=rs/'install'/'replace'/'contract.json'
-            if f.exists():originals=[r['replace_binding'] for r in json.loads(f.read_text(encoding='utf-8')) if r['replace_binding']<=5263]
+            for f in inst.glob('*_replace/contract.json'):originals+=[r['replace_binding'] for r in json.loads(f.read_text(encoding='utf-8')) if r['replace_binding']<=5263]
             allow=['--allow-original',*originals] if originals else []
             run('scripts/assets/install_pending_art.py','--only',*sources)
             flags=([] if n==len(a.units)-1 else ['--no-caches'])+allow
