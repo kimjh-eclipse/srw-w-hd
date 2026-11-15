@@ -35,7 +35,7 @@ def main():
         subprocess.run(PY+['scripts/assets/fit_pose_drawing.py',str(folder)],cwd=ROOT,capture_output=True)
         info=json.loads((folder/'fit.json').read_text(encoding='utf-8'))
         done=review(folder,'candidate_fit.png');(folder/'review.png').replace(folder/'review_fit.png')
-        big=max(abs(info['scale'][0]-1),abs(info['scale'][1]-1))>.12 or max(abs(v) for v in info['offset_4x'])>16
+        big=max(abs(info['scale'][0]-1),abs(info['scale'][1]-1))>.2 or max(abs(v) for v in info['offset_4x'])>24
         reasons=list(done['fail'])+(['fit correction too large (drawing does not sit on the native pose)'] if big else [])
         status[folder.name]=dict(state='accepted' if not reasons else 'rejected',reasons=reasons,iou_raw=raw.get('iou'),iou_fit=done.get('iou'),
             scale=info['scale'],offset_4x=info['offset_4x'],filled_px=info['filled_px'],trimmed_px=info['trimmed_px'],

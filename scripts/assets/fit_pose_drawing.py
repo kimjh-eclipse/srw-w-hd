@@ -69,10 +69,10 @@ def main():
         a=np.asarray(canvas.crop((32,32,32+w,32+h)))>127
         return float((a&nat2).sum()/max((a|nat2).sum(),1))
     best=(score(1,1,0,0),1.,1.,0,0)
-    for sx in np.arange(.88,1.1201,.02):
-        for sy in np.arange(.88,1.1201,.02):
-            for dx in range(-12,13,3):
-                for dy in range(-12,13,3):
+    for sx in np.arange(.80,1.2001,.02):
+        for sy in np.arange(.80,1.2001,.02):
+            for dx in range(-20,21,4):
+                for dy in range(-20,21,4):
                     v=score(sx,sy,dx,dy)
                     if v>best[0]:best=(v,sx,sy,dx,dy)
     _,sx,sy,dx,dy=best;b=best

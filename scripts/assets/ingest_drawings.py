@@ -49,6 +49,9 @@ def work(item):
         else:r=subprocess.run(PY+['scripts/assets/split_unified_sheet.py',str(rs)],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
         if r.returncode:return f"{u} split failed: {(r.stderr or r.stdout).strip().splitlines()[-1:]}"
         res=[l for l in r.stdout.splitlines() if 'px per native' in l]
+        subprocess.run(PY+['scripts/verify/drawing_resolution.py',u[5:],'--hold'],cwd=ROOT,capture_output=True)
+        if (rs/'HOLD_REDRAW').exists() and (rs/'HOLD_REDRAW').stat().st_mtime>drawing_of(rs)[1]:
+            return f"{u} {kind} held: drawn resolution below 2.5 px per native px (SHEETS built for redraw)"
         (rs/'DRAWINGS_STATUS.json').unlink(missing_ok=True)
         r=subprocess.run(PY+['scripts/assets/process_pose_drawings.py',str(rs)],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
         subprocess.run(PY+['scripts/verify/sheet_side_by_side.py',u[5:],'1800'],cwd=ROOT,capture_output=True)

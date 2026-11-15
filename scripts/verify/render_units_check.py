@@ -28,14 +28,14 @@ frames={sorted(frames)}
 for f in range(frames[-1]+1):
     core.run();core.audio.clear()
     if f in frames:
-        img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities))
+        img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities),effect_foreground=core.effect_foreground,window=core.window,cutin_palettes=getattr(core,'cutin_palettes',None))
         import time
         for _ in range(25):   # let asynchronously prepared art (portraits) finish, as a running game would a moment later
             p=r.portraits.pending if hasattr(r,'portraits') else {{}}
             if hasattr(r,'portraits'):r.portraits.collect_prepared()
             if not getattr(r.portraits,'pending',None):break
             time.sleep(.1)
-        img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities))
+        img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities),effect_foreground=core.effect_foreground,window=core.window,cutin_palettes=getattr(core,'cutin_palettes',None))
         img.save(r'{out_prefix}_'+str(f)+'.png')
 """
     subprocess.run([sys.executable,'-X','utf8','-c',code],cwd=ROOT,capture_output=True)

@@ -69,7 +69,9 @@ def main():
     for i,b in enumerate(lib,1):
         if b.get('rgb_enabled',True) and not b.get('disabled'):active.setdefault(b['hash'],i)
     done=json.loads((ROOT/'docs/ART_INSTALL_DONE.json').read_text(encoding='utf-8')).get('installed',[])
-    redrawn={d.get('atlas') for d in done if 'pose_packets' in str(d.get('source',''))}
+    # Atlases redrawn by OTHER units' pose sets; this unit's own earlier set is replaced.
+    me=root.parent.name+'/'
+    redrawn={d.get('atlas') for d in done if 'pose_packets' in str(d.get('source','')) and me not in str(d.get('source','')).replace(chr(92),'/')}
     for f in parts.glob('*.png'):
         h=int(f.stem);r=rows[h]
         idx=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype='uint8').reshape(r['h'],r['w'])
