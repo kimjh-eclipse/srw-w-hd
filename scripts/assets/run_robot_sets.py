@@ -6,7 +6,7 @@ Prints one line per finished step so a monitor can follow.
 
   py -3.11 -X utf8 scripts/assets/run_robot_sets.py 0 1 3 4 ...
 """
-import json,subprocess,sys
+import json,shutil,subprocess,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from scripts._bootstrap import ROOT
@@ -36,6 +36,8 @@ def main():
     for uid in map(int,sys.argv[1:]):
         base=ROOT/f'test_current/parts/pose_packets/unit_{uid}';rs=base/'robot_set'
         if (rs/'PARTITIONS_SHEET.png').exists():print(uid,'already done',flush=True);continue
+        free=shutil.disk_usage(ROOT).free/2**30
+        if free<5:print('STOP low disk',round(free,1),'GB before unit',uid,flush=True);break
         code,last,err=step(['scripts/assets/capture_unit_poses.py','--unit',str(uid),'--frames','0:1800:2'])
         print(uid,'capture',code,last,err,flush=True)
         if code:continue

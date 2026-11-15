@@ -4,7 +4,7 @@ capture poses per weapon (build_pose_packets) and objects (build_object_packets)
   py -3.11 -X utf8 scripts/assets/capture_unit_poses.py --unit 2 [--frames 0:1800:1]
 Output: test_current/parts/pose_packets/unit_<U>/weapon_<W>/...
 """
-import argparse,json,subprocess,sys
+import argparse,json,shutil,subprocess,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]));sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'emulator'))
 from scripts._bootstrap import ROOT
@@ -21,8 +21,9 @@ def main():
     from attack_start import build_in_child
     status={}
     for wid in unit['weapon_ids']:
-        state=CACHE/f'unit_{a.unit}_weapon_{wid}.state'
+        state=CACHE/f'unit_{a.unit}_weapon_{wid}.state';built=False
         if not state.exists():
+            built=True
             result=build_in_child(ROOT,rom,a.unit,wid,state)
             if not (result.get('ok') and state.exists()):status[wid]='no start: '+str(result.get('reason'));print(wid,status[wid]);continue
         out=base/f'weapon_{wid}'
@@ -30,6 +31,15 @@ def main():
         if r.returncode:status[wid]='pose capture failed: '+r.stderr.strip().splitlines()[-1];print(wid,status[wid]);continue
         r=subprocess.run([sys.executable,'-X','utf8','scripts/assets/build_object_packets.py',str(out)],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
         status[wid]=r.stdout.strip().splitlines()[0] if r.returncode==0 else 'objects failed: '+r.stderr.strip().splitlines()[-1]
+        # Per-frame pose folders are only the input of the objects; drop them
+        # right away (about 1 GB per unit otherwise).
+        if r.returncode==0:
+            from scripts.assets.prune_pose_captures import prune_weapon
+            prune_weapon(out)
+        # A start state built only for this batch (about 12 MB) is rebuilt on
+        # demand by the test window; do not keep it.
+        if built:
+            state.unlink(missing_ok=True);shutil.rmtree(CACHE/'attack_start_saves'/state.stem,ignore_errors=True)
         print(wid,status[wid],flush=True)
     base.mkdir(parents=True,exist_ok=True);(base/'STATUS.json').write_text(json.dumps(status,ensure_ascii=False,indent=1),encoding='utf-8')
 
