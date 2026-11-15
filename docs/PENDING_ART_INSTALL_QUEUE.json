@@ -6485,6 +6485,158 @@
     "5731": "033afbffeca79828d88966507bf761883960189723c6ee385ce71d49efb7d04f"
    },
    "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_29/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_16/robot_set/install/unit_16_new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "0459b7c09205c324857b4cfa25d5b602236d68500625fc9484319f9dc958f4fe",
+    "drawing": "31db7bfdbb3a5161fe62d5ac7592d378f13830314393c1ef187c802d9f0226bb",
+    "native": "4287d5eaebf9c34ae5ba1bbc4f5685de14db09c6f0998db348b8228e960d6518",
+    "generated": "31db7bfdbb3a5161fe62d5ac7592d378f13830314393c1ef187c802d9f0226bb"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1366199524,
+     "index_hash": 1281270369
+    },
+    {
+     "hash": 2471491694,
+     "index_hash": 3550362544
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_16/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_30/robot_set/install/unit_30_new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "02dfebdbecee78370514073a65898dff8c8dd70a551df6ba86eff39a4664e5aa",
+    "drawing": "b9ab7cfa63e0ae1167079a226f9e598458753e2c9806e6ce70acc6b3aa17a2dd",
+    "native": "a6e5184f9048f70941e24f9feb27a453d5f266858eaca7f39caabab2ce8d215c",
+    "generated": "b9ab7cfa63e0ae1167079a226f9e598458753e2c9806e6ce70acc6b3aa17a2dd"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1585533072,
+     "index_hash": 4219253819
+    },
+    {
+     "hash": 1637419324,
+     "index_hash": 3230233146
+    },
+    {
+     "hash": 1956153049,
+     "index_hash": 3764367396
+    },
+    {
+     "hash": 2272810444,
+     "index_hash": 2221386304
+    },
+    {
+     "hash": 312339017,
+     "index_hash": 4216912778
+    },
+    {
+     "hash": 3253122121,
+     "index_hash": 1985972662
+    },
+    {
+     "hash": 3412027471,
+     "index_hash": 989797111
+    },
+    {
+     "hash": 3562038129,
+     "index_hash": 3454836919
+    },
+    {
+     "hash": 3918008928,
+     "index_hash": 976157282
+    },
+    {
+     "hash": 4270632650,
+     "index_hash": 4233514353
+    },
+    {
+     "hash": 2080107714,
+     "index_hash": 1040867930
+    },
+    {
+     "hash": 3195000480,
+     "index_hash": 2275290431
+    },
+    {
+     "hash": 3708312877,
+     "index_hash": 3153109567
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_30/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_30/robot_set/install/unit_30_replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "e572a1eb2f3f85b786446f481f697b039862d7aff05eb27d4b3b6a911d83da04",
+    "drawing": "2cf566dc60534eb736a3426a87b3c651cdcd0741816ba489519a8918c8085e7d",
+    "native": "f45071ccf3f5300c83ae2057d249433a064da09099718d096d211093e56814fc",
+    "generated": "2cf566dc60534eb736a3426a87b3c651cdcd0741816ba489519a8918c8085e7d"
+   },
+   "bindings": [
+    5721,
+    5722,
+    5725,
+    5726,
+    5724,
+    14697,
+    5723
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "5721": "87510a8667d95ebb860cd56ea30caae6c55b7d4d8f2923a755c27c810cc2790f",
+    "5722": "37200b042e1e913ec1ac878033ff5aef09cc7152928ac516384130e269a72b7c",
+    "5725": "1529073c9ed0927f6a4711b86fe7ca98600e9362e9c66d27a4f141cd94911f15",
+    "5726": "fbe7adb40b88aeeac437ac6e8e99b7b921b7ec18d2cb3087e42f8e9ed5fcb067",
+    "5724": "df48ae793991806a81506127de6435505239307a76558649294a1ae42e10eb10",
+    "14697": "3b80206ba20bdabaccc17f9da7a1a5f765f840c3cbbcaebd2cc8c88b99dfade9",
+    "5723": "8c5604d2b92f5079e8699b95d4e52afd3a8651cdaa66464ab71ee10406500251"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_30/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_31/robot_set/install/unit_31_replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "77714b298fed72867cf3589c68875a09f00d32ace916ff4ceb49f61d30a51aa2",
+    "drawing": "ea125d59a6b9ebe17681dc92ff9a269118d2b8795cda95a9631898daffb660ea",
+    "native": "e217b66ca89ccf13059e5979c13c28c981d71c97f6a3e7e5fbe1d1bc95ab90a4",
+    "generated": "ea125d59a6b9ebe17681dc92ff9a269118d2b8795cda95a9631898daffb660ea"
+   },
+   "bindings": [
+    5295,
+    14687,
+    5296
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "5295": "0aa3d5c7a2604f2fa5a3869b099338b29fba2ad3abe4d213bc405d6892aad83e",
+    "14687": "9c6ae206be22b4945d78522e04303fb7fba33312f7f297b57b16f2b2a04d4d3b",
+    "5296": "854893d4712b5890f01061d7a8f93f0049dfa7de531ca216d19966d46f708978"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_31/robot_set): replacement of existing RGB-keyed HD"
   }
  ],
  "not_ready": [],
