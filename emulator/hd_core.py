@@ -88,6 +88,10 @@ class Core:
         self.part_palettes=np.zeros((128,16),dtype='uint16')
         blocked_index_keys=set(library.get('indexed_collision_keys',[]))
         indexed=[(b['index_hash'],i) for i,b in enumerate(library['bindings'],1) if b.get('dynamic_palette') and b.get('indexed_safe',True) and not b.get('disabled') and b['index_hash'] not in blocked_index_keys]
+        # No recolouring (user decision 11/15-16): a sprite shown in another
+        # palette than its HD art (fade, flash, tint) is not matched by shape;
+        # the original pixels stay for that moment. Exact RGB keys still match.
+        if os.environ.get('SRWW_NO_RECOLOUR','1')!='0':indexed=[]
         self.indexed_bridge=hasattr(self.api,'retro_srw_register_indexed_parts')
         if indexed and not self.indexed_bridge:raise RuntimeError('전체 기체용 코어를 업데이트해야 합니다.')
         if self.indexed_bridge:

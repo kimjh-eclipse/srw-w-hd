@@ -26,6 +26,9 @@ RECOLOUR_ANCHOR=os.environ.get('SRWW_RECOLOUR_ANCHOR','1')!='0'
 SHORTCUTS=os.environ.get('SRWW_RENDER_SHORTCUTS','1')!='0'
 OBJ_BLEND=os.environ.get('SRWW_OBJ_BLEND','1')!='0'
 RECOLOUR_SMOOTH=os.environ.get('SRWW_RECOLOUR_SMOOTH','1')!='0'
+# Whole-palette rules (fade/flash/tint) applied to the HD picture at run time.
+PALETTE_AFFINE=os.environ.get('SRWW_PALETTE_AFFINE','1')!='0'
+PALETTE_AFFINE_TOLERANCE=float(os.environ.get('SRWW_PALETTE_AFFINE_TOLERANCE','34'))   # 8-bit units (about 4 of 31)
 
 def blotch_share(rgb,painted,alpha):
     """Share of opaque pixels that jump 40+ from their 3x3 median where the
@@ -616,7 +619,30 @@ class PartsRenderer:
             target_palette=np.stack([(colors&31)*255//31,((colors>>5)&31)*255//31,((colors>>10)&31)*255//31],-1)
             if np.array_equal(target_palette[1:],np.asarray(spec['original_palette_rgb'])[1:]):target_palette=None
         if target_palette is not None and np.array_equal(np.asarray(target_palette),np.asarray(spec.get('original_palette_rgb',self.source_palette))):target_palette=None
-        if target_palette is not None:
+        affine_done=False
+        if target_palette is not None and PALETTE_AFFINE:
+            # Fades, flashes and tints change the whole palette by one rule.
+            # Fit that rule per channel (target = a*source + b over the slots
+            # this part uses) and apply it to the whole HD picture: no
+            # per-pixel slot guess, so no blotches. Other palettes (a real
+            # colour variant) do not fit and take the path below.
+            source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
+            target=np.asarray(target_palette,dtype='float32')
+            used=self.used_palette_indices(binding,source_palette,spec)
+            if used is None or not len(used):used=np.arange(1,min(len(source_palette),len(target)))
+            src=source_palette[used];dst=target[used]
+            A=np.stack([src,np.ones_like(src)],-1)            # (n,3,2)
+            coef=np.zeros((3,2),dtype='float32');worst=0.
+            for ch in range(3):
+                design=A[:,ch,:]
+                if np.ptp(src[:,ch])<1:sol=np.array([0.,float(dst[:,ch].mean())])
+                else:sol,*_=np.linalg.lstsq(design,dst[:,ch],rcond=None)
+                coef[ch]=sol;worst=max(worst,float(np.abs(design@sol-dst[:,ch]).max()))
+            if worst<=PALETTE_AFFINE_TOLERANCE:
+                pixels=np.array(art);rgb=pixels[:,:,:3].astype('float32')
+                pixels[:,:,:3]=np.clip(np.rint(rgb*coef[:,0]+coef[:,1]),0,255).astype('uint8')
+                art=Image.fromarray(pixels);affine_done=True
+        if target_palette is not None and not affine_done:
             source_palette=np.asarray(spec.get('palette_source_rgb',spec.get('original_palette_rgb',self.source_palette)),dtype='float32')
             residual,indices=self.material_map(binding,art,source_palette,spec)
             pixels=np.array(art)
