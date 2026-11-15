@@ -1,0 +1,20 @@
+{
+  "source": "test_current/parts/claude_visual94340_broad_band_v2",
+  "bindings": [
+    94340
+  ],
+  "contract": "install_contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_selected.png",
+  "file_sha256": {
+    "contract": "cc0a5ebc37ffa3db787deec64e3d6bdeea96ba72884c6a8d625cda91015bd560",
+    "drawing": "4d73c220c1cc33dcee46f06c5d5ff640ff975928eb78c3d538851d73025b9fe1",
+    "native": "2c0a8f50b269e54da87040353392d6fda745decc18d40514e8111a625f29f8cc",
+    "generated": "2648cdd5368557e9e506866a38a5b7d8ce2999251b7d46d9052a0d74df40ed71"
+  },
+  "prior_binding_spec_sha256": {
+    "94340": "1ed5878a6ff0941416457242d4dcb4ad5bdbd263fe6773b04e13cc571c64aa3f"
+  },
+  "note": "실제 흰 띠 폭 교정 후보, 설치·굽기·검증은 Claude 대기"
+}

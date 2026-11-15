@@ -1,0 +1,1 @@
+최종19808교체11후보완료: ready_replacement11.json/normalized_installer_contract11.json. 원계약9actual/2ROMraw+actualfullpalette미관측보존. 정상92653불변. installer좌표로NullCache prepare11을직접실행해기존좌표prepare와같음확인. source기하11 IoU1/면적1;색·실제이음·HD재생/공식QA는Claude대기. root만새atlas분기11설치/굽기.

@@ -1,0 +1,73 @@
+{
+  "new_whole_master_drawings": 1,
+  "binding_replacements": 2,
+  "generated_file": "generated.png",
+  "generated_file_sha256": "85800074665b106779dcc3f7e0e71f6ebda2246098a6bd6e4545b5aef9022837",
+  "generated_size": [
+    2048,
+    768
+  ],
+  "generation_prompt": "generation_prompt.txt",
+  "input_reference": "refine_generated_true_alpha.png",
+  "input_native_parent_extent": [
+    32,
+    8
+  ],
+  "input_generation_canvas": [
+    32,
+    12
+  ],
+  "padding": "Bottom4rows ofgenerationcanvas areempty sourcepadding; artcoordinates untouched.",
+  "candidate": "candidate.png",
+  "candidate_sha256": "02c10017df0b41c9ec595e45b0b14b640b10a4ec1cbf618115395caad9c45cb9",
+  "normalization": "Wholegenerated32x12 uniformlyresizedto128x48,thenfixedtop128x32parentcrop. No pixel-derivedmask, clippingpaths, contourretarget, alpha threshold/deletion or color replacement.",
+  "candidate_pixels_equal_own_generated_resize_unpad": true,
+  "child_crop": [
+    0,
+    0,
+    16,
+    8
+  ],
+  "child_generated_separately": false,
+  "shared_full16": true,
+  "excluded_palette_variant_binding": 93523,
+  "root_drafts_used": false,
+  "shared_RGBA_checks": [
+    {
+      "slot_a": 93493,
+      "slot_b": 93510,
+      "source_overlap": [
+        160,
+        56,
+        16,
+        8
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "formal_QA": false,
+  "generation_calls": 2,
+  "final_new_whole_master_count": 1,
+  "input_reference_origin": "Own firstgenerated whole32x12 master, onlyRGBunderalpha0clearedforreference; alphaunchanged. Firstgeneration used exactnative paddedtruealpha reference.",
+  "generation_chain": [
+    {
+      "file": "generated_draft.png",
+      "sha256": "4483e16a30db6d14e681d249fae0f9a7938f7e38c1f762a312b822e2ee8e2a03",
+      "reference": "reference_padded_true_alpha.png",
+      "role": "Firstgeometrycorrectownmaster; interiorcellseamsnotselected"
+    },
+    {
+      "file": "generated_flat.png",
+      "sha256": "85800074665b106779dcc3f7e0e71f6ebda2246098a6bd6e4545b5aef9022837",
+      "reference": "refine_generated_true_alpha.png",
+      "role": "Selectedflatunified2Dstyle refinement; samewholeparent layout"
+    }
+  ],
+  "native_or_root_draft_paint_used": false,
+  "root_parent_whole_draft_used": false,
+  "root_parent_cells_draft_used": false,
+  "far_empty_alpha_gt8_fraction": 0.0,
+  "far_empty_max_alpha": 3,
+  "background_note": "155faroutputpixelsalpha1..3 remain. Generatedalpha preserved; no threshold/deletion used. No actualgrayhaze detected in graycomposite."
+}

@@ -1,0 +1,878 @@
+[
+  {
+    "state": "test_current\\parts\\true_missing_21071\\unit325_weapon1320_source.state",
+    "frame": 301,
+    "video_epoch": 565,
+    "engine": 0,
+    "oam": 3,
+    "attributes": [
+      32831,
+      32825,
+      18954
+    ],
+    "screen_x": 57,
+    "screen_y": 63,
+    "w": 16,
+    "h": 32,
+    "display_w": 16,
+    "display_h": 32,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 4,
+    "tile_number": 522,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 4205840513,
+    "index_hash": 1664872947,
+    "material": 3403182212,
+    "used_mask": 28,
+    "opaque": 25,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxjYMAJmJlRuUxMzCzIXGQeUDELA24uAyoPwyY0Lppq/JrRdRNSTkB6hAEAhLwAUg==",
+    "indices_sha256": "61640b081edc86acbd816b8810aa7f39ec4235ed414ada853ef377274c416466",
+    "palette_15bit": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "original_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 301,
+        "oam": 3
+      },
+      {
+        "frame": 302,
+        "oam": 3
+      },
+      {
+        "frame": 345,
+        "oam": 3
+      },
+      {
+        "frame": 346,
+        "oam": 3
+      },
+      {
+        "frame": 473,
+        "oam": 3
+      },
+      {
+        "frame": 474,
+        "oam": 3
+      }
+    ],
+    "atlas_box": [
+      80,
+      32,
+      16,
+      32
+    ],
+    "source_box": [
+      80,
+      32,
+      16,
+      32
+    ],
+    "replace_binding": 92601,
+    "candidate_file": "candidate_atlas.png",
+    "note": "21071 부모92602 상부8성분 실제폭/위치/사이간격 유지하며 새연속곡선/연속색면 교정. 작은자식92601/92604는같은 own_master.png 공유. source/atlas master[80,32,32,64]. 하부기존곡선과다른팔레트보존. 1px점HD이득제한, 중앙연결/공식QA미수행.",
+    "slot": 3,
+    "actual_palette_bgr555": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "actual_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 21071,
+      "source_x": 80,
+      "source_y": 32
+    }
+  },
+  {
+    "state": "test_current\\parts\\true_missing_21071\\unit325_weapon1320_source.state",
+    "frame": 303,
+    "video_epoch": 567,
+    "engine": 0,
+    "oam": 0,
+    "attributes": [
+      32829,
+      49208,
+      18954
+    ],
+    "screen_x": 56,
+    "screen_y": 61,
+    "w": 32,
+    "h": 64,
+    "display_w": 32,
+    "display_h": 64,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 4,
+    "tile_number": 522,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 3422963716,
+    "index_hash": 2341811393,
+    "material": 1326334568,
+    "used_mask": 30,
+    "opaque": 241,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJy1VVsCgzAIq8D9z7zqJg9N4Gt81QIBQtS1qqnoIqanx1SOA4aoiBoP0Mv7RRAB4ObnM6JxfyOq39YaLjrD88QJgSWiYK1NA2XySto0NdUTABkFsPSqoDx9mxw9gE5+rpVfA+CuAKCkwZ+XgUazvqc9dWTB0BgK8xsNKNxw0vHA3xr4Y8oApf5jE5eTACaB+SvwKDv4vSgRqG/YYH8WCoDtp6nxm22NM6leMTl+jZs3hx3ImdSF1Rl2q5uNMaTHFxgDBPWUZF8TgifnlGLlCYbcACDA+gpV+k8d2VP5Ukq83BUBfrkluYky7mSyeP/98j+4vVT5AZBAAqQ=",
+    "indices_sha256": "fd2c0ffb9f2966829388765f8aafd2b93f84121fb58aea0078e0f60c0deeb564",
+    "palette_15bit": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "original_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 303,
+        "oam": 0
+      },
+      {
+        "frame": 304,
+        "oam": 0
+      },
+      {
+        "frame": 347,
+        "oam": 0
+      },
+      {
+        "frame": 348,
+        "oam": 0
+      },
+      {
+        "frame": 475,
+        "oam": 0
+      },
+      {
+        "frame": 476,
+        "oam": 0
+      }
+    ],
+    "atlas_box": [
+      80,
+      32,
+      32,
+      64
+    ],
+    "source_box": [
+      80,
+      32,
+      32,
+      64
+    ],
+    "replace_binding": 92602,
+    "candidate_file": "candidate_atlas.png",
+    "note": "21071 부모92602 상부8성분 실제폭/위치/사이간격 유지하며 새연속곡선/연속색면 교정. 작은자식92601/92604는같은 own_master.png 공유. source/atlas master[80,32,32,64]. 하부기존곡선과다른팔레트보존. 1px점HD이득제한, 중앙연결/공식QA미수행.",
+    "slot": 0,
+    "actual_palette_bgr555": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "actual_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 21071,
+      "source_x": 80,
+      "source_y": 32
+    }
+  },
+  {
+    "state": "test_current\\parts\\true_missing_21071\\unit325_weapon1320_source.state",
+    "frame": 301,
+    "video_epoch": 565,
+    "engine": 0,
+    "oam": 2,
+    "attributes": [
+      32829,
+      32839,
+      18956
+    ],
+    "screen_x": 71,
+    "screen_y": 61,
+    "w": 16,
+    "h": 32,
+    "display_w": 16,
+    "display_h": 32,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 4,
+    "tile_number": 524,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 816556949,
+    "index_hash": 187804455,
+    "material": 1551154620,
+    "used_mask": 30,
+    "opaque": 92,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJyFkDECwCAMAgnw/zdX20HD0LAF0ZyIwi2LVRoMMu90YzsIB5MUY4AtjGZ4Yf0HksoRAKsHlHN2w/jHPnbMugy/GOiiWx5nycd7HlD1BQ4+MDuLVXPpeAAQ5AD0",
+    "indices_sha256": "5cdd20c0742312cfc9aac8736663594dad337f00b7c79e5084675305d7eee252",
+    "palette_15bit": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "original_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 301,
+        "oam": 2
+      },
+      {
+        "frame": 302,
+        "oam": 2
+      },
+      {
+        "frame": 345,
+        "oam": 2
+      },
+      {
+        "frame": 346,
+        "oam": 2
+      },
+      {
+        "frame": 473,
+        "oam": 2
+      },
+      {
+        "frame": 474,
+        "oam": 2
+      }
+    ],
+    "atlas_box": [
+      96,
+      32,
+      16,
+      32
+    ],
+    "source_box": [
+      96,
+      32,
+      16,
+      32
+    ],
+    "replace_binding": 92604,
+    "candidate_file": "candidate_atlas.png",
+    "note": "21071 부모92602 상부8성분 실제폭/위치/사이간격 유지하며 새연속곡선/연속색면 교정. 작은자식92601/92604는같은 own_master.png 공유. source/atlas master[80,32,32,64]. 하부기존곡선과다른팔레트보존. 1px점HD이득제한, 중앙연결/공식QA미수행.",
+    "slot": 2,
+    "actual_palette_bgr555": [
+      21140,
+      32767,
+      32696,
+      32624,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "actual_palette_rgb": [
+      [
+        164,
+        164,
+        164
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        197,
+        238,
+        255
+      ],
+      [
+        131,
+        222,
+        255
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 21071,
+      "source_x": 96,
+      "source_y": 32
+    }
+  }
+]

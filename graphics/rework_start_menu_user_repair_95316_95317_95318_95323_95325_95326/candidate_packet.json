@@ -1,0 +1,31 @@
+{
+  "source": "test_current/ui/start_menu_user_repair",
+  "bindings": [
+    95316,
+    95317,
+    95318,
+    95323,
+    95325,
+    95326
+  ],
+  "contract": "contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_master.png",
+  "file_sha256": {
+    "contract": "d87f2de5ecdcb3512f003e7d06bdc5ce8ab660850702107ed824ee8b982486bf",
+    "drawing": "fa34ec31c185ed6ad850123e378320c07654a803385aa347409b8cf381759eca",
+    "native": "0f6c013d59c6761a88067ff1aa43b554c5de4ef810164587a19f730e8fdf84f5",
+    "generated": "fa34ec31c185ed6ad850123e378320c07654a803385aa347409b8cf381759eca"
+  },
+  "prior_binding_spec_sha256": {
+    "95316": "3884573a4694e0193c39124db7749789bfdaf259b411c9ed32183b4aa512d206",
+    "95317": "b87bac21f4c0ae5b122474aae755d25e00cae471d8226cd3f92a6b586bfb1b7b",
+    "95318": "e17d4dd7418d55a73d654ba5e730f4321ad61c4bc75bab0a193ffe7e860bb699",
+    "95323": "3fe153961b9ef3301d28538668c6623c516ec8e498207884d34415d7c16aeda7",
+    "95325": "be5a9d1c89ecf55b9d6843895594dcaa0997275683291c750ba19c3b5921d206",
+    "95326": "fa8f5417a8de3a855c13c467b4278c879b61702eca87a3665aef3e2984e9321b"
+  },
+  "nested": true,
+  "note": "선택/비선택패널의원본각도·길이복원. 기존문자와반복선보존. 코드native vectorUI2소재/타이틀새그림0. 실재생QA대기."
+}

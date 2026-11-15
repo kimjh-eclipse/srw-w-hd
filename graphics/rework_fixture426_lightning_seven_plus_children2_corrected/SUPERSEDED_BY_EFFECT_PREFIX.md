@@ -1,0 +1,1 @@
+검사분류가아틀라스명effect/fx를사용하므로기존연출분류를유지하는effect_fixture426_lightning_seven_plus_children2_corrected로같은RGBA/ID를다시등록했습니다.옛그림은이름변경이력이며현재설치/manifest대상이아닙니다.

@@ -1,0 +1,37 @@
+{
+  "same_palette_overlapping": [
+    {
+      "binding": 93493,
+      "source_box": [
+        160,
+        56,
+        32,
+        8
+      ],
+      "full16_palette_same": true
+    },
+    {
+      "binding": 93510,
+      "source_box": [
+        160,
+        56,
+        16,
+        8
+      ],
+      "full16_palette_same": true
+    }
+  ],
+  "different_palette_overlapping": [
+    {
+      "binding": 93523,
+      "source_box": [
+        160,
+        56,
+        32,
+        8
+      ],
+      "full16_palette_same": false
+    }
+  ],
+  "explicit_exclusion": 93523
+}

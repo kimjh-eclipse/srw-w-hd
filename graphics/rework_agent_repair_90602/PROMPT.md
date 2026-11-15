@@ -1,0 +1,7 @@
+Mode: built-in image_gen edit; transparent_background=true.
+
+Input 1: head_current_hd.png (edit target). Input 2: head_native_reference_24x.png (authoritative actual cached palette and geometry).
+
+Use case: precise-object-edit. Asset: replacement 32x32 native-sized game sprite tile, rendered at 4x or higher with transparent background. Repair only the stepped pixel-like upper red helmet crest above the gold V fin: replace its blocky edges with clean smooth ink outlines and flat cel-shaded faces. Retain its unusual tall red upper cap, dark purple side plate, yellow top/front highlight, and green little sensor; these colors and the crest design are confirmed in pure native game frames. Keep the lower face, green eye, red chin, gold V horns, purple and silver side armor, their pose and relative positions unchanged. The native crop has cut edges where adjacent tiles connect: preserve those cut-edge endpoints, do not complete a head outside the tile. No new spikes, new head, neutral-white recoloring, glow, halo, or drop shadow. One head tile only, same framing, genuine transparent background. Smooth cel-shaded game sprite compatible with current lower head.
+
+Observed limitation: the generator also simplified the lower-face rendering despite the instruction. It preserves the same major landmarks, but this is a whole head-tile candidate and must be checked in assembled body context. It is not an approved crest-only pixel-preserving patch.

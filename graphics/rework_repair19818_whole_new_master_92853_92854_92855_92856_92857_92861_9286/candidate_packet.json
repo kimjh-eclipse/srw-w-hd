@@ -1,0 +1,32 @@
+{
+  "source": "test_current/parts/repair19818_whole_new_master",
+  "bindings": [
+    92853,
+    92854,
+    92855,
+    92856,
+    92857,
+    92861,
+    92862
+  ],
+  "contract": "contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_selected.png",
+  "file_sha256": {
+    "contract": "3d629f986f61bab7e82ff4712c9db5223cc2ff9c562b1c490598bb4f2803d4c7",
+    "drawing": "7fe962bf8bcef999f85b535b7781db2338fb2509391772ebc4bb0046d101b1d9",
+    "native": "8d7cccdab92698e0505c8f8cfa9863c5d5185c9fd852f53e47044b2e4c644194",
+    "generated": "746b0298a5f67a9c19d50774d4bc3c0c8e00f5ba4d462892314a7002d8299553"
+  },
+  "prior_binding_spec_sha256": {
+    "92853": "798f99e818b4b24d328eb094a544c8968309879d52a04426f1fbf2bcb6a41915",
+    "92854": "2d8c6d025257c7a9ca0a0acf314e495cd5db2b31d5fe1470239a9585c66fa7c0",
+    "92855": "e003b98eb1548de97c5bbfc108b292f965dd6c4004377f72e50a14e502d30078",
+    "92856": "e62c10ac96509506e084c0892952ac9e03af3836a5c9a8c18adde741ac09c602",
+    "92857": "ec9ed4f15789ec5ecb6580f1780bd3b4562d785421fbee96dcf449b0b18cfbf4",
+    "92861": "554387761cabb69fdc413249d66ad8d1e65cfadc3b16ce4044c413eda0142ede",
+    "92862": "90c81b587b4ae57ea39be4c13aadc738cb4369d9a55b6295fc95b5fea22700b3"
+  },
+  "note": "신규master1개/공유계약7개. 전체32×32새생성. 외부RGBA불변,생성alpha유지. Claude 연결/굽기/판정대기."
+}

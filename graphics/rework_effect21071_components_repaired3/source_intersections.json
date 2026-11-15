@@ -1,0 +1,60 @@
+[
+  {
+    "binding": 92596,
+    "intersections": []
+  },
+  {
+    "binding": 92597,
+    "intersections": []
+  },
+  {
+    "binding": 92599,
+    "intersections": []
+  },
+  {
+    "binding": 92601,
+    "intersections": [
+      {
+        "binding": 92602,
+        "normal": true,
+        "source_box": [
+          80,
+          32,
+          32,
+          64
+        ],
+        "intersection": [
+          80,
+          32,
+          96,
+          64
+        ],
+        "raw_equal": true,
+        "contains": true
+      }
+    ]
+  },
+  {
+    "binding": 92604,
+    "intersections": [
+      {
+        "binding": 92602,
+        "normal": true,
+        "source_box": [
+          80,
+          32,
+          32,
+          64
+        ],
+        "intersection": [
+          96,
+          32,
+          112,
+          64
+        ],
+        "raw_equal": true,
+        "contains": true
+      }
+    ]
+  }
+]

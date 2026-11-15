@@ -1,0 +1,140 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "teal_lost95085",
+  "atlas": {
+    "image": "rework_teal_lost95085/pose_hd.png",
+    "reference": "rework_teal_lost95085/pose_native.png",
+    "native_size": [
+      16,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 755502516,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 95084,
+      "replacement_binding_id_1based": 95085,
+      "classification": "same_id_actual_broad_teal_support_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_344_1391\\unit344_weapon1391_source.state",
+          "frame": 170
+        }
+      ],
+      "proposed_binding": {
+        "hash": 755502516,
+        "index_hash": 1973572277,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            32,
+            90,
+            82
+          ],
+          [
+            65,
+            123,
+            115
+          ],
+          [
+            98,
+            164,
+            148
+          ],
+          [
+            139,
+            197,
+            172
+          ],
+          [
+            180,
+            222,
+            205
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            222,
+            148
+          ],
+          [
+            139,
+            189,
+            106
+          ],
+          [
+            90,
+            148,
+            74
+          ],
+          [
+            238,
+            189,
+            115
+          ],
+          [
+            222,
+            131,
+            82
+          ],
+          [
+            205,
+            32,
+            32
+          ],
+          [
+            139,
+            16,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "index_pixels": "eJyNjkEOwEAIAk1Q+P+Py7pp05o91IsygjHiWEDugSATlFQJRLhJJmXEWhsEvMUdNKAKz6W0KKnDLXuoDi//27sN+X0liQFGwmSC/3UBEzEBmg==",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "teal_lost95085",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 344, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

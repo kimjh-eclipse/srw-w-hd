@@ -1,0 +1,42 @@
+{
+  "native_components": 17,
+  "candidate_8connected_components_by_alpha_measurement_threshold": {
+    "0": 17,
+    "8": 17,
+    "16": 17,
+    "32": 17,
+    "128": 17
+  },
+  "output_threshold_applied": false,
+  "native_size": [
+    16,
+    16
+  ],
+  "candidate_size": [
+    64,
+    64
+  ],
+  "diagnostic_alpha_iou_gt16": 0.9675,
+  "own_RGBA_nonzero_bbox": [
+    4,
+    0,
+    64,
+    60
+  ],
+  "visible_bbox_gt16": [
+    4,
+    0,
+    64,
+    60
+  ],
+  "no_alpha_threshold_applied_to_output": true,
+  "only_own_generated_RGBA_geometry": true,
+  "subvisible_nonzero_alpha_components": [],
+  "native_nonzero_bbox_at_4x": [
+    4,
+    0,
+    64,
+    60
+  ],
+  "preserved_endpoint_geometry": "All own particle output boxes exactly match canonical source component bboxes; natural antialias may shift visible envelope within subpixel margins. See exact measured bboxes."
+}

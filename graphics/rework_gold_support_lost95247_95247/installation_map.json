@@ -1,0 +1,140 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "gold_support_lost95247",
+  "atlas": {
+    "image": "rework_gold_support_lost95247/pose_hd.png",
+    "reference": "rework_gold_support_lost95247/pose_native.png",
+    "native_size": [
+      8,
+      8
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 1688207606,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 95246,
+      "replacement_binding_id_1based": 95247,
+      "classification": "same_id_actual_solid_dark_olive_support_candidate",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_424_1650\\unit424_weapon1650_source.state",
+          "frame": 390
+        }
+      ],
+      "proposed_binding": {
+        "hash": 1688207606,
+        "index_hash": 2376198425,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            106,
+            164,
+            148
+          ],
+          [
+            32,
+            32,
+            24
+          ],
+          [
+            65,
+            57,
+            49
+          ],
+          [
+            213,
+            131,
+            32
+          ],
+          [
+            98,
+            90,
+            74
+          ],
+          [
+            148,
+            131,
+            106
+          ],
+          [
+            41,
+            205,
+            90
+          ],
+          [
+            148,
+            82,
+            16
+          ],
+          [
+            189,
+            172,
+            148
+          ],
+          [
+            238,
+            197,
+            65
+          ],
+          [
+            98,
+            74,
+            24
+          ],
+          [
+            139,
+            106,
+            32
+          ],
+          [
+            189,
+            156,
+            49
+          ],
+          [
+            230,
+            205,
+            49
+          ],
+          [
+            238,
+            230,
+            189
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "index_pixels": "eJxjYAADRiiFTjMxEAAAAZMACQ==",
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "gold_support_lost95247",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 424, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

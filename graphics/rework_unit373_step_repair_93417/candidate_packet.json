@@ -1,0 +1,20 @@
+{
+  "source": "test_current/parts/root_unit373_step_repair",
+  "bindings": [
+    93417
+  ],
+  "contract": "contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_step.png",
+  "prior_binding_spec_sha256": {
+    "93417": "b1d2507e64675e3901925ca1e9d1113f917c15084f8e93281157cac53f92e905"
+  },
+  "note": "이전 후보의 폭 오독을 정정. 원본35texel의1texel선과중앙단차. 자체생성RGBA사각crop만. Claude폭/알파/이음매판정대기.",
+  "file_sha256": {
+    "contract": "9e87089b595413a6c9e3954832c9b8e4634fb32d2e99697ce6241b5c05bc495f",
+    "drawing": "742b60280d13eccb87e06a987de55db5645f2d6d9bee9198051f4f79029bbd41",
+    "native": "ab46b1262551d0e95ccdf0a3651af9c0806bb9847d771028b7357df67bbede43",
+    "generated": "e42d9fcf1f43de014061aad15e161e14daeadb352025f3242283402ea67c3c6f"
+  }
+}

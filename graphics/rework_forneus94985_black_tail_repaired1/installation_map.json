@@ -1,0 +1,140 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "forneus_lost94985",
+  "atlas": {
+    "image": "rework_forneus_lost94985/pose_hd.png",
+    "reference": "rework_forneus_lost94985/pose_native.png",
+    "native_size": [
+      8,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3563540291,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 94984,
+      "replacement_binding_id_1based": 94985,
+      "classification": "same_id_actual_plain_black_tail_edge_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_346_1395\\unit346_weapon1395_source.state",
+          "frame": 235
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3563540291,
+        "index_hash": 3983751539,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            82,
+            74,
+            90
+          ],
+          [
+            123,
+            115,
+            123
+          ],
+          [
+            164,
+            164,
+            156
+          ],
+          [
+            205,
+            205,
+            189
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            222,
+            213,
+            238
+          ],
+          [
+            180,
+            172,
+            213
+          ],
+          [
+            139,
+            131,
+            189
+          ],
+          [
+            98,
+            90,
+            164
+          ],
+          [
+            238,
+            189,
+            115
+          ],
+          [
+            222,
+            131,
+            82
+          ],
+          [
+            205,
+            32,
+            32
+          ],
+          [
+            139,
+            16,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "index_pixels": "eJxjYIAARkYYDWExYjAYYDRCMQOMJh8AAAjLABc=",
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 16,
+        "atlas_id": "forneus_lost94985",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 346, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

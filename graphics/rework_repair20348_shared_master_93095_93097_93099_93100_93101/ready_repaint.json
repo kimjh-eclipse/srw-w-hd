@@ -1,0 +1,28 @@
+{
+  "source": "test_current/parts/repair20348_shared_master",
+  "bindings": [
+    93095,
+    93097,
+    93099,
+    93100,
+    93101
+  ],
+  "contract": "contract_repaint.json",
+  "drawing": "candidate_repaint.png",
+  "native": "native_atlas.png",
+  "generated": "generated_repaint.png",
+  "file_sha256": {
+    "contract": "fdce8ed8272caf31bcd6e67cae6158749bc35117db3ecdd3ca38e16fd77e4885",
+    "drawing": "7a84ccba1b0f57c4995970256c0ceedc9de498f70ab2777153752f48979e790e",
+    "native": "965d8baf9986febd2c7d5be2dae37f8fc97d823088cbcc3a63a93f1a4f258600",
+    "generated": "8ccc7a31a086aa3ddf43dadab58ea64a3400445230c34d5c67bab408d03d71aa"
+  },
+  "prior_binding_spec_sha256": {
+    "93095": "4cb8d6b1c701eebfd5c31502d87e3b4c47225f98ded55a2dd272327de0b02bcc",
+    "93097": "2df8c9d0931e875b2369d21ab62cb3e82538efbfefb97ca25b5d4790c37710a8",
+    "93099": "c9c9e8521f44940c77ddcb7d8f585a452a4c6a578c98cf24ba7703af08128f08",
+    "93100": "7e164e0543c699da559f9c31bfc7e23343e99b2e6710a186231f2963777e1613",
+    "93101": "92a7a01bdd34ea97db89e399511e1c2fbd4dcb43d974ee0298b14a0dc6c2e0fa"
+  },
+  "supersedes_withdrawn_packet": "ready_candidate.json"
+}

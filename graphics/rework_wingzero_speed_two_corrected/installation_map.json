@@ -1,0 +1,266 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "lost_wingzero_speed_two",
+  "atlas": {
+    "image": "rework_lost_wingzero_speed_two/pose_hd.png",
+    "reference": "rework_lost_wingzero_speed_two/pose_native.png",
+    "native_size": [
+      32,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "replacement_only_no_new_count": true,
+  "entries": [
+    {
+      "actual_rgb_hash": 2664882122,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 93573,
+      "replacement_binding_id_1based": 93574,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_0_2\\unit0_weapon2_source.state",
+          "frame": 160
+        }
+      ],
+      "observed_oam_slots": [
+        7
+      ],
+      "proposed_binding": {
+        "hash": 2664882122,
+        "index_hash": 2593460173,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            74,
+            74,
+            74
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            148,
+            172,
+            189
+          ],
+          [
+            180,
+            197,
+            205
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            49,
+            74,
+            180
+          ],
+          [
+            82,
+            123,
+            213
+          ],
+          [
+            115,
+            172,
+            238
+          ],
+          [
+            16,
+            238,
+            32
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ]
+        ],
+        "index_pixels": "eJyNj9EKACAIA8Vl///JuYSwjOgex26oyB+qCqBlAA+PTmalQhXJw+69cM3MesFDLrFxp34QU5O4nukAwCQB4g==",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 8,
+        "atlas_id": "lost_wingzero_speed_two",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "generated_shared_master": "master upper32x8 for small; full32x16 for large"
+    },
+    {
+      "actual_rgb_hash": 2647704864,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 93574,
+      "replacement_binding_id_1based": 93575,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_0_2\\unit0_weapon2_source.state",
+          "frame": 160
+        }
+      ],
+      "observed_oam_slots": [
+        8
+      ],
+      "proposed_binding": {
+        "hash": 2647704864,
+        "index_hash": 2228286056,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            74,
+            74,
+            74
+          ],
+          [
+            106,
+            123,
+            131
+          ],
+          [
+            148,
+            172,
+            189
+          ],
+          [
+            180,
+            197,
+            205
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            49,
+            74,
+            180
+          ],
+          [
+            82,
+            123,
+            213
+          ],
+          [
+            115,
+            172,
+            238
+          ],
+          [
+            16,
+            238,
+            32
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ]
+        ],
+        "index_pixels": "eJyNkFEOwCAIQwkdu/+RBzgHgjF7n0ixLdE/mBnAlQF0WHYy35RMiqTDqjuhMhG5Gzq0S7axpycYp5zh/nR//jASuH1JvOlzDq7EQ21u24OvBWu3yC4lrO1/7iaagdnQAywhBJg=",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "lost_wingzero_speed_two",
+        "resource": null,
+        "source_x": 32,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "generated_shared_master": "master upper32x8 for small; full32x16 for large"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "selected_material": "generated_components.png",
+  "selected_material_sha256": "ab62dab75ca07197850aa3082a7088a3c97fd4cd6c3a182f9148955da739be4c",
+  "regions": [
+    {
+      "component": 0,
+      "source_texels": 4,
+      "source_bbox": [
+        1,
+        1,
+        2,
+        4
+      ],
+      "own_generated_material_crop": [
+        108,
+        80,
+        480,
+        800
+      ],
+      "output_box": [
+        4,
+        4,
+        8,
+        16
+      ],
+      "native_pixelmask_transfer": false
+    },
+    {
+      "component": 1,
+      "source_texels": 44,
+      "source_bbox": [
+        3,
+        6,
+        11,
+        26
+      ],
+      "own_generated_material_crop": [
+        720,
+        75,
+        1054,
+        810
+      ],
+      "output_box": [
+        12,
+        24,
+        44,
+        104
+      ],
+      "native_pixelmask_transfer": false
+    },
+    {
+      "component": 2,
+      "source_texels": 16,
+      "source_bbox": [
+        1,
+        21,
+        7,
+        10
+      ],
+      "own_generated_material_crop": [
+        1265,
+        145,
+        1687,
+        744
+      ],
+      "output_box": [
+        4,
+        84,
+        28,
+        40
+      ],
+      "native_pixelmask_transfer": false
+    }
+  ],
+  "method": "own RGBA rectangle crop/LANCZOS resize/translation only; no source alpha/RGB/mask/stencil or output threshold"
+}

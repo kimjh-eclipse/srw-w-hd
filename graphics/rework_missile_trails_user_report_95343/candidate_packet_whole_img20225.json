@@ -1,0 +1,43 @@
+{
+  "source": "test_current/parts/missile_trails_user_report",
+  "kind": "whole_img_tile_source",
+  "tile_source_only": true,
+  "actual_observed": false,
+  "adapter_required": true,
+  "automatic_parts_install_supported": false,
+  "bindings": [],
+  "new_source_keys": [
+    2659413298
+  ],
+  "new_source_key_details": [
+    {
+      "resource": 20225,
+      "source_box": [
+        0,
+        0,
+        64,
+        96
+      ],
+      "full_RGB_hash": 2659413298,
+      "full_index_hash": 3524227790,
+      "indices_sha256": "3e7c86dc38de5a0e548b42d3004d0d310d063e53c41581fba53910b32dbe8483"
+    }
+  ],
+  "contract": "contract_whole_img20225.json",
+  "drawing": "candidate_img20225_assembled.png",
+  "native": "native_img20225.png",
+  "generated": "generated_img20225.png",
+  "file_sha256": {
+    "contract": "4b67caf853081359f493cf5c5fc1d777a309eb5a2144b4cb73aa809a8653b0de",
+    "drawing": "487c2a7eb2a733009e6849eab0bd9df2fcb4b48c0721dc2086dc251a7d46e6dd",
+    "native": "bb678b4f6c254474e2b12b4378ae82a543f40acd3336bcee65a8278a93cffc2c",
+    "generated": "f09462448d37db5abd6ecb716ef79e48966bd17fd6bdd9ee8a24e6d2f025c4e7"
+  },
+  "prior_binding_spec_sha256": {},
+  "preserve_existing_accepted_priority": true,
+  "note": "wholeIMGtilebank소스후보. 직접OBJ관측아님. 기존accepted그림우선유지/빠진8x8재료용. Claudeadapter/실재생대기.",
+  "additional_file_sha256": {
+    "accepted_parent95351.png": "192671480f468c66776098ab076287a838c988fe2a532f7991a1ec391bffd42a",
+    "accepted_parent95351_reuse_proof.json": "f673ad5c0bb016b9d0a74f186b4cf0abb55b52b285b2e8d169424e63df989ce5"
+  }
+}

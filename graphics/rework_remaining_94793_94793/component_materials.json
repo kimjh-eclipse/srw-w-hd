@@ -1,0 +1,664 @@
+{
+  "materials": [
+    {
+      "material": 0,
+      "native_size": [
+        1,
+        1
+      ],
+      "example_source_box": [
+        5,
+        1,
+        6,
+        2
+      ],
+      "area": 1
+    },
+    {
+      "material": 1,
+      "native_size": [
+        1,
+        1
+      ],
+      "example_source_box": [
+        25,
+        2,
+        26,
+        3
+      ],
+      "area": 1
+    },
+    {
+      "material": 2,
+      "native_size": [
+        1,
+        1
+      ],
+      "example_source_box": [
+        3,
+        3,
+        4,
+        4
+      ],
+      "area": 1
+    },
+    {
+      "material": 3,
+      "native_size": [
+        2,
+        2
+      ],
+      "example_source_box": [
+        21,
+        3,
+        23,
+        5
+      ],
+      "area": 4
+    },
+    {
+      "material": 4,
+      "native_size": [
+        1,
+        1
+      ],
+      "example_source_box": [
+        16,
+        6,
+        17,
+        7
+      ],
+      "area": 1
+    },
+    {
+      "material": 5,
+      "native_size": [
+        2,
+        2
+      ],
+      "example_source_box": [
+        6,
+        8,
+        8,
+        10
+      ],
+      "area": 4
+    },
+    {
+      "material": 6,
+      "native_size": [
+        3,
+        4
+      ],
+      "example_source_box": [
+        15,
+        10,
+        18,
+        14
+      ],
+      "area": 9
+    },
+    {
+      "material": 7,
+      "native_size": [
+        2,
+        2
+      ],
+      "example_source_box": [
+        27,
+        15,
+        29,
+        17
+      ],
+      "area": 4
+    },
+    {
+      "material": 8,
+      "native_size": [
+        3,
+        3
+      ],
+      "example_source_box": [
+        3,
+        16,
+        6,
+        19
+      ],
+      "area": 5
+    },
+    {
+      "material": 9,
+      "native_size": [
+        2,
+        2
+      ],
+      "example_source_box": [
+        7,
+        16,
+        9,
+        18
+      ],
+      "area": 4
+    },
+    {
+      "material": 10,
+      "native_size": [
+        4,
+        4
+      ],
+      "example_source_box": [
+        14,
+        16,
+        18,
+        20
+      ],
+      "area": 12
+    },
+    {
+      "material": 11,
+      "native_size": [
+        2,
+        1
+      ],
+      "example_source_box": [
+        20,
+        17,
+        22,
+        18
+      ],
+      "area": 2
+    },
+    {
+      "material": 12,
+      "native_size": [
+        3,
+        5
+      ],
+      "example_source_box": [
+        20,
+        21,
+        23,
+        26
+      ],
+      "area": 10
+    },
+    {
+      "material": 13,
+      "native_size": [
+        2,
+        3
+      ],
+      "example_source_box": [
+        6,
+        22,
+        8,
+        25
+      ],
+      "area": 5
+    },
+    {
+      "material": 14,
+      "native_size": [
+        2,
+        2
+      ],
+      "example_source_box": [
+        25,
+        22,
+        27,
+        24
+      ],
+      "area": 4
+    },
+    {
+      "material": 15,
+      "native_size": [
+        2,
+        1
+      ],
+      "example_source_box": [
+        16,
+        23,
+        18,
+        24
+      ],
+      "area": 2
+    },
+    {
+      "material": 16,
+      "native_size": [
+        2,
+        3
+      ],
+      "example_source_box": [
+        15,
+        26,
+        17,
+        29
+      ],
+      "area": 6
+    }
+  ],
+  "components": [
+    {
+      "box": [
+        5,
+        1,
+        6,
+        2
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        25,
+        2,
+        26,
+        3
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        3,
+        3,
+        4,
+        4
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        21,
+        3,
+        23,
+        5
+      ],
+      "area": 4,
+      "material": 3
+    },
+    {
+      "box": [
+        12,
+        4,
+        13,
+        5
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        4,
+        5,
+        5,
+        6
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        16,
+        6,
+        17,
+        7
+      ],
+      "area": 1,
+      "material": 4
+    },
+    {
+      "box": [
+        11,
+        7,
+        12,
+        8
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        23,
+        7,
+        24,
+        8
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        6,
+        8,
+        8,
+        10
+      ],
+      "area": 4,
+      "material": 5
+    },
+    {
+      "box": [
+        18,
+        9,
+        19,
+        10
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        26,
+        9,
+        27,
+        10
+      ],
+      "area": 1,
+      "material": 4
+    },
+    {
+      "box": [
+        12,
+        10,
+        13,
+        11
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        15,
+        10,
+        18,
+        14
+      ],
+      "area": 9,
+      "material": 6
+    },
+    {
+      "box": [
+        21,
+        10,
+        22,
+        11
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        9,
+        12,
+        10,
+        13
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        12,
+        13,
+        13,
+        14
+      ],
+      "area": 1,
+      "material": 4
+    },
+    {
+      "box": [
+        20,
+        13,
+        21,
+        14
+      ],
+      "area": 1,
+      "material": 4
+    },
+    {
+      "box": [
+        2,
+        14,
+        3,
+        15
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        24,
+        14,
+        25,
+        15
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        20,
+        15,
+        21,
+        16
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        27,
+        15,
+        29,
+        17
+      ],
+      "area": 4,
+      "material": 7
+    },
+    {
+      "box": [
+        3,
+        16,
+        6,
+        19
+      ],
+      "area": 5,
+      "material": 8
+    },
+    {
+      "box": [
+        7,
+        16,
+        9,
+        18
+      ],
+      "area": 4,
+      "material": 9
+    },
+    {
+      "box": [
+        14,
+        16,
+        18,
+        20
+      ],
+      "area": 12,
+      "material": 10
+    },
+    {
+      "box": [
+        20,
+        17,
+        22,
+        18
+      ],
+      "area": 2,
+      "material": 11
+    },
+    {
+      "box": [
+        11,
+        18,
+        12,
+        19
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        26,
+        19,
+        27,
+        20
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        12,
+        20,
+        13,
+        21
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        10,
+        21,
+        11,
+        22
+      ],
+      "area": 1,
+      "material": 1
+    },
+    {
+      "box": [
+        17,
+        21,
+        18,
+        22
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        20,
+        21,
+        23,
+        26
+      ],
+      "area": 10,
+      "material": 12
+    },
+    {
+      "box": [
+        29,
+        21,
+        30,
+        22
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        6,
+        22,
+        8,
+        25
+      ],
+      "area": 5,
+      "material": 13
+    },
+    {
+      "box": [
+        25,
+        22,
+        27,
+        24
+      ],
+      "area": 4,
+      "material": 14
+    },
+    {
+      "box": [
+        16,
+        23,
+        18,
+        24
+      ],
+      "area": 2,
+      "material": 15
+    },
+    {
+      "box": [
+        11,
+        25,
+        12,
+        26
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        15,
+        26,
+        17,
+        29
+      ],
+      "area": 6,
+      "material": 16
+    },
+    {
+      "box": [
+        28,
+        27,
+        29,
+        28
+      ],
+      "area": 1,
+      "material": 2
+    },
+    {
+      "box": [
+        19,
+        28,
+        20,
+        29
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        25,
+        28,
+        26,
+        29
+      ],
+      "area": 1,
+      "material": 0
+    },
+    {
+      "box": [
+        29,
+        29,
+        30,
+        30
+      ],
+      "area": 1,
+      "material": 1
+    }
+  ]
+}

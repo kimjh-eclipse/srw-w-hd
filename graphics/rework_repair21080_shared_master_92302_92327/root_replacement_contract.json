@@ -1,0 +1,609 @@
+[
+  {
+    "state": "test_current\\parts\\true_missing_21080\\unit325_weapon1321_source.state",
+    "frame": 266,
+    "video_epoch": 541,
+    "engine": 0,
+    "oam": 0,
+    "attributes": [
+      16518,
+      28688,
+      23056
+    ],
+    "screen_x": 16,
+    "screen_y": 134,
+    "w": 32,
+    "h": 8,
+    "display_w": 32,
+    "display_h": 8,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 5,
+    "tile_number": 528,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": true,
+    "flip_y": true,
+    "mosaic": false,
+    "hash": 1067163089,
+    "index_hash": 1723390932,
+    "material": 1980289661,
+    "used_mask": 510,
+    "opaque": 27,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxjYCAHMLGAKTZ2MvQyM0MZbDjkWRjYmBgYWBiA6jgQwqysSGpYGFF0gExihRmHcBNMNxuyVjSLAS9OAIE=",
+    "indices_sha256": "f65456613c4816c8f9f7f3bb2c54abcf29be9b40c859ebc115bbd31d37729930",
+    "palette_15bit": [
+      17920,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      21697,
+      19584,
+      17472,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        8,
+        49,
+        172
+      ],
+      [
+        0,
+        32,
+        156
+      ],
+      [
+        0,
+        16,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 266,
+        "oam": 0
+      },
+      {
+        "frame": 266,
+        "oam": 1
+      },
+      {
+        "frame": 267,
+        "oam": 0
+      },
+      {
+        "frame": 267,
+        "oam": 1
+      },
+      {
+        "frame": 304,
+        "oam": 0
+      },
+      {
+        "frame": 304,
+        "oam": 1
+      },
+      {
+        "frame": 305,
+        "oam": 0
+      },
+      {
+        "frame": 305,
+        "oam": 1
+      },
+      {
+        "frame": 342,
+        "oam": 0
+      },
+      {
+        "frame": 342,
+        "oam": 1
+      },
+      {
+        "frame": 343,
+        "oam": 0
+      },
+      {
+        "frame": 343,
+        "oam": 1
+      },
+      {
+        "frame": 380,
+        "oam": 0
+      },
+      {
+        "frame": 380,
+        "oam": 1
+      },
+      {
+        "frame": 381,
+        "oam": 0
+      },
+      {
+        "frame": 381,
+        "oam": 1
+      },
+      {
+        "frame": 418,
+        "oam": 0
+      },
+      {
+        "frame": 418,
+        "oam": 1
+      },
+      {
+        "frame": 419,
+        "oam": 0
+      },
+      {
+        "frame": 419,
+        "oam": 1
+      }
+    ],
+    "atlas_box": [
+      128,
+      128,
+      32,
+      8
+    ],
+    "source_box": [
+      128,
+      32,
+      32,
+      8
+    ],
+    "replace_binding": 92302,
+    "candidate_file": "candidate_atlas.png",
+    "note": "21080 부모92327의 상부 실제약한12성분을 새곡선/연속면으로 교정. 자식92302와같은 own_master.png 공유, master source[128,32,32,32]와candidate[128,128,32,32]구분. source풀16/원본raw/관측유지. 1px점은동일자체재질이며HD이득제한. 부모하부와다른팔레트정상영역보존. 중앙연결/공식QA미수행. 부모92327의32x32 전체형상은 원본index/팔레트확정이나 재생미관측이며 actual_observed=false를 유지합니다.",
+    "slot": 0,
+    "actual_palette_bgr555": [
+      17920,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      21697,
+      19584,
+      17472,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        8,
+        49,
+        172
+      ],
+      [
+        0,
+        32,
+        156
+      ],
+      [
+        0,
+        16,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 21080,
+      "source_x": 128,
+      "source_y": 32
+    }
+  },
+  {
+    "cell": 4,
+    "slot": null,
+    "binding": null,
+    "hash": 1615511533,
+    "index_hash": 1831682087,
+    "index_pixels": "eJydUgsShSAI5J/3P/ETXxpqWtPOWCbswmIAX0BSXnZ84DKfG1vEBYwABHJeuo5VQ45gx3AlrXJXT5VtkbouXKQAF5GjLMpNsW9pCJ1AZJiGks6aWZqLgE8ApzTJTJMc8+VjeAfe2HG4+4eUZyDt49R3O2Qfd/XDWQqzGC9rhGsJt6+uyT2zyysrNF0MKPizif/LaK4hhG0CPJhzpscFxFxWKz+omwg1a3o7EImyKU3mmuwd3v4rM34y0gIq",
+    "actual_palette_bgr555": [
+      17920,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      21697,
+      19584,
+      17472,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        8,
+        49,
+        172
+      ],
+      [
+        0,
+        32,
+        156
+      ],
+      [
+        0,
+        16,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "source_palette_bank": 1,
+    "source_image": 21080,
+    "source_box": [
+      128,
+      32,
+      32,
+      32
+    ],
+    "atlas_box": [
+      128,
+      128,
+      32,
+      32
+    ],
+    "bank_atlas_box": [
+      128,
+      32,
+      32,
+      32
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": false,
+    "actual_index_observed": true,
+    "existing_actual_rgb_binding": null,
+    "live_active_rgb_or_indexed_matches": [],
+    "spec": {
+      "resource": 21080,
+      "source_x": 128,
+      "source_y": 32
+    },
+    "output_size": [
+      32,
+      32
+    ],
+    "rendered_source_contract": null,
+    "fixture": null,
+    "recommended_source_search_fixture": "test_current/parts/true_missing_21080/unit325_weapon1321_source.state",
+    "core_path": "emulator/desmume/desmume/src/frontend/libretro/desmume_libretro.dll",
+    "render_mode": "static",
+    "category": "effect",
+    "source_palette_confirmation": "PLT21079 bank1 all16 equals observed cached palette group; see ../palette_groups.json",
+    "review_status": "source contract and actual palette confirmed, this shape not observed in replay; Claude pending",
+    "same_effect_art_reuse": "../candidate_atlas.png; no new generation",
+    "original_palette_rgb": [
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        106,
+        197,
+        255
+      ],
+      [
+        82,
+        164,
+        255
+      ],
+      [
+        57,
+        131,
+        238
+      ],
+      [
+        32,
+        98,
+        213
+      ],
+      [
+        16,
+        65,
+        189
+      ],
+      [
+        8,
+        49,
+        172
+      ],
+      [
+        0,
+        32,
+        156
+      ],
+      [
+        0,
+        16,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ],
+      [
+        0,
+        131,
+        139
+      ]
+    ],
+    "palette_15bit": [
+      17920,
+      32525,
+      32394,
+      30215,
+      27012,
+      23810,
+      21697,
+      19584,
+      17472,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920,
+      17920
+    ],
+    "w": 32,
+    "h": 32,
+    "replace_binding": 92327,
+    "candidate_file": "candidate_atlas.png",
+    "note": "21080 부모92327의 상부 실제약한12성분을 새곡선/연속면으로 교정. 자식92302와같은 own_master.png 공유, master source[128,32,32,32]와candidate[128,128,32,32]구분. source풀16/원본raw/관측유지. 1px점은동일자체재질이며HD이득제한. 부모하부와다른팔레트정상영역보존. 중앙연결/공식QA미수행. 부모92327의32x32 전체형상은 원본index/팔레트확정이나 재생미관측이며 actual_observed=false를 유지합니다.",
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false
+  }
+]

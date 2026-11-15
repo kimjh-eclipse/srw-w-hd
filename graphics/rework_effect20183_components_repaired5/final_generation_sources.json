@@ -1,0 +1,35 @@
+{
+  "mode": "builtin image_gen",
+  "transparent_background": true,
+  "sources": [
+    {
+      "binding": 94797,
+      "generated": "generated_94797.png",
+      "builtin_original": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1d7c1-a755-7c41-a6f2-96c03e933430\\exec-87016006-932c-4c6c-ab4f-7de432199079.png",
+      "reference": "reference_94797.png",
+      "prompt": "Faithfully reproduce the attached sprite as a hand-painted high definition game texture. This is an asymmetric cropped tile: white center, cyan edge, a very large solid turquoise area filling the upper right corner. Keep that upper-right corner fully opaque saturated cyan, no black, no gray, no shadow there. The lower-left dark gray triangular space alone is transparent. Follow the reference exact silhouette, color band placement and proportions. No checkers, no sparkles, no wisps, no spray, no additional objects. Restrained smooth gradients. Full edge-to-edge canvas; do not center or add margins."
+    },
+    {
+      "binding": 94798,
+      "generated": "generated_94798.png",
+      "builtin_original": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1d7c1-a755-7c41-a6f2-96c03e933430\\exec-dd705796-bd52-4abc-b2fd-4ee42411bdcc.png",
+      "reference": "94798_reference.png",
+      "prompt": "Create a transparent 2D game effect sprite matching the reference's exact straight diagonal descending blue-cyan streak, including its clipped edge ends and every narrow step. Smooth high-resolution painted edges and subtle gradients, retain bright cyan centre and blue outer bands. Gray background is transparent empty space. Same composition and silhouette; no glow cloud, no added objects, no text."
+    },
+    {
+      "binding": 94799,
+      "generated": "generated_94799.png",
+      "builtin_original": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1d7c1-a755-7c41-a6f2-96c03e933430\\exec-a92f89c4-b959-44fb-862b-de773bc87d73.png",
+      "reference": "reference_94799.png",
+      "prompt": "Redraw this sparse diagonal 2D game particle sprite in high resolution. Preserve ALL six separated small blue-cyan dashes at their exact positions, shapes, widths and spacing; the top left dash is clipped at the canvas edges, lower right dash likewise. Keep the same full canvas framing, empty space is transparent. Smooth subtle cyan-blue gradients inside each dash; no halos, no spray, no extra particles, no curve, no connecting line, no text. Dark gray background must become actual transparency."
+    },
+    {
+      "binding": 94800,
+      "generated": "generated_94800.png",
+      "builtin_original": "C:\\Users\\OXP2\\.codex\\generated_images\\01a1d7c1-a755-7c41-a6f2-96c03e933430\\exec-bef5ef9e-7a20-4619-a86e-01d03af3c83f.png",
+      "reference": "reference_94800.png",
+      "prompt": "Redraw this sparse diagonal 2D game particle sprite in high resolution. Preserve every separated small very PALE cyan dash at exact positions, widths and spacing. The top left dash is clipped at canvas edges and lower right dash too. The pale cyan color is essential, use #ACF6FF and #94F6FF to #83F6FF with nearly white cyan highlight. No saturated blue. Same full canvas framing. Empty dark gray area must be actual transparency. Subtle smooth paint only inside the dashes. No halos, spray, extra particles, connecting line, curves, text."
+    }
+  ],
+  "note": "94799 최초 프롬프트의 six는 오기입니다. 실제 index 기준 5성분을 유지하도록 crop/등록했습니다. 세번째 L은 기존 같은팔레트 자체생성 panel0 cell3으로 대체했습니다."
+}

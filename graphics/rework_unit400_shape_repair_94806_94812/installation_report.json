@@ -1,0 +1,49 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 0,
+      "binding": 94806,
+      "hash": 1614593695,
+      "alpha_iou": 0.8494983277591973,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 0,
+      "binding": 94812,
+      "hash": 3007572937,
+      "alpha_iou": 0.8421052631578947,
+      "new_rgb": false,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [
+    {
+      "slot": 0,
+      "hash": 1614593695,
+      "native_solid_fraction": 1.0,
+      "native_bright_fraction": 1.0,
+      "generated_center_coverage": 1.0,
+      "generated_center_mean_alpha": 0.9953022875816994,
+      "missing_opaque_bright_center": false
+    },
+    {
+      "slot": 0,
+      "hash": 3007572937,
+      "native_solid_fraction": 1.0,
+      "native_bright_fraction": 1.0,
+      "generated_center_coverage": 1.0,
+      "generated_center_mean_alpha": 0.9956188725490196,
+      "missing_opaque_bright_center": false
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}

@@ -1,0 +1,60 @@
+{
+  "rows": [
+    {
+      "binding": 93493,
+      "ROM_indices_exact": true,
+      "actual_cached_raw_sha256": "9a5c3781c0d2d6daf2be9e69f8bbd85bb2a9d375914ee440cdcb120582db4e39",
+      "full16_palette_exact": true,
+      "hash_index_hash_match": true,
+      "source_box": [
+        160,
+        56,
+        32,
+        8
+      ],
+      "candidate_atlas_box": [
+        0,
+        0,
+        32,
+        8
+      ],
+      "prior_binding_spec_sha256": "39de1df7a6070970b9386f86004ff80c50c3509d1db20bcb7f047b7139666385"
+    },
+    {
+      "binding": 93510,
+      "ROM_indices_exact": true,
+      "actual_cached_raw_sha256": "24f350fcb2e32d5eb64ae733a091496a81da8e34596c024743b0e2ecb9dacd9b",
+      "full16_palette_exact": true,
+      "hash_index_hash_match": true,
+      "source_box": [
+        160,
+        56,
+        16,
+        8
+      ],
+      "candidate_atlas_box": [
+        0,
+        0,
+        16,
+        8
+      ],
+      "prior_binding_spec_sha256": "ebbf6c6ddcca4f4efd636113c4b200275e1ff7360e82c0b0882fe64477aaca62"
+    }
+  ],
+  "shared_containment_checks": [
+    {
+      "slot_a": 93493,
+      "slot_b": 93510,
+      "source_overlap": [
+        160,
+        56,
+        16,
+        8
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "whole_ROM_IMG_sha256": "4438bf0ad35809c5967c46333f160f37ff67a986107af2c76aff0a0d2777bf89",
+  "excluded_binding93523_palette_differs": true
+}

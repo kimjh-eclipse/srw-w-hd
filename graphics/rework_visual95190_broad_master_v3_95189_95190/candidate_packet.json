@@ -1,0 +1,22 @@
+{
+  "source": "test_current/parts/claude_visual95190_broad_master_v3",
+  "bindings": [
+    95190,
+    95189
+  ],
+  "contract": "install_contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_selected.png",
+  "file_sha256": {
+    "contract": "677594a0e545698c4ffb3c65bad39bcb0b53b65ca8fc961da9ae33a196db957b",
+    "drawing": "c21fcee4cf79717eb1b450df458ec5d30fef4303b6503f83cdbb653a45364186",
+    "native": "44daf8d8e0117bc9182a97c2908153f171621ad4bbf5251afa31cd7323f511e0",
+    "generated": "edd390f6c73ac3045b5238eee956c99f0324c8e908d77f46bf3d0d1d4f264d3d"
+  },
+  "prior_binding_spec_sha256": {
+    "95190": "2dcca6271bf497c82674cbfe261f87b07ae8035e4205d556e003506234cadff0",
+    "95189": "5254f9c09b369587534522d973b56268b6a87edd086a960677b3c31deabe8c73"
+  },
+  "note": "실제 폭 결함95190 새 master1장과자식95189 공유,정상다른영역보존"
+}

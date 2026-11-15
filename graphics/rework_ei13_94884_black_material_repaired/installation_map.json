@@ -1,0 +1,140 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "ei13_lost94884",
+  "atlas": {
+    "image": "rework_ei13_lost94884/pose_hd.png",
+    "reference": "rework_ei13_lost94884/pose_native.png",
+    "native_size": [
+      16,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3689209504,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 94883,
+      "replacement_binding_id_1based": 94884,
+      "classification": "same_id_actual_black_support_lower_red_material_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_341_1382\\unit341_weapon1382_source.state",
+          "frame": 170
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3689209504,
+        "index_hash": 3048906181,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            98,
+            65,
+            106
+          ],
+          [
+            156,
+            123,
+            156
+          ],
+          [
+            205,
+            189,
+            197
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            238,
+            189,
+            222
+          ],
+          [
+            213,
+            139,
+            180
+          ],
+          [
+            189,
+            90,
+            131
+          ],
+          [
+            16,
+            106,
+            139
+          ],
+          [
+            16,
+            172,
+            197
+          ],
+          [
+            74,
+            230,
+            238
+          ],
+          [
+            222,
+            131,
+            82
+          ],
+          [
+            205,
+            32,
+            32
+          ],
+          [
+            139,
+            16,
+            16
+          ],
+          [
+            238,
+            238,
+            65
+          ]
+        ],
+        "index_pixels": "eJydzjEOwDAIA0DsIfGC///cUqpGUZZK9cQBQkT8CDoH3w72HKzGhzESzK5os2rOkZLvyIFSsqnpus+lZqB39Qz7H5ZkbO+TSxfVRALI",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "ei13_lost94884",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 341, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

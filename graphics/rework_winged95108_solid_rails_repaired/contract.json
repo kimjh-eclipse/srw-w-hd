@@ -1,0 +1,618 @@
+[
+  {
+    "replace_binding": 95108,
+    "atlas_box": [
+      0,
+      0,
+      32,
+      16
+    ],
+    "source_contract": {
+      "state": "test_current\\parts\\native_weapon_source_345_1394\\unit345_weapon1394_source.state",
+      "frame": 180,
+      "video_epoch": 181,
+      "engine": 0,
+      "oam": 6,
+      "attributes": [
+        16441,
+        32903,
+        2071
+      ],
+      "screen_x": 135,
+      "screen_y": 57,
+      "w": 32,
+      "h": 16,
+      "display_w": 32,
+      "display_h": 16,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 0,
+      "tile_number": 23,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 1285081732,
+      "index_hash": 3465600751,
+      "material": 3661444123,
+      "used_mask": 6022,
+      "opaque": 127,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJx9z1EOwCAIA1DLj5R4//NOxpJtSdHfRyuM0TxDJ8WO04Bxnnyzz96TeYiHFyPkkLG42fFluvAPq/qHLSg3RBRThnfs3tl0eHOmu+48PJmm7wby0657rGUgEL/wBSdcArM=",
+      "indices_sha256": "4264373c1c5f0f04b9defe804e64e4e76213c4bb1713cb578a692b1a5bb94a3b",
+      "palette_15bit": [
+        32608,
+        2114,
+        12620,
+        16882,
+        20118,
+        24379,
+        30653,
+        30555,
+        27318,
+        24081,
+        20844,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          98,
+          82,
+          98
+        ],
+        [
+          148,
+          123,
+          131
+        ],
+        [
+          180,
+          164,
+          156
+        ],
+        [
+          222,
+          205,
+          189
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          222,
+          213,
+          238
+        ],
+        [
+          180,
+          172,
+          213
+        ],
+        [
+          139,
+          131,
+          189
+        ],
+        [
+          98,
+          90,
+          164
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "source_visible_native_obj_pixels": 95,
+      "observations": [
+        {
+          "frame": 175,
+          "oam": 12,
+          "source_visible_native_obj_pixels": 0
+        },
+        {
+          "frame": 180,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 95
+        },
+        {
+          "frame": 185,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 95
+        },
+        {
+          "frame": 190,
+          "oam": 6,
+          "source_visible_native_obj_pixels": 95
+        },
+        {
+          "frame": 195,
+          "oam": 12,
+          "source_visible_native_obj_pixels": 2
+        }
+      ]
+    },
+    "source_original": {
+      "cell": 4,
+      "slot": 6,
+      "binding": 0,
+      "hash": 1285081732,
+      "index_hash": 3465600751,
+      "index_pixels": "eJx9z1EOwCAIA1DLj5R4//NOxpJtSdHfRyuM0TxDJ8WO04Bxnnyzz96TeYiHFyPkkLG42fFluvAPq/qHLSg3RBRThnfs3tl0eHOmu+48PJmm7wby0657rGUgEL/wBSdcArM=",
+      "actual_palette_bgr555": [
+        32608,
+        2114,
+        12620,
+        16882,
+        20118,
+        24379,
+        30653,
+        30555,
+        27318,
+        24081,
+        20844,
+        15101,
+        10779,
+        4249,
+        2129,
+        3005
+      ],
+      "actual_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          98,
+          82,
+          98
+        ],
+        [
+          148,
+          123,
+          131
+        ],
+        [
+          180,
+          164,
+          156
+        ],
+        [
+          222,
+          205,
+          189
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          222,
+          213,
+          238
+        ],
+        [
+          180,
+          172,
+          213
+        ],
+        [
+          139,
+          131,
+          189
+        ],
+        [
+          98,
+          90,
+          164
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "source_owner": null,
+      "source_image": null,
+      "source_space": "cached_obj",
+      "source_box": [
+        0,
+        0,
+        32,
+        16
+      ],
+      "atlas_box": [
+        0,
+        72,
+        32,
+        16
+      ],
+      "source_index_bytes_exact": true,
+      "actual_observed": true,
+      "phase": "\uc2e4\uc81c \uc6d0\ubcf8 \uad00\uce21 \uc0c9 \uc720\uc9c0",
+      "existing_actual_rgb_binding": 0,
+      "spec": {
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "x": 0,
+        "y": 72,
+        "w": 32,
+        "h": 16
+      },
+      "output_size": [
+        32,
+        16
+      ],
+      "fixture": "test_current/parts/native_weapon_source_345_1394/unit345_weapon1394_source.state",
+      "frame": 180,
+      "rendered_source_contract": {
+        "state": "test_current\\parts\\native_weapon_source_345_1394\\unit345_weapon1394_source.state",
+        "frame": 180,
+        "video_epoch": 181,
+        "engine": 0,
+        "oam": 6,
+        "attributes": [
+          16441,
+          32903,
+          2071
+        ],
+        "screen_x": 135,
+        "screen_y": 57,
+        "w": 32,
+        "h": 16,
+        "display_w": 32,
+        "display_h": 16,
+        "priority": 2,
+        "obj_mode": 0,
+        "eight_bit": false,
+        "palette_bank": 0,
+        "tile_number": 23,
+        "affine": false,
+        "affine_double": false,
+        "affine_matrix_index": null,
+        "affine_matrix_8_8": null,
+        "flip_x": false,
+        "flip_y": false,
+        "mosaic": false,
+        "hash": 1285081732,
+        "index_hash": 3465600751,
+        "material": 3661444123,
+        "used_mask": 6022,
+        "opaque": 127,
+        "binding_id": 0,
+        "bound_hash_checked": false,
+        "hd_pending_or_held": null,
+        "index_pixels": "eJx9z1EOwCAIA1DLj5R4//NOxpJtSdHfRyuM0TxDJ8WO04Bxnnyzz96TeYiHFyPkkLG42fFluvAPq/qHLSg3RBRThnfs3tl0eHOmu+48PJmm7wby0657rGUgEL/wBSdcArM=",
+        "indices_sha256": "4264373c1c5f0f04b9defe804e64e4e76213c4bb1713cb578a692b1a5bb94a3b",
+        "palette_15bit": [
+          32608,
+          2114,
+          12620,
+          16882,
+          20118,
+          24379,
+          30653,
+          30555,
+          27318,
+          24081,
+          20844,
+          15101,
+          10779,
+          4249,
+          2129,
+          3005
+        ],
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            98,
+            82,
+            98
+          ],
+          [
+            148,
+            123,
+            131
+          ],
+          [
+            180,
+            164,
+            156
+          ],
+          [
+            222,
+            205,
+            189
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            222,
+            213,
+            238
+          ],
+          [
+            180,
+            172,
+            213
+          ],
+          [
+            139,
+            131,
+            189
+          ],
+          [
+            98,
+            90,
+            164
+          ],
+          [
+            238,
+            189,
+            115
+          ],
+          [
+            222,
+            131,
+            82
+          ],
+          [
+            205,
+            32,
+            32
+          ],
+          [
+            139,
+            16,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "source": "rendered_obj_cache",
+        "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+        "source_visible_native_obj_pixels": 95,
+        "observations": [
+          {
+            "frame": 175,
+            "oam": 12,
+            "source_visible_native_obj_pixels": 0
+          },
+          {
+            "frame": 180,
+            "oam": 6,
+            "source_visible_native_obj_pixels": 95
+          },
+          {
+            "frame": 185,
+            "oam": 6,
+            "source_visible_native_obj_pixels": 95
+          },
+          {
+            "frame": 190,
+            "oam": 6,
+            "source_visible_native_obj_pixels": 95
+          },
+          {
+            "frame": 195,
+            "oam": 12,
+            "source_visible_native_obj_pixels": 2
+          }
+        ]
+      },
+      "render_mode": "static",
+      "category": "unit",
+      "replacement_of_existing_binding": null,
+      "role": "\uc2e4\uc81c \ubbf8\uc5f0\uacb0 \uae30\uacc4 \uc870\uac01",
+      "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+      "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+      "source_owner_confirmed": false,
+      "source_owner_note": "\uae30\uc220 \uc2e4\ud589 \uc8fc\uccb4 345, \uc6d0\ubcf8 \uc870\uac01 IMG \uc18c\uc720\uc790\ub294 \ub3c5\ub9bd \ud655\uc815\ud558\uc9c0 \uc54a\uc74c",
+      "packed_original_group": "345_180",
+      "packed_original_cell": 4,
+      "packed_original_atlas_box": [
+        288,
+        0,
+        32,
+        16
+      ]
+    },
+    "old_spec": {
+      "hash": 1285081732,
+      "index_hash": 3465600751,
+      "rgb_enabled": true,
+      "indexed_safe": false,
+      "dynamic_palette": true,
+      "original_palette_rgb": [
+        [
+          0,
+          222,
+          255
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          98,
+          82,
+          98
+        ],
+        [
+          148,
+          123,
+          131
+        ],
+        [
+          180,
+          164,
+          156
+        ],
+        [
+          222,
+          205,
+          189
+        ],
+        [
+          238,
+          238,
+          238
+        ],
+        [
+          222,
+          213,
+          238
+        ],
+        [
+          180,
+          172,
+          213
+        ],
+        [
+          139,
+          131,
+          189
+        ],
+        [
+          98,
+          90,
+          164
+        ],
+        [
+          238,
+          189,
+          115
+        ],
+        [
+          222,
+          131,
+          82
+        ],
+        [
+          205,
+          32,
+          32
+        ],
+        [
+          139,
+          16,
+          16
+        ],
+        [
+          238,
+          238,
+          16
+        ]
+      ],
+      "index_pixels": "eJx9z1EOwCAIA1DLj5R4//NOxpJtSdHfRyuM0TxDJ8WO04Bxnnyzz96TeYiHFyPkkLG42fFluvAPq/qHLSg3RBRThnfs3tl0eHOmu+48PJmm7wby0657rGUgEL/wBSdcArM=",
+      "x": 0,
+      "y": 72,
+      "w": 32,
+      "h": 16,
+      "atlas_id": "observed_fixture345_winged_six",
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0,
+      "registered_attack_bank": true,
+      "preserve_canonical_paint": true,
+      "reviewed_observed_pose": false,
+      "source_engine": null,
+      "actual_observed": true,
+      "independent_visual_verification": false,
+      "review_status": "pending_claude",
+      "source_owner": null,
+      "source_owner_confirmed": false,
+      "source_owner_note": "\uae30\uc220 \uc2e4\ud589 \uc8fc\uccb4 345, \uc6d0\ubcf8 \uc870\uac01 IMG \uc18c\uc720\uc790\ub294 \ub3c5\ub9bd \ud655\uc815\ud558\uc9c0 \uc54a\uc74c"
+    },
+    "native_file": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\winged_lost95108\\native_atlas.png"
+  }
+]

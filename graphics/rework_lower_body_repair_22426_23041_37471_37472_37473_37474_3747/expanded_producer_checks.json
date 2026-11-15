@@ -1,0 +1,55 @@
+{
+  "original_rgb_index_palette_alpha_contracts_verified": 342,
+  "shared_source_RGBA_overlap_pairs": 8580,
+  "all_shared_generated_RGBA_exact": true,
+  "current_spec_SHA_matches": true,
+  "primary_and_parent_diagnostic_IoU": [
+    {
+      "binding": 89484,
+      "diagnostic_alpha_iou": 0.8456726729530389
+    },
+    {
+      "binding": 89791,
+      "diagnostic_alpha_iou": 0.8760913891357767
+    },
+    {
+      "binding": 89799,
+      "diagnostic_alpha_iou": 0.7801026957637998
+    },
+    {
+      "binding": 37473,
+      "diagnostic_alpha_iou": 0.8725272197515719
+    },
+    {
+      "binding": 37474,
+      "diagnostic_alpha_iou": 0.9243089074155332
+    },
+    {
+      "binding": 37475,
+      "diagnostic_alpha_iou": 0.8298212856761803
+    },
+    {
+      "binding": 37476,
+      "diagnostic_alpha_iou": 0.8147311827956989
+    },
+    {
+      "binding": 37487,
+      "diagnostic_alpha_iou": 0.7956938918792418
+    },
+    {
+      "binding": 23041,
+      "diagnostic_alpha_iou": 0.9056471413539109
+    },
+    {
+      "binding": 22426,
+      "diagnostic_alpha_iou": 0.7207621550591328
+    }
+  ],
+  "source_parent_groups_complete_for_confirmed_scope": true,
+  "scope": "1164[0,0,128,32];7086[0,0,128,64];front23041+22426 separately because crossing palette/raw unmatched",
+  "independent_visual_QA": false,
+  "current_runtime_replay_verified": false,
+  "all_342_touched_child_contact_pages_producer_inspected": true,
+  "child_contact_index": "expanded_children_contact_index.json",
+  "wholepose_palette_scope": "expanded_pose_color_scope.json"
+}

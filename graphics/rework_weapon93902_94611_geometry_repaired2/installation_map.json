@@ -1,0 +1,257 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "revisit_lost93902_94611",
+  "atlas": {
+    "image": "rework_revisit_lost93902_94611/pose_hd.png",
+    "reference": "rework_revisit_lost93902_94611/pose_native.png",
+    "native_size": [
+      128,
+      32
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3324067345,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 93901,
+      "replacement_binding_id_1based": 93902,
+      "classification": "same_id_actual_material_geometry_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_82_351\\unit82_weapon351_source.state",
+          "frame": 165
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3324067345,
+        "index_hash": 4143894990,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            74,
+            90
+          ],
+          [
+            90,
+            106,
+            131
+          ],
+          [
+            139,
+            148,
+            164
+          ],
+          [
+            189,
+            197,
+            205
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            164,
+            32,
+            16
+          ],
+          [
+            238,
+            41,
+            16
+          ],
+          [
+            238,
+            139,
+            16
+          ],
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            131,
+            115,
+            255
+          ],
+          [
+            131,
+            115,
+            255
+          ]
+        ],
+        "index_pixels": "eJxjYKApYMYvy8yKX5YFt36wLNOoLCMjI169jCxMjHhMBgDIKgEI",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 16,
+        "atlas_id": "revisit_lost93902_94611",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null
+      }
+    },
+    {
+      "actual_rgb_hash": 4173263909,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 94610,
+      "replacement_binding_id_1based": 94611,
+      "classification": "same_id_actual_material_geometry_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_fixed_74_313_300\\source_pose.state",
+          "frame": 0
+        }
+      ],
+      "proposed_binding": {
+        "hash": 4173263909,
+        "index_hash": 2741191328,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            0,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            49,
+            57,
+            49
+          ],
+          [
+            82,
+            98,
+            82
+          ],
+          [
+            115,
+            148,
+            115
+          ],
+          [
+            156,
+            189,
+            139
+          ],
+          [
+            189,
+            222,
+            164
+          ],
+          [
+            65,
+            90,
+            98
+          ],
+          [
+            90,
+            115,
+            123
+          ],
+          [
+            131,
+            156,
+            164
+          ],
+          [
+            197,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            197,
+            90,
+            16
+          ],
+          [
+            238,
+            156,
+            16
+          ],
+          [
+            230,
+            156,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "index_pixels": "eJyVj0EOwEAIAhXQ/z+5e0WbbepN4gBG3CfTd5RMQXel3dOFeBPonq1xQE89QF4BFf8Bax8VixgVPUAjgB+GUQuAA7Mi2yOxIgSZZ2ogSbWVCPhXZx5spQF/",
+        "x": 64,
+        "y": 0,
+        "w": 16,
+        "h": 32,
+        "atlas_id": "revisit_lost93902_94611",
+        "resource": 8872,
+        "source_x": 144,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

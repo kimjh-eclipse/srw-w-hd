@@ -1,0 +1,22 @@
+{
+  "source": "test_current/parts/missile95420_broad_shared_v2_corrected_ids",
+  "bindings": [
+    95420,
+    95421
+  ],
+  "contract": "install_contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_selected.png",
+  "file_sha256": {
+    "contract": "5ebb73ed7d8dd3060c0a4f459df77d742c6ebd82b1b3adf4d8ffe9bebfa16e76",
+    "drawing": "d7cfddc3f7f349f88bf4c5b19fe03a0b3ca4e64ef951f2803d1f41b93b91069f",
+    "native": "2a08026607f9f6341638d5aab8be7a6204098faeca7641884cf6a7c5e5cbe484",
+    "generated": "f10fbb05cff9fe39fa8db06114e9125e63b7249270fbd4f8f55391c2e90e5037"
+  },
+  "prior_binding_spec_sha256": {
+    "95420": "12e5410fd39da4dc945ac8654a36ac8dec1d0258263ae08671c17f8c8c91608f",
+    "95421": "62d402d16e818edfa66204ffd1ab013b26e20b04b07ffe5c3cd6184bf75b7e84"
+  },
+  "note": "기존 새 그림 RGBA를 바꾸지 않고 표시 ID만 바로잡은 복제 패킷입니다. 새 그림 수0, 실제 부모95420·자식95421입니다. 기존 잘못된 번호 패킷은 철회됐습니다."
+}

@@ -1,0 +1,48 @@
+{
+  "ready_packets": [
+    {
+      "kind": "whole_img_tile_source",
+      "resource": 20224,
+      "packet": "candidate_packet_whole_img20224.json",
+      "drawing": "candidate_img20224.png",
+      "drawing_sha256": "f09679eac93d41d63673d822984d2e2837940ef854248baa0d7df823bbc11e16",
+      "packet_sha256": "6c46b30c9eac6ff534e23fa6f2399ce8b188d54b8fc3eb3354e02e998cd1d786"
+    },
+    {
+      "kind": "whole_img_tile_source",
+      "resource": 20225,
+      "packet": "candidate_packet_whole_img20225.json",
+      "drawing": "candidate_img20225_assembled.png",
+      "drawing_sha256": "487c2a7eb2a733009e6849eab0bd9df2fcb4b48c0721dc2086dc251a7d46e6dd",
+      "packet_sha256": "a438581bbd2c10323519ed80d2e24c2ab933bff2c358eb1c5881e569399daee9"
+    },
+    {
+      "kind": "exact_part_replacement",
+      "binding": 95343,
+      "packet": "candidate_packet_replace95343.json",
+      "drawing": "candidate_img20225_assembled.png",
+      "drawing_sha256": "487c2a7eb2a733009e6849eab0bd9df2fcb4b48c0721dc2086dc251a7d46e6dd",
+      "packet_sha256": "6d2baddda9616f1b60c03fd274a85b308ca230e17fbf3f7db60d0a7b3e908dae"
+    }
+  ],
+  "whole_bank_masters": 2,
+  "new_tile_source_keys": 2,
+  "normal_binding_replacements": 1,
+  "extra_newfragment_drawings": 0,
+  "source_tile_positions_previously_missing_any_palette": 66,
+  "source_tile_positions_previously_missing_exact_actual_palette": 74,
+  "all_source_nonzero_tile_crops_have_paint": true,
+  "all_four_role_SHA_verified": true,
+  "normal_replacement_prior_live_verified": true,
+  "runtime_QA": false,
+  "installation_performed": false,
+  "read_only_tile_database_audit": true,
+  "rejected_drafts": [
+    "generated_img20225_draft.png (pixelstairs)",
+    "generated_img20225_final.png (glow/matte regression)"
+  ],
+  "selected_body_assembly": "Newownwholebodytop64rows + exactaccepted95351wholeparentbottom32rows;see accepted_parent95351_reuse_proof.json",
+  "installation_order_recommendation": "Claude validates/installs95343 replacement independently, adaptswholebanksastile_source_only,preservesolderacceptedtilepriority,thenrebuilds/replays. Do NOTrenderwholebanksasruntimeOBJ.",
+  "producer_whole_master_proof_sha256": "e5ca263f43090061317e08e29b613e71750b57d5522b58358bd306768cc45954",
+  "note": "95351reuse is installed/nonquarantined with producerIoU.9599, not independentvisualaccept. All243+89nonzerosource tilepositionshavepaint inselectedwholemasters."
+}

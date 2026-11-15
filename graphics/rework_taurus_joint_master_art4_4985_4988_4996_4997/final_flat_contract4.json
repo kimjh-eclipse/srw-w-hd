@@ -1,0 +1,686 @@
+[
+  {
+    "state": "test_current\\parts\\true_missing_1219\\unit8_weapon28_source.state",
+    "frame": 120,
+    "video_epoch": 121,
+    "engine": 0,
+    "oam": 7,
+    "attributes": [
+      70,
+      32872,
+      2048
+    ],
+    "screen_x": 104,
+    "screen_y": 70,
+    "w": 32,
+    "h": 32,
+    "display_w": 32,
+    "display_h": 32,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 0,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 3757073245,
+    "index_hash": 81948232,
+    "material": 3362773562,
+    "used_mask": 65534,
+    "opaque": 785,
+    "binding_id": 4988,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJx9k4mO4yAQRF19QMxi/P9/O1WNdzMZaaeVyMivqD7AxwEP/poiLLjG8Rnmka3NOVsPD3P7JtASxbGu2cdPAysOI5/31Ub7NECWaFoCWGu24R8G1kp1Wbxeifuao9s3A8TDcZ4jMdfOAHJ3bc/NJ17nn5MGSz2EmSGHa3tun0m+DTgIQ/GGN7+Ky4CCVILowxH55kMJaDAbBWbROiuJeHiSPwYlcE8Jqkq2PnGOl2bAIW0BOFIK2ChYEAWCc5YBS0iLEqQ4YJMlrftebwNPChJ/+TTctwSaQZWYFAAaEizobEsCJmn/eIp7cg7Mvg0mj1Ik1DzEI6Grw1NTAeRJMx45mxcHZeGcKP81+DRWiIiHU2eqj1w9WrqtT84p2SVLng2Tuo7nzeF7I9+23lm17VC6qp8bOQl2QMztpva6EjVsDrhaVcGW1hVctdojztYYSkB3LSl06003pXgJ9ldgD4Ztm/19eBUoAZ44UMPY97he7IeMjv+FRv4bL8EvuFL8ePMFtDkO+A==",
+    "indices_sha256": "d71a03e1b591c201f739db29ff66677a98dae56d3ad3fd74145db00f4105e81b",
+    "palette_15bit": [
+      15072,
+      2114,
+      6375,
+      7432,
+      8489,
+      10603,
+      13774,
+      18002,
+      16815,
+      21043,
+      26328,
+      30556,
+      2132,
+      2141,
+      3707,
+      5021
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        57,
+        57,
+        49
+      ],
+      [
+        65,
+        65,
+        57
+      ],
+      [
+        74,
+        74,
+        65
+      ],
+      [
+        90,
+        90,
+        82
+      ],
+      [
+        115,
+        115,
+        106
+      ],
+      [
+        148,
+        148,
+        139
+      ],
+      [
+        123,
+        106,
+        131
+      ],
+      [
+        156,
+        139,
+        164
+      ],
+      [
+        197,
+        180,
+        205
+      ],
+      [
+        230,
+        213,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "replace_binding": 4988,
+    "source_image": 1219,
+    "resource": 1219,
+    "source_palette_resource": 1220,
+    "source_box": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "source_x": 0,
+    "source_y": 0,
+    "atlas_box": [
+      0,
+      32,
+      32,
+      32
+    ],
+    "master_box": [
+      8,
+      16,
+      32,
+      32
+    ],
+    "candidate_file": "candidate_atlas.png",
+    "effect_part": false,
+    "unit_id": 8,
+    "unit_name": "トーラス",
+    "note": "사용자승인보호prefix교정. actual16pal/원본raw/관측계약유지. 4985/4988/4996/4997은같은56x48 ownRGBA master에서crop. master y16 내부접합에독립외곽선/투명한줄없도록새그림. 목표네파츠전체를한벌의새master로교정. 다른10개기존binding/spec/atlas그대로. source_box와atlas_box는다른좌표입니다. 그림후보만/중앙미수정/공식QA없음."
+  },
+  {
+    "state": "test_current\\parts\\true_missing_1219\\unit8_weapon28_source.state",
+    "frame": 120,
+    "video_epoch": 121,
+    "engine": 0,
+    "oam": 6,
+    "attributes": [
+      32838,
+      32904,
+      2052
+    ],
+    "screen_x": 136,
+    "screen_y": 70,
+    "w": 16,
+    "h": 32,
+    "display_w": 16,
+    "display_h": 32,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 4,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 41779406,
+    "index_hash": 1596482207,
+    "material": 3120711940,
+    "used_mask": 126,
+    "opaque": 298,
+    "binding_id": 4996,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJytzkkKwDAIBVCH2PsfOQ5t1EADhf4s5H0Xhi6RwYykDzSyWfnJkvYiTCePs0czG6stlNZhWf/Bxdv4Zmc41+mgW7H7obmu7T4WgrOYOwE3RwHQCvgvE6HKApw=",
+    "indices_sha256": "5bbf9a920ed26fb0d2766005b3117e96036896507723759501f9e7a98b4accb5",
+    "palette_15bit": [
+      15072,
+      2114,
+      6375,
+      7432,
+      8489,
+      10603,
+      13774,
+      18002,
+      16815,
+      21043,
+      26328,
+      30556,
+      2132,
+      2141,
+      3707,
+      5021
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        57,
+        57,
+        49
+      ],
+      [
+        65,
+        65,
+        57
+      ],
+      [
+        74,
+        74,
+        65
+      ],
+      [
+        90,
+        90,
+        82
+      ],
+      [
+        115,
+        115,
+        106
+      ],
+      [
+        148,
+        148,
+        139
+      ],
+      [
+        123,
+        106,
+        131
+      ],
+      [
+        156,
+        139,
+        164
+      ],
+      [
+        197,
+        180,
+        205
+      ],
+      [
+        230,
+        213,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "replace_binding": 4996,
+    "source_image": 1219,
+    "resource": 1219,
+    "source_palette_resource": 1220,
+    "source_box": [
+      32,
+      0,
+      16,
+      32
+    ],
+    "source_x": 32,
+    "source_y": 0,
+    "atlas_box": [
+      0,
+      96,
+      16,
+      32
+    ],
+    "master_box": [
+      40,
+      16,
+      16,
+      32
+    ],
+    "candidate_file": "candidate_atlas.png",
+    "effect_part": false,
+    "unit_id": 8,
+    "unit_name": "トーラス",
+    "note": "사용자승인보호prefix교정. actual16pal/원본raw/관측계약유지. 4985/4988/4996/4997은같은56x48 ownRGBA master에서crop. master y16 내부접합에독립외곽선/투명한줄없도록새그림. 목표네파츠전체를한벌의새master로교정. 다른10개기존binding/spec/atlas그대로. source_box와atlas_box는다른좌표입니다. 그림후보만/중앙미수정/공식QA없음."
+  },
+  {
+    "state": "test_current\\parts\\true_missing_1219\\unit8_weapon28_source.state",
+    "frame": 120,
+    "video_epoch": 121,
+    "engine": 0,
+    "oam": 5,
+    "attributes": [
+      16446,
+      16480,
+      2102
+    ],
+    "screen_x": 96,
+    "screen_y": 62,
+    "w": 32,
+    "h": 8,
+    "display_w": 32,
+    "display_h": 8,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 54,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 4097690812,
+    "index_hash": 2712952494,
+    "material": 1808485462,
+    "used_mask": 94,
+    "opaque": 77,
+    "binding_id": 4985,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJydjUEOwDAIw4oT8f8nj6jHdpo0jtiYtX5M1QfmTZAYrquQKt2UfBMKV3gjGzi40NxGsH0G5mu6vYW42T43RwDU",
+    "indices_sha256": "7cbb75cfe665a2307587661ce78aaacf40cb404b0b6151536bd87cec87a0b009",
+    "palette_15bit": [
+      15072,
+      2114,
+      6375,
+      7432,
+      8489,
+      10603,
+      13774,
+      18002,
+      16815,
+      21043,
+      26328,
+      30556,
+      2132,
+      2141,
+      3707,
+      5021
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        57,
+        57,
+        49
+      ],
+      [
+        65,
+        65,
+        57
+      ],
+      [
+        74,
+        74,
+        65
+      ],
+      [
+        90,
+        90,
+        82
+      ],
+      [
+        115,
+        115,
+        106
+      ],
+      [
+        148,
+        148,
+        139
+      ],
+      [
+        123,
+        106,
+        131
+      ],
+      [
+        156,
+        139,
+        164
+      ],
+      [
+        197,
+        180,
+        205
+      ],
+      [
+        230,
+        213,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "replace_binding": 4985,
+    "source_image": 1219,
+    "resource": 1219,
+    "source_palette_resource": 1220,
+    "source_box": [
+      176,
+      8,
+      32,
+      8
+    ],
+    "source_x": 176,
+    "source_y": 8,
+    "atlas_box": [
+      32,
+      0,
+      32,
+      8
+    ],
+    "master_box": [
+      0,
+      8,
+      32,
+      8
+    ],
+    "candidate_file": "candidate_atlas.png",
+    "effect_part": false,
+    "unit_id": 8,
+    "unit_name": "トーラス",
+    "note": "사용자승인보호prefix교정. actual16pal/원본raw/관측계약유지. 4985/4988/4996/4997은같은56x48 ownRGBA master에서crop. master y16 내부접합에독립외곽선/투명한줄없도록새그림. 목표네파츠전체를한벌의새master로교정. 다른10개기존binding/spec/atlas그대로. source_box와atlas_box는다른좌표입니다. 그림후보만/중앙미수정/공식QA없음."
+  },
+  {
+    "state": "test_current\\parts\\true_missing_1219\\unit8_weapon28_source.state",
+    "frame": 120,
+    "video_epoch": 121,
+    "engine": 0,
+    "oam": 4,
+    "attributes": [
+      54,
+      16520,
+      2058
+    ],
+    "screen_x": 136,
+    "screen_y": 54,
+    "w": 16,
+    "h": 16,
+    "display_w": 16,
+    "display_h": 16,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 10,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 2297591910,
+    "index_hash": 2167353108,
+    "material": 3774966871,
+    "used_mask": 126,
+    "opaque": 75,
+    "binding_id": 4997,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJy1yjEOACAMAkCB4v+frHEwxV22A8b4EjxkFIC6t8ROsR/oMMpSM13HuHOYDqNmeAEsLAC3",
+    "indices_sha256": "aed5b6191140a568fb7f32988c7197bb4570a3dca5861ab39be2194bb9f61638",
+    "palette_15bit": [
+      15072,
+      2114,
+      6375,
+      7432,
+      8489,
+      10603,
+      13774,
+      18002,
+      16815,
+      21043,
+      26328,
+      30556,
+      2132,
+      2141,
+      3707,
+      5021
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        57,
+        57,
+        49
+      ],
+      [
+        65,
+        65,
+        57
+      ],
+      [
+        74,
+        74,
+        65
+      ],
+      [
+        90,
+        90,
+        82
+      ],
+      [
+        115,
+        115,
+        106
+      ],
+      [
+        148,
+        148,
+        139
+      ],
+      [
+        123,
+        106,
+        131
+      ],
+      [
+        156,
+        139,
+        164
+      ],
+      [
+        197,
+        180,
+        205
+      ],
+      [
+        230,
+        213,
+        238
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "replace_binding": 4997,
+    "source_image": 1219,
+    "resource": 1219,
+    "source_palette_resource": 1220,
+    "source_box": [
+      80,
+      0,
+      16,
+      16
+    ],
+    "source_x": 80,
+    "source_y": 0,
+    "atlas_box": [
+      32,
+      96,
+      16,
+      16
+    ],
+    "master_box": [
+      40,
+      0,
+      16,
+      16
+    ],
+    "candidate_file": "candidate_atlas.png",
+    "effect_part": false,
+    "unit_id": 8,
+    "unit_name": "トーラス",
+    "note": "사용자승인보호prefix교정. actual16pal/원본raw/관측계약유지. 4985/4988/4996/4997은같은56x48 ownRGBA master에서crop. master y16 내부접합에독립외곽선/투명한줄없도록새그림. 목표네파츠전체를한벌의새master로교정. 다른10개기존binding/spec/atlas그대로. source_box와atlas_box는다른좌표입니다. 그림후보만/중앙미수정/공식QA없음."
+  }
+]

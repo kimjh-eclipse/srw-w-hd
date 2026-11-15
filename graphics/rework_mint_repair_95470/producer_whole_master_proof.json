@@ -1,0 +1,86 @@
+{
+  "source_resource": 21657,
+  "source_resource_decompressed_sha256": "7a301b6fcda80bd94bb4eaf9de71b56528195b9b6a0a99b75862b7f4800a303a",
+  "overlap": {
+    "rectangles_overlap": false,
+    "reason": "95468=[160,0,32,16],95470=[160,32,16,32]. No rawsource overlap; parent strip includes unrelatedcells. Two whole masters preserve own exact cells."
+  },
+  "new_generated_whole_masters": 2,
+  "reused_unrelated_paint": false,
+  "alpha_thresholding_or_deletion": false,
+  "source_alpha_stamping": false,
+  "masters": [
+    {
+      "binding": 95468,
+      "source_image": 21657,
+      "source_box": [
+        160,
+        0,
+        32,
+        16
+      ],
+      "native_indices_match_ROM": true,
+      "source_indices_sha256": "dc7fa5019f41ddb9b7833fd626aaf1f22a7a4e42a88682a78656c396780f52c9",
+      "native_sha256": "11cfbe91bd3a761d0da3ab1df44fc1666af34a6648c46a533c5c22f23feb1207",
+      "whole_generated_master": "generated_95468_corrected.png",
+      "whole_generated_master_sha256": "07b84a615fa5ccd8adf55124943a52ff5bdfa9c765e782d7c5449f1c9434407f",
+      "generated_size": [
+        1774,
+        887
+      ],
+      "candidate": "candidate_95468_corrected.png",
+      "candidate_sha256": "5a599edcfaca7ff9743bc963fac272b1971379eda01d6a8963967d2b4591f3c8",
+      "whole_master_to_candidate": "Entire generated image resized uniformly to4x exactsourcecell. No crop, patch mixing, rawpixel/alpha copying, color replacement, threshold/deletion.",
+      "candidate_pixel_equal_to_whole_master_resize": true,
+      "reference_input": "reference_gray_95468.png",
+      "prompt": "prompt_95468_corrected.txt"
+    },
+    {
+      "binding": 95470,
+      "source_image": 21657,
+      "source_box": [
+        160,
+        32,
+        16,
+        32
+      ],
+      "native_indices_match_ROM": true,
+      "source_indices_sha256": "c6ebe9596188f9a19bbc2e66534666ddc53f6b25f3f65b49bff9599256b58107",
+      "native_sha256": "987edbf413a0abc29b1284e3cf2c9b294da2615abd1c347223fced497101edba",
+      "whole_generated_master": "generated_95470.png",
+      "whole_generated_master_sha256": "bcbbb3ebe45fa435fa52ef04c2ae0d5e77b12899c8e07a2f26227c7e6e6cb056",
+      "generated_size": [
+        887,
+        1774
+      ],
+      "candidate": "candidate_95470.png",
+      "candidate_sha256": "b146ca5862a6edf864439c133dd99bc20b80522f373c2a3b001c379aff750348",
+      "whole_master_to_candidate": "Entire generated image resized uniformly to4x exactsourcecell. No crop, patch mixing, rawpixel/alpha copying, color replacement, threshold/deletion.",
+      "candidate_pixel_equal_to_whole_master_resize": true,
+      "reference_input": "reference_gray_95470.png",
+      "prompt": "prompt_95470.txt"
+    }
+  ],
+  "generation_calls": 3,
+  "generated_files": [
+    {
+      "file": "generated_95468.png",
+      "sha256": "6c7bd4620bf260fe1e84d607ac9b82bf8887c4c527feaa11c2d95c402360837b",
+      "role": "discarded_first95468_endpoint_too_thin"
+    },
+    {
+      "file": "generated_95468_corrected.png",
+      "sha256": "07b84a615fa5ccd8adf55124943a52ff5bdfa9c765e782d7c5449f1c9434407f",
+      "role": "final_whole_master"
+    },
+    {
+      "file": "generated_95470.png",
+      "sha256": "bcbbb3ebe45fa435fa52ef04c2ae0d5e77b12899c8e07a2f26227c7e6e6cb056",
+      "role": "final_whole_master"
+    }
+  ],
+  "own_master_lineage": {
+    "95468_corrected": "Regenerated from own first95468 generated wholemaster plus exactgraynative geometry reference; no other effect painting reused.",
+    "95470": "Generated directly from exactnative grayreference."
+  }
+}

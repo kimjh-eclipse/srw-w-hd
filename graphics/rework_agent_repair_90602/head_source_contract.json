@@ -1,0 +1,772 @@
+{
+  "status": "generated_art_pending",
+  "scope": "head crest tile only; other reported parts remain open",
+  "source": {
+    "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_3_15\\source_pose.state",
+    "frame": 0,
+    "video_epoch": 557,
+    "engine": 0,
+    "oam": 9,
+    "attributes": [
+      51,
+      32882,
+      1024
+    ],
+    "screen_x": 114,
+    "screen_y": 51,
+    "w": 32,
+    "h": 32,
+    "display_w": 32,
+    "display_h": 32,
+    "priority": 1,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 0,
+    "tile_number": 0,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 1614348685,
+    "index_hash": 2140177243,
+    "material": 795961692,
+    "used_mask": 65518,
+    "opaque": 780,
+    "binding_id": 90602,
+    "bound_hash_checked": true,
+    "hd_pending_or_held": false,
+    "index_pixels": "eJx1k4tuxSAMQ69bFRJe/f+/nR2gW7WNStNdj2OcQD+fZ6Fy4fPPQm2tjW5/CxaF2Z8OaH3kXIkl0N+3ClqjNr5nCgV5C1QyeTNyrrcAKuiAoemX1C8B41VrCHuqwl82j8BaEzC5C0sQSbAbmJxtRqstWO/bIxpA4LVEWb0drPZBDrjD3K1mzRJyxjS4OT14STmxOGicBrfD5ComRu2zdlnzf6wAZs7SoBoBdu+MyciME5DURZlkG/QaOA9Sil1BSlKUaaDyUVmk4lQcgjnTZhogynlE7KEUt00f3vtgfGJPDKnw+vHNB/Gghdov7JzDKsI+sW4EJs7anmL1YF7ibCRoLe6VrFE0k9gl8vd9JvD7vjn/8ryY+zM5nyuxInDaithf14/PcZ7ncfCdOkuYRcHhfEguhuMJWLaM39zs5FCOE0jIcVhSLG6qB5snPxLCPnp5tucnhIuYyhLxdNj7iANzhJetuhL45/cVHzfmTVnXReQLF+oTJg==",
+    "indices_sha256": "6f756d296c67559a836a74104a89a1be1e8b0e2bc174fa90a57170db88aeb349",
+    "palette_15bit": [
+      15072,
+      2114,
+      14734,
+      20021,
+      20187,
+      25332,
+      28538,
+      30653,
+      18635,
+      26097,
+      28311,
+      2132,
+      2141,
+      3707,
+      5021,
+      5026
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        189,
+        115
+      ],
+      [
+        16,
+        16,
+        16
+      ],
+      [
+        115,
+        98,
+        115
+      ],
+      [
+        172,
+        139,
+        156
+      ],
+      [
+        222,
+        180,
+        156
+      ],
+      [
+        164,
+        189,
+        197
+      ],
+      [
+        213,
+        222,
+        222
+      ],
+      [
+        238,
+        238,
+        238
+      ],
+      [
+        90,
+        49,
+        148
+      ],
+      [
+        139,
+        123,
+        205
+      ],
+      [
+        189,
+        164,
+        222
+      ],
+      [
+        164,
+        16,
+        16
+      ],
+      [
+        238,
+        16,
+        16
+      ],
+      [
+        222,
+        156,
+        24
+      ],
+      [
+        238,
+        230,
+        32
+      ],
+      [
+        16,
+        238,
+        32
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+    "core_sha256": "a6d80b29119f7c18447725acc4e0e5c8fb88cdda07d8cef6ccb106e936b64fe0"
+  },
+  "raw_indices_sha256": "6f756d296c67559a836a74104a89a1be1e8b0e2bc174fa90a57170db88aeb349",
+  "raw_indices_size": 1024,
+  "palette_full16_rgb": [
+    [
+      0,
+      189,
+      115
+    ],
+    [
+      16,
+      16,
+      16
+    ],
+    [
+      115,
+      98,
+      115
+    ],
+    [
+      172,
+      139,
+      156
+    ],
+    [
+      222,
+      180,
+      156
+    ],
+    [
+      164,
+      189,
+      197
+    ],
+    [
+      213,
+      222,
+      222
+    ],
+    [
+      238,
+      238,
+      238
+    ],
+    [
+      90,
+      49,
+      148
+    ],
+    [
+      139,
+      123,
+      205
+    ],
+    [
+      189,
+      164,
+      222
+    ],
+    [
+      164,
+      16,
+      16
+    ],
+    [
+      238,
+      16,
+      16
+    ],
+    [
+      222,
+      156,
+      24
+    ],
+    [
+      238,
+      230,
+      32
+    ],
+    [
+      16,
+      238,
+      32
+    ]
+  ],
+  "palette_full16_15bit": [
+    15072,
+    2114,
+    14734,
+    20021,
+    20187,
+    25332,
+    28538,
+    30653,
+    18635,
+    26097,
+    28311,
+    2132,
+    2141,
+    3707,
+    5021,
+    5026
+  ],
+  "palette_verdict": "Claude HANDOFF_TO_CODEX_6 pure-HD-off +2/+30/+60/+90 confirms red helmet, dark purple panels, yellow V and purple body",
+  "bindings": [
+    {
+      "binding_index0": 23147,
+      "binding_id1": 23148,
+      "prior_binding_spec_sha256": "537d2fdfed3ae42c1bafecb676f464c15231ac4da1e0aabd9d3ff013b9c46e4f",
+      "spec": {
+        "hash": 1025156237,
+        "rgb_enabled": true,
+        "index_hash": 2140177243,
+        "x": 268,
+        "y": 172,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "full_attack_017",
+        "auto_full_attack": true,
+        "resource": 7276,
+        "source_x": 0,
+        "source_y": 0,
+        "dynamic_palette": true,
+        "indexed_safe": true,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            98,
+            115
+          ],
+          [
+            172,
+            139,
+            156
+          ],
+          [
+            222,
+            180,
+            156
+          ],
+          [
+            164,
+            189,
+            197
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            90,
+            49,
+            148
+          ],
+          [
+            139,
+            123,
+            205
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ],
+          [
+            16,
+            238,
+            32
+          ]
+        ],
+        "source_binding": 90602,
+        "palette_source_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            98,
+            115
+          ],
+          [
+            172,
+            139,
+            156
+          ],
+          [
+            222,
+            180,
+            156
+          ],
+          [
+            164,
+            189,
+            197
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            90,
+            49,
+            148
+          ],
+          [
+            139,
+            123,
+            205
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ],
+          [
+            16,
+            238,
+            32
+          ]
+        ],
+        "index_pixels": "eJx1k4tuxSAMQ69bFRJe/f+/nR2gW7WNStNdj2OcQD+fZ6Fy4fPPQm2tjW5/CxaF2Z8OaH3kXIkl0N+3ClqjNr5nCgV5C1QyeTNyrrcAKuiAoemX1C8B41VrCHuqwl82j8BaEzC5C0sQSbAbmJxtRqstWO/bIxpA4LVEWb0drPZBDrjD3K1mzRJyxjS4OT14STmxOGicBrfD5ComRu2zdlnzf6wAZs7SoBoBdu+MyciME5DURZlkG/QaOA9Sil1BSlKUaaDyUVmk4lQcgjnTZhogynlE7KEUt00f3vtgfGJPDKnw+vHNB/Gghdov7JzDKsI+sW4EJs7anmL1YF7ibCRoLe6VrFE0k9gl8vd9JvD7vjn/8ryY+zM5nyuxInDaithf14/PcZ7ncfCdOkuYRcHhfEguhuMJWLaM39zs5FCOE0jIcVhSLG6qB5snPxLCPnp5tucnhIuYyhLxdNj7iANzhJetuhL45/cVHzfmTVnXReQLF+oTJg==",
+        "wing_source_relinked": true,
+        "palette_rgb": [
+          [
+            0,
+            123,
+            164
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            24,
+            57,
+            106
+          ],
+          [
+            49,
+            82,
+            98
+          ],
+          [
+            123,
+            148,
+            180
+          ],
+          [
+            164,
+            189,
+            197
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            90,
+            49,
+            148
+          ],
+          [
+            115,
+            82,
+            180
+          ],
+          [
+            139,
+            123,
+            205
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            213,
+            197,
+            238
+          ],
+          [
+            131,
+            98,
+            74
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ]
+        ]
+      }
+    },
+    {
+      "binding_index0": 90601,
+      "binding_id1": 90602,
+      "prior_binding_spec_sha256": "32e3c29f98f4ce5b73253a384ec3c122e3e1034c2d718948e9361023b32fc408",
+      "spec": {
+        "hash": 1614348685,
+        "index_hash": 2140177243,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            98,
+            115
+          ],
+          [
+            172,
+            139,
+            156
+          ],
+          [
+            222,
+            180,
+            156
+          ],
+          [
+            164,
+            189,
+            197
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            90,
+            49,
+            148
+          ],
+          [
+            139,
+            123,
+            205
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ],
+          [
+            16,
+            238,
+            32
+          ]
+        ],
+        "index_pixels": "eJx1k4tuxSAMQ69bFRJe/f+/nR2gW7WNStNdj2OcQD+fZ6Fy4fPPQm2tjW5/CxaF2Z8OaH3kXIkl0N+3ClqjNr5nCgV5C1QyeTNyrrcAKuiAoemX1C8B41VrCHuqwl82j8BaEzC5C0sQSbAbmJxtRqstWO/bIxpA4LVEWb0drPZBDrjD3K1mzRJyxjS4OT14STmxOGicBrfD5ComRu2zdlnzf6wAZs7SoBoBdu+MyciME5DURZlkG/QaOA9Sil1BSlKUaaDyUVmk4lQcgjnTZhogynlE7KEUt00f3vtgfGJPDKnw+vHNB/Gghdov7JzDKsI+sW4EJs7anmL1YF7ibCRoLe6VrFE0k9gl8vd9JvD7vjn/8ryY+zM5nyuxInDaithf14/PcZ7ncfCdOkuYRcHhfEguhuMJWLaM39zs5FCOE0jIcVhSLG6qB5snPxLCPnp5tucnhIuYyhLxdNj7iANzhJetuhL45/cVHzfmTVnXReQLF+oTJg==",
+        "x": 208,
+        "y": 88,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "sandrock_cached_pose",
+        "resource": 1180,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude"
+      }
+    },
+    {
+      "binding_index0": 92053,
+      "binding_id1": 92054,
+      "prior_binding_spec_sha256": "d1edc340ba667cdaeeea8d3a9af721d8ed0503203edd94011012ca2df0866d5c",
+      "spec": {
+        "hash": 1614348685,
+        "rgb_enabled": false,
+        "index_hash": 2140177243,
+        "indexed_safe": true,
+        "dynamic_palette": true,
+        "atlas_id": "wing_primary",
+        "resource": 1180,
+        "source_x": 0,
+        "source_y": 0,
+        "x": 0,
+        "y": 32,
+        "w": 32,
+        "h": 32,
+        "original_palette_rgb": [
+          [
+            0,
+            189,
+            115
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            98,
+            115
+          ],
+          [
+            172,
+            139,
+            156
+          ],
+          [
+            222,
+            180,
+            156
+          ],
+          [
+            164,
+            189,
+            197
+          ],
+          [
+            213,
+            222,
+            222
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            90,
+            49,
+            148
+          ],
+          [
+            139,
+            123,
+            205
+          ],
+          [
+            189,
+            164,
+            222
+          ],
+          [
+            164,
+            16,
+            16
+          ],
+          [
+            238,
+            16,
+            16
+          ],
+          [
+            222,
+            156,
+            24
+          ],
+          [
+            238,
+            230,
+            32
+          ],
+          [
+            16,
+            238,
+            32
+          ]
+        ],
+        "index_pixels": "eJx1k4tuxSAMQ69bFRJe/f+/nR2gW7WNStNdj2OcQD+fZ6Fy4fPPQm2tjW5/CxaF2Z8OaH3kXIkl0N+3ClqjNr5nCgV5C1QyeTNyrrcAKuiAoemX1C8B41VrCHuqwl82j8BaEzC5C0sQSbAbmJxtRqstWO/bIxpA4LVEWb0drPZBDrjD3K1mzRJyxjS4OT14STmxOGicBrfD5ComRu2zdlnzf6wAZs7SoBoBdu+MyciME5DURZlkG/QaOA9Sil1BSlKUaaDyUVmk4lQcgjnTZhogynlE7KEUt00f3vtgfGJPDKnw+vHNB/Gghdov7JzDKsI+sW4EJs7anmL1YF7ibCRoLe6VrFE0k9gl8vd9JvD7vjn/8ryY+zM5nyuxInDaithf14/PcZ7ncfCdOkuYRcHhfEguhuMJWLaM39zs5FCOE0jIcVhSLG6qB5snPxLCPnp5tucnhIuYyhLxdNj7iANzhJetuhL45/cVHzfmTVnXReQLF+oTJg==",
+        "wing_img_first": true,
+        "auto_unit": true,
+        "indexed_fallback_for": 90602
+      }
+    }
+  ],
+  "shield_hypothesis": {
+    "status": "not accepted for production; no defense state actual palette",
+    "resource": 7242,
+    "source_main": [
+      192,
+      0,
+      32,
+      32
+    ],
+    "source_lower": [
+      224,
+      0,
+      32,
+      32
+    ],
+    "template_atlas": "full_attack_044",
+    "template_main": [
+      460,
+      6,
+      32,
+      32
+    ],
+    "template_lower": [
+      492,
+      6,
+      32,
+      32
+    ],
+    "binding_index0_candidates": [
+      38080,
+      38082,
+      38083
+    ],
+    "warning": "template is red/gray; do not paint screenshot purple or head palette without cached defense contract"
+  }
+}

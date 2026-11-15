@@ -1,0 +1,798 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "lost_arbalest_speed_fx6",
+  "atlas": {
+    "image": "rework_lost_arbalest_speed_fx6/pose_hd.png",
+    "reference": "rework_lost_arbalest_speed_fx6/pose_native.png",
+    "native_size": [
+      192,
+      144
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "replacement_only_no_new_count": true,
+  "entries": [
+    {
+      "actual_rgb_hash": 549779238,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 92955,
+      "replacement_binding_id_1based": 92956,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 1,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            142,
+            67
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        1
+      ],
+      "proposed_binding": {
+        "hash": 549779238,
+        "index_hash": 492686820,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJzl0DESgEAIA0AqAvn/gw3YKUfvmHYnB5zZn5O5K7koGee+utLE1k0gJo3uQjrND+XuksP7jVZIdzz9of6arIMgzEn7WuCgHRDs1WdN1uWzon9b6mO3s2usWiuf1XzD4k2/mwsyHQUH",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 80,
+        "source_y": 16,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    },
+    {
+      "actual_rgb_hash": 2548471860,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 92957,
+      "replacement_binding_id_1based": 92958,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 3,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            139,
+            78
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        3
+      ],
+      "proposed_binding": {
+        "hash": 2548471860,
+        "index_hash": 239701860,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJxjYAABNnYIxQmm2bggNBcnGxuI4gJTIC4SxQAVZYBSDFCKRAAATwsA3Q==",
+        "x": 64,
+        "y": 0,
+        "w": 8,
+        "h": 16,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 28,
+        "source_y": 96,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    },
+    {
+      "actual_rgb_hash": 2556936390,
+      "source_cell": 2,
+      "existing_exact_rgb_binding": 92959,
+      "replacement_binding_id_1based": 92960,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 13,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            112,
+            86
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        13
+      ],
+      "proposed_binding": {
+        "hash": 2556936390,
+        "index_hash": 1265057255,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJxjYGBg4GTgYgdSQMzFBuYysINoIAtCgWTAFCoXDAASgwBy",
+        "x": 128,
+        "y": 0,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 156,
+        "source_y": 100,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    },
+    {
+      "actual_rgb_hash": 3662022626,
+      "source_cell": 3,
+      "existing_exact_rgb_binding": 92961,
+      "replacement_binding_id_1based": 92962,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 17,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            110,
+            80
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        17
+      ],
+      "proposed_binding": {
+        "hash": 3662022626,
+        "index_hash": 1679837814,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJxjYIACNiAA01xcEJqdi50NQkME2LmgCtmRaQAW8gCv",
+        "x": 0,
+        "y": 72,
+        "w": 8,
+        "h": 8,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 92,
+        "source_y": 172,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    },
+    {
+      "actual_rgb_hash": 137598423,
+      "source_cell": 4,
+      "existing_exact_rgb_binding": 92963,
+      "replacement_binding_id_1based": 92964,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 24,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            117,
+            75
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        24
+      ],
+      "proposed_binding": {
+        "hash": 137598423,
+        "index_hash": 1227938695,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJxdjEEKADAMwjxZ8P8PHtWujHkJERF4QtKoCiVG7atDqevVrFpNpcblnPw5cLgBuw==",
+        "x": 64,
+        "y": 72,
+        "w": 8,
+        "h": 16,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 28,
+        "source_y": 240,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    },
+    {
+      "actual_rgb_hash": 3473426801,
+      "source_cell": 5,
+      "existing_exact_rgb_binding": 92964,
+      "replacement_binding_id_1based": 92965,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "unit": 265,
+          "oam": 25,
+          "state": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0,
+          "screen": [
+            123,
+            67
+          ]
+        }
+      ],
+      "observed_oam_slots": [
+        25
+      ],
+      "proposed_binding": {
+        "hash": 3473426801,
+        "index_hash": 3869502680,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJzt0TEOQCEMAlCmknL/A5tvHC0ddDH5rC+UocCfTUiG48w0zpTOmA3XdcYX2zbjk+vrHYcdp+TqN7j0hoHF7uuQ5xczAI6NA7s=",
+        "x": 128,
+        "y": 72,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "lost_arbalest_speed_fx6",
+        "resource": null,
+        "source_x": 80,
+        "source_y": 232,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    }
+  ]
+}

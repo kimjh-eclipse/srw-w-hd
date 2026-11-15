@@ -1,0 +1,855 @@
+{
+  "status": "CACHED_OBJ_ARTWORK_CANDIDATE_UNVERIFIED",
+  "atlas_id": "lost_pink_base_six",
+  "atlas": {
+    "image": "rework_lost_pink_base_six/pose_hd.png",
+    "reference": "rework_lost_pink_base_six/pose_native.png",
+    "native_size": [
+      192,
+      128
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "replacement_only_no_new_count": true,
+  "entries": [
+    {
+      "actual_rgb_hash": 1197390202,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 94833,
+      "replacement_binding_id_1based": 94834,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_231_952\\unit231_weapon952_source.state",
+          "frame": 655,
+          "oam": 9,
+          "source_image_candidate": 21748,
+          "owner_confirmed": false
+        },
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_231_952\\unit231_weapon952_source.state",
+          "frame": 655,
+          "oam": 9,
+          "source_image_candidate": 22409,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        9
+      ],
+      "proposed_binding": {
+        "hash": 1197390202,
+        "index_hash": 2598499693,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJxjYCAHsIEAKwggC0BEIIAFCqDCLAjAjAIIyRMyn0j34QQALFUCXw==",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 8,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 21748,
+        "source_x": 0,
+        "source_y": 32,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            21748,
+            0,
+            32
+          ],
+          [
+            22409,
+            32,
+            16
+          ]
+        ],
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    },
+    {
+      "actual_rgb_hash": 3395044551,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 94836,
+      "replacement_binding_id_1based": 94837,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_237_965\\unit237_weapon965_source.state",
+          "frame": 540,
+          "oam": 2,
+          "source_image_candidate": 21748,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        2
+      ],
+      "proposed_binding": {
+        "hash": 3395044551,
+        "index_hash": 1258897847,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJzF0DEOwDAIA0AnDvz/yQ3qjD2gqqwnLDAwmdTqWHqG4jQcx7Ba/5bPjKk+Mxyeo8+ecKlkcrN9/OX29Mt7k1168erTb2e/MQzDMAxjidpqHmAxAvs=",
+        "x": 64,
+        "y": 0,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 21748,
+        "source_x": 32,
+        "source_y": 32,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            22410,
+            32,
+            0
+          ],
+          [
+            21748,
+            32,
+            32
+          ]
+        ],
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    },
+    {
+      "actual_rgb_hash": 477780745,
+      "source_cell": 2,
+      "existing_exact_rgb_binding": 94839,
+      "replacement_binding_id_1based": 94840,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_237_965\\unit237_weapon965_source.state",
+          "frame": 535,
+          "oam": 4,
+          "source_image_candidate": 21748,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        4
+      ],
+      "proposed_binding": {
+        "hash": 477780745,
+        "index_hash": 3801346093,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJyV0lEOwCAIA1BAuf+V55bM0cok8vsS2wgi6XjvzXRMwbl/nPrQlzOPbPnbk9sm+uZeMHmMfth33HasxO4OTOEOzY4Zo7kbJpdM1Tszhsd9/LAesOK3LWzoGUdfmJaGzEtjN2YpWAoWZD7X6ClLwdPNUpYLwPAERA==",
+        "x": 128,
+        "y": 0,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 21748,
+        "source_x": 160,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            22410,
+            160,
+            0
+          ],
+          [
+            21748,
+            160,
+            0
+          ]
+        ],
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    },
+    {
+      "actual_rgb_hash": 1324927907,
+      "source_cell": 3,
+      "existing_exact_rgb_binding": 94840,
+      "replacement_binding_id_1based": 94841,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_237_965\\unit237_weapon965_source.state",
+          "frame": 535,
+          "oam": 5,
+          "source_image_candidate": 21748,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        5
+      ],
+      "proposed_binding": {
+        "hash": 1324927907,
+        "index_hash": 2117936727,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJy10UESwCAIA0BA4P9PLtSx7SHAqV53IlGI/jvuvbbes7tZ7aG6rGYLVhu4iMfVOvAKLnxzGbeBb10Ku/sdFkkG8T1Z0hHbwPowGn7CsuC/7mKyb6+YGcdzl5LMsNwJp0c5yFwyvcyCnvZh2H1g+rACpj59HFZ/vdjK8YbpAgCaBCs=",
+        "x": 0,
+        "y": 64,
+        "w": 32,
+        "h": 32,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 21748,
+        "source_x": 128,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            22410,
+            128,
+            0
+          ],
+          [
+            21748,
+            128,
+            0
+          ]
+        ],
+        "source_owner_confirmed": false,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    },
+    {
+      "actual_rgb_hash": 1220154195,
+      "source_cell": 4,
+      "existing_exact_rgb_binding": 94841,
+      "replacement_binding_id_1based": 94842,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_237_965\\unit237_weapon965_source.state",
+          "frame": 595,
+          "oam": 2,
+          "source_image_candidate": 21748,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        2
+      ],
+      "proposed_binding": {
+        "hash": 1220154195,
+        "index_hash": 1427188303,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJydx7ENAAAIAjAG4P+TnWEwxm4FNs5VFTej6upddnmvsqhiAF2hAME=",
+        "x": 64,
+        "y": 64,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 21748,
+        "source_x": 104,
+        "source_y": 40,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            21748,
+            104,
+            40
+          ]
+        ],
+        "source_owner_confirmed": true,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    },
+    {
+      "actual_rgb_hash": 4245804887,
+      "source_cell": 5,
+      "existing_exact_rgb_binding": 94845,
+      "replacement_binding_id_1based": 94846,
+      "classification": "existing_lost_same_id_replacement",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_231_952\\unit231_weapon952_source.state",
+          "frame": 660,
+          "oam": 6,
+          "source_image_candidate": 22409,
+          "owner_confirmed": false
+        }
+      ],
+      "observed_oam_slots": [
+        6
+      ],
+      "proposed_binding": {
+        "hash": 4245804887,
+        "index_hash": 1687366408,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            246
+          ],
+          [
+            213,
+            222,
+            238
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            164,
+            189,
+            213
+          ],
+          [
+            139,
+            172,
+            197
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ],
+          [
+            0,
+            123,
+            115
+          ]
+        ],
+        "index_pixels": "eJxjYKAtYGNlYWFhZQPSQMCCCoAiQAkQACnECmjsOgYGAJczATA=",
+        "x": 128,
+        "y": 64,
+        "w": 32,
+        "h": 8,
+        "atlas_id": "lost_pink_base_six",
+        "resource": 22409,
+        "source_x": 64,
+        "source_y": 24,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": 0,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_candidate_matches": [
+          [
+            22409,
+            64,
+            24
+          ]
+        ],
+        "source_owner_confirmed": true,
+        "effect_part": true
+      },
+      "production_role_reclassification": "흰 회청색 빔 FX"
+    }
+  ]
+}

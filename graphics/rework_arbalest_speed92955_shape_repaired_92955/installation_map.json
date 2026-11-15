@@ -1,0 +1,140 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "arbalest_speed92955_shape_repaired",
+  "atlas": {
+    "image": "rework_arbalest_speed92955_shape_repaired/pose_hd.png",
+    "reference": "rework_arbalest_speed92955_shape_repaired/pose_native.png",
+    "native_size": [
+      16,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 2736613849,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 92954,
+      "replacement_binding_id_1based": 92955,
+      "classification": "same_id_speed_streak_two_components_shape_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\borrowed_shape_rework\\source_mechanical_265_1096\\source_pose.state",
+          "frame": 0
+        }
+      ],
+      "proposed_binding": {
+        "hash": 2736613849,
+        "index_hash": 753408839,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": false,
+        "original_palette_rgb": [
+          [
+            0,
+            123,
+            131
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            41,
+            41,
+            41
+          ],
+          [
+            65,
+            74,
+            74
+          ],
+          [
+            90,
+            98,
+            106
+          ],
+          [
+            115,
+            131,
+            139
+          ],
+          [
+            139,
+            164,
+            172
+          ],
+          [
+            164,
+            189,
+            205
+          ],
+          [
+            189,
+            205,
+            222
+          ],
+          [
+            213,
+            222,
+            230
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            180,
+            115,
+            24
+          ],
+          [
+            222,
+            172,
+            16
+          ],
+          [
+            238,
+            238,
+            24
+          ],
+          [
+            32,
+            172,
+            123
+          ],
+          [
+            24,
+            238,
+            156
+          ]
+        ],
+        "index_pixels": "eJxjYCALcKDwOLmI5TGg8NjYGDg5wYqAJCc7G1QJFxKPnR2kAy4HlARKw3lAPic7Eg+kHpkHtIKARwCbSgFy",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "arbalest_speed92955_shape_repaired",
+        "resource": null,
+        "source_x": 24,
+        "source_y": 24,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner_confirmed": false,
+        "source_owner_note": "Actual rendered cached OBJ proven; IMG resource ownership not asserted.",
+        "effect_part": true
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true,
+  "connection_bake_verification_owner": "Claude"
+}

@@ -1,0 +1,262 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "primada_lost95131_95133",
+  "atlas": {
+    "image": "rework_primada_lost95131_95133/pose_hd.png",
+    "reference": "rework_primada_lost95131_95133/pose_native.png",
+    "native_size": [
+      128,
+      32
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 3960784341,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 95130,
+      "replacement_binding_id_1based": 95131,
+      "classification": "same_id_actual_broad_panel_shape_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_347_1398\\unit347_weapon1398_source.state",
+          "frame": 160
+        }
+      ],
+      "proposed_binding": {
+        "hash": 3960784341,
+        "index_hash": 2734417713,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            90,
+            115
+          ],
+          [
+            148,
+            123,
+            148
+          ],
+          [
+            180,
+            164,
+            180
+          ],
+          [
+            213,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            238,
+            197,
+            222
+          ],
+          [
+            238,
+            156,
+            205
+          ],
+          [
+            238,
+            106,
+            189
+          ],
+          [
+            230,
+            65,
+            164
+          ],
+          [
+            197,
+            49,
+            123
+          ],
+          [
+            164,
+            32,
+            90
+          ],
+          [
+            131,
+            16,
+            49
+          ],
+          [
+            90,
+            16,
+            49
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "index_pixels": "eJx9kEsWxSAIQ8vkKZ9k/8t9SK3aSTPiHiFIrutLIm+EvUgcB7kLuNAdlD1PJpGrP5+EEXH4ESBP9t7agb1b7H2XRC7Y/eW/3wVAhPT9H1NVPn4sVDwcQqTf5ECY5fLfTwuzbK33HKj7kZV55EnqxZrDwxD2sJYm02ilL3YPLB5/99ExucpscJ+XZ1Lj4JsrzNLKU3hr5TvyAGTnE0OCPzwpClI=",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 32,
+        "atlas_id": "primada_lost95131_95133",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 347, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    },
+    {
+      "actual_rgb_hash": 4142452612,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 95132,
+      "replacement_binding_id_1based": 95133,
+      "classification": "same_id_actual_broad_panel_shape_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_347_1398\\unit347_weapon1398_source.state",
+          "frame": 160
+        }
+      ],
+      "proposed_binding": {
+        "hash": 4142452612,
+        "index_hash": 4054276368,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            115,
+            90,
+            115
+          ],
+          [
+            148,
+            123,
+            148
+          ],
+          [
+            180,
+            164,
+            180
+          ],
+          [
+            213,
+            205,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            238,
+            197,
+            222
+          ],
+          [
+            238,
+            156,
+            205
+          ],
+          [
+            238,
+            106,
+            189
+          ],
+          [
+            230,
+            65,
+            164
+          ],
+          [
+            197,
+            49,
+            123
+          ],
+          [
+            164,
+            32,
+            90
+          ],
+          [
+            131,
+            16,
+            49
+          ],
+          [
+            90,
+            16,
+            49
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "index_pixels": "eJxtzksShEAIA1AzOohAcv/j2pb92cjuBQrYtu8iqyqnUBGm4ks1RZwq9XYaw53LTieQGvMUwnF1Q0JSXtMH7L/H9M9gtiOGW2AHVh+Fh9N5Ftq/QjfrWmr3W5CLz4KhG1pdBIo=",
+        "x": 64,
+        "y": 0,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "primada_lost95131_95133",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 347, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true
+}

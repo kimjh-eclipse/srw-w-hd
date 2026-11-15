@@ -1,0 +1,3 @@
+# 현재상태
+
+후보6/정상12보존,normalizedprepare6/preflight경고0,root설치·Claude검증대기. SHA d75f1fc243fad141ce1a96190e4488d7e876df8a71ddea258912ad4dc0cddc81

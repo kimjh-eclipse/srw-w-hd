@@ -1,0 +1,211 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 4,
+      "binding": 93810,
+      "hash": 3456484461,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 5,
+      "binding": 93811,
+      "hash": 1587536128,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 8,
+      "binding": 93812,
+      "hash": 1346859999,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 11,
+      "binding": 93813,
+      "hash": 1428889313,
+      "alpha_iou": 0.1774193548387097,
+      "new_rgb": false,
+      "shape_review_required": true
+    },
+    {
+      "slot": 12,
+      "binding": 93814,
+      "hash": 1302372881,
+      "alpha_iou": 0.2641509433962264,
+      "new_rgb": false,
+      "shape_review_required": true
+    },
+    {
+      "slot": 13,
+      "binding": 93815,
+      "hash": 3407841122,
+      "alpha_iou": 0.6711229946524064,
+      "new_rgb": false,
+      "shape_review_required": true
+    },
+    {
+      "slot": 16,
+      "binding": 93816,
+      "hash": 564202114,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 19,
+      "binding": 93817,
+      "hash": 387842611,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": 7,
+      "binding": 93818,
+      "hash": 664122820,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": 4,
+      "slot_b": 5,
+      "source_overlap": [
+        160,
+        8,
+        24,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 4,
+      "slot_b": 8,
+      "source_overlap": [
+        160,
+        8,
+        16,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 4,
+      "slot_b": 19,
+      "source_overlap": [
+        160,
+        8,
+        16,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 4,
+      "slot_b": 7,
+      "source_overlap": [
+        176,
+        8,
+        16,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 5,
+      "slot_b": 8,
+      "source_overlap": [
+        160,
+        8,
+        16,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 5,
+      "slot_b": 16,
+      "source_overlap": [
+        152,
+        8,
+        8,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 5,
+      "slot_b": 19,
+      "source_overlap": [
+        152,
+        8,
+        24,
+        8
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 5,
+      "slot_b": 7,
+      "source_overlap": [
+        176,
+        8,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 8,
+      "slot_b": 19,
+      "source_overlap": [
+        160,
+        0,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 16,
+      "slot_b": 19,
+      "source_overlap": [
+        144,
+        0,
+        16,
+        16
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [
+    11,
+    12,
+    13
+  ],
+  "independent_visual_verification": false
+}

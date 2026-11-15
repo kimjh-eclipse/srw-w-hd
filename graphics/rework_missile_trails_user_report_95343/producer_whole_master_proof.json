@@ -1,0 +1,68 @@
+{
+  "final_master_count": 2,
+  "builtin_imagegen_calls": 4,
+  "generated_outputs": [
+    {
+      "file": "generated_img20224.png",
+      "sha256": "fd1f1ae1d8a1e1b3c557511fb964a68ad9806498a9435bf3926792b2ef3fc945",
+      "role": "selectedwhole20224"
+    },
+    {
+      "file": "generated_img20225.png",
+      "sha256": "f09462448d37db5abd6ecb716ef79e48966bd17fd6bdd9ee8a24e6d2f025c4e7",
+      "role": "selectednewwholebodytop64rows"
+    },
+    {
+      "file": "generated_img20225_draft.png",
+      "sha256": "f9d467cff2ec034fc90c69ab254b5c09726644413d1dd87f1b7b9e30c371a38b",
+      "role": "rejectedpixelstairs"
+    },
+    {
+      "file": "generated_img20225_final.png",
+      "sha256": "cba8394ee764ec0a1bf9773749d43c9c8e36023a86391e30caf2b02c88e57172",
+      "role": "rejectedglowmatte"
+    }
+  ],
+  "whole20224": {
+    "native_source": "native_img20224.png",
+    "generated": "generated_img20224.png",
+    "drawing": "candidate_img20224.png",
+    "operation": "WholegeneratedPNG uniformlyresized768x384; no sourceRGB/alpha stamp, thresholdcleanup, colorreplacement or piece rearrangement."
+  },
+  "whole20225": {
+    "native_source": "native_img20225.png",
+    "new_top_master": "generated_img20225.png",
+    "new_top_source_box": [
+      0,
+      0,
+      64,
+      64
+    ],
+    "preserved_bottom_whole_parent": "accepted_parent95351.png",
+    "bottom_source_box": [
+      0,
+      64,
+      64,
+      32
+    ],
+    "bottom_parent_source_proof": "accepted_parent95351_reuse_proof.json",
+    "drawing": "candidate_img20225_assembled.png",
+    "operation": "Newwholegeneratedbody uniformlyresized256x384; top256rowskept. Entire installedsameIMG/fullpalette parent64x32copiedat its originalsource[0,64]. No smallpatch mixing, no nativealpha mask, no recolor, no alpha threshold/deletion."
+  },
+  "replacement95343": {
+    "source_box": [
+      24,
+      0,
+      8,
+      8
+    ],
+    "whole_master": "candidate_img20225_assembled.png",
+    "independent_fragment_drawing": false,
+    "shared_RGBA_crop_equal": true
+  },
+  "existing_painter_priorities_preserved": true,
+  "whole_bank_actual_observed": false,
+  "runtime_installation": false,
+  "formal_QA": false,
+  "source_directory": "test_current/parts/missile_trails_user_report"
+}

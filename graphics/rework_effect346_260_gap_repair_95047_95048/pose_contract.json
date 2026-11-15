@@ -1,0 +1,782 @@
+[
+  {
+    "state": "test_current\\parts\\native_weapon_source_346_1395\\unit346_weapon1395_source.state",
+    "frame": 260,
+    "video_epoch": 261,
+    "engine": 0,
+    "oam": 1,
+    "attributes": [
+      107,
+      187,
+      14816
+    ],
+    "screen_x": 187,
+    "screen_y": 107,
+    "w": 8,
+    "h": 8,
+    "display_w": 8,
+    "display_h": 8,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 3,
+    "tile_number": 480,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 4066042720,
+    "index_hash": 4271129589,
+    "material": 3510364763,
+    "used_mask": 12,
+    "opaque": 19,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxjYAACJhBgZmZiYmCAkEAhBjTABBVHkwAAB24AKw==",
+    "indices_sha256": "586ac89481100294f1d65d1cf9c631178168c780ce01b5081a6036b64e9e6c72",
+    "palette_15bit": [
+      32256,
+      5328,
+      6417,
+      10644,
+      13879,
+      18106,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "source_visible_native_obj_pixels": 19,
+    "observations": [
+      {
+        "frame": 260,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      },
+      {
+        "frame": 265,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      },
+      {
+        "frame": 280,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      },
+      {
+        "frame": 300,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      },
+      {
+        "frame": 305,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      },
+      {
+        "frame": 320,
+        "oam": 1,
+        "source_visible_native_obj_pixels": 19
+      }
+    ],
+    "x": 72,
+    "y": 0,
+    "source_x": 0,
+    "source_y": 0,
+    "resource": null,
+    "source_image": null,
+    "owner_confirmed": false,
+    "source_grid_scope": "virtual packed cached OBJ; not original IMG coordinates",
+    "atlas": "observed_effect_346_260_brown_5",
+    "atlas_id": "observed_effect_346_260_brown_5",
+    "candidate_file": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\root_fx_346_orange_native1395\\346_260\\candidate_atlas.png",
+    "dynamic_palette": false,
+    "effect_part": true,
+    "category": "effect",
+    "render_mode": "static",
+    "palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "cached_original_contract_file": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\root_fx_346_orange_native1395\\346_260\\install_contract.json",
+    "replace_binding": 95047,
+    "atlas_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "slot": 1,
+    "actual_observed": true,
+    "actual_palette_bgr555": [
+      32256,
+      5328,
+      6417,
+      10644,
+      13879,
+      18106,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0
+    },
+    "source_engine": 0
+  },
+  {
+    "state": "test_current\\parts\\native_weapon_source_346_1395\\unit346_weapon1395_source.state",
+    "frame": 260,
+    "video_epoch": 261,
+    "engine": 0,
+    "oam": 2,
+    "attributes": [
+      16481,
+      16539,
+      14720
+    ],
+    "screen_x": 155,
+    "screen_y": 97,
+    "w": 32,
+    "h": 8,
+    "display_w": 32,
+    "display_h": 8,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 3,
+    "tile_number": 384,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 3961613832,
+    "index_hash": 2405464640,
+    "material": 2423975817,
+    "used_mask": 12,
+    "opaque": 21,
+    "binding_id": 0,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJxjYKA2YCJKGpcqJib80sxgihmXPFiCCac0WDuyNBMADOkAMQ==",
+    "indices_sha256": "da18556bd357c9ae47e84f70057072d4527b0c21596cbbb9b2c773faffe5b51a",
+    "palette_15bit": [
+      32256,
+      5328,
+      6417,
+      10644,
+      13879,
+      18106,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "source_visible_native_obj_pixels": 21,
+    "observations": [
+      {
+        "frame": 260,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      },
+      {
+        "frame": 265,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      },
+      {
+        "frame": 280,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      },
+      {
+        "frame": 300,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      },
+      {
+        "frame": 305,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      },
+      {
+        "frame": 320,
+        "oam": 2,
+        "source_visible_native_obj_pixels": 21
+      }
+    ],
+    "x": 144,
+    "y": 0,
+    "source_x": 0,
+    "source_y": 0,
+    "resource": null,
+    "source_image": null,
+    "owner_confirmed": false,
+    "source_grid_scope": "virtual packed cached OBJ; not original IMG coordinates",
+    "atlas": "observed_effect_346_260_brown_5",
+    "atlas_id": "observed_effect_346_260_brown_5",
+    "candidate_file": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\root_fx_346_orange_native1395\\346_260\\candidate_atlas.png",
+    "dynamic_palette": false,
+    "effect_part": true,
+    "category": "effect",
+    "render_mode": "static",
+    "palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "cached_original_contract_file": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\root_fx_346_orange_native1395\\346_260\\install_contract.json",
+    "replace_binding": 95048,
+    "atlas_box": [
+      0,
+      16,
+      32,
+      8
+    ],
+    "slot": 2,
+    "actual_observed": true,
+    "actual_palette_bgr555": [
+      32256,
+      5328,
+      6417,
+      10644,
+      13879,
+      18106,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992,
+      992
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        131,
+        255
+      ],
+      [
+        131,
+        49,
+        41
+      ],
+      [
+        139,
+        65,
+        49
+      ],
+      [
+        164,
+        98,
+        82
+      ],
+      [
+        189,
+        139,
+        106
+      ],
+      [
+        213,
+        172,
+        139
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ],
+      [
+        0,
+        255,
+        0
+      ]
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "spec": {
+      "resource": null,
+      "source_x": 0,
+      "source_y": 0
+    },
+    "source_engine": 0
+  }
+]

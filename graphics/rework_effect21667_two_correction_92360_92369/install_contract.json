@@ -1,0 +1,726 @@
+[
+  {
+    "cell": 9,
+    "slot": 2,
+    "binding": 0,
+    "hash": 2345202731,
+    "index_hash": 1918533368,
+    "index_pixels": "eJyl0lESgCAIBFCEpfsfucZxQoXWj/j0zRpgIrQa1z98UC24UY4Lmyr7nhbhSKhZTi+c02ahljTYqrsFGApg49ZPX8WmlPvA4xBwd0satXFakfuseQqftdjQW0C1gqkNcP1mp2GuJ5ZJrfo1hz7DVTqQte/H9snoIhfV5X2WugFz6gIU",
+    "actual_palette_bgr555": [
+      576,
+      6771,
+      7927,
+      10107,
+      11263,
+      22527,
+      32767,
+      30652,
+      27481,
+      24310,
+      22195,
+      19024,
+      576,
+      576,
+      576,
+      576
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        156,
+        156,
+        49
+      ],
+      [
+        189,
+        189,
+        57
+      ],
+      [
+        222,
+        222,
+        74
+      ],
+      [
+        255,
+        255,
+        82
+      ],
+      [
+        255,
+        255,
+        172
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        180,
+        189,
+        189
+      ],
+      [
+        156,
+        172,
+        172
+      ],
+      [
+        131,
+        148,
+        148
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ]
+    ],
+    "source_palette_bank": 0,
+    "source_image": 21667,
+    "source_box": [
+      56,
+      0,
+      32,
+      32
+    ],
+    "atlas_box": [
+      56,
+      0,
+      32,
+      32
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": true,
+    "existing_actual_rgb_binding": 92369,
+    "spec": {
+      "resource": 21667,
+      "source_x": 56,
+      "source_y": 0,
+      "x": 56,
+      "y": 0
+    },
+    "output_size": [
+      32,
+      32
+    ],
+    "rendered_source_contract": {
+      "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+      "frame": 139,
+      "video_epoch": 140,
+      "engine": 0,
+      "oam": 2,
+      "attributes": [
+        58,
+        32916,
+        43783
+      ],
+      "screen_x": 148,
+      "screen_y": 58,
+      "w": 32,
+      "h": 32,
+      "display_w": 32,
+      "display_h": 32,
+      "priority": 2,
+      "obj_mode": 0,
+      "eight_bit": false,
+      "palette_bank": 10,
+      "tile_number": 775,
+      "affine": false,
+      "affine_double": false,
+      "affine_matrix_index": null,
+      "affine_matrix_8_8": null,
+      "flip_x": false,
+      "flip_y": false,
+      "mosaic": false,
+      "hash": 2345202731,
+      "index_hash": 1918533368,
+      "material": 82160764,
+      "used_mask": 126,
+      "opaque": 164,
+      "binding_id": 0,
+      "bound_hash_checked": false,
+      "hd_pending_or_held": null,
+      "index_pixels": "eJyl0lESgCAIBFCEpfsfucZxQoXWj/j0zRpgIrQa1z98UC24UY4Lmyr7nhbhSKhZTi+c02ahljTYqrsFGApg49ZPX8WmlPvA4xBwd0satXFakfuseQqftdjQW0C1gqkNcP1mp2GuJ5ZJrfo1hz7DVTqQte/H9snoIhfV5X2WugFz6gIU",
+      "indices_sha256": "15886fd4eacc1416c0048de0fe313d7be66a29c7b2dee4f850a03a684dafebc2",
+      "palette_15bit": [
+        576,
+        6771,
+        7927,
+        10107,
+        11263,
+        22527,
+        32767,
+        30652,
+        27481,
+        24310,
+        22195,
+        19024,
+        576,
+        576,
+        576,
+        576
+      ],
+      "original_palette_rgb": [
+        [
+          0,
+          148,
+          0
+        ],
+        [
+          156,
+          156,
+          49
+        ],
+        [
+          189,
+          189,
+          57
+        ],
+        [
+          222,
+          222,
+          74
+        ],
+        [
+          255,
+          255,
+          82
+        ],
+        [
+          255,
+          255,
+          172
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          230,
+          238,
+          238
+        ],
+        [
+          205,
+          213,
+          213
+        ],
+        [
+          180,
+          189,
+          189
+        ],
+        [
+          156,
+          172,
+          172
+        ],
+        [
+          131,
+          148,
+          148
+        ],
+        [
+          0,
+          148,
+          0
+        ],
+        [
+          0,
+          148,
+          0
+        ],
+        [
+          0,
+          148,
+          0
+        ],
+        [
+          0,
+          148,
+          0
+        ]
+      ],
+      "source": "rendered_obj_cache",
+      "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+      "observations": [
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 139,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 139,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 140,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 140,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 141,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+          "frame": 141,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 130,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 130,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 131,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 131,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 132,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_131.state",
+          "frame": 132,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 141,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 141,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 142,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 142,
+          "oam": 4
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 143,
+          "oam": 2
+        },
+        {
+          "state": "test_current/combat/named_attacks/unit_249/mechanical_cutin_143.state",
+          "frame": 143,
+          "oam": 4
+        }
+      ]
+    },
+    "fixture": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+    "frame": 139,
+    "core_path": "emulator/desmume/desmume/src/frontend/libretro/desmume_libretro.dll",
+    "render_mode": "static",
+    "category": "effect",
+    "source_palette_confirmation": "PLT21666 bank0 all16 exactly equals actual cached palette of28 observed shapes",
+    "screen": [
+      148,
+      58
+    ],
+    "attrs": [
+      58,
+      32916,
+      43783
+    ],
+    "matrix": [
+      [
+        1.0,
+        0
+      ],
+      [
+        0,
+        1.0
+      ]
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "original_palette_rgb": [
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        156,
+        156,
+        49
+      ],
+      [
+        189,
+        189,
+        57
+      ],
+      [
+        222,
+        222,
+        74
+      ],
+      [
+        255,
+        255,
+        82
+      ],
+      [
+        255,
+        255,
+        172
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        180,
+        189,
+        189
+      ],
+      [
+        156,
+        172,
+        172
+      ],
+      [
+        131,
+        148,
+        148
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ]
+    ],
+    "resource": 21667,
+    "source_x": 56,
+    "source_y": 0,
+    "state": "test_current/combat/named_attacks/unit_224/mechanical_cutin_143.state",
+    "replace_binding": 92369,
+    "replacement_only": true,
+    "w": 32,
+    "h": 32,
+    "indexed_safe": false
+  },
+  {
+    "cell": 0,
+    "slot": null,
+    "binding": null,
+    "hash": 1559505499,
+    "index_hash": 1148492189,
+    "index_pixels": "eJxjYIADRiZGEMXEwsLCBOSxsLKxsjACuWxsbEABGB8mD1UPAA2YAHs=",
+    "actual_palette_bgr555": [
+      576,
+      6771,
+      7927,
+      10107,
+      11263,
+      22527,
+      32767,
+      30652,
+      27481,
+      24310,
+      22195,
+      19024,
+      576,
+      576,
+      576,
+      576
+    ],
+    "actual_palette_rgb": [
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        156,
+        156,
+        49
+      ],
+      [
+        189,
+        189,
+        57
+      ],
+      [
+        222,
+        222,
+        74
+      ],
+      [
+        255,
+        255,
+        82
+      ],
+      [
+        255,
+        255,
+        172
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        180,
+        189,
+        189
+      ],
+      [
+        156,
+        172,
+        172
+      ],
+      [
+        131,
+        148,
+        148
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ]
+    ],
+    "source_palette_bank": 0,
+    "source_image": 21667,
+    "source_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "atlas_box": [
+      0,
+      0,
+      8,
+      8
+    ],
+    "source_index_bytes_exact": true,
+    "actual_observed": false,
+    "existing_actual_rgb_binding": 92360,
+    "spec": {
+      "resource": 21667,
+      "source_x": 0,
+      "source_y": 0,
+      "x": 0,
+      "y": 0
+    },
+    "output_size": [
+      8,
+      8
+    ],
+    "rendered_source_contract": null,
+    "fixture": null,
+    "frame": null,
+    "core_path": "emulator/desmume/desmume/src/frontend/libretro/desmume_libretro.dll",
+    "render_mode": "static",
+    "category": "effect",
+    "source_palette_confirmation": "PLT21666 bank0 all16 exactly equals actual cached palette of28 observed shapes",
+    "original_palette_rgb": [
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        156,
+        156,
+        49
+      ],
+      [
+        189,
+        189,
+        57
+      ],
+      [
+        222,
+        222,
+        74
+      ],
+      [
+        255,
+        255,
+        82
+      ],
+      [
+        255,
+        255,
+        172
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        230,
+        238,
+        238
+      ],
+      [
+        205,
+        213,
+        213
+      ],
+      [
+        180,
+        189,
+        189
+      ],
+      [
+        156,
+        172,
+        172
+      ],
+      [
+        131,
+        148,
+        148
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ],
+      [
+        0,
+        148,
+        0
+      ]
+    ],
+    "resource": 21667,
+    "source_x": 0,
+    "source_y": 0,
+    "state": null,
+    "replace_binding": 92360,
+    "replacement_only": true,
+    "w": 8,
+    "h": 8,
+    "indexed_safe": false
+  }
+]

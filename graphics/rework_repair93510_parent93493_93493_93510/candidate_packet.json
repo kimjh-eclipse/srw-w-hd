@@ -1,0 +1,29 @@
+{
+  "source": "test_current/parts/quarantine_four_source/repair93510_parent93493",
+  "bindings": [
+    93493,
+    93510
+  ],
+  "contract": "contract.json",
+  "drawing": "candidate.png",
+  "native": "native.png",
+  "generated": "generated.png",
+  "file_sha256": {
+    "contract": "1bb726b653d8b0833a21515531cdf46c79a9ce5d2dea5f7ffae7cea09c0c3eca",
+    "drawing": "02c10017df0b41c9ec595e45b0b14b640b10a4ec1cbf618115395caad9c45cb9",
+    "native": "a32b410f4c7fe6586ab71891c803cdfce9754eaab2d40a00c6c62c72a5b60cae",
+    "generated": "85800074665b106779dcc3f7e0e71f6ebda2246098a6bd6e4545b5aef9022837"
+  },
+  "prior_binding_spec_sha256": {
+    "93493": "39de1df7a6070970b9386f86004ff80c50c3509d1db20bcb7f047b7139666385",
+    "93510": "ebbf6c6ddcca4f4efd636113c4b200275e1ff7360e82c0b0882fe64477aaca62"
+  },
+  "producer_whole_master_proof": "producer_whole_master_proof.json",
+  "note": "32x8 부모전체 신규2D1장,93493/93510한벌공유. native/candidate47·14/성분7/경계bridge유지. 93523다른full16제외. 알파삭제/마스크/재색칠없음/ClaudeQA대기.",
+  "additional_file_sha256": {
+    "producer_whole_master_proof.json": "6de684702540dfafac3d0ec3a0c953b4378d6b8da1466152b6b10149632c1244",
+    "source_contract_proof.json": "f142a8e1fe83b51854e013f62e464f3262c6da49336370e53b1ce97beba26d9f",
+    "producer_geometry_check.json": "126259cd4872622887afa734c8b131387202d69c0eb516acc0b16c98eddeb645",
+    "live_shared_region_palette_proof.json": "a43fc6b0abedc4c90352837faf1df751e26702833b70439f7684ba743b7edef9"
+  }
+}

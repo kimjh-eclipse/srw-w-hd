@@ -1,0 +1,264 @@
+[
+  {
+    "binding": 92220,
+    "source_box": [
+      128,
+      48,
+      16,
+      16
+    ],
+    "intersections": [
+      {
+        "binding": 92211,
+        "normal": true,
+        "source_box": [
+          112,
+          48,
+          32,
+          16
+        ],
+        "intersection": [
+          128,
+          48,
+          144,
+          64
+        ],
+        "raw_equal": true,
+        "contains_flagged": true
+      }
+    ]
+  },
+  {
+    "binding": 92223,
+    "source_box": [
+      128,
+      32,
+      16,
+      16
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92224,
+    "source_box": [
+      144,
+      8,
+      32,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92225,
+    "source_box": [
+      144,
+      0,
+      32,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92226,
+    "source_box": [
+      128,
+      0,
+      16,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92227,
+    "source_box": [
+      24,
+      0,
+      8,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92228,
+    "source_box": [
+      128,
+      8,
+      16,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92229,
+    "source_box": [
+      144,
+      24,
+      32,
+      8
+    ],
+    "intersections": [
+      {
+        "binding": 92231,
+        "normal": false,
+        "source_box": [
+          160,
+          24,
+          16,
+          8
+        ],
+        "intersection": [
+          160,
+          24,
+          176,
+          32
+        ],
+        "raw_equal": true,
+        "contains_flagged": false
+      }
+    ]
+  },
+  {
+    "binding": 92230,
+    "source_box": [
+      144,
+      16,
+      32,
+      8
+    ],
+    "intersections": []
+  },
+  {
+    "binding": 92231,
+    "source_box": [
+      160,
+      24,
+      16,
+      8
+    ],
+    "intersections": [
+      {
+        "binding": 92229,
+        "normal": false,
+        "source_box": [
+          144,
+          24,
+          32,
+          8
+        ],
+        "intersection": [
+          160,
+          24,
+          176,
+          32
+        ],
+        "raw_equal": true,
+        "contains_flagged": true
+      }
+    ]
+  },
+  {
+    "binding": 92232,
+    "source_box": [
+      152,
+      32,
+      16,
+      8
+    ],
+    "intersections": [
+      {
+        "binding": 92233,
+        "normal": false,
+        "source_box": [
+          144,
+          32,
+          32,
+          8
+        ],
+        "intersection": [
+          152,
+          32,
+          168,
+          40
+        ],
+        "raw_equal": true,
+        "contains_flagged": true
+      }
+    ]
+  },
+  {
+    "binding": 92233,
+    "source_box": [
+      144,
+      32,
+      32,
+      8
+    ],
+    "intersections": [
+      {
+        "binding": 92232,
+        "normal": false,
+        "source_box": [
+          152,
+          32,
+          16,
+          8
+        ],
+        "intersection": [
+          152,
+          32,
+          168,
+          40
+        ],
+        "raw_equal": true,
+        "contains_flagged": false
+      },
+      {
+        "binding": 92234,
+        "normal": false,
+        "source_box": [
+          168,
+          32,
+          8,
+          8
+        ],
+        "intersection": [
+          168,
+          32,
+          176,
+          40
+        ],
+        "raw_equal": true,
+        "contains_flagged": false
+      }
+    ]
+  },
+  {
+    "binding": 92234,
+    "source_box": [
+      168,
+      32,
+      8,
+      8
+    ],
+    "intersections": [
+      {
+        "binding": 92233,
+        "normal": false,
+        "source_box": [
+          144,
+          32,
+          32,
+          8
+        ],
+        "intersection": [
+          168,
+          32,
+          176,
+          40
+        ],
+        "raw_equal": true,
+        "contains_flagged": true
+      }
+    ]
+  }
+]

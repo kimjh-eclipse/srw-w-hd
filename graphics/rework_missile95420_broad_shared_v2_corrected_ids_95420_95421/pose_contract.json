@@ -1,0 +1,630 @@
+[
+  {
+    "state": "test_current\\parts\\native_weapon_source_172_737\\unit172_weapon737_source.state",
+    "frame": 210,
+    "video_epoch": 474,
+    "engine": 0,
+    "oam": 11,
+    "attributes": [
+      114,
+      41153,
+      26772
+    ],
+    "screen_x": 193,
+    "screen_y": 114,
+    "w": 32,
+    "h": 32,
+    "display_w": 32,
+    "display_h": 32,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 6,
+    "tile_number": 148,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": false,
+    "flip_y": true,
+    "mosaic": false,
+    "hash": 1671582883,
+    "index_hash": 284136971,
+    "material": 541172266,
+    "used_mask": 112,
+    "opaque": 124,
+    "binding_id": 95420,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJyFk0EOxDAIAznY/P/JLaS0qxWYnCJ5koBNYGaweQFaDxEgZz0lAaREn1/Io0I3dw24q9OFbNB6ic895joeCDMZGtQt2OoIYCljKEGG/A90MAB8+xZgjUHbZMiv3gG8W2dtuxIjQ6aLvUsnY8wu/gxB7/I3JlMMBczz9PS2fQkV5PG3dbmIDXiwC4MaAnQ=",
+    "indices_sha256": "517ca10555a2d0b0fadbc24c35fb5469fe3aa862537da6ddc87c341441e7ceea",
+    "palette_15bit": [
+      32420,
+      13637,
+      16809,
+      19981,
+      23185,
+      25333,
+      28505,
+      8443,
+      638,
+      927,
+      11444,
+      14682,
+      18975,
+      26367,
+      3137,
+      32420
+    ],
+    "original_palette_rgb": [
+      [
+        32,
+        172,
+        255
+      ],
+      [
+        41,
+        82,
+        106
+      ],
+      [
+        74,
+        106,
+        131
+      ],
+      [
+        106,
+        131,
+        156
+      ],
+      [
+        139,
+        164,
+        180
+      ],
+      [
+        172,
+        189,
+        197
+      ],
+      [
+        205,
+        213,
+        222
+      ],
+      [
+        222,
+        57,
+        65
+      ],
+      [
+        246,
+        156,
+        0
+      ],
+      [
+        255,
+        230,
+        0
+      ],
+      [
+        164,
+        41,
+        90
+      ],
+      [
+        213,
+        82,
+        115
+      ],
+      [
+        255,
+        131,
+        148
+      ],
+      [
+        255,
+        189,
+        205
+      ],
+      [
+        8,
+        16,
+        24
+      ],
+      [
+        32,
+        172,
+        255
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 210,
+        "oam": 11
+      },
+      {
+        "frame": 240,
+        "oam": 11
+      }
+    ],
+    "all_source_matches": [
+      [
+        20224,
+        160,
+        0
+      ],
+      [
+        20224,
+        160,
+        0
+      ],
+      [
+        20224,
+        160,
+        0
+      ]
+    ],
+    "resource": 20224,
+    "owner_confirmed": false,
+    "direct_IMG20224_20225_matches": [
+      [
+        20224,
+        160,
+        0
+      ]
+    ],
+    "base_actual_palette_equal": false,
+    "source_image": 20224,
+    "source_x": 160,
+    "source_y": 0,
+    "source_owner_confirmed": true,
+    "base_actual_hashes_with_same_raw": [],
+    "status": "실제 팔레트별 새 그림 후보 준비, 연결·판정은 Claude 대기입니다.",
+    "source_group": 0,
+    "atlas_box": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "output_size": [
+      32,
+      32
+    ],
+    "actual_palette_rgb": [
+      [
+        32,
+        172,
+        255
+      ],
+      [
+        41,
+        82,
+        106
+      ],
+      [
+        74,
+        106,
+        131
+      ],
+      [
+        106,
+        131,
+        156
+      ],
+      [
+        139,
+        164,
+        180
+      ],
+      [
+        172,
+        189,
+        197
+      ],
+      [
+        205,
+        213,
+        222
+      ],
+      [
+        222,
+        57,
+        65
+      ],
+      [
+        246,
+        156,
+        0
+      ],
+      [
+        255,
+        230,
+        0
+      ],
+      [
+        164,
+        41,
+        90
+      ],
+      [
+        213,
+        82,
+        115
+      ],
+      [
+        255,
+        131,
+        148
+      ],
+      [
+        255,
+        189,
+        205
+      ],
+      [
+        8,
+        16,
+        24
+      ],
+      [
+        32,
+        172,
+        255
+      ]
+    ],
+    "render_mode": "static",
+    "dynamic_palette": false,
+    "indexed_safe": false,
+    "effect_part": true,
+    "actual_observed": true,
+    "review_status": "pending_claude",
+    "note": "Claude 지적 #95420의 왼쪽 위 넓은 사선이 가늘어진 결함을 같은 32×32 생성 master에서 다시 그렸습니다. 부모95419와 자식95420은 같은 새RGBA를 공유하며 다른 오른쪽 4계약은 변경하지 않습니다.",
+    "palette_phase": 1,
+    "replace_binding": 95420,
+    "binding_array_index": 95419,
+    "slot": 11,
+    "actual_palette_bgr555": [
+      32420,
+      13637,
+      16809,
+      19981,
+      23185,
+      25333,
+      28505,
+      8443,
+      638,
+      927,
+      11444,
+      14682,
+      18975,
+      26367,
+      3137,
+      32420
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 20224,
+      "source_x": 160,
+      "source_y": 0
+    },
+    "source_engine": 0
+  },
+  {
+    "state": "test_current\\parts\\native_weapon_source_172_737\\unit172_weapon737_source.state",
+    "frame": 240,
+    "video_epoch": 504,
+    "engine": 0,
+    "oam": 10,
+    "attributes": [
+      98,
+      20700,
+      26772
+    ],
+    "screen_x": 220,
+    "screen_y": 98,
+    "w": 16,
+    "h": 16,
+    "display_w": 16,
+    "display_h": 16,
+    "priority": 2,
+    "obj_mode": 0,
+    "eight_bit": false,
+    "palette_bank": 6,
+    "tile_number": 148,
+    "affine": false,
+    "affine_double": false,
+    "affine_matrix_index": null,
+    "affine_matrix_8_8": null,
+    "flip_x": true,
+    "flip_y": false,
+    "mosaic": false,
+    "hash": 4013075440,
+    "index_hash": 987741593,
+    "material": 480382100,
+    "used_mask": 112,
+    "opaque": 41,
+    "binding_id": 95421,
+    "bound_hash_checked": false,
+    "hd_pending_or_held": null,
+    "index_pixels": "eJyFi7kNADAMAimA/UeOYsnykyKuuAMTAFFHTr5ASsURm4go10dUjWFPYfc21ZbPyJqsxRCXwF8cfOgA0g==",
+    "indices_sha256": "36ea7b6fa67bfa431adca0669c937279ca63c424138f864a395b7acea34d30e3",
+    "palette_15bit": [
+      32420,
+      13637,
+      16809,
+      19981,
+      23185,
+      25333,
+      28505,
+      8443,
+      638,
+      927,
+      11444,
+      14682,
+      18975,
+      26367,
+      3137,
+      32420
+    ],
+    "original_palette_rgb": [
+      [
+        32,
+        172,
+        255
+      ],
+      [
+        41,
+        82,
+        106
+      ],
+      [
+        74,
+        106,
+        131
+      ],
+      [
+        106,
+        131,
+        156
+      ],
+      [
+        139,
+        164,
+        180
+      ],
+      [
+        172,
+        189,
+        197
+      ],
+      [
+        205,
+        213,
+        222
+      ],
+      [
+        222,
+        57,
+        65
+      ],
+      [
+        246,
+        156,
+        0
+      ],
+      [
+        255,
+        230,
+        0
+      ],
+      [
+        164,
+        41,
+        90
+      ],
+      [
+        213,
+        82,
+        115
+      ],
+      [
+        255,
+        131,
+        148
+      ],
+      [
+        255,
+        189,
+        205
+      ],
+      [
+        8,
+        16,
+        24
+      ],
+      [
+        32,
+        172,
+        255
+      ]
+    ],
+    "source": "rendered_obj_cache",
+    "visibility_scope": "enabled OBJ bounding box intersects screen; per-pixel window/occlusion not adjudicated",
+    "observations": [
+      {
+        "frame": 240,
+        "oam": 10
+      }
+    ],
+    "all_source_matches": [
+      [
+        20224,
+        160,
+        0
+      ],
+      [
+        20224,
+        160,
+        0
+      ],
+      [
+        20224,
+        160,
+        0
+      ]
+    ],
+    "resource": 20224,
+    "owner_confirmed": false,
+    "direct_IMG20224_20225_matches": [
+      [
+        20224,
+        160,
+        0
+      ]
+    ],
+    "base_actual_palette_equal": false,
+    "source_image": 20224,
+    "source_x": 160,
+    "source_y": 0,
+    "source_owner_confirmed": true,
+    "base_actual_hashes_with_same_raw": [],
+    "status": "실제 팔레트별 새 그림 후보 준비, 연결·판정은 Claude 대기입니다.",
+    "source_group": 0,
+    "atlas_box": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "output_size": [
+      16,
+      16
+    ],
+    "actual_palette_rgb": [
+      [
+        32,
+        172,
+        255
+      ],
+      [
+        41,
+        82,
+        106
+      ],
+      [
+        74,
+        106,
+        131
+      ],
+      [
+        106,
+        131,
+        156
+      ],
+      [
+        139,
+        164,
+        180
+      ],
+      [
+        172,
+        189,
+        197
+      ],
+      [
+        205,
+        213,
+        222
+      ],
+      [
+        222,
+        57,
+        65
+      ],
+      [
+        246,
+        156,
+        0
+      ],
+      [
+        255,
+        230,
+        0
+      ],
+      [
+        164,
+        41,
+        90
+      ],
+      [
+        213,
+        82,
+        115
+      ],
+      [
+        255,
+        131,
+        148
+      ],
+      [
+        255,
+        189,
+        205
+      ],
+      [
+        8,
+        16,
+        24
+      ],
+      [
+        32,
+        172,
+        255
+      ]
+    ],
+    "render_mode": "static",
+    "dynamic_palette": false,
+    "indexed_safe": false,
+    "effect_part": true,
+    "actual_observed": true,
+    "review_status": "pending_claude",
+    "note": "Claude 지적 #95420의 왼쪽 위 넓은 사선이 가늘어진 결함을 같은 32×32 생성 master에서 다시 그렸습니다. 부모95419와 자식95420은 같은 새RGBA를 공유하며 다른 오른쪽 4계약은 변경하지 않습니다.",
+    "palette_phase": 1,
+    "replace_binding": 95421,
+    "binding_array_index": 95420,
+    "slot": 10,
+    "actual_palette_bgr555": [
+      32420,
+      13637,
+      16809,
+      19981,
+      23185,
+      25333,
+      28505,
+      8443,
+      638,
+      927,
+      11444,
+      14682,
+      18975,
+      26367,
+      3137,
+      32420
+    ],
+    "preserve_existing_palette_mode": true,
+    "preserve_existing_effect_mode": true,
+    "preserve_existing_lookup_flags": false,
+    "spec": {
+      "resource": 20224,
+      "source_x": 160,
+      "source_y": 0
+    },
+    "source_engine": 0
+  }
+]

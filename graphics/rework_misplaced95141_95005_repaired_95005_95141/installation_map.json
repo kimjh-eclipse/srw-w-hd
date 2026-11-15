@@ -1,0 +1,263 @@
+{
+  "status": "CANDIDATE_PENDING_CLAUDE",
+  "atlas_id": "misplaced95141_95005_repaired",
+  "atlas": {
+    "image": "rework_misplaced95141_95005_repaired/pose_hd.png",
+    "reference": "rework_misplaced95141_95005_repaired/pose_native.png",
+    "native_size": [
+      40,
+      16
+    ],
+    "lazy": true
+  },
+  "candidate_image": "candidate_atlas.png",
+  "native_reference": "native_atlas.png",
+  "entries": [
+    {
+      "actual_rgb_hash": 2857673839,
+      "source_cell": 0,
+      "existing_exact_rgb_binding": 95140,
+      "replacement_binding_id_1based": 95141,
+      "classification": "same_id_native_position_solid_support_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_347_1398\\unit347_weapon1398_source.state",
+          "frame": 155
+        }
+      ],
+      "proposed_binding": {
+        "hash": 2857673839,
+        "index_hash": 615129368,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            98
+          ],
+          [
+            57,
+            49,
+            131
+          ],
+          [
+            98,
+            90,
+            172
+          ],
+          [
+            139,
+            131,
+            205
+          ],
+          [
+            180,
+            172,
+            238
+          ],
+          [
+            238,
+            156,
+            205
+          ],
+          [
+            238,
+            106,
+            189
+          ],
+          [
+            230,
+            65,
+            164
+          ],
+          [
+            197,
+            57,
+            156
+          ],
+          [
+            164,
+            49,
+            139
+          ],
+          [
+            131,
+            41,
+            131
+          ],
+          [
+            98,
+            32,
+            123
+          ],
+          [
+            65,
+            24,
+            106
+          ],
+          [
+            32,
+            16,
+            98
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "index_pixels": "eJzj4gICHi4w4OHlZWADAnYudijFwYnCZ4MASvi8IMDIy8vDA7SUg52dAQFAglwMdAYA+oMEDw==",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16,
+        "atlas_id": "misplaced95141_95005_repaired",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 347, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    },
+    {
+      "actual_rgb_hash": 2912794030,
+      "source_cell": 1,
+      "existing_exact_rgb_binding": 95004,
+      "replacement_binding_id_1based": 95005,
+      "classification": "same_id_native_position_solid_support_repair",
+      "legacy_indexed_bindings": [],
+      "contexts": [
+        {
+          "fixture": "test_current\\parts\\native_weapon_source_342_1385\\unit342_weapon1385_source.state",
+          "frame": 230
+        }
+      ],
+      "proposed_binding": {
+        "hash": 2912794030,
+        "index_hash": 2740537404,
+        "rgb_enabled": true,
+        "indexed_safe": false,
+        "dynamic_palette": true,
+        "original_palette_rgb": [
+          [
+            0,
+            222,
+            255
+          ],
+          [
+            16,
+            16,
+            16
+          ],
+          [
+            74,
+            74,
+            131
+          ],
+          [
+            123,
+            131,
+            164
+          ],
+          [
+            189,
+            189,
+            213
+          ],
+          [
+            238,
+            238,
+            238
+          ],
+          [
+            148,
+            49,
+            74
+          ],
+          [
+            189,
+            90,
+            131
+          ],
+          [
+            238,
+            148,
+            180
+          ],
+          [
+            16,
+            106,
+            16
+          ],
+          [
+            16,
+            172,
+            16
+          ],
+          [
+            238,
+            189,
+            115
+          ],
+          [
+            222,
+            131,
+            82
+          ],
+          [
+            205,
+            32,
+            32
+          ],
+          [
+            139,
+            16,
+            16
+          ],
+          [
+            238,
+            238,
+            16
+          ]
+        ],
+        "index_pixels": "eJxty8EOACAIAlBxE/r/L66wTsXlTQcRO8imZIZ8g6RF0u9yD1KiVzy742r+jeuTCSq7AH4=",
+        "x": 24,
+        "y": 0,
+        "w": 8,
+        "h": 16,
+        "atlas_id": "misplaced95141_95005_repaired",
+        "resource": null,
+        "source_x": 0,
+        "source_y": 0,
+        "registered_attack_bank": true,
+        "preserve_canonical_paint": true,
+        "reviewed_observed_pose": false,
+        "source_engine": null,
+        "actual_observed": true,
+        "independent_visual_verification": false,
+        "review_status": "pending_claude",
+        "source_owner": null,
+        "source_owner_confirmed": false,
+        "source_owner_note": "기술 실행 주체 342, 원본 조각 IMG 소유자는 독립 확정하지 않음"
+      }
+    }
+  ],
+  "replacement_only_no_new_count": true,
+  "connection_bake_verification_owner": "Claude"
+}

@@ -1,0 +1,23 @@
+{
+  "normal_wing_binding_37485_excluded": true,
+  "closed_accepted_wing_bindings_excluded": [
+    89573,
+    89419,
+    89721,
+    89913,
+    89946,
+    89504,
+    89910,
+    89943
+  ],
+  "normal_weapon_and_energy_bindings_excluded": [
+    37538,
+    37516,
+    37525,
+    37518,
+    37519
+  ],
+  "producer_RGBA_compositor_applies_runtime_palette_remap": false,
+  "normal_native_green_blade_current_candidate_purple_is_preexisting_atlas_RGBA_color_context_not_fixed_or_claimed_in_this_body_scope": true,
+  "explanation": "Wholepose diagnostic draws stored atlas RGBA without emulator dynamic-palette recoloring. Native pane uses captured raw native colors; current/candidate weapon/energy storedpaint is unchanged and outside342IDscope. This is not a claim actual runtime blade appears purple or all composite colors are verified."
+}

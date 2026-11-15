@@ -1,0 +1,28 @@
+{
+  "source": "test_current/parts/quarantine_four_source/repair92544_three",
+  "bindings": [
+    92544
+  ],
+  "contract": "install_contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_components.png",
+  "prior_binding_spec_sha256": {
+    "92544": "d82d92cb39da05bf747398709e8ae4d355b59508bf986c737d39d5a9dcfcae3e"
+  },
+  "ready_for_root_visual_review": true,
+  "producer_visual_check": true,
+  "connected": false,
+  "baked": false,
+  "independent_visual_QA": false,
+  "root_reported_quarantined": true,
+  "do_not_lift_quarantine_automatically": true,
+  "effect": true,
+  "note": "New3-component sheet generated from actual64texel3-source-component references, supersedes2-streak assumption. Whole ownRGBA crops resized/geometrically placed; no native mask/RGB/alpha transfer or threshold-delete. Source y5 empty stripe exactlytransparent. Visible3components atalpha>8/16/32/128; area64.0625 nativeequiv at>16 vsnative64. Rawalpha>0 retains faint residual islands(17 total), honestlyreported; no cleanup. No centralmutations.",
+  "file_sha256": {
+    "contract": "b9dd5b8b0565920014084f374167843423dcace33e1cae4029173d2e9f756aef",
+    "drawing": "7b615ca1fe523a05218f28e15f86c9b0a3c8375154024a80aefe49a3a1b531aa",
+    "native": "f734e9addedf5d1a812055da332e06a1776584ce08d829f42e3344eefb2db63b",
+    "generated": "ab62dab75ca07197850aa3082a7088a3c97fd4cd6c3a182f9148955da739be4c"
+  }
+}

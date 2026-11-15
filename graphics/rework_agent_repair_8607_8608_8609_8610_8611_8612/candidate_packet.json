@@ -1,0 +1,33 @@
+{
+  "source": "test_current/parts/valstork_user_report/agent_repair",
+  "bindings": [
+    8607,
+    8608,
+    8609,
+    8610,
+    8611,
+    8612
+  ],
+  "contract": "install_contract.json",
+  "drawing": "candidate_atlas.png",
+  "native": "native_atlas.png",
+  "generated": "generated_continuous_ship.png",
+  "prior_binding_spec_sha256": {
+    "8611": "a8969722d36925875804985112521a973621f9af202648ffd424c897c184a534",
+    "8612": "8bb65578f48aba81c0c1aaf3ad72b891cb328bf4765b3c55b407cad067b96839",
+    "8610": "5994147ce358f5d82158d1450bff55132863ae145c7dea0a09178cba4769675d",
+    "8609": "130b7f01b41467cf503c638d8974c82bc598c45bafb9a6ca60415580dbf75b0e",
+    "8608": "07d31e836f791a9ce0186701e1d2d9f3e57b6735db7ac8a19b4ff92069b68b3d",
+    "8607": "ba33bd1b2240cc0ff9334807eff75a6ccca72de1a38564a0e97dc703ada77676"
+  },
+  "note": "Valstork IMG3392 all six touching source regions from one continuous ship redraw; generated own RGBA only, full-canvas proportional resize then source rectangle geometric packing; screenshot/source identified, live frame unobserved; Claude installation and independent visual QA pending",
+  "connected": false,
+  "baked": false,
+  "independent_visual_QA": false,
+  "file_sha256": {
+    "contract": "af376dc7b8812b735d9f0009c3f51e9c5a0da445b23e0844ea13ec035e63cc12",
+    "drawing": "05263f44e2d9f13c8007d2ce47ef53c3defe9334c28c7920fe4f00f2e8d700c9",
+    "native": "12484d3b9ecb9cb4bc6c4bdb1d9f0d06c14b30f4b7e719b67db816ca9d6ea82a",
+    "generated": "a12232e239f8c4d33a5e1c33a04189619125ff586e764c7d55f05dad30211b6c"
+  }
+}

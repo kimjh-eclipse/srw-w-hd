@@ -1,0 +1,43 @@
+{
+  "whole_banks": [
+    {
+      "resource": 20224,
+      "native_opaque": 7181,
+      "candidate_gt64": 7950,
+      "alpha_iou": 0.8680246913580247,
+      "far_alpha_gt8_fraction": 0.004856984737271351,
+      "actual_observed": false,
+      "tile_source_only": true
+    },
+    {
+      "resource": 20225,
+      "native_opaque": 3708,
+      "candidate_gt64": 3631,
+      "alpha_iou": 0.8745849297573436,
+      "far_alpha_gt8_fraction": 0.02632161842882457,
+      "actual_observed": false,
+      "tile_source_only": true
+    }
+  ],
+  "replacement95343": {
+    "binding": 95343,
+    "native_opaque": 45,
+    "candidate_gt64": 45,
+    "alpha_iou": 0.7647058823529411,
+    "shared_whole_master_RGBA_equal": true
+  },
+  "shared_containment_checks": [
+    {
+      "slot_a": 20225,
+      "slot_b": 95343,
+      "source_overlap": [
+        24,
+        0,
+        8,
+        8
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ]
+}
