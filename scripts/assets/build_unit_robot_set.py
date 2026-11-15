@@ -32,6 +32,20 @@ RULES="""# 그리는 규칙 (Claude 작성)
 """
 
 
+def unit_tiles(resources):
+    """All 8x8 index tiles (and their flips) of the unit's ROM images."""
+    from scripts.assets import srw_graphics as g
+    rom=(ROOT/'release_battle_v02/SRWW_K_Kazuma_BattleVoice_v02.nds').read_bytes();off=g.archive(rom);out=set()
+    for res in resources:
+        try:a=g.pixels(g.decompress(rom[g.BASE+off[res]:g.BASE+off[res+1]]))
+        except Exception:continue
+        for y in range(0,a.shape[0]-7,8):
+            for x in range(0,a.shape[1]-7,8):
+                t=np.ascontiguousarray(a[y:y+8,x:x+8]).astype('uint8')
+                for v in (t,t[:,::-1],t[::-1],t[::-1,::-1]):out.add(np.ascontiguousarray(v).tobytes())
+    return out
+
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--unit',type=int,required=True);p.add_argument('--min-gain',type=int,default=48)
     a=p.parse_args()
@@ -40,10 +54,21 @@ def main():
     own=set(range(unit['resource_start'],unit['resource_end']+1))|{unit.get('secondary_image')}
     lib=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text(encoding='utf-8'))['bindings']
     base=ROOT/f'test_current/parts/pose_packets/unit_{a.unit}'
+    # A sprite is the robot's when its 8x8 index tiles come from the unit's own
+    # ROM images (independent of what the HD library recorded as source).
+    tiles=unit_tiles(sorted(x for x in own if x is not None))
+    def is_robot(r):
+        idx=sprite_pixels(r);n=hit=0
+        for y in range(0,r['h'],8):
+            for x in range(0,r['w'],8):
+                t=idx[y:y+8,x:x+8]
+                if not t.any():continue
+                n+=1;hit+=t.tobytes() in tiles
+        return n>0 and hit/n>=.8
     found=[];screen_frames={}
     for folder in sorted(base.glob('weapon_*/objects/obj_*')):
         rows=json.loads((folder/'contract.json').read_text(encoding='utf-8'))
-        if not any(r['binding_id'] and lib[r['binding_id']-1].get('resource') in own for r in rows):continue
+        if not any((r['binding_id'] and lib[r['binding_id']-1].get('resource') in own) or is_robot(r) for r in rows):continue
         frames=len(json.loads((folder/'frames.json').read_text())['frames'])
         for r in rows:screen_frames[r['hash']]=screen_frames.get(r['hash'],0)+frames
         found.append((folder,rows))
@@ -79,6 +104,7 @@ def main():
     for _,gain,_ in cands:
         for h,v in gain.items():ever[h]|=v&need[h]
     out=base/'robot_set'
+    if out.exists() and any(out.glob('pose_*/candidate*.png')):sys.exit(f'{out} holds drawings; not rebuilding (move them first)')
     if out.exists():shutil.rmtree(out)
     out.mkdir(parents=True);index=[]
     for n,i in enumerate(chosen):
