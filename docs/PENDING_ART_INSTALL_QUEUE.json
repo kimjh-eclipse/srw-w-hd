@@ -4688,6 +4688,907 @@
     }
    ],
    "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_9/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_7/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "06c61f7dc25cc3ab279d62bcd6c2cee1c74833528cb6252c22c2cd3802ec68ad",
+    "drawing": "67b3eb8cff3239c08520d6db7926fe5eaacc72f6b10f03584374a380aaceaae7",
+    "native": "9ac51fb27fde08b958797e84c3dd68261db8676cc5d6b8ea551d02bd5669066a",
+    "generated": "67b3eb8cff3239c08520d6db7926fe5eaacc72f6b10f03584374a380aaceaae7"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 2208647562,
+     "index_hash": 1378800407
+    },
+    {
+     "hash": 3553065283,
+     "index_hash": 3768366870
+    },
+    {
+     "hash": 389576154,
+     "index_hash": 583180446
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_7/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_6/robot_set/install/replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "7128e9c1d3bfacc7a497da41454806f22005c14700638b283eababffba8a31b6",
+    "drawing": "8b0a8c809a4d9c4b1e0cb19ce26870cfcd6ab9102dcce3271bdcf14b9e427e59",
+    "native": "8e22c334568e9efe0bb7f049d1ace8d4a2cbe73c7864d419f5d7ef6ec05b6533",
+    "generated": "8b0a8c809a4d9c4b1e0cb19ce26870cfcd6ab9102dcce3271bdcf14b9e427e59"
+   },
+   "bindings": [
+    90681,
+    90675,
+    90676,
+    90677,
+    90682,
+    90688,
+    90684,
+    90679,
+    90678,
+    90687,
+    90685,
+    90683,
+    90680,
+    90686
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "90681": "92b0701e6360c9ac1079bc38cffd8c7e6148b853d0274ea04f071bf32fbbac04",
+    "90675": "d203bc046cb1b85f7de01c8eefac2643ad835a52789450bdbcf9695ace509f2b",
+    "90676": "400a4ca254a83ad53f3de0414785e262fa90fa0247e4db73b385b7dbd76935cc",
+    "90677": "22b732190314311b70c806892e488523f62fbacf8fc81f694d4f46fd1a7bbfc9",
+    "90682": "7ad7333a01c3a789508134bf447b7d87b055297fed1b55f60018dd31fc4552d0",
+    "90688": "49acc208edce13402e6a4f689e29acfadaaf7d9a91ec63568d986c76b5d99ad7",
+    "90684": "fcba9478c650603284b7b40b44059a4573ce0138e2ea0c1fef80f4f55108404e",
+    "90679": "f31054d19ece3349dd4b447c34689393c0d4eff023300af946c9aea4b0004b26",
+    "90678": "4db78f7649e1bf28cdc9824a62e39468909874facd000f7a96dcce9d9d710510",
+    "90687": "16fb5f5806349a519fd787bb8853e1414f5c0c6a0479c6e681cbd47ac93ea1f9",
+    "90685": "a08b5b34dbb05dec0821c80d930a5ae3ba5dcfe6cc47a68f12e082317c01c6a7",
+    "90683": "5e13d5f77b938b73171cc435738f4eb9dcc7a300646b7eb5ebd21df5cd98051a",
+    "90680": "957c3a87dc67b89cdfc67840d9241b7bd8ef0a0f16cc47efe8b448439a3c8236",
+    "90686": "c4fcbf9a04de305d7e105c5b3ac9da196b2e12b898e978113f253793aa94acef"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_6/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_6/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "11d49a9b7b1e5ed3de395eb2c250631953021fe84bff698e5e3f384e9f9ca96c",
+    "drawing": "06c1404372af45a6f40d9afc4c7968c61fe6e8b7218be3e0be718e7fc16c4a68",
+    "native": "84d173eeaf5260dd161e5b586bdd4dbc960e8176da5c83d545b980ea02188de4",
+    "generated": "06c1404372af45a6f40d9afc4c7968c61fe6e8b7218be3e0be718e7fc16c4a68"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1068933985,
+     "index_hash": 2093539254
+    },
+    {
+     "hash": 1266470794,
+     "index_hash": 2812274286
+    },
+    {
+     "hash": 1983640260,
+     "index_hash": 1744492247
+    },
+    {
+     "hash": 2127387819,
+     "index_hash": 1629877788
+    },
+    {
+     "hash": 2419555971,
+     "index_hash": 1404934031
+    },
+    {
+     "hash": 2693598431,
+     "index_hash": 2318929879
+    },
+    {
+     "hash": 2850419103,
+     "index_hash": 1704402292
+    },
+    {
+     "hash": 2865511839,
+     "index_hash": 1008477678
+    },
+    {
+     "hash": 3570303629,
+     "index_hash": 851288342
+    },
+    {
+     "hash": 3808150138,
+     "index_hash": 3569391529
+    },
+    {
+     "hash": 401946438,
+     "index_hash": 1780000268
+    },
+    {
+     "hash": 4087332118,
+     "index_hash": 3501642962
+    },
+    {
+     "hash": 837539829,
+     "index_hash": 1250698062
+    },
+    {
+     "hash": 168964194,
+     "index_hash": 3578904167
+    },
+    {
+     "hash": 173125639,
+     "index_hash": 942699994
+    },
+    {
+     "hash": 1795153958,
+     "index_hash": 1930980169
+    },
+    {
+     "hash": 2527032501,
+     "index_hash": 3883875949
+    },
+    {
+     "hash": 2571283204,
+     "index_hash": 1963634324
+    },
+    {
+     "hash": 2603431209,
+     "index_hash": 3445425255
+    },
+    {
+     "hash": 3028741101,
+     "index_hash": 3149309618
+    },
+    {
+     "hash": 3120392595,
+     "index_hash": 3915835980
+    },
+    {
+     "hash": 3553303081,
+     "index_hash": 724844037
+    },
+    {
+     "hash": 366693602,
+     "index_hash": 4046330959
+    },
+    {
+     "hash": 3818356397,
+     "index_hash": 3257209936
+    },
+    {
+     "hash": 3857081959,
+     "index_hash": 3842915705
+    },
+    {
+     "hash": 4009304248,
+     "index_hash": 1461770388
+    },
+    {
+     "hash": 400975751,
+     "index_hash": 3311088888
+    },
+    {
+     "hash": 4011893677,
+     "index_hash": 2121587555
+    },
+    {
+     "hash": 4016158232,
+     "index_hash": 3623335045
+    },
+    {
+     "hash": 4086561430,
+     "index_hash": 975371274
+    },
+    {
+     "hash": 4251146414,
+     "index_hash": 1682963250
+    },
+    {
+     "hash": 4255474089,
+     "index_hash": 3721706752
+    },
+    {
+     "hash": 445814095,
+     "index_hash": 2431784108
+    },
+    {
+     "hash": 508214413,
+     "index_hash": 3260647029
+    },
+    {
+     "hash": 846173079,
+     "index_hash": 278654561
+    },
+    {
+     "hash": 2460477989,
+     "index_hash": 3095909027
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_6/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_8/robot_set/install/replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "92e20bcbdb6a96f1cdaacbfde6ee0a78c02deebc838333239f9094ef5c8db48c",
+    "drawing": "c6cb4e6891946a0c560697f51ccbe62d7ec0d59741006952845ae6be41bc3ef1",
+    "native": "e1df36011be40c88d04f72e752162e2694ed3399640898d00fd7156f19ece66b",
+    "generated": "c6cb4e6891946a0c560697f51ccbe62d7ec0d59741006952845ae6be41bc3ef1"
+   },
+   "bindings": [
+    4994,
+    4993,
+    4988,
+    4992,
+    4996,
+    4966,
+    4984,
+    4965,
+    4997,
+    4987,
+    4969,
+    4971,
+    4972,
+    4991,
+    4986,
+    4970,
+    4995,
+    4973,
+    4989,
+    4963,
+    4964,
+    4985,
+    4990
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "4994": "b72cb0bf15329abc1b536516d146760cde5b9676228d981ddb57e1695c355d82",
+    "4993": "6f720506bd1a2b06ebfb6d258e6c83240e8f3a1fd005359070a807fb9c261de8",
+    "4988": "8bdbdb375e1c02a368ebd04a3c0ecadc8334bee6820022eb0f02e6ff047018c2",
+    "4992": "76c2247875f5a0dc78e7f0e998fa12755e7a515ab046babcc61fed9e65062bb6",
+    "4996": "1ed34f72b0a2f121026c93c57925986f3440c0b00338507fc2b87f4816210577",
+    "4966": "8cd3ab95877a4dec28965aef8bad41eead8571fec996919305e62c5ca857b59f",
+    "4984": "f210d98b92f290eb6e47b5cbe18bc0f794ebc1ed22c99c1d3634bdc46ca4f4b6",
+    "4965": "9f0e65eecfa368e48deca4aed36aa73cbf8e098eec4639d8236fc9a1da356f8b",
+    "4997": "f0a5aa70c981cdd2e92d798c8a68f4938ff7b94aa0717ee9b86bce819c424a49",
+    "4987": "d2a7126a37edfd4d5eb18128d45d32bbfcded75d7817796f86f6599fb65d934a",
+    "4969": "7aa7735dcd57c6701137f26930c6a3212a902f7d9cb01b4c5d63864988358e61",
+    "4971": "2762895c334983ae8228e007af2f49f5adb717b7b601c90eacae590a12380bcd",
+    "4972": "372e8f08608b177fb93905f703c7ebfedaf38d752fff99025d6b8dfdfa4f53dd",
+    "4991": "5f297321111eb61d532a80b4df282ee856d5984862d027e0e88d1b77bf4f924c",
+    "4986": "4a46e7ae483d7da1a22500735f839ac2105181bd9c3d1de124391cc602c39b2c",
+    "4970": "d06f2e7c0952740a5acffdf50e04dc9099c2c3679a43bfa0a42358ce09a1ee7f",
+    "4995": "4b61fb7606640c7346429c0e4068f3b4bab9a2f858e1353db9755167d08c4695",
+    "4973": "9bfd6aad7b8ecb75eb2d8ce8a14ccba846970d0b43cb6fc1aa3af6e6bf8e8bc2",
+    "4989": "15567f394c176c99a5a86460597d7947d4a4513e366ea31091b6db434b4e63f0",
+    "4963": "b8edd14523bca71ed31574f2cfccf30aea5ff11bf7f4976fdd648d4f010ee10c",
+    "4964": "2d40c322b5ed3dc32445fb61903869247243654944b99a4265bf69f12db626ac",
+    "4985": "ac00a8f1732bb9676f49dfce9b21dd49f27911c6721dcdf1e2d1367f5b4ae8cd",
+    "4990": "a4773f5cb92af1359e118b0122f4b779c27fadb26ec9b523fd04018e146881ae"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_8/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_8/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "63d5ac4961e6f6ccf6b78396af1dad9ca38c2bbbcf36f05fcaf7d1a8f82c5a91",
+    "drawing": "d5a4fcdd095e401159d4eb939c9e7f92a6d3e58eabd047a39c063a404acd0401",
+    "native": "bf5ff5e8402d25778a9fc7bd0a165956d9f21c2e7c442731bf69ae02b2bc8d94",
+    "generated": "d5a4fcdd095e401159d4eb939c9e7f92a6d3e58eabd047a39c063a404acd0401"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 961027906,
+     "index_hash": 2735886920
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_8/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_15/robot_set/install/replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "cbea25b9212f61b20c22006b320d76522953286ac6dbbd37065a5d9fece934ca",
+    "drawing": "d3d53572a5e673934217cf9b043f20f6c3b18afa30338c34330f9c319c22207f",
+    "native": "3de6dced541e1fceaee48ae993a20b9d84e78301f06e0e45176fa551e343bb2d",
+    "generated": "d3d53572a5e673934217cf9b043f20f6c3b18afa30338c34330f9c319c22207f"
+   },
+   "bindings": [
+    5264,
+    94137,
+    93321,
+    5271,
+    5284,
+    5281,
+    5265,
+    5283,
+    94135,
+    93261,
+    5269,
+    5282,
+    5280,
+    94138,
+    5279,
+    94132,
+    5268,
+    94133,
+    94207,
+    94206,
+    94139,
+    94141,
+    5277,
+    94140,
+    5270,
+    5278,
+    94134,
+    5287,
+    94136,
+    5286,
+    5272
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "5264": "c705326b02d4ea2e910375ed0b0edf0a043c2df5e77411c40397ee64b048cb11",
+    "94137": "0b154a23f1a826ae79e6d34fc05d37ac1ff622afc142d91dcc93f2ea7cc2e6f4",
+    "93321": "2199397e41acbf8f49c2525989883e00ccc6c4d2fff1acd217561d7888ff2869",
+    "5271": "54c8e3195b880f3bc6bf580f92c6abb4b53b789b584fa6152486f3d05586ed76",
+    "5284": "b50530846ff027657bb5ec34f150a72d63237bd65e80cecfb1c5cab503d8fc74",
+    "5281": "8466005886e5b4ff59f1b83684e77df4b4cbc1efb0710886db568cdab83a3fb7",
+    "5265": "b739dd4a313fe500699bcb854bdb06e06e306acad42282434b6e9aea8ba595ee",
+    "5283": "89076fe33e0830b041badffa089a9062adfc6c818f5bed0645dc376e2bc4dfa6",
+    "94135": "cb29c3dddcad95edb29d1d64d8b7f7851195d12f8c92fa43c0cfec4b5b011fd6",
+    "93261": "c331cbd9aac89c9afd3c9f4cd31176e89d533b8d5ecc82a8d05323e4234ef318",
+    "5269": "e66308f3b6b07c1d1af2532739f550ed719c734ddb4df080c0f870ec127d4af3",
+    "5282": "1f68b994f5ebf70464aaf2d7b92fc61affa1f4468e9ec7ab8dd5af0d7bbfd76a",
+    "5280": "cfc85a0cd564e10ccbf5d7d257faf5ab85aac6685d444e1141c7b831fc0bff59",
+    "94138": "71fc7c3e78a37e738ec6b32f51b785a1ac10ff52b58617843d7b19c90808a972",
+    "5279": "8a2dca0d968de21ccc9b3965c43f26aabc2a482426cc5ab74b76d56664197e53",
+    "94132": "13742dd3f4fb0a403a9113d95e85d9c2a6f24ea681872e6ea50dffaf0cbfca29",
+    "5268": "009a0038663f464f45655f3237c4e76e36d3e361eb713329feb6519eb9cd44ef",
+    "94133": "fdb3bd706cb69b77859ef01d5d257d4fc8b9c583b4bd27324da940d78a97b2ef",
+    "94207": "b035f64233564617c6411b572ff004c937218ed3a6f3099922df0c24cc712549",
+    "94206": "5aae354dc32b6bc9f83f781d1773e41b4b20b5d580ac430f1a6d5753f33394ee",
+    "94139": "5d32f366fafeca8730167c0d5ba1aa0bc94c80a6c5d867334c3cfee09a7ae430",
+    "94141": "c1160aaad5019b752bcd4a781bb555305cf731d5378432ab967682b9f20b0411",
+    "5277": "b3f9640468e9c1cad07982c5514bffc868c41edc7fb28469fbd0decc29a9510d",
+    "94140": "bb23f51a86304f4736594675a3ef01a0fc15c0584828ffac9de57df0a3f1db41",
+    "5270": "45f4fd70136c0a05c02d525c5efb8a725078cd21a6068a98079f7308738d3add",
+    "5278": "eb10fcffb67526fc4fc326bb72be64221373f67a8b3c7edb50e001920f83a79c",
+    "94134": "ac699dfba12ac99c2ea51afc42e9a4022a199c562d5cf6efd265fc29c6413b67",
+    "5287": "7293e8c3a8e10c608e15038fd47964bef6061454c25f4c98b761f1535b3a0f6f",
+    "94136": "85be9f169dbd91911ba6190c851c3530552defe793312793ce185ce489dd39d5",
+    "5286": "a12a1c9ac7f430ffd6ce1d97881e98107c71dd6599b3bde84fab020b3aa35c85",
+    "5272": "88247ba8bb05955922dd9d8e6d3f7f335b1e195bf903a5107f7c73b089e0cfb5"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_15/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_15/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "0ef5c1ab26d09f72f1bc99e6a53a3417bee188a73c52102558b06d3b865b096e",
+    "drawing": "90f59eceac6680f29387bce356b80902c8c47a734e84044c6be2ba703e39d9d4",
+    "native": "aaca24e481def1dc77158599f71710f0082fc6203633be6ba27702fad27a5c0a",
+    "generated": "90f59eceac6680f29387bce356b80902c8c47a734e84044c6be2ba703e39d9d4"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1462176053,
+     "index_hash": 2243030492
+    },
+    {
+     "hash": 1570405332,
+     "index_hash": 2940180795
+    },
+    {
+     "hash": 1627514390,
+     "index_hash": 964256739
+    },
+    {
+     "hash": 1876311180,
+     "index_hash": 325960778
+    },
+    {
+     "hash": 2563564018,
+     "index_hash": 3937884031
+    },
+    {
+     "hash": 3641889869,
+     "index_hash": 1073751262
+    },
+    {
+     "hash": 558763553,
+     "index_hash": 98089170
+    },
+    {
+     "hash": 573699603,
+     "index_hash": 2160858050
+    },
+    {
+     "hash": 1102282442,
+     "index_hash": 235003256
+    },
+    {
+     "hash": 1294350041,
+     "index_hash": 3436343605
+    },
+    {
+     "hash": 1482271102,
+     "index_hash": 3988497563
+    },
+    {
+     "hash": 1774476431,
+     "index_hash": 3887269323
+    },
+    {
+     "hash": 2159411271,
+     "index_hash": 4123202694
+    },
+    {
+     "hash": 2382676695,
+     "index_hash": 1469396251
+    },
+    {
+     "hash": 238704653,
+     "index_hash": 3308745820
+    },
+    {
+     "hash": 3957197011,
+     "index_hash": 1405856433
+    },
+    {
+     "hash": 1285403870,
+     "index_hash": 218764378
+    },
+    {
+     "hash": 1990803814,
+     "index_hash": 2041790705
+    },
+    {
+     "hash": 2079358509,
+     "index_hash": 461167819
+    },
+    {
+     "hash": 2667936368,
+     "index_hash": 1237403662
+    },
+    {
+     "hash": 320000359,
+     "index_hash": 4147339106
+    },
+    {
+     "hash": 3562884260,
+     "index_hash": 3390267768
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_15/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_14/robot_set/install/replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "955a537019203adcb4ad88f20c49064d6cd2896ab166da1dfcef0a145c344371",
+    "drawing": "0cf50093daf1bde722965d5f1e25617954d4c1c50e7afd64720115505f23e650",
+    "native": "a71fd213577629f670853cc4e968bad97052d5a69fea526aaacf2947b37414d2",
+    "generated": "0cf50093daf1bde722965d5f1e25617954d4c1c50e7afd64720115505f23e650"
+   },
+   "bindings": [
+    93322,
+    5264,
+    93321,
+    5273,
+    5271,
+    93259,
+    5267,
+    5265,
+    93260,
+    93320,
+    5275,
+    94137,
+    5269,
+    5274,
+    93980,
+    5266,
+    93324,
+    93261,
+    93979,
+    5276,
+    93976,
+    93975,
+    5268,
+    93981,
+    5279,
+    93978,
+    93258,
+    93262,
+    93982,
+    5270,
+    93977,
+    5277,
+    5278,
+    94139,
+    94136,
+    5272
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "93322": "42c7dd5c6fe4ca4a3ff8c49161be40320669db8a69e07fe3b7fbc30398d5491f",
+    "5264": "546c8caa2d7e3d7e555a1723497e2b92dc92f88d845105ef73208d18926aff1a",
+    "93321": "673ee2ba199db4dfd4c18667be452dfe3cad4caee07166bc232021a842b8acbf",
+    "5273": "392498bd0514a82d8f85e0394c21a3a96efac72bade540434e83d3b95e86541c",
+    "5271": "88d6712da1ffa822583dc8ac18070fd3c87fc075475f1dfdb9739205b87d0267",
+    "93259": "db6b8064b6ed97ab8a7f8a16c8598b8a72c6b60c4678c936c72c571e908f0373",
+    "5267": "1240623bd6487720e1bb9ad3362a9a85e56646cb50accbe97603b833eb932323",
+    "5265": "19c940033654afae35e2a211721df19fb6ae6f741801fcc291410b0d85d5b3a2",
+    "93260": "ac806bb86a2a392800deb4ea7367110c5abc489ed2593ab4a5cbc34a2aebedf0",
+    "93320": "0a5e7b37c60cb200db42b9b20f51e1973f2843a4c3ebb65024898df85faa4419",
+    "5275": "63981e7d80cee31299f1d548487df69e3560db40b33c42e64ceade6b117eb093",
+    "94137": "483bbc3aa720a00ca2a18099f20553deab9a69f6c1a9584c1f9cc1abdf2e4876",
+    "5269": "4c6fcc487764990f5be11d4a68be7b7d93021eec12ed09e42bf0a9594a936b8f",
+    "5274": "5119ca54dba31ee304cdcde2d76ae47d3f1f883e68c62d6821a4585c6f938f9a",
+    "93980": "4b1a18d6a3f708fe43ce83d506ce0fefb33e4b5f97a608818d6fa18257c7bc79",
+    "5266": "33c3d5fbca7e5e7f3afe20f871ab627f77d3a4712144b08f152348e4bd30c968",
+    "93324": "4533c8fe0a6c0450a357f18faa63ee468b7cf0e86b441500a45afba83deef257",
+    "93261": "02984d9dc423d064d59c1cdc5a726451b08a8afa1f2f71374e73294d88b57bc7",
+    "93979": "609840ee6269b74c7daee5533147b20fb53979ac1eba3bef9171413334d841a1",
+    "5276": "4b23c88b084a3207d145328ec10f9c3cc0ba99351c528bf07fb9bd9a7a1c753c",
+    "93976": "ef4f5262993bd5f97e927f590e88fc0c5ccad3dde5b230724db880b85278e6bc",
+    "93975": "bf284ad4ce881c5c9041e5d088fa215ac406436635886f44c54e710f7bb74158",
+    "5268": "ebc94a487161c3034150f68ddca7e9cb058a0450168efd35dd436937b64bd900",
+    "93981": "ea0129782a458039cb0d30397afe3a8ce18bdc365c56d38dc3078b8ee1967e9a",
+    "5279": "34eb128eeee3ce5c438650114184ef5636ea97e1647795cb2b76df93665f9534",
+    "93978": "2ff2a2f53561efa41c9e04e26a042a2d15d80cb39a4ad4fd08f29cc2ecb0dc7a",
+    "93258": "46637d29ff63a01863818c6b289cdae029a7a6b2e0429abb02c5601159e14216",
+    "93262": "af5f85d63560b4863cba5e8e1953626aa6709f3a76369269180035e14bfe131f",
+    "93982": "4e290eb53a1dd365cc4a436e457776a802233be961095486ec3ec45354700306",
+    "5270": "5cb3a914b6b975864db3861d8dfc580a4143166844346895c43b0f9718b084d5",
+    "93977": "60e0a554ad3b19a47711ad9fbd17c721922fbc36019a1e4322d2bb9cc728ca9b",
+    "5277": "1f9cf5781bea74a1c955c6afa397857cf9cb26e1b9489515cf795f9824529db0",
+    "5278": "c6f4ce8e2c97bcc8194846db501bf4f3800dafd670f8d4be6184b911daff2d51",
+    "94139": "485014f6a77804cb09c60b290749b1db725f34a73e3280c0222c5fa18bdf608b",
+    "94136": "b47c94d5439a9f3a8d85adf6f7ec5607c868fed9d753a2c6f2833a5533b55741",
+    "5272": "81d4e651768a0757be0ba48377fdef57beeefe20d3fab5529150da0f4410dc77"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_14/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_14/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "1cb66a462b926f4ecb47633c80c8526c616f6f7f9f9d8baaceebbcb8a0fb3b05",
+    "drawing": "2de12ff50cacb167c0d11c77c6bafd6fd91b7560225b01cc274f615c468170ae",
+    "native": "d92be28ed5af630065e907250e32d6182f5545722098b36f15cafe9abaf888de",
+    "generated": "2de12ff50cacb167c0d11c77c6bafd6fd91b7560225b01cc274f615c468170ae"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 1062314979,
+     "index_hash": 3002828372
+    },
+    {
+     "hash": 110615342,
+     "index_hash": 1914627639
+    },
+    {
+     "hash": 1174538833,
+     "index_hash": 2451314592
+    },
+    {
+     "hash": 1243971202,
+     "index_hash": 2133029998
+    },
+    {
+     "hash": 1339126463,
+     "index_hash": 3068175056
+    },
+    {
+     "hash": 141654294,
+     "index_hash": 3645162471
+    },
+    {
+     "hash": 172362607,
+     "index_hash": 3194265821
+    },
+    {
+     "hash": 2236526038,
+     "index_hash": 75553906
+    },
+    {
+     "hash": 2695406529,
+     "index_hash": 297813258
+    },
+    {
+     "hash": 3017760423,
+     "index_hash": 3661513858
+    },
+    {
+     "hash": 3061028493,
+     "index_hash": 4126412924
+    },
+    {
+     "hash": 4060590052,
+     "index_hash": 52865217
+    },
+    {
+     "hash": 4127744285,
+     "index_hash": 3117520917
+    },
+    {
+     "hash": 564217939,
+     "index_hash": 1961940050
+    },
+    {
+     "hash": 679643887,
+     "index_hash": 2313187021
+    },
+    {
+     "hash": 96414979,
+     "index_hash": 2684227220
+    },
+    {
+     "hash": 2017034937,
+     "index_hash": 3198319582
+    },
+    {
+     "hash": 2137671753,
+     "index_hash": 1482531845
+    },
+    {
+     "hash": 2696475258,
+     "index_hash": 985315858
+    },
+    {
+     "hash": 3215260079,
+     "index_hash": 2782086500
+    },
+    {
+     "hash": 3294664071,
+     "index_hash": 2591986569
+    },
+    {
+     "hash": 3689004293,
+     "index_hash": 421895038
+    },
+    {
+     "hash": 4057087,
+     "index_hash": 4204370099
+    },
+    {
+     "hash": 518690235,
+     "index_hash": 3348202224
+    },
+    {
+     "hash": 832190223,
+     "index_hash": 3305707096
+    },
+    {
+     "hash": 2405050390,
+     "index_hash": 2892912171
+    },
+    {
+     "hash": 2741411213,
+     "index_hash": 3736423819
+    },
+    {
+     "hash": 3156080378,
+     "index_hash": 1809739537
+    },
+    {
+     "hash": 3667535485,
+     "index_hash": 2350850335
+    },
+    {
+     "hash": 3725125852,
+     "index_hash": 1202386682
+    },
+    {
+     "hash": 4002121916,
+     "index_hash": 3279223863
+    },
+    {
+     "hash": 917125172,
+     "index_hash": 2768892452
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_14/robot_set): own RGB key, no recolour"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_21/robot_set/install/replace",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "d07e78dba3af2f094f624c2cd5213d7d8179e82fd0e94c14e4f19c1982928425",
+    "drawing": "85a937037d0c0b467d0946f5241f313a48a750728aa039ca0797fc18ad2e0e18",
+    "native": "d90ca4b529ea954104a6e56b5681121efaf5c0b6b5b6d1068ec014f12ba55bd7",
+    "generated": "85a937037d0c0b467d0946f5241f313a48a750728aa039ca0797fc18ad2e0e18"
+   },
+   "bindings": [
+    5975,
+    5264,
+    5265,
+    5281,
+    5971,
+    5968,
+    94137,
+    5976,
+    5982,
+    5977,
+    5981,
+    5973,
+    94206,
+    5979,
+    94207,
+    5268,
+    5278,
+    5277,
+    5270,
+    94140,
+    94136,
+    5983,
+    5984,
+    5272
+   ],
+   "nested": true,
+   "prior_binding_spec_sha256": {
+    "5975": "d62930cf5f2ed565e7433b7a2a56707403f83515818cc5f6e9ee68959ba63b00",
+    "5264": "3ee84cad20ca8b39235898057e93bc0010e1dc0c482de6fe2dd5caf34d7b1eb5",
+    "5265": "333f677aa8f805ab4b3aa4aa8b86c58386b75538932823de2d947820e3f1e86d",
+    "5281": "43996d48b757d1fa8cb7db5eb848f97859322ce9f11e3563586d30a4cc42cc85",
+    "5971": "26977f704dedec0f2b158e7f6ff186ee24cdebe669510ccb7bb3ef64aafa52ef",
+    "5968": "b325425ae6bfcc5842a248d241490823414440069cfee16e9b2c2839809e4b3b",
+    "94137": "527c0eef9d39d7db827e44c1310b609b3b00c1dd807035ca3e86c65093abe8d9",
+    "5976": "cb0bc144acfac0dfc033e35688ba14e557037eb8eda570af82e0020f18fa5d26",
+    "5982": "0e9bfca15d91f36eb7e4fa8b4777f72dff69a1be3967e3dd588b593ce978fefa",
+    "5977": "6488dbdbd09abe429f26fdbeb871679ad636f1c8b0d1b06b73a0c2ee4581f035",
+    "5981": "3f6539387ab511de6f9ebcf895f3e6974fad7c4e77ae3b1e5a4936a0dd71da76",
+    "5973": "e1d1212ec174c3b3661e97318f236200573f6e7d03f19d566e3fc6ddde5fd853",
+    "94206": "188ae46b17c8de6766a0242dd8f2130a32d6d92ad74a79b6c1bcaefd630de3ed",
+    "5979": "a6f259adfe8182bc82a196b5b67e708233e253c0814a8fd2f89c1e2ce437a0d2",
+    "94207": "8ee5f83495c3989c330e6f34a526aeb329250373557382fc093acfe299a67755",
+    "5268": "40cdd1c568c7bf6a96b9f7a50b9c397b53f134055e257de7cc5783981bd29e9b",
+    "5278": "584bd2c0694de0e89e4f35059d6463988d8bc6b5e7a00698e75ed4628ccd58f6",
+    "5277": "46bfa400f908cf1f471a525a7fcce3e6ea7fd6600948262372905b0160eaadd9",
+    "5270": "1fef149c48946c149cd226390a46a7b7dd0cb0fff3f901aa7dc9dfc3f2dd5267",
+    "94140": "324f26bbc9ca696c1941b9304a670bf41beceb85a15f739a48b94818adcc20ce",
+    "94136": "789e9d5e6b9ad80ac52745478496ecff07d8dc25196f4567c93855245cd8d808",
+    "5983": "8ab9ff332e7d385323af5661b4da2e6b05562544a0797681ed28e9ce41831080",
+    "5984": "cf613e4b717f8a6907f1b7a2fcb443cd8aa07a3b1b02d9621bc5230bb7fd0c8c",
+    "5272": "3392ec6bc0fec360e129a5a602dce4aac98c566d82513efdae75967f8e8dd02e"
+   },
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_21/robot_set): replacement of existing RGB-keyed HD"
+  },
+  {
+   "source": "test_current/parts/pose_packets/unit_21/robot_set/install/new",
+   "contract": "contract.json",
+   "drawing": "candidate_atlas.png",
+   "native": "native_atlas.png",
+   "generated": "generated.png",
+   "file_sha256": {
+    "contract": "f1ffd83c8e1f7a5483b344ba3bbdc10fc62218f43d459b7e1443dce7509bb6d2",
+    "drawing": "0688d764933f8ecc9dd5757a7de16e6da611182dbc6f4892c967b94941f7df63",
+    "native": "dcb0b774505267dab17a9ff4d9e494cba436592b9b66f264f054794144643d26",
+    "generated": "0688d764933f8ecc9dd5757a7de16e6da611182dbc6f4892c967b94941f7df63"
+   },
+   "bindings": [],
+   "new_source_keys": [
+    {
+     "hash": 2150394034,
+     "index_hash": 2921150291
+    },
+    {
+     "hash": 4098296922,
+     "index_hash": 1700903678
+    },
+    {
+     "hash": 881378570,
+     "index_hash": 3251773536
+    },
+    {
+     "hash": 947813495,
+     "index_hash": 3935936163
+    },
+    {
+     "hash": 1007258987,
+     "index_hash": 1159294120
+    },
+    {
+     "hash": 1922114812,
+     "index_hash": 3350834344
+    },
+    {
+     "hash": 2024734992,
+     "index_hash": 1358839081
+    },
+    {
+     "hash": 209676510,
+     "index_hash": 3021852789
+    },
+    {
+     "hash": 2756358680,
+     "index_hash": 926032018
+    },
+    {
+     "hash": 3080050543,
+     "index_hash": 1080404275
+    },
+    {
+     "hash": 3298353556,
+     "index_hash": 2821629921
+    },
+    {
+     "hash": 379716665,
+     "index_hash": 2299094389
+    },
+    {
+     "hash": 643943214,
+     "index_hash": 2475496546
+    },
+    {
+     "hash": 681096745,
+     "index_hash": 342641216
+    },
+    {
+     "hash": 850731298,
+     "index_hash": 1080404275
+    },
+    {
+     "hash": 1433784672,
+     "index_hash": 4157364774
+    },
+    {
+     "hash": 3981458060,
+     "index_hash": 3237540379
+    },
+    {
+     "hash": 4040914641,
+     "index_hash": 1686307003
+    }
+   ],
+   "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_21/robot_set): own RGB key, no recolour"
   }
  ],
  "not_ready": [],

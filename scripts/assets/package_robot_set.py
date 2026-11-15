@@ -83,6 +83,7 @@ def main():
         for prev in replace[:i]:
             pb=lib[prev['row']['binding_id']-1]
             if pb.get('resource') is None or pb.get('resource')!=b.get('resource') or prev['row']['palette_15bit']!=it['row']['palette_15bit']:continue
+            if None in (b.get('source_x'),b.get('source_y'),pb.get('source_x'),pb.get('source_y')):continue
             left,top=max(b['source_x'],pb['source_x']),max(b['source_y'],pb['source_y'])
             right,bottom=min(b['source_x']+b['w'],pb['source_x']+pb['w']),min(b['source_y']+b['h'],pb['source_y']+pb['h'])
             if right<=left or bottom<=top:continue
