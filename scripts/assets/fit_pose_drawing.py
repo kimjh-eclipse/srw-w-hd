@@ -56,21 +56,40 @@ def main():
     folder=Path(sys.argv[1]);name=sys.argv[2] if len(sys.argv)>2 else 'candidate.png'
     native=Image.open(folder/'native.png').convert('RGBA');W,H=native.size;nat=np.asarray(native)[:,:,3]>0
     cand=Image.open(folder/name).convert('RGBA');size=(W*S,H*S)
-    before=iou_of(cand,nat,W,H);best=(before,1.,1.,0,0)
+    before=iou_of(cand,nat,W,H)
+    # The search only needs the silhouette: alpha alone, at 2x, against the
+    # native mask at 2x. Offsets stay in 4x units. Only the chosen transform is
+    # applied to the full colour drawing.
+    alpha2=cand.getchannel('A').resize((W*2,H*2),Image.Resampling.BOX)
+    nat2=np.kron(nat,np.ones((2,2),bool))
+    def score(sx,sy,dx,dy):
+        w,h=alpha2.size;nw,nh=max(1,round(w*sx)),max(1,round(h*sy))
+        sc=alpha2.resize((nw,nh),Image.Resampling.BILINEAR)
+        canvas=Image.new('L',(w+64,h+64));canvas.paste(sc,(32+round((w-nw)/2+dx/2),32+round((h-nh)/2+dy/2)))
+        a=np.asarray(canvas.crop((32,32,32+w,32+h)))>127
+        return float((a&nat2).sum()/max((a|nat2).sum(),1))
+    best=(score(1,1,0,0),1.,1.,0,0)
     for sx in np.arange(.88,1.1201,.02):
         for sy in np.arange(.88,1.1201,.02):
             for dx in range(-12,13,3):
                 for dy in range(-12,13,3):
-                    v=iou_of(transform(cand,sx,sy,dx,dy,size),nat,W,H)
+                    v=score(sx,sy,dx,dy)
                     if v>best[0]:best=(v,sx,sy,dx,dy)
     _,sx,sy,dx,dy=best;b=best
     for sx2 in np.arange(sx-.02,sx+.0201,.005):
         for sy2 in np.arange(sy-.02,sy+.0201,.005):
-            for dx2 in range(dx-3,dx+4):
-                for dy2 in range(dy-3,dy+4):
-                    v=iou_of(transform(cand,sx2,sy2,dx2,dy2,size),nat,W,H)
+            for dx2 in range(dx-3,dx+4,2):
+                for dy2 in range(dy-3,dy+4,2):
+                    v=score(sx2,sy2,dx2,dy2)
                     if v>b[0]:b=(v,sx2,sy2,dx2,dy2)
-    v,sx,sy,dx,dy=b;moved=transform(cand,sx,sy,dx,dy,size)
+    _,sx,sy,dx,dy=b
+    # last pixel at 4x: alpha only, one step around the best
+    alpha4=cand.getchannel('A')
+    def score4(dx,dy):
+        moved=transform(Image.merge('RGBA',(alpha4,alpha4,alpha4,alpha4)),sx,sy,dx,dy,size)
+        return iou_of(moved,nat,W,H)
+    v,dx,dy=max(((score4(dx+ox,dy+oy),dx+ox,dy+oy) for ox in (-1,0,1) for oy in (-1,0,1)),key=lambda t:t[0])
+    moved=transform(cand,sx,sy,dx,dy,size)
     # edge fit
     sil=Image.fromarray((nat*255).astype('uint8')).resize(size,Image.Resampling.NEAREST)
     keep=np.asarray(sil.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.GaussianBlur(1.2))).astype('float32')/255
