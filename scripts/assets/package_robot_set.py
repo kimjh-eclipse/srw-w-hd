@@ -100,7 +100,7 @@ def main():
             arr[dy:dy+h,dx:dx+w]=src[sy:sy+h,sx:sx+w];unified+=1
         it['art']=Image.fromarray(arr)
     print('shared source regions unified',unified)
-    out=root/'install';summary={}
+    out=root/'install';out.mkdir(parents=True,exist_ok=True);summary={}
     if replace:
         placed,H=pack(replace)
         def rrow(it,box):

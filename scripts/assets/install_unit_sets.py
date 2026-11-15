@@ -47,6 +47,8 @@ def main():
                 e=json.loads(f.read_text(encoding='utf-8'));sources.append(e['source'])
                 queue['ready_candidates']=[c for c in queue['ready_candidates'] if c.get('source')!=e['source']]+[e]
             q.write_text(json.dumps(queue,ensure_ascii=False,indent=1),encoding='utf-8')
+            if not sources:
+                results[u]=dict(poses=len(accepted),lines=['all parts already redrawn by other units']);print(u,'poses',len(accepted),'all parts already redrawn by other units',flush=True);continue
             # Originals (1..5263) of this unit are replaced under the user's whole-robot redraw order.
             originals=[]
             for f in inst.glob('*_replace/contract.json'):originals+=[r['replace_binding'] for r in json.loads(f.read_text(encoding='utf-8')) if r['replace_binding']<=5263]
