@@ -292,9 +292,9 @@ def main():
                 sources=set()
                 for bid in seen:
                     spec=renderer.parts_renderer.bindings[bid-1]
-                    if 'resource' in spec:sources.add(spec['resource'])
+                    if spec.get('resource') is not None:sources.add(spec['resource'])
                     for group in renderer.parts_renderer.registration_stats.get(bid,{}).get('tile_groups',[]):
-                        sources.add(tile_resources[group['source']])
+                        if tile_resources.get(group['source']) is not None:sources.add(tile_resources[group['source']])
                 row['observed_source_resources']=sorted(sources)
                 misses=renderer.parts_renderer.unmapped_misses
                 row['new_unmapped_textures']={str(k):v for k,v in misses.items() if k not in previous_misses}
