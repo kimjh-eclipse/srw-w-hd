@@ -109,7 +109,8 @@ def main():
     out.mkdir(parents=True);index=[]
     for n,i in enumerate(chosen):
         folder,gain,count=cands[i];dst=out/f'pose_{n:02d}';dst.mkdir()
-        for f in ('native.png','native_4x.png','contract.json','frames.json'):shutil.copy2(folder/f,dst/f)
+        for f in ('native.png','contract.json','frames.json'):shutil.copy2(folder/f,dst/f)
+        with Image.open(folder/'native.png') as im:im.resize((im.width*4,im.height*4),Image.Resampling.NEAREST).save(dst/'native_4x.png')
         (dst/'source.json').write_text(json.dumps(dict(object=str(folder.relative_to(ROOT)).replace('\\','/')),ensure_ascii=False),encoding='utf-8')
         W,H=Image.open(folder/'native.png').size
         rows=json.loads((folder/'contract.json').read_text(encoding='utf-8'))
