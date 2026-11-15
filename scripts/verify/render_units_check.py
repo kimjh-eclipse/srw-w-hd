@@ -29,6 +29,13 @@ for f in range(frames[-1]+1):
     core.run();core.audio.clear()
     if f in frames:
         img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities))
+        import time
+        for _ in range(25):   # let asynchronously prepared art (portraits) finish, as a running game would a moment later
+            p=r.portraits.pending if hasattr(r,'portraits') else {{}}
+            if hasattr(r,'portraits'):r.portraits.collect_prepared()
+            if not getattr(r.portraits,'pending',None):break
+            time.sleep(.1)
+        img=r.render_top(core.native,core.ids,core.hd,paused=True,parts=core.parts,obj=core.obj.raw,owners=core.owners,bgpriors=core.bgpriors,bgparts=core.bgparts,part_palettes=core.part_palettes,backgrounds=core.backgrounds,bg_layout=core.bg_layout,unknown=core.unknown_snapshot(),cutin_layers=core.cutin_layers,sub_parts=(core.sub_parts,core.sub_owners,core.sub_oam.raw,core.sub_palettes,core.sub_ids,core.sub_priorities))
         img.save(r'{out_prefix}_'+str(f)+'.png')
 """
     subprocess.run([sys.executable,'-X','utf8','-c',code],cwd=ROOT,capture_output=True)
@@ -41,11 +48,12 @@ def main():
     catalog=json.loads((ROOT/'test_current/parts/named_unit_catalog.json').read_text(encoding='utf-8'))
     tmp=ROOT/'test_current/parts/pose_packets/_render_tmp';tmp.mkdir(exist_ok=True);rows=[]
     for u in a.units:
-        unit=next(x for x in catalog['units'] if x['unit_id']==u);wid=unit['weapon_ids'][-1]
-        state=CACHE/f'unit_{u}_weapon_{wid}.state'
-        if not state.exists():
-            res=build_in_child(ROOT,ROM,u,wid,state)
-            if not res.get('ok'):print(u,'no start',res.get('reason'));continue
+        unit=next(x for x in catalog['units'] if x['unit_id']==u);state=None
+        # Strongest weapon first; fall back when its start cannot be built (combination/MAP weapons).
+        for wid in reversed(unit['weapon_ids']):
+            s=CACHE/f'unit_{u}_weapon_{wid}.state'
+            if s.exists() or build_in_child(ROOT,ROM,u,wid,s).get('ok'):state=s;break
+        if state is None:print(u,'no start for any weapon');continue
         render_one(state,frames,tmp/f'u{u}')
         ims=[Image.open(tmp/f'u{u}_{f}.png').convert('RGB').resize((512,384)) for f in frames if (tmp/f'u{u}_{f}.png').exists()]
         row=Image.new('RGB',(len(frames)*516+200,384),(20,20,24));d=ImageDraw.Draw(row);d.text((8,8),f"unit {u}",fill=(255,255,0))
