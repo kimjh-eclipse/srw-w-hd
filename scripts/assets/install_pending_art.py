@@ -157,22 +157,34 @@ def main():
             effect=any(library['bindings'][b-1].get('effect_part') for b in c['bindings']))
         if c.get('nested'):job['nested']=True
         jobs.append(job)
-    config=OUT/f'config_{stamp}.json';results=f'test_current/parts/pending_install/results_{stamp}.json'
     originals=sorted({b for job in jobs for b in job['bindings'] if b<=5263})
     assert set(originals)<=set(args.allow_original),('candidate replaces original bindings not named with --allow-original',originals)
-    config.write_text(json.dumps(dict(results=results,jobs=jobs,allow_original=originals),ensure_ascii=False,indent=2),encoding='utf-8')
-    run('test_current/parts/root_pending_repair_factory.py',config)
-    run('test_current/parts/record_completed_art_batch.py',results)
-    ids=[b for job in jobs for b in job['bindings']]
-    run('scripts/verify/verify_new_art.py','--bindings',*ids,'--out','test_current/parts/pending_install/check')
-    report=json.loads((OUT/'check/report.json').read_text(encoding='utf-8'))
-    installed=json.loads((ROOT/results).read_text(encoding='utf-8'))
-    for (c,_),row in zip(ready,installed):
-        done.append(dict(source=c['source'],bindings=row['bindings'],atlas=row['atlas'],drawing_sha256=c['file_sha256']['drawing'],installed=stamp,
-            flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
-    save(done,rejected)
+    # One factory run per package: a package the factory refuses is reported
+    # (with the installer's own reason) and the round carries on to the rest
+    # and to the cache rebuild.
+    installed_pairs=[];failed=[]
+    for k,((c,_),job) in enumerate(zip(ready,jobs)):
+        config=OUT/f'config_{stamp}_{k}.json';results=f'test_current/parts/pending_install/results_{stamp}_{k}.json'
+        config.write_text(json.dumps(dict(results=results,jobs=[job],allow_original=[b for b in originals if b in job['bindings']]),ensure_ascii=False,indent=2),encoding='utf-8')
+        try:run('test_current/parts/root_pending_repair_factory.py',config)
+        except subprocess.CalledProcessError:
+            log=ROOT/Path(c['source'].replace('\\','/'))/'root_install_console.log'
+            reason=log.read_text(encoding='utf-8',errors='replace').strip().splitlines()[-1] if log.exists() else 'factory failed'
+            failed.append((c['source'],reason));print('FAILED',c['source'],reason);continue
+        run('test_current/parts/record_completed_art_batch.py',results)
+        installed_pairs.append((c,json.loads((ROOT/results).read_text(encoding='utf-8'))[0]))
+    if installed_pairs:
+        ids=[b for _,row in installed_pairs for b in row['bindings']]
+        run('scripts/verify/verify_new_art.py','--bindings',*ids,'--out','test_current/parts/pending_install/check')
+        report=json.loads((OUT/'check/report.json').read_text(encoding='utf-8'))
+        for c,row in installed_pairs:
+            done.append(dict(source=c['source'],bindings=row['bindings'],atlas=row['atlas'],drawing_sha256=c['file_sha256']['drawing'],installed=stamp,
+                flagged=[p['binding'] for p in report['parts'] if p['binding'] in row['bindings']]))
+        save(done,rejected)
+        print('installed',len(ids),'flagged',report['flagged'])
     rebuild_caches(run,args)
-    print('installed',len(ids),'flagged',report['flagged'],'backup',backup)
+    for source,reason in failed:print('NOT INSTALLED',source,reason)
+    print('backup',backup)
 
 
 def split_mixed(ready,stamp):
