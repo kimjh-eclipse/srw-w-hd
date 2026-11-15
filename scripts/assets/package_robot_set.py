@@ -87,21 +87,29 @@ def main():
     # Replacements whose library sources overlap in the same image (same palette)
     # must show identical pixels there. The better-drawn part wins; the other
     # takes those pixels (same set of drawings, same palette - not a recolour).
-    replace.sort(key=lambda it:-it['drawn']);unified=0
-    for i,it in enumerate(replace):
-        b=lib[it['row']['binding_id']-1];arr=np.asarray(it['art']).copy()
-        for prev in replace[:i]:
+    replace.sort(key=lambda it:-it['drawn']);unified=0;kept=[];conflicts=[]
+    for it in replace:
+        b=lib[it['row']['binding_id']-1];arr=np.asarray(it['art']).copy();clash=False
+        for prev in kept:
             pb=lib[prev['row']['binding_id']-1]
             if pb.get('resource') is None or pb.get('resource')!=b.get('resource') or prev['row']['palette_15bit']!=it['row']['palette_15bit']:continue
             if None in (b.get('source_x'),b.get('source_y'),pb.get('source_x'),pb.get('source_y')):continue
             left,top=max(b['source_x'],pb['source_x']),max(b['source_y'],pb['source_y'])
             right,bottom=min(b['source_x']+b['w'],pb['source_x']+pb['w']),min(b['source_y']+b['h'],pb['source_y']+pb['h'])
             if right<=left or bottom<=top:continue
+            # Recorded sources overlap but the native pixels there differ: one
+            # record is wrong. Keep the better-drawn replacement; leave this one
+            # on its current HD rather than guess which record is right.
+            ia=it['idx'][top-b['source_y']:bottom-b['source_y'],left-b['source_x']:right-b['source_x']]
+            ib=prev['idx'][top-pb['source_y']:bottom-pb['source_y'],left-pb['source_x']:right-pb['source_x']]
+            if ia.shape!=ib.shape or not np.array_equal(ia,ib):clash=True;break
             src=np.asarray(prev['art'])
             sx,sy=(left-pb['source_x'])*S,(top-pb['source_y'])*S;dx,dy=(left-b['source_x'])*S,(top-b['source_y'])*S;w,h=(right-left)*S,(bottom-top)*S
             arr[dy:dy+h,dx:dx+w]=src[sy:sy+h,sx:sx+w];unified+=1
-        it['art']=Image.fromarray(arr)
-    print('shared source regions unified',unified)
+        if clash:conflicts.append(it['row']['binding_id']);continue
+        it['art']=Image.fromarray(arr);kept.append(it)
+    replace=kept
+    print('shared source regions unified',unified,'left on current HD (conflicting source records)',conflicts)
     out=root/'install';out.mkdir(parents=True,exist_ok=True);summary={}
     if replace:
         placed,H=pack(replace)
