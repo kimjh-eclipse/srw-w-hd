@@ -12,6 +12,8 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--workspace',type=Path)
     parser.add_argument('--rom',type=Path)
+    parser.add_argument('--unit',type=int,help='open this unit right away')
+    parser.add_argument('--weapon',type=int,help='with --unit: play this weapon from the start')
     opts=parser.parse_args()
     candidates=[opts.workspace,APP_DIR,APP_DIR.parent.parent]
     ROOT=next((p for p in candidates if p and (p/'test_current/parts/named_unit_catalog.json').exists()),None)
@@ -78,6 +80,12 @@ def main():
     # Match the selector to the scene initially displayed.
     for label,path in scenes[413].items():
         if path==initial:scene.set(label);break
+    if opts.unit is not None and opts.unit in scenes:
+        unit.set(next(k for k,v in labels.items() if v==opts.unit));refresh()
+        if opts.weapon is not None:
+            pick=next((k for k,v in scenes[opts.unit].items() if isinstance(v,tuple) and v[2]==opts.weapon),None)
+            if pick:scene.set(pick)
+        root.after(500,load)
     def title():
         if app.closed:return
         root.title('슈퍼로봇대전 W HD · 기체별 전투 테스트');root.after(500,title)
