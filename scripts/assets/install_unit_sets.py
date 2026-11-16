@@ -31,6 +31,9 @@ def main():
         if free<a.min_free:print('STOP low disk',round(free,1),'GB before unit',u,flush=True);break
         rs=ROOT/f'test_current/parts/pose_packets/unit_{u}/robot_set'
         if (rs/'HOLD_REDRAW').exists():print(u,'held for redraw, not installed',flush=True);continue
+        from scripts.assets.codex_holds import holds
+        h=holds(rs)
+        if h:print(u,'Codex hold, not installed',h,flush=True);continue
         status=json.loads((rs/'DRAWINGS_STATUS.json').read_text(encoding='utf-8'))
         accepted=[k for k,v in status.items() if v['state']=='accepted']
         if not accepted:print(u,'nothing accepted',flush=True);continue
