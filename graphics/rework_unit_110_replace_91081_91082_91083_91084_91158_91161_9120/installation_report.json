@@ -1,0 +1,127 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": "binding91083",
+      "binding": 91083,
+      "hash": 319751573,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91161",
+      "binding": 91161,
+      "hash": 3553087714,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding94914",
+      "binding": 94914,
+      "hash": 796318644,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding94911",
+      "binding": 94911,
+      "hash": 1953441323,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding94910",
+      "binding": 94910,
+      "hash": 3996858225,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91158",
+      "binding": 91158,
+      "hash": 2969542821,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91082",
+      "binding": 91082,
+      "hash": 1396632059,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91081",
+      "binding": 91081,
+      "hash": 3890340304,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding94909",
+      "binding": 94909,
+      "hash": 3990550460,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91208",
+      "binding": 91208,
+      "hash": 3502240359,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding91084",
+      "binding": 91084,
+      "hash": 3147914091,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": "binding91083",
+      "slot_b": "binding91158",
+      "source_overlap": [
+        208,
+        0,
+        8,
+        32
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": "binding94914",
+      "slot_b": "binding94909",
+      "source_overlap": [
+        152,
+        16,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}
