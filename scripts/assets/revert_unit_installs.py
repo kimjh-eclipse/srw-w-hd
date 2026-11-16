@@ -26,7 +26,10 @@ def main():
     stamp=lambda r:str(r.get('installed',''))
     for u,before in zip(a.unit,a.before):
         if before not in old_libs:
-            old_libs[before]=json.loads(subprocess.run(['git','show',f'{before}:graphics/kazuma_parts_library.json'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8').stdout)['bindings']
+            # The library is stored with Git LFS: git show gives the pointer, smudge gives the file.
+            pointer=subprocess.run(['git','show',f'{before}:graphics/kazuma_parts_library.json'],cwd=ROOT,capture_output=True).stdout
+            data=subprocess.run(['git','lfs','smudge','graphics/kazuma_parts_library.json'],cwd=ROOT,input=pointer,capture_output=True).stdout
+            old_libs[before]=json.loads(data.decode('utf-8'))['bindings']
         old=old_libs[before];key=f'unit_{u}/'
         mine=[r for r in recs if key in str(r.get('source','')).replace('\\','/') and not r.get('reverted')]
         for r in mine:
