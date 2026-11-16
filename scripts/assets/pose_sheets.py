@@ -65,26 +65,56 @@ def build(root,per):
     print(root.parent.name,'poses',len(poses),'base',base.name,'sheets',len(index),[s['size'] for s in index])
 
 
+BAD_TAGS=('reject','held','hold','before','draft','failed','wrong','previous')
+
+
+def drawing_sources(official):
+    """(drawing, layout) pairs for one sheet: the official sheet first, then
+    Codex's alternate layouts (candidate_sheet_<tag>.png + layout_<tag>.json in
+    the folder, or ALT*/alt*/plate subfolders), skipping held/rejected ones."""
+    out=[]
+    folders=[official]+sorted(d for d in official.rglob('*') if d.is_dir() and not any(t in d.name.lower() for t in BAD_TAGS))
+    for folder in folders:
+        sv=folder/'STYLE_VERSION.json'
+        if folder!=official and sv.exists():
+            try:
+                d=json.loads(sv.read_text(encoding='utf-8'));st=str(d.get('review_status','')).lower()
+                if d.get('do_not_install') is True or 'reject' in st or 'hold' in st:continue
+            except Exception:pass
+        for lay in sorted(folder.glob('layout*.json')):
+            tag=lay.stem[len('layout'):]
+            if any(t in tag.lower() for t in BAD_TAGS):continue
+            for name in (f'candidate_sheet{tag}.png',f'generated_sheet{tag}.png','candidate_sheet.png','generated_sheet.png'):
+                if (folder/name).exists():out.append((folder/name,lay));break
+    return out
+
+
 def split(root):
     out=root/'SHEETS';done=set();n_out=0
     for official in sorted(out.glob('sheet_*')):
-        # Codex may draw an over-large sheet as an alternate layout (ALT_*/,
-        # own layout.json, same pose canvases) when the official one is missing.
-        folder=official if (official/'candidate_sheet.png').exists() else next((d for d in sorted(official.glob('ALT*')) if (d/'candidate_sheet.png').exists() and (d/'layout.json').exists()),None)
-        if folder is None:continue
-        cand=folder/'candidate_sheet.png'
-        lay=json.loads((folder/'layout.json').read_text(encoding='utf-8'));W,H=lay['sheet']
-        art=Image.open(cand).convert('RGBA');assert abs((art.width/W)/(art.height/H)-1)<.01,(folder.name,art.size,(W,H))
-        if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)
-        for e in lay['layout']:
-            if e['pose'] in done:continue
-            x,y=e['sheet_origin'];w,h=e['source_canvas'];pose=root/e['pose'];dst=pose/'candidate.png'
-            if dst.exists():
-                k=1
-                while (pose/f'candidate_v{k}.png').exists():k+=1
-                dst.replace(pose/f'candidate_v{k}.png')
-                if (pose/'candidate_fit.png').exists():(pose/'candidate_fit.png').replace(pose/f'candidate_fit_v{k}.png')
-            art.crop((x,y,x+w,y+h)).save(dst);done.add(e['pose']);n_out+=1
+        official_lay=json.loads((official/'layout.json').read_text(encoding='utf-8'))
+        cuts={}
+        for cand,layf in drawing_sources(official):
+            lay=json.loads(layf.read_text(encoding='utf-8'));W,H=lay['sheet']
+            art=Image.open(cand).convert('RGBA')
+            if abs((art.width/W)/(art.height/H)-1)>=.01:print('skip (aspect)',cand,art.size,(W,H));continue
+            if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)
+            for e in lay['layout']:
+                if e['pose'] in done:continue
+                x,y=e['sheet_origin'];w,h=e['source_canvas'];pose=root/e['pose'];dst=pose/'candidate.png'
+                if list(Image.open(pose/'native_4x.png').size)!=[w,h]:print('skip (canvas)',e['pose'],cand);continue
+                if dst.exists():
+                    k=1
+                    while (pose/f'candidate_v{k}.png').exists():k+=1
+                    dst.replace(pose/f'candidate_v{k}.png')
+                    if (pose/'candidate_fit.png').exists():(pose/'candidate_fit.png').replace(pose/f'candidate_fit_v{k}.png')
+                piece=art.crop((x,y,x+w,y+h));piece.save(dst);cuts[e['pose']]=piece;done.add(e['pose']);n_out+=1
+        # The cut poses back in the official layout, for the eye-review sheet.
+        if cuts and not (official/'candidate_sheet.png').exists():
+            W,H=official_lay['sheet'];sheet=Image.new('RGBA',(W,H))
+            for e in official_lay['layout']:
+                if e['pose'] in cuts:sheet.alpha_composite(cuts[e['pose']],tuple(e['sheet_origin']))
+            sheet.save(official/'candidate_sheet_assembled.png')
     print('poses cut',n_out)
 
 

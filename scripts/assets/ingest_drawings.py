@@ -20,7 +20,7 @@ BASE=ROOT/'test_current/parts/pose_packets'
 
 
 def drawing_of(rs):
-    sheets=sorted(rs.glob('SHEETS/sheet_*/candidate_sheet.png'))+sorted(rs.glob('SHEETS/sheet_*/ALT*/candidate_sheet.png'))
+    sheets=[p for p in rs.glob('SHEETS/sheet_*/**/*.png') if p.name.startswith(('candidate_sheet','generated_sheet')) and 'assembled' not in p.name]
     if sheets:return 'sheets',max(p.stat().st_mtime for p in sheets)
     for kind,p in (('combined',rs/'COMBINED/candidate_combined.png'),('unified',rs/'unified_sheet/candidate_sheet.png')):
         if p.exists():return kind,p.stat().st_mtime
