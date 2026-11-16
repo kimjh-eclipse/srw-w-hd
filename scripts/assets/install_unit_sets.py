@@ -34,6 +34,7 @@ def main():
         from scripts.assets.codex_holds import holds
         h=holds(rs)
         if h:print(u,'Codex hold, not installed',h,flush=True);continue
+        if not (rs/'DRAWINGS_STATUS.json').exists():print(u,'not processed (no DRAWINGS_STATUS), skipped',flush=True);continue
         status=json.loads((rs/'DRAWINGS_STATUS.json').read_text(encoding='utf-8'))
         accepted=[k for k,v in status.items() if v['state']=='accepted']
         if not accepted:print(u,'nothing accepted',flush=True);continue
