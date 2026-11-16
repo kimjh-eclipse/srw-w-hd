@@ -35,11 +35,14 @@ def holds(rs):
             for o in json.loads(j.read_text(encoding='utf-8')).get('outputs',[]):
                 if 'do_not_apply' in str(o.get('status','')):out.append(f"SHEETS/{o.get('sheet')} rework hold")
         except Exception:out.append('SHEETS/STYLE_REWORK_HOLD.json')
-    for f in rs.rglob('STYLE_VERSION.json'):
+    # Sheet-level STYLE_VERSION holds are applied when cutting (pose_sheets skips
+    # held drawings and clears poses cut from them). Only a STYLE_VERSION that
+    # sits directly in robot_set, or in SHEETS/ itself, holds the whole unit.
+    for f in list(rs.glob('STYLE_VERSION.json'))+list(rs.glob('SHEETS/STYLE_VERSION.json')):
         try:d=json.loads(f.read_text(encoding='utf-8'))
         except Exception:continue
-        st=(str(d.get('review_status',''))+' '+str(d.get('status',''))).lower()
-        if d.get('do_not_install') is True or 'reject' in st or 'hold' in st:out.append(str(f.relative_to(rs)).replace('\\','/'))
+        st=' '.join(str(v) for k,v in d.items() if isinstance(v,str) and any(w in k.lower() for w in ('status','hold','check','install'))).lower().replace('hold_released','').replace('hold released','')
+        if d.get('do_not_install') is True or 'reject' in st or 'hold' in st or 'held' in st:out.append(str(f.relative_to(rs)).replace('\\','/'))
     return sorted(set(out))
 
 

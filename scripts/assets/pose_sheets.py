@@ -78,8 +78,8 @@ def drawing_sources(official):
         sv=folder/'STYLE_VERSION.json'
         if sv.exists():
             try:
-                d=json.loads(sv.read_text(encoding='utf-8'));st=(str(d.get('review_status',''))+' '+str(d.get('status',''))).lower()
-                if d.get('do_not_install') is True or 'reject' in st or 'hold' in st:continue
+                d=json.loads(sv.read_text(encoding='utf-8'));st=' '.join(str(v) for k,v in d.items() if isinstance(v,str) and any(w in k.lower() for w in ('status','hold','check','install'))).lower().replace('hold_released','').replace('hold released','')
+                if d.get('do_not_install') is True or 'reject' in st or 'hold' in st or 'held' in st:continue
             except Exception:pass
         for lay in sorted(folder.glob('layout*.json')):
             tag=lay.stem[len('layout'):]
@@ -109,6 +109,16 @@ def split(root):
                     dst.replace(pose/f'candidate_v{k}.png')
                     if (pose/'candidate_fit.png').exists():(pose/'candidate_fit.png').replace(pose/f'candidate_fit_v{k}.png')
                 piece=art.crop((x,y,x+w,y+h));piece.save(dst);cuts[e['pose']]=piece;done.add(e['pose']);n_out+=1
+        # Poses of this sheet that no usable (non-held) drawing covers: a
+        # candidate.png left from an earlier cut came from a held drawing.
+        for e in official_lay['layout']:
+            if e['pose'] in done:continue
+            pose=root/e['pose']
+            if (pose/'candidate.png').exists():
+                k=1
+                while (pose/f'candidate_held_v{k}.png').exists():k+=1
+                (pose/'candidate.png').replace(pose/f'candidate_held_v{k}.png')
+                (pose/'candidate_fit.png').unlink(missing_ok=True);print('cleared (held source)',e['pose'])
         # The cut poses back in the official layout, for the eye-review sheet.
         if cuts and not (official/'candidate_sheet.png').exists():
             W,H=official_lay['sheet'];sheet=Image.new('RGBA',(W,H))
