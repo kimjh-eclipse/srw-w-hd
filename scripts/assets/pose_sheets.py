@@ -97,7 +97,7 @@ def split(root):
         for cand,layf in drawing_sources(official):
             lay=json.loads(layf.read_text(encoding='utf-8'));W,H=lay['sheet']
             art=Image.open(cand).convert('RGBA')
-            if abs((art.width/W)/(art.height/H)-1)>=.01:print('skip (aspect)',cand,art.size,(W,H));continue
+            if abs((art.width/W)/(art.height/H)-1)>=.06:print('skip (aspect)',cand,art.size,(W,H));continue
             if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)
             for e in lay['layout']:
                 if e['pose'] in done:continue

@@ -38,7 +38,7 @@ def main():
     size=lay.get('sheet') if isinstance(lay.get('sheet'),list) else lay.get('sheet_size') or lay.get('size') or lay.get('source_sheet_size')
     W,H=size;art=Image.open(sheet/name).convert('RGBA')
     sx,sy=art.width/W,art.height/H
-    assert abs(sx/sy-1)<.01,('aspect differs',art.size,(W,H))
+    assert abs(sx/sy-1)<.06,('aspect differs',art.size,(W,H))   # x and y are scaled separately; the fit corrects per pose
     gen=sheet/'generated_all_poses.png';gsize=Image.open(gen).size if gen.exists() else art.size
     print('drawing',art.size,'generated',gsize,'sheet',(W,H),'-> about',round(4*gsize[0]/W,2),'generated px per native px')
     if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)
