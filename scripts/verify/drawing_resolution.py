@@ -17,7 +17,7 @@ BASE=ROOT/'test_current/parts/pose_packets'
 
 
 def resolution(rs):
-    sheets=sorted(rs.glob('SHEETS/sheet_*/candidate_sheet.png'))
+    sheets=sorted(rs.glob('SHEETS/sheet_*/candidate_sheet.png'))+[c for c in sorted(rs.glob('SHEETS/sheet_*/ALT*/candidate_sheet.png')) if not (c.parent.parent/'candidate_sheet.png').exists()]
     if sheets:
         vals=[]
         for c in sheets:

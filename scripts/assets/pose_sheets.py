@@ -67,9 +67,12 @@ def build(root,per):
 
 def split(root):
     out=root/'SHEETS';done=set();n_out=0
-    for folder in sorted(out.glob('sheet_*')):
+    for official in sorted(out.glob('sheet_*')):
+        # Codex may draw an over-large sheet as an alternate layout (ALT_*/,
+        # own layout.json, same pose canvases) when the official one is missing.
+        folder=official if (official/'candidate_sheet.png').exists() else next((d for d in sorted(official.glob('ALT*')) if (d/'candidate_sheet.png').exists() and (d/'layout.json').exists()),None)
+        if folder is None:continue
         cand=folder/'candidate_sheet.png'
-        if not cand.exists():continue
         lay=json.loads((folder/'layout.json').read_text(encoding='utf-8'));W,H=lay['sheet']
         art=Image.open(cand).convert('RGBA');assert abs((art.width/W)/(art.height/H)-1)<.01,(folder.name,art.size,(W,H))
         if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)

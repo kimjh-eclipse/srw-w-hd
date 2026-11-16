@@ -25,7 +25,7 @@ def pair(nat,can):
 def main():
     u=int(sys.argv[1]);mw=int(sys.argv[2]) if len(sys.argv)>2 else 1800
     rs=ROOT/f'test_current/parts/pose_packets/unit_{u}/robot_set'
-    sheets=sorted(rs.glob('SHEETS/sheet_*/candidate_sheet.png'))
+    sheets=sorted(rs.glob('SHEETS/sheet_*/candidate_sheet.png'))+[c for c in sorted(rs.glob('SHEETS/sheet_*/ALT*/candidate_sheet.png')) if not (c.parent.parent/'candidate_sheet.png').exists()]
     if sheets:
         rows=[pair(c.parent/'native_sheet_4x.png',c) for c in sheets]
         W=max(r.width for r in rows);out=Image.new('RGBA',(W,sum(r.height+24 for r in rows)),(40,40,48,255));y=0
