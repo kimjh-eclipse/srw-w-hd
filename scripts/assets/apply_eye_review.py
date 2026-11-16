@@ -43,7 +43,7 @@ def main():
         for line in out.splitlines():
             print(line[:220])
             parts=line.split()
-            if parts and parts[0].isdigit() and 'ERROR' not in line and 'held' not in line and 'nothing' not in line:(BASE/f'unit_{parts[0]}/robot_set/INSTALLED').touch()
+            if parts and parts[0].isdigit() and 'ERROR' not in line and 'held' not in line and 'hold' not in line and 'nothing' not in line:(BASE/f'unit_{parts[0]}/robot_set/INSTALLED').touch()
     if lines:
         h=ROOT/a.handoff;text=h.read_text(encoding='utf-8');stamp=datetime.datetime.now().strftime('%m/%d %H:%M')
         block=f"## {stamp} — 눈 검수 결과 (unit {', '.join(map(str,a.units))})\n\n"+'\n'.join(lines)+'\n\n'
