@@ -38,6 +38,10 @@ def main():
         split=rs/'split_fit'
         if split.exists():shutil.rmtree(split)
         try:
+            # Redo only the fill of each accepted pose (stored transform): gaps
+            # take the native colour instead of grown outline black.
+            for k in accepted:
+                if (rs/k/'fit.json').exists():run('scripts/assets/fit_pose_drawing.py',rs/k,'--reuse',check=False)
             run('scripts/assets/split_object_drawings.py',rs,'--drawing','candidate_fit.png','--out',split,'--only',only)
             q=ROOT/'docs/PENDING_ART_INSTALL_QUEUE.json';queue=json.loads(q.read_text(encoding='utf-8'));sources=[]
             inst=rs/'install'

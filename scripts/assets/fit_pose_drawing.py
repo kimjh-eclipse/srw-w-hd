@@ -53,10 +53,12 @@ def grow_fill(rgba,want):
 
 
 def main():
-    folder=Path(sys.argv[1]);name=sys.argv[2] if len(sys.argv)>2 else 'candidate.png'
+    args=[x for x in sys.argv[1:] if x!='--reuse'];reuse='--reuse' in sys.argv
+    folder=Path(args[0]);name=args[1] if len(args)>1 else 'candidate.png'
     native=Image.open(folder/'native.png').convert('RGBA');W,H=native.size;nat=np.asarray(native)[:,:,3]>0
     cand=Image.open(folder/name).convert('RGBA');size=(W*S,H*S)
     before=iou_of(cand,nat,W,H)
+    old=json.loads((folder/'fit.json').read_text(encoding='utf-8')) if reuse and (folder/'fit.json').exists() else None
     # The search only needs the silhouette: alpha alone, at 2x, against the
     # native mask at 2x. Offsets stay in 4x units. Only the chosen transform is
     # applied to the full colour drawing.
@@ -69,14 +71,14 @@ def main():
         a=np.asarray(canvas.crop((32,32,32+w,32+h)))>127
         return float((a&nat2).sum()/max((a|nat2).sum(),1))
     best=(score(1,1,0,0),1.,1.,0,0)
-    for sx in np.arange(.80,1.2001,.02):
+    for sx in ([] if old else np.arange(.80,1.2001,.02)):
         for sy in np.arange(.80,1.2001,.02):
             for dx in range(-20,21,4):
                 for dy in range(-20,21,4):
                     v=score(sx,sy,dx,dy)
                     if v>best[0]:best=(v,sx,sy,dx,dy)
     _,sx,sy,dx,dy=best;b=best
-    for sx2 in np.arange(sx-.02,sx+.0201,.005):
+    for sx2 in ([] if old else np.arange(sx-.02,sx+.0201,.005)):
         for sy2 in np.arange(sy-.02,sy+.0201,.005):
             for dx2 in range(dx-3,dx+4,2):
                 for dy2 in range(dy-3,dy+4,2):
@@ -88,7 +90,9 @@ def main():
     def score4(dx,dy):
         moved=transform(Image.merge('RGBA',(alpha4,alpha4,alpha4,alpha4)),sx,sy,dx,dy,size)
         return iou_of(moved,nat,W,H)
-    v,dx,dy=max(((score4(dx+ox,dy+oy),dx+ox,dy+oy) for ox in (-1,0,1) for oy in (-1,0,1)),key=lambda t:t[0])
+    if old:   # --reuse: the transform found before, only the fill is redone
+        (sx,sy),(dx,dy)=old['scale'],old['offset_4x'];v=old.get('iou_registered',0)
+    else:v,dx,dy=max(((score4(dx+ox,dy+oy),dx+ox,dy+oy) for ox in (-1,0,1) for oy in (-1,0,1)),key=lambda t:t[0])
     moved=transform(cand,sx,sy,dx,dy,size)
     # edge fit
     sil=Image.fromarray((nat*255).astype('uint8')).resize(size,Image.Resampling.NEAREST)
@@ -96,6 +100,13 @@ def main():
     arr=np.asarray(moved).copy();arr[:,:,3]=(arr[:,:,3].astype('float32')*keep).astype('uint8')
     want=np.asarray(sil)>127
     fitted=grow_fill(arr,want)
+    # Where the drawing does not reach the native silhouette (a wire tip, an
+    # edge), growing from neighbours drags the black outline inward. Use the
+    # native colour there instead; only those few pixels are affected.
+    gap=want&~(arr[:,:,3]>127)
+    if gap.any():
+        native4=np.asarray(native.resize(size,Image.Resampling.NEAREST))
+        fitted[gap,:3]=native4[gap,:3];fitted[gap,3]=255
     out=Image.fromarray(fitted);out.save(folder/'candidate_fit.png')
     after=iou_of(out,nat,W,H)
     info=dict(source=name,iou_before=round(before,4),iou_registered=round(v,4),iou_after_edge=round(after,4),scale=[round(float(sx),4),round(float(sy),4)],offset_4x=[int(dx),int(dy)],
