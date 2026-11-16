@@ -38,7 +38,7 @@ def holds(rs):
     for f in rs.rglob('STYLE_VERSION.json'):
         try:d=json.loads(f.read_text(encoding='utf-8'))
         except Exception:continue
-        st=str(d.get('review_status','')).lower()
+        st=(str(d.get('review_status',''))+' '+str(d.get('status',''))).lower()
         if d.get('do_not_install') is True or 'reject' in st or 'hold' in st:out.append(str(f.relative_to(rs)).replace('\\','/'))
     return sorted(set(out))
 

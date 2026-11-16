@@ -76,9 +76,9 @@ def drawing_sources(official):
     folders=[official]+sorted(d for d in official.rglob('*') if d.is_dir() and not any(t in d.name.lower() for t in BAD_TAGS))
     for folder in folders:
         sv=folder/'STYLE_VERSION.json'
-        if folder!=official and sv.exists():
+        if sv.exists():
             try:
-                d=json.loads(sv.read_text(encoding='utf-8'));st=str(d.get('review_status','')).lower()
+                d=json.loads(sv.read_text(encoding='utf-8'));st=(str(d.get('review_status',''))+' '+str(d.get('status',''))).lower()
                 if d.get('do_not_install') is True or 'reject' in st or 'hold' in st:continue
             except Exception:pass
         for lay in sorted(folder.glob('layout*.json')):
