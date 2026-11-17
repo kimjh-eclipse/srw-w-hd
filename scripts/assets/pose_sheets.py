@@ -90,6 +90,29 @@ def drawing_sources(official):
     return out
 
 
+def register_by_content(art,folder,W,H):
+    """A drawing output in another aspect (the generator pads to its own
+    frame) is placed back on the W x H sheet by matching the drawn content's
+    bounding box to the native sheet's: one uniform scale and an offset. None
+    when the native sheet is missing or the two boxes do not agree in shape."""
+    import numpy as np
+    nat=folder/'native_sheet_4x.png'
+    if not nat.exists():return None
+    n=np.asarray(Image.open(nat).convert('RGBA'))[:,:,3]>20;c=np.asarray(art)[:,:,3]>20
+    if n.shape!=(H,W) or not n.any() or not c.any():return None
+    def box(m):
+        ys,xs=np.where(m);return xs.min(),ys.min(),xs.max()+1,ys.max()+1
+    nx0,ny0,nx1,ny1=box(n);cx0,cy0,cx1,cy1=box(c)
+    sx=(cx1-cx0)/(nx1-nx0);sy=(cy1-cy0)/(ny1-ny0)
+    if abs(sx/sy-1)>=.06:return None
+    s=(sx+sy)/2
+    # the native sheet frame expressed in drawing pixels
+    left,top=cx0-nx0*s,cy0-ny0*s
+    sheet=Image.new('RGBA',(round(W*s),round(H*s)))
+    sheet.alpha_composite(art,(round(-left),round(-top))) if left<=0 and top<=0 else sheet.paste(art,(round(-left),round(-top)),art)
+    return sheet
+
+
 def split(root):
     out=root/'SHEETS';done=set();n_out=0
     for official in sorted(out.glob('sheet_*')):
@@ -98,7 +121,10 @@ def split(root):
         for cand,layf in drawing_sources(official):
             lay=json.loads(layf.read_text(encoding='utf-8'));W,H=lay['sheet']
             art=Image.open(cand).convert('RGBA')
-            if abs((art.width/W)/(art.height/H)-1)>=.06:print('skip (aspect)',cand,art.size,(W,H));continue
+            if abs((art.width/W)/(art.height/H)-1)>=.06:
+                art=register_by_content(art,layf.parent,W,H)
+                if art is None:print('skip (aspect)',cand,(W,H));continue
+                print('registered by content',cand)
             if art.size!=(W,H):art=art.resize((W,H),Image.Resampling.LANCZOS)
             for e in lay['layout']:
                 if e['pose'] in done:continue
