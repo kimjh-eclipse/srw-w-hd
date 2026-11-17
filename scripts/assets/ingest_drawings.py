@@ -20,7 +20,8 @@ BASE=ROOT/'test_current/parts/pose_packets'
 
 
 def drawing_of(rs):
-    sheets=[p for p in rs.glob('SHEETS/sheet_*/**/*.png') if p.name.startswith(('candidate_sheet','generated_sheet')) and 'assembled' not in p.name]
+    from scripts.assets.pose_sheets import drawing_sources
+    sheets=[c for s in rs.glob('SHEETS/sheet_*') for c,_ in drawing_sources(s)]
     if sheets:return 'sheets',max(p.stat().st_mtime for p in sheets)
     for kind,p in (('combined',rs/'COMBINED/candidate_combined.png'),('unified',rs/'unified_sheet/candidate_sheet.png')):
         if p.exists():return kind,p.stat().st_mtime
@@ -30,8 +31,9 @@ def drawing_of(rs):
 def todo():
     out=[]
     for rs in sorted(BASE.glob('unit_*/robot_set'),key=lambda p:int(p.parent.name[5:])):
-        if (rs/'INSTALLED').exists():continue
         kind,stamp=drawing_of(rs)
+        # Installed already: only a drawing newer than the install (a Codex repair) brings it back.
+        if (rs/'INSTALLED').exists() and (rs/'INSTALLED').stat().st_mtime>stamp:continue
         if not kind:continue
         hold=rs/'HOLD_REDRAW'
         if hold.exists() and hold.stat().st_mtime>stamp:continue   # waiting for the redraw
@@ -52,7 +54,7 @@ def work(item):
         subprocess.run(PY+['scripts/verify/drawing_resolution.py',u[5:],'--hold'],cwd=ROOT,capture_output=True)
         if (rs/'HOLD_REDRAW').exists() and (rs/'HOLD_REDRAW').stat().st_mtime>drawing_of(rs)[1]:
             return f"{u} {kind} held: drawn resolution below 2.5 px per native px (SHEETS built for redraw)"
-        (rs/'DRAWINGS_STATUS.json').unlink(missing_ok=True)
+        for f in ('DRAWINGS_STATUS.json','EYE_REVIEW.json','EYE_REVIEW_PENDING','INSTALLED'):(rs/f).unlink(missing_ok=True)   # a new drawing goes through review and install again
         r=subprocess.run(PY+['scripts/assets/process_pose_drawings.py',str(rs)],cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
         subprocess.run(PY+['scripts/verify/sheet_side_by_side.py',u[5:],'1800'],cwd=ROOT,capture_output=True)
         s=json.loads((rs/'DRAWINGS_STATUS.json').read_text(encoding='utf-8')) if (rs/'DRAWINGS_STATUS.json').exists() else {}

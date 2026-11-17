@@ -86,6 +86,7 @@ def drawing_sources(official):
             if any(t in tag.lower() for t in BAD_TAGS):continue
             for name in (f'candidate_sheet{tag}.png',f'generated_sheet{tag}.png','candidate_sheet.png','generated_sheet.png'):
                 if (folder/name).exists():out.append((folder/name,lay));break
+    out.sort(key=lambda s:-s[0].stat().st_mtime)   # newest drawing of a pose wins (Codex repairs come later)
     return out
 
 
