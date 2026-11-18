@@ -25,7 +25,8 @@ def pair(nat,can):
 def main():
     u=int(sys.argv[1]);mw=int(sys.argv[2]) if len(sys.argv)>2 else 1800
     rs=ROOT/f'test_current/parts/pose_packets/unit_{u}/robot_set'
-    sheets=[s/'candidate_sheet.png' if (s/'candidate_sheet.png').exists() else s/'candidate_sheet_assembled.png' for s in sorted(rs.glob('SHEETS/sheet_*')) if (s/'candidate_sheet.png').exists() or (s/'candidate_sheet_assembled.png').exists()]
+    # The assembled sheet holds the poses actually cut (newest Codex repair wins); the official sheet only when none.
+    sheets=[max((c for c in (s/'candidate_sheet_assembled.png',s/'candidate_sheet.png') if c.exists()),key=lambda c:c.stat().st_mtime) for s in sorted(rs.glob('SHEETS/sheet_*')) if (s/'candidate_sheet.png').exists() or (s/'candidate_sheet_assembled.png').exists()]
     if sheets:
         rows=[pair(c.parent/'native_sheet_4x.png',c) for c in sheets]
         W=max(r.width for r in rows);out=Image.new('RGBA',(W,sum(r.height+24 for r in rows)),(40,40,48,255));y=0

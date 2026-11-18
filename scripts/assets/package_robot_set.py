@@ -72,6 +72,7 @@ def main():
     # Atlases redrawn by OTHER units' pose sets; this unit's own earlier set is replaced.
     me=root.parent.name+'/'
     redrawn={d.get('atlas') for d in done if 'pose_packets' in str(d.get('source','')) and me not in str(d.get('source','')).replace(chr(92),'/')}
+    hidden=[]
     for f in parts.glob('*.png'):
         h=int(f.stem);r=rows[h]
         idx=np.frombuffer(zlib.decompress(base64.b64decode(r['index_pixels'])),dtype='uint8').reshape(r['h'],r['w'])
@@ -80,6 +81,12 @@ def main():
         if not (art[:,:,3]>127).any():continue
         filled=grow_fill(art,want);filled[~want,3]=0
         it=dict(row=r,w=r['w'],h=r['h'],idx=idx,art=Image.fromarray(filled),drawn=float((art[:,:,3]>127)[want].mean()))
+        # A part the drawings show for less than half its pixels would be mostly
+        # invented by grow_fill (unit 130 chest hole): leave the original.
+        if it['drawn']<.5:hidden.append(h);continue
+        # A single-colour part has nothing to redraw and its RGB key matches plain
+        # tiles elsewhere (unit 387 black 8x8 tile -> black slab in unit 1's scythe scene).
+        if len(np.unique(idx[idx>0]))<=1:hidden.append(h);continue
         b=active.get(h)
         if b and lib[b-1].get('atlas_id') in redrawn:skipped.append(h);continue   # already redrawn by another unit's set: keep that one
         if b:it['row']=dict(r,binding_id=b);replace.append(it)
@@ -132,7 +139,7 @@ def main():
             return dict(bindings=[],new_source_keys=[dict(hash=x['hash'],index_hash=x['index_hash']) for x in rows_],
                 note=f'whole-pose redraw split by Claude ({root.relative_to(ROOT).as_posix()}): own RGB key, no recolour')
         summary['new']=write_packet(out/f'{root.parent.name}_new',placed,H,nrow,nentry)
-    print('replace',len(replace),'new',len(new),'kept from other units',len(skipped),'mean drawn share',round(float(np.mean([i['drawn'] for i in replace+new])),3))
+    print('replace',len(replace),'new',len(new),'kept from other units',len(skipped),'hidden (<50% drawn, original kept)',len(hidden),'mean drawn share',round(float(np.mean([i['drawn'] for i in replace+new])),3))
     (out/'SUMMARY.json').write_text(json.dumps({k:dict(source=v['source'],parts=len(v.get('bindings') or v.get('new_source_keys'))) for k,v in summary.items()},ensure_ascii=False,indent=1),encoding='utf-8')
 
 

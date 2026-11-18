@@ -1,0 +1,49 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": 0,
+      "binding": 112429,
+      "hash": 1880156150,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    },
+    {
+      "slot": 1,
+      "binding": 112430,
+      "hash": 2532485231,
+      "alpha_iou": 1.0,
+      "new_rgb": true,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [
+    {
+      "slot": 0,
+      "hash": 1880156150,
+      "native_solid_fraction": 1.0,
+      "native_bright_fraction": 1.0,
+      "generated_center_coverage": 1.0,
+      "generated_center_mean_alpha": 0.984313725490196,
+      "missing_opaque_bright_center": false
+    },
+    {
+      "slot": 1,
+      "hash": 2532485231,
+      "native_solid_fraction": 1.0,
+      "native_bright_fraction": 1.0,
+      "generated_center_coverage": 1.0,
+      "generated_center_mean_alpha": 0.984313725490196,
+      "missing_opaque_bright_center": false
+    }
+  ],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}

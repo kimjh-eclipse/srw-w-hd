@@ -20,8 +20,8 @@ BASE=ROOT/'test_current/parts/pose_packets'
 
 
 def drawing_of(rs):
-    from scripts.assets.pose_sheets import drawing_sources
-    sheets=[c for s in rs.glob('SHEETS/sheet_*') for c,_ in drawing_sources(s)]
+    from scripts.assets.pose_sheets import unit_sources
+    sheets=[c for c,_ in unit_sources(rs)]
     if sheets:return 'sheets',max(p.stat().st_mtime for p in sheets)
     for kind,p in (('combined',rs/'COMBINED/candidate_combined.png'),('unified',rs/'unified_sheet/candidate_sheet.png')):
         if p.exists():return kind,p.stat().st_mtime

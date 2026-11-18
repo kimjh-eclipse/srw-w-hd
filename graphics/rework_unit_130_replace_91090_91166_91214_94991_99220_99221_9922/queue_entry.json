@@ -1,0 +1,39 @@
+{
+ "source": "test_current/parts/pose_packets/unit_130/robot_set/install/unit_130_replace",
+ "contract": "contract.json",
+ "drawing": "candidate_atlas.png",
+ "native": "native_atlas.png",
+ "generated": "generated.png",
+ "file_sha256": {
+  "contract": "a2ad426114fc4cec8b07259f8f3fea907958afb296ebaf98cbad754e4fb352d3",
+  "drawing": "c37a9506c398950631986baeea261bf62111833a1f137f64ec93e0138dfc235d",
+  "native": "f0dd026255294921fcfe5691d775099ea4dfe8fbd9d05295fccf7e239076ba5d",
+  "generated": "c37a9506c398950631986baeea261bf62111833a1f137f64ec93e0138dfc235d"
+ },
+ "bindings": [
+  91166,
+  99220,
+  99221,
+  91214,
+  99224,
+  91090,
+  94991,
+  99225,
+  99223,
+  99222
+ ],
+ "nested": true,
+ "prior_binding_spec_sha256": {
+  "91166": "1da1c55fdc4ac17189f3331ddfea24f44b9d628494dd34942a3b6313f411ca19",
+  "99220": "8c00bd67e23b27f30c168f8e754e05f6c448dbed9e9b6b5f8d853feffdeba68f",
+  "99221": "bcf0e8e52ed8dd99858e68849ece0ab986f7af4af4532f1b7cb2859543a3d4f3",
+  "91214": "9769858222ca568399005bfa688b653ba35bea32db4eb6562c00905ecebfc069",
+  "99224": "38f4dbb29f48bd5daed7ce1636ee8b1a8d18c869ce9c827f7e0eefac2cc6364a",
+  "91090": "b71feb138d459dc39c7603cf6371dee5dafff6ee98c7a3f72fbbec98114e0d4e",
+  "94991": "6e93d34348d1b6edfda8531ac0343d1f79940af3cee076add8f20e829078545a",
+  "99225": "e52bc9a1b3c44b7b6062b8f83321b88f23e7a1610b07286ec7e29818e4de3ee0",
+  "99223": "1dacdfc1d172280c48ab6db940f36443179e5fed2fcfe1aa8ba378c3a39d2af5",
+  "99222": "89c8aaf492dcf7dba8f9b9dfa0f2407a49750315ffea3d4d13b20b93baefa619"
+ },
+ "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_130/robot_set): replacement of existing RGB-keyed HD"
+}

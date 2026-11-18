@@ -152,7 +152,10 @@ def main():
         print('backup',backup);return
     jobs=[]
     for c,_ in ready:
-        name=atlas_name(c);assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
+        name=atlas_name(c);k=2
+        # A unit installing again over the same bindings (a Codex repair) gets a fresh atlas
+        # folder; the earlier one stays for the bindings' history and backups.
+        while (ROOT/'graphics'/('rework_'+name)).exists():name=f'{atlas_name(c)}_r{k}';k+=1
         job=dict(source=c['source'],bindings=c['bindings'],atlas=name,contract=c['contract'],drawing=c['drawing'],native=c['native'],generated=c['generated'],
             effect=any(library['bindings'][b-1].get('effect_part') for b in c['bindings']))
         if c.get('nested'):job['nested']=True
@@ -246,7 +249,8 @@ def install_new(c,library,stamp,run):
         box=r.get('source_box') or r.get('source_box_candidate') or [None,None]
         r.setdefault('spec',dict(resource=r.get('resource',r.get('source_owner',r.get('source_image_candidate'))),source_x=r.get('source_x',box[0]),source_y=r.get('source_y',box[1])))
     contract=OUT/f'new_contract_{stamp}_{folder.name}.json';contract.write_text(json.dumps(rows,ensure_ascii=False),encoding='utf-8')
-    name=atlas_name(c)+'_new'+str(len(rows));assert not (ROOT/'graphics'/('rework_'+name)).exists(),name
+    name=atlas_name(c)+'_new'+str(len(rows));k=2
+    while (ROOT/'graphics'/('rework_'+name)).exists():name=f"{atlas_name(c)}_new{len(rows)}_r{k}";k+=1
     flags=['--defer-shape-review','--new-only','--apply']
     if all(r.get('render_mode')=='static' for r in rows):flags.append('--static-palette')
     if any(r.get('effect_part') for r in rows):flags.append('--effect')

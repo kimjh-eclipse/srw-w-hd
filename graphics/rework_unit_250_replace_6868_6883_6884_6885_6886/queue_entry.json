@@ -1,0 +1,29 @@
+{
+ "source": "test_current/parts/pose_packets/unit_250/robot_set/install/unit_250_replace",
+ "contract": "contract.json",
+ "drawing": "candidate_atlas.png",
+ "native": "native_atlas.png",
+ "generated": "generated.png",
+ "file_sha256": {
+  "contract": "299fe957857e8d946699fe03fb1773bbea9e528bf62c0ab31ea0e49c8e896862",
+  "drawing": "8c0f085efefe5095382891482f63a5eada24eb7114aa1f716654fe2ed23a7b2a",
+  "native": "fed42a69a4dfeedb3ac94b8db2976fd21912ee8c8db218722e3f2548a35e176a",
+  "generated": "8c0f085efefe5095382891482f63a5eada24eb7114aa1f716654fe2ed23a7b2a"
+ },
+ "bindings": [
+  6884,
+  6868,
+  6885,
+  6883,
+  6886
+ ],
+ "nested": true,
+ "prior_binding_spec_sha256": {
+  "6884": "f6dcfa859f41c35a72bf89ff30efa1f25a01a8b5b1b24f4844096abcd0d275f8",
+  "6868": "511b730c515d970f8887acebb68d6b1e26faa57326ff87914cd637ea8520f073",
+  "6885": "2a6a90155e3d56ecde9e4d20a05bdfa579e100f2922d72fab9150d5be5ab17f3",
+  "6883": "9160c03e112cc54da517f3e2fff2733580d5cfc2c3a27a8ccbcb5d43d28e3597",
+  "6886": "aee58da2537bb20dc849346c8c505e098fd1da7afe7979e245dc87a5b44c8a57"
+ },
+ "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_250/robot_set): replacement of existing RGB-keyed HD"
+}

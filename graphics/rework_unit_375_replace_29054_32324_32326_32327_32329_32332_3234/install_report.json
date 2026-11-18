@@ -1,0 +1,83 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": "binding29054",
+      "binding": 29054,
+      "hash": 1908716565,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32332",
+      "binding": 32332,
+      "hash": 1959220268,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32329",
+      "binding": 32329,
+      "hash": 972116570,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32347",
+      "binding": 32347,
+      "hash": 2217752418,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32324",
+      "binding": 32324,
+      "hash": 2721812204,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32326",
+      "binding": 32326,
+      "hash": 2370969744,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding32327",
+      "binding": 32327,
+      "hash": 799712432,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": "binding32326",
+      "slot_b": "binding32327",
+      "source_overlap": [
+        32,
+        16,
+        32,
+        8
+      ],
+      "relation": "contained",
+      "generated_rgba_equal": true
+    }
+  ],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}

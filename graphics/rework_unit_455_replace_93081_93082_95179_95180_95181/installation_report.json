@@ -1,0 +1,67 @@
+{
+  "applied": true,
+  "parts": [
+    {
+      "slot": "binding95179",
+      "binding": 95179,
+      "hash": 1032169424,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding95181",
+      "binding": 95181,
+      "hash": 4010642519,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding93081",
+      "binding": 93081,
+      "hash": 4260370948,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding93082",
+      "binding": 93082,
+      "hash": 1423408979,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    },
+    {
+      "slot": "binding95180",
+      "binding": 95180,
+      "hash": 2186920093,
+      "alpha_iou": 1.0,
+      "new_rgb": false,
+      "shape_review_required": false
+    }
+  ],
+  "source_containment_checks": [
+    {
+      "slot_a": "binding95181",
+      "slot_b": "binding95180",
+      "source_overlap": [
+        88,
+        0,
+        8,
+        16
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "candidate_layout_checks": [],
+  "opaque_bright_center_checks": [],
+  "source_containment_scope": "newly-written contracts with confirmed resource, full actual palette and raw overlap; not global visual QA",
+  "original_prefix_preserved": true,
+  "shape_review_deferred": true,
+  "reference_iou_threshold": 0.7,
+  "shape_review_slots": [],
+  "independent_visual_verification": false
+}
