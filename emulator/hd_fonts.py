@@ -426,14 +426,15 @@ class FontRenderer:
             return (x+offset[0],y+offset[1]),bitmap
         return render_width,stroke,mask(stroke) if stroke else None,mask(0)
 
-    def prewarm_ui(self):
-        """Prepare common UI characters before emulation starts, at all supported sizes."""
+    def prewarm_ui(self, screen_width=None):
+        """Prepare common UI characters for the requested viewport."""
         import math
         from render_resolution import MIN_WIDTH,MAX_WIDTH
         words='이동공격변형정신능력레벨기력원공원방요청상태지형방어회피전투행동원군데모사격격투명중기술우주공간파일럿기체무기성장개조자금경험치카즈마발호크지원소비불굴집중응원표시전환항목추가확인취소저장불러오기특수리스트'
         ascii_chars='0123456789HPENPARTSLRSELON/?:+-%±·.,!「」'
         white=(255,255,255,255)
-        for screen in range(MIN_WIDTH,MAX_WIDTH+1,32):
+        screens = (screen_width,) if screen_width is not None else range(MIN_WIDTH,MAX_WIDTH+1,32)
+        for screen in screens:
             scale=screen/256
             sizes={math.floor(12*scale),math.ceil(12*scale)}
             for w in sizes:

@@ -5,6 +5,7 @@ import json
 import hashlib,os,queue
 import numpy as np
 from asset_paths import asset_root
+from parts_catalog import load_parts_library
 
 HERE=Path(__file__).resolve().parent
 ROOT=asset_root(HERE.parent)
@@ -39,8 +40,10 @@ class Core:
         for name,cb in zip(['environment','video_refresh','audio_sample','audio_sample_batch','input_poll','input_state'],self.callbacks):getattr(self.api,'retro_set_'+name)(cb)
         self.vars[b'desmume_cpu_mode']=b'jit';self.vars[b'desmume_jit_block_size']=b'12';self.vars[b'desmume_opengl_mode']=b'disabled';self.vars[b'desmume_frameskip']=str(self.frameskip).encode()
         self.api.retro_init()
-        self.buffer=C.create_string_buffer(self.rom.read_bytes())
-        self.clean_korean=hashlib.sha256(self.buffer.raw[:-1]).hexdigest()=='0a5a22bd6bb25ebe640767e6b422b91358636e9ae1300e61d7e8ac3c5d8cd478'
+        rom_bytes=self.rom.read_bytes()
+        self.clean_korean=hashlib.sha256(rom_bytes).hexdigest()=='0a5a22bd6bb25ebe640767e6b422b91358636e9ae1300e61d7e8ac3c5d8cd478'
+        self.buffer=C.create_string_buffer(rom_bytes)
+        del rom_bytes
         game=Game(str(self.rom).encode('utf-8'),C.cast(self.buffer,C.c_void_p),len(self.buffer)-1,None)
         self.api.retro_load_game.argtypes=[C.POINTER(Game)];self.api.retro_load_game.restype=C.c_bool
         if not self.api.retro_load_game(C.byref(game)):raise RuntimeError('롬을 열지 못했습니다.')
@@ -64,7 +67,7 @@ class Core:
         self.api.retro_srw_get_robot_state.argtypes=[C.POINTER(C.c_int)]
         self.parts=np.zeros((128,8),dtype='uint32');self.owners=np.zeros((192,256),dtype='uint8');self.bgpriors=np.full(6,4,dtype='uint8')
         self.bgparts=np.zeros((3200,8),dtype='uint32');self.api.retro_srw_copy_bg_parts.argtypes=[C.c_void_p]
-        library=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text())
+        library,_=load_parts_library(ROOT/'graphics/kazuma_parts_library.json')
         self.menu_bindings={i for i,b in enumerate(library['bindings'],1) if b.get('atlas_id')=='favorite_menu'}
         hashes=(C.c_uint*len(library['bindings']))(*[b['hash'] if b.get('rgb_enabled',True) and not b.get('disabled') else 0 for b in library['bindings']])
         self.api.retro_srw_register_parts.argtypes=[C.POINTER(C.c_uint),C.c_uint];self.api.retro_srw_register_parts(hashes,len(hashes))

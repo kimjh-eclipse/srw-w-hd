@@ -41,7 +41,6 @@ def start_frame_worker(parent_pid,async_parts,dynamic_parts,memory_name=None,loc
         from multiprocessing import shared_memory
         _memory=shared_memory.SharedMemory(name=memory_name);_lock=lock
     _renderer=HDRenderer(async_parts=async_parts,dynamic_parts=dynamic_parts,gpu_composition=os.environ.get('SRWW_GPU_COMPOSITOR','1')!='0')
-    _renderer.text_renderer.prewarm_ui()
     _renderer.ui_labels.prewarm()
     _renderer.parts_renderer.prewarm_registered()
     from frame_trace import install
@@ -80,6 +79,8 @@ def _render_snapshot(snapshot,full=False):
     global _last_bottom,_last_ready
     native,ids,hd,paused,frame,kwargs=snapshot
     kwargs=dict(kwargs);_renderer.set_resolution(kwargs.pop('render_width',DEFAULT_WIDTH));layout=kwargs.pop('present_layout',None)
+    if _last_ready == -1:
+        _renderer.text_renderer.prewarm_ui(_renderer.size[0])
     image=(_renderer.render if full else _renderer.render_top)(native,ids,hd,paused,**kwargs)
     parts=_renderer.parts_renderer;dynamic=[]
     while True:

@@ -15,6 +15,7 @@ from texture_preparation import prepare_task,prepare_composite_task,start_textur
 from native_composition import PartVisibility
 
 from asset_paths import asset_root
+from parts_catalog import load_parts_library
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
 SCALE=1440/256
 # Finished textures are kept at this multiple of the native part size. The
@@ -56,18 +57,18 @@ def is_menu_gradient(indices,w,h):
 
 class PartsRenderer:
     def __init__(self,async_prepare=False,dynamic_parts=False):
-        meta=json.loads((ROOT/'graphics/kazuma_parts_library.json').read_text())
+        meta,library_digest=load_parts_library(ROOT/'graphics/kazuma_parts_library.json')
         self.bindings=meta['bindings'];self.atlas=Image.open(ROOT/'graphics'/meta['atlas']).convert('RGBA').resize((1024,512),Image.Resampling.LANCZOS)
         self.material_slot_masks=None;self.material_slot_references={};self.material_slot_verified={}
         try:
             compiled=json.loads((ROOT/'graphics/material_slots.json').read_text())
-            if compiled['library_sha256']==hashlib.sha256((ROOT/'graphics/kazuma_parts_library.json').read_bytes()).hexdigest():
+            if compiled['library_sha256']==library_digest:
                 self.material_slot_masks=np.load(ROOT/'graphics/material_slots.npy',allow_pickle=False);self.material_slot_references=compiled['references']
         except (OSError,ValueError,KeyError):pass
         self.native_materials=None
         try:
             material_meta=json.loads((ROOT/'graphics/native_materials.json').read_text())
-            if material_meta['library_sha256']==hashlib.sha256((ROOT/'graphics/kazuma_parts_library.json').read_bytes()).hexdigest():
+            if material_meta['library_sha256']==library_digest:
                 with np.load(ROOT/'graphics/native_materials.npz',allow_pickle=False) as archive:self.native_materials={key:archive[key] for key in archive.files}
         except (OSError,ValueError,KeyError):pass
         self.native_atlas=Image.open(ROOT/'graphics/kazuma_parts_atlas_reference.png').convert('RGBA').resize((256,128),Image.Resampling.NEAREST)
@@ -256,22 +257,39 @@ class PartsRenderer:
         the re-keying tool need it).
         """
         source=self.bindings[binding-1];x,y=source['x'],source['y'];name=source.get('atlas_id','base')
-        spec=self.atlas_specs.get(name,{'image':'kazuma_parts_atlas_facefix.png','reference':'kazuma_parts_atlas_reference.png'})
         registration_mode=('painted-attack-bank-v3' if source.get('registered_attack_bank') else
             'painted-mini-canvas-v1' if source.get('secondary_unit') else ('painted-wing-v2' if name=='wing_primary' else 'native-crop-v2'))
-        from part_cut_edges import POLICY
         path_bound=path_bound or legacy
-        identity=[self.registration_version if path_bound else self.registration_content,registration_mode,x,y,w,h]
-        if cut_policy:identity.append(POLICY)
-        if not legacy:identity.append(f'store-{STORE_SCALE}x-webp')
-        if not path_bound:identity.append('atlas-content-v1')
-        stats=self.__dict__.setdefault('atlas_stats',{})
-        for file in (spec['image'],spec['reference']):
-            if not path_bound:identity.extend(self.atlas_identity(file));continue
-            if file not in stats:
-                path=ROOT/'graphics'/file;stat=path.stat();stats[file]=[str(path),stat.st_mtime_ns,stat.st_size]
-            identity.extend(stats[file])
-        return hashlib.sha256(json.dumps(identity).encode()).hexdigest()
+        templates = self.__dict__.setdefault('texture_key_templates', {})
+        group = (name, registration_mode, cut_policy, legacy, path_bound)
+        template = templates.get(group)
+        if template is None:
+            from part_cut_edges import POLICY
+            # The legacy digest is over a single JSON array. Only its four
+            # rectangle coordinates vary among parts in this atlas and mode.
+            spec = self.atlas_specs.get(name, {'image': 'kazuma_parts_atlas_facefix.png', 'reference': 'kazuma_parts_atlas_reference.png'})
+            version = self.registration_version if path_bound else self.registration_content
+            prefix = json.dumps([version, registration_mode])[:-1] + ', '
+            tail = [POLICY] if cut_policy else []
+            if not legacy:
+                tail.append(f'store-{STORE_SCALE}x-webp')
+            if not path_bound:
+                tail.append('atlas-content-v1')
+            for file in (spec['image'], spec['reference']):
+                if path_bound:
+                    stats = self.__dict__.setdefault('atlas_stats', {})
+                    if file not in stats:
+                        path = ROOT/'graphics'/file
+                        stat = path.stat()
+                        stats[file] = [str(path), stat.st_mtime_ns, stat.st_size]
+                    tail.extend(stats[file])
+                else:
+                    tail.extend(self.atlas_identity(file))
+            template = templates[group] = (prefix, ', ' + json.dumps(tail)[1:])
+        rectangle = f'{x}, {y}, {w}, {h}'
+        if not (type(x) is type(y) is type(w) is type(h) is int):
+            rectangle = json.dumps([x, y, w, h])[1:-1]
+        return hashlib.sha256((template[0] + rectangle + template[1]).encode()).hexdigest()
 
     def load_quarantine(self):
         """Parts whose current picture failed verification: the native part stays on screen.
