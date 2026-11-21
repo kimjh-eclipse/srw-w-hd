@@ -1,0 +1,17 @@
+{
+  "title_existing_source": "test_current/parts/title_logo_hd",
+  "existing_candidate": "candidate_logo.png",
+  "candidate_sha256": "a5cebbc3cea56d5529402b6656a3c88c935181c2aad58a5a199994c8b4c8a81e",
+  "all_four_role_sha_valid": {
+    "contract": true,
+    "drawing": true,
+    "native": true,
+    "generated": true
+  },
+  "new_title_drawing_made": false,
+  "visual_reading": "スーパーロボット大戦W",
+  "visual_inspection": "Existing candidate retains gold Japanese two-line title, silver/black bevels, large navy-to-blue W and blue outer rim. No obvious missing or substituted word noticed. Exact Japanese stroke contours and final placement need Claude actual-layer review.",
+  "runtime_evidence": "Reported screenshot visibly native pixel logo. Native source is much closer to screenshot than existing smoothHD candidate; see title_logo_screen_comparison.json. No candidate_logo/title_logo hook reference found in scanned current renderer, cutins_library or background library. This is connection evidence, not a runtime code fix.",
+  "source_contract": "IMG38 / PLT36 / PAT39 pose0;248x104 native;992x416 candidate. Existing provenance/PAT-flip correction preserved.",
+  "limitations": "Screenshot scale and placement prevent a byte-exact match; native-vsHD meanerrors are diagnostic, not exactsource identity proof."
+}

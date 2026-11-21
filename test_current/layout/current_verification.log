@@ -1,1 +1,14 @@
-{"relocation_targets": 329, "tracked_relocated_files_found": 2194, "indexed_tools": 231, "parsed_python_files": 297, "imported_runtime_modules": 51, "source_bundle_files": 1004, "source_bundle_crc": true, "protected_rom_and_face_unchanged": true, "private_files_in_source_bundle": false}
+Traceback (most recent call last):
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\verify\verify_repository_layout.py", line 83, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\scripts\verify\verify_repository_layout.py", line 56, in main
+    names = write_source_bundle(archive_path)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\패치유틸.xdeltaUI\work_srw_w_voice\distribution\source_bundle.py", line 33, in write_source_bundle
+    with zipfile.ZipFile(destination, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\zipfile.py", line 1281, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'D:\\패치유틸.xdeltaUI\\work_srw_w_voice\\test_current\\layout\\source.zip'

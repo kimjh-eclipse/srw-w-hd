@@ -68,7 +68,10 @@ def main():
                 C.c_uint32.from_address(unit).value=max(1,u['hp']);C.c_uint16.from_address(unit+4).value=u['en']
                 step([0],5);step([],35)
                 attrs=np.frombuffer(c.obj.raw,dtype='<u2').reshape(128,4);canvas=Image.new('RGBA',(768,576));slots=[];palette=None;bindings=[]
-                for i,(oa,ob,ot,_) in enumerate(attrs):
+                # Back to front: DS draws the lower OAM index in front (11/19 fix: index order
+                # put Strike's chest over its face). See regen_secondary_icons.py.
+                for i in sorted(range(128),key=lambda i:(-((int(attrs[i][2])>>10)&3),-i)):
+                    oa,ob,ot,_=attrs[i]
                     x=int(ob&511);y=int(oa&255)
                     if (oa&0x300)==0x200 or not (166<=x<256 and 88<=y<166 and ot>>12==6):continue
                     bid=int(c.parts[i,0])

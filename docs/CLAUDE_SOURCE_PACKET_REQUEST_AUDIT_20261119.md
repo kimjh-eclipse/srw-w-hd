@@ -1,0 +1,20 @@
+# Claude 원본 패킷 요청 — 읽기전용 재대조
+
+조사 범위: TO9 사용자 추가 요청 및 `NORMAL_POSE_REQUIRED_REDRAW_REMAINING_20261118.json`의 `missing_valid_source_packet`. 기존 251/180 작업 재생성 없음. 원본 캡처·복호화·코드·설치·생성 변경 없음. 아래 메모만 추가한다.
+
+결론: 조사한 위치에서 **지금 바로 새로 그릴 수 있는 새 원본 조합 패킷은 발견하지 못했다.** 기존 native와 새 affine source는 구별했다. affine 그림이 있다는 이유로 native의 숨은 구조가 해결됐다고 보지 않는다.
+
+| 항목 | 확인한 현재 근거 | Claude에게 필요한 자료/판정 |
+|---|---|---|
+| unit339 native02 — 실제 missing_valid_source_packet | `pose_packets/unit_339/robot_set/pose_02/source.json`: weapon1377/objects/obj057. frames: pose150,614/616. native SHA256 `0ece5a3c2c1a263aa37c1c0376d0bb156585b63cf1edb05e7396fe3f84593689`, 기존 missing 목록 SHA와 완전히 동일. obj원본도11/15 자료. 최신 EYE도 상체의 빨강/흰 잡음·짙은 빨강 사각형을 깨진 캡처로 반려. | weapon1377 pose150 frame614/616의 정상 상체가 보이는 새 실제 화면+object-only assembled native+OAM/원팔레트/flip/priority contract+화면원점/프레임 매핑을 제공. 실제게임도 같은 잡음이라면 그림을 만들지 않고 원본 유지할지 판정. 기존 잡음을 해부학으로 해석하지 않음. |
+| unit1 크리티컬 몸체 | TO9 21:30은 OAM30여개 미연결인 누락 자세라고 명시. robot_set native00..15/INDEX는11/15,수정폴더는11/16. 새 critical body 전용 contract/layout/object mapping 없음. 기존 낫/BG/wing 그림은 새 몸체 패킷이 아님. | 사용자 지적 크리티컬 장면의 정확 weapon/frame/object ID와 자기팔레트 assembled body native/contract/화면기준점. BG검은초승달 렌더 결함과 별개로 몸체만 식별. 전체장면 캡처도 함께 제공하여 기존00..15와 다른 자세임을 확인. |
+| unit130/135 돌진 | `unit_130/robot_set/PREPARED_NONSTANDARD_SOURCE/weapon541_obj072_20261118/`는 기존11/18 19:55 준비본.127x86,18OAM재합성RGBA일치 proof 있음. 그러나 긴 왼쪽 총이 보여 '왼팔 주먹 돌진'과 동일 장면인지 미확정. generation_request는 scene_confirmation 대기,호출0. native00..08과135공유proof는 기존 자세뿐. | weapon541 obj072가 사용자 요청 돌진 본체인지 실제화면/프레임으로 확인하고 정식 object/좌표 map 제공. 아니라면 왼팔 주먹·파랑흰가슴·어깨돔·회색등짐을 함께 보여주는 올바른 조합 원본/contract 제공. 파란추진불꽃은 body에 임의 추가하지 않음. |
+| unit130/135 붉은장갑 결합 두번째 상태 | 위 준비본 HANDOFF도 exactobj/frame/원본조합packet missing으로 명시. 이후 추가 native/정식pose/계약 미발견. | 돌진과 구별되는 붉은장갑 결합 상태의 exact weapon/frame/object ID+자기팔레트 object-only조합원본+contract+좌표/레이어가림.135가 완전동일RGBA인지 별도 입증 전 자동 공유 금지. |
+| unit130 자기팔레트 형제자세(full_attack050/083/134) | TO9 21:50 별도 요청. 기존9자세/130obj072만 발견했고 형제세트 자세→130의 자기팔레트 object를 확정한 새packet 없음.130/135 affine target없음. | 각각 형제자세가 등장하는130실제 weapon/frame/object와130자기팔레트 PNG/contract 제공. 형제 HD 재색칠 금지.위 돌진/결합과 같은 상태면 동일원본 proof로 중복 제거. |
+| unit213·40 상대기체 자기팔레트 | TO9 21:50은 unit216그림의 팔레트교체판이라고 명시.213native00..15/40native00..14와INDEX는11/15,새 상대기체 전용 조합/layout/contract mapping 미발견. | 각 장면의 공격자/상대기체 소유,weapon/frame/object ID,원팔레트assembledPNG,contract와화면원점 제공. unit216HD색변환으로 대체하지 않음. |
+| unit265 native12 숨은머리 | 원본은 weapon1094 obj034/frame604,86x68, SHA `8046e790ca64ba618efe35ca10c801b197abcfc407b2ab782422e8d3e4fd2577` 그대로. `qa_pose12_source_only_20261118/HANDOFF_SOURCE_INSPECTION.md`: x20..38,y24..43은 가려진 좁은면,OAM8가시55.2%;완전머리/숨은팔 발명금지. 기존 단독 fresh RAW/DELIVERY_TARGETS 있음. 최신EYE(11/18 23:21)는pose12포함accept,reject없음으로 옛HELD메모와 상태차이. 새affine00..04는 별개. | **새 생성 우선 대상 아님.** 먼저 최신EYE가 검수한 candidate/RAW SHA와 단독source-only후보의채택여부를 확정. 숨은머리를 실제로 복원해야 한다면 같은 장면의 가림이 풀린 실제원본+OAM 소유/동일성 proof를 제공. 기존가려진 OAM의 비가시면을 그림참조로 임의 노출하지 않음. |
+| unit364 native02 가슴A0창 | weapon1444 obj197/frame280,124x100 native SHA `ca5b2be2013a79d823d870a9ed7a33dac13b9a62617535af7405ad8a070e99a9` 그대로. `qa_native_guns_gaps_20261118/plate_01/HANDOFF.md`: 두 시도후창채움HELD,편집05밝기회귀라05도그편집선택금지. `SOURCE_ALPHA0_GAPS.json`에 기존창근거있음. 최신EYE(11/18 22:11)는02포함21자세accept/reject없음. 새affinea00/a01RAW·보조판은 native02해결증거아님. | **원본 부족보다 판정/후보 연결 충돌.** 최신EYE대상 candidate/RAW SHA와native02창의실제A0 보존여부를 확인. 창은4x좌표x256..300,y144..168 부근(496x400 source); 정확모양은원본기준. 기존창원본은이미있으므로 새캡처필수라고 오인하지 않음. 새그림필요시 root에명시적으로 재반려하고 기존 실패RAW와구별된 source-only계약으로 전달. |
+
+추가: unit26614는 `missing_valid_source_packet` 항목이 아니다. 별도 손실하반신 source검증대기 메모가 있으나 기존 weapon1100 obj089/pose058 frames238/240 원본은11/15 그대로다. 기존 `qa_eye_shape_20261118` 및 DELIVERY_EYE_SHAPE_266_269_474_20261118를 우선 검수하고, 하반신이 원본 자체에서 누락된 문제라면 올바른 전체 몸체 actual capture/assembled source/contract를 제공해야 한다. 이번 조사에서는 해당 capture를 만들지 않았다.
+
+확인 위치: 각 unit의 robot_set/INDEX·pose_NN/source.json·frames.json·native·EYE_REVIEW,130 PREPARED_NONSTANDARD_SOURCE,265 qa_pose12_source_only,364 qa_native_guns_gaps,관련 affine prepared delivery,docs/HANDOFF_TO_CODEX_9·FROM49/50/51/52. 새원본 발견 주장0건,새imagegen0회.

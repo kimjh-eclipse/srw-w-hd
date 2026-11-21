@@ -1,0 +1,668 @@
+{
+  "updated": "2026-11-21T10:06:19.174325+09:00",
+  "deadline_kst": "2026-11-20T11:00:00+09:00",
+  "shutdown_task": "Codex_ImageWork_Shutdown_20261120_1100",
+  "scope": "Current campaign, RAW received != finished. No speculative total for unpacketized scenes.",
+  "incoming": [
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX.md",
+      "modified": "2026-11-13T07:07:17.411474+09:00",
+      "sha256": "646ecea8e56aa3f1002dda86ac3bf197923b66dd37d14cda56c2475f8d1c1bb0"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_10.md",
+      "modified": "2026-11-20T09:23:02.251384+09:00",
+      "sha256": "84f9c3f1dff73a5f6061d6384d97083aa49c686fd3a6873952fe7f79b0c6461d"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_2.md",
+      "modified": "2026-11-14T06:36:24.940249+09:00",
+      "sha256": "a7be8c60cf3f417d700f199c8ad5b494ceea8a12d0dceb3958375e7ef5282a60"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_3.md",
+      "modified": "2026-11-14T12:41:04.170882+09:00",
+      "sha256": "5da09f3a65867f53c614dbb179532a33762347cda89faa59f61f436931a63918"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_4.md",
+      "modified": "2026-11-14T14:14:32.521478+09:00",
+      "sha256": "0c310911fa7192c0818ce1c87f344ccd1f352a01f3a4c30742709ed47edaf01b"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_5.md",
+      "modified": "2026-11-14T19:49:21.468453+09:00",
+      "sha256": "e9d84217ac0cfb86cab5d6f94e7f37ff0c0e2e4259c2e842888d3cdb20306fa9"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_6.md",
+      "modified": "2026-11-15T09:47:56.377296+09:00",
+      "sha256": "8fcc5947423ca0943bc22e5b8bab7c8bb03bc914d5f17439469a97780df45885"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_7.md",
+      "modified": "2026-11-15T20:12:19.221712+09:00",
+      "sha256": "5b6cc096830340db91f4a7acfe1d315fddb167917eaf01734aaa3fbb3b3f2e2c"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_8.md",
+      "modified": "2026-11-16T23:38:13.735092+09:00",
+      "sha256": "7519c36871d6529ea08b3473fa57a136159362c24eeff153e01bef4171a7a500"
+    },
+    {
+      "path": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_TO_CODEX_9.md",
+      "modified": "2026-11-20T09:23:02.427890+09:00",
+      "sha256": "31649997f586fba69173f2ee58aaa89062a9710a5b9a70774cc9018c32688ec9"
+    }
+  ],
+  "active_handoff": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\HANDOFF_FROM_CODEX_56.md",
+  "latest99": {
+    "received": 99,
+    "selected_raw_files": 33,
+    "source_hold": [
+      {
+        "unit": 5,
+        "poses": [
+          "pose_03"
+        ],
+        "reason": "native head overlap, frame694 replay needed"
+      },
+      {
+        "unit": 5,
+        "poses": [
+          "pose_02",
+          "pose_07",
+          "pose_10",
+          "pose_20"
+        ],
+        "reason": "cannon transition interpreted as physical blades, original replay needed"
+      }
+    ],
+    "qa_pending": "All99 structure/alpha/alignment/split/install/game QA. Partial alpha issue in generated RAW."
+  },
+  "known_unmade": {
+    "unit_pose_items": 17,
+    "independent_images": 16,
+    "reason": "Existing tool content restriction holds, no bypass or retry",
+    "items": [
+      {
+        "unit": 23,
+        "poses": [
+          "pose_01"
+        ]
+      },
+      {
+        "unit": 95,
+        "poses": [
+          "pose_01"
+        ],
+        "identical_source_to": "unit23pose01"
+      },
+      {
+        "unit": 386,
+        "poses": [
+          "pose_a00",
+          "pose_a01",
+          "pose_a02",
+          "pose_a03",
+          "pose_a04",
+          "pose_a05",
+          "pose_a06",
+          "pose_a07",
+          "pose_a08",
+          "pose_a09",
+          "pose_a10",
+          "pose_a11",
+          "pose_a12",
+          "pose_a13",
+          "pose_a14"
+        ]
+      }
+    ]
+  },
+  "source_empty": [
+    {
+      "unit": 131,
+      "pose": "pose_a02",
+      "native_alpha": [
+        0,
+        0
+      ]
+    }
+  ],
+  "source_requests": "C:\\Emul\\Workshop\\SRW_W_HD\\docs\\CLAUDE_SOURCE_PACKET_REQUEST_AUDIT_20261119.md",
+  "new_actionable": [
+    {
+      "unit": 265,
+      "targets": [
+        "pose_08",
+        "pose_15",
+        "pose_16",
+        "pose_17",
+        "pose_19",
+        "pose_27",
+        "pose_35",
+        "pose_40"
+      ],
+      "request": "TO9 11/20 09:09 missing8",
+      "status": "8raw_received_6_pending_QA_2_precision_hold"
+    },
+    {
+      "group": [
+        "G009",
+        "G010"
+      ],
+      "images": [
+        22850,
+        22857
+      ],
+      "request": "HANDOFF_TO_CODEX_10 batch priority2 human closeup",
+      "status": "new_RAW_received_Claude_layout_alpha_QA_pending"
+    },
+    {
+      "request": "HANDOFF_TO_CODEX_10 693IMG/302groups native batch",
+      "source_index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_requests\\batch_20261120\\INDEX.json",
+      "master_delivery": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\CUTIN_INCOMING_MASTER_DELIVERY.json",
+      "status": "57_IMG_new_RAW_received_of_which10_component_only_ALL_Claude_QA_pending",
+      "not_touched_by_this_output_root": 636,
+      "untouched_is_not_global_RAW_missing": true
+    }
+  ],
+  "notes": [
+    "Incoming watcher checks new handoff changes; new requests append with exact packet and state.",
+    "Existing SOURCE/RAW/ROM/library/queue preserved.",
+    "No generated pixel processing; Claude handles installation and validation."
+  ],
+  "new_deliveries": [
+    {
+      "unit": 265,
+      "targets": 8,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\INCOMING_UNIT265_DELIVERY.json",
+      "actual_calls": 4,
+      "structural_or_install_approval": false
+    },
+    {
+      "group": [
+        "G009",
+        "G010"
+      ],
+      "images": [
+        22850,
+        22857
+      ],
+      "new_images": 2,
+      "actual_calls": 4,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G009_G010_DELIVERY.json",
+      "source_only_padding_retry": true,
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G019",
+        "G026"
+      ],
+      "images": [
+        22927,
+        23042
+      ],
+      "actual_calls": 2,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G019_G026_DELIVERY.json",
+      "partial_layer_images": [
+        22927
+      ],
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G001",
+        "G003",
+        "G007"
+      ],
+      "images": [
+        22755,
+        22769,
+        22831
+      ],
+      "actual_calls": 4,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G001_G003_G007_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "group": "G014",
+      "images": [
+        22877,
+        22878,
+        22879,
+        22881,
+        22882
+      ],
+      "actual_calls": 3,
+      "unique_original_RGBA": 2,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G014\\G014_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G015",
+        "G016",
+        "G020"
+      ],
+      "images": [
+        22895,
+        22896,
+        22934,
+        22935
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G015_G016_G020_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G059",
+        "G061"
+      ],
+      "images": [
+        23496,
+        23542
+      ],
+      "partial_layer_only": true,
+      "actual_calls": 2,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G059_G061_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G004",
+        "G044"
+      ],
+      "images": [
+        22791,
+        22792,
+        23180,
+        23181,
+        23182
+      ],
+      "actual_calls": 4,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G004_G044_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G063",
+        "G071",
+        "G072"
+      ],
+      "images": [
+        23547,
+        23617,
+        23618
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G063_G071_G072_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G076",
+        "G081",
+        "G082"
+      ],
+      "images": [
+        23893,
+        23957,
+        23958
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G076_G081_G082_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G085",
+        "G086",
+        "G087"
+      ],
+      "images": [
+        23994,
+        24092,
+        24093
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G085_G086_G087_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G088",
+        "G089",
+        "G090"
+      ],
+      "images": [
+        24115,
+        24116,
+        24117,
+        24119,
+        24120
+      ],
+      "actual_calls": 5,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G088_G089_G090_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G022",
+        "G023",
+        "G024"
+      ],
+      "images": [
+        23000,
+        23019,
+        23020
+      ],
+      "partial_layer_images": [
+        23019,
+        23020
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G022_G023_G024_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G106",
+        "G112",
+        "G113"
+      ],
+      "images": [
+        24453,
+        24510,
+        24517
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\BG3_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G000",
+        "G006",
+        "G017"
+      ],
+      "images": [
+        22701,
+        22702,
+        22813,
+        22903,
+        22904
+      ],
+      "partial_layer_images": [
+        22903,
+        22904
+      ],
+      "actual_calls": 4,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G000_G006_G017_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G021"
+      ],
+      "images": [
+        22977,
+        22978,
+        22979,
+        22980,
+        22981
+      ],
+      "actual_calls": 3,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G021_DELIVERY.json",
+      "accepted_or_installed": false
+    },
+    {
+      "groups": [
+        "G002",
+        "G028"
+      ],
+      "images": [
+        22758,
+        23095,
+        23096,
+        23097
+      ],
+      "partial_layer_images": [
+        23095,
+        23096,
+        23097
+      ],
+      "actual_calls": 2,
+      "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\G002_G028_DELIVERY.json",
+      "accepted_or_installed": false
+    }
+  ],
+  "new_holds": [
+    {
+      "unit": 265,
+      "targets": [
+        "pose_08",
+        "pose_17"
+      ],
+      "reason": "New white RAW received twice, but source alpha0 holes/cloud-contour and strict RGB255 flatness unresolved; no generated pixel repairs or repeated retries"
+    },
+    {
+      "group": [
+        "G009",
+        "G010"
+      ],
+      "images": [
+        22851,
+        22858
+      ],
+      "reason": "Source BG1 has skin-glow patch plus cyan dialogue/HUD frame. Requires Claude source classification; no arbitrary HUD repaint/erase. Faces BG2 delivered separately."
+    },
+    {
+      "group": "G019",
+      "image": 22927,
+      "reason": "Only upperface component drawn; original BG1 also has cyan dialogue/HUD frame elsewhere. Remaining source region requires Claude classification, not full IMG completion. Generated face topcorner clipping also needs source-fit check."
+    },
+    {
+      "group": "G007",
+      "image": 22831,
+      "reason": "2RAWs but opaque white background has alpha holes; no masking/whitefill/composite attempted."
+    },
+    {
+      "groups": [
+        "G059",
+        "G061"
+      ],
+      "images": [
+        23496,
+        23542
+      ],
+      "reason": "Face components RAWdelivered; cyan dialogue/HUD frame elsewhere in originalBG1 not drawn, source classification pending. Not full IMG completion."
+    },
+    {
+      "group": "G076",
+      "images": [
+        23894,
+        23896
+      ],
+      "reason": "Native BG1/BG0 contains portrait plus cyan dialogue HUD or baked dialogue text/portrait; not called, requires source classification. Only standalone23893 delivered."
+    },
+    {
+      "groups": [
+        "G088",
+        "G089",
+        "G090"
+      ],
+      "images": [
+        24115,
+        24116,
+        24119,
+        24120
+      ],
+      "reason": "RAWs received but visible unrequested white/colored speckles/halos between blades; no mask/crop/pixelrepair attempted. Not accepted."
+    },
+    {
+      "groups": [
+        "G023",
+        "G024"
+      ],
+      "images": [
+        23019,
+        23020
+      ],
+      "reason": "Upperrobot components RAW delivered only; native BG1 contains cyan dialogue frame below. Remaining source classification required, full IMG incomplete. G024 bottomcrop alignment QA."
+    },
+    {
+      "groups": [
+        "G106",
+        "G112",
+        "G113"
+      ],
+      "images": [
+        24453,
+        24510,
+        24517
+      ],
+      "reason": "BGRAWs: G106/G112 ignored transparent32padding and drew fullbleed, source fitting unresolved; G113 erased original opaque tile corners so tilewrap/opacity fail. No RAW pixel repair."
+    },
+    {
+      "group": "G017",
+      "images": [
+        22903,
+        22904
+      ],
+      "reason": "Upperrobot components RAWonly, native cyan dialogue frame below not drawn. Source classification remains; not fullIMGcomplete."
+    },
+    {
+      "group": "G028",
+      "images": [
+        23095,
+        23096,
+        23097
+      ],
+      "reason": "Upperrobot componentRAW only, cyan dialogueHUD below excluded pending source classification; not full IMGcompletion."
+    }
+  ],
+  "source_classification_notes": [
+    {
+      "group": "G048",
+      "image": 23249,
+      "decision": "actual source is dark cockpit/background only; overview female portrait is separateOBJ, no invented face; left in priority3"
+    },
+    {
+      "group": "G062",
+      "images": [
+        23543,
+        23544
+      ],
+      "decision": "not called: used_in includes unit386, existing386 policyhold scope requires parent/Claude classification; separatehumanBGcutin not proven same blockedcontent"
+    }
+  ],
+  "incoming_cutin_master_delivery": {
+    "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\CUTIN_INCOMING_MASTER_DELIVERY.json",
+    "summary": {
+      "updated": "2026-11-20T10:45:35.601679+09:00",
+      "scope": "ONLY this 11/20 incoming cutin batch redraw output root; not global campaign installed progress",
+      "actual_new_raw_calls": 51,
+      "unique_raw_sha256": 51,
+      "image_ids_with_new_raw": 57,
+      "full_layer_target_ids_with_new_raw": 47,
+      "component_only_target_ids_with_new_raw": 10,
+      "known_visual_hold_target_ids": 8,
+      "prepared_uncalled_requests": 1,
+      "raw_sha_failures": [],
+      "source_or_reference_or_contract_changed": [],
+      "total_incoming_image_ids": 693,
+      "not_touched_by_this_output_root": 636,
+      "all_pending_Claude_visual_sourcefit_opacity_QA": true,
+      "accepted_or_installed": false,
+      "notes": [
+        "Counts of untouched IDs are NOT globally RAWmissing: preexisting11/18 RAW/existingHD hooks and policy/source holds must be reconciled separately.",
+        "All RAW preserved unchanged. Common alpha252/253 remains strict opacity limitation. Dimension gate alone is not QA.",
+        "G009/G010 padded source retry and G014 eye correction preferred; G007 whitepanel retry remains HOLD. All first RAW remain in rows.",
+        "No generated resize/crop/mask/recolor/composite, no candidate/ROM/library/queue modifications.",
+        "G116 preparednotcalled. Known23/95/386 hold content not retried. No429/moderation error this incoming run."
+      ]
+    }
+  },
+  "incoming_morning_final_audit": {
+    "updated": "2026-11-20T10:46:48.192469+09:00",
+    "scope": "Incoming work found by watcher after09:09 only, separate from earlier99 campaign",
+    "actual_builtin_calls": 55,
+    "raw_files_verified": 55,
+    "requested_targets_with_new_RAW": 65,
+    "cutin_IMG_targets": 57,
+    "unit265_pose_targets": 8,
+    "component_only_cutin_targets": 10,
+    "strict_accepted_or_installed": 0,
+    "unit265_index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\INCOMING_UNIT265_DELIVERY.json",
+    "unit265_raw_verified": [
+      {
+        "raw_path": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\plate_01_white\\RAW_imagegen.png",
+        "sha256": "0903d88b57ff189b4b34069f252707809d24d992caedfe0f6aeffa6380c8723c"
+      },
+      {
+        "raw_path": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\plate_01_white_sourceonly_fix\\RAW_imagegen.png",
+        "sha256": "b41068b4d664ca9a1609f749e8163edc320a13b8bd9c0abfbd7085606f2b6511"
+      },
+      {
+        "raw_path": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\plate_02_dark\\RAW_imagegen.png",
+        "sha256": "050d24bd26cb635c72754c6d94d82fd54bc93a81f0ccd297794b547507d4e0c5"
+      },
+      {
+        "raw_path": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\incoming_redraw_20261120\\unit_265\\plate_03_dark\\RAW_imagegen.png",
+        "sha256": "a7fd946b8ec5b529c977e7618e1b9f76e9456938bc893b133b0e68d617bed5b3"
+      }
+    ],
+    "cutin_master": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\CUTIN_INCOMING_MASTER_DELIVERY.json",
+    "pending": "All outputs require Claude structure/sourcefit/alpha/split/install/gameQA. White26508/17 precisionholes,8 cutinvisualholds,10componentHUDsourceclassification explicit. Large693IMG request incomplete."
+  },
+  "watcher_final_state": {
+    "ended_at": "2026-11-20T10:50:31.403239+09:00",
+    "doc_watch": "DOC_WATCH_END exit0",
+    "packet_watch": "PACKET_WATCH_END exit0",
+    "latest_incoming": "HANDOFF_TO_CODEX_10.md unchanged since09:23",
+    "inflight_calls": 0,
+    "unsaved_RAW": 0,
+    "new_packet_pending": "Only cutin_requests/_scan/scan_new.json progressed, no finalized new source packet/request observed",
+    "next_work": "Claude QA/source classification/split/align/install/game checks; untouched693batch IDs and future packets remain. Do not retry23/95/386holds; do not equate RAWreceipt with installation."
+  },
+  "current_session": "2026-11-21 assembled-pose part consistency redraw, unit196 four-pose pilot pendingClaudeQA",
+  "evening_cutin_delivery": {
+    "index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\EVENING_MASTER_DELIVERY.json",
+    "raw_count": 634,
+    "image_ids": 639,
+    "sha_errors": [],
+    "component_patch_raw_count": 26
+  },
+  "latest_cutin_745_receipt_audit": {
+    "path": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\cutin_batch_redraw_20261120\\FINAL_CURRENT_RECEIPT_INDEX.json",
+    "updated": "2026-11-20T22:56:51.179513+09:00",
+    "counts": {
+      "direct_or_previously_recorded_regular_RAW": 696,
+      "no_regular_RAW_alias_or_patch": 17,
+      "prior1118_RAW": 6,
+      "existing_HD_hook": 6,
+      "only_proposed_native_RGBA_alias_regular_RAW": 1,
+      "component_patch_only": 19
+    },
+    "accepted_or_installed": false
+  },
+  "redraw_151": {
+    "units": 151,
+    "poses": 2934,
+    "pilot_delivered_poses": 4,
+    "remaining_after_pilot": 2930,
+    "other_units_unlocked": false,
+    "pilot_raw": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_196_pilot\\RAW_imagegen.png",
+    "accepted_or_installed": false
+  },
+  "cutin_23514_redraw": {
+    "status": "RAW_delivered_pendingClaudeQA",
+    "raw": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\cutin_23514\\RAW_imagegen.png",
+    "sha256": "34015bd56eb489bbedc7cffc7979d9b48c021000411f80b385e8358320edaade",
+    "accepted_or_installed": false
+  }
+}

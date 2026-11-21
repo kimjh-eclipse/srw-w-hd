@@ -1,0 +1,103 @@
+495 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+495 INFO: Python: 3.11.0
+517 INFO: Platform: Windows-10-10.0.26300-SP0
+517 INFO: Python environment: C:\Program Files\Python311
+655 INFO: Module search paths (PYTHONPATH):
+['C:\\Emul\\Workshop\\SRW_W_HD',
+ 'C:\\Program Files\\Python311\\python311.zip',
+ 'C:\\Program Files\\Python311\\Lib',
+ 'C:\\Program Files\\Python311\\DLLs',
+ 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages',
+ 'C:\\Program Files\\Python311',
+ 'C:\\Program Files\\Python311\\Lib\\site-packages',
+ 'C:\\Emul\\Workshop\\SRW_W_HD\\emulator',
+ 'C:\\Emul\\Workshop\\SRW_W_HD\\tools\\gpu_py']
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+2042 INFO: Appending 'binaries' from .spec
+2043 INFO: Appending 'datas' from .spec
+2084 INFO: checking Analysis
+2084 INFO: Building Analysis because Analysis-00.toc is non existent
+2085 INFO: Looking for Python shared library...
+2085 INFO: Using Python shared library: C:\Program Files\Python311\python311.dll
+2085 INFO: Running Analysis Analysis-00.toc
+2085 INFO: Target bytecode optimization level: 0
+2085 INFO: Initializing module dependency graph...
+2088 INFO: Initializing module graph hook caches...
+2186 INFO: Analyzing modules for base_library.zip ...
+4060 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+5038 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+5298 INFO: Processing standard module hook 'hook-math.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+5811 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+9740 INFO: Caching module dependency graph...
+9815 INFO: Analyzing C:\Emul\Workshop\SRW_W_HD\emulator\portable_entry.py
+9872 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+10181 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+10608 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+10811 INFO: Processing standard module hook 'hook-numpy.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+11817 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11823 INFO: SetuptoolsInfo: initializing cached setuptools info...
+14619 INFO: Processing standard module hook 'hook-difflib.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+15511 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+15718 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+16482 INFO: Processing standard module hook 'hook-webbrowser.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+16578 INFO: Processing standard module hook 'hook-psutil.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+19109 INFO: Processing standard module hook 'hook-charset_normalizer.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+19670 INFO: Processing standard module hook 'hook-PIL.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+19826 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+20567 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+20946 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+21505 INFO: Processing standard module hook 'hook-pygame.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\pygame\\__pyinstaller'
+22878 INFO: Processing standard module hook 'hook-pkg_resources.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+25523 INFO: Processing standard module hook 'hook-sqlite3.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+26763 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+26770 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+27769 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+28189 INFO: Analyzing hidden import 'PIL.WebPImagePlugin'
+28209 INFO: Processing module hooks (post-graph stage)...
+28695 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+28763 INFO: Processing pre-safe-import-module hook 'hook-win32com.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+29729 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+30255 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks'
+30282 INFO: Performing binary vs. data reclassification (996 entries)
+30857 INFO: Looking for ctypes DLLs
+31246 INFO: Analyzing run-time hooks ...
+31252 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\rthooks'
+31257 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\rthooks'
+31262 INFO: Including run-time hook 'pyi_rth_pkgres.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\rthooks'
+31271 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\rthooks'
+31272 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\PyInstaller\\hooks\\rthooks'
+31339 INFO: Creating base_library.zip...
+31372 INFO: Looking for dynamic libraries
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+32944 INFO: Extra DLL search directories (AddDllDirectory): ['C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\numpy.libs', 'C:\\Users\\OXP2\\AppData\\Roaming\\Python\\Python311\\site-packages\\pygame']
+32944 INFO: Extra DLL search directories (PATH): []
+35900 INFO: Warnings written to C:\Emul\Workshop\SRW_W_HD\build\portable\SRW_W_HD\warn-SRW_W_HD.txt
+36019 INFO: Graph cross-reference written to C:\Emul\Workshop\SRW_W_HD\build\portable\SRW_W_HD\xref-SRW_W_HD.html
+36090 INFO: checking PYZ
+36090 INFO: Building PYZ because PYZ-00.toc is non existent
+36090 INFO: Building PYZ (ZlibArchive) C:\Emul\Workshop\SRW_W_HD\build\portable\SRW_W_HD\PYZ-00.pyz
+37015 INFO: Building PYZ (ZlibArchive) C:\Emul\Workshop\SRW_W_HD\build\portable\SRW_W_HD\PYZ-00.pyz completed successfully.
+37047 INFO: checking PKG
+37047 INFO: Building PKG because PKG-00.toc is non existent
+37047 INFO: Building PKG (CArchive) SRW_W_HD.pkg
+37098 INFO: Building PKG (CArchive) SRW_W_HD.pkg completed successfully.
+37099 INFO: Bootloader C:\Users\OXP2\AppData\Roaming\Python\Python311\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+37099 INFO: checking EXE
+37100 INFO: Building EXE because EXE-00.toc is non existent
+37100 INFO: Building EXE from EXE-00.toc
+37101 INFO: Copying bootloader EXE to C:\Emul\Workshop\SRW_W_HD\build\portable\SRW_W_HD\SRW_W_HD.exe
+37192 INFO: Copying icon to EXE
+37275 INFO: Copying 0 resources to EXE
+37275 INFO: Embedding manifest in EXE
+37344 INFO: Appending PKG archive to EXE
+37451 INFO: Fixing EXE headers
+37862 INFO: Building EXE from EXE-00.toc completed successfully.
+37877 INFO: checking COLLECT
+37878 INFO: Building COLLECT because COLLECT-00.toc is non existent
+37879 INFO: Building COLLECT COLLECT-00.toc
+40671 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+40701 INFO: Build complete! The results are available in: C:\Emul\Workshop\SRW_W_HD\build\frozen_update
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html

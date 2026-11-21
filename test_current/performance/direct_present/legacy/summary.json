@@ -1,0 +1,36 @@
+{
+  "direct": 0,
+  "seconds": 36,
+  "exit_code": 0,
+  "screens": 3,
+  "emulation_fps": {
+    "median": 59.8,
+    "worst": 6.0
+  },
+  "composition_fps": {
+    "median": 31.9,
+    "worst": 14.0
+  },
+  "display_fps": {
+    "median": 34.0,
+    "worst": 11.0
+  },
+  "render_ms": {
+    "median": 24.0,
+    "worst": 37.2
+  },
+  "render_p95_ms": {
+    "median": 35.8,
+    "worst": 72.5
+  },
+  "input_to_present_ms": {
+    "median": 9968.4,
+    "worst": 9968.4
+  },
+  "compositor": {
+    "enabled": true,
+    "error": null,
+    "direct_present": false,
+    "direct_present_error": null
+  }
+}

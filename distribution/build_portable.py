@@ -1,6 +1,6 @@
 """Produce a ROM-free Windows portable folder, notices, source and manifest."""
 from pathlib import Path
-import subprocess,sys,shutil,json,hashlib,zipfile,sqlite3,argparse
+import subprocess,sys,shutil,json,hashlib,zipfile,sqlite3,argparse,os
 from source_bundle import write_source_bundle
 ROOT=Path(__file__).resolve().parent.parent
 TARGET=ROOT/'dist/SRW_W_HD'
@@ -22,7 +22,7 @@ def main():
     optimized={r['path']:r for r in optimization['entries'] if r.get('encoded')}
     assets=[];unchanged_assets=set();copied_assets=0
     for source in ([] if args.program_only else (ROOT/'graphics').rglob('*')):
-        if not source.is_file() or source.name.startswith('parts_registered.sqlite') or source.suffix in ('.lock','.html') or source.name.endswith(('-wal','-shm')):continue
+        if not source.is_file() or source.name.startswith(('parts_registered.sqlite','parts_baked')) or '.before_' in source.name or '.after_' in source.name or source.suffix in ('.lock','.html') or source.name.endswith(('-wal','-shm')):continue
         if source.suffix.lower() not in ('.png','.json','.npz','.npy','.sqlite','.md','.txt','.otf'):continue
         relative=source.relative_to(ROOT);row=optimized.get(source.relative_to(ROOT/'graphics').as_posix())
         if row:source=ROOT/row['encoded'];relative=Path('graphics')/row['output']
@@ -30,9 +30,20 @@ def main():
         source_stat=source.stat();target_stat=dest.stat() if dest.exists() else None
         if target_stat and (target_stat.st_size,target_stat.st_mtime_ns)==(source_stat.st_size,source_stat.st_mtime_ns):
             unchanged_assets.add(relative.as_posix())
-        else:shutil.copy2(source,dest);copied_assets+=1
+        else:
+            # A repacked picture is linked, costing no disk: prepare_images replaces those files and
+            # never writes into them. Workspace files are copied, since tools do write into them.
+            dest.unlink(missing_ok=True)
+            try:
+                if not row:raise OSError('copy')
+                os.link(source,dest)
+            except OSError:shutil.copy2(source,dest)
+            copied_assets+=1
         assets.append(relative.as_posix())
     print(json.dumps(dict(copied_assets=copied_assets,unchanged_assets=len(unchanged_assets))),flush=True)
+    # Finished part textures: only the ones the current parts use, with the atlas identities
+    # they were stored under (the packaged atlases are repacked and cannot give them).
+    if not args.program_only:subprocess.run([sys.executable,str(ROOT/'distribution/pack_baked_store.py'),str(TARGET/'graphics')],cwd=ROOT,check=True)
     (TARGET/'image_optimization.json').write_text(json.dumps({k:v for k,v in optimization.items() if k!='entries'},indent=2),encoding='utf-8')
     # Retain the already-prepared portraits: only their packaged file stamps
     # changed, not the portrait identities or source design.

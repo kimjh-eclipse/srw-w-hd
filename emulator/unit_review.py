@@ -39,6 +39,14 @@ def main():
     for path in (ROOT/'test_current/combat/named_attacks').rglob('*.state'):
         unit=next((int(p[5:]) for p in path.parts if p.startswith('unit_') and p[5:].isdigit()),None)
         if unit is None or path.stem=='capture':continue
+        # A capture saved on a blank screen (e.g. unit 413 weapon 1614, menu entry injected: the game
+        # never drew the attack) plays only music; its native_<frame>.png is all black, so leave it out.
+        shot=path.with_name('native_'+path.stem.split('_')[-1]+'.png')
+        if shot.exists():
+            try:
+                from PIL import Image
+                if Image.open(shot).convert('L').getextrema()[1]==0:continue
+            except Exception:pass
         weapon=next((int(p.split('_')[1]) for p in path.parts if p.startswith('weapon_') and p.endswith('_capture')),None)
         label='저장 장면 · '+(weapons.get(weapon,str(weapon))+' · ' if weapon is not None else '')+path.stem
         if 'native_reference' in path.parts:label+=' · 원본 재생 기반'
@@ -48,6 +56,10 @@ def main():
     args=SimpleNamespace(config=out/'settings.json',save_root=out/'isolated_saves',metrics=out/'metrics.json',profile_render=None,software_display=False,legacy_timing=False,no_start=False,demo=False,rom=rom,state=initial,state_frame=0,paused=False)
     root=tk.Tk();app=EmulatorWindow(root,args)
     panel=ttk.Frame(root,padding=4);panel.pack(fill='x',before=app.canvas)
+    # Only units whose HD robot set is installed (robot_set/INSTALLED); SRWW_REVIEW_ALL=1 lists every unit.
+    if os.environ.get('SRWW_REVIEW_ALL')!='1':
+        done={uid for uid in scenes if (ROOT/f'test_current/parts/pose_packets/unit_{uid}/robot_set/INSTALLED').exists()}
+        scenes={uid:v for uid,v in scenes.items() if uid in done} or scenes
     labels={f'{names.get(uid,uid)} [{uid}]':uid for uid in sorted(scenes,key=lambda n:(n!=413,n))}
     unit=tk.StringVar(value=next(iter(labels)));scene=tk.StringVar()
     ttk.Label(panel,text='기체').pack(side='left');units=ttk.Combobox(panel,textvariable=unit,values=list(labels),state='readonly',width=29);units.pack(side='left')

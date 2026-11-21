@@ -1,0 +1,23 @@
+{
+ "source": "test_current/parts/pose_packets/unit_92/robot_set/install/unit_92_replace",
+ "contract": "contract.json",
+ "drawing": "candidate_atlas.png",
+ "native": "native_atlas.png",
+ "generated": "generated.png",
+ "file_sha256": {
+  "contract": "075fe5cdd9e342ffef6dc7a49231c23cf1bd36ec90277b150a62da21cc6996be",
+  "drawing": "bbe07e36f99fb452388bba69a92a0907ebe77489d88234d42584925b5fc11a01",
+  "native": "de6755c7d6c1f2454f0d063df74b428307ec942cb891ae01b80eb167f500e0c3",
+  "generated": "bbe07e36f99fb452388bba69a92a0907ebe77489d88234d42584925b5fc11a01"
+ },
+ "bindings": [
+  102978,
+  102979
+ ],
+ "nested": true,
+ "prior_binding_spec_sha256": {
+  "102978": "393ee34c0292ed578b71e6bca221ef307a9a00bdd4b1e7c8aa5b65cabbc2eb5c",
+  "102979": "811bdd647a4752f5fe747e5db9e139e20a61acccd28005acecba337f79dd6251"
+ },
+ "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_92/robot_set): replacement of existing RGB-keyed HD"
+}

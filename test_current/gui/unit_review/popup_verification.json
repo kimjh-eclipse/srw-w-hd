@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "focus": ".!canvas",
+      "grab": "",
+      "popup": false
+    },
+    {
+      "focus": ".!combobox.popdown.f.l",
+      "grab": "",
+      "popup": true
+    },
+    {
+      "focus": ".!combobox",
+      "grab": ".!combobox.popdown",
+      "popup": true
+    }
+  ],
+  "python_focus_conversion_not_used": true
+}

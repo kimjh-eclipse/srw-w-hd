@@ -1,0 +1,159 @@
+{
+ "name": "stages",
+ "frames": 1680,
+ "width": 768,
+ "ms": {
+  "mean": 17.12,
+  "p50": 16.66,
+  "p95": 27.19,
+  "p99": 53.36,
+  "max": 269.72
+ },
+ "over_16_7ms": 0.496,
+ "stage_ms_per_frame": {
+  "render_top": [
+   11.96,
+   1.0
+  ],
+  "parts.compose": [
+   4.68,
+   1.43
+  ],
+  "text.recognize": [
+   3.441,
+   3.79
+  ],
+  "text._recognize": [
+   3.391,
+   1.0
+  ],
+  "render_bottom": [
+   2.582,
+   1.0
+  ],
+  "foreground.gpu_plane": [
+   1.578,
+   0.6
+  ],
+  "gpu.finish": [
+   1.204,
+   1.0
+  ],
+  "text.clean_native": [
+   1.169,
+   1.79
+  ],
+  "gpu.render": [
+   1.153,
+   1.43
+  ],
+  "battle_bg.identify": [
+   0.991,
+   2.17
+  ],
+  "foreground.eligibility": [
+   0.906,
+   8.22
+  ],
+  "battle_bg.compose": [
+   0.825,
+   1.0
+  ],
+  "parts.sprite": [
+   0.756,
+   18.96
+  ],
+  "portraits.compose": [
+   0.59,
+   1.0
+  ],
+  "bottom_text.compose": [
+   0.512,
+   0.43
+  ],
+  "map_icons.compose": [
+   0.51,
+   0.47
+  ],
+  "parts.prefetch_related": [
+   0.376,
+   1.43
+  ],
+  "bg.compose": [
+   0.349,
+   1.0
+  ],
+  "scenario_bg.compose": [
+   0.315,
+   0.49
+  ],
+  "localized.compose": [
+   0.314,
+   1.43
+  ],
+  "map_tiles.phase": [
+   0.276,
+   0.51
+  ],
+  "parts.collect_prepared": [
+   0.214,
+   1.43
+  ],
+  "text.compose": [
+   0.208,
+   1.0
+  ],
+  "map_tiles.compose": [
+   0.202,
+   0.49
+  ],
+  "foreground.active": [
+   0.186,
+   1.73
+  ],
+  "localized.stage_key": [
+   0.147,
+   1.0
+  ],
+  "text._heal_native": [
+   0.101,
+   0.32
+  ],
+  "parts.rescue": [
+   0.1,
+   0.02
+  ],
+  "menu.identify": [
+   0.098,
+   1.93
+  ],
+  "ui_labels.compose": [
+   0.073,
+   1.43
+  ],
+  "menu.compose": [
+   0.052,
+   1.0
+  ],
+  "parts.schedule_unknown": [
+   0.022,
+   1.0
+  ]
+ },
+ "mean_ms_by_2s": [
+  11.9,
+  16.1,
+  18.6,
+  21.8,
+  22.3,
+  24.9,
+  16.5,
+  16.4,
+  25.5,
+  15.6,
+  14.9,
+  10.1,
+  11.2,
+  14.0
+ ]
+}

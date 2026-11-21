@@ -67,9 +67,14 @@ class Core:
         self.api.retro_srw_get_robot_state.argtypes=[C.POINTER(C.c_int)]
         self.parts=np.zeros((128,8),dtype='uint32');self.owners=np.zeros((192,256),dtype='uint8');self.bgpriors=np.full(6,4,dtype='uint8')
         self.bgparts=np.zeros((3200,8),dtype='uint32');self.api.retro_srw_copy_bg_parts.argtypes=[C.c_void_p]
-        library,_=load_parts_library(ROOT/'graphics/kazuma_parts_library.json')
+        library,library_digest=load_parts_library(ROOT/'graphics/kazuma_parts_library.json')
         self.menu_bindings={i for i,b in enumerate(library['bindings'],1) if b.get('atlas_id')=='favorite_menu'}
-        hashes=(C.c_uint*len(library['bindings']))(*[b['hash'] if b.get('rgb_enabled',True) and not b.get('disabled') else 0 for b in library['bindings']])
+        # SRWW_ROBOT_SPRITE_HD=0 (opt-in): robot OBJ bindings are not
+        # registered, so the core keeps drawing those sprites natively.
+        from robot_sprite_switch import robot_sprite_hd,robot_ids
+        self.robot_sprite_hd=robot_sprite_hd()
+        self.robot_binding_ids=set() if self.robot_sprite_hd else robot_ids(library['bindings'],library_digest)
+        hashes=(C.c_uint*len(library['bindings']))(*[b['hash'] if b.get('rgb_enabled',True) and not b.get('disabled') and i not in self.robot_binding_ids else 0 for i,b in enumerate(library['bindings'],1)])
         self.api.retro_srw_register_parts.argtypes=[C.POINTER(C.c_uint),C.c_uint];self.api.retro_srw_register_parts(hashes,len(hashes))
         self.effect_bridge=hasattr(self.api,'retro_srw_register_effect_parts')
         # A source alias may have its own binding ID in the core. Inherit
@@ -94,7 +99,12 @@ class Core:
         # No recolouring (user decision 11/15-16): a sprite shown in another
         # palette than its HD art (fade, flash, tint) is not matched by shape;
         # the original pixels stay for that moment. Exact RGB keys still match.
-        if os.environ.get('SRWW_NO_RECOLOUR','1')!='0':indexed=[]
+        # 11/19: applies to robot parts only. HUD digits (red HP), effects and other
+        # non-robot art follow the game's own palette (user decision 2026-11-19).
+        if os.environ.get('SRWW_NO_RECOLOUR','1')!='0':
+            robots=self.robot_binding_ids or robot_ids(library['bindings'],library_digest)
+            indexed=[v for v in indexed if v[1] not in robots]
+        indexed=[v for v in indexed if v[1] not in self.robot_binding_ids]
         self.indexed_bridge=hasattr(self.api,'retro_srw_register_indexed_parts')
         if indexed and not self.indexed_bridge:raise RuntimeError('전체 기체용 코어를 업데이트해야 합니다.')
         if self.indexed_bridge:
@@ -198,6 +208,7 @@ class Core:
             while True:
                 try:identity,material,binding=renderer.dynamic_bindings.get_nowait()
                 except queue.Empty:break
+                if not self.robot_sprite_hd:continue   # runtime assemblies are unbound robot OBJ
                 self.api.retro_srw_add_dynamic_part(identity,material,binding)
         if not hasattr(self.api,'retro_srw_set_ready_parts') or renderer.ready_generation==self.ready_generation:return
         generation=renderer.ready_generation

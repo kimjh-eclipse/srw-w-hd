@@ -1,0 +1,746 @@
+{
+  "physical_screen": "lower",
+  "engine": 1,
+  "BG_layer": 0,
+  "frame_BG_layer": 1,
+  "source_IMG": 4651,
+  "source_PLT": 4650,
+  "source_SCR": null,
+  "SCR_reason": "프레임별 BG map은 수치/채움에 따라 변함. ROM SCR 단일 소유는 미확정.",
+  "tiles": [
+    {
+      "role": "HP 라벨",
+      "actual_source": [
+        {
+          "box": [
+            48,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 52,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            48,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 52,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "f1d683af9a1f7691b42ac4e7e656d1e776999bd3b171f4fd65370ca45b09276a",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 52,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 160,
+          "y": 8,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 라벨",
+      "actual_source": [
+        {
+          "box": [
+            56,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 53,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            56,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 53,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "ff2e93f1b1464fc1c3242f3f61ac57b78bea7cf31b3a67a1404689017b471070",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 53,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 168,
+          "y": 8,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 라벨",
+      "actual_source": [
+        {
+          "box": [
+            64,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 54,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            64,
+            96,
+            8,
+            8
+          ],
+          "tile_id": 54,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "c0ccaf91566eab40d80473f8b8de55f0d2e3d42cba4caa4346ad4d611e079b1d",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 54,
+          "raw_tile_aligned": true
+        },
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 60,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 176,
+          "y": 8,
+          "w": 8,
+          "h": 8
+        },
+        {
+          "resource": 4651,
+          "x": 224,
+          "y": 8,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            48,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 65,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            128,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 65,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            128,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 65,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "f75d2181a5690f5537456d7551c5cd193469409b538d252fcd15ef19ec94e2b2",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 65,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 8,
+          "y": 16,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            56,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            64,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            136,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            144,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            152,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            160,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            168,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            176,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            184,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            192,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            136,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            144,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            152,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            160,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            168,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            176,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            184,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            192,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 9,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "f31dc2df709eedef6819d05dbba0d3d86c29f2c7c6c6d7c38bbfbb8dd4fc0965",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 9,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 72,
+          "y": 0,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            72,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            80,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            88,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            96,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            104,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            112,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            56,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            64,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            72,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            80,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            88,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            96,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            104,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            112,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 1,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "120fdd1ed2c06e822988529efc55efb37f43839a82a4b3e2cffcf232ffce5077",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 1,
+          "raw_tile_aligned": true
+        },
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 33,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 8,
+          "y": 0,
+          "w": 8,
+          "h": 8
+        },
+        {
+          "resource": 4651,
+          "x": 8,
+          "y": 8,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            120,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 70,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            120,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 70,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "8b67e687193b4d885d9366340cdafd243b8a3f5e8073838a083619ae5c44cb91",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 70,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 48,
+          "y": 16,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            200,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 66,
+          "palette_bank": 0
+        },
+        {
+          "box": [
+            200,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 66,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "6da78ba62daa3db35902d8d83d4c2da104956e647fb258916d7d3062b3756e59",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 66,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 16,
+          "y": 16,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    },
+    {
+      "role": "HP 바 동적 타일",
+      "actual_source": [
+        {
+          "box": [
+            48,
+            104,
+            8,
+            8
+          ],
+          "tile_id": 69,
+          "palette_bank": 0
+        }
+      ],
+      "raw_tile_sha256": "98038882fd12e651fbc0747ff2af1d548654e63e9a936cdc0505cafe3b7004c8",
+      "IMG_candidates": [
+        {
+          "IMG": 4651,
+          "ROM_tile_index": 69,
+          "raw_tile_aligned": true
+        }
+      ],
+      "source_IMG": 4651,
+      "source_boxes": [
+        {
+          "resource": 4651,
+          "x": 40,
+          "y": 16,
+          "w": 8,
+          "h": 8
+        }
+      ],
+      "render_mode": "BG 4bpp tile; original tile_map selects dynamic segment",
+      "source_palette_resource": 4650,
+      "actual_palette_bgr555_in_per_frame_contract": true,
+      "new_HD_drawing": false
+    }
+  ],
+  "figure_geometry": "glyph_and_bar_geometry.json",
+  "dynamic_tile_maps": "native_offset0/hud_bg_tiles_contract.json + native_offset1080/hud_bg_tiles_contract.json",
+  "stable_source_offsets": [
+    0,
+    1080
+  ],
+  "excluded_transition_offset": 1060
+}

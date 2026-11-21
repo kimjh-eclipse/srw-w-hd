@@ -1,0 +1,43 @@
+{
+ "source": "test_current/parts/pose_packets/unit_239/robot_set/install/unit_239_replace",
+ "contract": "contract.json",
+ "drawing": "candidate_atlas.png",
+ "native": "native_atlas.png",
+ "generated": "generated.png",
+ "file_sha256": {
+  "contract": "3748dc34cd3413738f8dc4df867a0e737f8d251b1463686d17e0d49ebb977299",
+  "drawing": "8144f8c779f6d0b4e271a6eeacc3e4b3dbfacf9fda48f040a751ba2dc7fa8c6b",
+  "native": "740142c244a63fa6b8bdd0002f46608a5e04be091db52c121af01b4c1795012d",
+  "generated": "8144f8c779f6d0b4e271a6eeacc3e4b3dbfacf9fda48f040a751ba2dc7fa8c6b"
+ },
+ "bindings": [
+  6762,
+  6761,
+  6766,
+  6760,
+  112300,
+  102781,
+  112299,
+  6763,
+  6769,
+  6768,
+  6767,
+  6770
+ ],
+ "nested": true,
+ "prior_binding_spec_sha256": {
+  "6762": "d2d14f8b34678308bd1e08123228d24c25449bb7af3250efdbcae0271d702fcd",
+  "6761": "cba3b587ddfded60707db4eee02736af1e536f662d7ad6bea487a54e9f1136b4",
+  "6766": "8e2efd971dbc2dcefbb8cac2c5a312057b047e9a5a19f84a72de7b66339e6474",
+  "6760": "891c4221e13c3454de7f3fc3715deb4748c5b7f60f6584c220e3ce528d47a8ad",
+  "112300": "ab35c4f9969a360abf6566003150308a0cd24c6da3991fb01f828c9b3d7dd02b",
+  "102781": "9edcbe3c50ae148a45af060ec83fd41f4664e5dc9ef9d922871e6600ade7c9c4",
+  "112299": "4cf9cc9ca9f4f601203bbfdd3215f32509c7efc7d718cae9bacbf4f195ec67a5",
+  "6763": "e9157d4c8d9afe2069cb4baddce8a3172be3ca56c28e64717c8d7466f0ab063b",
+  "6769": "34ba8a24e91985d0e5c78ed60a4e8465ef6b940dd8167b0fd7f7e67a2c3c60ff",
+  "6768": "22db5864660db1b4639df35ccaa056df678bd420ec126c747db1067ac65cfc68",
+  "6767": "be648427ef6d49ce1b8f025f2cb61278aef6cfa24a047c2b719cf70a7a9c5a98",
+  "6770": "d93b09c079187832a214cd065e7cd2a632c4757fa24fb785a4407268e5c86ac7"
+ },
+ "note": "whole-pose redraw split by Claude (test_current/parts/pose_packets/unit_239/robot_set): replacement of existing RGB-keyed HD"
+}

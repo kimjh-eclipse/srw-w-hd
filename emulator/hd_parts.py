@@ -9,6 +9,7 @@ from collections import OrderedDict
 import numpy as np
 from PIL import Image
 from hd_parts_registration import register_part,registration_stamp
+from registration_stamp_cache import cached_registration_stamp
 from parts_disk_cache import PartsDiskCache
 from palette_materials import material_indices,anchored_indices
 from texture_preparation import prepare_task,prepare_composite_task,start_texture_worker
@@ -88,7 +89,7 @@ class PartsRenderer:
         cache_path=ROOT/'graphics'/meta.get('registration_cache','kazuma_parts_registration.npz')
         if cache_path.exists():
             with np.load(cache_path,allow_pickle=False) as archive:
-                if str(archive['stamp'])==registration_stamp(ROOT,meta):
+                if str(archive['stamp'])==cached_registration_stamp(ROOT,meta,library_digest):
                     self.registered_cache={key:archive[key] for key in archive.files if key.startswith('part_')}
                     self.cached_stats=json.loads(str(archive['statistics']))
         self.cache=OrderedDict();self.scaled=OrderedDict();self.material_maps=OrderedDict();self.baked_scales={}
@@ -113,6 +114,8 @@ class PartsRenderer:
         for index,binding in enumerate(self.bindings,1):self.ready_aliases.setdefault(binding.get('source_binding',index),[]).append(index)
         self.baked_ready=np.fromiter((alias for source in self.baked for alias in self.ready_aliases.get(source,())),dtype='uint32')
         self.dynamic_parts=bool(dynamic_parts and async_prepare and (ROOT/'graphics/parts_tile_library.sqlite').exists())
+        # SRWW_ROBOT_SPRITE_HD=0: unbound robot OBJ must stay native, not be re-assembled.
+        if os.environ.get('SRWW_ROBOT_SPRITE_HD','1')=='0':self.dynamic_parts=False
         self.dynamic_bindings=queue.SimpleQueue();self.unmapped_pending={};self.unmapped_seen=set();self.unmapped_misses={};self.runtime_requests={}
         self.prepared.on_evict=lambda:setattr(self,'ready_generation',self.ready_generation+1)
         if self.dynamic_parts and os.environ.get('SRWW_ASSEMBLY_MISSES','1')!='0':self.load_misses()
@@ -232,6 +235,16 @@ class PartsRenderer:
             temporary=path.with_suffix('.json.tmp');temporary.write_text(json.dumps(self.digest_table,sort_keys=True,indent=0),encoding='utf-8');temporary.replace(path);self.digests_dirty=False
         except OSError:pass
 
+    def shipped_atlas_identities(self):
+        table=getattr(self,'shipped_identities',None)
+        if table is None:
+            table={};store=self.disk_cache.shipped_path
+            if store is not None:
+                try:table=json.loads(store.with_name('parts_baked_atlases.json').read_text(encoding='utf-8'))['atlases']
+                except (OSError,ValueError,KeyError):table={}
+            self.shipped_identities=table
+        return table
+
     def atlas_identity(self,file):
         """Name, size and content hash of one atlas.
 
@@ -240,6 +253,12 @@ class PartsRenderer:
         modification time only decides whether a recorded hash can be reused.
         """
         known=self.__dict__.setdefault('atlas_ids',{}).get(file)
+        if known is None:
+            # A release repacks the atlases (WebP, at most 960 px), so their files no longer
+            # give the identity the delivered textures were stored under: the table beside
+            # the delivered store does.
+            shipped=self.shipped_atlas_identities().get(file)
+            if shipped:known=self.atlas_ids[file]=[file,shipped[0],shipped[1]]
         if known is None:
             path=ROOT/'graphics'/file;stat=path.stat();recorded=self.atlas_digests().get(file)
             if recorded and recorded[0]==stat.st_size and recorded[1]==stat.st_mtime_ns:digest=recorded[2]

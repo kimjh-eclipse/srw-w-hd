@@ -1,0 +1,16 @@
+{
+  "scope": "Check every DS RGB value and unquantized boundaries against NumPy rules.",
+  "ds_rgb_values": 32768,
+  "low_bit_offsets": [
+    0,
+    1,
+    6,
+    7
+  ],
+  "additional_rgb_pixels": 49152,
+  "six_predicates_exact": true,
+  "mean_ms": {
+    "numpy": 0.1756,
+    "native": 0.2005
+  }
+}

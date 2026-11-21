@@ -1,0 +1,307 @@
+{
+ "name": "step2_profile",
+ "frames": 1680,
+ "width": 768,
+ "ms": {
+  "mean": 28.2,
+  "p50": 27.07,
+  "p95": 47.68,
+  "p99": 85.11,
+  "max": 443.53
+ },
+ "over_16_7ms": 0.853,
+ "exclusive": [
+  {
+   "function": "hd_fonts.py:_recognize",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 2.381,
+   "inclusive_ms_per_frame": 6.219
+  },
+  {
+   "function": "<method 'reduce' of 'numpy.ufunc' objects>",
+   "calls": 206861,
+   "exclusive_ms_per_frame": 1.391,
+   "inclusive_ms_per_frame": 1.391
+  },
+  {
+   "function": "foreground_blend.py:gpu_plane",
+   "calls": 1012,
+   "exclusive_ms_per_frame": 1.141,
+   "inclusive_ms_per_frame": 2.099
+  },
+  {
+   "function": "foreground_blend.py:eligibility",
+   "calls": 13862,
+   "exclusive_ms_per_frame": 1.117,
+   "inclusive_ms_per_frame": 1.335
+  },
+  {
+   "function": "<method 'finish' of 'mgl.Context' objects>",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.937,
+   "inclusive_ms_per_frame": 0.937
+  },
+  {
+   "function": "<built-in method zlib.crc32>",
+   "calls": 60952,
+   "exclusive_ms_per_frame": 0.832,
+   "inclusive_ms_per_frame": 0.832
+  },
+  {
+   "function": "hd_fonts.py:_underlay_key",
+   "calls": 3655,
+   "exclusive_ms_per_frame": 0.822,
+   "inclusive_ms_per_frame": 0.977
+  },
+  {
+   "function": "hd_battle_backgrounds.py:identify",
+   "calls": 3068,
+   "exclusive_ms_per_frame": 0.754,
+   "inclusive_ms_per_frame": 1.046
+  },
+  {
+   "function": "gpu_surface.py:render",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.604,
+   "inclusive_ms_per_frame": 2.998
+  },
+  {
+   "function": "native_font_scan.py:scan",
+   "calls": 12548,
+   "exclusive_ms_per_frame": 0.593,
+   "inclusive_ms_per_frame": 0.787
+  },
+  {
+   "function": "hd_parts.py:compose",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.589,
+   "inclusive_ms_per_frame": 8.046
+  },
+  {
+   "function": "hd_fonts.py:_selected_span",
+   "calls": 10824,
+   "exclusive_ms_per_frame": 0.556,
+   "inclusive_ms_per_frame": 1.546
+  },
+  {
+   "function": "hd_fonts.py:clean_native",
+   "calls": 3009,
+   "exclusive_ms_per_frame": 0.526,
+   "inclusive_ms_per_frame": 1.536
+  },
+  {
+   "function": "hd_localized_screens.py:compose",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.386,
+   "inclusive_ms_per_frame": 0.461
+  },
+  {
+   "function": "hd_fonts.py:compose",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.347,
+   "inclusive_ms_per_frame": 1.104
+  },
+  {
+   "function": "hd_scenario_backgrounds.py:rgb555",
+   "calls": 807,
+   "exclusive_ms_per_frame": 0.321,
+   "inclusive_ms_per_frame": 0.401
+  },
+  {
+   "function": "gpu_surface.py:texture",
+   "calls": 87745,
+   "exclusive_ms_per_frame": 0.316,
+   "inclusive_ms_per_frame": 1.417
+  },
+  {
+   "function": "<method 'tobytes' of 'numpy.ndarray' objects>",
+   "calls": 192497,
+   "exclusive_ms_per_frame": 0.303,
+   "inclusive_ms_per_frame": 0.303
+  },
+  {
+   "function": "<method 'copy' of 'numpy.ndarray' objects>",
+   "calls": 98595,
+   "exclusive_ms_per_frame": 0.3,
+   "inclusive_ms_per_frame": 0.3
+  },
+  {
+   "function": "stage_cache.py:__contains__",
+   "calls": 1278837,
+   "exclusive_ms_per_frame": 0.297,
+   "inclusive_ms_per_frame": 0.373
+  },
+  {
+   "function": "hd_map_icons.py:codes",
+   "calls": 1050,
+   "exclusive_ms_per_frame": 0.296,
+   "inclusive_ms_per_frame": 0.373
+  },
+  {
+   "function": "<method 'encode' of 'ImagingEncoder' objects>",
+   "calls": 35455,
+   "exclusive_ms_per_frame": 0.288,
+   "inclusive_ms_per_frame": 0.288
+  },
+  {
+   "function": "hd_portraits.py:compose",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.286,
+   "inclusive_ms_per_frame": 0.932
+  },
+  {
+   "function": "native_composition.py:blend_mask",
+   "calls": 31238,
+   "exclusive_ms_per_frame": 0.285,
+   "inclusive_ms_per_frame": 0.347
+  },
+  {
+   "function": "foreground_blend.py:active",
+   "calls": 2908,
+   "exclusive_ms_per_frame": 0.281,
+   "inclusive_ms_per_frame": 0.281
+  },
+  {
+   "function": "hd_renderer.py:render_top",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.277,
+   "inclusive_ms_per_frame": 19.883
+  },
+  {
+   "function": "native_composition.py:mask",
+   "calls": 31238,
+   "exclusive_ms_per_frame": 0.274,
+   "inclusive_ms_per_frame": 0.686
+  },
+  {
+   "function": "numeric.py:flatnonzero",
+   "calls": 352503,
+   "exclusive_ms_per_frame": 0.269,
+   "inclusive_ms_per_frame": 0.932
+  },
+  {
+   "function": "<method 'astype' of 'numpy.ndarray' objects>",
+   "calls": 129115,
+   "exclusive_ms_per_frame": 0.267,
+   "inclusive_ms_per_frame": 0.267
+  },
+  {
+   "function": "hd_parts.py:sprite",
+   "calls": 31927,
+   "exclusive_ms_per_frame": 0.263,
+   "inclusive_ms_per_frame": 1.232
+  },
+  {
+   "function": "hd_map_tiles.py:phase",
+   "calls": 976,
+   "exclusive_ms_per_frame": 0.221,
+   "inclusive_ms_per_frame": 0.399
+  },
+  {
+   "function": "hd_parts.py:prefetch_related",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.213,
+   "inclusive_ms_per_frame": 1.072
+  },
+  {
+   "function": "<method 'texture' of 'mgl.Context' objects>",
+   "calls": 22920,
+   "exclusive_ms_per_frame": 0.201,
+   "inclusive_ms_per_frame": 0.201
+  },
+  {
+   "function": "hd_parts.py:collect_prepared",
+   "calls": 2388,
+   "exclusive_ms_per_frame": 0.2,
+   "inclusive_ms_per_frame": 0.315
+  },
+  {
+   "function": "hd_backgrounds.py:compose",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.193,
+   "inclusive_ms_per_frame": 0.524
+  },
+  {
+   "function": "<method 'transform' of 'ImagingCore' objects>",
+   "calls": 16098,
+   "exclusive_ms_per_frame": 0.189,
+   "inclusive_ms_per_frame": 0.189
+  },
+  {
+   "function": "<built-in method numpy.asarray>",
+   "calls": 74189,
+   "exclusive_ms_per_frame": 0.188,
+   "inclusive_ms_per_frame": 0.21
+  },
+  {
+   "function": "connection.py:send_bytes",
+   "calls": 4947,
+   "exclusive_ms_per_frame": 0.184,
+   "inclusive_ms_per_frame": 0.289
+  },
+  {
+   "function": "_moderngl.py:value",
+   "calls": 296977,
+   "exclusive_ms_per_frame": 0.181,
+   "inclusive_ms_per_frame": 0.426
+  },
+  {
+   "function": "menu_scene.py:<genexpr>",
+   "calls": 418605,
+   "exclusive_ms_per_frame": 0.17,
+   "inclusive_ms_per_frame": 0.17
+  },
+  {
+   "function": "native_font_pixels.py:masks",
+   "calls": 1436,
+   "exclusive_ms_per_frame": 0.163,
+   "inclusive_ms_per_frame": 0.181
+  },
+  {
+   "function": "fromnumeric.py:ravel",
+   "calls": 352503,
+   "exclusive_ms_per_frame": 0.162,
+   "inclusive_ms_per_frame": 0.274
+  },
+  {
+   "function": "hd_localized_screens.py:stage_key",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.156,
+   "inclusive_ms_per_frame": 0.199
+  },
+  {
+   "function": "process.py:submit",
+   "calls": 4947,
+   "exclusive_ms_per_frame": 0.154,
+   "inclusive_ms_per_frame": 0.52
+  },
+  {
+   "function": "<built-in method nt.stat>",
+   "calls": 578,
+   "exclusive_ms_per_frame": 0.154,
+   "inclusive_ms_per_frame": 0.156
+  }
+ ],
+ "exclusive_by_module": {
+  "hd_fonts.py": 5.13,
+  "foreground_blend.py": 2.64,
+  "hd_parts.py": 1.47,
+  "<method 'reduce' of 'numpy.ufunc' objects>": 1.39,
+  "gpu_surface.py": 1.14,
+  "Image.py": 1.09,
+  "<method 'finish' of 'mgl.Context' objects>": 0.94,
+  "hd_battle_backgrounds.py": 0.88,
+  "<built-in method zlib.crc32>": 0.83,
+  "native_font_scan.py": 0.66,
+  "native_composition.py": 0.6,
+  "hd_localized_screens.py": 0.55,
+  "fromnumeric.py": 0.51,
+  "stage_cache.py": 0.45,
+  "hd_map_icons.py": 0.4,
+  "__init__.py": 0.4,
+  "numeric.py": 0.38,
+  "hd_map_tiles.py": 0.37,
+  "hd_renderer.py": 0.37,
+  "hd_scenario_backgrounds.py": 0.34
+ }
+}

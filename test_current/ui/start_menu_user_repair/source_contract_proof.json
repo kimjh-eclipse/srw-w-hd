@@ -1,0 +1,140 @@
+{
+  "rows": [
+    {
+      "binding": 95316,
+      "source_box": [
+        40,
+        0,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    },
+    {
+      "binding": 95317,
+      "source_box": [
+        48,
+        0,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    },
+    {
+      "binding": 95318,
+      "source_box": [
+        32,
+        0,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    },
+    {
+      "binding": 95323,
+      "source_box": [
+        16,
+        32,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    },
+    {
+      "binding": 95325,
+      "source_box": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    },
+    {
+      "binding": 95326,
+      "source_box": [
+        0,
+        32,
+        32,
+        32
+      ],
+      "source_IMG23_indices_equal": true,
+      "hash_index_hash_match": true,
+      "live_prior_spec_equal": true
+    }
+  ],
+  "shared_parent_checks": [
+    {
+      "slot_a": 95316,
+      "slot_b": 95317,
+      "source_overlap": [
+        48,
+        0,
+        24,
+        32
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 95316,
+      "slot_b": 95318,
+      "source_overlap": [
+        40,
+        0,
+        24,
+        32
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 95317,
+      "slot_b": 95318,
+      "source_overlap": [
+        48,
+        0,
+        16,
+        32
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 95323,
+      "slot_b": 95325,
+      "source_overlap": [
+        32,
+        32,
+        16,
+        32
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    },
+    {
+      "slot_a": 95323,
+      "slot_b": 95326,
+      "source_overlap": [
+        16,
+        32,
+        16,
+        32
+      ],
+      "relation": "partial_overlap",
+      "generated_rgba_equal": true
+    }
+  ],
+  "four_role_sha_verified": true,
+  "no_actual_runtime_QA": true
+}

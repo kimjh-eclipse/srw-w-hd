@@ -1,0 +1,136 @@
+{
+  "note": "사용자 최근 그림수정요청 전부를 추적. candidate_submitted는 게임반영/재생합격 아님. Claude ART_INSTALL_DONE/독립재생결과와 별도.",
+  "items": [
+    {
+      "id": "death_open_wing",
+      "issue": "데스사이즈 펼친 날개 절단선",
+      "status": "Claude_installed_art_review_accepted",
+      "source": "test_current/parts/deathscythe_user_report/wing_master/candidate_packet.json",
+      "actual_replay_accepted": false,
+      "note": "입력6 20:15~20:20 판정. 전체무장 실제재생완료 아님."
+    },
+    {
+      "id": "death_closed_wing",
+      "issue": "데스사이즈 닫힌 날개 수평 절단",
+      "status": "Claude_installed_art_review_accepted",
+      "source": "test_current/parts/deathscythe_user_report/closed_wing_master/candidate_packet.json",
+      "actual_replay_accepted": false,
+      "note": "입력6 20:15~20:20 판정. 전체무장 실제재생완료 아님."
+    },
+    {
+      "id": "death_lower",
+      "issue": "데스사이즈 양다리·복부",
+      "status": "installed_with_54_disabled_review_pending",
+      "source": "test_current/parts/deathscythe_user_report/lower_body_repair/expanded_candidate_packet.json",
+      "actual_replay_accepted": false,
+      "note": "342 installed;54 형태불합격disabled유지. held54 및 접합새후보는검토전용. 전체완료아님."
+    },
+    {
+      "id": "death_effect",
+      "issue": "데스사이즈 노란 번개·빛·파편",
+      "status": "candidate_submitted_two_lightning_frames_and_rocks",
+      "source": "test_current/parts/deathscythe_user_report/yellow_lightning_bg_phase2/candidate_packet.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "sand_head",
+      "issue": "샌드록 투구 볏·얼굴",
+      "status": "Claude_installed_art_review_accepted",
+      "source": "test_current/parts/sandrock_user_report/agent_repair",
+      "actual_replay_accepted": false,
+      "note": "입력6 20:15~20:20 판정. 전체무장 실제재생완료 아님."
+    },
+    {
+      "id": "sand_shotel",
+      "issue": "샌드록 쇼텔",
+      "status": "candidate_submitted",
+      "source": "test_current/parts/sandrock_user_report/agent_repair/delivery_index.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "sand_chest_legs",
+      "issue": "샌드록 가슴·다리",
+      "status": "candidate_submitted",
+      "source": "test_current/parts/sandrock_user_report/agent_repair/delivery_index.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "sand_rear",
+      "issue": "샌드록 후면",
+      "status": "candidate_submitted",
+      "source": "test_current/parts/sandrock_user_report/agent_repair/delivery_index.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "sand_shield",
+      "issue": "샌드록 실드",
+      "status": "candidate_submitted",
+      "source": "test_current/parts/sandrock_user_report/agent_repair/shield/candidate_packet.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "valstork_seams",
+      "issue": "발스토크 포탑·우측장갑 접합",
+      "status": "Claude_installed_art_review_accepted",
+      "source": "test_current/parts/valstork_user_report/agent_repair/candidate_packet.json",
+      "actual_replay_accepted": false,
+      "note": "입력6 20:15~20:20 판정. 전체무장 실제재생완료 아님."
+    },
+    {
+      "id": "bless_cutin",
+      "issue": "브레스 전방향 빔 런처 컷인",
+      "status": "candidate_submitted_20_distinct_frames",
+      "source": "test_current/parts/bless_cutin_user_report/remaining_family_packet_index.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "title_logo",
+      "issue": "타이틀 로고",
+      "status": "connection_QA_Claude",
+      "source": "test_current/parts/title_logo_hd/candidate_packet.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "title_menu",
+      "issue": "오른쪽 시작메뉴",
+      "status": "candidate_submitted_panel_geometry_repaired",
+      "source": "test_current/ui/start_menu_user_repair/candidate_packet.json",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "death_joint_smooth",
+      "issue": "데스사이즈 날개·몸통 접합/큰날개 각진면",
+      "status": "review_only_candidate",
+      "source": "test_current/parts/deathscythe_user_report/wing_body_join_repair/review_candidate_packet.json",
+      "actual_replay_accepted": false,
+      "note": "341 공유계약/정적조립2자세. 89608소폭형태저하,37502미해결. 자동설치큐아님."
+    },
+    {
+      "id": "death_mixed_front_report",
+      "issue": "머리/양날개 원본+몸통/다리HD 혼합",
+      "screenshot": "C:/Users/OXP2/AppData/Local/Temp/codex-clipboard-4962df4c-b61c-4e0d-917a-f9888a2843a1.png",
+      "status": "source_trace_required",
+      "actual_replay_accepted": false
+    },
+    {
+      "id": "pink_combination_blur",
+      "issue": "분홍 헬기/차량/인간형 합체장면 파츠 뭉개짐",
+      "screenshot": "C:/Users/OXP2/AppData/Local/Temp/codex-clipboard-e7081d77-b31f-4143-b6aa-8d4a1e38c5ce.png",
+      "status": "source_trace_in_progress",
+      "actual_replay_accepted": false,
+      "note": "unit378 기존색단계자료가 후보,미확정. 재색칠/그림오류원인대조중."
+    },
+    {
+      "id": "heavyarms_leg_shoulder_smooth",
+      "issue": "헤비암즈 EW 다리/어깨 뭉개짐,매끈하게 수정",
+      "screenshot": "C:/Users/OXP2/AppData/Local/Temp/codex-clipboard-fc10db56-188c-4e7e-ad42-98ce68685595.png",
+      "status": "source_and_artwork_in_progress",
+      "actual_replay_accepted": false,
+      "note": "heavyarms_smooth_repair에게 원본/한자세계약/새그림조립비교배정.",
+      "additional_screenshots": [
+        "C:/Users/OXP2/AppData/Local/Temp/codex-clipboard-7721cdf7-4427-44f7-8c32-0f2beb9261a5.png"
+      ],
+      "additional_issue": "얼굴녹색얼룩/팔끝원본도트"
+    }
+  ]
+}

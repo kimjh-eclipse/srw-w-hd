@@ -1,0 +1,420 @@
+{
+ "name": "step1",
+ "frames": 1680,
+ "width": 768,
+ "ms": {
+  "mean": 43.15,
+  "p50": 22.73,
+  "p95": 41.44,
+  "p99": 69.22,
+  "max": 16358.16
+ },
+ "over_16_7ms": 0.824,
+ "exclusive": [
+  {
+   "function": "<method 'execute' of 'sqlite3.Connection' objects>",
+   "calls": 28,
+   "exclusive_ms_per_frame": 18.633,
+   "inclusive_ms_per_frame": 18.633
+  },
+  {
+   "function": "hd_fonts.py:_recognize",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 2.172,
+   "inclusive_ms_per_frame": 5.43
+  },
+  {
+   "function": "<method 'finish' of 'mgl.Context' objects>",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 1.356,
+   "inclusive_ms_per_frame": 1.356
+  },
+  {
+   "function": "<method 'reduce' of 'numpy.ufunc' objects>",
+   "calls": 210669,
+   "exclusive_ms_per_frame": 1.091,
+   "inclusive_ms_per_frame": 1.091
+  },
+  {
+   "function": "foreground_blend.py:gpu_plane",
+   "calls": 1004,
+   "exclusive_ms_per_frame": 1.009,
+   "inclusive_ms_per_frame": 1.745
+  },
+  {
+   "function": "foreground_blend.py:eligibility",
+   "calls": 13691,
+   "exclusive_ms_per_frame": 0.906,
+   "inclusive_ms_per_frame": 1.093
+  },
+  {
+   "function": "hd_fonts.py:_underlay_key",
+   "calls": 4447,
+   "exclusive_ms_per_frame": 0.758,
+   "inclusive_ms_per_frame": 0.89
+  },
+  {
+   "function": "<built-in method zlib.crc32>",
+   "calls": 64117,
+   "exclusive_ms_per_frame": 0.709,
+   "inclusive_ms_per_frame": 0.709
+  },
+  {
+   "function": "hd_battle_backgrounds.py:identify",
+   "calls": 3068,
+   "exclusive_ms_per_frame": 0.643,
+   "inclusive_ms_per_frame": 0.903
+  },
+  {
+   "function": "gpu_surface.py:render",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.599,
+   "inclusive_ms_per_frame": 2.724
+  },
+  {
+   "function": "hd_parts.py:compose",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.531,
+   "inclusive_ms_per_frame": 25.2
+  },
+  {
+   "function": "native_font_scan.py:scan",
+   "calls": 12628,
+   "exclusive_ms_per_frame": 0.509,
+   "inclusive_ms_per_frame": 0.675
+  },
+  {
+   "function": "hd_fonts.py:_selected_span",
+   "calls": 10834,
+   "exclusive_ms_per_frame": 0.505,
+   "inclusive_ms_per_frame": 1.422
+  },
+  {
+   "function": "hd_fonts.py:clean_native",
+   "calls": 3009,
+   "exclusive_ms_per_frame": 0.454,
+   "inclusive_ms_per_frame": 1.291
+  },
+  {
+   "function": "hd_localized_screens.py:compose",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.361,
+   "inclusive_ms_per_frame": 0.427
+  },
+  {
+   "function": "hd_scenario_backgrounds.py:rgb555",
+   "calls": 1598,
+   "exclusive_ms_per_frame": 0.316,
+   "inclusive_ms_per_frame": 0.39
+  },
+  {
+   "function": "hd_map_icons.py:codes",
+   "calls": 1842,
+   "exclusive_ms_per_frame": 0.304,
+   "inclusive_ms_per_frame": 0.375
+  },
+  {
+   "function": "hd_fonts.py:compose",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.29,
+   "inclusive_ms_per_frame": 1.078
+  },
+  {
+   "function": "gpu_surface.py:texture",
+   "calls": 100045,
+   "exclusive_ms_per_frame": 0.263,
+   "inclusive_ms_per_frame": 1.195
+  },
+  {
+   "function": "native_composition.py:mask",
+   "calls": 32038,
+   "exclusive_ms_per_frame": 0.25,
+   "inclusive_ms_per_frame": 0.601
+  },
+  {
+   "function": "numeric.py:flatnonzero",
+   "calls": 352837,
+   "exclusive_ms_per_frame": 0.249,
+   "inclusive_ms_per_frame": 0.855
+  },
+  {
+   "function": "<method 'copy' of 'numpy.ndarray' objects>",
+   "calls": 97956,
+   "exclusive_ms_per_frame": 0.242,
+   "inclusive_ms_per_frame": 0.242
+  },
+  {
+   "function": "native_composition.py:blend_mask",
+   "calls": 32038,
+   "exclusive_ms_per_frame": 0.238,
+   "inclusive_ms_per_frame": 0.291
+  },
+  {
+   "function": "hd_parts.py:sprite",
+   "calls": 33072,
+   "exclusive_ms_per_frame": 0.234,
+   "inclusive_ms_per_frame": 19.671
+  },
+  {
+   "function": "<method 'tobytes' of 'numpy.ndarray' objects>",
+   "calls": 201150,
+   "exclusive_ms_per_frame": 0.226,
+   "inclusive_ms_per_frame": 0.226
+  },
+  {
+   "function": "hd_map_tiles.py:phase",
+   "calls": 1767,
+   "exclusive_ms_per_frame": 0.215,
+   "inclusive_ms_per_frame": 0.39
+  },
+  {
+   "function": "<method 'astype' of 'numpy.ndarray' objects>",
+   "calls": 128106,
+   "exclusive_ms_per_frame": 0.211,
+   "inclusive_ms_per_frame": 0.211
+  },
+  {
+   "function": "hd_portraits.py:compose",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.209,
+   "inclusive_ms_per_frame": 0.715
+  },
+  {
+   "function": "foreground_blend.py:active",
+   "calls": 2908,
+   "exclusive_ms_per_frame": 0.207,
+   "inclusive_ms_per_frame": 0.207
+  },
+  {
+   "function": "hd_renderer.py:render_top",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.204,
+   "inclusive_ms_per_frame": 25.266
+  },
+  {
+   "function": "<method 'encode' of 'ImagingEncoder' objects>",
+   "calls": 39118,
+   "exclusive_ms_per_frame": 0.204,
+   "inclusive_ms_per_frame": 0.204
+  },
+  {
+   "function": "<method 'texture' of 'mgl.Context' objects>",
+   "calls": 25068,
+   "exclusive_ms_per_frame": 0.185,
+   "inclusive_ms_per_frame": 0.185
+  },
+  {
+   "function": "stage_cache.py:__contains__",
+   "calls": 827666,
+   "exclusive_ms_per_frame": 0.182,
+   "inclusive_ms_per_frame": 0.232
+  },
+  {
+   "function": "_moderngl.py:value",
+   "calls": 341728,
+   "exclusive_ms_per_frame": 0.173,
+   "inclusive_ms_per_frame": 0.402
+  },
+  {
+   "function": "hd_backgrounds.py:compose",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.172,
+   "inclusive_ms_per_frame": 0.471
+  },
+  {
+   "function": "<built-in method numpy.asarray>",
+   "calls": 83548,
+   "exclusive_ms_per_frame": 0.171,
+   "inclusive_ms_per_frame": 0.187
+  },
+  {
+   "function": "fromnumeric.py:ravel",
+   "calls": 352837,
+   "exclusive_ms_per_frame": 0.148,
+   "inclusive_ms_per_frame": 0.247
+  },
+  {
+   "function": "<method 'transform' of 'ImagingCore' objects>",
+   "calls": 17488,
+   "exclusive_ms_per_frame": 0.148,
+   "inclusive_ms_per_frame": 0.148
+  },
+  {
+   "function": "menu_scene.py:<genexpr>",
+   "calls": 418605,
+   "exclusive_ms_per_frame": 0.147,
+   "inclusive_ms_per_frame": 0.147
+  },
+  {
+   "function": "native_font_pixels.py:masks",
+   "calls": 1437,
+   "exclusive_ms_per_frame": 0.147,
+   "inclusive_ms_per_frame": 0.161
+  },
+  {
+   "function": "hd_parts.py:collect_prepared",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.146,
+   "inclusive_ms_per_frame": 0.249
+  },
+  {
+   "function": "hd_localized_screens.py:stage_key",
+   "calls": 1680,
+   "exclusive_ms_per_frame": 0.138,
+   "inclusive_ms_per_frame": 0.171
+  },
+  {
+   "function": "Image.py:tobytes",
+   "calls": 26166,
+   "exclusive_ms_per_frame": 0.133,
+   "inclusive_ms_per_frame": 0.577
+  },
+  {
+   "function": "<method 'resize' of 'ImagingCore' objects>",
+   "calls": 1240,
+   "exclusive_ms_per_frame": 0.128,
+   "inclusive_ms_per_frame": 0.128
+  },
+  {
+   "function": "hd_parts.py:prefetch_related",
+   "calls": 3179,
+   "exclusive_ms_per_frame": 0.122,
+   "inclusive_ms_per_frame": 0.585
+  }
+ ],
+ "exclusive_by_module": {
+  "<method 'execute' of 'sqlite3.Connection' objects>": 18.63,
+  "hd_fonts.py": 4.6,
+  "foreground_blend.py": 2.2,
+  "<method 'finish' of 'mgl.Context' objects>": 1.36,
+  "hd_parts.py": 1.2,
+  "<method 'reduce' of 'numpy.ufunc' objects>": 1.09,
+  "gpu_surface.py": 1.07,
+  "Image.py": 1.01,
+  "hd_battle_backgrounds.py": 0.75,
+  "<built-in method zlib.crc32>": 0.71,
+  "native_font_scan.py": 0.57,
+  "native_composition.py": 0.52,
+  "hd_localized_screens.py": 0.51,
+  "fromnumeric.py": 0.47,
+  "hd_map_icons.py": 0.38,
+  "__init__.py": 0.37,
+  "numeric.py": 0.35,
+  "hd_scenario_backgrounds.py": 0.34,
+  "hd_map_tiles.py": 0.32,
+  "stage_cache.py": 0.32
+ },
+ "compared_with": "baseline",
+ "picture_differences": [
+  {
+   "frame": 64880,
+   "differing_pixels": 0,
+   "max": 0,
+   "mean": 0.0
+  },
+  {
+   "frame": 64970,
+   "differing_pixels": 12659,
+   "max": 255,
+   "mean": 0.7028
+  },
+  {
+   "frame": 65060,
+   "differing_pixels": 21,
+   "max": 2,
+   "mean": 0.0
+  },
+  {
+   "frame": 65150,
+   "differing_pixels": 21,
+   "max": 2,
+   "mean": 0.0
+  },
+  {
+   "frame": 65240,
+   "differing_pixels": 313,
+   "max": 7,
+   "mean": 0.0004
+  },
+  {
+   "frame": 65330,
+   "differing_pixels": 312,
+   "max": 7,
+   "mean": 0.0004
+  },
+  {
+   "frame": 65420,
+   "differing_pixels": 720,
+   "max": 7,
+   "mean": 0.0012
+  },
+  {
+   "frame": 65510,
+   "differing_pixels": 10423,
+   "max": 230,
+   "mean": 0.1889
+  },
+  {
+   "frame": 65600,
+   "differing_pixels": 10745,
+   "max": 235,
+   "mean": 0.209
+  },
+  {
+   "frame": 65690,
+   "differing_pixels": 5529,
+   "max": 83,
+   "mean": 0.0147
+  },
+  {
+   "frame": 65780,
+   "differing_pixels": 5538,
+   "max": 83,
+   "mean": 0.0149
+  },
+  {
+   "frame": 65870,
+   "differing_pixels": 6647,
+   "max": 63,
+   "mean": 0.015
+  },
+  {
+   "frame": 65960,
+   "differing_pixels": 2448,
+   "max": 55,
+   "mean": 0.0068
+  },
+  {
+   "frame": 66050,
+   "differing_pixels": 37,
+   "max": 7,
+   "mean": 0.0001
+  },
+  {
+   "frame": 66140,
+   "differing_pixels": 5816,
+   "max": 48,
+   "mean": 0.0135
+  },
+  {
+   "frame": 66230,
+   "differing_pixels": 7011,
+   "max": 62,
+   "mean": 0.0171
+  },
+  {
+   "frame": 66320,
+   "differing_pixels": 7007,
+   "max": 62,
+   "mean": 0.0172
+  },
+  {
+   "frame": 66410,
+   "differing_pixels": 7201,
+   "max": 62,
+   "mean": 0.0176
+  }
+ ],
+ "identical_frames": 1,
+ "compared_frames": 18
+}

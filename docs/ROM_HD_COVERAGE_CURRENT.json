@@ -1,0 +1,31 @@
+{
+  "totals": {
+    "patterns": 1866,
+    "patterns_read": 1863,
+    "patterns_spanning_images": 1070,
+    "pattern_errors": 3,
+    "rectangles": 72785,
+    "out_of_bounds": 15218,
+    "covered": 44199,
+    "missing": 11166,
+    "missing_tiny": 1740
+  },
+  "distinct_parts": 48377,
+  "distinct_missing": 10223,
+  "images_with_patterns": 1824,
+  "images_with_missing_parts": 973,
+  "images_fully_missing": 248,
+  "missing_seen_in_scenes": 34,
+  "order": "seen in retained scenes (frames), then units selectable in the test window, then missing opaque area",
+  "generated_at": "2026-11-14T09:45:26+09:00",
+  "library_sha256": "780a3ba4b083a250e06207089235e1216ad6d12db5b80545843213a1c1518fcf",
+  "comparison_basis": "Same export_missing_parts.py PAT-first-image/index-or-RGB hash coverage rules; output path isolated; no quality verdict.",
+  "previous_distinct_missing": 11358,
+  "delta_connected": 1135,
+  "caveats": [
+    "First image only:15218 out-of-bounds rectangles unjudged",
+    "BG layers not included",
+    "3 pattern parse failures",
+    "Registered lookup coverage only: not baked availability, quarantine status, correct drawing, or replay validation"
+  ]
+}

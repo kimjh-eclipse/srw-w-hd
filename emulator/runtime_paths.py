@@ -29,3 +29,18 @@ def texture_cache(default):
         prepared=Path(workspace)/'graphics'/Path(default).name
         if prepared.is_file():return prepared
     folder=data_dir()/'cache';folder.mkdir(exist_ok=True);return folder/Path(default).name
+
+def shipped_texture_store(default,writable):
+    """Finished textures delivered with a release, read only; None in a source checkout.
+
+    The player's own store stays in data/cache (texture_cache) so an update can replace the
+    delivered file. SRWW_SHIPPED_BAKED names a delivered store for tests.
+    """
+    named=os.environ.get('SRWW_SHIPPED_BAKED')
+    if named:candidate=Path(named)
+    elif FROZEN:candidate=Path(default)
+    else:return None
+    try:
+        if candidate.is_file() and candidate.resolve()!=Path(writable).resolve():return candidate
+    except OSError:pass
+    return None

@@ -19,6 +19,7 @@ from hd_battle_backgrounds import BattleBackgroundRenderer
 from render_resolution import clamp_width,DEFAULT_WIDTH,MAX_WIDTH,MAX_HEIGHT
 from painted_edges import clean_alpha,cutin_visibility
 from cutin_assets import CutinAssets
+from robot_sprite_switch import native_obj_filter
 
 from asset_paths import asset_root
 ROOT=asset_root(Path(__file__).resolve().parent.parent)
@@ -192,6 +193,13 @@ class HDRenderer:
             if self.menu_scene.last_scene is None and not is_battle:
                 terrain=self.map_tiles.compose(top,native)
                 if terrain or self.map_tiles.phase(native[:192]) is not None:self.map_icons.compose(top,native,background=getattr(self.map_tiles,'last_background',None) if terrain else None)
+        if hd[10] and not menu_kind and native_obj_filter():
+            # Opt-in (SRWW_NATIVE_OBJ_FILTER=xbrz): native OBJ pixels scaled
+            # with xBRZ instead of nearest; HD parts and cut-ins still go above.
+            from native_obj_filter import obj_overlay
+            overlay=obj_overlay(display_native,layer_ids,self.size,hud_mask)
+            if overlay is not None:
+                image,mask,box=overlay;top.paste(image,box[:2],mask)
         draw_cutins=[]
         for cutin in cutins:
             spec=self.cutins.specs.get(int(cutin[0]),{})

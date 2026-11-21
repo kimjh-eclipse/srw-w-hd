@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-11-14T12:11:56+09:00",
+  "source_report": "test_current\\parts\\codex_art_recheck_current\\report.json",
+  "source_classifier": "test_current\\parts\\codex_art_recheck_current\\classified.json",
+  "total_measured": 3324,
+  "flagged": 223,
+  "unflagged": 3101,
+  "by_group": {
+    "effect": {
+      "lost": 67,
+      "misplaced": 2,
+      "bloated": 2,
+      "shape": 15,
+      "colour": 8
+    },
+    "machine": {
+      "lost": 9,
+      "misplaced": 2,
+      "shape": 2,
+      "colour": 116
+    }
+  },
+  "recent_replacements": 131,
+  "recent_flagged": [
+    {
+      "binding": 92622,
+      "atlas": "effect92622_actual_bands_corrected",
+      "resource": null,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "native_texels": 111,
+      "iou": 0.703,
+      "outside": 0.004,
+      "unpainted": 0.0,
+      "colour_bad": 0.306,
+      "colour_mean": 67.3,
+      "flat": 0.137,
+      "green_pixels": 0,
+      "magenta_pixels": 0,
+      "registered_iou": null,
+      "flags": [
+        "colour"
+      ],
+      "batch": 445,
+      "area_ratio": 1.423,
+      "centroid_shift": 0.59,
+      "kind": "colour",
+      "effect": true,
+      "source": "test_current/parts/claude_colour92622_bands_v3"
+    },
+    {
+      "binding": 95108,
+      "atlas": "winged95108_solid_rails_repaired",
+      "resource": null,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 16,
+      "native_texels": 127,
+      "iou": 0.88,
+      "outside": 0.0,
+      "unpainted": 0.016,
+      "colour_bad": 0.385,
+      "colour_mean": 69.4,
+      "flat": 0.0,
+      "green_pixels": 0,
+      "magenta_pixels": 0,
+      "registered_iou": null,
+      "flags": [
+        "colour"
+      ],
+      "batch": 447,
+      "area_ratio": 0.969,
+      "centroid_shift": 0.23,
+      "kind": "colour",
+      "effect": false,
+      "source": "test_current/parts/borrowed_shape_rework/winged_lost95108"
+    },
+    {
+      "binding": 94759,
+      "atlas": "effect19915_shared_masters_repaired4",
+      "resource": 19915,
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 8,
+      "native_texels": 96,
+      "iou": 1.0,
+      "outside": 0.0,
+      "unpainted": 0.0,
+      "colour_bad": 0.333,
+      "colour_mean": 61.3,
+      "flat": 0.0,
+      "green_pixels": 0,
+      "magenta_pixels": 0,
+      "registered_iou": null,
+      "flags": [
+        "colour"
+      ],
+      "batch": 440,
+      "area_ratio": 1.0,
+      "centroid_shift": 0.0,
+      "kind": "colour",
+      "effect": true,
+      "source": "test_current/parts/claude_effect19915_correction"
+    }
+  ],
+  "formal_QA": false,
+  "HD_replay": false,
+  "input_SHA_unchanged": {
+    "library": true,
+    "quarantine": true
+  }
+}

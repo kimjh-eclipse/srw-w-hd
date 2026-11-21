@@ -1,0 +1,115 @@
+{
+  "note": "Codex 제작 작업 배정. 연결·굽기·합격·실제 재생 완료 수가 아닙니다. 실제 설치는 ART_INSTALL_DONE.json을 참조하세요.",
+  "handoff": "HANDOFF_FROM_CODEX_18.md",
+  "input": "HANDOFF_TO_CODEX_6.md",
+  "active": [
+    {
+      "owner": "root",
+      "status": "데스사이즈 큰날개/접합 새그림341공유계약·정적조립2자세 공개. 검토전용,실재생미확인. 새제보원본/HD혼합도추적중."
+    },
+    {
+      "owner": "heavyarms_smooth_repair",
+      "status": "fc10다리/어깨 및7721녹색얼굴·팔끝도트,원본팔레트/한자세대조및매끈한새그림작업중."
+    },
+    {
+      "owner": "pink_combination_repair",
+      "status": "e7081 분홍합체기체뭉개짐,unit378기존실제자료와대조중."
+    }
+  ],
+  "ready_rom_packets": [
+    {
+      "rank": 1,
+      "image": 21948,
+      "bank": 0,
+      "contracts": 17,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 2,
+      "image": 22163,
+      "bank": 0,
+      "contracts": 9,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 3,
+      "image": 19645,
+      "bank": 0,
+      "contracts": 22,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 4,
+      "image": 21785,
+      "bank": 0,
+      "contracts": 6,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 5,
+      "image": 22163,
+      "bank": 1,
+      "contracts": 11,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 6,
+      "image": 21657,
+      "bank": 0,
+      "contracts": 13,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 7,
+      "image": 21657,
+      "bank": 1,
+      "contracts": 11,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 8,
+      "image": 19645,
+      "bank": 1,
+      "contracts": 7,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    },
+    {
+      "rank": 9,
+      "image": 21785,
+      "bank": 1,
+      "contracts": 2,
+      "status": "후보인계;설치/합격은ART_INSTALL_DONE참조"
+    }
+  ],
+  "central_write_owner": "Claude",
+  "generation_limit": {
+    "status": "생성가능;현재새그림제작중"
+  },
+  "source_only_waiting": [
+    {
+      "rank": 10,
+      "image": 21948,
+      "bank": 1,
+      "contracts": 12
+    },
+    {
+      "rank": 11,
+      "image": 21071,
+      "bank": 0,
+      "contracts": 29
+    },
+    {
+      "rank": 12,
+      "image": 22419,
+      "bank": 0,
+      "contracts": 4
+    },
+    {
+      "rank": 14,
+      "image": 22419,
+      "bank": 1,
+      "contracts": 3
+    }
+  ],
+  "resume_instruction": "현재입력HANDOFF_TO_CODEX_6.md/출력HANDOFF_FROM_CODEX_18.md. Claude만설치·굽기·실재생. 미완료원인을형태/색/연결로구분. 사용자모니터안끔."
+}

@@ -79,8 +79,18 @@ def main():
         want=np.kron(idx>0,np.ones((S,S),bool))
         art=np.asarray(Image.open(f).convert('RGBA'))
         if not (art[:,:,3]>127).any():continue
-        filled=grow_fill(art,want);filled[~want,3]=0
-        it=dict(row=r,w=r['w'],h=r['h'],idx=idx,art=Image.fromarray(filled),drawn=float((art[:,:,3]>127)[want].mean()))
+        cov_p=parts.parent/'cov'/f.name
+        if cov_p.exists():
+            # Soft edge (11/20): pixels a drawing gave keep the drawing's own alpha, inside the
+            # sprite and in the outline ring around it; only pixels no drawing gave are grown
+            # (inside) or cleared (outside). The edge follows the drawn outline, not the 4x grid.
+            cov=np.asarray(Image.open(cov_p))>0;solid=(art[:,:,3]>127)&want
+            filled=grow_fill(np.where(solid[...,None],art,0).astype('uint8'),want)
+            filled[cov&~solid]=art[cov&~solid];filled[~want&~cov,3]=0
+            drawn=float((cov|solid)[want].mean())
+        else:
+            filled=grow_fill(art,want);filled[~want,3]=0;drawn=float((art[:,:,3]>127)[want].mean())
+        it=dict(row=r,w=r['w'],h=r['h'],idx=idx,art=Image.fromarray(filled),drawn=drawn)
         # A part the drawings show for less than half its pixels would be mostly
         # invented by grow_fill (unit 130 chest hole): leave the original.
         if it['drawn']<.5:hidden.append(h);continue

@@ -1,0 +1,303 @@
+{
+  "note": "Compact production screening history; superseded scratch folders cleaned under AGENTS.md. Initial64 review remains in its fixed separate directory while Claude reviews58 pictures.",
+  "checks": [
+    {
+      "check_name": "codex_art_recheck_round2",
+      "measured": 3323,
+      "flagged": 427,
+      "unflagged": 2896,
+      "report_sha256": "d3033334a22028703a11c8cdbdfc8778292be3535b3aeffb1009edcc96f72b30",
+      "by_group": {
+        "machine": {
+          "lost": 18,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        },
+        "effect": {
+          "lost": 222,
+          "misplaced": 7,
+          "bloated": 8,
+          "empty": 8,
+          "shape": 24,
+          "colour": 21
+        }
+      }
+    },
+    {
+      "check_name": "codex_art_recheck_round3",
+      "measured": 3323,
+      "flagged": 367,
+      "unflagged": 2956,
+      "report_sha256": "44f453619a307f30993c92304f141330337f8b15e6fbae6295698a5520d71cc9",
+      "by_group": {
+        "machine": {
+          "lost": 18,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        },
+        "effect": {
+          "lost": 173,
+          "misplaced": 5,
+          "bloated": 8,
+          "empty": 5,
+          "shape": 23,
+          "colour": 16
+        }
+      },
+      "window_proof": {
+        "library_unchanged": true,
+        "quarantine_unchanged": true,
+        "total_measured": 3323,
+        "flagged": 367,
+        "unflagged": 2956,
+        "by_group": {
+          "machine": {
+            "lost": 18,
+            "misplaced": 2,
+            "shape": 2,
+            "colour": 115
+          },
+          "effect": {
+            "lost": 173,
+            "misplaced": 5,
+            "bloated": 8,
+            "empty": 5,
+            "shape": 23,
+            "colour": 16
+          }
+        },
+        "recent62_screen_passed": 60,
+        "recent_flagged": [
+          {
+            "binding": 92262,
+            "atlas": "effect21819_components_repaired13",
+            "resource": null,
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32,
+            "native_texels": 240,
+            "iou": 0.621,
+            "outside": 0.0,
+            "unpainted": 0.225,
+            "colour_bad": 0.201,
+            "colour_mean": 49.4,
+            "flat": 0.0,
+            "green_pixels": 0,
+            "magenta_pixels": 0,
+            "registered_iou": null,
+            "flags": [
+              "unpainted"
+            ],
+            "batch": 408
+          },
+          {
+            "binding": 92272,
+            "atlas": "effect21819_components_repaired13",
+            "resource": null,
+            "x": 32,
+            "y": 64,
+            "w": 32,
+            "h": 32,
+            "native_texels": 240,
+            "iou": 0.613,
+            "outside": 0.0,
+            "unpainted": 0.217,
+            "colour_bad": 0.136,
+            "colour_mean": 46.7,
+            "flat": 0.0,
+            "green_pixels": 0,
+            "magenta_pixels": 0,
+            "registered_iou": null,
+            "flags": [
+              "unpainted"
+            ],
+            "batch": 408
+          }
+        ],
+        "formal_QA": false,
+        "HD_replay": false
+      }
+    },
+    {
+      "check_name": "codex_art_recheck_round4",
+      "measured": 3323,
+      "flagged": 349,
+      "unflagged": 2974,
+      "report_sha256": "7bc44fe12a6acab82d61a1407440022194c67c452f407b3eac2aaeea64676e0c",
+      "by_group": {
+        "machine": {
+          "lost": 18,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        },
+        "effect": {
+          "lost": 155,
+          "misplaced": 5,
+          "bloated": 8,
+          "empty": 5,
+          "shape": 23,
+          "colour": 16
+        }
+      }
+    },
+    {
+      "check_name": "codex_art_recheck_20050",
+      "measured": 11,
+      "flagged": 0,
+      "unflagged": 11,
+      "report_sha256": "c10c8e769096e1711e33f6e4a3e85221ecafd1b25f5d855cfe892204ae89d25d"
+    },
+    {
+      "generated_at": "2026-11-14T10:24:53+09:00",
+      "source_report": "test_current/parts/codex_art_recheck_current/report.json",
+      "source_classifier": "test_current/parts/codex_art_recheck_current/classified.json",
+      "total_measured": 3323,
+      "flagged": 349,
+      "unflagged": 2974,
+      "by_group": {
+        "machine": {
+          "lost": 18,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        },
+        "effect": {
+          "lost": 155,
+          "misplaced": 5,
+          "bloated": 8,
+          "empty": 5,
+          "shape": 23,
+          "colour": 16
+        }
+      },
+      "recent18_flagged": [],
+      "formal_QA": false,
+      "HD_replay": false,
+      "window_SHA_proof": "No before snapshot for round4; round3 proof preserved separately. Root used --no-quarantine-write."
+    },
+    {
+      "generated_at": "2026-11-14T11:35:32+09:00",
+      "source_report": "test_current\\parts\\codex_art_recheck_current\\report.json",
+      "source_classifier": "test_current\\parts\\codex_art_recheck_current\\classified.json",
+      "total_measured": 3323,
+      "flagged": 265,
+      "unflagged": 3058,
+      "by_group": {
+        "machine": {
+          "lost": 16,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        },
+        "effect": {
+          "lost": 95,
+          "misplaced": 2,
+          "bloated": 2,
+          "shape": 15,
+          "colour": 16
+        }
+      },
+      "recent_replacements": 85,
+      "recent_flagged": [
+        {
+          "binding": 92622,
+          "atlas": "effect22030_continuous_beams_repaired5",
+          "resource": null,
+          "x": 128,
+          "y": 32,
+          "w": 32,
+          "h": 32,
+          "native_texels": 111,
+          "iou": 0.774,
+          "outside": 0.0,
+          "unpainted": 0.063,
+          "colour_bad": 0.323,
+          "colour_mean": 73.5,
+          "flat": 0.0,
+          "green_pixels": 0,
+          "magenta_pixels": 0,
+          "registered_iou": null,
+          "flags": [
+            "colour"
+          ],
+          "batch": 424,
+          "area_ratio": 0.982,
+          "centroid_shift": 1.85,
+          "kind": "colour",
+          "effect": true,
+          "source": "test_current/parts/claude_effect22030_smooth_v2"
+        }
+      ],
+      "formal_QA": false,
+      "HD_replay": false,
+      "input_SHA_unchanged": {
+        "library": true,
+        "quarantine": true
+      }
+    },
+    {
+      "generated_at": "2026-11-14T11:49:43+09:00",
+      "source_report": "test_current\\parts\\codex_art_recheck_current\\report.json",
+      "source_classifier": "test_current\\parts\\codex_art_recheck_current\\classified.json",
+      "total_measured": 3324,
+      "flagged": 250,
+      "unflagged": 3074,
+      "by_group": {
+        "effect": {
+          "lost": 87,
+          "misplaced": 2,
+          "bloated": 2,
+          "shape": 15,
+          "colour": 11
+        },
+        "machine": {
+          "lost": 14,
+          "misplaced": 2,
+          "shape": 2,
+          "colour": 115
+        }
+      },
+      "recent_replacements": 102,
+      "recent_flagged": [
+        {
+          "binding": 92622,
+          "atlas": "effect92622_actual_colour_corrected",
+          "resource": null,
+          "x": 0,
+          "y": 0,
+          "w": 32,
+          "h": 32,
+          "native_texels": 111,
+          "iou": 0.778,
+          "outside": 0.0,
+          "unpainted": 0.0,
+          "colour_bad": 0.41,
+          "colour_mean": 88.1,
+          "flat": 0.0,
+          "green_pixels": 0,
+          "magenta_pixels": 0,
+          "registered_iou": null,
+          "flags": [
+            "colour"
+          ],
+          "batch": 435,
+          "area_ratio": 1.162,
+          "centroid_shift": 0.74,
+          "kind": "colour",
+          "effect": true,
+          "source": "test_current/parts/claude_colour92622_review"
+        }
+      ],
+      "formal_QA": false,
+      "HD_replay": false,
+      "input_SHA_unchanged": {
+        "library": true,
+        "quarantine": true
+      }
+    }
+  ]
+}

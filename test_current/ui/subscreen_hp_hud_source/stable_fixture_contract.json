@@ -1,0 +1,33 @@
+{
+  "core_path": "C:\\Emul\\Workshop\\SRW_W_HD\\emulator\\desmume\\desmume\\src\\frontend\\libretro\\desmume_libretro.dll",
+  "core_sha256": "a81130f50c91e9069dee5324663c908a2b8bd986d192ba8f783733dad528ac93",
+  "native_only": true,
+  "core_enabled": false,
+  "origin_state": "test_current\\ui\\valhawk_reported_pose\\actual_frame90.state",
+  "fixtures": [
+    {
+      "state": "test_current/ui/subscreen_hp_hud_source/native_offset0/source.state",
+      "native": "test_current/ui/subscreen_hp_hud_source/native_offset0/both_screens.png",
+      "relative_frame_after_origin": 0,
+      "HP_values": [
+        1308,
+        5000
+      ]
+    },
+    {
+      "state": "test_current/ui/subscreen_hp_hud_source/native_offset1080/source.state",
+      "native": "test_current/ui/subscreen_hp_hud_source/native_offset1080/both_screens.png",
+      "relative_frame_after_origin": 1080,
+      "HP_values": [
+        0,
+        5000
+      ]
+    }
+  ],
+  "transient_1060": {
+    "native_number": 872,
+    "postrun_MMU_BG_number": 828,
+    "used_as_precise_rendered_contract": false
+  },
+  "formal_HD_replay_QA": false
+}
