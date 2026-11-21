@@ -38,8 +38,8 @@ def read_settings(path):
 def sdl_pad_mapping(sdl_mapping):
     """Translate SDL semantic button names to this joystick's physical indices."""
     result=dict(DEFAULT_PAD)
-    # l3/r3 (stick clicks) are not DS buttons: either one swaps the main and second screen
-    names=dict(a='a',b='b',x='x',y='y',l='leftshoulder',r='rightshoulder',start='start',select='back',up='dpup',down='dpdown',left='dpleft',right='dpright',l3='leftstick',r3='rightstick')
+    # r3 (right stick click) is not a DS button: it swaps the main and second screen
+    names=dict(a='a',b='b',x='x',y='y',l='leftshoulder',r='rightshoulder',start='start',select='back',up='dpup',down='dpdown',left='dpleft',right='dpright',r3='rightstick')
     for name,semantic in names.items():
         value=sdl_mapping.get(semantic,'')
         if isinstance(value,str) and value.startswith('b') and value[1:].isdigit():result[name]=int(value[1:])

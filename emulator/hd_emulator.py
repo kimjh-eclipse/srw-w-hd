@@ -501,10 +501,10 @@ class EmulatorWindow(ShortcutMixin):
                 self.pad_fast_forward=self.settings['pad_hotkeys']['fast_forward'] in held
                 for name,button in self.settings['pad_hotkeys'].items():
                     if button in pressed:self.run_action(name)
-                # Default for the screen swap while no pad button is assigned to it: a stick click (R3, or
-                # L3 on pads that report it), like the Android player; never a button used by another shortcut.
+                # Default for the screen swap while no pad button is assigned to it: the right stick click (R3,
+                # never L3), like the Android player; never a button used by another shortcut.
                 if self.settings['pad_hotkeys'].get('swap_screens') is None:
-                    sticks={self.pad.get_mapping().get(name) for name in ('r3','l3')}-{None}-set(self.settings['pad_hotkeys'].values())
+                    sticks={self.pad.get_mapping().get(name) for name in ('r3',)}-{None}-set(self.settings['pad_hotkeys'].values())
                     if sticks&pressed:self.run_action('swap_screens')
             axes=[self.pad.get_axis(i) for i in range(self.pad.get_numaxes())];hats=[self.pad.get_hat(i) for i in range(self.pad.get_numhats())]
             result=pad_buttons(held,axes,hats,self.pad_draft if self.pad_draft is not None else self.active_pad_mapping(),self.settings['deadzone'])

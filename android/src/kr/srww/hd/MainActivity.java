@@ -350,8 +350,9 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
     static final String[] SC_NAMES = {"메뉴 열기", "주·보조 화면 바꾸기", "빨리 감기 (누르는 동안)", "빠른 저장 (슬롯 1)", "빠른 불러오기 (슬롯 1)"};
     final java.util.HashSet<Integer> held = new java.util.HashSet<>(), usedMod = new java.util.HashSet<>(), taken = new java.util.HashSet<>();
 
-    /** Some pads report the right stick click as THUMBL (with DPAD_CENTER): both stick clicks are one button. */
-    static int norm(int code) { return code == KeyEvent.KEYCODE_BUTTON_THUMBL ? KeyEvent.KEYCODE_BUTTON_THUMBR : code; }
+    /** L3 and R3 are separate buttons (only R3 swaps the screens by default); a pad that reports its right stick
+     *  click as THUMBL can be remapped in the shortcut menu. */
+    static int norm(int code) { return code; }
 
     static String keyName(int code) {
         switch (code) {
@@ -360,7 +361,7 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
             case KeyEvent.KEYCODE_BUTTON_X: return "X"; case KeyEvent.KEYCODE_BUTTON_Y: return "Y";
             case KeyEvent.KEYCODE_BUTTON_L1: return "L1"; case KeyEvent.KEYCODE_BUTTON_R1: return "R1";
             case KeyEvent.KEYCODE_BUTTON_L2: return "L2"; case KeyEvent.KEYCODE_BUTTON_R2: return "R2";
-            case KeyEvent.KEYCODE_BUTTON_THUMBL: case KeyEvent.KEYCODE_BUTTON_THUMBR: return "R3";
+            case KeyEvent.KEYCODE_BUTTON_THUMBL: return "L3"; case KeyEvent.KEYCODE_BUTTON_THUMBR: return "R3";
             case KeyEvent.KEYCODE_BUTTON_START: return "START"; case KeyEvent.KEYCODE_BUTTON_SELECT: return "SELECT";
             case KeyEvent.KEYCODE_BUTTON_MODE: return "홈";
             case KeyEvent.KEYCODE_DPAD_UP: return "↑"; case KeyEvent.KEYCODE_DPAD_DOWN: return "↓";
