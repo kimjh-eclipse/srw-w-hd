@@ -20,6 +20,16 @@ def main():
         assert pad.last_update>pad.started,'Controller worker did not respond'
         result.update(controller_process=True,connected_controllers=len(pad.devices()))
     finally:pad.close()
+    # Finished part textures delivered with the release: found by key without registration work.
+    from hd_parts import PartsRenderer
+    parts=PartsRenderer(async_prepare=False);parts.load_baked()
+    active=[b for b,s in enumerate(parts.bindings,1) if not (s.get('source_binding') or s.get('runtime_texture') or s.get('disabled') or b in parts.quarantine)]
+    sample=[b for b in active if b in parts.baked][::997]
+    for b in sample:
+        image,_=parts.disk_cache.get(parts.texture_key(b,parts.bindings[b-1]['w'],parts.bindings[b-1]['h']));assert image.size[0]>0
+    result.update(shipped_store=str(parts.disk_cache.shipped_path),player_store=str(parts.disk_cache.path),active_parts=len(active),baked_parts=sum(b in parts.baked for b in active),baked_sample_read=len(sample),
+        player_store_rows=parts.disk_cache.db().execute('SELECT count(*) FROM textures').fetchone()[0])
+    parts.disk_cache.close()
     if args.rom:
         from hd_core import Core,ROOT
         from frame_compositor import FrameCompositor

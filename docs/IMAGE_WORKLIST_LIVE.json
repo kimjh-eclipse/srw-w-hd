@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T10:06:19.174325+09:00",
+  "updated": "2026-11-21T20:50:23.868179+09:00",
   "deadline_kst": "2026-11-20T11:00:00+09:00",
   "shutdown_task": "Codex_ImageWork_Shutdown_20261120_1100",
   "scope": "Current campaign, RAW received != finished. No speculative total for unpacketized scenes.",
@@ -664,5 +664,37 @@
     "raw": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\cutin_23514\\RAW_imagegen.png",
     "sha256": "34015bd56eb489bbedc7cffc7979d9b48c021000411f80b385e8358320edaade",
     "accepted_or_installed": false
-  }
+  },
+  "latest_expansion_authorized": true,
+  "current_robot_policy": "TO10: individual wholeposes; 196 rest+151 authorized; Claude assemblies QA",
+  "preferred_196_delivery_root": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_196_pilot",
+  "preferred_196_revisions": {
+    "04": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_196_pilot\\single_pose04\\shared_parts_retry\\RAW_imagegen.png",
+    "05": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_196_pilot\\single_pose05\\stripe_smooth\\RAW_imagegen.png"
+  },
+  "unit196_delivery": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_196_pilot\\UNIT_196_WHOLEPOSE_DELIVERY.json",
+  "unit196_raw_poses": 12,
+  "unit196_installed_verified": false,
+  "current_wholepose_receipt_index": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\LIVE_WHOLEPOSE_RECEIPT_INDEX.json",
+  "current_units": [
+    {
+      "folder": "unit_196_pilot",
+      "raw_pose_count": 12
+    },
+    {
+      "folder": "unit_120_redraw",
+      "raw_pose_count": 5
+    },
+    {
+      "folder": "unit_314",
+      "raw_pose_count": 7
+    },
+    {
+      "folder": "unit_311",
+      "raw_pose_count": 5
+    }
+  ],
+  "unit314_delivery": "C:\\Emul\\Workshop\\SRW_W_HD\\test_current\\parts\\redraw_requests\\_codex_20261121\\unit_314\\DELIVERY.json",
+  "unit314_raw_poses": 11,
+  "unit314_installed_verified": false
 }

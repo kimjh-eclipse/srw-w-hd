@@ -246,3 +246,30 @@
 - 실제 배포 실행 파일(SRW_W_HD.exe)로 띄워 본 확인은 재빌드 뒤에 해야 한다.
 - 런타임 조립(바인딩 없는 스프라이트) 결과는 배포 저장소에 넣지 않는다. 전과 같이 사용자 PC에서 만든다.
 - Assets 압축 파일 전체가 2GiB를 넘는지는 재빌드해 봐야 안다. `archive_portable.py`는 Assets를 더 쪼개지 못한다.
+
+
+## 2026-11-21 저녁 (Claude) PC 배포본 재빌드, 디스크 정리, 커밋 a5940f49
+
+### PC 배포본 (dist/SRW_W_HD) 재빌드
+- 실행: `PYTHONUTF8=1 python distribution/build_portable.py` (python 3.11). `PYTHONUTF8=1` 없이는 `prepare_images.py`가 파츠 목록 JSON을 cp949로 읽다 실패한다.
+- 결과: 39,295 파일 4.39GB. 구운 텍스처 105,771키 전부 수록(1.47GB).
+- 배포 실행 파일 자체 검사(`SRW_W_HD.exe --self-test ... --rom ... --state unit_0_weapon_0.state`):
+  frozen=true, 쓰는 파츠 107,905 = 구운 파츠 107,905, 사용자 저장소 0행, HD 프레임 1920x1080 정상.
+  자체 검사에 `shipped_store / active_parts / baked_parts / player_store_rows` 항목을 추가했다(`emulator/portable_selftest.py`).
+- 릴리즈 압축 파일(`python distribution/archive_portable.py`): Program 54MB, Assets 1,953MB, Baked 1,405MB. 셋 다 2GiB 미만.
+  **Assets가 한도의 95%다.** 그림이 조금만 더 늘면 넘으므로 다음 빌드 전에 Assets를 둘로 나눠야 한다(예: 로봇 아틀라스 / 나머지).
+- `build_portable.py`: `.before_`/`.after_` 백업 파일 제외, 변환된 그림(build/optimized_graphics)은 dist로 하드링크(작업공간 원본은 복사).
+- `archive_portable.py`: Portable(전체 한 파일)은 `--portable`을 줄 때만 만든다. `verify_portable.py`는 세 파일이 목록을 한 번씩 빠짐없이 담는지 검사하도록 바꿨으나 아직 돌려 보지 않았다(자체 검사가 quatre 컷인 상태 파일을 요구).
+
+### 디스크 정리 (작업공간 102.7GB → 정리 후 수치는 아래)
+- `git lfs prune --verify-remote`: 원격에 있는 것이 확인된 로컬 LFS 사본 342개, 약 16GB 삭제. 이력은 그대로다(필요하면 `git lfs fetch`로 다시 받는다).
+- NTFS 압축(`compact /c`): test_current 의 *.state *.dsv *.json, research 의 *.bin *.state *.json *.wav, graphics 의 *.json. 내용은 그대로이고 읽기·쓰기 방식도 같다.
+- 삭제: `test_current/parts/baked_store_compaction/candidate.sqlite`(11/13 후보, 실제 정리는 11/21에 따로 끝남), `build/android-toolchain/android-ndk-r27d-windows.zip`(이미 풀려 있는 설치 압축본), `build/shipped_baked_stage`(내 검증용).
+- 남겨 둔 것: graphics 의 `kazuma_parts_library.before_*/after_*` 5개와 pending_install 백업(오늘 다른 세션이 만든 되돌리기용, 압축만 적용).
+
+### 커밋 a5940f49
+- 포함: 코드(emulator, scripts, distribution), docs, graphics(새 아틀라스·아이콘·컷인), test_current 중 parts/combat 밖, tools 소스.
+- 제외: test_current/parts, test_current/combat 의 미추적 작업 데이터(110만 파일 24GB), android_pack, graphics/parts_baked.sqlite(100MB 초과·스크립트로 재생성), 백업 사본.
+- `graphics/parts_registered.sqlite`(옛 8배 저장소) 삭제를 커밋했다.
+- **작업 폴더에 없는 추적 파일 2개**: `graphics/menu_units/display_sizes.sqlite`, `graphics/portraits/prepared.sqlite`. 누가 지웠는지 모른다. 삭제는 커밋하지 않고 그대로 두었다(HEAD에는 남아 있음).
+- 푸시는 하지 않았다. origin/main 보다 92커밋 앞.
