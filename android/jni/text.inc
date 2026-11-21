@@ -496,27 +496,12 @@ static void heal(int k, uint32_t *rgba, uint32_t *argb) {
 /* host: after the shown frame was produced, before it is uploaded */
 void hd_text_frame(uint32_t *rgba, uint32_t *argb) {
     if (!hd_active() || !text_ready) return;
-    { /* debug: first time red HUD digits show in the top HUD rows, record 30 frames to files/frames_red.raw */
-        static int done, left2; static FILE *rf;
-        if (!done && !left2) { int red = 0; for (int i = 0; i < 32 * 256; i++) { uint32_t c = rgba[i]; if ((c & 255) >= 128 && ((c >> 8) & 255) < 64 && ((c >> 16) & 255) < 64) red++; }
-            if (red >= 40) { rf = fopen("/sdcard/Android/data/kr.srww.hd/files/frames_red.raw", "wb"); left2 = 30; done = 1; LOG("red HUD seen (%d px), recording", red); } }
-        if (left2 > 0 && rf) { fwrite(rgba, 4, 256 * 384, rf); if (--left2 == 0) { fclose(rf); rf = NULL; LOG("red frames recorded"); } }
-    }
-    { /* debug: while files/dumpframes exists, append 90 raw frames (both screens) to files/frames.raw */
-        static int left = -1; static FILE *df;
-        if (left < 0 && access("/sdcard/Android/data/kr.srww.hd/files/dumpframes", F_OK) == 0) { left = 90; for (int i = 0; i < 128; i++) if (parts[i][0]) { const struct Recolour *rc = recolour_of(parts[i][0]); int e = parts[i][0] <= nbind ? ent_of[parts[i][0]] : -1;
-            LOG("part %d bind %u xy %u,%u bit31 %u hash %08x indexed %d tex %d", i, parts[i][0], parts[i][2] & 511, parts[i][1] & 255, parts[i][7] >> 31, parts[i][4], rc != NULL, e >= 0 ? srcs[src_of[e]].state : -1); } df = fopen("/sdcard/Android/data/kr.srww.hd/files/frames.raw", "wb"); unlink("/sdcard/Android/data/kr.srww.hd/files/dumpframes"); }
-        if (left > 0 && df) { fwrite(rgba, 4, 256 * 384, df); if (--left == 0) { fclose(df); df = NULL; LOG("frames dumped"); left = -1; } }
-    }
     for (int k = 0; k < 2; k++) {
         uint32_t *scr = rgba + k * 256 * 192;
         int battle = k == 0 && (hdst[0] || (bginfo[3][2] == 0x06018000 && bginfo[2][2] == 0x06010000));
         uint32_t stamp = crc32b(battle, (const uint8_t *)scr, 256 * 192 * 4);
         if (stamp != ts[k].stamp) {
             ts[k].stamp = stamp; recognize(k, scr, battle);
-            { static int lastn[2] = {-1, -1}; static int logleft; if (access("/sdcard/Android/data/kr.srww.hd/files/logtext", F_OK) == 0) { logleft = 300; unlink("/sdcard/Android/data/kr.srww.hd/files/logtext"); }
-              if (logleft > 0) { logleft--; uint32_t h = 0; for (int i = 0; i < ts[k].n; i++) h = h * 31 + ts[k].g[i].x * 7 + ts[k].g[i].y * 131 + ts[k].g[i].cp[0];
-                if (ts[k].n != lastn[k] || 1) LOG("tx %d n %d held %d sig %08x", k, ts[k].n, nheld[k], h); lastn[k] = ts[k].n; } }
         }
         heal(k, scr, argb ? argb + k * 256 * 192 : NULL);
     }

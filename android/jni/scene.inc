@@ -11,7 +11,6 @@ static unsigned hdst[12], hdl[4][12], bginfo[4][9];
 static uint16_t native555[192 * 256];
 static int cyan;
 /* diagnostics: counted per screen frame, logged once a second */
-static int dg_frames, dg_cut, dg_cut_drawn, dg_notgpu, dg_vis0, dg_place, dg_mask_full, dg_bg_seen, dg_bg_drawn, dg_lastid = -1;
 
 static int scene_init(void *core, const char *dir) {
     for (int i = 0; i < 4096; i++) cut_of[i] = -1;
@@ -189,13 +188,13 @@ static int cutin_task(const unsigned *row, int x, int y, Task *k) {
     int ci = row[0] < 4096 ? cut_of[row[0]] : -1; if (ci < 0) return 0;
     Cut *c = &cuts[ci];
     ask(c->src); prefetch_family(ci);
-    if (srcs[c->src].state != ON_GPU) { ask(c->src); dg_notgpu++; return 0; }
+    if (srcs[c->src].state != ON_GPU) { ask(c->src); return 0; }
     memset(k, 0, sizeof *k);
     k->type = 1; k->cut = ci; k->src = c->src; k->item = row[5] & 3; k->prio = row[6] & 3; k->pilot = c->flags & 1;
     k->key = (k->prio << 20) | (1 << 16) | (k->item << 4);
     float nx = -x + c->bx / (float)S, ny = -y + c->by / (float)S, fw = srcs[c->src].w / (float)S, fh = srcs[c->src].h / (float)S;
     k->dux = 1 / fw; k->dvy = 1 / fh;
-    if (!place(k, nx, ny, fw, fh)) { dg_place++; return 0; }
+    if (!place(k, nx, ny, fw, fh)) return 0;
     k->alpha = 1;
     srcs[c->src].last = frame_no;
     return 1;
@@ -228,12 +227,6 @@ static uint8_t keep_ids[192 * 256];
  * Sort key: priority<<20 | kind<<16 | item<<4 | sub (sub 1 = BG tile, before the cut-in of the same layer). */
 int hd_draw(int top_screen) {
     if (!hd_active()) return 0;
-    if (top_screen && access("/sdcard/Android/data/kr.srww.hd/files/logparts", F_OK) == 0) {   /* debug: one frame of part rows */
-        unlink("/sdcard/Android/data/kr.srww.hd/files/logparts");
-        for (int i = 0; i < 128; i++) if (parts[i][0]) { const struct Recolour *rc = recolour_of(parts[i][0]); int e = parts[i][0] <= nbind ? ent_of[parts[i][0]] : -1;
-            LOG("part %d bind %u xy %u,%u bit31 %u hash %08x indexed %d tex %d", i, parts[i][0], parts[i][2] & 511, parts[i][1] & 255, parts[i][7] >> 31, parts[i][4], rc != NULL, e >= 0 ? srcs[src_of[e]].state : -1); }
-        LOG("parts logged");
-    }
     int nb = 0, np = 0, n = 0, restored = 0, restore_layer = -1, band = 0;
     if (top_screen && c_hd_state) {
         unsigned planes[4][12]; int nplanes = 0;
@@ -250,8 +243,6 @@ int hd_draw(int top_screen) {
         int battle = hdst[0] || (bginfo[3][2] == 0x06018000 && bginfo[2][2] == 0x06010000);
         band = battle && cyan;
         BGMatch bm[2]; int nm = identify_bgs(bm);
-        dg_frames++; if (nplanes) dg_cut++; dg_bg_seen += nm;
-        if ((int)(nplanes ? planes[0][0] : 0) != dg_lastid) { LOG("cut-in %d -> %d (planes %d, hd %u layers %u %u %u %u)", dg_lastid, nplanes ? (int)planes[0][0] : 0, nplanes, hdst[0], hdl[0][0], hdl[1][0], hdl[2][0], hdl[3][0]); dg_lastid = nplanes ? planes[0][0] : 0; }
         if (hdst[0] > 1 && nplanes) {
             /* restoration: native cut-in pixels become the backdrop layer behind (renderer.py 165-188) */
             int minp = 9; for (int i = 0; i < nplanes; i++) if ((int)planes[i][6] < minp) minp = planes[i][6];
@@ -328,7 +319,7 @@ int hd_draw(int top_screen) {
     for (int t = 0; t < na; t++) {
         Task *k = all[t];
         if (k->type == 2) {                           /* layer pixels (+ restoration) & window, art alpha */
-            if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 0; dg_mask_full++; continue; }
+            if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 0; continue; }
             int cnt = 0;
             for (int y = 0; y < k->h; y++) for (int x = 0; x < k->w; x++) {
                 int p = (k->top + y) * 256 + k->left + x;
@@ -342,7 +333,7 @@ int hd_draw(int top_screen) {
             k->state = cutin_visibility(k, NULL, 0);
             if (!k->state) continue;
             if (!fg_on && k->state == 2) { k->state = 3; continue; }
-            if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 3; dg_mask_full++; continue; }
+            if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 3; continue; }
             k->state = cutin_visibility(k, maskbuf + k->my * MW + k->mx, MW);
             if (k->fgany) any_fg = 1; else if (k->state == 2) k->state = 3;
             continue;
@@ -350,22 +341,12 @@ int hd_draw(int top_screen) {
         int kind = k->mx >> 16 & 1, priority = k->mx >> 8 & 3, item = k->mx & 255;
         int semi = k->alpha < 1;
         if (k->state == 2 && !semi && !(top_screen && fg_on)) { k->state = 3; continue; }   /* no mask needed */
-        if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 3; dg_mask_full++; continue; }
+        if (!mask_alloc(k->w, k->h, &k->mx, &k->my)) { k->state = 3; continue; }
         k->state = visibility(top_screen, k, priority, kind, item, k->ctl, maskbuf + k->my * MW + k->mx, MW);
         if (k->fgany) any_fg = 1;
         if (k->state == 2 && !k->fgany && !semi) k->state = 3;
     }
     if (restored) memcpy(ids, keep_ids, sizeof ids);
-    if (top_screen && c_hd_state) {
-        int drawn = 0, bgd = 0;
-        for (int t = 0; t < na; t++) { if (all[t]->type == 1 && all[t]->state) drawn = 1; if (all[t]->type == 1 && !all[t]->state) dg_vis0++; if (all[t]->type == 2 && all[t]->state) bgd = 1; }
-        dg_cut_drawn += drawn; dg_bg_drawn += bgd;
-        if (dg_frames >= 60) {
-            if (dg_cut || dg_mask_full) LOG("diag 60f: cutin frames %d drawn %d | not-gpu %d vis0 %d place %d maskfull %d | bg matched %d drawn %d | gpu %u MB",
-                dg_cut, dg_cut_drawn, dg_notgpu, dg_vis0, dg_place, dg_mask_full, dg_bg_seen, dg_bg_drawn, gpu_bytes >> 20);
-            dg_frames = dg_cut = dg_cut_drawn = dg_notgpu = dg_vis0 = dg_place = dg_mask_full = dg_bg_seen = dg_bg_drawn = 0;
-        }
-    }
     if (!na) return band;
     glUseProgram(prog);
     glActiveTexture(GL_TEXTURE1); glBindTexture(GL_TEXTURE_2D, masktex);

@@ -346,7 +346,6 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
     @Override public boolean dispatchKeyEvent(KeyEvent e) {
         int code = e.getKeyCode();
         boolean pad = fromPad(e.getSource());
-        if (pad && e.getRepeatCount() == 0) android.util.Log.i("srwwkey", (e.getAction() == KeyEvent.ACTION_DOWN ? "down " : "up ") + KeyEvent.keyCodeToString(code) + " r3=" + r3);
         if (code == KeyEvent.KEYCODE_BACK && !pad) { if (e.getAction() == KeyEvent.ACTION_UP) showMenu(); return true; }
         boolean down = e.getAction() == KeyEvent.ACTION_DOWN;
         if (code == KeyEvent.KEYCODE_BUTTON_R2 || code == KeyEvent.KEYCODE_TAB) { fastKey = down; fast = fastKey || fastAxis; return true; }

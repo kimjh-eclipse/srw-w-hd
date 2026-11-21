@@ -35,7 +35,6 @@ static void (*c_register_parts)(const unsigned *, unsigned), (*c_register_effect
             (*c_copy_parts)(void *, void *), (*c_copy_rendered_obj)(void *), (*c_copy_bg_parts)(void *),
             (*c_copy_layer_ids)(void *), (*c_copy_sub_parts)(void *, void *, void *, void *, void *, void *);
 static int (*c_bg_info)(unsigned, unsigned *), (*c_copy_foreground)(void *), (*c_copy_window)(void *);
-static void (*c_copy_unknown)(void *, void *, void *);   /* optional: sprites without HD art (logged once per hash) */
 
 /* ---- pack ---- */
 #pragma pack(push, 1)
@@ -117,7 +116,6 @@ int hd_init(void *core, const char *dir) {
     CSYM(c_copy_bg_parts, "retro_srw_copy_bg_parts") CSYM(c_copy_layer_ids, "retro_srw_copy_layer_ids")
     CSYM(c_copy_sub_parts, "retro_srw_copy_sub_parts") CSYM(c_bg_info, "retro_srw_get_bg_info")
     CSYM(c_copy_foreground, "retro_srw_copy_foreground") CSYM(c_copy_window, "retro_srw_copy_window")
-    *(void **)&c_copy_unknown = dlsym(core, "retro_srw_copy_unknown_parts");
     rumble_init(core);                        /* works without the HD packs */
     void *jg = dlopen("libjnigraphics.so", RTLD_NOW);
     if (!jg) { LOG("hd: no libjnigraphics"); return 0; }
@@ -240,19 +238,6 @@ void hd_after_run(const uint32_t *rgba) {
     bgprio[4] = bgprio[5] = sbgprio[4] = sbgprio[5] = 4;
     fg_on = c_copy_foreground(fgrec);
     win_on = c_copy_window(win);
-    if (c_copy_unknown) {
-        static uint32_t urows[128][8]; static uint8_t upx[128 * 4096]; static uint16_t upal[128 * 16];
-        static uint32_t seen[4096]; static int nseen;
-        memset(urows, 0, sizeof urows); c_copy_unknown(urows, upx, upal);
-        for (int i = 0; i < 128; i++) {
-            if (!urows[i][1]) continue;
-            uint32_t h = urows[i][6]; int k = 0; while (k < nseen && seen[k] != h) k++;
-            if (k < nseen || nseen >= 4096) continue;
-            seen[nseen++] = h;
-            int y = urows[i][3] & 255, x = urows[i][4] & 511;
-            LOG("no-hd sprite hash %u index %u %ux%u at %d,%d pal %u", h, urows[i][0], urows[i][1], urows[i][2], x, y, urows[i][5] >> 12);
-        }
-    }
     if (win_on) { int all = 1; for (int i = 0; i < 192 * 256; i++) if ((win[i] & 31) != 31) { all = 0; break; } if (all) win_on = 0; }
 }
 
