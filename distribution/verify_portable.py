@@ -3,7 +3,7 @@ from pathlib import Path
 import json,zipfile,hashlib,io
 ROOT=Path(__file__).resolve().parent.parent
 FORBIDDEN={'.nds','.gba','.iso','.rom','.state','.sav','.dsv','.srm','.key','.pem'}
-SPLIT=('SRW_W_HD_Program.zip','SRW_W_HD_Assets.zip','SRW_W_HD_Baked.zip')
+SPLIT=('SRW_W_HD_Program.zip',*sorted(p.name for p in (ROOT/'dist').glob('SRW_W_HD_Assets_*.zip')),'SRW_W_HD_Baked.zip')
 LIMIT=2*1024**3
 
 def main():
@@ -11,6 +11,7 @@ def main():
     assert image['after']<=image['before']/2
     smoke=json.loads((ROOT/'test_current/packaging/frozen_selftest.json').read_text())
     assert smoke['frozen'] and smoke['hd_cutin_id']==7 and smoke['controller_process'] and smoke['frame_worker']
+    assert len(SPLIT)>2 and not (ROOT/'dist/SRW_W_HD_Assets.zip').exists(),'artwork archives missing or a stale single one present'
     rows=[];seen={};manifest=None
     names_checked=list(SPLIT)+(['SRW_W_HD_Portable.zip'] if (ROOT/'dist/SRW_W_HD_Portable.zip').exists() else [])
     for name in names_checked:
