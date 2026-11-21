@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-CORE_DIR     := $(LOCAL_PATH)/../../..
+CORE_DIR     := $(abspath $(LOCAL_PATH)/../../..)
 LIBRETRO_DIR := $(CORE_DIR)/frontend/libretro
 
 JIT             :=

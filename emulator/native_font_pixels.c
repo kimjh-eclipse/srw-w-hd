@@ -17,7 +17,10 @@ API void font_pixel_masks(const uint8_t *restrict rgb,int height,int width,
   selected[i]=(r<48 && g>=48 && b<48);
   if(i<header){
    hud_ink[i]=(g>=232 && b>=232 && r>=80) ||
-              (r>=128 && g<64 && b<64) || (r>=128 && g>=128 && b<64);
+              (r>=128 && g<64 && b<64) || (r>=128 && g>=128 && b<64) ||
+              /* warning digits: the cyan face/bevel shades turned red (205,72,74 / 230,157,156 /
+                 255,230,230) or yellow (r==g); all three shades are ink like the cyan ones */
+              (r>=200 && g>=64 && g-b<=8 && b-g<=8 && r-g>=24) || (r>=200 && r-g<=8 && g-r<=8 && r-b>=24);
    hud_gold[i]=(r>=180 && g>=64 && b<64);
   }
  }

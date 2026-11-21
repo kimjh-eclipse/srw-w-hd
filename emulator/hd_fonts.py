@@ -23,6 +23,9 @@ DIM_TEXT=os.environ.get('SRWW_DIM_TEXT','1')!='0'
 DRAW_AS={'、':','}
 HEAL_SKIP_INK=os.environ.get('SRWW_HEAL_SKIP_INK','1')!='0'
 BASELINE_MARKS=set(',.。．，_')
+# Line-like marks are read only beside text (anchors): animated button gloss and moving
+# separator lines match '-', '`' or '￣' for a frame or two and flicker (2026-11-21).
+LINE_MARKS=('_','―','━','─','—','│','┃','-','－','‐','−','`','｀','￣','‾','¯','~','～')
 # Menu and dialogue text in the bold face as well (the native font is a heavy pixel face).
 BOLD_TEXT=os.environ.get('SRWW_BOLD_TEXT','1')!='0'
 
@@ -167,6 +170,9 @@ class FontRenderer:
             white = (low >= 232) & neutral
             selected_green=(red<48)&(green>=48)&(blue<48)
             hud_ink=((green[:32]>=232)&(blue[:32]>=232)&(red[:32]>=80))|((red[:32]>=128)&(green[:32]<64)&(blue[:32]<64))|((red[:32]>=128)&(green[:32]>=128)&(blue[:32]<64))
+            # Warning HP digits: the three cyan shades turned red or yellow (2026-11-21).
+            r_,g_,b_=red[:32].astype(int),green[:32].astype(int),blue[:32].astype(int)
+            hud_ink|=((r_>=200)&(g_>=64)&(abs(g_-b_)<=8)&(r_-g_>=24))|((r_>=200)&(abs(r_-g_)<=8)&(r_-b_>=24))
             hud_gold=(red[:32]>=180)&(green[:32]>=64)&(blue[:32]<64)
         if self.battle_scan:bright&=self.scan_mask;white&=self.scan_mask
         # A translucent button exposes animated gray pixels behind its text.
@@ -272,10 +278,13 @@ class FontRenderer:
         kanji=lambda ch:'一'<=ch<='鿿'
         text_anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum() and not kanji(ch)}
         candidates=[row for row in candidates if not kanji(row[2]) or any((row[0]+dx,row[1]) in text_anchors for dx in (-12,-8,8,12,-16,16))]
+        # Lines are read only beside text: the shaded stem of a bold HUD digit (level 8) is
+        # exactly the bitmap of '│' and would erase the digit (2026-11-21).
         anchors={(x,y) for x,y,ch,*_ in candidates if ch.isalnum()}
-        candidates=[row for row in candidates if row[2] not in ('_','―','━','─','—') or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
+        candidates=[row for row in candidates if row[2] not in LINE_MARKS or any((row[0]+dx,row[1]) in anchors for dx in (-16,-12,-8,8,12,16))]
         occupied = np.zeros(bright.shape, dtype=bool)
         accepted = []
+        fresh = []
         sizes, heights = {}, {}
         mask = np.zeros(bright.shape, dtype=bool)
         for x, y, char, width, height, ink in candidates:
@@ -287,6 +296,17 @@ class FontRenderer:
             mask[y:y+height, x:x+width] |= ink
             accepted.append((x, y, char))
             sizes[x, y], heights[x, y] = width, height
+            fresh.append((x, y, char, width, height, ink))
+        # A glyph read last time keeps its place while its own ink pixels are unchanged.
+        # Animated button gradients change the gray-level masks around fixed text
+        # ('????' spirit slots), so a fresh scan alternates between HD and native
+        # lettering every few frames (2026-11-21).
+        held=[]
+        for x,y,char,width,height,ink,colors in getattr(self,'held_glyphs',()):
+            if occupied[y:y+height,x:x+width].any() or not np.array_equal(native[y:y+height,x:x+width][ink],colors):continue
+            occupied[y:y+height,x:x+width]=True;mask[y:y+height,x:x+width]|=ink
+            accepted.append((x,y,char));sizes[x,y],heights[x,y]=width,height;held.append((x,y,char,width,height,ink,colors))
+        self.held_glyphs=held+[(x,y,char,w,h,ink,native[y:y+h,x:x+w][ink].copy()) for x,y,char,w,h,ink in fresh]
         self.last_sizes, self.last_heights = sizes, heights
         self.last_ink = mask.copy()
         if not SHORTCUTS:
@@ -294,10 +314,13 @@ class FontRenderer:
             mask = np.logical_or.reduce([padded[dy:dy+192, dx:dx+256]
                                          for dy in range(5) for dx in range(5)])
         elif accepted:
-            wide=mask.copy()
-            for step in (1,2):wide[:,step:]|=mask[:,:-step];wide[:,:-step]|=mask[:,step:]
-            mask=wide.copy()
-            for step in (1,2):mask[step:]|=wide[:-step];mask[:-step]|=wide[step:]
+            # Erase the glyph and only its own dark rim, not a 5x5 box: a box also
+            # erased the animated button gloss next to the letters and smeared it
+            # behind them (gray halos that move with the gloss, 2026-11-21).
+            ring=mask.copy()
+            ring[:,1:]|=mask[:,:-1];ring[:,:-1]|=mask[:,1:]
+            near=ring.copy();near[1:]|=ring[:-1];near[:-1]|=ring[1:]
+            mask=mask|(near&(native.max(2)<=48))
         self.hud_mask=np.zeros((192,256),dtype=bool);self.hud_positions={(x,y) for x,y,*_ in hud}
         for x,y,erase in hud_erasers:self.hud_mask[y:y+erase.shape[0],x:x+erase.shape[1]]|=erase
         mask|=self.hud_mask
