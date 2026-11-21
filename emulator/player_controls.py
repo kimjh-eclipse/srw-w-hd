@@ -5,8 +5,8 @@ import copy,json,tempfile,os,time
 BUTTONS=[('up','위',4),('down','아래',5),('left','왼쪽',6),('right','오른쪽',7),('a','A · 확인',8),('b','B · 취소',0),('x','X',9),('y','Y',1),('l','L',10),('r','R',11),('start','Start',3),('select','Select',2)]
 DEFAULT_KEYS=dict(up='Up',down='Down',left='Left',right='Right',a='z',b='x',x='c',y='v',l='a',r='s',start='Return',select='Shift_R')
 DEFAULT_PAD=dict(a=0,b=1,x=2,y=3,l=4,r=5,start=7,select=6)
-SHORTCUTS=[('fast_forward','빠른 진행 · 누르는 동안'),('quick_save','중간 저장'),('quick_load','중간 불러오기'),('pause_resume','일시정지 / 계속'),('pause','일시정지'),('resume','계속')]
-DEFAULT_HOTKEYS=dict(fast_forward='Tab',quick_save='F5',quick_load='F8',pause_resume='space',pause='Pause',resume='F6')
+SHORTCUTS=[('fast_forward','빠른 진행 · 누르는 동안'),('quick_save','중간 저장'),('quick_load','중간 불러오기'),('pause_resume','일시정지 / 계속'),('pause','일시정지'),('resume','계속'),('swap_screens','주·보조 화면 바꾸기')]
+DEFAULT_HOTKEYS=dict(fast_forward='Tab',quick_save='F5',quick_load='F8',pause_resume='space',pause='Pause',resume='F6',swap_screens='F9')
 DEFAULT_PAD_HOTKEYS={name:None for name,_ in SHORTCUTS}
 LAYOUTS=[('large_horizontal','메인 크게 · 가로'),('large_vertical','메인 크게 · 세로'),('equal_horizontal','같은 크기 · 가로'),('equal_vertical','같은 크기 · 세로')]
 LAYOUT_ALIASES=dict(side='large_horizontal',stack='equal_vertical')
@@ -38,7 +38,8 @@ def read_settings(path):
 def sdl_pad_mapping(sdl_mapping):
     """Translate SDL semantic button names to this joystick's physical indices."""
     result=dict(DEFAULT_PAD)
-    names=dict(a='a',b='b',x='x',y='y',l='leftshoulder',r='rightshoulder',start='start',select='back',up='dpup',down='dpdown',left='dpleft',right='dpright')
+    # l3/r3 (stick clicks) are not DS buttons: either one swaps the main and second screen
+    names=dict(a='a',b='b',x='x',y='y',l='leftshoulder',r='rightshoulder',start='start',select='back',up='dpup',down='dpdown',left='dpleft',right='dpright',l3='leftstick',r3='rightstick')
     for name,semantic in names.items():
         value=sdl_mapping.get(semantic,'')
         if isinstance(value,str) and value.startswith('b') and value[1:].isdigit():result[name]=int(value[1:])

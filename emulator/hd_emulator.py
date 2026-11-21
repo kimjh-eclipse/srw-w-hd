@@ -501,6 +501,11 @@ class EmulatorWindow(ShortcutMixin):
                 self.pad_fast_forward=self.settings['pad_hotkeys']['fast_forward'] in held
                 for name,button in self.settings['pad_hotkeys'].items():
                     if button in pressed:self.run_action(name)
+                # Default for the screen swap while no pad button is assigned to it: a stick click (R3, or
+                # L3 on pads that report it), like the Android player; never a button used by another shortcut.
+                if self.settings['pad_hotkeys'].get('swap_screens') is None:
+                    sticks={self.pad.get_mapping().get(name) for name in ('r3','l3')}-{None}-set(self.settings['pad_hotkeys'].values())
+                    if sticks&pressed:self.run_action('swap_screens')
             axes=[self.pad.get_axis(i) for i in range(self.pad.get_numaxes())];hats=[self.pad.get_hat(i) for i in range(self.pad.get_numhats())]
             result=pad_buttons(held,axes,hats,self.pad_draft if self.pad_draft is not None else self.active_pad_mapping(),self.settings['deadzone'])
             if self.dialog and hasattr(self,'input_preview'):
@@ -569,7 +574,7 @@ class EmulatorWindow(ShortcutMixin):
         for (kind,name),button in self.mapping_buttons.items():button.config(text=self.key_label(self.mapping_draft[name]) if kind=='key' else f'버튼 {self.pad_draft[name]+1}')
 
     def help_dialog(self):
-        keys=self.settings['hotkeys'];labels=dict(fast_forward='빠른 진행 · 누르는 동안',quick_save='현재 칸에 중간 저장',quick_load='현재 칸 불러오기',pause_resume='일시정지 / 계속',pause='일시정지',resume='계속')
+        keys=self.settings['hotkeys'];labels=dict(fast_forward='빠른 진행 · 누르는 동안',quick_save='현재 칸에 중간 저장',quick_load='현재 칸 불러오기',pause_resume='일시정지 / 계속',pause='일시정지',resume='계속',swap_screens='주·보조 화면 바꾸기')
         mapping='\n'.join(f'{self.key_label(key)}: {labels[name]}' for name,key in keys.items() if key)
         old=self.pause_for_dialog();messagebox.showinfo('조작 안내','게임 화면을 클릭한 뒤 키보드나 패드로 조작하세요.\n아래 화면은 마우스로 터치할 수 있습니다.\n\n'+mapping+'\nF1: HD 켜기 / 끄기\nF11: 전체 화면\nCtrl+O: 롬 열기\nCtrl+D: HD 미리보기\nCtrl+R: 다시 시작\n\n설정 → 단축키 · 빠른 진행 설정에서 키와 패드 버튼을 지정할 수 있습니다.\n빠른 진행 중에는 소리와 진동을 잠시 끕니다.\n미리보기 저장과 일반 게임 저장은 따로 보관됩니다.',parent=self.root);self.restore_after_dialog(old)
     def about_dialog(self):

@@ -24,6 +24,7 @@ class ShortcutMixin:
         elif name=='pause_resume':self.toggle_pause()
         elif name=='pause' and not self.paused:self.toggle_pause()
         elif name=='resume' and self.paused:self.toggle_pause()
+        elif name=='swap_screens' and self.layout_var.get()!='top':self.swap_var.set(not self.swap_var.get());self.set_layout()
 
     def update_shortcut_labels(self):
         for index,name in ((0,'pause_resume'),(5,'quick_save'),(6,'quick_load')):
@@ -42,12 +43,12 @@ class ShortcutMixin:
             for column,kind in ((1,'shortcut_key'),(2,'shortcut_pad')):
                 button=ttk.Button(body,width=19,command=lambda k=kind,n=name:self.begin_shortcut_capture(k,n));button.grid(row=row,column=column,padx=5);self.shortcut_buttons[kind,name]=button
             ttk.Button(body,text='지우기',command=lambda n=name:self.clear_shortcut(n)).grid(row=row,column=3,padx=5)
-        self.shortcut_note=tk.StringVar(value='빠른 진행은 누르는 동안 작동합니다. 저장·불러오기는 현재 선택한 저장 칸을 사용합니다.')
-        ttk.Label(body,textvariable=self.shortcut_note,wraplength=600).grid(row=8,column=0,columnspan=4,sticky='w',pady=12)
-        ttk.Label(body,text='빠른 진행 배속').grid(row=9,column=0,sticky='w');speed=tk.StringVar(value=str(self.settings['fast_forward_speed'])+'배')
-        ttk.Combobox(body,textvariable=speed,values=('2배','4배','8배','16배'),state='readonly',width=16).grid(row=9,column=1,sticky='w',padx=5)
-        ttk.Label(body,text='실제 속도는 기기 성능에 따라 달라집니다.').grid(row=10,column=0,columnspan=4,sticky='w',pady=6)
-        actions=ttk.Frame(body);actions.grid(row=11,column=0,columnspan=4,sticky='ew',pady=(12,0))
+        self.shortcut_note=tk.StringVar(value='빠른 진행은 누르는 동안 작동합니다. 저장·불러오기는 현재 선택한 저장 칸을 사용합니다. 화면 바꾸기에 패드 버튼을 지정하지 않으면 R3(스틱 누르기)로 바뀝니다.')
+        ttk.Label(body,textvariable=self.shortcut_note,wraplength=600).grid(row=len(SHORTCUTS)+2,column=0,columnspan=4,sticky='w',pady=12)
+        ttk.Label(body,text='빠른 진행 배속').grid(row=len(SHORTCUTS)+3,column=0,sticky='w');speed=tk.StringVar(value=str(self.settings['fast_forward_speed'])+'배')
+        ttk.Combobox(body,textvariable=speed,values=('2배','4배','8배','16배'),state='readonly',width=16).grid(row=len(SHORTCUTS)+3,column=1,sticky='w',padx=5)
+        ttk.Label(body,text='실제 속도는 기기 성능에 따라 달라집니다.').grid(row=len(SHORTCUTS)+4,column=0,columnspan=4,sticky='w',pady=6)
+        actions=ttk.Frame(body);actions.grid(row=len(SHORTCUTS)+5,column=0,columnspan=4,sticky='ew',pady=(12,0))
         def finish(save=False):
             if save:
                 if any(value and value in self.settings['keys'].values() for value in self.shortcut_draft.values()):

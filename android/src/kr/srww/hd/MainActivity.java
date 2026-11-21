@@ -36,8 +36,9 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
     GLSurfaceView view;
     ControlsView controls;
     File rom, autoState;
-    volatile boolean ready, paused, fast, fastKey, fastAxis;
-    boolean r3, r3Used;
+    volatile boolean ready, paused, fast, fastKey;
+    volatile boolean tabFast;
+    boolean l2Axis, r2Axis;
     final float[] rumbleEvent = new float[3];
     volatile float[] topRect = new float[4], bottomRect = new float[4];
     volatile int touchButtons, keyButtons, axisButtons, touching, touchX, touchY;
@@ -154,7 +155,7 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
             if (tw > w * 0.8f) { tw = w * 0.8f; th = tw / aspect; }
             float rw = w - tw, bw = rw, bh = bw / aspect;
             if (bh > h) { bh = h; bw = bh * aspect; }
-            float y = (h - th) / 2;
+            float y = 0;                                 // top-aligned like the small screen (a wide phone leaves room below)
             top.set(0, y, tw, y + th);
             float bx = tw + (rw - bw) / 2;
             bot.set(bx, 0, bx + bw, bh);                 // top of the right column; the buttons go below it
@@ -218,7 +219,7 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
                 "위·아래 화면 바꾸기: " + onOff(settings.swap), "HD 그림: " + (Native.hdReady() || !settings.hd ? onOff(settings.hd) : "팩 없음"), "화면 필터: " + Settings.FILTERS[settings.filter],
                 "화면 버튼: " + Settings.BUTTON_MODES[settings.buttonMode], "버튼 크기: " + Math.round(settings.size * 100) + "%",
                 "버튼 투명도: " + Math.round(settings.opacity * 100) + "%", "빨리 감기 배속: " + settings.fastSpeed + "배",
-                "진동: " + onOff(settings.vibrate), "전투 진동: " + onOff(settings.rumble), "전투 진동 세기: " + settings.rumbleStrength + "%", "빔 진동: " + onOff(settings.rumbleBeam), "소리: " + onOff(settings.sound), "게임 리셋", "롬 다시 고르기"};
+                "진동: " + onOff(settings.vibrate), "전투 진동: " + onOff(settings.rumble), "전투 진동 세기: " + settings.rumbleStrength + "%", "빔 진동: " + onOff(settings.rumbleBeam), "소리: " + onOff(settings.sound), "게임 리셋", "롬 다시 고르기", "패드 단축키 설정…"};
         new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert).setTitle("SRW W HD")
             .setItems(items, new DialogInterface.OnClickListener() { public void onClick(DialogInterface d, int i) { menuPick(i); } })
             .setOnCancelListener(new DialogInterface.OnCancelListener() { public void onCancel(DialogInterface d) { resumeGame(); } })
@@ -254,6 +255,7 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
             case 15: settings.sound = !settings.sound; break;
             case 16: view.queueEvent(new Runnable() { public void run() { Native.reset(); } }); break;
             case 17: settings.save(); pickRom(); return;
+            case 18: shortcutList(); return;
         }
         settings.save();
         resumeGame();
@@ -343,25 +345,140 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
         return (source & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD || (source & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK;
     }
 
+    // ---------- pad shortcuts (remappable in the menu) ----------
+    static final int SC_MENU = 0, SC_SWAP = 1, SC_FAST = 2, SC_SAVE = 3, SC_LOAD = 4;
+    static final String[] SC_NAMES = {"메뉴 열기", "주·보조 화면 바꾸기", "빨리 감기 (누르는 동안)", "빠른 저장 (슬롯 1)", "빠른 불러오기 (슬롯 1)"};
+    final java.util.HashSet<Integer> held = new java.util.HashSet<>(), usedMod = new java.util.HashSet<>(), taken = new java.util.HashSet<>();
+
+    /** Some pads report the right stick click as THUMBL (with DPAD_CENTER): both stick clicks are one button. */
+    static int norm(int code) { return code == KeyEvent.KEYCODE_BUTTON_THUMBL ? KeyEvent.KEYCODE_BUTTON_THUMBR : code; }
+
+    static String keyName(int code) {
+        switch (code) {
+            case 0: return "";
+            case KeyEvent.KEYCODE_BUTTON_A: return "A"; case KeyEvent.KEYCODE_BUTTON_B: return "B";
+            case KeyEvent.KEYCODE_BUTTON_X: return "X"; case KeyEvent.KEYCODE_BUTTON_Y: return "Y";
+            case KeyEvent.KEYCODE_BUTTON_L1: return "L1"; case KeyEvent.KEYCODE_BUTTON_R1: return "R1";
+            case KeyEvent.KEYCODE_BUTTON_L2: return "L2"; case KeyEvent.KEYCODE_BUTTON_R2: return "R2";
+            case KeyEvent.KEYCODE_BUTTON_THUMBL: case KeyEvent.KEYCODE_BUTTON_THUMBR: return "R3";
+            case KeyEvent.KEYCODE_BUTTON_START: return "START"; case KeyEvent.KEYCODE_BUTTON_SELECT: return "SELECT";
+            case KeyEvent.KEYCODE_BUTTON_MODE: return "홈";
+            case KeyEvent.KEYCODE_DPAD_UP: return "↑"; case KeyEvent.KEYCODE_DPAD_DOWN: return "↓";
+            case KeyEvent.KEYCODE_DPAD_LEFT: return "←"; case KeyEvent.KEYCODE_DPAD_RIGHT: return "→";
+            default: return KeyEvent.keyCodeToString(code).replace("KEYCODE_", "").replace("BUTTON_", "");
+        }
+    }
+
+    String binding(int i) { return settings.scMod[i] != 0 ? keyName(settings.scMod[i]) + " + " + keyName(settings.scKey[i]) : settings.scKey[i] != 0 ? keyName(settings.scKey[i]) : "없음"; }
+
+    boolean isModifier(int code) { for (int m : settings.scMod) if (m != 0 && m == code) return true; return false; }
+
+    void fire(int i, boolean down) {
+        if (i == SC_FAST) { fastKey = down; fast = fastKey || tabFast; return; }
+        if (!down) return;
+        switch (i) {
+            case SC_MENU: showMenu(); break;
+            case SC_SWAP: settings.swap = !settings.swap; relayout(); settings.save(); break;
+            case SC_SAVE: quick(true); break;
+            case SC_LOAD: quick(false); break;
+        }
+    }
+
+    /** Pad button (or trigger) for the shortcuts; true when it is used up and must not reach the game.
+     *  A modifier button's own action fires when it is released without a combination (R3 tap). */
+    boolean shortcutKey(int code, boolean down) {
+        code = norm(code);
+        boolean mod = isModifier(code), game = keyButton(code) >= 0;
+        if (down) {
+            if (held.contains(code)) return taken.contains(code) || (mod && !game);      // key repeat / key + axis twins
+            held.add(code);
+            for (int i = 0; i < settings.scKey.length; i++)
+                if (settings.scMod[i] != 0 && settings.scKey[i] == code && held.contains(settings.scMod[i])) {
+                    usedMod.add(settings.scMod[i]); taken.add(code); fire(i, true); return true;
+                }
+            if (mod) { usedMod.remove(code); return !game; }
+            for (int i = 0; i < settings.scKey.length; i++)
+                if (settings.scMod[i] == 0 && settings.scKey[i] == code) { taken.add(code); fire(i, true); return true; }
+            return false;
+        }
+        if (!held.remove(code)) return taken.contains(code) || (mod && !game);
+        if (taken.remove(code)) { for (int i = 0; i < settings.scKey.length; i++) if (settings.scKey[i] == code) fire(i, false); return true; }
+        if (mod) {
+            if (!usedMod.remove(code))
+                for (int i = 0; i < settings.scKey.length; i++) if (settings.scMod[i] == 0 && settings.scKey[i] == code && i != SC_FAST) fire(i, true);
+            return !game;
+        }
+        return false;
+    }
+
+    void shortcutList() {
+        String[] items = new String[SC_NAMES.length + 1];
+        for (int i = 0; i < SC_NAMES.length; i++) items[i] = SC_NAMES[i] + ":  " + binding(i);
+        items[SC_NAMES.length] = "기본값으로 되돌리기";
+        new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert).setTitle("패드 단축키 설정")
+            .setItems(items, new DialogInterface.OnClickListener() { public void onClick(DialogInterface d, int k) {
+                if (k == SC_NAMES.length) {
+                    settings.scMod = Settings.SC_MOD_DEFAULT.clone(); settings.scKey = Settings.SC_KEY_DEFAULT.clone(); settings.save();
+                    Toast.makeText(MainActivity.this, "기본값으로 되돌렸습니다", Toast.LENGTH_SHORT).show(); shortcutList();
+                } else captureShortcut(k); } })
+            .setOnCancelListener(new DialogInterface.OnCancelListener() { public void onCancel(DialogInterface d) { resumeGame(); } })
+            .setNegativeButton("게임으로", new DialogInterface.OnClickListener() { public void onClick(DialogInterface d, int i) { resumeGame(); } })
+            .show();
+    }
+
+    /** Waits for one pad button, or two (hold the first, press the second), and binds it to action `which`. */
+    void captureShortcut(final int which) {
+        held.clear(); usedMod.clear(); taken.clear(); fastKey = false; fast = tabFast;
+        final AlertDialog d = new AlertDialog(this, android.R.style.Theme_DeviceDefault_Dialog_Alert) {
+            int first; float lt, rt;
+            void press(int code, boolean down) {
+                code = norm(code);
+                if (down) { if (first == 0) first = code; else if (code != first) { assign(which, first, code); dismiss(); } }
+                else if (code == first) { assign(which, 0, code); dismiss(); }
+            }
+            @Override public boolean dispatchKeyEvent(KeyEvent e) {
+                int c = e.getKeyCode(); boolean pad = fromPad(e.getSource());
+                if (!pad && (c == KeyEvent.KEYCODE_BACK || c == KeyEvent.KEYCODE_ESCAPE)) return super.dispatchKeyEvent(e);
+                if (c == KeyEvent.KEYCODE_DPAD_CENTER && pad) return true;
+                if (e.getRepeatCount() == 0) press(c, e.getAction() == KeyEvent.ACTION_DOWN);
+                return true;
+            }
+            @Override public boolean dispatchGenericMotionEvent(MotionEvent e) {
+                if (!fromPad(e.getSource())) return super.dispatchGenericMotionEvent(e);
+                float l = Math.max(e.getAxisValue(MotionEvent.AXIS_LTRIGGER), e.getAxisValue(MotionEvent.AXIS_BRAKE));
+                float r = Math.max(e.getAxisValue(MotionEvent.AXIS_RTRIGGER), e.getAxisValue(MotionEvent.AXIS_GAS));
+                if ((l > 0.5f) != (lt > 0.5f)) press(KeyEvent.KEYCODE_BUTTON_L2, l > 0.5f);
+                if ((r > 0.5f) != (rt > 0.5f)) press(KeyEvent.KEYCODE_BUTTON_R2, r > 0.5f);
+                lt = l; rt = r;
+                return true;
+            }
+        };
+        d.setTitle(SC_NAMES[which] + "  (지금: " + binding(which) + ")");
+        d.setMessage("지정할 패드 버튼을 누르세요.\n두 버튼 조합: 첫 버튼을 누른 채로 두 번째 버튼을 누르세요.");
+        d.setButton(DialogInterface.BUTTON_NEGATIVE, "취소", new DialogInterface.OnClickListener() { public void onClick(DialogInterface x, int i) { } });
+        d.setOnDismissListener(new DialogInterface.OnDismissListener() { public void onDismiss(DialogInterface x) { shortcutList(); } });
+        d.show();
+    }
+
+    void assign(int which, int mod, int key) {
+        if (mod == 0 && keyButton(key) >= 0) {
+            Toast.makeText(this, keyName(key) + " 버튼은 게임 조작에 쓰여서 혼자 지정할 수 없습니다. 다른 버튼과 조합해 주세요.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        for (int i = 0; i < settings.scKey.length; i++)                // the action that had this binding takes the old one
+            if (i != which && settings.scMod[i] == mod && settings.scKey[i] == key) { settings.scMod[i] = settings.scMod[which]; settings.scKey[i] = settings.scKey[which]; }
+        settings.scMod[which] = mod; settings.scKey[which] = key; settings.save();
+        Toast.makeText(this, SC_NAMES[which] + ": " + binding(which), Toast.LENGTH_SHORT).show();
+    }
+
     @Override public boolean dispatchKeyEvent(KeyEvent e) {
         int code = e.getKeyCode();
         boolean pad = fromPad(e.getSource());
         if (code == KeyEvent.KEYCODE_BACK && !pad) { if (e.getAction() == KeyEvent.ACTION_UP) showMenu(); return true; }
         boolean down = e.getAction() == KeyEvent.ACTION_DOWN;
-        if (code == KeyEvent.KEYCODE_BUTTON_R2 || code == KeyEvent.KEYCODE_TAB) { fastKey = down; fast = fastKey || fastAxis; return true; }
-        if (code == KeyEvent.KEYCODE_BUTTON_L2) return true;
-        // R3 is a modifier: R3 + A = quick save (slot 1), R3 + X = quick load (slot 1); R3 alone = menu
-        // some pads report the stick click as THUMBL (with DPAD_CENTER): either stick is the modifier
+        if (code == KeyEvent.KEYCODE_TAB) { tabFast = down; fast = fastKey || tabFast; return true; }   // keyboard: fast-forward
         if (code == KeyEvent.KEYCODE_DPAD_CENTER && pad) return true;
-        if (code == KeyEvent.KEYCODE_BUTTON_THUMBR || code == KeyEvent.KEYCODE_BUTTON_THUMBL) {
-            if (down && e.getRepeatCount() == 0) { r3 = true; r3Used = false; }
-            else if (!down) { r3 = false; if (!r3Used) showMenu(); }
-            return true;
-        }
-        if (r3 && (code == KeyEvent.KEYCODE_BUTTON_A || code == KeyEvent.KEYCODE_BUTTON_X)) {
-            if (down && e.getRepeatCount() == 0) { r3Used = true; quick(code == KeyEvent.KEYCODE_BUTTON_A); }
-            return true;
-        }
+        if (pad && shortcutKey(code, down)) return true;
         if (code == KeyEvent.KEYCODE_BUTTON_MODE || code == KeyEvent.KEYCODE_ESCAPE
                 || (code == KeyEvent.KEYCODE_BACK && pad)) {
             if (down && e.getRepeatCount() == 0) showMenu();
@@ -385,9 +502,10 @@ public class MainActivity extends Activity implements GLSurfaceView.Renderer, Co
         if (hx > 0.5f || sx > 0.5f) b |= 1 << RIGHT;
         if (hy < -0.5f || sy < -0.5f) b |= 1 << UP;
         if (hy > 0.5f || sy > 0.5f) b |= 1 << DOWN;
-        fastAxis = rt > 0.5f;                       // R2 = fast-forward while held
-        fast = fastKey || fastAxis;
-        if (b != 0 || fastAxis) padUsed();
+        boolean l2 = lt > 0.5f, r2 = rt > 0.5f;     // analog triggers count as the L2 / R2 buttons for the shortcuts
+        if (l2 != l2Axis) { l2Axis = l2; shortcutKey(KeyEvent.KEYCODE_BUTTON_L2, l2); }
+        if (r2 != r2Axis) { r2Axis = r2; shortcutKey(KeyEvent.KEYCODE_BUTTON_R2, r2); }
+        if (b != 0 || r2) padUsed();
         axisButtons = b;
         return true;
     }

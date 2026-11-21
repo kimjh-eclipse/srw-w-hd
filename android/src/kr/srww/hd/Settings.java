@@ -24,6 +24,11 @@ final class Settings {
     boolean rumble = true;    // battle rumble on the pad (PC defaults: on, 65, beams on)
     int rumbleStrength = 65;
     boolean rumbleBeam = true;
+    /* pad shortcuts: action i fires on scKey[i], or on scKey[i] while scMod[i] is held (0 = single button).
+       Order: menu, swap screens, fast-forward (held), quick save, quick load (MainActivity.SC_NAMES). */
+    static final int[] SC_MOD_DEFAULT = {0, 0, 0, 107 /* THUMBR */, 107};
+    static final int[] SC_KEY_DEFAULT = {104 /* L2 */, 107 /* THUMBR */, 105 /* R2 */, 96 /* A */, 99 /* X */};
+    int[] scMod = SC_MOD_DEFAULT.clone(), scKey = SC_KEY_DEFAULT.clone();
 
     private final SharedPreferences p;
 
@@ -43,11 +48,15 @@ final class Settings {
         rumble = p.getBoolean("rumble", rumble);
         rumbleStrength = p.getInt("rumbleStrength", rumbleStrength);
         rumbleBeam = p.getBoolean("rumbleBeam", rumbleBeam);
+        for (int i = 0; i < scKey.length; i++) { scMod[i] = p.getInt("scMod" + i, scMod[i]); scKey[i] = p.getInt("scKey" + i, scKey[i]); }
     }
 
     void save() {
         p.edit().putInt("layout", layout).putInt("orientation", orientation).putBoolean("swap", swap).putInt("filter", filter)
                 .putInt("buttonMode", buttonMode).putFloat("opacity", opacity).putFloat("size", size)
                 .putBoolean("vibrate", vibrate).putBoolean("sound", sound).putInt("fastSpeed", fastSpeed).putBoolean("hd", hd).putBoolean("rumble", rumble).putInt("rumbleStrength", rumbleStrength).putBoolean("rumbleBeam", rumbleBeam).apply();
+        SharedPreferences.Editor e = p.edit();
+        for (int i = 0; i < scKey.length; i++) e.putInt("scMod" + i, scMod[i]).putInt("scKey" + i, scKey[i]);
+        e.apply();
     }
 }
